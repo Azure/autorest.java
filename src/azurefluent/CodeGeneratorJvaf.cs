@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = Path.Combine("src/main/java", cm.Namespace.ToLower().Replace('.', '/'));
+            var packagePath = Path.Combine("src/main/java", cm.Namespace.Replace('.', '/'));
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;
@@ -113,20 +113,17 @@ namespace AutoRest.Java.Azure.Fluent
                 Model = new PackageInfoTemplateModel(cm, "implementation")
             }, Path.Combine(packagePath, "implementation", _packageInfoFileName));
 
-            object value;
-            bool regenerateManager;
-            if (Settings.Instance.CustomSettings.TryGetValue("RegenerateManager", out value) &&
-                bool.TryParse(value.ToString(), out regenerateManager) &&
-                regenerateManager)
-            {
-                // Manager
-                await Write(
-                    new AzureServiceManagerTemplate { Model = codeModel },
-                    Path.Combine(packagePath, "implementation", codeModel.ServiceName + "Manager" + ImplementationFileExtension));
+            // Manager
+            var method = codeModel.Methods[0];
+            var match = Regex.Match(input: method.Url, pattern: @"/providers/Microsoft\.(\w+)/");
+            var serviceName = match.Groups[1].Value;
 
-                // POM
-                await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
-            }
+            await Write(
+                new AzureServiceManagerTemplate { Model = codeModel },
+                Path.Combine(packagePath, "implementation", serviceName + "Manager" + ImplementationFileExtension));
+
+            // POM
+            await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
         }
     }
 }
