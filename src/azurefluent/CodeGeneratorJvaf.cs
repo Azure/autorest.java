@@ -26,7 +26,7 @@ namespace AutoRest.Java.Azure.Fluent
         private const string _packageInfoFileName = "package-info.java";
 
         public override bool IsSingleFileGenerationSupported => true;
-        
+
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
         /// <summary>
@@ -113,11 +113,7 @@ namespace AutoRest.Java.Azure.Fluent
                 Model = new PackageInfoTemplateModel(cm, "implementation")
             }, Path.Combine(packagePath, "implementation", _packageInfoFileName));
 
-            object value;
-            bool regenerateManager;
-            if (Settings.Instance.CustomSettings.TryGetValue("RegenerateManager", out value) &&
-                bool.TryParse(value.ToString(), out regenerateManager) &&
-                regenerateManager)
+            if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
                 // Manager
                 await Write(
