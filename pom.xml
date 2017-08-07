@@ -75,12 +75,12 @@
       <dependency>
         <groupId>com.microsoft.rest</groupId>
         <artifactId>client-runtime</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.5-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-client-runtime</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.5-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
@@ -195,8 +195,8 @@
     </pluginManagement>
   </build>
   <modules>
-    <module>test/vanilla</module>
-    <module>test/azure</module>
-    <module>test/azurefluent</module>
+    <module>src/generator/AutoRest.Java.Tests</module>
+    <module>src/generator/AutoRest.Java.Azure.Tests</module>
+    <module>src/generator/AutoRest.Java.Azure.Fluent.Tests</module>
   </modules>
 </project>
