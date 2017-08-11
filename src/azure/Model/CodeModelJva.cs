@@ -75,9 +75,10 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (Settings.Instance.CustomSettings.TryGetValue("ServiceName", out object obj))
+                var serviceNameSetting = Settings.Instance.Host?.GetValue<string>("service-name").Result;
+                if (!string.IsNullOrEmpty(serviceNameSetting))
                 {
-                    return obj.ToString();
+                    return serviceNameSetting;
                 }
 
                 var method = Methods[0];
