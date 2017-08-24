@@ -117,7 +117,7 @@
               <executable>node</executable>
               <workingDirectory>${session.executionRootDirectory}</workingDirectory>
               <arguments>
-                <argument>node_modules\@microsoft.azure\autorest.testserver</argument>
+                <argument>node_modules/@microsoft.azure/autorest.testserver</argument>
               </arguments>
               <async>true</async>
             </configuration>
