@@ -7,10 +7,6 @@ Import
     source '**/*.csproj'
       .pipe except /preview/ig
 
-  # test projects 
-  tests:() ->
-    source '**/*[Tt]est.csproj'
-
 # ==============================================================================
 # Functions
 
@@ -57,13 +53,6 @@ task 'restore','restores the dotnet packages for the projects',['clear-cache-on-
       return true
     .pipe foreach (each,done)->
       execute "dotnet restore #{ each.path } /nologo", {retry:1},(code,stderr,stdout) ->
-        done()
-        
-task 'test', 'dotnet', ['restore'] , (done) ->
-  # run xunit test in parallel with each other.
-  tests()
-    .pipe foreach (each,done)->
-      execute "dotnet test #{ each.path } /nologo",{retry:1}, (code,stderr,stdout) ->
         done()
         
 # the dotnet gulp-plugin.

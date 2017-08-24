@@ -288,3 +288,5 @@ __pycache__/
 *.xsd.cs
 
 package-lock.json
+*.class
+test/*/target/

@@ -9,7 +9,7 @@
     <groupId>com.microsoft.azure</groupId>
     <artifactId>autorest-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../../../pom.xml</relativePath>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <artifactId>azure-codegen-tests</artifactId>
@@ -115,9 +115,9 @@
             </goals>
             <configuration>
               <executable>node</executable>
-              <workingDirectory>${session.executionRootDirectory}/src/dev/TestServer/server</workingDirectory>
+              <workingDirectory>${session.executionRootDirectory}</workingDirectory>
               <arguments>
-                <argument>startup/www</argument>
+                <argument>node_modules\@microsoft.azure\autorest.testserver</argument>
               </arguments>
               <async>true</async>
             </configuration>

@@ -20,8 +20,8 @@ task 'init', "" ,(done)->
   done()
   
 # Run language-specific tests:
-# (ie, things that call stuff like 'mvn test', 'npm test', 'tox', 'go run' etc)
-task 'test', "more", [], (done) ->
-  # insert commands here to do other kinds of testing
-  # echo "Testing More"
+task 'test', "", [], (done) ->
+  await execute "mvn test -pl test/vanilla",     defer code, stderr, stdout
+  await execute "mvn test -pl test/azure",       defer code, stderr, stdout
+  await execute "mvn test -pl test/azurefluent", defer code, stderr, stdout
   done();
