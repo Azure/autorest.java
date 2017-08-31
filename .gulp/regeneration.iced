@@ -10,135 +10,92 @@ regenExpected = (opts,done) ->
 
   for kkey in keys
     optsMappingsValue = opts.mappings[kkey]
-    key = kkey.trim();
+    key = kkey.trim().toLowerCase()
     
-    swaggerFiles = (if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue).split(";")
     args = [
-      "--#{opts.language}",
+      "--java",
       "--output-folder=#{outputDir}/#{key}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
-      "--enable-xml"
+      "--java.namespace=#{['Fixtures', key.replace(/\/|\./, '')].join('.')}",
+      "--input-file=#{swaggerDir}/#{optsMappingsValue}"
     ]
 
-    for swaggerFile in swaggerFiles
-      args.push("--input-file=#{if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile}")
-
-    if (opts.addCredentials)
-      args.push("--#{opts.language}.add-credentials=true")
-
     if (opts.azureArm)
-      args.push("--#{opts.language}.azure-arm=true")
+      args.push("--java.azure-arm=true")
 
     if (opts.fluent)
-      args.push("--#{opts.language}.fluent=true")
-    
-    if (opts.syncMethods)
-      args.push("--#{opts.language}.sync-methods=#{opts.syncMethods}")
-    
-    if (opts.flatteningThreshold)
-      args.push("--#{opts.language}.payload-flattening-threshold=#{opts.flatteningThreshold}")
-
-    if (!!opts.nsPrefix)
-      if (optsMappingsValue instanceof Array && optsMappingsValue[1] != undefined)
-        args.push("--#{opts.language}.namespace=#{optsMappingsValue[1]}")
-      else
-        args.push("--#{opts.language}.namespace=#{[opts.nsPrefix, key.replace(/\/|\./, '')].join('.')}")
-
-    if (opts['override-info.version'])
-      args.push("--override-info.version=#{opts['override-info.version']}")
-    if (opts['override-info.title'])
-      args.push("--override-info.title=#{opts['override-info.title']}")
-    if (opts['override-info.description'])
-      args.push("--override-info.description=#{opts['override-info.description']}")
+      args.push("--java.fluent=true")
 
     autorest args,() =>
       instances--
       return done() if instances is 0 
 
 defaultMappings = {
-  'AcceptanceTests/ParameterFlattening': 'parameter-flattening.json',
-  'AcceptanceTests/BodyArray': 'body-array.json',
-  'AcceptanceTests/BodyBoolean': 'body-boolean.json',
-  'AcceptanceTests/BodyByte': 'body-byte.json',
-  'AcceptanceTests/BodyComplex': 'body-complex.json',
-  'AcceptanceTests/BodyDate': 'body-date.json',
-  'AcceptanceTests/BodyDateTime': 'body-datetime.json',
-  'AcceptanceTests/BodyDateTimeRfc1123': 'body-datetime-rfc1123.json',
-  'AcceptanceTests/BodyDuration': 'body-duration.json',
-  'AcceptanceTests/BodyDictionary': 'body-dictionary.json',
-  'AcceptanceTests/BodyFile': 'body-file.json',
-  'AcceptanceTests/BodyFormData': 'body-formdata.json',
-  'AcceptanceTests/BodyInteger': 'body-integer.json',
-  'AcceptanceTests/BodyNumber': 'body-number.json',
-  'AcceptanceTests/BodyString': 'body-string.json',
-  'AcceptanceTests/Header': 'header.json',
-  'AcceptanceTests/Http': 'httpInfrastructure.json',
-  'AcceptanceTests/Report': 'report.json',
-  'AcceptanceTests/RequiredOptional': 'required-optional.json',
-  'AcceptanceTests/Url': 'url.json',
-  'AcceptanceTests/Validation': 'validation.json',
-  'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json',
-  'AcceptanceTests/CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
-  'AcceptanceTests/ModelFlattening': 'model-flattening.json'
+  'ParameterFlattening': 'parameter-flattening.json',
+  'BodyArray': 'body-array.json',
+  'BodyBoolean': 'body-boolean.json',
+  'BodyByte': 'body-byte.json',
+  'BodyComplex': 'body-complex.json',
+  'BodyDate': 'body-date.json',
+  'BodyDateTime': 'body-datetime.json',
+  'BodyDateTimeRfc1123': 'body-datetime-rfc1123.json',
+  'BodyDuration': 'body-duration.json',
+  'BodyDictionary': 'body-dictionary.json',
+  'BodyFile': 'body-file.json',
+  'BodyFormData': 'body-formdata.json',
+  'BodyInteger': 'body-integer.json',
+  'BodyNumber': 'body-number.json',
+  'BodyString': 'body-string.json',
+  'Header': 'header.json',
+  'Http': 'httpInfrastructure.json',
+  'Report': 'report.json',
+  'RequiredOptional': 'required-optional.json',
+  'Url': 'url.json',
+  'Validation': 'validation.json',
+  'CustomBaseUri': 'custom-baseUrl.json',
+  'CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
+  'ModelFlattening': 'model-flattening.json'
 }
 
 defaultAzureMappings = {
-  'AcceptanceTests/Lro': 'lro.json',
-  'AcceptanceTests/Paging': 'paging.json',
-  'AcceptanceTests/AzureReport': 'azure-report.json',
-  'AcceptanceTests/AzureParameterGrouping': 'azure-parameter-grouping.json',
-  'AcceptanceTests/AzureResource': 'azure-resource.json',
-  'AcceptanceTests/Head': 'head.json',
-  'AcceptanceTests/HeadExceptions': 'head-exceptions.json',
-  'AcceptanceTests/SubscriptionIdApiVersion': 'subscriptionId-apiVersion.json',
-  'AcceptanceTests/AzureSpecials': 'azure-special-properties.json',
-  'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json'
+  'Lro': 'lro.json',
+  'Paging': 'paging.json',
+  'AzureReport': 'azure-report.json',
+  'AzureParameterGrouping': 'azure-parameter-grouping.json',
+  'AzureResource': 'azure-resource.json',
+  'Head': 'head.json',
+  'HeadExceptions': 'head-exceptions.json',
+  'SubscriptionIdApiVersion': 'subscriptionId-apiVersion.json',
+  'AzureSpecials': 'azure-special-properties.json',
+  'CustomBaseUri': 'custom-baseUrl.json'
 }
 
 swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
 task 'regenerate-javaazure', '', (done) ->
-  mappings = {}
-  for key of defaultAzureMappings
-    mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
   regenExpected {
     'outputBaseDir': 'test/azure',
-    'inputBaseDir': swaggerDir,
-    'mappings': mappings,
+    'mappings': defaultAzureMappings,
     'outputDir': 'src/main/java/fixtures',
-    'language': 'java',
-    'azureArm': true,
-    'nsPrefix': 'Fixtures'
+    'azureArm': true
   },done
   return null
 
 task 'regenerate-javaazurefluent', '', (done) ->
-  mappings = {}
-  for key of defaultAzureMappings
-    mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
   regenExpected {
     'outputBaseDir': 'test/azurefluent',
-    'inputBaseDir': swaggerDir,
-    'mappings': mappings,
+    'mappings': defaultAzureMappings,
     'outputDir': 'src/main/java/fixtures',
-    'language': 'java',
     'azureArm': true,
-    'fluent': true,
-    'nsPrefix': 'Fixtures'
+    'fluent': true
   },done
   return null
 
 task 'regenerate-java', '', (done) ->
-  mappings = {}
-  for key of defaultMappings
-    mappings[key.substring(16).toLowerCase()] = defaultMappings[key]
   regenExpected {
     'outputBaseDir': 'test/vanilla',
-    'inputBaseDir': swaggerDir,
-    'mappings': mappings,
-    'outputDir': 'src/main/java/fixtures',
-    'language': 'java',
-    'nsPrefix': 'Fixtures'
+    'mappings': defaultMappings,
+    'outputDir': 'src/main/java/fixtures'
   },done
   return null
 
