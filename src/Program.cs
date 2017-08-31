@@ -31,7 +31,7 @@ namespace AutoRest.Java
             {
                 var connection = new Connection(Console.OpenStandardOutput(), Console.OpenStandardInput());
                 connection.Dispatch<IEnumerable<string>>("GetPluginNames", async () => new []{ "java" });
-                connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Program(connection, sessionId).Process());
+                connection.Dispatch<string, string, bool>("Process", (plugin, sessionId) => new Program(connection, plugin, sessionId).Process());
                 connection.DispatchNotification("Shutdown", connection.Stop);
 
                 // wait for something to do.
@@ -45,7 +45,7 @@ namespace AutoRest.Java
             return 1;
         }
 
-        public Program(Connection connection, string sessionId) : base(connection, sessionId) { }
+        public Program(Connection connection, string plugin, string sessionId) : base(connection, plugin, sessionId) { }
 
         private T GetXmsCodeGenSetting<T>(CodeModel codeModel, string name)
         {
