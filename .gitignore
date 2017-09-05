@@ -266,6 +266,7 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+*.iml
 
 # CodeRush
 .cr/
@@ -292,4 +293,4 @@ package-lock.json
 test/*/target/
 .settings/
 .project
-.classpath 
+.classpath

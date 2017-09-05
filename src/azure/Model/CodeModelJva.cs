@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -8,6 +8,8 @@ using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using AutoRest.Core;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -62,6 +64,62 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 return "";
+            }
+        }
+
+        /// <summary>
+        /// Attempts to infer the name of the service referenced by this CodeModel.
+        /// </summary>
+        [JsonIgnore]
+        public string ServiceName
+        {
+            get
+            {
+                var serviceNameSetting = Settings.Instance.Host?.GetValue<string>("service-name").Result;
+                if (!string.IsNullOrEmpty(serviceNameSetting))
+                {
+                    return serviceNameSetting;
+                }
+
+                var method = Methods[0];
+                var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+                var serviceName = match.Groups[1].Value.ToPascalCase();
+                return serviceName;
+            }
+        }
+
+
+        const string targetVersion = "1.1.3";
+        /// <summary>
+        /// The Azure SDK version to reference in the generated POM.
+        /// </summary>
+        [JsonIgnore]
+        public string PomVersion
+        {
+            get
+            {
+                return targetVersion + "-SNAPSHOT";
+            }
+        }
+
+        /// <summary>
+        /// The Beta.SinceVersion value to pass to the Beta annotation.
+        /// </summary>
+        [JsonIgnore]
+        public string BetaSinceVersion
+        {
+            get
+            {
+                var versionParts = targetVersion.Split('.');
+                var minorVersion = int.Parse(versionParts[1]);
+                var patchVersion = int.Parse(versionParts[2]);
+
+                var newMinorVersion = patchVersion == 0
+                    ? minorVersion
+                    : minorVersion + 1;
+
+                var result = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
+                return result;
             }
         }
     }
