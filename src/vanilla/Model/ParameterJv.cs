@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
@@ -279,13 +280,9 @@ namespace AutoRest.Java.Model
 
         private string LocationImport(ParameterLocation parameterLocation)
         {
-            if (parameterLocation == Core.Model.ParameterLocation.FormData)
+            if (parameterLocation != Core.Model.ParameterLocation.None)
             {
-                return "retrofit2.http.Part";
-            }
-            else if (parameterLocation != Core.Model.ParameterLocation.None)
-            {
-                return "retrofit2.http." + parameterLocation.ToString();
+                return "com.microsoft.rest.v2.annotations." + parameterLocation.ToString() + "Param";
             }
             else
             {

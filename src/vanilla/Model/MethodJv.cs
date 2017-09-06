@@ -71,20 +71,20 @@ namespace AutoRest.Java.Model
                         parameter.Location == ParameterLocation.Header)
                     {
                         declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@{0}(\"{1}\") ",
+                            "@{0}Param(\"{1}\") ",
                             parameter.Location.ToString(),
                             parameter.SerializedName));
                     }
                     else if (parameter.Location == ParameterLocation.Body)
                     {
                         declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@{0} ",
+                            "@{0}Param ",
                             parameter.Location.ToString()));
                     }
                     else if (parameter.Location == ParameterLocation.FormData)
                     {
                         declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@Part(\"{0}\") ",
+                            "// @Part(\"{0}\") not supported by RestProxy",
                             parameter.SerializedName));
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
@@ -732,21 +732,18 @@ namespace AutoRest.Java.Model
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("rx.Single");
-                imports.Add("rx.Observable");
                 imports.Add("rx.functions.Func1");
                 if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")
                 {
-                    imports.Add("retrofit2.http.Multipart");
+                    // FIXME
+                    imports.Add("retrofit2.http.Multipart.FIXME");
                 }
                 else
                 {
-                    imports.Add("retrofit2.http.Headers");
+                    imports.Add("com.microsoft.rest.v2.annotations.Headers");
                 }
-                imports.Add("retrofit2.Response");
-                if (this.HttpMethod != HttpMethod.Head)
-                {
-                    imports.Add("okhttp3.ResponseBody");
-                }
+                
+                imports.Add("com.microsoft.rest.v2.http.HttpClient");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
@@ -771,7 +768,7 @@ namespace AutoRest.Java.Model
                 imports.AddRange(this.ReturnTypeJv.ImplImports);
                 if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                 {
-                    imports.Add("retrofit2.http.Streaming");
+                    imports.Add("retrofit2.http.Streaming.FIXME");
                 }
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange((r.Value as ResponseJv).ImplImports));

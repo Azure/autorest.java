@@ -18,19 +18,12 @@ else
 {
 @:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.FullyQualifiedDomainName @method.Name" })
 }
-if (method.HttpMethod == HttpMethod.Delete)
-{
-@:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
-}
-else
-{
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
-}
 if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
 {
 @:    @@Streaming
 }
-@:    Observable<Response<@method.CallType>> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Single<Response<@method.CallType>> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine
 }
 }

@@ -98,11 +98,9 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("@Model.BaseUrl", clientBuilder, restBuilder);
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
         initialize();
     }
 
@@ -111,10 +109,8 @@ if(!property.IsReadOnly)
      * Initializes an instance of @(Model.Name) client.
      *
      * @@param baseUrl the base URL of the host
-     * @@param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @@param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
         super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
@@ -150,7 +146,7 @@ if(!property.IsReadOnly)
 @EmptyLine
 <text>
     private void initializeService() {
-        service = retrofit().create(@(Model.ServiceClientServiceType).class);
+        service = RestProxy.create(@(Model.ServiceClientServiceType).class, httpClient(), serializerAdapter());
     }
 </text>
 @EmptyLine

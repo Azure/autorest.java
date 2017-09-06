@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.Java.Model;
@@ -91,15 +92,8 @@ namespace AutoRest.Java
 
         public static string ImportFrom(this HttpMethod httpMethod)
         {
-            string package = "retrofit2.http.";
-            if (httpMethod == HttpMethod.Delete)
-            {
-                return package + "HTTP";
-            }
-            else
-            {
-                return package + httpMethod.ToString().ToUpperInvariant();
-            }
+            string package = "com.microsoft.rest.v2.annotations.";
+            return package + httpMethod.ToString().ToUpperInvariant();
         }
     }
 }

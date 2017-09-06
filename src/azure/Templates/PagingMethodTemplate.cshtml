@@ -424,37 +424,3 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
         });
 }
 @EmptyLine
-private @Model.ReturnTypeJva.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return @(Model.ClientReference).restClient().responseBuilderFactory().<@Model.ReturnTypeJva.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>newInstance(@(Model.ClientReference).serializerAdapter())
-@foreach (var response in Model.Responses)
-{
-
-            @:.register(@((int)response.Key), new TypeToken<@((response.Value as ResponseJva).GenericBodyWireTypeString)>() { }.getType())
-}
-@if (Model.DefaultResponse.Body != null)
-{
-            @:.registerError(@(Model.OperationExceptionTypeString).class)
-}
-@if (Model.HttpMethod == HttpMethod.Head)
-{
-    if (Model.ReturnType.Headers != null)
-    {
-            @:.buildEmptyWithHeaders(response, @(Model.ReturnType.Headers.Name).class);
-    }
-    else
-    {
-            @:.buildEmpty(response);
-    }
-}
-else
-{
-    if (Model.ReturnType.Headers != null)
-    {
-            @:.buildWithHeaders(response, @(Model.ReturnType.Headers.Name).class);
-    }
-    else
-    {
-            @:.build(response);
-    }
-}
-}

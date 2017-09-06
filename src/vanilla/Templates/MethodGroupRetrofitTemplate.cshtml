@@ -18,14 +18,7 @@ else
 {
 @:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.MethodGroupFullType @method.Name" })
 }
-if (method.HttpMethod == HttpMethod.Delete)
-{
-@:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
-}
-else
-{
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
-}
 if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
 {
 @:    @@Streaming

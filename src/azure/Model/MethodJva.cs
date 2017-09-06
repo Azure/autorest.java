@@ -127,7 +127,7 @@ namespace AutoRest.Java.Azure.Model
                 var declaration = base.MethodParameterApiDeclaration;
                 if (IsPagingNextOperation)
                 {
-                    declaration = declaration.Replace("@Path(\"nextUrl\")", "@Url");
+                    declaration = declaration.Replace("@PathParam(\"nextUrl\")", "@Url");
                 }
                 foreach (var parameter in RetrofitParameters.Where(p => 
                     p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
@@ -136,8 +136,8 @@ namespace AutoRest.Java.Azure.Model
                         (bool) parameter.Extensions[AzureExtensions.SkipUrlEncodingExtension] == true)
                     {
                         declaration = declaration.Replace(
-                            string.Format(CultureInfo.InvariantCulture, "@{0}(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
-                            string.Format(CultureInfo.InvariantCulture, "@{0}(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
+                            string.Format(CultureInfo.InvariantCulture, "@{0}Param(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
+                            string.Format(CultureInfo.InvariantCulture, "@{0}Param(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
                     }
                 }
                 return declaration;

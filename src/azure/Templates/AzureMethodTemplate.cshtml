@@ -88,7 +88,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
-public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+public Single<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeJva.ClientResponseTypeString, @Model.ReturnTypeJva.GenericBodyClientTypeString>() {
         @@Override
         public @Model.ReturnTypeJva.GenericBodyClientTypeString call(@Model.ReturnTypeJva.ClientResponseTypeString response) {
