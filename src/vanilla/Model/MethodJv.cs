@@ -679,9 +679,11 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                string factoryMethod = "fromResponse";
+                string factoryMethod = "fromBody";
                 if (ReturnType.Headers != null)
                 {
+                    // FIXME
+                    Console.Error.WriteLine("TODO: RestProxy");
                     factoryMethod = "fromHeaderResponse";
                 }
                 return factoryMethod;
@@ -704,7 +706,7 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("rx.Observable");
+                imports.Add("rx.Single");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
@@ -729,6 +731,7 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
+                imports.Add("rx.Single");
                 imports.Add("rx.Observable");
                 imports.Add("rx.functions.Func1");
                 if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")

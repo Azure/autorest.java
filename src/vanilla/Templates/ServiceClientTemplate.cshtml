@@ -137,7 +137,7 @@ if(!property.IsReadOnly)
 }
 @foreach (var operation in Model.AllOperations)
 {
-@:        this.@(operation.Name) = new @(operation.TypeName)Impl(retrofit(), this);
+@:        this.@(operation.Name) = new @(operation.TypeName)Impl(this);
 }
 @if (Model.RootMethods.Any())
 {
@@ -154,7 +154,7 @@ if(!property.IsReadOnly)
     }
 </text>
 @EmptyLine
-@if (Model.RootMethods.Any())
+if (Model.RootMethods.Any())
 {
 @:    @Include(new ServiceClientRetrofitTemplate(), Model)
 @EmptyLine

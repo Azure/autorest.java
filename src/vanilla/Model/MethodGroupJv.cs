@@ -115,7 +115,7 @@ namespace AutoRest.Java.Model
             get
             {
                 var imports = new List<string>();
-                imports.Add("retrofit2.Retrofit");
+                imports.Add("com.microsoft.rest.v2.RestProxy");
                 if (MethodGroupTypeString == TypeName)
                 {
                     imports.Add(MethodGroupFullType);

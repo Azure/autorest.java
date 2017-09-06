@@ -5,7 +5,7 @@
 @inherits AutoRest.Core.Template<AutoRest.Java.Model.MethodGroupJv>
 /**
  * The interface defining all the services for @Model.TypeName to be
- * used by Retrofit to perform actually REST calls.
+ * used by RestProxy to perform REST calls.
  */
 interface @Model.MethodGroupServiceType {
 @foreach (MethodJv method in Model.Methods)
@@ -30,7 +30,7 @@ if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
 {
 @:    @@Streaming
 }
-@:    Observable<Response<@method.CallType>> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Single<@(method.ReturnTypeJv.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine
 }
 }

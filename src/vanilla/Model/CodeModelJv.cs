@@ -72,10 +72,10 @@ namespace AutoRest.Java.Model
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
                 classes.AddRange(new[]{
+                        "com.microsoft.rest.v2.RestProxy",
                         "com.microsoft.rest.ServiceClient",
                         "com.microsoft.rest.RestClient",
-                        "okhttp3.OkHttpClient",
-                        "retrofit2.Retrofit"
+                        "rx.Single"
                     });
 
                 classes.AddRange(RootMethods
