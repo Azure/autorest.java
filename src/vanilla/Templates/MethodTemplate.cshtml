@@ -29,7 +29,7 @@
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeJv.ClientResponseTypeString @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
+public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
 @if (@Model.ReturnTypeResponseName == "void")
 {
 @:    @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().value();

@@ -12,7 +12,7 @@ interface @Model.ServiceClientServiceType {
 {
 if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
 {
-@:    @@Multipart
+@:    // @@Multipart not supported by RestProxy
 }
 else
 {
@@ -28,7 +28,7 @@ else
 }
 if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
 {
-@:    @@Streaming
+@:    // @@Streaming not supported by RestProxy
 }
 @:    Single<@(method.ReturnTypeJva.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine

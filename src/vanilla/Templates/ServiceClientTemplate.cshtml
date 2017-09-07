@@ -76,13 +76,7 @@ if(!property.IsReadOnly)
 @:        return this.@(operation.Name);
 @:    }
 }
-@EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     */
-    public @(Model.Name)Impl() {
-        this("@Model.BaseUrl");
-    }
+
 @EmptyLine
     /**
      * Initializes an instance of @(Model.Name) client.
@@ -101,17 +95,6 @@ if(!property.IsReadOnly)
      */
     public @(Model.Name)Impl() {
         this("@Model.BaseUrl");
-        initialize();
-    }
-
-@EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUrl the base URL of the host
-     */
-    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
-        super(baseUrl, clientBuilder, restBuilder);
         initialize();
     }
 @EmptyLine

@@ -124,24 +124,12 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public string WrapResponse(string responseTypeString)
-        {
-            if (Headers == null)
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ClientResponseType, responseTypeString);
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ClientResponseType, responseTypeString, GenericHeaderClientTypeString);
-            }
-        }
-
         [JsonIgnore]
         public string ClientResponseTypeString
         {
             get
             {
-                return WrapResponse(GenericBodyClientTypeString);
+                return GenericBodyClientTypeString;
             }
         }
 
@@ -194,15 +182,6 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public string GenericBodyClientTypeStringWrapped
-        {
-            get
-            {
-                return WrapResponse(GenericBodyClientTypeString);
-            }
-        }
-
-        [JsonIgnore]
         public virtual string ServiceFutureGenericParameterString
         {
             get
@@ -225,7 +204,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return WrapResponse(ServiceResponseGenericParameterString);
+                return ServiceResponseGenericParameterString;
             }
         }
 
@@ -252,7 +231,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return WrapResponse(GenericBodyWireTypeString);
+                return GenericBodyWireTypeString;
             }
         }
 

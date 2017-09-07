@@ -84,7 +84,7 @@ namespace AutoRest.Java.Model
                     else if (parameter.Location == ParameterLocation.FormData)
                     {
                         declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "// @Part(\"{0}\") not supported by RestProxy",
+                            "/* @Part(\"{0}\") not supported by RestProxy */",
                             parameter.SerializedName));
                     }
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
@@ -683,8 +683,7 @@ namespace AutoRest.Java.Model
                 if (ReturnType.Headers != null)
                 {
                     // FIXME
-                    Console.Error.WriteLine("TODO: RestProxy");
-                    factoryMethod = "fromHeaderResponse";
+                    factoryMethod = "fromBody/* RestProxy doesn't support headers */";
                 }
                 return factoryMethod;
             }
@@ -733,15 +732,7 @@ namespace AutoRest.Java.Model
                 // static imports
                 imports.Add("rx.Single");
                 imports.Add("rx.functions.Func1");
-                if (RequestContentType == "multipart/form-data" || RequestContentType == "application/x-www-form-urlencoded")
-                {
-                    // FIXME
-                    imports.Add("retrofit2.http.Multipart.FIXME");
-                }
-                else
-                {
-                    imports.Add("com.microsoft.rest.v2.annotations.Headers");
-                }
+                imports.Add("com.microsoft.rest.v2.annotations.Headers");
                 
                 imports.Add("com.microsoft.rest.v2.http.HttpClient");
                 imports.Add("com.microsoft.rest.ServiceFuture");
@@ -766,10 +757,6 @@ namespace AutoRest.Java.Model
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                 // return type
                 imports.AddRange(this.ReturnTypeJv.ImplImports);
-                if (ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
-                {
-                    imports.Add("retrofit2.http.Streaming.FIXME");
-                }
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange((r.Value as ResponseJv).ImplImports));
                 // exceptions

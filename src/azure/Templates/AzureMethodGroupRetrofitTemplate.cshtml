@@ -10,14 +10,7 @@
 interface @Model.MethodGroupServiceType {
 @foreach (MethodJva method in Model.Methods)
 {
-if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
-{
-@:    @@Multipart
-}
-else
-{
 @:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.MethodGroupFullType @method.Name" })
-}
 if (method.IsPagingNextOperation)
 {
 @:    @@GET
@@ -25,10 +18,6 @@ if (method.IsPagingNextOperation)
 else
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
-}
-if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
-{
-@:    @@Streaming
 }
 @:    Single<@(method.ReturnTypeJva.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine

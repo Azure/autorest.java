@@ -236,7 +236,11 @@ namespace AutoRest.Java.Model
                     imports.AddRange(WireType.Imports);
                 }
                 // parameter location
-                imports.Add(LocationImport(this.Location));
+                var locImport = LocationImport(this.Location);
+                if (locImport != null)
+                {
+                    imports.Add(locImport);
+                }
                 return imports;
             }
         }
@@ -280,7 +284,8 @@ namespace AutoRest.Java.Model
 
         private string LocationImport(ParameterLocation parameterLocation)
         {
-            if (parameterLocation != Core.Model.ParameterLocation.None)
+            if (parameterLocation != Core.Model.ParameterLocation.None &&
+                parameterLocation != Core.Model.ParameterLocation.FormData)
             {
                 return "com.microsoft.rest.v2.annotations." + parameterLocation.ToString() + "Param";
             }
