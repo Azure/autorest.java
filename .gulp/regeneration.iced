@@ -18,6 +18,7 @@ regenExpected = (opts,done) ->
     
     args = [
       "--java",
+      "--clear-output-folder",
       "--output-folder=#{mappingOutputDir}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--java.namespace=#{['Fixtures', key.replace(/\/|\./, '')].join('.')}",
