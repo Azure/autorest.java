@@ -125,10 +125,6 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var declaration = base.MethodParameterApiDeclaration;
-                if (IsPagingNextOperation)
-                {
-                    declaration = declaration.Replace("@PathParam(\"nextUrl\")", "@Url");
-                }
                 foreach (var parameter in RetrofitParameters.Where(p => 
                     p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
                 {
@@ -424,7 +420,7 @@ namespace AutoRest.Java.Azure.Model
                 string invocation;
                 MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
 
-                builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.body()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                     .Indent().AppendLine("@Override")
                     .AppendLine("public Page<{0}> nextPage(String {1}) throws {2}, IOException {{",
                         ((SequenceType)ReturnType.Body).ElementType.Name,
@@ -432,7 +428,7 @@ namespace AutoRest.Java.Azure.Model
                         OperationExceptionTypeString)
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
-                        builder.AppendLine("return {0}({1}).body();", 
+                        builder.AppendLine("return {0}({1});", 
                             invocation, filterRequired ? nextMethod.MethodDefaultParameterInvocation : nextMethod.MethodParameterInvocation)
                     .Outdent().AppendLine("}")
                 .Outdent().AppendLine("};");
@@ -444,7 +440,7 @@ namespace AutoRest.Java.Azure.Model
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0}<{1}<{2}>> response = {3}Delegate(call.execute());",
                     ReturnTypeJva.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
-                builder.AppendLine("{0} result = response.body().items();", this.ReturnType.Body.Name);
+                builder.AppendLine("{0} result = response.items();", this.ReturnType.Body.Name);
                 return builder.ToString();
             }
             else
@@ -486,7 +482,7 @@ namespace AutoRest.Java.Azure.Model
                 builder.AppendLine("{0} result = {1}Delegate(response);",
                     ReturnTypeJva.WireResponseTypeString, this.Name);
                 builder.AppendLine("if (serviceCallback != null) {").Indent();
-                builder.AppendLine("serviceCallback.load(result.body().items());");
+                builder.AppendLine("serviceCallback.load(result.items());");
                 builder.AppendLine("if (result.body().nextPageLink() != null").Indent().Indent()
                     .AppendLine("&& serviceCallback.progress(result.body().items()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
                 string invocation;

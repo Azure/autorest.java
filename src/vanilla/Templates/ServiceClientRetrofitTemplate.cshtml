@@ -7,6 +7,7 @@
  * The interface defining all the services for @Model.Name to be
  * used by Retrofit to perform actually REST calls.
  */
+@@Host("@(Model.BaseUrl)")
 interface @Model.ServiceClientServiceType {
 @foreach (MethodJv method in Model.Methods)
 {

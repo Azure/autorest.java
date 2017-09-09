@@ -135,7 +135,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
         .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
             public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped page) {
-                String @Model.PagingNextPageLinkParameterName = page.body().nextPageLink();
+                String @Model.PagingNextPageLinkParameterName = page.nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
                 }
@@ -204,12 +204,12 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation)
-        .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
+        .flatMap(new Func1<@Model.ReturnTypeJva.GenericBodyClientTypeString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
             public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(Response<@Model.CallType> response) {
                 try {
                     @Model.ReturnTypeJva.GenericBodyWireTypeStringWrapped result = @(Model.Name)Delegate(response);
-                    return Observable.just(@(Model.ReturnTypeJva.ServiceResponseCreation(Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, "result.body()", "result")));
+                    return Observable.just(@(Model.ReturnTypeJva.ServiceResponseCreation(Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, "result", "result")));
                 } catch (Throwable t) {
                     return Observable.error(t);
                 }

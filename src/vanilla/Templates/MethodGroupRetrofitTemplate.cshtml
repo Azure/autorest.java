@@ -6,7 +6,8 @@
 /**
  * The interface defining all the services for @Model.TypeName to be
  * used by RestProxy to perform REST calls.
- */
+*/
+@@Host("@(Model.CodeModel.BaseUrl)")
 interface @Model.MethodGroupServiceType {
 @foreach (MethodJv method in Model.Methods)
 {

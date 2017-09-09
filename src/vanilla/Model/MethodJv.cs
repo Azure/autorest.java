@@ -705,6 +705,7 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
+                imports.Add("rx.Observable");
                 imports.Add("rx.Single");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
@@ -730,9 +731,11 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
+                imports.Add("rx.Observable");
                 imports.Add("rx.Single");
                 imports.Add("rx.functions.Func1");
                 imports.Add("com.microsoft.rest.v2.annotations.Headers");
+                imports.Add("com.microsoft.rest.v2.annotations.Host");
                 
                 imports.Add("com.microsoft.rest.v2.http.HttpClient");
                 imports.Add("com.microsoft.rest.ServiceFuture");

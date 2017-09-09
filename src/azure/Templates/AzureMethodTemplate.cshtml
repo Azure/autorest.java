@@ -3,6 +3,7 @@
 @using AutoRest.Java.vanilla.Templates
 @using AutoRest.Java.azure.Templates
 @using System.Linq
+@using System.Runtime.Serialization
 @using AutoRest.Core.Utilities
 @using AutoRest.Java.Model
 @using AutoRest.Java.Azure.Model
@@ -49,6 +50,8 @@ else
 }
 }
 @EmptyLine
+
+
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -97,6 +100,8 @@ public Single<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name)Asy
     });
 }
 @EmptyLine
+
+
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -114,7 +119,7 @@ public Single<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name)Asy
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
-public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -144,6 +149,8 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 </text>
 }
 <text>
+
+
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -169,14 +176,16 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
 @if (@Model.ReturnTypeResponseName == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().body();
+@:    @(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().last();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().body();
+@:    return @(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().last();
 }
 }
 @EmptyLine
+
+
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -196,7 +205,7 @@ else
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
-    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation), serviceCallback);
+    return ServiceFuture.fromBody(@(Model.Name)Async(@Model.MethodParameterInvocation), serviceCallback);
 }
 @EmptyLine
 /**
