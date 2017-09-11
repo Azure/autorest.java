@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = Path.Combine("src/main/java", cm.Namespace.ToLower().Replace('.', '/'));
+            var packagePath = $"src/main/java{cm.Namespace.ToLower().Replace('.', '/')}";
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;
@@ -47,14 +47,14 @@ namespace AutoRest.Java.Azure.Fluent
 
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, Path.Combine(packagePath, "implementation", codeModel.Name.ToPascalCase() + "Impl" + ImplementationFileExtension));
+            await Write(serviceClientTemplate, $"{packagePath}/implementation/{codeModel.Name.ToPascalCase()}Impl{ImplementationFileExtension}");
 
             // operations
             foreach (MethodGroupJvaf methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, Path.Combine(packagePath, "implementation", methodGroup.TypeName.ToPascalCase()) + "Inner" + ImplementationFileExtension);
+                await Write(operationsTemplate, $"{packagePath}/implementation/{methodGroup.TypeName.ToPascalCase()}Inner{ImplementationFileExtension}");
             }
 
             //Models
@@ -71,14 +71,14 @@ namespace AutoRest.Java.Azure.Fluent
                 }
 
                 var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine(packagePath, modelType.ModelsPackage.Trim('.'), $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(modelTemplate, $"{packagePath}/{modelType.ModelsPackage.Trim('.')}/{modelType.Name.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             //Enums
             foreach (EnumTypeJvaf enumType in cm.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(packagePath, enumType.ModelsPackage.Trim('.'), $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(enumTemplate, $"{packagePath}/{enumType.ModelsPackage.Trim('.')}/{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             // Page class
@@ -88,7 +88,7 @@ namespace AutoRest.Java.Azure.Fluent
                 {
                     Model = new PageJvaf(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine(packagePath, "implementation", $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
+                await Write(pageTemplate, $"{packagePath}/implementation/{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}");
             }
 
             // Exceptions
@@ -100,25 +100,25 @@ namespace AutoRest.Java.Azure.Fluent
                 }
 
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine(packagePath, exceptionType.ModelsPackage.Trim('.'), $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+                await Write(exceptionTemplate, $"{packagePath}/{exceptionType.ModelsPackage.Trim('.')}/{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}");
             }
 
             // package-info.java
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm)
-            }, Path.Combine(packagePath, _packageInfoFileName));
+            }, $"{packagePath}/{_packageInfoFileName}");
             await Write(new PackageInfoTemplate
             {
                 Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine(packagePath, "implementation", _packageInfoFileName));
+            }, $"{packagePath}/implementation/{_packageInfoFileName}");
 
             if (true == AutoRest.Core.Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
                 // Manager
                 await Write(
                     new AzureServiceManagerTemplate { Model = codeModel },
-                    Path.Combine(packagePath, "implementation", codeModel.ServiceName + "Manager" + ImplementationFileExtension));
+                    $"{packagePath}/implementation/{codeModel.ServiceName}Manager{ImplementationFileExtension}");
 
                 // POM
                 await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
