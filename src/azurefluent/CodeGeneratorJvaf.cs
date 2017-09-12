@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = $"src/main/java{cm.Namespace.ToLower().Replace('.', '/')}";
+            var packagePath = $"src/main/java/{cm.Namespace.ToLower().Replace('.', '/')}";
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;
