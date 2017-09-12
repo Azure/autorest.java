@@ -133,7 +133,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>fixtures.azurereport.CoverageReporter</mainClass>
+              <mainClass>javafixtures.azurereport.CoverageReporter</mainClass>
               <classpathScope>test</classpathScope>
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
