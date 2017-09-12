@@ -1,8 +1,9 @@
 {
   "name": "@microsoft.azure/autorest.java",
-  "version": "1.9.2",
+  "version": "1.9.4",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
+    "autorest": "autorest",
     "start": "dotnet src/bin/netcoreapp2.0/autorest.java.dll --server",
     "test": "gulp testci",
     "testci": "gulp testci",

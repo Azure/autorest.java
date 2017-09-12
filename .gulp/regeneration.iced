@@ -18,7 +18,6 @@ regenExpected = (opts,done) ->
     
     args = [
       "--java",
-      "--clear-output-folder",
       "--output-folder=#{mappingOutputDir}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--java.namespace=#{['Fixtures', key.replace(/\/|\./, '')].join('.')}",
@@ -30,6 +29,8 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--java.fluent=true")
+    else
+      args.push("--clear-output-folder") # doesn't work for fluent since the output-folder you specify is higher up
 
     autorest args,() =>
       instances--
