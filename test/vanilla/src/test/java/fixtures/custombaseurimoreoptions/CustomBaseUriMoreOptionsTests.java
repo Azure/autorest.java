@@ -1,5 +1,7 @@
 package fixtures.custombaseurimoreoptions;
 
+import com.microsoft.rest.LogLevel;
+import com.microsoft.rest.RestClient;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,9 +15,11 @@ public class CustomBaseUriMoreOptionsTests {
 
     @BeforeClass
     public static void setup() {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
-        client = new AutoRestParameterizedCustomHostTestClientImpl(clientBuilder, new Retrofit.Builder());
+        RestClient restClient = new RestClient.Builder()
+                .withLogLevel(LogLevel.BODY)
+                .build();
+
+        client = new AutoRestParameterizedCustomHostTestClientImpl(restClient);
         client.withSubscriptionId("test12");
     }
 

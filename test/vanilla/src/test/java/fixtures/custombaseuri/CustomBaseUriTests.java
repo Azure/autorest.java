@@ -71,19 +71,7 @@ public class CustomBaseUriTests {
     @Test
     public void getEmptyMultipleThreads() throws Exception {
         final CountDownLatch latch = new CountDownLatch(2);
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            // do nothing
-                        }
-                        return chain.proceed(chain.request());
-                    }
-                });
-        final AutoRestParameterizedHostTestClient client1 = new AutoRestParameterizedHostTestClientImpl(clientBuilder, new Retrofit.Builder());
+        final AutoRestParameterizedHostTestClient client1 = new AutoRestParameterizedHostTestClientImpl();
         client1.withHost("host:3000");
         Thread t1 = new Thread(new Runnable() {
             @Override

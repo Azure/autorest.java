@@ -50,7 +50,7 @@ public class FormdataTests {
                                 throw Exceptions.propagate(e);
                             }
                         }
-                    }).toBlocking().single();
+                    }).toBlocking().value();
             Assert.assertEquals(new String(bytes), IOUtils.toString(actual));
         }
 

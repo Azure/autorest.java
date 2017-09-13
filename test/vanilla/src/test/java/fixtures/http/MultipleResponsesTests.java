@@ -1,8 +1,13 @@
 package fixtures.http;
 
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v2.http.HttpResponse;
+import com.microsoft.rest.v2.policy.RequestPolicy;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
+import fixtures.http.implementation.MultipleResponsesImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
@@ -12,6 +17,7 @@ import fixtures.http.models.MyException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import rx.Single;
 import rx.functions.Action1;
 
 import java.util.concurrent.CountDownLatch;
@@ -130,27 +136,71 @@ public class MultipleResponsesTests {
 
     @Test
     public void get202None204NoneDefaultError202None() throws Exception {
-        client.multipleResponses().get202None204NoneDefaultError202NoneWithServiceResponseAsync()
-            .subscribe(new Action1<ServiceResponse<Void>>() {
-                @Override
-                public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(202, response.response().code());
-                    lock.countDown();
-                }
-            });
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
+                .addCustomPolicy(new RequestPolicy.Factory() {
+                    @Override
+                    public RequestPolicy create(final RequestPolicy next) {
+                        return new RequestPolicy() {
+                            @Override
+                            public Single<HttpResponse> sendAsync(HttpRequest request) {
+                                return next.sendAsync(request)
+                                        .doOnSuccess(new Action1<HttpResponse>() {
+                                            @Override
+                                            public void call(HttpResponse httpResponse) {
+                                                Assert.assertEquals(202, httpResponse.statusCode());
+                                                lock.countDown();
+                                            }
+                                        })
+                                        .doOnError(new Action1<Throwable>() {
+                                            @Override
+                                            public void call(Throwable throwable) {
+                                                Assert.fail(throwable.getMessage());
+                                            }
+                                        });
+                            }
+                        };
+                    }
+                })
+                .build();
+
+        AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(restClient);
+        localClient.multipleResponses().get202None204NoneDefaultError202NoneAsync().subscribe();
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void get202None204NoneDefaultError204None() throws Exception {
-        client.multipleResponses().get202None204NoneDefaultError204NoneWithServiceResponseAsync()
-            .subscribe(new Action1<ServiceResponse<Void>>() {
-                @Override
-                public void call(ServiceResponse<Void> response) {
-                    Assert.assertEquals(204, response.response().code());
-                    lock.countDown();
-                }
-            });
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
+                .addCustomPolicy(new RequestPolicy.Factory() {
+                    @Override
+                    public RequestPolicy create(final RequestPolicy next) {
+                        return new RequestPolicy() {
+                            @Override
+                            public Single<HttpResponse> sendAsync(HttpRequest request) {
+                                return next.sendAsync(request)
+                                        .doOnSuccess(new Action1<HttpResponse>() {
+                                            @Override
+                                            public void call(HttpResponse httpResponse) {
+                                                Assert.assertEquals(204, httpResponse.statusCode());
+                                                lock.countDown();
+                                            }
+                                        })
+                                        .doOnError(new Action1<Throwable>() {
+                                            @Override
+                                            public void call(Throwable throwable) {
+                                                Assert.fail(throwable.getMessage());
+                                            }
+                                        });
+                            }
+                        };
+                    }
+                })
+                .build();
+
+        AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(restClient);
+        localClient.multipleResponses().get202None204NoneDefaultError204NoneAsync().subscribe();
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
