@@ -10,7 +10,7 @@
 
 package fixtures.bodydictionary.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodydictionary.Dictionarys;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.Base64Url;
@@ -18,6 +18,14 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
@@ -25,24 +33,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Dictionarys.
  */
 public class DictionarysImpl implements Dictionarys {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private DictionarysService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATdictionaryServiceImpl client;
@@ -50,278 +53,408 @@ public class DictionarysImpl implements Dictionarys {
     /**
      * Initializes an instance of Dictionarys.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public DictionarysImpl(Retrofit retrofit, AutoRestSwaggerBATdictionaryServiceImpl client) {
-        this.service = retrofit.create(DictionarysService.class);
+    public DictionarysImpl(AutoRestSwaggerBATdictionaryServiceImpl client) {
+        this.service = RestProxy.create(DictionarysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Dictionarys to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface DictionarysService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNull" })
         @GET("dictionary/null")
-        Observable<Response<ResponseBody>> getNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Integer>> getNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmpty" })
         @GET("dictionary/empty")
-        Observable<Response<ResponseBody>> getEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Integer>> getEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putEmpty" })
         @PUT("dictionary/empty")
-        Observable<Response<ResponseBody>> putEmpty(@Body Map<String, String> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putEmpty(@BodyParam Map<String, String> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullValue" })
         @GET("dictionary/nullvalue")
-        Observable<Response<ResponseBody>> getNullValue();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getNullValue();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullKey" })
         @GET("dictionary/nullkey")
-        Observable<Response<ResponseBody>> getNullKey();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getNullKey();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmptyStringKey" })
         @GET("dictionary/keyemptystring")
-        Observable<Response<ResponseBody>> getEmptyStringKey();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getEmptyStringKey();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getInvalid" })
         @GET("dictionary/invalid")
-        Observable<Response<ResponseBody>> getInvalid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getInvalid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanTfft" })
         @GET("dictionary/prim/boolean/tfft")
-        Observable<Response<ResponseBody>> getBooleanTfft();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Boolean>> getBooleanTfft();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putBooleanTfft" })
         @PUT("dictionary/prim/boolean/tfft")
-        Observable<Response<ResponseBody>> putBooleanTfft(@Body Map<String, Boolean> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBooleanTfft(@BodyParam Map<String, Boolean> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidNull" })
         @GET("dictionary/prim/boolean/true.null.false")
-        Observable<Response<ResponseBody>> getBooleanInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Boolean>> getBooleanInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidString" })
         @GET("dictionary/prim/boolean/true.boolean.false")
-        Observable<Response<ResponseBody>> getBooleanInvalidString();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Boolean>> getBooleanInvalidString();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntegerValid" })
         @GET("dictionary/prim/integer/1.-1.3.300")
-        Observable<Response<ResponseBody>> getIntegerValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Integer>> getIntegerValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putIntegerValid" })
         @PUT("dictionary/prim/integer/1.-1.3.300")
-        Observable<Response<ResponseBody>> putIntegerValid(@Body Map<String, Integer> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putIntegerValid(@BodyParam Map<String, Integer> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidNull" })
         @GET("dictionary/prim/integer/1.null.zero")
-        Observable<Response<ResponseBody>> getIntInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Integer>> getIntInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidString" })
         @GET("dictionary/prim/integer/1.integer.0")
-        Observable<Response<ResponseBody>> getIntInvalidString();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Integer>> getIntInvalidString();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongValid" })
         @GET("dictionary/prim/long/1.-1.3.300")
-        Observable<Response<ResponseBody>> getLongValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Long>> getLongValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putLongValid" })
         @PUT("dictionary/prim/long/1.-1.3.300")
-        Observable<Response<ResponseBody>> putLongValid(@Body Map<String, Long> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putLongValid(@BodyParam Map<String, Long> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidNull" })
         @GET("dictionary/prim/long/1.null.zero")
-        Observable<Response<ResponseBody>> getLongInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Long>> getLongInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidString" })
         @GET("dictionary/prim/long/1.integer.0")
-        Observable<Response<ResponseBody>> getLongInvalidString();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Long>> getLongInvalidString();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatValid" })
         @GET("dictionary/prim/float/0--0.01-1.2e20")
-        Observable<Response<ResponseBody>> getFloatValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Double>> getFloatValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putFloatValid" })
         @PUT("dictionary/prim/float/0--0.01-1.2e20")
-        Observable<Response<ResponseBody>> putFloatValid(@Body Map<String, Double> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putFloatValid(@BodyParam Map<String, Double> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidNull" })
         @GET("dictionary/prim/float/0.0-null-1.2e20")
-        Observable<Response<ResponseBody>> getFloatInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Double>> getFloatInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidString" })
         @GET("dictionary/prim/float/1.number.0")
-        Observable<Response<ResponseBody>> getFloatInvalidString();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Double>> getFloatInvalidString();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleValid" })
         @GET("dictionary/prim/double/0--0.01-1.2e20")
-        Observable<Response<ResponseBody>> getDoubleValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Double>> getDoubleValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDoubleValid" })
         @PUT("dictionary/prim/double/0--0.01-1.2e20")
-        Observable<Response<ResponseBody>> putDoubleValid(@Body Map<String, Double> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putDoubleValid(@BodyParam Map<String, Double> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidNull" })
         @GET("dictionary/prim/double/0.0-null-1.2e20")
-        Observable<Response<ResponseBody>> getDoubleInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Double>> getDoubleInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidString" })
         @GET("dictionary/prim/double/1.number.0")
-        Observable<Response<ResponseBody>> getDoubleInvalidString();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Double>> getDoubleInvalidString();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringValid" })
         @GET("dictionary/prim/string/foo1.foo2.foo3")
-        Observable<Response<ResponseBody>> getStringValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getStringValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putStringValid" })
         @PUT("dictionary/prim/string/foo1.foo2.foo3")
-        Observable<Response<ResponseBody>> putStringValid(@Body Map<String, String> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putStringValid(@BodyParam Map<String, String> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithNull" })
         @GET("dictionary/prim/string/foo.null.foo2")
-        Observable<Response<ResponseBody>> getStringWithNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getStringWithNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithInvalid" })
         @GET("dictionary/prim/string/foo.123.foo2")
-        Observable<Response<ResponseBody>> getStringWithInvalid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, String>> getStringWithInvalid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateValid" })
         @GET("dictionary/prim/date/valid")
-        Observable<Response<ResponseBody>> getDateValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, LocalDate>> getDateValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateValid" })
         @PUT("dictionary/prim/date/valid")
-        Observable<Response<ResponseBody>> putDateValid(@Body Map<String, LocalDate> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putDateValid(@BodyParam Map<String, LocalDate> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidNull" })
         @GET("dictionary/prim/date/invalidnull")
-        Observable<Response<ResponseBody>> getDateInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, LocalDate>> getDateInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidChars" })
         @GET("dictionary/prim/date/invalidchars")
-        Observable<Response<ResponseBody>> getDateInvalidChars();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, LocalDate>> getDateInvalidChars();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeValid" })
         @GET("dictionary/prim/date-time/valid")
-        Observable<Response<ResponseBody>> getDateTimeValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, DateTime>> getDateTimeValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeValid" })
         @PUT("dictionary/prim/date-time/valid")
-        Observable<Response<ResponseBody>> putDateTimeValid(@Body Map<String, DateTime> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putDateTimeValid(@BodyParam Map<String, DateTime> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidNull" })
         @GET("dictionary/prim/date-time/invalidnull")
-        Observable<Response<ResponseBody>> getDateTimeInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, DateTime>> getDateTimeInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidChars" })
         @GET("dictionary/prim/date-time/invalidchars")
-        Observable<Response<ResponseBody>> getDateTimeInvalidChars();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, DateTime>> getDateTimeInvalidChars();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeRfc1123Valid" })
         @GET("dictionary/prim/date-time-rfc1123/valid")
-        Observable<Response<ResponseBody>> getDateTimeRfc1123Valid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, DateTime>> getDateTimeRfc1123Valid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeRfc1123Valid" })
         @PUT("dictionary/prim/date-time-rfc1123/valid")
-        Observable<Response<ResponseBody>> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putDateTimeRfc1123Valid(@BodyParam Map<String, DateTimeRfc1123> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDurationValid" })
         @GET("dictionary/prim/duration/valid")
-        Observable<Response<ResponseBody>> getDurationValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Period>> getDurationValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDurationValid" })
         @PUT("dictionary/prim/duration/valid")
-        Observable<Response<ResponseBody>> putDurationValid(@Body Map<String, Period> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putDurationValid(@BodyParam Map<String, Period> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteValid" })
         @GET("dictionary/prim/byte/valid")
-        Observable<Response<ResponseBody>> getByteValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, byte[]>> getByteValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putByteValid" })
         @PUT("dictionary/prim/byte/valid")
-        Observable<Response<ResponseBody>> putByteValid(@Body Map<String, byte[]> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putByteValid(@BodyParam Map<String, byte[]> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteInvalidNull" })
         @GET("dictionary/prim/byte/invalidnull")
-        Observable<Response<ResponseBody>> getByteInvalidNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, byte[]>> getByteInvalidNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBase64Url" })
         @GET("dictionary/prim/base64url/valid")
-        Observable<Response<ResponseBody>> getBase64Url();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, byte[]>> getBase64Url();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexNull" })
         @GET("dictionary/complex/null")
-        Observable<Response<ResponseBody>> getComplexNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Widget>> getComplexNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexEmpty" })
         @GET("dictionary/complex/empty")
-        Observable<Response<ResponseBody>> getComplexEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Widget>> getComplexEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemNull" })
         @GET("dictionary/complex/itemnull")
-        Observable<Response<ResponseBody>> getComplexItemNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Widget>> getComplexItemNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemEmpty" })
         @GET("dictionary/complex/itemempty")
-        Observable<Response<ResponseBody>> getComplexItemEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Widget>> getComplexItemEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexValid" })
         @GET("dictionary/complex/valid")
-        Observable<Response<ResponseBody>> getComplexValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Widget>> getComplexValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putComplexValid" })
         @PUT("dictionary/complex/valid")
-        Observable<Response<ResponseBody>> putComplexValid(@Body Map<String, Widget> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putComplexValid(@BodyParam Map<String, Widget> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayNull" })
         @GET("dictionary/array/null")
-        Observable<Response<ResponseBody>> getArrayNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, List<String>>> getArrayNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayEmpty" })
         @GET("dictionary/array/empty")
-        Observable<Response<ResponseBody>> getArrayEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, List<String>>> getArrayEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemNull" })
         @GET("dictionary/array/itemnull")
-        Observable<Response<ResponseBody>> getArrayItemNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, List<String>>> getArrayItemNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemEmpty" })
         @GET("dictionary/array/itemempty")
-        Observable<Response<ResponseBody>> getArrayItemEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, List<String>>> getArrayItemEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayValid" })
         @GET("dictionary/array/valid")
-        Observable<Response<ResponseBody>> getArrayValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, List<String>>> getArrayValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putArrayValid" })
         @PUT("dictionary/array/valid")
-        Observable<Response<ResponseBody>> putArrayValid(@Body Map<String, List<String>> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putArrayValid(@BodyParam Map<String, List<String>> arrayBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryNull" })
         @GET("dictionary/dictionary/null")
-        Observable<Response<ResponseBody>> getDictionaryNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Map<String, String>>> getDictionaryNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryEmpty" })
         @GET("dictionary/dictionary/empty")
-        Observable<Response<ResponseBody>> getDictionaryEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Map<String, String>>> getDictionaryEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemNull" })
         @GET("dictionary/dictionary/itemnull")
-        Observable<Response<ResponseBody>> getDictionaryItemNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Map<String, String>>> getDictionaryItemNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemEmpty" })
         @GET("dictionary/dictionary/itemempty")
-        Observable<Response<ResponseBody>> getDictionaryItemEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Map<String, String>>> getDictionaryItemEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryValid" })
         @GET("dictionary/dictionary/valid")
-        Observable<Response<ResponseBody>> getDictionaryValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Map<String, String>>> getDictionaryValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDictionaryValid" })
         @PUT("dictionary/dictionary/valid")
-        Observable<Response<ResponseBody>> putDictionaryValid(@Body Map<String, Map<String, String>> arrayBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putDictionaryValid(@BodyParam Map<String, Map<String, String>> arrayBody);
 
     }
 
@@ -334,7 +467,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().body();
+        return getNullAsync().toBlocking().value();
     }
 
     /**
@@ -345,7 +478,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
@@ -354,42 +487,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getNullAsync() {
-        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getNullAsync() {
+        return service.getNull();
     }
 
-    /**
-     * Get null dictionary value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getNullWithServiceResponseAsync() {
-        return service.getNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get empty dictionary value {}.
@@ -400,7 +501,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -411,7 +512,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -420,42 +521,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getEmptyAsync() {
-        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getEmptyAsync() {
+        return service.getEmpty();
     }
 
-    /**
-     * Get empty dictionary value {}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getEmptyWithServiceResponseAsync() {
-        return service.getEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value empty {}.
@@ -466,7 +535,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putEmpty(Map<String, String> arrayBody) {
-        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putEmptyAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -478,7 +547,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putEmptyAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -488,47 +557,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putEmptyAsync(Map<String, String> arrayBody) {
-        return putEmptyWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value empty {}.
-     *
-     * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(Map<String, String> arrayBody) {
+    public Single<Void> putEmptyAsync(Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putEmpty(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putEmpty(arrayBody);
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get Dictionary with null value.
@@ -539,7 +575,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullValue() {
-        return getNullValueWithServiceResponseAsync().toBlocking().single().body();
+        return getNullValueAsync().toBlocking().value();
     }
 
     /**
@@ -550,7 +586,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullValueWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullValueAsync(), serviceCallback);
     }
 
     /**
@@ -559,42 +595,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getNullValueAsync() {
-        return getNullValueWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getNullValueAsync() {
+        return service.getNullValue();
     }
 
-    /**
-     * Get Dictionary with null value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getNullValueWithServiceResponseAsync() {
-        return service.getNullValue()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getNullValueDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getNullValueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get Dictionary with null key.
@@ -605,7 +609,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullKey() {
-        return getNullKeyWithServiceResponseAsync().toBlocking().single().body();
+        return getNullKeyAsync().toBlocking().value();
     }
 
     /**
@@ -616,7 +620,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullKeyAsync(), serviceCallback);
     }
 
     /**
@@ -625,42 +629,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getNullKeyAsync() {
-        return getNullKeyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getNullKeyAsync() {
+        return service.getNullKey();
     }
 
-    /**
-     * Get Dictionary with null key.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getNullKeyWithServiceResponseAsync() {
-        return service.getNullKey()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getNullKeyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get Dictionary with key as empty string.
@@ -671,7 +643,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getEmptyStringKey() {
-        return getEmptyStringKeyWithServiceResponseAsync().toBlocking().single().body();
+        return getEmptyStringKeyAsync().toBlocking().value();
     }
 
     /**
@@ -682,7 +654,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyStringKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getEmptyStringKeyAsync(), serviceCallback);
     }
 
     /**
@@ -691,42 +663,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getEmptyStringKeyAsync() {
-        return getEmptyStringKeyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getEmptyStringKeyAsync() {
+        return service.getEmptyStringKey();
     }
 
-    /**
-     * Get Dictionary with key as empty string.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getEmptyStringKeyWithServiceResponseAsync() {
-        return service.getEmptyStringKey()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getEmptyStringKeyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid Dictionary value.
@@ -737,7 +677,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidAsync().toBlocking().value();
     }
 
     /**
@@ -748,7 +688,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
     /**
@@ -757,42 +697,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getInvalidAsync() {
-        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getInvalidAsync() {
+        return service.getInvalid();
     }
 
-    /**
-     * Get invalid Dictionary value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getInvalidWithServiceResponseAsync() {
-        return service.getInvalid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getInvalidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -803,7 +711,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanTfft() {
-        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().body();
+        return getBooleanTfftAsync().toBlocking().value();
     }
 
     /**
@@ -814,7 +722,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Boolean>> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanTfftAsync(), serviceCallback);
     }
 
     /**
@@ -823,42 +731,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    public Observable<Map<String, Boolean>> getBooleanTfftAsync() {
-        return getBooleanTfftWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
-            @Override
-            public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Boolean>> getBooleanTfftAsync() {
+        return service.getBooleanTfft();
     }
 
-    /**
-     * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Boolean&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanTfftWithServiceResponseAsync() {
-        return service.getBooleanTfft()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Boolean>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Boolean>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Boolean>> clientResponse = getBooleanTfftDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Boolean>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -869,7 +745,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
-        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putBooleanTfftAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -881,7 +757,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putBooleanTfftAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -891,47 +767,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
-        return putBooleanTfftWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
-     *
-     * @param arrayBody the Map&lt;String, Boolean&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBooleanTfftWithServiceResponseAsync(Map<String, Boolean> arrayBody) {
+    public Single<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putBooleanTfft(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBooleanTfftDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putBooleanTfft(arrayBody);
     }
 
-    private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -942,7 +785,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getBooleanInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -953,7 +796,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -962,42 +805,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    public Observable<Map<String, Boolean>> getBooleanInvalidNullAsync() {
-        return getBooleanInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
-            @Override
-            public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Boolean>> getBooleanInvalidNullAsync() {
+        return service.getBooleanInvalidNull();
     }
 
-    /**
-     * Get boolean dictionary value {"0": true, "1": null, "2": false }.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Boolean&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidNullWithServiceResponseAsync() {
-        return service.getBooleanInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Boolean>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Boolean>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Boolean>> clientResponse = getBooleanInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Boolean>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -1008,7 +819,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().body();
+        return getBooleanInvalidStringAsync().toBlocking().value();
     }
 
     /**
@@ -1019,7 +830,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanInvalidStringAsync(), serviceCallback);
     }
 
     /**
@@ -1028,42 +839,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Boolean&gt; object
      */
-    public Observable<Map<String, Boolean>> getBooleanInvalidStringAsync() {
-        return getBooleanInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
-            @Override
-            public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Boolean>> getBooleanInvalidStringAsync() {
+        return service.getBooleanInvalidString();
     }
 
-    /**
-     * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Boolean&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Boolean>>> getBooleanInvalidStringWithServiceResponseAsync() {
-        return service.getBooleanInvalidString()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Boolean>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Boolean>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Boolean>> clientResponse = getBooleanInvalidStringDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Boolean>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -1074,7 +853,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntegerValid() {
-        return getIntegerValidWithServiceResponseAsync().toBlocking().single().body();
+        return getIntegerValidAsync().toBlocking().value();
     }
 
     /**
@@ -1085,7 +864,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntegerValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getIntegerValidAsync(), serviceCallback);
     }
 
     /**
@@ -1094,42 +873,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getIntegerValidAsync() {
-        return getIntegerValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getIntegerValidAsync() {
+        return service.getIntegerValid();
     }
 
-    /**
-     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getIntegerValidWithServiceResponseAsync() {
-        return service.getIntegerValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getIntegerValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -1140,7 +887,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putIntegerValid(Map<String, Integer> arrayBody) {
-        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putIntegerValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -1152,7 +899,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putIntegerValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1162,47 +909,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
-        return putIntegerValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
-     * @param arrayBody the Map&lt;String, Integer&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putIntegerValidWithServiceResponseAsync(Map<String, Integer> arrayBody) {
+    public Single<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putIntegerValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putIntegerValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putIntegerValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -1213,7 +927,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidNull() {
-        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getIntInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -1224,7 +938,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getIntInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -1233,42 +947,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getIntInvalidNullAsync() {
-        return getIntInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getIntInvalidNullAsync() {
+        return service.getIntInvalidNull();
     }
 
-    /**
-     * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidNullWithServiceResponseAsync() {
-        return service.getIntInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getIntInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -1279,7 +961,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidString() {
-        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().body();
+        return getIntInvalidStringAsync().toBlocking().value();
     }
 
     /**
@@ -1290,7 +972,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getIntInvalidStringAsync(), serviceCallback);
     }
 
     /**
@@ -1299,42 +981,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getIntInvalidStringAsync() {
-        return getIntInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getIntInvalidStringAsync() {
+        return service.getIntInvalidString();
     }
 
-    /**
-     * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getIntInvalidStringWithServiceResponseAsync() {
-        return service.getIntInvalidString()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getIntInvalidStringDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -1345,7 +995,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongValid() {
-        return getLongValidWithServiceResponseAsync().toBlocking().single().body();
+        return getLongValidAsync().toBlocking().value();
     }
 
     /**
@@ -1356,7 +1006,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Long>> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceFuture.fromResponse(getLongValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getLongValidAsync(), serviceCallback);
     }
 
     /**
@@ -1365,42 +1015,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    public Observable<Map<String, Long>> getLongValidAsync() {
-        return getLongValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
-            @Override
-            public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Long>> getLongValidAsync() {
+        return service.getLongValid();
     }
 
-    /**
-     * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Long&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Long>>> getLongValidWithServiceResponseAsync() {
-        return service.getLongValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Long>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Long>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Long>> clientResponse = getLongValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Long>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Long>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -1411,7 +1029,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putLongValid(Map<String, Long> arrayBody) {
-        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putLongValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -1423,7 +1041,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putLongValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1433,47 +1051,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putLongValidAsync(Map<String, Long> arrayBody) {
-        return putLongValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
-     *
-     * @param arrayBody the Map&lt;String, Long&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putLongValidWithServiceResponseAsync(Map<String, Long> arrayBody) {
+    public Single<Void> putLongValidAsync(Map<String, Long> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putLongValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putLongValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putLongValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -1484,7 +1069,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidNull() {
-        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getLongInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -1495,7 +1080,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Long>> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceFuture.fromResponse(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getLongInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -1504,42 +1089,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    public Observable<Map<String, Long>> getLongInvalidNullAsync() {
-        return getLongInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
-            @Override
-            public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Long>> getLongInvalidNullAsync() {
+        return service.getLongInvalidNull();
     }
 
-    /**
-     * Get long dictionary value {"0": 1, "1": null, "2": 0}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Long&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidNullWithServiceResponseAsync() {
-        return service.getLongInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Long>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Long>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Long>> clientResponse = getLongInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Long>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Long>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -1550,7 +1103,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidString() {
-        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().body();
+        return getLongInvalidStringAsync().toBlocking().value();
     }
 
     /**
@@ -1561,7 +1114,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Long>> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceFuture.fromResponse(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getLongInvalidStringAsync(), serviceCallback);
     }
 
     /**
@@ -1570,42 +1123,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Long&gt; object
      */
-    public Observable<Map<String, Long>> getLongInvalidStringAsync() {
-        return getLongInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
-            @Override
-            public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Long>> getLongInvalidStringAsync() {
+        return service.getLongInvalidString();
     }
 
-    /**
-     * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Long&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Long>>> getLongInvalidStringWithServiceResponseAsync() {
-        return service.getLongInvalidString()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Long>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Long>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Long>> clientResponse = getLongInvalidStringDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Long>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Long>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -1616,7 +1137,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatValid() {
-        return getFloatValidWithServiceResponseAsync().toBlocking().single().body();
+        return getFloatValidAsync().toBlocking().value();
     }
 
     /**
@@ -1627,7 +1148,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Double>> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceFuture.fromResponse(getFloatValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getFloatValidAsync(), serviceCallback);
     }
 
     /**
@@ -1636,42 +1157,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<Map<String, Double>> getFloatValidAsync() {
-        return getFloatValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
-            @Override
-            public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Double>> getFloatValidAsync() {
+        return service.getFloatValid();
     }
 
-    /**
-     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Double&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Double>>> getFloatValidWithServiceResponseAsync() {
-        return service.getFloatValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Double>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Double>> clientResponse = getFloatValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Double>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -1682,7 +1171,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putFloatValid(Map<String, Double> arrayBody) {
-        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putFloatValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -1694,7 +1183,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putFloatValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1704,47 +1193,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putFloatValidAsync(Map<String, Double> arrayBody) {
-        return putFloatValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
-     * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putFloatValidWithServiceResponseAsync(Map<String, Double> arrayBody) {
+    public Single<Void> putFloatValidAsync(Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putFloatValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putFloatValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putFloatValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -1755,7 +1211,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidNull() {
-        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getFloatInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -1766,7 +1222,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Double>> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceFuture.fromResponse(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getFloatInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -1775,42 +1231,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<Map<String, Double>> getFloatInvalidNullAsync() {
-        return getFloatInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
-            @Override
-            public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Double>> getFloatInvalidNullAsync() {
+        return service.getFloatInvalidNull();
     }
 
-    /**
-     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Double&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidNullWithServiceResponseAsync() {
-        return service.getFloatInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Double>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Double>> clientResponse = getFloatInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Double>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -1821,7 +1245,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidString() {
-        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().body();
+        return getFloatInvalidStringAsync().toBlocking().value();
     }
 
     /**
@@ -1832,7 +1256,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Double>> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceFuture.fromResponse(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getFloatInvalidStringAsync(), serviceCallback);
     }
 
     /**
@@ -1841,42 +1265,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<Map<String, Double>> getFloatInvalidStringAsync() {
-        return getFloatInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
-            @Override
-            public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Double>> getFloatInvalidStringAsync() {
+        return service.getFloatInvalidString();
     }
 
-    /**
-     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Double&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Double>>> getFloatInvalidStringWithServiceResponseAsync() {
-        return service.getFloatInvalidString()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Double>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Double>> clientResponse = getFloatInvalidStringDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Double>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -1887,7 +1279,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleValid() {
-        return getDoubleValidWithServiceResponseAsync().toBlocking().single().body();
+        return getDoubleValidAsync().toBlocking().value();
     }
 
     /**
@@ -1898,7 +1290,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Double>> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDoubleValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDoubleValidAsync(), serviceCallback);
     }
 
     /**
@@ -1907,42 +1299,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<Map<String, Double>> getDoubleValidAsync() {
-        return getDoubleValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
-            @Override
-            public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Double>> getDoubleValidAsync() {
+        return service.getDoubleValid();
     }
 
-    /**
-     * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Double&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Double>>> getDoubleValidWithServiceResponseAsync() {
-        return service.getDoubleValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Double>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Double>> clientResponse = getDoubleValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Double>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -1953,7 +1313,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDoubleValid(Map<String, Double> arrayBody) {
-        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putDoubleValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -1965,7 +1325,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putDoubleValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1975,47 +1335,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
-        return putDoubleValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
-     *
-     * @param arrayBody the Map&lt;String, Double&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putDoubleValidWithServiceResponseAsync(Map<String, Double> arrayBody) {
+    public Single<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDoubleValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putDoubleValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putDoubleValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -2026,7 +1353,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getDoubleInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -2037,7 +1364,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Double>> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDoubleInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -2046,42 +1373,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<Map<String, Double>> getDoubleInvalidNullAsync() {
-        return getDoubleInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
-            @Override
-            public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Double>> getDoubleInvalidNullAsync() {
+        return service.getDoubleInvalidNull();
     }
 
-    /**
-     * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Double&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidNullWithServiceResponseAsync() {
-        return service.getDoubleInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Double>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Double>> clientResponse = getDoubleInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Double>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -2092,7 +1387,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().body();
+        return getDoubleInvalidStringAsync().toBlocking().value();
     }
 
     /**
@@ -2103,7 +1398,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Double>> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDoubleInvalidStringAsync(), serviceCallback);
     }
 
     /**
@@ -2112,42 +1407,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Double&gt; object
      */
-    public Observable<Map<String, Double>> getDoubleInvalidStringAsync() {
-        return getDoubleInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
-            @Override
-            public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Double>> getDoubleInvalidStringAsync() {
+        return service.getDoubleInvalidString();
     }
 
-    /**
-     * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Double&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Double>>> getDoubleInvalidStringWithServiceResponseAsync() {
-        return service.getDoubleInvalidString()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Double>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Double>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Double>> clientResponse = getDoubleInvalidStringDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Double>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -2158,7 +1421,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringValid() {
-        return getStringValidWithServiceResponseAsync().toBlocking().single().body();
+        return getStringValidAsync().toBlocking().value();
     }
 
     /**
@@ -2169,7 +1432,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getStringValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getStringValidAsync(), serviceCallback);
     }
 
     /**
@@ -2178,42 +1441,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getStringValidAsync() {
-        return getStringValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getStringValidAsync() {
+        return service.getStringValid();
     }
 
-    /**
-     * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getStringValidWithServiceResponseAsync() {
-        return service.getStringValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getStringValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -2224,7 +1455,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putStringValid(Map<String, String> arrayBody) {
-        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putStringValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -2236,7 +1467,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putStringValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2246,47 +1477,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putStringValidAsync(Map<String, String> arrayBody) {
-        return putStringValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
-     *
-     * @param arrayBody the Map&lt;String, String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(Map<String, String> arrayBody) {
+    public Single<Void> putStringValidAsync(Map<String, String> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putStringValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putStringValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putStringValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -2297,7 +1495,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithNull() {
-        return getStringWithNullWithServiceResponseAsync().toBlocking().single().body();
+        return getStringWithNullAsync().toBlocking().value();
     }
 
     /**
@@ -2308,7 +1506,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getStringWithNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getStringWithNullAsync(), serviceCallback);
     }
 
     /**
@@ -2317,42 +1515,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getStringWithNullAsync() {
-        return getStringWithNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getStringWithNullAsync() {
+        return service.getStringWithNull();
     }
 
-    /**
-     * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getStringWithNullWithServiceResponseAsync() {
-        return service.getStringWithNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getStringWithNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -2363,7 +1529,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithInvalid() {
-        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().body();
+        return getStringWithInvalidAsync().toBlocking().value();
     }
 
     /**
@@ -2374,7 +1540,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, String>> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceFuture.fromResponse(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getStringWithInvalidAsync(), serviceCallback);
     }
 
     /**
@@ -2383,42 +1549,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, String&gt; object
      */
-    public Observable<Map<String, String>> getStringWithInvalidAsync() {
-        return getStringWithInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
-            @Override
-            public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, String>> getStringWithInvalidAsync() {
+        return service.getStringWithInvalid();
     }
 
-    /**
-     * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, String&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, String>>> getStringWithInvalidWithServiceResponseAsync() {
-        return service.getStringWithInvalid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, String>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, String>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, String>> clientResponse = getStringWithInvalidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, String>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -2429,7 +1563,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateValid() {
-        return getDateValidWithServiceResponseAsync().toBlocking().single().body();
+        return getDateValidAsync().toBlocking().value();
     }
 
     /**
@@ -2440,7 +1574,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, LocalDate>> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateValidAsync(), serviceCallback);
     }
 
     /**
@@ -2449,42 +1583,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    public Observable<Map<String, LocalDate>> getDateValidAsync() {
-        return getDateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
-            @Override
-            public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, LocalDate>> getDateValidAsync() {
+        return service.getDateValid();
     }
 
-    /**
-     * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, LocalDate&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateValidWithServiceResponseAsync() {
-        return service.getDateValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, LocalDate>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, LocalDate>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, LocalDate>> clientResponse = getDateValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, LocalDate>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -2495,7 +1597,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDateValid(Map<String, LocalDate> arrayBody) {
-        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putDateValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -2507,7 +1609,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putDateValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2517,47 +1619,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
-        return putDateValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
-     *
-     * @param arrayBody the Map&lt;String, LocalDate&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putDateValidWithServiceResponseAsync(Map<String, LocalDate> arrayBody) {
+    public Single<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDateValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putDateValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putDateValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -2568,7 +1637,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getDateInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -2579,7 +1648,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, LocalDate>> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -2588,42 +1657,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    public Observable<Map<String, LocalDate>> getDateInvalidNullAsync() {
-        return getDateInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
-            @Override
-            public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, LocalDate>> getDateInvalidNullAsync() {
+        return service.getDateInvalidNull();
     }
 
-    /**
-     * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, LocalDate&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidNullWithServiceResponseAsync() {
-        return service.getDateInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, LocalDate>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, LocalDate>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, LocalDate>> clientResponse = getDateInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, LocalDate>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -2634,7 +1671,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
+        return getDateInvalidCharsAsync().toBlocking().value();
     }
 
     /**
@@ -2645,7 +1682,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateInvalidCharsAsync(), serviceCallback);
     }
 
     /**
@@ -2654,42 +1691,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, LocalDate&gt; object
      */
-    public Observable<Map<String, LocalDate>> getDateInvalidCharsAsync() {
-        return getDateInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
-            @Override
-            public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, LocalDate>> getDateInvalidCharsAsync() {
+        return service.getDateInvalidChars();
     }
 
-    /**
-     * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, LocalDate&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, LocalDate>>> getDateInvalidCharsWithServiceResponseAsync() {
-        return service.getDateInvalidChars()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, LocalDate>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, LocalDate>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, LocalDate>> clientResponse = getDateInvalidCharsDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, LocalDate>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -2700,7 +1705,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeValid() {
-        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().body();
+        return getDateTimeValidAsync().toBlocking().value();
     }
 
     /**
@@ -2711,7 +1716,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, DateTime>> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateTimeValidAsync(), serviceCallback);
     }
 
     /**
@@ -2720,42 +1725,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<Map<String, DateTime>> getDateTimeValidAsync() {
-        return getDateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
-            @Override
-            public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, DateTime>> getDateTimeValidAsync() {
+        return service.getDateTimeValid();
     }
 
-    /**
-     * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, DateTime&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeValidWithServiceResponseAsync() {
-        return service.getDateTimeValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, DateTime>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, DateTime>> clientResponse = getDateTimeValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, DateTime>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -2766,7 +1739,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDateTimeValid(Map<String, DateTime> arrayBody) {
-        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putDateTimeValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -2778,7 +1751,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putDateTimeValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2788,47 +1761,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
-        return putDateTimeValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
-     *
-     * @param arrayBody the Map&lt;String, DateTime&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putDateTimeValidWithServiceResponseAsync(Map<String, DateTime> arrayBody) {
+    public Single<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDateTimeValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putDateTimeValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putDateTimeValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -2839,7 +1779,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getDateTimeInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -2850,7 +1790,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateTimeInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -2859,42 +1799,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
-        return getDateTimeInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
-            @Override
-            public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
+        return service.getDateTimeInvalidNull();
     }
 
-    /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, DateTime&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidNullWithServiceResponseAsync() {
-        return service.getDateTimeInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, DateTime>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, DateTime>> clientResponse = getDateTimeInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, DateTime>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -2905,7 +1813,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
+        return getDateTimeInvalidCharsAsync().toBlocking().value();
     }
 
     /**
@@ -2916,7 +1824,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateTimeInvalidCharsAsync(), serviceCallback);
     }
 
     /**
@@ -2925,42 +1833,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
-        return getDateTimeInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
-            @Override
-            public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
+        return service.getDateTimeInvalidChars();
     }
 
-    /**
-     * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, DateTime&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeInvalidCharsWithServiceResponseAsync() {
-        return service.getDateTimeInvalidChars()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, DateTime>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, DateTime>> clientResponse = getDateTimeInvalidCharsDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, DateTime>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -2971,7 +1847,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().body();
+        return getDateTimeRfc1123ValidAsync().toBlocking().value();
     }
 
     /**
@@ -2982,7 +1858,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDateTimeRfc1123ValidAsync(), serviceCallback);
     }
 
     /**
@@ -2991,52 +1867,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, DateTime&gt; object
      */
-    public Observable<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
-        return getDateTimeRfc1123ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
-            @Override
-            public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
+        return service.getDateTimeRfc1123Valid();
     }
 
-    /**
-     * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, DateTime&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, DateTime>>> getDateTimeRfc1123ValidWithServiceResponseAsync() {
-        return service.getDateTimeRfc1123Valid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, DateTime>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, DateTime>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
-                        Map<String, DateTime> body = null;
-                        if (result.body() != null) {
-                            body = new HashMap<String, DateTime>();
-                            for (Map.Entry<String, DateTimeRfc1123> entry : result.body().entrySet()) {
-                                DateTime value;
-                                value = entry.getValue().dateTime();
-                                body.put(entry.getKey(), value);
-                            }
-                        }
-                        ServiceResponse<Map<String, DateTime>> clientResponse = new ServiceResponse<Map<String, DateTime>>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, DateTimeRfc1123>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, DateTimeRfc1123>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -3047,7 +1881,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) {
-        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putDateTimeRfc1123ValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -3059,7 +1893,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putDateTimeRfc1123ValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3069,23 +1903,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
-        return putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
-     *
-     * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidWithServiceResponseAsync(Map<String, DateTime> arrayBody) {
+    public Single<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
@@ -3095,26 +1913,9 @@ public class DictionarysImpl implements Dictionarys {
             DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
             arrayBodyConverted.put(entry.getKey(), value);
         }
-        return service.putDateTimeRfc1123Valid(arrayBodyConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putDateTimeRfc1123ValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -3125,7 +1926,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Period&gt; object if successful.
      */
     public Map<String, Period> getDurationValid() {
-        return getDurationValidWithServiceResponseAsync().toBlocking().single().body();
+        return getDurationValidAsync().toBlocking().value();
     }
 
     /**
@@ -3136,7 +1937,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Period>> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDurationValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDurationValidAsync(), serviceCallback);
     }
 
     /**
@@ -3145,42 +1946,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Period&gt; object
      */
-    public Observable<Map<String, Period>> getDurationValidAsync() {
-        return getDurationValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Period>>, Map<String, Period>>() {
-            @Override
-            public Map<String, Period> call(ServiceResponse<Map<String, Period>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Period>> getDurationValidAsync() {
+        return service.getDurationValid();
     }
 
-    /**
-     * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Period&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Period>>> getDurationValidWithServiceResponseAsync() {
-        return service.getDurationValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Period>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Period>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Period>> clientResponse = getDurationValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Period>> getDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Period>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Period>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -3191,7 +1960,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDurationValid(Map<String, Period> arrayBody) {
-        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putDurationValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -3203,7 +1972,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putDurationValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3213,47 +1982,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putDurationValidAsync(Map<String, Period> arrayBody) {
-        return putDurationValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
-     *
-     * @param arrayBody the Map&lt;String, Period&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putDurationValidWithServiceResponseAsync(Map<String, Period> arrayBody) {
+    public Single<Void> putDurationValidAsync(Map<String, Period> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDurationValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putDurationValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putDurationValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -3264,7 +2000,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteValid() {
-        return getByteValidWithServiceResponseAsync().toBlocking().single().body();
+        return getByteValidAsync().toBlocking().value();
     }
 
     /**
@@ -3275,7 +2011,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, byte[]>> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceFuture.fromResponse(getByteValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getByteValidAsync(), serviceCallback);
     }
 
     /**
@@ -3284,42 +2020,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    public Observable<Map<String, byte[]>> getByteValidAsync() {
-        return getByteValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
-            @Override
-            public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, byte[]>> getByteValidAsync() {
+        return service.getByteValid();
     }
 
-    /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, byte[]&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, byte[]>>> getByteValidWithServiceResponseAsync() {
-        return service.getByteValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, byte[]>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, byte[]>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, byte[]>> clientResponse = getByteValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, byte[]>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, byte[]>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -3330,7 +2034,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putByteValid(Map<String, byte[]> arrayBody) {
-        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putByteValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -3342,7 +2046,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putByteValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3352,47 +2056,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
-        return putByteValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
-     *
-     * @param arrayBody the Map&lt;String, byte[]&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putByteValidWithServiceResponseAsync(Map<String, byte[]> arrayBody) {
+    public Single<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putByteValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putByteValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putByteValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -3403,7 +2074,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteInvalidNull() {
-        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().body();
+        return getByteInvalidNullAsync().toBlocking().value();
     }
 
     /**
@@ -3414,7 +2085,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, byte[]>> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceFuture.fromResponse(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getByteInvalidNullAsync(), serviceCallback);
     }
 
     /**
@@ -3423,42 +2094,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    public Observable<Map<String, byte[]>> getByteInvalidNullAsync() {
-        return getByteInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
-            @Override
-            public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, byte[]>> getByteInvalidNullAsync() {
+        return service.getByteInvalidNull();
     }
 
-    /**
-     * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, byte[]&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, byte[]>>> getByteInvalidNullWithServiceResponseAsync() {
-        return service.getByteInvalidNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, byte[]>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, byte[]>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, byte[]>> clientResponse = getByteInvalidNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, byte[]>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, byte[]>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
@@ -3469,7 +2108,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getBase64Url() {
-        return getBase64UrlWithServiceResponseAsync().toBlocking().single().body();
+        return getBase64UrlAsync().toBlocking().value();
     }
 
     /**
@@ -3480,7 +2119,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, byte[]>> getBase64UrlAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceFuture.fromResponse(getBase64UrlWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBase64UrlAsync(), serviceCallback);
     }
 
     /**
@@ -3489,52 +2128,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, byte[]&gt; object
      */
-    public Observable<Map<String, byte[]>> getBase64UrlAsync() {
-        return getBase64UrlWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
-            @Override
-            public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, byte[]>> getBase64UrlAsync() {
+        return service.getBase64Url();
     }
 
-    /**
-     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem ipsum"}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, byte[]&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, byte[]>>> getBase64UrlWithServiceResponseAsync() {
-        return service.getBase64Url()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, byte[]>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, byte[]>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Base64Url>> result = getBase64UrlDelegate(response);
-                        Map<String, byte[]> body = null;
-                        if (result.body() != null) {
-                            body = new HashMap<String, byte[]>();
-                            for (Map.Entry<String, Base64Url> entry : result.body().entrySet()) {
-                                byte[] value;
-                                value = entry.getValue().decodedBytes();
-                                body.put(entry.getKey(), value);
-                            }
-                        }
-                        ServiceResponse<Map<String, byte[]>> clientResponse = new ServiceResponse<Map<String, byte[]>>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Base64Url>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Base64Url>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Base64Url>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get dictionary of complex type null value.
@@ -3545,7 +2142,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexNull() {
-        return getComplexNullWithServiceResponseAsync().toBlocking().single().body();
+        return getComplexNullAsync().toBlocking().value();
     }
 
     /**
@@ -3556,7 +2153,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Widget>> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceFuture.fromResponse(getComplexNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getComplexNullAsync(), serviceCallback);
     }
 
     /**
@@ -3565,42 +2162,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<Map<String, Widget>> getComplexNullAsync() {
-        return getComplexNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
-            @Override
-            public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Widget>> getComplexNullAsync() {
+        return service.getComplexNull();
     }
 
-    /**
-     * Get dictionary of complex type null value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Widget&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexNullWithServiceResponseAsync() {
-        return service.getComplexNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Widget>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Widget>> clientResponse = getComplexNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get empty dictionary of complex type {}.
@@ -3611,7 +2176,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexEmpty() {
-        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getComplexEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -3622,7 +2187,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Widget>> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceFuture.fromResponse(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getComplexEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -3631,42 +2196,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<Map<String, Widget>> getComplexEmptyAsync() {
-        return getComplexEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
-            @Override
-            public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Widget>> getComplexEmptyAsync() {
+        return service.getComplexEmpty();
     }
 
-    /**
-     * Get empty dictionary of complex type {}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Widget&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexEmptyWithServiceResponseAsync() {
-        return service.getComplexEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Widget>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Widget>> clientResponse = getComplexEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -3677,7 +2210,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemNull() {
-        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().body();
+        return getComplexItemNullAsync().toBlocking().value();
     }
 
     /**
@@ -3688,7 +2221,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Widget>> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceFuture.fromResponse(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getComplexItemNullAsync(), serviceCallback);
     }
 
     /**
@@ -3697,42 +2230,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<Map<String, Widget>> getComplexItemNullAsync() {
-        return getComplexItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
-            @Override
-            public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Widget>> getComplexItemNullAsync() {
+        return service.getComplexItemNull();
     }
 
-    /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Widget&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemNullWithServiceResponseAsync() {
-        return service.getComplexItemNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Widget>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Widget>> clientResponse = getComplexItemNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -3743,7 +2244,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemEmpty() {
-        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getComplexItemEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -3754,7 +2255,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Widget>> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceFuture.fromResponse(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getComplexItemEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -3763,42 +2264,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<Map<String, Widget>> getComplexItemEmptyAsync() {
-        return getComplexItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
-            @Override
-            public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Widget>> getComplexItemEmptyAsync() {
+        return service.getComplexItemEmpty();
     }
 
-    /**
-     * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Widget&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexItemEmptyWithServiceResponseAsync() {
-        return service.getComplexItemEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Widget>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Widget>> clientResponse = getComplexItemEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -3809,7 +2278,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexValid() {
-        return getComplexValidWithServiceResponseAsync().toBlocking().single().body();
+        return getComplexValidAsync().toBlocking().value();
     }
 
     /**
@@ -3820,7 +2289,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Widget>> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceFuture.fromResponse(getComplexValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getComplexValidAsync(), serviceCallback);
     }
 
     /**
@@ -3829,42 +2298,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Widget&gt; object
      */
-    public Observable<Map<String, Widget>> getComplexValidAsync() {
-        return getComplexValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
-            @Override
-            public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Widget>> getComplexValidAsync() {
+        return service.getComplexValid();
     }
 
-    /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Widget&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Widget>>> getComplexValidWithServiceResponseAsync() {
-        return service.getComplexValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Widget>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Widget>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Widget>> clientResponse = getComplexValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -3875,7 +2312,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putComplexValid(Map<String, Widget> arrayBody) {
-        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putComplexValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -3887,7 +2324,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putComplexValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3897,47 +2334,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
-        return putComplexValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
-     *
-     * @param arrayBody the Map&lt;String, Widget&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putComplexValidWithServiceResponseAsync(Map<String, Widget> arrayBody) {
+    public Single<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putComplexValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putComplexValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putComplexValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get a null array.
@@ -3948,7 +2352,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayNull() {
-        return getArrayNullWithServiceResponseAsync().toBlocking().single().body();
+        return getArrayNullAsync().toBlocking().value();
     }
 
     /**
@@ -3959,7 +2363,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, List<String>>> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getArrayNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getArrayNullAsync(), serviceCallback);
     }
 
     /**
@@ -3968,42 +2372,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<Map<String, List<String>>> getArrayNullAsync() {
-        return getArrayNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
-            @Override
-            public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, List<String>>> getArrayNullAsync() {
+        return service.getArrayNull();
     }
 
-    /**
-     * Get a null array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayNullWithServiceResponseAsync() {
-        return service.getArrayNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, List<String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, List<String>>> clientResponse = getArrayNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an empty dictionary {}.
@@ -4014,7 +2386,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayEmpty() {
-        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getArrayEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -4025,7 +2397,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, List<String>>> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getArrayEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -4034,42 +2406,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<Map<String, List<String>>> getArrayEmptyAsync() {
-        return getArrayEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
-            @Override
-            public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, List<String>>> getArrayEmptyAsync() {
+        return service.getArrayEmpty();
     }
 
-    /**
-     * Get an empty dictionary {}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayEmptyWithServiceResponseAsync() {
-        return service.getArrayEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, List<String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, List<String>>> clientResponse = getArrayEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -4080,7 +2420,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemNull() {
-        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().body();
+        return getArrayItemNullAsync().toBlocking().value();
     }
 
     /**
@@ -4091,7 +2431,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, List<String>>> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getArrayItemNullAsync(), serviceCallback);
     }
 
     /**
@@ -4100,42 +2440,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<Map<String, List<String>>> getArrayItemNullAsync() {
-        return getArrayItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
-            @Override
-            public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, List<String>>> getArrayItemNullAsync() {
+        return service.getArrayItemNull();
     }
 
-    /**
-     * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemNullWithServiceResponseAsync() {
-        return service.getArrayItemNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, List<String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, List<String>>> clientResponse = getArrayItemNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -4146,7 +2454,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getArrayItemEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -4157,7 +2465,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, List<String>>> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getArrayItemEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -4166,42 +2474,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<Map<String, List<String>>> getArrayItemEmptyAsync() {
-        return getArrayItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
-            @Override
-            public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, List<String>>> getArrayItemEmptyAsync() {
+        return service.getArrayItemEmpty();
     }
 
-    /**
-     * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayItemEmptyWithServiceResponseAsync() {
-        return service.getArrayItemEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, List<String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, List<String>>> clientResponse = getArrayItemEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -4212,7 +2488,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayValid() {
-        return getArrayValidWithServiceResponseAsync().toBlocking().single().body();
+        return getArrayValidAsync().toBlocking().value();
     }
 
     /**
@@ -4223,7 +2499,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, List<String>>> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getArrayValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getArrayValidAsync(), serviceCallback);
     }
 
     /**
@@ -4232,42 +2508,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
      */
-    public Observable<Map<String, List<String>>> getArrayValidAsync() {
-        return getArrayValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
-            @Override
-            public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, List<String>>> getArrayValidAsync() {
+        return service.getArrayValid();
     }
 
-    /**
-     * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, List&lt;String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, List<String>>>> getArrayValidWithServiceResponseAsync() {
-        return service.getArrayValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, List<String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, List<String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, List<String>>> clientResponse = getArrayValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -4278,7 +2522,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putArrayValid(Map<String, List<String>> arrayBody) {
-        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putArrayValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -4290,7 +2534,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putArrayValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4300,47 +2544,14 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
-        return putArrayValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
-     *
-     * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putArrayValidWithServiceResponseAsync(Map<String, List<String>> arrayBody) {
+    public Single<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putArrayValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putArrayValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putArrayValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -4351,7 +2562,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().body();
+        return getDictionaryNullAsync().toBlocking().value();
     }
 
     /**
@@ -4362,7 +2573,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDictionaryNullAsync(), serviceCallback);
     }
 
     /**
@@ -4371,42 +2582,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<Map<String, Map<String, String>>> getDictionaryNullAsync() {
-        return getDictionaryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
-            @Override
-            public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Map<String, String>>> getDictionaryNullAsync() {
+        return service.getDictionaryNull();
     }
 
-    /**
-     * Get an dictionaries of dictionaries with value null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryNullWithServiceResponseAsync() {
-        return service.getDictionaryNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Map<String, String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Map<String, String>>> clientResponse = getDictionaryNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -4417,7 +2596,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getDictionaryEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -4428,7 +2607,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDictionaryEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -4437,42 +2616,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
-        return getDictionaryEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
-            @Override
-            public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
+        return service.getDictionaryEmpty();
     }
 
-    /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryEmptyWithServiceResponseAsync() {
-        return service.getDictionaryEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Map<String, String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Map<String, String>>> clientResponse = getDictionaryEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -4483,7 +2630,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().body();
+        return getDictionaryItemNullAsync().toBlocking().value();
     }
 
     /**
@@ -4494,7 +2641,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDictionaryItemNullAsync(), serviceCallback);
     }
 
     /**
@@ -4503,42 +2650,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
-        return getDictionaryItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
-            @Override
-            public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
+        return service.getDictionaryItemNull();
     }
 
-    /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemNullWithServiceResponseAsync() {
-        return service.getDictionaryItemNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Map<String, String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Map<String, String>>> clientResponse = getDictionaryItemNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -4549,7 +2664,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getDictionaryItemEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -4560,7 +2675,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDictionaryItemEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -4569,42 +2684,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
-        return getDictionaryItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
-            @Override
-            public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
+        return service.getDictionaryItemEmpty();
     }
 
-    /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryItemEmptyWithServiceResponseAsync() {
-        return service.getDictionaryItemEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Map<String, String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Map<String, String>>> clientResponse = getDictionaryItemEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -4615,7 +2698,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().body();
+        return getDictionaryValidAsync().toBlocking().value();
     }
 
     /**
@@ -4626,7 +2709,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceFuture.fromResponse(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getDictionaryValidAsync(), serviceCallback);
     }
 
     /**
@@ -4635,42 +2718,10 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
      */
-    public Observable<Map<String, Map<String, String>>> getDictionaryValidAsync() {
-        return getDictionaryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
-            @Override
-            public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Map<String, String>>> getDictionaryValidAsync() {
+        return service.getDictionaryValid();
     }
 
-    /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Map&lt;String, String&gt;&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Map<String, String>>>> getDictionaryValidWithServiceResponseAsync() {
-        return service.getDictionaryValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Map<String, String>>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Map<String, String>>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Map<String, String>>> clientResponse = getDictionaryValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -4681,7 +2732,7 @@ public class DictionarysImpl implements Dictionarys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
+        putDictionaryValidAsync(arrayBody).toBlocking().value();
     }
 
     /**
@@ -4693,7 +2744,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceFuture.fromBody(putDictionaryValidAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4703,46 +2754,13 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
-        return putDictionaryValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
-     *
-     * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putDictionaryValidWithServiceResponseAsync(Map<String, Map<String, String>> arrayBody) {
+    public Single<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
         if (arrayBody == null) {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-        return service.putDictionaryValid(arrayBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putDictionaryValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putDictionaryValid(arrayBody);
     }
 
-    private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

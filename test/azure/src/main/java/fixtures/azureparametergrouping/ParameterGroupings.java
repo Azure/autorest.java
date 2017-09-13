@@ -20,6 +20,7 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParam
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,16 +54,8 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
-    /**
-     * Post a bunch of required parameters grouped.
-     *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postRequiredWithServiceResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -88,15 +81,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postOptionalAsync();
-
-    /**
-     * Post a bunch of optional parameters grouped.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync();
+    Single<Void> postOptionalAsync();
     /**
      * Post a bunch of optional parameters grouped.
      *
@@ -124,16 +109,8 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
-    /**
-     * Post a bunch of optional parameters grouped.
-     *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -159,15 +136,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postMultiParamGroupsAsync();
-
-    /**
-     * Post parameters from multiple different parameter groups.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync();
+    Single<Void> postMultiParamGroupsAsync();
     /**
      * Post parameters from multiple different parameter groups.
      *
@@ -198,17 +167,8 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    Single<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
-    /**
-     * Post parameters from multiple different parameter groups.
-     *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters with a shared parameter group object.
@@ -234,15 +194,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postSharedParameterGroupObjectAsync();
-
-    /**
-     * Post parameters with a shared parameter group object.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync();
+    Single<Void> postSharedParameterGroupObjectAsync();
     /**
      * Post parameters with a shared parameter group object.
      *
@@ -270,15 +222,7 @@ public interface ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
+    Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
 
-    /**
-     * Post parameters with a shared parameter group object.
-     *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync(FirstParameterGroup firstParameterGroup);
 
 }

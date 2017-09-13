@@ -18,22 +18,26 @@ import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.azurereport.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
  */
 public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
@@ -164,17 +168,18 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     }
 
     private void initializeService() {
-        service = restClient().retrofit().create(AutoRestReportServiceForAzureService.class);
+        service = RestProxy.create(AutoRestReportServiceForAzureService.class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 
     /**
      * The interface defining all the services for AutoRestReportServiceForAzure to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("http://localhost")
     interface AutoRestReportServiceForAzureService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
-        Observable<Response<ResponseBody>> getReport(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Map<String, Integer>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -187,7 +192,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportWithServiceResponseAsync().toBlocking().single().body();
+        return getReportAsync().toBlocking().value();
     }
 
     /**
@@ -198,7 +203,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
     /**
@@ -207,41 +212,9 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getReportAsync() {
-        return getReportWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getReportAsync() {
+        return service.getReport(this.acceptLanguage(), this.userAgent());
     }
 
-    /**
-     * Get test coverage report.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync() {
-        return service.getReport(this.acceptLanguage(), this.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

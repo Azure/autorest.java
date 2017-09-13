@@ -17,6 +17,7 @@ import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -51,15 +52,7 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SampleResourceGroup object
      */
-    Observable<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
+    Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
 
-    /**
-     * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
-     * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroup object
-     */
-    Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName);
 
 }

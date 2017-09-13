@@ -14,8 +14,10 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.head.AutoRestHeadTestService;
 import fixtures.head.HttpSuccess;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestServiceImpl class.
@@ -148,7 +150,7 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.httpSuccess = new HttpSuccessImpl(restClient().retrofit(), this);
+        this.httpSuccess = new HttpSuccessImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

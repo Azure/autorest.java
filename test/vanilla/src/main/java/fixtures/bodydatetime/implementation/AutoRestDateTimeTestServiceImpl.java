@@ -12,10 +12,10 @@ package fixtures.bodydatetime.implementation;
 
 import fixtures.bodydatetime.AutoRestDateTimeTestService;
 import fixtures.bodydatetime.Datetimes;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestDateTimeTestService class.
@@ -37,13 +37,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
 
     /**
      * Initializes an instance of AutoRestDateTimeTestService client.
-     */
-    public AutoRestDateTimeTestServiceImpl() {
-        this("https://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestDateTimeTestService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -55,23 +48,9 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
     /**
      * Initializes an instance of AutoRestDateTimeTestService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestDateTimeTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestDateTimeTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestDateTimeTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestDateTimeTestServiceImpl() {
+        this("https://localhost");
         initialize();
     }
 
@@ -86,6 +65,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
     }
 
     private void initialize() {
-        this.datetimes = new DatetimesImpl(retrofit(), this);
+        this.datetimes = new DatetimesImpl(this);
     }
 }

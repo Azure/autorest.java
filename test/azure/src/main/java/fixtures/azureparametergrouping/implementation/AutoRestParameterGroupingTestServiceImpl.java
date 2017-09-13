@@ -14,8 +14,10 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
 import fixtures.azureparametergrouping.ParameterGroupings;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
@@ -148,7 +150,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.parameterGroupings = new ParameterGroupingsImpl(restClient().retrofit(), this);
+        this.parameterGroupings = new ParameterGroupingsImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

@@ -17,6 +17,7 @@ import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> head400Async();
+    Single<Error> head400Async();
 
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> head400WithServiceResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -83,15 +77,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get400Async();
+    Single<Error> get400Async();
 
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get400WithServiceResponseAsync();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -118,15 +105,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put400WithServiceResponseAsync();
+    Single<Error> put400Async();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -155,16 +134,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put400Async(Boolean booleanValue);
+    Single<Error> put400Async(Boolean booleanValue);
 
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put400WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -191,15 +162,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> patch400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> patch400WithServiceResponseAsync();
+    Single<Error> patch400Async();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -228,16 +191,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> patch400Async(Boolean booleanValue);
+    Single<Error> patch400Async(Boolean booleanValue);
 
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> patch400WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -264,15 +219,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post400WithServiceResponseAsync();
+    Single<Error> post400Async();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -301,16 +248,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post400Async(Boolean booleanValue);
+    Single<Error> post400Async(Boolean booleanValue);
 
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post400WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -337,15 +276,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete400Async();
-
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete400WithServiceResponseAsync();
+    Single<Error> delete400Async();
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -374,16 +305,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete400Async(Boolean booleanValue);
+    Single<Error> delete400Async(Boolean booleanValue);
 
-    /**
-     * Return 400 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete400WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -410,15 +333,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> head401Async();
+    Single<Error> head401Async();
 
-    /**
-     * Return 401 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> head401WithServiceResponseAsync();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -445,15 +361,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get402Async();
+    Single<Error> get402Async();
 
-    /**
-     * Return 402 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get402WithServiceResponseAsync();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -480,15 +389,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get403Async();
+    Single<Error> get403Async();
 
-    /**
-     * Return 403 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get403WithServiceResponseAsync();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -515,15 +417,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put404Async();
-
-    /**
-     * Return 404 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put404WithServiceResponseAsync();
+    Single<Error> put404Async();
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
@@ -552,16 +446,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put404Async(Boolean booleanValue);
+    Single<Error> put404Async(Boolean booleanValue);
 
-    /**
-     * Return 404 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put404WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -588,15 +474,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> patch405Async();
-
-    /**
-     * Return 405 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> patch405WithServiceResponseAsync();
+    Single<Error> patch405Async();
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
@@ -625,16 +503,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> patch405Async(Boolean booleanValue);
+    Single<Error> patch405Async(Boolean booleanValue);
 
-    /**
-     * Return 405 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> patch405WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -661,15 +531,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post406Async();
-
-    /**
-     * Return 406 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post406WithServiceResponseAsync();
+    Single<Error> post406Async();
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
@@ -698,16 +560,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post406Async(Boolean booleanValue);
+    Single<Error> post406Async(Boolean booleanValue);
 
-    /**
-     * Return 406 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post406WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -734,15 +588,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete407Async();
-
-    /**
-     * Return 407 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete407WithServiceResponseAsync();
+    Single<Error> delete407Async();
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
@@ -771,16 +617,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete407Async(Boolean booleanValue);
+    Single<Error> delete407Async(Boolean booleanValue);
 
-    /**
-     * Return 407 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete407WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -807,15 +645,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put409Async();
-
-    /**
-     * Return 409 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put409WithServiceResponseAsync();
+    Single<Error> put409Async();
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
@@ -844,16 +674,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put409Async(Boolean booleanValue);
+    Single<Error> put409Async(Boolean booleanValue);
 
-    /**
-     * Return 409 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put409WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -880,15 +702,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> head410Async();
+    Single<Error> head410Async();
 
-    /**
-     * Return 410 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> head410WithServiceResponseAsync();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -915,15 +730,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get411Async();
+    Single<Error> get411Async();
 
-    /**
-     * Return 411 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get411WithServiceResponseAsync();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -950,15 +758,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get412Async();
+    Single<Error> get412Async();
 
-    /**
-     * Return 412 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get412WithServiceResponseAsync();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -985,15 +786,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put413Async();
-
-    /**
-     * Return 413 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put413WithServiceResponseAsync();
+    Single<Error> put413Async();
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
@@ -1022,16 +815,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> put413Async(Boolean booleanValue);
+    Single<Error> put413Async(Boolean booleanValue);
 
-    /**
-     * Return 413 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> put413WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1058,15 +843,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> patch414Async();
-
-    /**
-     * Return 414 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> patch414WithServiceResponseAsync();
+    Single<Error> patch414Async();
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
@@ -1095,16 +872,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> patch414Async(Boolean booleanValue);
+    Single<Error> patch414Async(Boolean booleanValue);
 
-    /**
-     * Return 414 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> patch414WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1131,15 +900,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post415Async();
-
-    /**
-     * Return 415 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post415WithServiceResponseAsync();
+    Single<Error> post415Async();
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
@@ -1168,16 +929,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post415Async(Boolean booleanValue);
+    Single<Error> post415Async(Boolean booleanValue);
 
-    /**
-     * Return 415 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post415WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1204,15 +957,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get416Async();
+    Single<Error> get416Async();
 
-    /**
-     * Return 416 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get416WithServiceResponseAsync();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1239,15 +985,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete417Async();
-
-    /**
-     * Return 417 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete417WithServiceResponseAsync();
+    Single<Error> delete417Async();
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
@@ -1276,16 +1014,8 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete417Async(Boolean booleanValue);
+    Single<Error> delete417Async(Boolean booleanValue);
 
-    /**
-     * Return 417 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete417WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -1312,14 +1042,7 @@ public interface HttpClientFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> head429Async();
+    Single<Error> head429Async();
 
-    /**
-     * Return 429 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> head429WithServiceResponseAsync();
 
 }

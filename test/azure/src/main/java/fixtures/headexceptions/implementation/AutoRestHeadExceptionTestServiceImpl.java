@@ -14,8 +14,10 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.headexceptions.AutoRestHeadExceptionTestService;
 import fixtures.headexceptions.HeadExceptions;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl class.
@@ -148,7 +150,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.headExceptions = new HeadExceptionsImpl(restClient().retrofit(), this);
+        this.headExceptions = new HeadExceptionsImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

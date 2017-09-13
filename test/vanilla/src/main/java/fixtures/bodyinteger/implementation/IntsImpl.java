@@ -10,31 +10,34 @@
 
 package fixtures.bodyinteger.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodyinteger.Ints;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Ints.
  */
 public class IntsImpl implements Ints {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private IntsService service;
     /** The service client containing this operation class. */
     private AutoRestIntegerTestServiceImpl client;
@@ -42,74 +45,102 @@ public class IntsImpl implements Ints {
     /**
      * Initializes an instance of Ints.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public IntsImpl(Retrofit retrofit, AutoRestIntegerTestServiceImpl client) {
-        this.service = retrofit.create(IntsService.class);
+    public IntsImpl(AutoRestIntegerTestServiceImpl client) {
+        this.service = RestProxy.create(IntsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Ints to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface IntsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getNull" })
         @GET("int/null")
-        Observable<Response<ResponseBody>> getNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Integer> getNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalid" })
         @GET("int/invalid")
-        Observable<Response<ResponseBody>> getInvalid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Integer> getInvalid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt32" })
         @GET("int/overflowint32")
-        Observable<Response<ResponseBody>> getOverflowInt32();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Integer> getOverflowInt32();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt32" })
         @GET("int/underflowint32")
-        Observable<Response<ResponseBody>> getUnderflowInt32();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Integer> getUnderflowInt32();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt64" })
         @GET("int/overflowint64")
-        Observable<Response<ResponseBody>> getOverflowInt64();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Long> getOverflowInt64();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt64" })
         @GET("int/underflowint64")
-        Observable<Response<ResponseBody>> getUnderflowInt64();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Long> getUnderflowInt64();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMax32" })
         @PUT("int/max/32")
-        Observable<Response<ResponseBody>> putMax32(@Body int intBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putMax32(@BodyParam int intBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMax64" })
         @PUT("int/max/64")
-        Observable<Response<ResponseBody>> putMax64(@Body long intBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putMax64(@BodyParam long intBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMin32" })
         @PUT("int/min/32")
-        Observable<Response<ResponseBody>> putMin32(@Body int intBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putMin32(@BodyParam int intBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMin64" })
         @PUT("int/min/64")
-        Observable<Response<ResponseBody>> putMin64(@Body long intBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putMin64(@BodyParam long intBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnixTime" })
         @GET("int/unixtime")
-        Observable<Response<ResponseBody>> getUnixTime();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<DateTime> getUnixTime();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putUnixTimeDate" })
         @PUT("int/unixtime")
-        Observable<Response<ResponseBody>> putUnixTimeDate(@Body long intBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putUnixTimeDate(@BodyParam long intBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalidUnixTime" })
         @GET("int/invalidunixtime")
-        Observable<Response<ResponseBody>> getInvalidUnixTime();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<DateTime> getInvalidUnixTime();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getNullUnixTime" })
         @GET("int/nullunixtime")
-        Observable<Response<ResponseBody>> getNullUnixTime();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<DateTime> getNullUnixTime();
 
     }
 
@@ -122,7 +153,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().body();
+        return getNullAsync().toBlocking().value();
     }
 
     /**
@@ -133,7 +164,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
@@ -142,42 +173,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
-    public Observable<Integer> getNullAsync() {
-        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
-            @Override
-            public Integer call(ServiceResponse<Integer> response) {
-                return response.body();
-            }
-        });
+    public Single<Integer> getNullAsync() {
+        return service.getNull();
     }
 
-    /**
-     * Get null Int value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Integer object
-     */
-    public Observable<ServiceResponse<Integer>> getNullWithServiceResponseAsync() {
-        return service.getNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
-                @Override
-                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Integer> clientResponse = getNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Integer, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Integer>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid Int value.
@@ -188,7 +187,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidAsync().toBlocking().value();
     }
 
     /**
@@ -199,7 +198,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
     /**
@@ -208,42 +207,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
-    public Observable<Integer> getInvalidAsync() {
-        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
-            @Override
-            public Integer call(ServiceResponse<Integer> response) {
-                return response.body();
-            }
-        });
+    public Single<Integer> getInvalidAsync() {
+        return service.getInvalid();
     }
 
-    /**
-     * Get invalid Int value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Integer object
-     */
-    public Observable<ServiceResponse<Integer>> getInvalidWithServiceResponseAsync() {
-        return service.getInvalid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
-                @Override
-                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Integer> clientResponse = getInvalidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Integer, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Integer>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get overflow Int32 value.
@@ -254,7 +221,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
-        return getOverflowInt32WithServiceResponseAsync().toBlocking().single().body();
+        return getOverflowInt32Async().toBlocking().value();
     }
 
     /**
@@ -265,7 +232,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceFuture.fromResponse(getOverflowInt32WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getOverflowInt32Async(), serviceCallback);
     }
 
     /**
@@ -274,42 +241,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
-    public Observable<Integer> getOverflowInt32Async() {
-        return getOverflowInt32WithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
-            @Override
-            public Integer call(ServiceResponse<Integer> response) {
-                return response.body();
-            }
-        });
+    public Single<Integer> getOverflowInt32Async() {
+        return service.getOverflowInt32();
     }
 
-    /**
-     * Get overflow Int32 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Integer object
-     */
-    public Observable<ServiceResponse<Integer>> getOverflowInt32WithServiceResponseAsync() {
-        return service.getOverflowInt32()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
-                @Override
-                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Integer> clientResponse = getOverflowInt32Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Integer, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Integer>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get underflow Int32 value.
@@ -320,7 +255,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
-        return getUnderflowInt32WithServiceResponseAsync().toBlocking().single().body();
+        return getUnderflowInt32Async().toBlocking().value();
     }
 
     /**
@@ -331,7 +266,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceFuture.fromResponse(getUnderflowInt32WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getUnderflowInt32Async(), serviceCallback);
     }
 
     /**
@@ -340,42 +275,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
-    public Observable<Integer> getUnderflowInt32Async() {
-        return getUnderflowInt32WithServiceResponseAsync().map(new Func1<ServiceResponse<Integer>, Integer>() {
-            @Override
-            public Integer call(ServiceResponse<Integer> response) {
-                return response.body();
-            }
-        });
+    public Single<Integer> getUnderflowInt32Async() {
+        return service.getUnderflowInt32();
     }
 
-    /**
-     * Get underflow Int32 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Integer object
-     */
-    public Observable<ServiceResponse<Integer>> getUnderflowInt32WithServiceResponseAsync() {
-        return service.getUnderflowInt32()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Integer>>>() {
-                @Override
-                public Observable<ServiceResponse<Integer>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Integer> clientResponse = getUnderflowInt32Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Integer, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Integer>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get overflow Int64 value.
@@ -386,7 +289,7 @@ public class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
-        return getOverflowInt64WithServiceResponseAsync().toBlocking().single().body();
+        return getOverflowInt64Async().toBlocking().value();
     }
 
     /**
@@ -397,7 +300,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceFuture.fromResponse(getOverflowInt64WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getOverflowInt64Async(), serviceCallback);
     }
 
     /**
@@ -406,42 +309,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Long object
      */
-    public Observable<Long> getOverflowInt64Async() {
-        return getOverflowInt64WithServiceResponseAsync().map(new Func1<ServiceResponse<Long>, Long>() {
-            @Override
-            public Long call(ServiceResponse<Long> response) {
-                return response.body();
-            }
-        });
+    public Single<Long> getOverflowInt64Async() {
+        return service.getOverflowInt64();
     }
 
-    /**
-     * Get overflow Int64 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Long object
-     */
-    public Observable<ServiceResponse<Long>> getOverflowInt64WithServiceResponseAsync() {
-        return service.getOverflowInt64()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Long>>>() {
-                @Override
-                public Observable<ServiceResponse<Long>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Long> clientResponse = getOverflowInt64Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Long, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Long>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get underflow Int64 value.
@@ -452,7 +323,7 @@ public class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
-        return getUnderflowInt64WithServiceResponseAsync().toBlocking().single().body();
+        return getUnderflowInt64Async().toBlocking().value();
     }
 
     /**
@@ -463,7 +334,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceFuture.fromResponse(getUnderflowInt64WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getUnderflowInt64Async(), serviceCallback);
     }
 
     /**
@@ -472,42 +343,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Long object
      */
-    public Observable<Long> getUnderflowInt64Async() {
-        return getUnderflowInt64WithServiceResponseAsync().map(new Func1<ServiceResponse<Long>, Long>() {
-            @Override
-            public Long call(ServiceResponse<Long> response) {
-                return response.body();
-            }
-        });
+    public Single<Long> getUnderflowInt64Async() {
+        return service.getUnderflowInt64();
     }
 
-    /**
-     * Get underflow Int64 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Long object
-     */
-    public Observable<ServiceResponse<Long>> getUnderflowInt64WithServiceResponseAsync() {
-        return service.getUnderflowInt64()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Long>>>() {
-                @Override
-                public Observable<ServiceResponse<Long>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Long> clientResponse = getUnderflowInt64Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Long, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Long>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put max int32 value.
@@ -518,7 +357,7 @@ public class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMax32(int intBody) {
-        putMax32WithServiceResponseAsync(intBody).toBlocking().single().body();
+        putMax32Async(intBody).toBlocking().value();
     }
 
     /**
@@ -530,7 +369,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putMax32WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceFuture.fromBody(putMax32Async(intBody), serviceCallback);
     }
 
     /**
@@ -540,43 +379,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putMax32Async(int intBody) {
-        return putMax32WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putMax32Async(int intBody) {
+        return service.putMax32(intBody);
     }
 
-    /**
-     * Put max int32 value.
-     *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putMax32WithServiceResponseAsync(int intBody) {
-        return service.putMax32(intBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putMax32Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put max int64 value.
@@ -587,7 +393,7 @@ public class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMax64(long intBody) {
-        putMax64WithServiceResponseAsync(intBody).toBlocking().single().body();
+        putMax64Async(intBody).toBlocking().value();
     }
 
     /**
@@ -599,7 +405,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putMax64WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceFuture.fromBody(putMax64Async(intBody), serviceCallback);
     }
 
     /**
@@ -609,43 +415,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putMax64Async(long intBody) {
-        return putMax64WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putMax64Async(long intBody) {
+        return service.putMax64(intBody);
     }
 
-    /**
-     * Put max int64 value.
-     *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putMax64WithServiceResponseAsync(long intBody) {
-        return service.putMax64(intBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putMax64Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put min int32 value.
@@ -656,7 +429,7 @@ public class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMin32(int intBody) {
-        putMin32WithServiceResponseAsync(intBody).toBlocking().single().body();
+        putMin32Async(intBody).toBlocking().value();
     }
 
     /**
@@ -668,7 +441,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putMin32WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceFuture.fromBody(putMin32Async(intBody), serviceCallback);
     }
 
     /**
@@ -678,43 +451,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putMin32Async(int intBody) {
-        return putMin32WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putMin32Async(int intBody) {
+        return service.putMin32(intBody);
     }
 
-    /**
-     * Put min int32 value.
-     *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putMin32WithServiceResponseAsync(int intBody) {
-        return service.putMin32(intBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putMin32Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put min int64 value.
@@ -725,7 +465,7 @@ public class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMin64(long intBody) {
-        putMin64WithServiceResponseAsync(intBody).toBlocking().single().body();
+        putMin64Async(intBody).toBlocking().value();
     }
 
     /**
@@ -737,7 +477,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putMin64WithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceFuture.fromBody(putMin64Async(intBody), serviceCallback);
     }
 
     /**
@@ -747,43 +487,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putMin64Async(long intBody) {
-        return putMin64WithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putMin64Async(long intBody) {
+        return service.putMin64(intBody);
     }
 
-    /**
-     * Put min int64 value.
-     *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putMin64WithServiceResponseAsync(long intBody) {
-        return service.putMin64(intBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putMin64Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get datetime encoded as Unix time value.
@@ -794,7 +501,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getUnixTime() {
-        return getUnixTimeWithServiceResponseAsync().toBlocking().single().body();
+        return getUnixTimeAsync().toBlocking().value();
     }
 
     /**
@@ -805,7 +512,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceFuture.fromResponse(getUnixTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getUnixTimeAsync(), serviceCallback);
     }
 
     /**
@@ -814,47 +521,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
-    public Observable<DateTime> getUnixTimeAsync() {
-        return getUnixTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
-            @Override
-            public DateTime call(ServiceResponse<DateTime> response) {
-                return response.body();
-            }
-        });
+    public Single<DateTime> getUnixTimeAsync() {
+        return service.getUnixTime();
     }
 
-    /**
-     * Get datetime encoded as Unix time value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
-     */
-    public Observable<ServiceResponse<DateTime>> getUnixTimeWithServiceResponseAsync() {
-        return service.getUnixTime()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
-                @Override
-                public Observable<ServiceResponse<DateTime>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Long> result = getUnixTimeDelegate(response);
-                        DateTime body = null;
-                        if (result.body() != null) {
-                            body = new DateTime(result.body() * 1000L, DateTimeZone.UTC);
-                        }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Long> getUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Long, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Long>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put datetime encoded as Unix time.
@@ -865,7 +535,7 @@ public class IntsImpl implements Ints {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putUnixTimeDate(DateTime intBody) {
-        putUnixTimeDateWithServiceResponseAsync(intBody).toBlocking().single().body();
+        putUnixTimeDateAsync(intBody).toBlocking().value();
     }
 
     /**
@@ -877,7 +547,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putUnixTimeDateWithServiceResponseAsync(intBody), serviceCallback);
+        return ServiceFuture.fromBody(putUnixTimeDateAsync(intBody), serviceCallback);
     }
 
     /**
@@ -887,44 +557,11 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putUnixTimeDateAsync(DateTime intBody) {
-        return putUnixTimeDateWithServiceResponseAsync(intBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put datetime encoded as Unix time.
-     *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putUnixTimeDateWithServiceResponseAsync(DateTime intBody) {
+    public Single<Void> putUnixTimeDateAsync(DateTime intBody) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
-        return service.putUnixTimeDate(intBodyConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putUnixTimeDateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putUnixTimeDate(intBodyConverted);
     }
 
-    private ServiceResponse<Void> putUnixTimeDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid Unix time value.
@@ -935,7 +572,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidUnixTimeAsync().toBlocking().value();
     }
 
     /**
@@ -946,7 +583,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidUnixTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidUnixTimeAsync(), serviceCallback);
     }
 
     /**
@@ -955,47 +592,10 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
-    public Observable<DateTime> getInvalidUnixTimeAsync() {
-        return getInvalidUnixTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
-            @Override
-            public DateTime call(ServiceResponse<DateTime> response) {
-                return response.body();
-            }
-        });
+    public Single<DateTime> getInvalidUnixTimeAsync() {
+        return service.getInvalidUnixTime();
     }
 
-    /**
-     * Get invalid Unix time value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
-     */
-    public Observable<ServiceResponse<DateTime>> getInvalidUnixTimeWithServiceResponseAsync() {
-        return service.getInvalidUnixTime()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
-                @Override
-                public Observable<ServiceResponse<DateTime>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Long> result = getInvalidUnixTimeDelegate(response);
-                        DateTime body = null;
-                        if (result.body() != null) {
-                            body = new DateTime(result.body() * 1000L, DateTimeZone.UTC);
-                        }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Long> getInvalidUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Long, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Long>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null Unix time value.
@@ -1006,7 +606,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getNullUnixTime() {
-        return getNullUnixTimeWithServiceResponseAsync().toBlocking().single().body();
+        return getNullUnixTimeAsync().toBlocking().value();
     }
 
     /**
@@ -1017,7 +617,7 @@ public class IntsImpl implements Ints {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullUnixTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullUnixTimeAsync(), serviceCallback);
     }
 
     /**
@@ -1026,46 +626,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
-    public Observable<DateTime> getNullUnixTimeAsync() {
-        return getNullUnixTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
-            @Override
-            public DateTime call(ServiceResponse<DateTime> response) {
-                return response.body();
-            }
-        });
+    public Single<DateTime> getNullUnixTimeAsync() {
+        return service.getNullUnixTime();
     }
 
-    /**
-     * Get null Unix time value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
-     */
-    public Observable<ServiceResponse<DateTime>> getNullUnixTimeWithServiceResponseAsync() {
-        return service.getNullUnixTime()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<DateTime>>>() {
-                @Override
-                public Observable<ServiceResponse<DateTime>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Long> result = getNullUnixTimeDelegate(response);
-                        DateTime body = null;
-                        if (result.body() != null) {
-                            body = new DateTime(result.body() * 1000L, DateTimeZone.UTC);
-                        }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Long> getNullUnixTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Long, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Long>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

@@ -17,6 +17,7 @@ import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> head501Async();
+    Single<Error> head501Async();
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> head501WithServiceResponseAsync();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -83,15 +77,8 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> get501Async();
+    Single<Error> get501Async();
 
-    /**
-     * Return 501 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> get501WithServiceResponseAsync();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -118,15 +105,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post505Async();
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post505WithServiceResponseAsync();
+    Single<Error> post505Async();
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -155,16 +134,8 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> post505Async(Boolean booleanValue);
+    Single<Error> post505Async(Boolean booleanValue);
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> post505WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -191,15 +162,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete505Async();
-
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete505WithServiceResponseAsync();
+    Single<Error> delete505Async();
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -228,15 +191,7 @@ public interface HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    Observable<Error> delete505Async(Boolean booleanValue);
+    Single<Error> delete505Async(Boolean booleanValue);
 
-    /**
-     * Return 505 status code - should be represented in the client as an error.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    Observable<ServiceResponse<Error>> delete505WithServiceResponseAsync(Boolean booleanValue);
 
 }

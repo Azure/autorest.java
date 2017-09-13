@@ -12,10 +12,10 @@ package fixtures.custombaseurimoreoptions.implementation;
 
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
@@ -83,13 +83,6 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     */
-    public AutoRestParameterizedCustomHostTestClientImpl() {
-        this("https://{vault}{secret}{dnsSuffix}");
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -101,23 +94,9 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestParameterizedCustomHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://{vault}{secret}{dnsSuffix}", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestParameterizedCustomHostTestClientImpl() {
+        this("https://{vault}{secret}{dnsSuffix}");
         initialize();
     }
 
@@ -133,6 +112,6 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     private void initialize() {
         this.dnsSuffix = "host";
-        this.paths = new PathsImpl(retrofit(), this);
+        this.paths = new PathsImpl(this);
     }
 }

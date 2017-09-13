@@ -19,6 +19,7 @@ import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import rx.Observable;
+import rx.Single;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
@@ -114,14 +115,7 @@ public interface AutoRestReportServiceForAzure {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Observable<Map<String, Integer>> getReportAsync();
+    Single<Map<String, Integer>> getReportAsync();
 
-    /**
-     * Get test coverage report.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync();
 
 }

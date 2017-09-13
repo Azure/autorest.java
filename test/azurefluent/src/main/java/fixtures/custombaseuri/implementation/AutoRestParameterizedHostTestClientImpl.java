@@ -14,6 +14,8 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
@@ -170,7 +172,7 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.paths = new PathsInner(restClient().retrofit(), this);
+        this.paths = new PathsInner(this);
         this.azureClient = new AzureClient(this);
     }
 

@@ -14,10 +14,10 @@ import fixtures.url.AutoRestUrlTestService;
 import fixtures.url.Paths;
 import fixtures.url.Queries;
 import fixtures.url.PathItems;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestUrlTestService class.
@@ -111,13 +111,6 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestUrlTestService client.
-     */
-    public AutoRestUrlTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestUrlTestService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -129,23 +122,9 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     /**
      * Initializes an instance of AutoRestUrlTestService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestUrlTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestUrlTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestUrlTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestUrlTestServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
@@ -160,8 +139,8 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     }
 
     private void initialize() {
-        this.paths = new PathsImpl(retrofit(), this);
-        this.queries = new QueriesImpl(retrofit(), this);
-        this.pathItems = new PathItemsImpl(retrofit(), this);
+        this.paths = new PathsImpl(this);
+        this.queries = new QueriesImpl(this);
+        this.pathItems = new PathItemsImpl(this);
     }
 }

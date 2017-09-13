@@ -17,6 +17,7 @@ import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.Period;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
-    Observable<Period> getNullAsync();
+    Single<Period> getNullAsync();
 
-    /**
-     * Get null duration value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
-     */
-    Observable<ServiceResponse<Period>> getNullWithServiceResponseAsync();
 
     /**
      * Put a positive duration value.
@@ -85,16 +79,8 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putPositiveDurationAsync(Period durationBody);
+    Single<Void> putPositiveDurationAsync(Period durationBody);
 
-    /**
-     * Put a positive duration value.
-     *
-     * @param durationBody the Period value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putPositiveDurationWithServiceResponseAsync(Period durationBody);
 
     /**
      * Get a positive duration value.
@@ -121,15 +107,8 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
-    Observable<Period> getPositiveDurationAsync();
+    Single<Period> getPositiveDurationAsync();
 
-    /**
-     * Get a positive duration value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
-     */
-    Observable<ServiceResponse<Period>> getPositiveDurationWithServiceResponseAsync();
 
     /**
      * Get an invalid duration value.
@@ -156,14 +135,7 @@ public interface Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
-    Observable<Period> getInvalidAsync();
+    Single<Period> getInvalidAsync();
 
-    /**
-     * Get an invalid duration value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
-     */
-    Observable<ServiceResponse<Period>> getInvalidWithServiceResponseAsync();
 
 }

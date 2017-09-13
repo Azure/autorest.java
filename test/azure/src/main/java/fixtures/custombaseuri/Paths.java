@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -49,15 +50,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getEmptyAsync(String accountName);
+    Single<Void> getEmptyAsync(String accountName);
 
-    /**
-     * Get a 200 to test a valid base uri.
-     *
-     * @param accountName Account Name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName);
 
 }

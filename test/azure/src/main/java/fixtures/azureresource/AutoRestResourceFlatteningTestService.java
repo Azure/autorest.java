@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
+import rx.Single;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -117,15 +118,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayAsync();
-
-    /**
-     * Put External Resource as an Array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync();
+    Single<Void> putArrayAsync();
     /**
      * Put External Resource as an Array.
      *
@@ -153,16 +146,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayAsync(List<Resource> resourceArray);
+    Single<Void> putArrayAsync(List<Resource> resourceArray);
 
-    /**
-     * Put External Resource as an Array.
-     *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray);
 
     /**
      * Get External Resource as an Array.
@@ -189,15 +174,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Observable<List<FlattenedProduct>> getArrayAsync();
+    Single<List<FlattenedProduct>> getArrayAsync();
 
-    /**
-     * Get External Resource as an Array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;FlattenedProduct&gt; object
-     */
-    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -223,15 +201,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDictionaryAsync();
-
-    /**
-     * Put External Resource as a Dictionary.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync();
+    Single<Void> putDictionaryAsync();
     /**
      * Put External Resource as a Dictionary.
      *
@@ -259,16 +229,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
 
-    /**
-     * Put External Resource as a Dictionary.
-     *
-     * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Get External Resource as a Dictionary.
@@ -295,15 +257,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    Observable<Map<String, FlattenedProduct>> getDictionaryAsync();
+    Single<Map<String, FlattenedProduct>> getDictionaryAsync();
 
-    /**
-     * Get External Resource as a Dictionary.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
-     */
-    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryWithServiceResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -329,15 +284,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putResourceCollectionAsync();
-
-    /**
-     * Put External Resource as a ResourceCollection.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync();
+    Single<Void> putResourceCollectionAsync();
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -365,16 +312,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
 
-    /**
-     * Put External Resource as a ResourceCollection.
-     *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -401,14 +340,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollection object
      */
-    Observable<ResourceCollection> getResourceCollectionAsync();
+    Single<ResourceCollection> getResourceCollectionAsync();
 
-    /**
-     * Get External Resource as a ResourceCollection.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ResourceCollection object
-     */
-    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync();
 
 }

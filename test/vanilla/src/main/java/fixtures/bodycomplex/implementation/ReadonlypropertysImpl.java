@@ -10,31 +10,34 @@
 
 package fixtures.bodycomplex.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodycomplex.Readonlypropertys;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Readonlypropertys.
  */
 public class ReadonlypropertysImpl implements Readonlypropertys {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private ReadonlypropertysService service;
     /** The service client containing this operation class. */
     private AutoRestComplexTestServiceImpl client;
@@ -42,26 +45,30 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Initializes an instance of Readonlypropertys.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ReadonlypropertysImpl(Retrofit retrofit, AutoRestComplexTestServiceImpl client) {
-        this.service = retrofit.create(ReadonlypropertysService.class);
+    public ReadonlypropertysImpl(AutoRestComplexTestServiceImpl client) {
+        this.service = RestProxy.create(ReadonlypropertysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Readonlypropertys to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface ReadonlypropertysService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
         @GET("complex/readonlyproperty/valid")
-        Observable<Response<ResponseBody>> getValid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<ReadonlyObj> getValid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
         @PUT("complex/readonlyproperty/valid")
-        Observable<Response<ResponseBody>> putValid(@Body ReadonlyObj complexBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putValid(@BodyParam ReadonlyObj complexBody);
 
     }
 
@@ -74,7 +81,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the ReadonlyObj object if successful.
      */
     public ReadonlyObj getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().body();
+        return getValidAsync().toBlocking().value();
     }
 
     /**
@@ -85,7 +92,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
-        return ServiceFuture.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
     /**
@@ -94,42 +101,10 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReadonlyObj object
      */
-    public Observable<ReadonlyObj> getValidAsync() {
-        return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ReadonlyObj>, ReadonlyObj>() {
-            @Override
-            public ReadonlyObj call(ServiceResponse<ReadonlyObj> response) {
-                return response.body();
-            }
-        });
+    public Single<ReadonlyObj> getValidAsync() {
+        return service.getValid();
     }
 
-    /**
-     * Get complex types that have readonly properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ReadonlyObj object
-     */
-    public Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync() {
-        return service.getValid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ReadonlyObj>>>() {
-                @Override
-                public Observable<ServiceResponse<ReadonlyObj>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<ReadonlyObj> clientResponse = getValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<ReadonlyObj> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<ReadonlyObj, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ReadonlyObj>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put complex types that have readonly properties.
@@ -140,7 +115,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValid(ReadonlyObj complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
+        putValidAsync(complexBody).toBlocking().value();
     }
 
     /**
@@ -152,7 +127,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -162,46 +137,13 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putValidAsync(ReadonlyObj complexBody) {
-        return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * @param complexBody the ReadonlyObj value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody) {
+    public Single<Void> putValidAsync(ReadonlyObj complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
-        return service.putValid(complexBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putValid(complexBody);
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

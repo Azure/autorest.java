@@ -20,6 +20,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -50,15 +51,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getBooleanTrueAsync();
+    Single<Void> getBooleanTrueAsync();
 
-    /**
-     * Get true Boolean value on path.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync();
 
     /**
      * Get false Boolean value on path.
@@ -84,15 +78,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getBooleanFalseAsync();
+    Single<Void> getBooleanFalseAsync();
 
-    /**
-     * Get false Boolean value on path.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -118,15 +105,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getBooleanNullAsync();
-
-    /**
-     * Get null Boolean value on query (query string should be absent).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getBooleanNullWithServiceResponseAsync();
+    Single<Void> getBooleanNullAsync();
     /**
      * Get null Boolean value on query (query string should be absent).
      *
@@ -154,16 +133,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getBooleanNullAsync(Boolean boolQuery);
+    Single<Void> getBooleanNullAsync(Boolean boolQuery);
 
-    /**
-     * Get null Boolean value on query (query string should be absent).
-     *
-     * @param boolQuery null boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getBooleanNullWithServiceResponseAsync(Boolean boolQuery);
 
     /**
      * Get '1000000' integer value.
@@ -189,15 +160,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getIntOneMillionAsync();
+    Single<Void> getIntOneMillionAsync();
 
-    /**
-     * Get '1000000' integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -223,15 +187,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getIntNegativeOneMillionAsync();
+    Single<Void> getIntNegativeOneMillionAsync();
 
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync();
 
     /**
      * Get null integer value (no query parameter).
@@ -257,15 +214,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getIntNullAsync();
-
-    /**
-     * Get null integer value (no query parameter).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getIntNullWithServiceResponseAsync();
+    Single<Void> getIntNullAsync();
     /**
      * Get null integer value (no query parameter).
      *
@@ -293,16 +242,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getIntNullAsync(Integer intQuery);
+    Single<Void> getIntNullAsync(Integer intQuery);
 
-    /**
-     * Get null integer value (no query parameter).
-     *
-     * @param intQuery null integer value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getIntNullWithServiceResponseAsync(Integer intQuery);
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -328,15 +269,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getTenBillionAsync();
+    Single<Void> getTenBillionAsync();
 
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -362,15 +296,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getNegativeTenBillionAsync();
+    Single<Void> getNegativeTenBillionAsync();
 
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -396,15 +323,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getLongNullAsync();
-
-    /**
-     * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getLongNullWithServiceResponseAsync();
+    Single<Void> getLongNullAsync();
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
@@ -432,16 +351,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getLongNullAsync(Long longQuery);
+    Single<Void> getLongNullAsync(Long longQuery);
 
-    /**
-     * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * @param longQuery null 64 bit integer value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getLongNullWithServiceResponseAsync(Long longQuery);
 
     /**
      * Get '1.034E+20' numeric value.
@@ -467,15 +378,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> floatScientificPositiveAsync();
+    Single<Void> floatScientificPositiveAsync();
 
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -501,15 +405,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> floatScientificNegativeAsync();
+    Single<Void> floatScientificNegativeAsync();
 
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -535,15 +432,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> floatNullAsync();
-
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> floatNullWithServiceResponseAsync();
+    Single<Void> floatNullAsync();
     /**
      * Get null numeric value (no query parameter).
      *
@@ -571,16 +460,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> floatNullAsync(Double floatQuery);
+    Single<Void> floatNullAsync(Double floatQuery);
 
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @param floatQuery null numeric value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> floatNullWithServiceResponseAsync(Double floatQuery);
 
     /**
      * Get '9999999.999' numeric value.
@@ -606,15 +487,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> doubleDecimalPositiveAsync();
+    Single<Void> doubleDecimalPositiveAsync();
 
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -640,15 +514,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> doubleDecimalNegativeAsync();
+    Single<Void> doubleDecimalNegativeAsync();
 
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -674,15 +541,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> doubleNullAsync();
-
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> doubleNullWithServiceResponseAsync();
+    Single<Void> doubleNullAsync();
     /**
      * Get null numeric value (no query parameter).
      *
@@ -710,16 +569,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> doubleNullAsync(Double doubleQuery);
+    Single<Void> doubleNullAsync(Double doubleQuery);
 
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @param doubleQuery null numeric value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> doubleNullWithServiceResponseAsync(Double doubleQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -745,15 +596,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringUnicodeAsync();
+    Single<Void> stringUnicodeAsync();
 
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -779,15 +623,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringUrlEncodedAsync();
+    Single<Void> stringUrlEncodedAsync();
 
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync();
 
     /**
      * Get ''.
@@ -813,15 +650,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringEmptyAsync();
+    Single<Void> stringEmptyAsync();
 
-    /**
-     * Get ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -847,15 +677,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringNullAsync();
-
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync();
+    Single<Void> stringNullAsync();
     /**
      * Get null (no query parameter in url).
      *
@@ -883,16 +705,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringNullAsync(String stringQuery);
+    Single<Void> stringNullAsync(String stringQuery);
 
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @param stringQuery null string value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -918,15 +732,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> enumValidAsync();
-
-    /**
-     * Get using uri with query parameter 'green color'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync();
+    Single<Void> enumValidAsync();
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -954,16 +760,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> enumValidAsync(UriColor enumQuery);
+    Single<Void> enumValidAsync(UriColor enumQuery);
 
-    /**
-     * Get using uri with query parameter 'green color'.
-     *
-     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -989,15 +787,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> enumNullAsync();
-
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync();
+    Single<Void> enumNullAsync();
     /**
      * Get null (no query parameter in url).
      *
@@ -1025,16 +815,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> enumNullAsync(UriColor enumQuery);
+    Single<Void> enumNullAsync(UriColor enumQuery);
 
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1060,15 +842,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteMultiByteAsync();
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync();
+    Single<Void> byteMultiByteAsync();
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -1096,16 +870,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteMultiByteAsync(byte[] byteQuery);
+    Single<Void> byteMultiByteAsync(byte[] byteQuery);
 
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] byteQuery);
 
     /**
      * Get '' as byte array.
@@ -1131,15 +897,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteEmptyAsync();
+    Single<Void> byteEmptyAsync();
 
-    /**
-     * Get '' as byte array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1165,15 +924,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteNullAsync();
-
-    /**
-     * Get null as byte array (no query parameters in uri).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync();
+    Single<Void> byteNullAsync();
     /**
      * Get null as byte array (no query parameters in uri).
      *
@@ -1201,16 +952,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteNullAsync(byte[] byteQuery);
+    Single<Void> byteNullAsync(byte[] byteQuery);
 
-    /**
-     * Get null as byte array (no query parameters in uri).
-     *
-     * @param byteQuery null as byte array (no query parameters in uri)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] byteQuery);
 
     /**
      * Get '2012-01-01' as date.
@@ -1236,15 +979,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateValidAsync();
+    Single<Void> dateValidAsync();
 
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1270,15 +1006,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateNullAsync();
-
-    /**
-     * Get null as date - this should result in no query parameters in uri.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync();
+    Single<Void> dateNullAsync();
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -1306,16 +1034,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateNullAsync(LocalDate dateQuery);
+    Single<Void> dateNullAsync(LocalDate dateQuery);
 
-    /**
-     * Get null as date - this should result in no query parameters in uri.
-     *
-     * @param dateQuery null as date (no query parameters in uri)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate dateQuery);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1341,15 +1061,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateTimeValidAsync();
+    Single<Void> dateTimeValidAsync();
 
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1375,15 +1088,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateTimeNullAsync();
-
-    /**
-     * Get null as date-time, should result in no query parameters in uri.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync();
+    Single<Void> dateTimeNullAsync();
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
@@ -1411,16 +1116,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateTimeNullAsync(DateTime dateTimeQuery);
+    Single<Void> dateTimeNullAsync(DateTime dateTimeQuery);
 
-    /**
-     * Get null as date-time, should result in no query parameters in uri.
-     *
-     * @param dateTimeQuery null as date-time (no query parameters)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimeQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1446,15 +1143,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringCsvValidAsync();
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringCsvValidWithServiceResponseAsync();
+    Single<Void> arrayStringCsvValidAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -1482,16 +1171,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
+    Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
 
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringCsvValidWithServiceResponseAsync(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1517,15 +1198,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringCsvNullAsync();
-
-    /**
-     * Get a null array of string using the csv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringCsvNullWithServiceResponseAsync();
+    Single<Void> arrayStringCsvNullAsync();
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -1553,16 +1226,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
+    Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
 
-    /**
-     * Get a null array of string using the csv-array format.
-     *
-     * @param arrayQuery a null array of string using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringCsvNullWithServiceResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1588,15 +1253,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringCsvEmptyAsync();
-
-    /**
-     * Get an empty array [] of string using the csv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringCsvEmptyWithServiceResponseAsync();
+    Single<Void> arrayStringCsvEmptyAsync();
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -1624,16 +1281,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
+    Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
 
-    /**
-     * Get an empty array [] of string using the csv-array format.
-     *
-     * @param arrayQuery an empty array [] of string using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringCsvEmptyWithServiceResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1659,15 +1308,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringSsvValidAsync();
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringSsvValidWithServiceResponseAsync();
+    Single<Void> arrayStringSsvValidAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -1695,16 +1336,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
+    Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
 
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringSsvValidWithServiceResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1730,15 +1363,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringTsvValidAsync();
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringTsvValidWithServiceResponseAsync();
+    Single<Void> arrayStringTsvValidAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
@@ -1766,16 +1391,8 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
+    Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
 
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringTsvValidWithServiceResponseAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1801,15 +1418,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringPipesValidAsync();
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringPipesValidWithServiceResponseAsync();
+    Single<Void> arrayStringPipesValidAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -1837,15 +1446,7 @@ public interface Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
+    Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
 
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayStringPipesValidWithServiceResponseAsync(List<String> arrayQuery);
 
 }

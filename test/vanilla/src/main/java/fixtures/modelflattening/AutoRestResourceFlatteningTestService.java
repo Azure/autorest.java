@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
+import rx.Single;
 import com.microsoft.rest.RestClient;
 
 /**
@@ -67,15 +68,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayAsync();
-
-    /**
-     * Put External Resource as an Array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync();
+    Single<Void> putArrayAsync();
     /**
      * Put External Resource as an Array.
      *
@@ -103,16 +96,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayAsync(List<Resource> resourceArray);
+    Single<Void> putArrayAsync(List<Resource> resourceArray);
 
-    /**
-     * Put External Resource as an Array.
-     *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray);
 
     /**
      * Get External Resource as an Array.
@@ -139,15 +124,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Observable<List<FlattenedProduct>> getArrayAsync();
+    Single<List<FlattenedProduct>> getArrayAsync();
 
-    /**
-     * Get External Resource as an Array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;FlattenedProduct&gt; object
-     */
-    Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -173,15 +151,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putWrappedArrayAsync();
-
-    /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putWrappedArrayWithServiceResponseAsync();
+    Single<Void> putWrappedArrayAsync();
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
@@ -209,16 +179,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray);
+    Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray);
 
-    /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     *
-     * @param resourceArray External Resource as an Array to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putWrappedArrayWithServiceResponseAsync(List<WrappedProduct> resourceArray);
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -245,15 +207,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;ProductWrapper&gt; object
      */
-    Observable<List<ProductWrapper>> getWrappedArrayAsync();
+    Single<List<ProductWrapper>> getWrappedArrayAsync();
 
-    /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;ProductWrapper&gt; object
-     */
-    Observable<ServiceResponse<List<ProductWrapper>>> getWrappedArrayWithServiceResponseAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -279,15 +234,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDictionaryAsync();
-
-    /**
-     * Put External Resource as a Dictionary.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync();
+    Single<Void> putDictionaryAsync();
     /**
      * Put External Resource as a Dictionary.
      *
@@ -315,16 +262,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
 
-    /**
-     * Put External Resource as a Dictionary.
-     *
-     * @param resourceDictionary External Resource as a Dictionary to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Get External Resource as a Dictionary.
@@ -351,15 +290,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    Observable<Map<String, FlattenedProduct>> getDictionaryAsync();
+    Single<Map<String, FlattenedProduct>> getDictionaryAsync();
 
-    /**
-     * Get External Resource as a Dictionary.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
-     */
-    Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryWithServiceResponseAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -385,15 +317,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putResourceCollectionAsync();
-
-    /**
-     * Put External Resource as a ResourceCollection.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync();
+    Single<Void> putResourceCollectionAsync();
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -421,16 +345,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
 
-    /**
-     * Put External Resource as a ResourceCollection.
-     *
-     * @param resourceComplexObject External Resource as a ResourceCollection to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -457,15 +373,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollection object
      */
-    Observable<ResourceCollection> getResourceCollectionAsync();
+    Single<ResourceCollection> getResourceCollectionAsync();
 
-    /**
-     * Get External Resource as a ResourceCollection.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ResourceCollection object
-     */
-    Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync();
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -492,15 +401,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SimpleProduct object
      */
-    Observable<SimpleProduct> putSimpleProductAsync();
-
-    /**
-     * Put Simple Product with client flattening true on the model.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
-     */
-    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithServiceResponseAsync();
+    Single<SimpleProduct> putSimpleProductAsync();
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -529,16 +430,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SimpleProduct object
      */
-    Observable<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct);
+    Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct);
 
-    /**
-     * Put Simple Product with client flattening true on the model.
-     *
-     * @param simpleBodyProduct Simple body product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
-     */
-    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithServiceResponseAsync(SimpleProduct simpleBodyProduct);
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -571,17 +464,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SimpleProduct object
      */
-    Observable<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName);
-
-    /**
-     * Put Flattened Simple Product with client flattening true on the parameter.
-     *
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     * @param maxProductDisplayName Display name of product.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
-     */
-    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductWithServiceResponseAsync(String productId, String maxProductDisplayName);
+    Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName);
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -622,20 +505,8 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SimpleProduct object
      */
-    Observable<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
+    Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
 
-    /**
-     * Put Flattened Simple Product with client flattening true on the parameter.
-     *
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
-     * @param maxProductDisplayName Display name of product.
-     * @param description Description of product.
-     * @param genericValue Generic URL value.
-     * @param odatavalue URL value.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
-     */
-    Observable<ServiceResponse<SimpleProduct>> postFlattenedSimpleProductWithServiceResponseAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -665,15 +536,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SimpleProduct object
      */
-    Observable<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup);
+    Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup);
 
-    /**
-     * Put Simple Product with client flattening true on the model.
-     *
-     * @param flattenParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
-     */
-    Observable<ServiceResponse<SimpleProduct>> putSimpleProductWithGroupingWithServiceResponseAsync(FlattenParameterGroup flattenParameterGroup);
 
 }

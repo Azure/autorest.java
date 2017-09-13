@@ -10,30 +10,33 @@
 
 package fixtures.bodynumber.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodynumber.Numbers;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Numbers.
  */
 public class NumbersImpl implements Numbers {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private NumbersService service;
     /** The service client containing this operation class. */
     private AutoRestNumberTestServiceImpl client;
@@ -41,114 +44,162 @@ public class NumbersImpl implements Numbers {
     /**
      * Initializes an instance of Numbers.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public NumbersImpl(Retrofit retrofit, AutoRestNumberTestServiceImpl client) {
-        this.service = retrofit.create(NumbersService.class);
+    public NumbersImpl(AutoRestNumberTestServiceImpl client) {
+        this.service = RestProxy.create(NumbersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Numbers to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("https://localhost")
     interface NumbersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getNull" })
         @GET("number/null")
-        Observable<Response<ResponseBody>> getNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidFloat" })
         @GET("number/invalidfloat")
-        Observable<Response<ResponseBody>> getInvalidFloat();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getInvalidFloat();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidDouble" })
         @GET("number/invaliddouble")
-        Observable<Response<ResponseBody>> getInvalidDouble();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getInvalidDouble();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidDecimal" })
         @GET("number/invaliddecimal")
-        Observable<Response<ResponseBody>> getInvalidDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<BigDecimal> getInvalidDecimal();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigFloat" })
         @PUT("number/big/float/3.402823e+20")
-        Observable<Response<ResponseBody>> putBigFloat(@Body double numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigFloat(@BodyParam double numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigFloat" })
         @GET("number/big/float/3.402823e+20")
-        Observable<Response<ResponseBody>> getBigFloat();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getBigFloat();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDouble" })
         @PUT("number/big/double/2.5976931e+101")
-        Observable<Response<ResponseBody>> putBigDouble(@Body double numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigDouble(@BodyParam double numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDouble" })
         @GET("number/big/double/2.5976931e+101")
-        Observable<Response<ResponseBody>> getBigDouble();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getBigDouble();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDoublePositiveDecimal" })
         @PUT("number/big/double/99999999.99")
-        Observable<Response<ResponseBody>> putBigDoublePositiveDecimal(@Body double numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigDoublePositiveDecimal(@BodyParam double numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDoublePositiveDecimal" })
         @GET("number/big/double/99999999.99")
-        Observable<Response<ResponseBody>> getBigDoublePositiveDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getBigDoublePositiveDecimal();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDoubleNegativeDecimal" })
         @PUT("number/big/double/-99999999.99")
-        Observable<Response<ResponseBody>> putBigDoubleNegativeDecimal(@Body double numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigDoubleNegativeDecimal(@BodyParam double numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDoubleNegativeDecimal" })
         @GET("number/big/double/-99999999.99")
-        Observable<Response<ResponseBody>> getBigDoubleNegativeDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getBigDoubleNegativeDecimal();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimal" })
         @PUT("number/big/decimal/2.5976931e+101")
-        Observable<Response<ResponseBody>> putBigDecimal(@Body BigDecimal numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigDecimal(@BodyParam BigDecimal numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimal" })
         @GET("number/big/decimal/2.5976931e+101")
-        Observable<Response<ResponseBody>> getBigDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<BigDecimal> getBigDecimal();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimalPositiveDecimal" })
         @PUT("number/big/decimal/99999999.99")
-        Observable<Response<ResponseBody>> putBigDecimalPositiveDecimal(@Body BigDecimal numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigDecimalPositiveDecimal(@BodyParam BigDecimal numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimalPositiveDecimal" })
         @GET("number/big/decimal/99999999.99")
-        Observable<Response<ResponseBody>> getBigDecimalPositiveDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<BigDecimal> getBigDecimalPositiveDecimal();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimalNegativeDecimal" })
         @PUT("number/big/decimal/-99999999.99")
-        Observable<Response<ResponseBody>> putBigDecimalNegativeDecimal(@Body BigDecimal numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBigDecimalNegativeDecimal(@BodyParam BigDecimal numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimalNegativeDecimal" })
         @GET("number/big/decimal/-99999999.99")
-        Observable<Response<ResponseBody>> getBigDecimalNegativeDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<BigDecimal> getBigDecimalNegativeDecimal();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallFloat" })
         @PUT("number/small/float/3.402823e-20")
-        Observable<Response<ResponseBody>> putSmallFloat(@Body double numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putSmallFloat(@BodyParam double numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallFloat" })
         @GET("number/small/float/3.402823e-20")
-        Observable<Response<ResponseBody>> getSmallFloat();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getSmallFloat();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallDouble" })
         @PUT("number/small/double/2.5976931e-101")
-        Observable<Response<ResponseBody>> putSmallDouble(@Body double numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putSmallDouble(@BodyParam double numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallDouble" })
         @GET("number/small/double/2.5976931e-101")
-        Observable<Response<ResponseBody>> getSmallDouble();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Double> getSmallDouble();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallDecimal" })
         @PUT("number/small/decimal/2.5976931e-101")
-        Observable<Response<ResponseBody>> putSmallDecimal(@Body BigDecimal numberBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putSmallDecimal(@BodyParam BigDecimal numberBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallDecimal" })
         @GET("number/small/decimal/2.5976931e-101")
-        Observable<Response<ResponseBody>> getSmallDecimal();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<BigDecimal> getSmallDecimal();
 
     }
 
@@ -161,7 +212,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().body();
+        return getNullAsync().toBlocking().value();
     }
 
     /**
@@ -172,7 +223,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getNullAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
@@ -181,42 +232,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getNullAsync() {
-        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getNullAsync() {
+        return service.getNull();
     }
 
-    /**
-     * Get null Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getNullWithServiceResponseAsync() {
-        return service.getNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid float Number value.
@@ -227,7 +246,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidFloat() {
-        return getInvalidFloatWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidFloatAsync().toBlocking().value();
     }
 
     /**
@@ -238,7 +257,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidFloatAsync(), serviceCallback);
     }
 
     /**
@@ -247,42 +266,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getInvalidFloatAsync() {
-        return getInvalidFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getInvalidFloatAsync() {
+        return service.getInvalidFloat();
     }
 
-    /**
-     * Get invalid float Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getInvalidFloatWithServiceResponseAsync() {
-        return service.getInvalidFloat()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getInvalidFloatDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid double Number value.
@@ -293,7 +280,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidDouble() {
-        return getInvalidDoubleWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidDoubleAsync().toBlocking().value();
     }
 
     /**
@@ -304,7 +291,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidDoubleAsync(), serviceCallback);
     }
 
     /**
@@ -313,42 +300,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getInvalidDoubleAsync() {
-        return getInvalidDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getInvalidDoubleAsync() {
+        return service.getInvalidDouble();
     }
 
-    /**
-     * Get invalid double Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getInvalidDoubleWithServiceResponseAsync() {
-        return service.getInvalidDouble()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getInvalidDoubleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid decimal Number value.
@@ -359,7 +314,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getInvalidDecimal() {
-        return getInvalidDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -370,7 +325,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -379,42 +334,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    public Observable<BigDecimal> getInvalidDecimalAsync() {
-        return getInvalidDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<BigDecimal>, BigDecimal>() {
-            @Override
-            public BigDecimal call(ServiceResponse<BigDecimal> response) {
-                return response.body();
-            }
-        });
+    public Single<BigDecimal> getInvalidDecimalAsync() {
+        return service.getInvalidDecimal();
     }
 
-    /**
-     * Get invalid decimal Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    public Observable<ServiceResponse<BigDecimal>> getInvalidDecimalWithServiceResponseAsync() {
-        return service.getInvalidDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BigDecimal>>>() {
-                @Override
-                public Observable<ServiceResponse<BigDecimal>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<BigDecimal> clientResponse = getInvalidDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<BigDecimal> getInvalidDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<BigDecimal, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big float value 3.402823e+20.
@@ -425,7 +348,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigFloat(double numberBody) {
-        putBigFloatWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigFloatAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -437,7 +360,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigFloatWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigFloatAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -447,43 +370,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigFloatAsync(double numberBody) {
-        return putBigFloatWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putBigFloatAsync(double numberBody) {
+        return service.putBigFloat(numberBody);
     }
 
-    /**
-     * Put big float value 3.402823e+20.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigFloatWithServiceResponseAsync(double numberBody) {
-        return service.putBigFloat(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigFloatDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big float value 3.402823e+20.
@@ -494,7 +384,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigFloat() {
-        return getBigFloatWithServiceResponseAsync().toBlocking().single().body();
+        return getBigFloatAsync().toBlocking().value();
     }
 
     /**
@@ -505,7 +395,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigFloatAsync(), serviceCallback);
     }
 
     /**
@@ -514,42 +404,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getBigFloatAsync() {
-        return getBigFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getBigFloatAsync() {
+        return service.getBigFloat();
     }
 
-    /**
-     * Get big float value 3.402823e+20.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getBigFloatWithServiceResponseAsync() {
-        return service.getBigFloat()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getBigFloatDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big double value 2.5976931e+101.
@@ -560,7 +418,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigDouble(double numberBody) {
-        putBigDoubleWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigDoubleAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -572,7 +430,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDoubleWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigDoubleAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -582,43 +440,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDoubleAsync(double numberBody) {
-        return putBigDoubleWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putBigDoubleAsync(double numberBody) {
+        return service.putBigDouble(numberBody);
     }
 
-    /**
-     * Put big double value 2.5976931e+101.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigDoubleWithServiceResponseAsync(double numberBody) {
-        return service.putBigDouble(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigDoubleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big double value 2.5976931e+101.
@@ -629,7 +454,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDouble() {
-        return getBigDoubleWithServiceResponseAsync().toBlocking().single().body();
+        return getBigDoubleAsync().toBlocking().value();
     }
 
     /**
@@ -640,7 +465,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigDoubleAsync(), serviceCallback);
     }
 
     /**
@@ -649,42 +474,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getBigDoubleAsync() {
-        return getBigDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getBigDoubleAsync() {
+        return service.getBigDouble();
     }
 
-    /**
-     * Get big double value 2.5976931e+101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getBigDoubleWithServiceResponseAsync() {
-        return service.getBigDouble()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getBigDoubleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big double value 99999999.99.
@@ -695,7 +488,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigDoublePositiveDecimal(double numberBody) {
-        putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigDoublePositiveDecimalAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -707,7 +500,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigDoublePositiveDecimalAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -717,43 +510,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
-        return putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
+        return service.putBigDoublePositiveDecimal(numberBody);
     }
 
-    /**
-     * Put big double value 99999999.99.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigDoublePositiveDecimalWithServiceResponseAsync(double numberBody) {
-        return service.putBigDoublePositiveDecimal(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigDoublePositiveDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big double value 99999999.99.
@@ -764,7 +524,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getBigDoublePositiveDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -775,7 +535,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigDoublePositiveDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigDoublePositiveDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -784,42 +544,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getBigDoublePositiveDecimalAsync() {
-        return getBigDoublePositiveDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getBigDoublePositiveDecimalAsync() {
+        return service.getBigDoublePositiveDecimal();
     }
 
-    /**
-     * Get big double value 99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getBigDoublePositiveDecimalWithServiceResponseAsync() {
-        return service.getBigDoublePositiveDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getBigDoublePositiveDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big double value -99999999.99.
@@ -830,7 +558,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigDoubleNegativeDecimal(double numberBody) {
-        putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigDoubleNegativeDecimalAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -842,7 +570,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigDoubleNegativeDecimalAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -852,43 +580,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
-        return putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
+        return service.putBigDoubleNegativeDecimal(numberBody);
     }
 
-    /**
-     * Put big double value -99999999.99.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigDoubleNegativeDecimalWithServiceResponseAsync(double numberBody) {
-        return service.putBigDoubleNegativeDecimal(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigDoubleNegativeDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big double value -99999999.99.
@@ -899,7 +594,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getBigDoubleNegativeDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -910,7 +605,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigDoubleNegativeDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigDoubleNegativeDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -919,42 +614,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getBigDoubleNegativeDecimalAsync() {
-        return getBigDoubleNegativeDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getBigDoubleNegativeDecimalAsync() {
+        return service.getBigDoubleNegativeDecimal();
     }
 
-    /**
-     * Get big double value -99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getBigDoubleNegativeDecimalWithServiceResponseAsync() {
-        return service.getBigDoubleNegativeDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getBigDoubleNegativeDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -965,7 +628,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigDecimal(BigDecimal numberBody) {
-        putBigDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigDecimalAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -977,7 +640,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigDecimalAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -987,46 +650,13 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDecimalAsync(BigDecimal numberBody) {
-        return putBigDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put big decimal value 2.5976931e+101.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigDecimalWithServiceResponseAsync(BigDecimal numberBody) {
+    public Single<Void> putBigDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
-        return service.putBigDecimal(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putBigDecimal(numberBody);
     }
 
-    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -1037,7 +667,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimal() {
-        return getBigDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getBigDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -1048,7 +678,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -1057,42 +687,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    public Observable<BigDecimal> getBigDecimalAsync() {
-        return getBigDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<BigDecimal>, BigDecimal>() {
-            @Override
-            public BigDecimal call(ServiceResponse<BigDecimal> response) {
-                return response.body();
-            }
-        });
+    public Single<BigDecimal> getBigDecimalAsync() {
+        return service.getBigDecimal();
     }
 
-    /**
-     * Get big decimal value 2.5976931e+101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    public Observable<ServiceResponse<BigDecimal>> getBigDecimalWithServiceResponseAsync() {
-        return service.getBigDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BigDecimal>>>() {
-                @Override
-                public Observable<ServiceResponse<BigDecimal>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<BigDecimal> clientResponse = getBigDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<BigDecimal> getBigDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<BigDecimal, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big decimal value 99999999.99.
@@ -1103,7 +701,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigDecimalPositiveDecimal(BigDecimal numberBody) {
-        putBigDecimalPositiveDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigDecimalPositiveDecimalAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -1115,7 +713,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDecimalPositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigDecimalPositiveDecimalAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1125,46 +723,13 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
-        return putBigDecimalPositiveDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put big decimal value 99999999.99.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigDecimalPositiveDecimalWithServiceResponseAsync(BigDecimal numberBody) {
+    public Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
-        return service.putBigDecimalPositiveDecimal(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigDecimalPositiveDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putBigDecimalPositiveDecimal(numberBody);
     }
 
-    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big decimal value 99999999.99.
@@ -1175,7 +740,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalPositiveDecimal() {
-        return getBigDecimalPositiveDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getBigDecimalPositiveDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -1186,7 +751,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigDecimalPositiveDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigDecimalPositiveDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -1195,42 +760,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    public Observable<BigDecimal> getBigDecimalPositiveDecimalAsync() {
-        return getBigDecimalPositiveDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<BigDecimal>, BigDecimal>() {
-            @Override
-            public BigDecimal call(ServiceResponse<BigDecimal> response) {
-                return response.body();
-            }
-        });
+    public Single<BigDecimal> getBigDecimalPositiveDecimalAsync() {
+        return service.getBigDecimalPositiveDecimal();
     }
 
-    /**
-     * Get big decimal value 99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    public Observable<ServiceResponse<BigDecimal>> getBigDecimalPositiveDecimalWithServiceResponseAsync() {
-        return service.getBigDecimalPositiveDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BigDecimal>>>() {
-                @Override
-                public Observable<ServiceResponse<BigDecimal>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<BigDecimal> clientResponse = getBigDecimalPositiveDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<BigDecimal> getBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<BigDecimal, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put big decimal value -99999999.99.
@@ -1241,7 +774,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBigDecimalNegativeDecimal(BigDecimal numberBody) {
-        putBigDecimalNegativeDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putBigDecimalNegativeDecimalAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -1253,7 +786,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDecimalNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putBigDecimalNegativeDecimalAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1263,46 +796,13 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
-        return putBigDecimalNegativeDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put big decimal value -99999999.99.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBigDecimalNegativeDecimalWithServiceResponseAsync(BigDecimal numberBody) {
+    public Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
-        return service.putBigDecimalNegativeDecimal(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBigDecimalNegativeDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putBigDecimalNegativeDecimal(numberBody);
     }
 
-    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big decimal value -99999999.99.
@@ -1313,7 +813,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalNegativeDecimal() {
-        return getBigDecimalNegativeDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getBigDecimalNegativeDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -1324,7 +824,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceFuture.fromResponse(getBigDecimalNegativeDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBigDecimalNegativeDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -1333,42 +833,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    public Observable<BigDecimal> getBigDecimalNegativeDecimalAsync() {
-        return getBigDecimalNegativeDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<BigDecimal>, BigDecimal>() {
-            @Override
-            public BigDecimal call(ServiceResponse<BigDecimal> response) {
-                return response.body();
-            }
-        });
+    public Single<BigDecimal> getBigDecimalNegativeDecimalAsync() {
+        return service.getBigDecimalNegativeDecimal();
     }
 
-    /**
-     * Get big decimal value -99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    public Observable<ServiceResponse<BigDecimal>> getBigDecimalNegativeDecimalWithServiceResponseAsync() {
-        return service.getBigDecimalNegativeDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BigDecimal>>>() {
-                @Override
-                public Observable<ServiceResponse<BigDecimal>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<BigDecimal> clientResponse = getBigDecimalNegativeDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<BigDecimal> getBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<BigDecimal, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put small float value 3.402823e-20.
@@ -1379,7 +847,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putSmallFloat(double numberBody) {
-        putSmallFloatWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putSmallFloatAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -1391,7 +859,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putSmallFloatWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putSmallFloatAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1401,43 +869,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putSmallFloatAsync(double numberBody) {
-        return putSmallFloatWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putSmallFloatAsync(double numberBody) {
+        return service.putSmallFloat(numberBody);
     }
 
-    /**
-     * Put small float value 3.402823e-20.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putSmallFloatWithServiceResponseAsync(double numberBody) {
-        return service.putSmallFloat(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putSmallFloatDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big double value 3.402823e-20.
@@ -1448,7 +883,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallFloat() {
-        return getSmallFloatWithServiceResponseAsync().toBlocking().single().body();
+        return getSmallFloatAsync().toBlocking().value();
     }
 
     /**
@@ -1459,7 +894,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getSmallFloatWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getSmallFloatAsync(), serviceCallback);
     }
 
     /**
@@ -1468,42 +903,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getSmallFloatAsync() {
-        return getSmallFloatWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getSmallFloatAsync() {
+        return service.getSmallFloat();
     }
 
-    /**
-     * Get big double value 3.402823e-20.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getSmallFloatWithServiceResponseAsync() {
-        return service.getSmallFloat()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getSmallFloatDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put small double value 2.5976931e-101.
@@ -1514,7 +917,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putSmallDouble(double numberBody) {
-        putSmallDoubleWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putSmallDoubleAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -1526,7 +929,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putSmallDoubleWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putSmallDoubleAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1536,43 +939,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putSmallDoubleAsync(double numberBody) {
-        return putSmallDoubleWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putSmallDoubleAsync(double numberBody) {
+        return service.putSmallDouble(numberBody);
     }
 
-    /**
-     * Put small double value 2.5976931e-101.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putSmallDoubleWithServiceResponseAsync(double numberBody) {
-        return service.putSmallDouble(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putSmallDoubleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get big double value 2.5976931e-101.
@@ -1583,7 +953,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallDouble() {
-        return getSmallDoubleWithServiceResponseAsync().toBlocking().single().body();
+        return getSmallDoubleAsync().toBlocking().value();
     }
 
     /**
@@ -1594,7 +964,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
-        return ServiceFuture.fromResponse(getSmallDoubleWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getSmallDoubleAsync(), serviceCallback);
     }
 
     /**
@@ -1603,42 +973,10 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Double object
      */
-    public Observable<Double> getSmallDoubleAsync() {
-        return getSmallDoubleWithServiceResponseAsync().map(new Func1<ServiceResponse<Double>, Double>() {
-            @Override
-            public Double call(ServiceResponse<Double> response) {
-                return response.body();
-            }
-        });
+    public Single<Double> getSmallDoubleAsync() {
+        return service.getSmallDouble();
     }
 
-    /**
-     * Get big double value 2.5976931e-101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Double object
-     */
-    public Observable<ServiceResponse<Double>> getSmallDoubleWithServiceResponseAsync() {
-        return service.getSmallDouble()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Double>>>() {
-                @Override
-                public Observable<ServiceResponse<Double>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Double> clientResponse = getSmallDoubleDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Double, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -1649,7 +987,7 @@ public class NumbersImpl implements Numbers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putSmallDecimal(BigDecimal numberBody) {
-        putSmallDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+        putSmallDecimalAsync(numberBody).toBlocking().value();
     }
 
     /**
@@ -1661,7 +999,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putSmallDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+        return ServiceFuture.fromBody(putSmallDecimalAsync(numberBody), serviceCallback);
     }
 
     /**
@@ -1671,46 +1009,13 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putSmallDecimalAsync(BigDecimal numberBody) {
-        return putSmallDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put small decimal value 2.5976931e-101.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putSmallDecimalWithServiceResponseAsync(BigDecimal numberBody) {
+    public Single<Void> putSmallDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
-        return service.putSmallDecimal(numberBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putSmallDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putSmallDecimal(numberBody);
     }
 
-    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get small decimal value 2.5976931e-101.
@@ -1721,7 +1026,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getSmallDecimal() {
-        return getSmallDecimalWithServiceResponseAsync().toBlocking().single().body();
+        return getSmallDecimalAsync().toBlocking().value();
     }
 
     /**
@@ -1732,7 +1037,7 @@ public class NumbersImpl implements Numbers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
-        return ServiceFuture.fromResponse(getSmallDecimalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getSmallDecimalAsync(), serviceCallback);
     }
 
     /**
@@ -1741,41 +1046,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    public Observable<BigDecimal> getSmallDecimalAsync() {
-        return getSmallDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<BigDecimal>, BigDecimal>() {
-            @Override
-            public BigDecimal call(ServiceResponse<BigDecimal> response) {
-                return response.body();
-            }
-        });
+    public Single<BigDecimal> getSmallDecimalAsync() {
+        return service.getSmallDecimal();
     }
 
-    /**
-     * Get small decimal value 2.5976931e-101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    public Observable<ServiceResponse<BigDecimal>> getSmallDecimalWithServiceResponseAsync() {
-        return service.getSmallDecimal()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<BigDecimal>>>() {
-                @Override
-                public Observable<ServiceResponse<BigDecimal>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<BigDecimal> clientResponse = getSmallDecimalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<BigDecimal> getSmallDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<BigDecimal, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

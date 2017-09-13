@@ -27,6 +27,7 @@ import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,15 +59,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the IntWrapper object
      */
-    Observable<IntWrapper> getIntAsync();
+    Single<IntWrapper> getIntAsync();
 
-    /**
-     * Get complex types with integer properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IntWrapper object
-     */
-    Observable<ServiceResponse<IntWrapper>> getIntWithServiceResponseAsync();
 
     /**
      * Put complex types with integer properties.
@@ -95,16 +89,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putIntAsync(IntWrapper complexBody);
+    Single<Void> putIntAsync(IntWrapper complexBody);
 
-    /**
-     * Put complex types with integer properties.
-     *
-     * @param complexBody Please put -1 and 2
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putIntWithServiceResponseAsync(IntWrapper complexBody);
 
     /**
      * Get complex types with long properties.
@@ -131,15 +117,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LongWrapper object
      */
-    Observable<LongWrapper> getLongAsync();
+    Single<LongWrapper> getLongAsync();
 
-    /**
-     * Get complex types with long properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LongWrapper object
-     */
-    Observable<ServiceResponse<LongWrapper>> getLongWithServiceResponseAsync();
 
     /**
      * Put complex types with long properties.
@@ -168,16 +147,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putLongAsync(LongWrapper complexBody);
+    Single<Void> putLongAsync(LongWrapper complexBody);
 
-    /**
-     * Put complex types with long properties.
-     *
-     * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putLongWithServiceResponseAsync(LongWrapper complexBody);
 
     /**
      * Get complex types with float properties.
@@ -204,15 +175,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the FloatWrapper object
      */
-    Observable<FloatWrapper> getFloatAsync();
+    Single<FloatWrapper> getFloatAsync();
 
-    /**
-     * Get complex types with float properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the FloatWrapper object
-     */
-    Observable<ServiceResponse<FloatWrapper>> getFloatWithServiceResponseAsync();
 
     /**
      * Put complex types with float properties.
@@ -241,16 +205,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putFloatAsync(FloatWrapper complexBody);
+    Single<Void> putFloatAsync(FloatWrapper complexBody);
 
-    /**
-     * Put complex types with float properties.
-     *
-     * @param complexBody Please put 1.05 and -0.003
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putFloatWithServiceResponseAsync(FloatWrapper complexBody);
 
     /**
      * Get complex types with double properties.
@@ -277,15 +233,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DoubleWrapper object
      */
-    Observable<DoubleWrapper> getDoubleAsync();
+    Single<DoubleWrapper> getDoubleAsync();
 
-    /**
-     * Get complex types with double properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DoubleWrapper object
-     */
-    Observable<ServiceResponse<DoubleWrapper>> getDoubleWithServiceResponseAsync();
 
     /**
      * Put complex types with double properties.
@@ -314,16 +263,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDoubleAsync(DoubleWrapper complexBody);
+    Single<Void> putDoubleAsync(DoubleWrapper complexBody);
 
-    /**
-     * Put complex types with double properties.
-     *
-     * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDoubleWithServiceResponseAsync(DoubleWrapper complexBody);
 
     /**
      * Get complex types with bool properties.
@@ -350,15 +291,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BooleanWrapper object
      */
-    Observable<BooleanWrapper> getBoolAsync();
+    Single<BooleanWrapper> getBoolAsync();
 
-    /**
-     * Get complex types with bool properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BooleanWrapper object
-     */
-    Observable<ServiceResponse<BooleanWrapper>> getBoolWithServiceResponseAsync();
 
     /**
      * Put complex types with bool properties.
@@ -387,16 +321,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBoolAsync(BooleanWrapper complexBody);
+    Single<Void> putBoolAsync(BooleanWrapper complexBody);
 
-    /**
-     * Put complex types with bool properties.
-     *
-     * @param complexBody Please put true and false
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBoolWithServiceResponseAsync(BooleanWrapper complexBody);
 
     /**
      * Get complex types with string properties.
@@ -423,15 +349,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StringWrapper object
      */
-    Observable<StringWrapper> getStringAsync();
+    Single<StringWrapper> getStringAsync();
 
-    /**
-     * Get complex types with string properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StringWrapper object
-     */
-    Observable<ServiceResponse<StringWrapper>> getStringWithServiceResponseAsync();
 
     /**
      * Put complex types with string properties.
@@ -460,16 +379,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putStringAsync(StringWrapper complexBody);
+    Single<Void> putStringAsync(StringWrapper complexBody);
 
-    /**
-     * Put complex types with string properties.
-     *
-     * @param complexBody Please put 'goodrequest', '', and null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putStringWithServiceResponseAsync(StringWrapper complexBody);
 
     /**
      * Get complex types with date properties.
@@ -496,15 +407,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateWrapper object
      */
-    Observable<DateWrapper> getDateAsync();
+    Single<DateWrapper> getDateAsync();
 
-    /**
-     * Get complex types with date properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateWrapper object
-     */
-    Observable<ServiceResponse<DateWrapper>> getDateWithServiceResponseAsync();
 
     /**
      * Put complex types with date properties.
@@ -533,16 +437,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDateAsync(DateWrapper complexBody);
+    Single<Void> putDateAsync(DateWrapper complexBody);
 
-    /**
-     * Put complex types with date properties.
-     *
-     * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDateWithServiceResponseAsync(DateWrapper complexBody);
 
     /**
      * Get complex types with datetime properties.
@@ -569,15 +465,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DatetimeWrapper object
      */
-    Observable<DatetimeWrapper> getDateTimeAsync();
+    Single<DatetimeWrapper> getDateTimeAsync();
 
-    /**
-     * Get complex types with datetime properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DatetimeWrapper object
-     */
-    Observable<ServiceResponse<DatetimeWrapper>> getDateTimeWithServiceResponseAsync();
 
     /**
      * Put complex types with datetime properties.
@@ -606,16 +495,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDateTimeAsync(DatetimeWrapper complexBody);
+    Single<Void> putDateTimeAsync(DatetimeWrapper complexBody);
 
-    /**
-     * Put complex types with datetime properties.
-     *
-     * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDateTimeWithServiceResponseAsync(DatetimeWrapper complexBody);
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -642,15 +523,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Datetimerfc1123Wrapper object
      */
-    Observable<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
+    Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
 
-    /**
-     * Get complex types with datetimeRfc1123 properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Datetimerfc1123Wrapper object
-     */
-    Observable<ServiceResponse<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithServiceResponseAsync();
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -679,16 +553,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
+    Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
 
-    /**
-     * Put complex types with datetimeRfc1123 properties.
-     *
-     * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDateTimeRfc1123WithServiceResponseAsync(Datetimerfc1123Wrapper complexBody);
 
     /**
      * Get complex types with duration properties.
@@ -715,15 +581,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DurationWrapper object
      */
-    Observable<DurationWrapper> getDurationAsync();
+    Single<DurationWrapper> getDurationAsync();
 
-    /**
-     * Get complex types with duration properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DurationWrapper object
-     */
-    Observable<ServiceResponse<DurationWrapper>> getDurationWithServiceResponseAsync();
 
     /**
      * Put complex types with duration properties.
@@ -752,16 +611,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDurationAsync(DurationWrapper complexBody);
+    Single<Void> putDurationAsync(DurationWrapper complexBody);
 
-    /**
-     * Put complex types with duration properties.
-     *
-     * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDurationWithServiceResponseAsync(DurationWrapper complexBody);
 
     /**
      * Get complex types with byte properties.
@@ -788,15 +639,8 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ByteWrapper object
      */
-    Observable<ByteWrapper> getByteAsync();
+    Single<ByteWrapper> getByteAsync();
 
-    /**
-     * Get complex types with byte properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ByteWrapper object
-     */
-    Observable<ServiceResponse<ByteWrapper>> getByteWithServiceResponseAsync();
 
     /**
      * Put complex types with byte properties.
@@ -825,15 +669,7 @@ public interface Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putByteAsync(ByteWrapper complexBody);
+    Single<Void> putByteAsync(ByteWrapper complexBody);
 
-    /**
-     * Put complex types with byte properties.
-     *
-     * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putByteWithServiceResponseAsync(ByteWrapper complexBody);
 
 }

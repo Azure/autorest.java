@@ -10,31 +10,34 @@
 
 package fixtures.azureparametergrouping.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PathParam;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.azureparametergrouping.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Path;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupings.
  */
 public class ParameterGroupingsInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private ParameterGroupingsService service;
     /** The service client containing this operation class. */
     private AutoRestParameterGroupingTestServiceImpl client;
@@ -42,11 +45,10 @@ public class ParameterGroupingsInner {
     /**
      * Initializes an instance of ParameterGroupingsInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ParameterGroupingsInner(Retrofit retrofit, AutoRestParameterGroupingTestServiceImpl client) {
-        this.service = retrofit.create(ParameterGroupingsService.class);
+    public ParameterGroupingsInner(AutoRestParameterGroupingTestServiceImpl client) {
+        this.service = RestProxy.create(ParameterGroupingsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -57,19 +59,19 @@ public class ParameterGroupingsInner {
     interface ParameterGroupingsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postRequired" })
         @POST("parameterGrouping/postRequired/{path}")
-        Observable<Response<ResponseBody>> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("User-Agent") String userAgent);
+        Single<Void> postRequired(@PathParam("path") String path, @HeaderParam("accept-language") String acceptLanguage, @BodyParam int body, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postOptional" })
         @POST("parameterGrouping/postOptional")
-        Observable<Response<ResponseBody>> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("User-Agent") String userAgent);
+        Single<Void> postOptional(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postMultiParamGroups" })
         @POST("parameterGrouping/postMultipleParameterGroups")
-        Observable<Response<ResponseBody>> postMultiParamGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo, @Header("User-Agent") String userAgent);
+        Single<Void> postMultiParamGroups(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("header-two") String headerTwo, @QueryParam("query-two") Integer queryTwo, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postSharedParameterGroupObject" })
         @POST("parameterGrouping/sharedParameterGroupObject")
-        Observable<Response<ResponseBody>> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("User-Agent") String userAgent);
+        Single<Void> postSharedParameterGroupObject(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -82,7 +84,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
-        postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().body();
+        postRequiredAsync(parameterGroupingPostRequiredParameters).toBlocking().value();
     }
 
     /**
@@ -94,7 +96,7 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
     /**
@@ -104,23 +106,7 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
-        return postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post a bunch of required parameters grouped.
-     *
-     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postRequiredWithServiceResponseAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
+    public Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         if (parameterGroupingPostRequiredParameters == null) {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
@@ -129,26 +115,9 @@ public class ParameterGroupingsInner {
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
-        return service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postRequiredDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent());
     }
 
-    private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -158,7 +127,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptional() {
-        postOptionalWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalAsync().toBlocking().value();
     }
 
     /**
@@ -169,46 +138,20 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalAsync(), serviceCallback);
     }
 
     /**
      * Post a bunch of optional parameters grouped.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalAsync() {
-        return postOptionalWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post a bunch of optional parameters grouped.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync() {
+    public Single<Void> postOptionalAsync() {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         String customHeader = null;
         Integer query = null;
-        return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
     }
 
     /**
@@ -220,7 +163,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
-        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().body();
+        postOptionalAsync(parameterGroupingPostOptionalParameters).toBlocking().value();
     }
 
     /**
@@ -232,7 +175,7 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
     /**
@@ -242,23 +185,7 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
-        return postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post a bunch of optional parameters grouped.
-     *
-     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
+    public Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -268,26 +195,9 @@ public class ParameterGroupingsInner {
         if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.query();
         }
-        return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
     }
 
-    private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -297,7 +207,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().body();
+        postMultiParamGroupsAsync().toBlocking().value();
     }
 
     /**
@@ -308,49 +218,23 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postMultiParamGroupsAsync(), serviceCallback);
     }
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postMultiParamGroupsAsync() {
-        return postMultiParamGroupsWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post parameters from multiple different parameter groups.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync() {
+    public Single<Void> postMultiParamGroupsAsync() {
         final FirstParameterGroupInner firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         String headerOne = null;
         Integer queryOne = null;
         String headerTwo = null;
         Integer queryTwo = null;
-        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postMultiParamGroupsDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
     }
 
     /**
@@ -363,7 +247,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().body();
+        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().value();
     }
 
     /**
@@ -376,7 +260,7 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
+        return ServiceFuture.fromBody(postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
     /**
@@ -387,24 +271,7 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        return postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post parameters from multiple different parameter groups.
-     *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public Single<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
@@ -423,26 +290,9 @@ public class ParameterGroupingsInner {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
-        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postMultiParamGroupsDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
     }
 
-    private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post parameters with a shared parameter group object.
@@ -452,7 +302,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().body();
+        postSharedParameterGroupObjectAsync().toBlocking().value();
     }
 
     /**
@@ -463,46 +313,20 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(), serviceCallback);
     }
 
     /**
      * Post parameters with a shared parameter group object.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postSharedParameterGroupObjectAsync() {
-        return postSharedParameterGroupObjectWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post parameters with a shared parameter group object.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync() {
+    public Single<Void> postSharedParameterGroupObjectAsync() {
         final FirstParameterGroupInner firstParameterGroup = null;
         String headerOne = null;
         Integer queryOne = null;
-        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postSharedParameterGroupObjectDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
     }
 
     /**
@@ -514,7 +338,7 @@ public class ParameterGroupingsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
-        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().body();
+        postSharedParameterGroupObjectAsync(firstParameterGroup).toBlocking().value();
     }
 
     /**
@@ -526,7 +350,7 @@ public class ParameterGroupingsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
+        return ServiceFuture.fromBody(postSharedParameterGroupObjectAsync(firstParameterGroup), serviceCallback);
     }
 
     /**
@@ -536,23 +360,7 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
-        return postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post parameters with a shared parameter group object.
-     *
-     * @param firstParameterGroup Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync(FirstParameterGroupInner firstParameterGroup) {
+    public Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         if (firstParameterGroup != null) {
@@ -562,25 +370,8 @@ public class ParameterGroupingsInner {
         if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.queryOne();
         }
-        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postSharedParameterGroupObjectDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
     }
 
-    private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

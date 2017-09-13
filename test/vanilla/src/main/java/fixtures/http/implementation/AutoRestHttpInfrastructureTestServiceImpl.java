@@ -18,10 +18,10 @@ import fixtures.http.HttpClientFailures;
 import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpRetrys;
 import fixtures.http.MultipleResponses;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
@@ -121,13 +121,6 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
-     */
-    public AutoRestHttpInfrastructureTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -139,23 +132,9 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestHttpInfrastructureTestServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
@@ -170,12 +149,12 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     private void initialize() {
-        this.httpFailures = new HttpFailuresImpl(retrofit(), this);
-        this.httpSuccess = new HttpSuccessImpl(retrofit(), this);
-        this.httpRedirects = new HttpRedirectsImpl(retrofit(), this);
-        this.httpClientFailures = new HttpClientFailuresImpl(retrofit(), this);
-        this.httpServerFailures = new HttpServerFailuresImpl(retrofit(), this);
-        this.httpRetrys = new HttpRetrysImpl(retrofit(), this);
-        this.multipleResponses = new MultipleResponsesImpl(retrofit(), this);
+        this.httpFailures = new HttpFailuresImpl(this);
+        this.httpSuccess = new HttpSuccessImpl(this);
+        this.httpRedirects = new HttpRedirectsImpl(this);
+        this.httpClientFailures = new HttpClientFailuresImpl(this);
+        this.httpServerFailures = new HttpServerFailuresImpl(this);
+        this.httpRetrys = new HttpRetrysImpl(this);
+        this.multipleResponses = new MultipleResponsesImpl(this);
     }
 }

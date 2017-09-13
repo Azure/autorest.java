@@ -18,6 +18,7 @@ import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -49,15 +50,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Colors object
      */
-    Observable<Colors> getNotExpandableAsync();
+    Single<Colors> getNotExpandableAsync();
 
-    /**
-     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Colors object
-     */
-    Observable<ServiceResponse<Colors>> getNotExpandableWithServiceResponseAsync();
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -86,16 +80,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putNotExpandableAsync(Colors stringBody);
+    Single<Void> putNotExpandableAsync(Colors stringBody);
 
-    /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putNotExpandableWithServiceResponseAsync(Colors stringBody);
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -122,15 +108,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Colors object
      */
-    Observable<Colors> getReferencedAsync();
+    Single<Colors> getReferencedAsync();
 
-    /**
-     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Colors object
-     */
-    Observable<ServiceResponse<Colors>> getReferencedWithServiceResponseAsync();
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -159,16 +138,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putReferencedAsync(Colors enumStringBody);
+    Single<Void> putReferencedAsync(Colors enumStringBody);
 
-    /**
-     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     *
-     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putReferencedWithServiceResponseAsync(Colors enumStringBody);
 
     /**
      * Get value 'green-color' from the constant.
@@ -195,15 +166,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the RefColorConstant object
      */
-    Observable<RefColorConstant> getReferencedConstantAsync();
+    Single<RefColorConstant> getReferencedConstantAsync();
 
-    /**
-     * Get value 'green-color' from the constant.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the RefColorConstant object
-     */
-    Observable<ServiceResponse<RefColorConstant>> getReferencedConstantWithServiceResponseAsync();
 
     /**
      * Sends value 'green-color' from a constant.
@@ -232,15 +196,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
+    Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
 
-    /**
-     * Sends value 'green-color' from a constant.
-     *
-     * @param enumStringBody the RefColorConstant value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putReferencedConstantWithServiceResponseAsync(RefColorConstant enumStringBody);
 
 }

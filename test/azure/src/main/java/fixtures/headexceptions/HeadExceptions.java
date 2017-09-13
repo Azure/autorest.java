@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -46,15 +47,8 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> head200Async();
+    Single<Void> head200Async();
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> head200WithServiceResponseAsync();
 
     /**
      * Return 204 status code if successful.
@@ -80,15 +74,8 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> head204Async();
+    Single<Void> head204Async();
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> head204WithServiceResponseAsync();
 
     /**
      * Return 404 status code if successful.
@@ -114,14 +101,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> head404Async();
+    Single<Void> head404Async();
 
-    /**
-     * Return 404 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> head404WithServiceResponseAsync();
 
 }

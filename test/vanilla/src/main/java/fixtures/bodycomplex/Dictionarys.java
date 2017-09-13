@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<DictionaryWrapper> getValidAsync();
+    Single<DictionaryWrapper> getValidAsync();
 
-    /**
-     * Get complex types with dictionary property.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DictionaryWrapper object
-     */
-    Observable<ServiceResponse<DictionaryWrapper>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types with dictionary property.
@@ -85,16 +79,8 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putValidAsync(DictionaryWrapper complexBody);
+    Single<Void> putValidAsync(DictionaryWrapper complexBody);
 
-    /**
-     * Put complex types with dictionary property.
-     *
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -121,15 +107,8 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<DictionaryWrapper> getEmptyAsync();
+    Single<DictionaryWrapper> getEmptyAsync();
 
-    /**
-     * Get complex types with dictionary property which is empty.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DictionaryWrapper object
-     */
-    Observable<ServiceResponse<DictionaryWrapper>> getEmptyWithServiceResponseAsync();
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -158,16 +137,8 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putEmptyAsync(DictionaryWrapper complexBody);
+    Single<Void> putEmptyAsync(DictionaryWrapper complexBody);
 
-    /**
-     * Put complex types with dictionary property which is empty.
-     *
-     * @param complexBody Please put an empty dictionary
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(DictionaryWrapper complexBody);
 
     /**
      * Get complex types with dictionary property which is null.
@@ -194,15 +165,8 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<DictionaryWrapper> getNullAsync();
+    Single<DictionaryWrapper> getNullAsync();
 
-    /**
-     * Get complex types with dictionary property which is null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DictionaryWrapper object
-     */
-    Observable<ServiceResponse<DictionaryWrapper>> getNullWithServiceResponseAsync();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
@@ -229,14 +193,7 @@ public interface Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
-    Observable<DictionaryWrapper> getNotProvidedAsync();
+    Single<DictionaryWrapper> getNotProvidedAsync();
 
-    /**
-     * Get complex types with dictionary property while server doesn't provide a response payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DictionaryWrapper object
-     */
-    Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedWithServiceResponseAsync();
 
 }

@@ -10,35 +10,38 @@
 
 package fixtures.url.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.url.Queries;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
 import java.util.List;
-import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Query;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Queries.
  */
 public class QueriesImpl implements Queries {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private QueriesService service;
     /** The service client containing this operation class. */
     private AutoRestUrlTestServiceImpl client;
@@ -46,154 +49,222 @@ public class QueriesImpl implements Queries {
     /**
      * Initializes an instance of Queries.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public QueriesImpl(Retrofit retrofit, AutoRestUrlTestServiceImpl client) {
-        this.service = retrofit.create(QueriesService.class);
+    public QueriesImpl(AutoRestUrlTestServiceImpl client) {
+        this.service = RestProxy.create(QueriesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Queries to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface QueriesService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })
         @GET("queries/bool/true")
-        Observable<Response<ResponseBody>> getBooleanTrue(@Query("boolQuery") boolean boolQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanFalse" })
         @GET("queries/bool/false")
-        Observable<Response<ResponseBody>> getBooleanFalse(@Query("boolQuery") boolean boolQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanNull" })
         @GET("queries/bool/null")
-        Observable<Response<ResponseBody>> getBooleanNull(@Query("boolQuery") Boolean boolQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntOneMillion" })
         @GET("queries/int/1000000")
-        Observable<Response<ResponseBody>> getIntOneMillion(@Query("intQuery") int intQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getIntOneMillion(@QueryParam("intQuery") int intQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntNegativeOneMillion" })
         @GET("queries/int/-1000000")
-        Observable<Response<ResponseBody>> getIntNegativeOneMillion(@Query("intQuery") int intQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntNull" })
         @GET("queries/int/null")
-        Observable<Response<ResponseBody>> getIntNull(@Query("intQuery") Integer intQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getIntNull(@QueryParam("intQuery") Integer intQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getTenBillion" })
         @GET("queries/long/10000000000")
-        Observable<Response<ResponseBody>> getTenBillion(@Query("longQuery") long longQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getTenBillion(@QueryParam("longQuery") long longQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getNegativeTenBillion" })
         @GET("queries/long/-10000000000")
-        Observable<Response<ResponseBody>> getNegativeTenBillion(@Query("longQuery") long longQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getLongNull" })
         @GET("queries/long/null")
-        Observable<Response<ResponseBody>> getLongNull(@Query("longQuery") Long longQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> getLongNull(@QueryParam("longQuery") Long longQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatScientificPositive" })
         @GET("queries/float/1.034E+20")
-        Observable<Response<ResponseBody>> floatScientificPositive(@Query("floatQuery") double floatQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatScientificNegative" })
         @GET("queries/float/-1.034E-20")
-        Observable<Response<ResponseBody>> floatScientificNegative(@Query("floatQuery") double floatQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatNull" })
         @GET("queries/float/null")
-        Observable<Response<ResponseBody>> floatNull(@Query("floatQuery") Double floatQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> floatNull(@QueryParam("floatQuery") Double floatQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleDecimalPositive" })
         @GET("queries/double/9999999.999")
-        Observable<Response<ResponseBody>> doubleDecimalPositive(@Query("doubleQuery") double doubleQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleDecimalNegative" })
         @GET("queries/double/-9999999.999")
-        Observable<Response<ResponseBody>> doubleDecimalNegative(@Query("doubleQuery") double doubleQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleNull" })
         @GET("queries/double/null")
-        Observable<Response<ResponseBody>> doubleNull(@Query("doubleQuery") Double doubleQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringUnicode" })
         @GET("queries/string/unicode/")
-        Observable<Response<ResponseBody>> stringUnicode(@Query("stringQuery") String stringQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> stringUnicode(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringUrlEncoded" })
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
-        Observable<Response<ResponseBody>> stringUrlEncoded(@Query("stringQuery") String stringQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringEmpty" })
         @GET("queries/string/empty")
-        Observable<Response<ResponseBody>> stringEmpty(@Query("stringQuery") String stringQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> stringEmpty(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringNull" })
         @GET("queries/string/null")
-        Observable<Response<ResponseBody>> stringNull(@Query("stringQuery") String stringQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> stringNull(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries enumValid" })
         @GET("queries/enum/green%20color")
-        Observable<Response<ResponseBody>> enumValid(@Query("enumQuery") UriColor enumQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries enumNull" })
         @GET("queries/enum/null")
-        Observable<Response<ResponseBody>> enumNull(@Query("enumQuery") UriColor enumQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteMultiByte" })
         @GET("queries/byte/multibyte")
-        Observable<Response<ResponseBody>> byteMultiByte(@Query("byteQuery") String byteQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteEmpty" })
         @GET("queries/byte/empty")
-        Observable<Response<ResponseBody>> byteEmpty(@Query("byteQuery") String byteQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> byteEmpty(@QueryParam("byteQuery") String byteQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteNull" })
         @GET("queries/byte/null")
-        Observable<Response<ResponseBody>> byteNull(@Query("byteQuery") String byteQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> byteNull(@QueryParam("byteQuery") String byteQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateValid" })
         @GET("queries/date/2012-01-01")
-        Observable<Response<ResponseBody>> dateValid(@Query("dateQuery") LocalDate dateQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateNull" })
         @GET("queries/date/null")
-        Observable<Response<ResponseBody>> dateNull(@Query("dateQuery") LocalDate dateQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateTimeValid" })
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
-        Observable<Response<ResponseBody>> dateTimeValid(@Query("dateTimeQuery") DateTime dateTimeQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateTimeNull" })
         @GET("queries/datetime/null")
-        Observable<Response<ResponseBody>> dateTimeNull(@Query("dateTimeQuery") DateTime dateTimeQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvValid" })
         @GET("queries/array/csv/string/valid")
-        Observable<Response<ResponseBody>> arrayStringCsvValid(@Query("arrayQuery") String arrayQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvNull" })
         @GET("queries/array/csv/string/null")
-        Observable<Response<ResponseBody>> arrayStringCsvNull(@Query("arrayQuery") String arrayQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvEmpty" })
         @GET("queries/array/csv/string/empty")
-        Observable<Response<ResponseBody>> arrayStringCsvEmpty(@Query("arrayQuery") String arrayQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringSsvValid" })
         @GET("queries/array/ssv/string/valid")
-        Observable<Response<ResponseBody>> arrayStringSsvValid(@Query("arrayQuery") String arrayQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringTsvValid" })
         @GET("queries/array/tsv/string/valid")
-        Observable<Response<ResponseBody>> arrayStringTsvValid(@Query("arrayQuery") String arrayQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringPipesValid" })
         @GET("queries/array/pipes/string/valid")
-        Observable<Response<ResponseBody>> arrayStringPipesValid(@Query("arrayQuery") String arrayQuery);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
 
     }
 
@@ -205,7 +276,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getBooleanTrue() {
-        getBooleanTrueWithServiceResponseAsync().toBlocking().single().body();
+        getBooleanTrueAsync().toBlocking().value();
     }
 
     /**
@@ -216,7 +287,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanTrueAsync(), serviceCallback);
     }
 
     /**
@@ -225,43 +296,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getBooleanTrueAsync() {
-        return getBooleanTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get true Boolean value on path.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync() {
+    public Single<Void> getBooleanTrueAsync() {
         final boolean boolQuery = true;
-        return service.getBooleanTrue(boolQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getBooleanTrueDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getBooleanTrue(boolQuery);
     }
 
-    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get false Boolean value on path.
@@ -271,7 +310,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getBooleanFalse() {
-        getBooleanFalseWithServiceResponseAsync().toBlocking().single().body();
+        getBooleanFalseAsync().toBlocking().value();
     }
 
     /**
@@ -282,7 +321,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanFalseAsync(), serviceCallback);
     }
 
     /**
@@ -291,43 +330,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getBooleanFalseAsync() {
-        return getBooleanFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get false Boolean value on path.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync() {
+    public Single<Void> getBooleanFalseAsync() {
         final boolean boolQuery = false;
-        return service.getBooleanFalse(boolQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getBooleanFalseDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getBooleanFalse(boolQuery);
     }
 
-    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -337,7 +344,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getBooleanNull() {
-        getBooleanNullWithServiceResponseAsync().toBlocking().single().body();
+        getBooleanNullAsync().toBlocking().value();
     }
 
     /**
@@ -348,44 +355,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanNullAsync(), serviceCallback);
     }
 
     /**
      * Get null Boolean value on query (query string should be absent).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> getBooleanNullAsync() {
-        return getBooleanNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null Boolean value on query (query string should be absent).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getBooleanNullWithServiceResponseAsync() {
+    public Single<Void> getBooleanNullAsync() {
         final Boolean boolQuery = null;
-        return service.getBooleanNull(boolQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getBooleanNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getBooleanNull(boolQuery);
     }
 
     /**
@@ -397,7 +378,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getBooleanNull(Boolean boolQuery) {
-        getBooleanNullWithServiceResponseAsync(boolQuery).toBlocking().single().body();
+        getBooleanNullAsync(boolQuery).toBlocking().value();
     }
 
     /**
@@ -409,7 +390,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getBooleanNullWithServiceResponseAsync(boolQuery), serviceCallback);
+        return ServiceFuture.fromBody(getBooleanNullAsync(boolQuery), serviceCallback);
     }
 
     /**
@@ -419,43 +400,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getBooleanNullAsync(Boolean boolQuery) {
-        return getBooleanNullWithServiceResponseAsync(boolQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> getBooleanNullAsync(Boolean boolQuery) {
+        return service.getBooleanNull(boolQuery);
     }
 
-    /**
-     * Get null Boolean value on query (query string should be absent).
-     *
-     * @param boolQuery null boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getBooleanNullWithServiceResponseAsync(Boolean boolQuery) {
-        return service.getBooleanNull(boolQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getBooleanNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '1000000' integer value.
@@ -465,7 +413,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getIntOneMillion() {
-        getIntOneMillionWithServiceResponseAsync().toBlocking().single().body();
+        getIntOneMillionAsync().toBlocking().value();
     }
 
     /**
@@ -476,7 +424,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getIntOneMillionAsync(), serviceCallback);
     }
 
     /**
@@ -485,43 +433,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getIntOneMillionAsync() {
-        return getIntOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '1000000' integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync() {
+    public Single<Void> getIntOneMillionAsync() {
         final int intQuery = 1000000;
-        return service.getIntOneMillion(intQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getIntOneMillionDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getIntOneMillion(intQuery);
     }
 
-    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '-1000000' integer value.
@@ -531,7 +447,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().body();
+        getIntNegativeOneMillionAsync().toBlocking().value();
     }
 
     /**
@@ -542,7 +458,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getIntNegativeOneMillionAsync(), serviceCallback);
     }
 
     /**
@@ -551,43 +467,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getIntNegativeOneMillionAsync() {
-        return getIntNegativeOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync() {
+    public Single<Void> getIntNegativeOneMillionAsync() {
         final int intQuery = -1000000;
-        return service.getIntNegativeOneMillion(intQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getIntNegativeOneMillionDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getIntNegativeOneMillion(intQuery);
     }
 
-    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null integer value (no query parameter).
@@ -597,7 +481,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getIntNull() {
-        getIntNullWithServiceResponseAsync().toBlocking().single().body();
+        getIntNullAsync().toBlocking().value();
     }
 
     /**
@@ -608,44 +492,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getIntNullAsync(), serviceCallback);
     }
 
     /**
      * Get null integer value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> getIntNullAsync() {
-        return getIntNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null integer value (no query parameter).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getIntNullWithServiceResponseAsync() {
+    public Single<Void> getIntNullAsync() {
         final Integer intQuery = null;
-        return service.getIntNull(intQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getIntNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getIntNull(intQuery);
     }
 
     /**
@@ -657,7 +515,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getIntNull(Integer intQuery) {
-        getIntNullWithServiceResponseAsync(intQuery).toBlocking().single().body();
+        getIntNullAsync(intQuery).toBlocking().value();
     }
 
     /**
@@ -669,7 +527,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getIntNullWithServiceResponseAsync(intQuery), serviceCallback);
+        return ServiceFuture.fromBody(getIntNullAsync(intQuery), serviceCallback);
     }
 
     /**
@@ -679,43 +537,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getIntNullAsync(Integer intQuery) {
-        return getIntNullWithServiceResponseAsync(intQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> getIntNullAsync(Integer intQuery) {
+        return service.getIntNull(intQuery);
     }
 
-    /**
-     * Get null integer value (no query parameter).
-     *
-     * @param intQuery null integer value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getIntNullWithServiceResponseAsync(Integer intQuery) {
-        return service.getIntNull(intQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getIntNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -725,7 +550,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getTenBillion() {
-        getTenBillionWithServiceResponseAsync().toBlocking().single().body();
+        getTenBillionAsync().toBlocking().value();
     }
 
     /**
@@ -736,7 +561,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getTenBillionAsync(), serviceCallback);
     }
 
     /**
@@ -745,43 +570,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getTenBillionAsync() {
-        return getTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync() {
+    public Single<Void> getTenBillionAsync() {
         final long longQuery = 10000000000L;
-        return service.getTenBillion(longQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getTenBillionDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getTenBillion(longQuery);
     }
 
-    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -791,7 +584,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().body();
+        getNegativeTenBillionAsync().toBlocking().value();
     }
 
     /**
@@ -802,7 +595,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNegativeTenBillionAsync(), serviceCallback);
     }
 
     /**
@@ -811,43 +604,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getNegativeTenBillionAsync() {
-        return getNegativeTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync() {
+    public Single<Void> getNegativeTenBillionAsync() {
         final long longQuery = -10000000000L;
-        return service.getNegativeTenBillion(longQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getNegativeTenBillionDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getNegativeTenBillion(longQuery);
     }
 
-    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -857,7 +618,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getLongNull() {
-        getLongNullWithServiceResponseAsync().toBlocking().single().body();
+        getLongNullAsync().toBlocking().value();
     }
 
     /**
@@ -868,44 +629,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getLongNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getLongNullAsync(), serviceCallback);
     }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> getLongNullAsync() {
-        return getLongNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getLongNullWithServiceResponseAsync() {
+    public Single<Void> getLongNullAsync() {
         final Long longQuery = null;
-        return service.getLongNull(longQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getLongNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getLongNull(longQuery);
     }
 
     /**
@@ -917,7 +652,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getLongNull(Long longQuery) {
-        getLongNullWithServiceResponseAsync(longQuery).toBlocking().single().body();
+        getLongNullAsync(longQuery).toBlocking().value();
     }
 
     /**
@@ -929,7 +664,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getLongNullWithServiceResponseAsync(longQuery), serviceCallback);
+        return ServiceFuture.fromBody(getLongNullAsync(longQuery), serviceCallback);
     }
 
     /**
@@ -939,43 +674,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getLongNullAsync(Long longQuery) {
-        return getLongNullWithServiceResponseAsync(longQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> getLongNullAsync(Long longQuery) {
+        return service.getLongNull(longQuery);
     }
 
-    /**
-     * Get 'null 64 bit integer value (no query param in uri).
-     *
-     * @param longQuery null 64 bit integer value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getLongNullWithServiceResponseAsync(Long longQuery) {
-        return service.getLongNull(longQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getLongNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '1.034E+20' numeric value.
@@ -985,7 +687,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void floatScientificPositive() {
-        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().body();
+        floatScientificPositiveAsync().toBlocking().value();
     }
 
     /**
@@ -996,7 +698,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(floatScientificPositiveAsync(), serviceCallback);
     }
 
     /**
@@ -1005,43 +707,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> floatScientificPositiveAsync() {
-        return floatScientificPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync() {
+    public Single<Void> floatScientificPositiveAsync() {
         final double floatQuery = 1.034E+20;
-        return service.floatScientificPositive(floatQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = floatScientificPositiveDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.floatScientificPositive(floatQuery);
     }
 
-    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -1051,7 +721,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void floatScientificNegative() {
-        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().body();
+        floatScientificNegativeAsync().toBlocking().value();
     }
 
     /**
@@ -1062,7 +732,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(floatScientificNegativeAsync(), serviceCallback);
     }
 
     /**
@@ -1071,43 +741,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> floatScientificNegativeAsync() {
-        return floatScientificNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync() {
+    public Single<Void> floatScientificNegativeAsync() {
         final double floatQuery = -1.034E-20;
-        return service.floatScientificNegative(floatQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = floatScientificNegativeDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.floatScientificNegative(floatQuery);
     }
 
-    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null numeric value (no query parameter).
@@ -1117,7 +755,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void floatNull() {
-        floatNullWithServiceResponseAsync().toBlocking().single().body();
+        floatNullAsync().toBlocking().value();
     }
 
     /**
@@ -1128,44 +766,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(floatNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(floatNullAsync(), serviceCallback);
     }
 
     /**
      * Get null numeric value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> floatNullAsync() {
-        return floatNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> floatNullWithServiceResponseAsync() {
+    public Single<Void> floatNullAsync() {
         final Double floatQuery = null;
-        return service.floatNull(floatQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = floatNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.floatNull(floatQuery);
     }
 
     /**
@@ -1177,7 +789,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void floatNull(Double floatQuery) {
-        floatNullWithServiceResponseAsync(floatQuery).toBlocking().single().body();
+        floatNullAsync(floatQuery).toBlocking().value();
     }
 
     /**
@@ -1189,7 +801,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(floatNullWithServiceResponseAsync(floatQuery), serviceCallback);
+        return ServiceFuture.fromBody(floatNullAsync(floatQuery), serviceCallback);
     }
 
     /**
@@ -1199,43 +811,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> floatNullAsync(Double floatQuery) {
-        return floatNullWithServiceResponseAsync(floatQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> floatNullAsync(Double floatQuery) {
+        return service.floatNull(floatQuery);
     }
 
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @param floatQuery null numeric value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> floatNullWithServiceResponseAsync(Double floatQuery) {
-        return service.floatNull(floatQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = floatNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '9999999.999' numeric value.
@@ -1245,7 +824,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().body();
+        doubleDecimalPositiveAsync().toBlocking().value();
     }
 
     /**
@@ -1256,7 +835,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(doubleDecimalPositiveAsync(), serviceCallback);
     }
 
     /**
@@ -1265,43 +844,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> doubleDecimalPositiveAsync() {
-        return doubleDecimalPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync() {
+    public Single<Void> doubleDecimalPositiveAsync() {
         final double doubleQuery = 9999999.999;
-        return service.doubleDecimalPositive(doubleQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = doubleDecimalPositiveDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.doubleDecimalPositive(doubleQuery);
     }
 
-    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '-9999999.999' numeric value.
@@ -1311,7 +858,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().body();
+        doubleDecimalNegativeAsync().toBlocking().value();
     }
 
     /**
@@ -1322,7 +869,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(doubleDecimalNegativeAsync(), serviceCallback);
     }
 
     /**
@@ -1331,43 +878,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> doubleDecimalNegativeAsync() {
-        return doubleDecimalNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync() {
+    public Single<Void> doubleDecimalNegativeAsync() {
         final double doubleQuery = -9999999.999;
-        return service.doubleDecimalNegative(doubleQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = doubleDecimalNegativeDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.doubleDecimalNegative(doubleQuery);
     }
 
-    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null numeric value (no query parameter).
@@ -1377,7 +892,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void doubleNull() {
-        doubleNullWithServiceResponseAsync().toBlocking().single().body();
+        doubleNullAsync().toBlocking().value();
     }
 
     /**
@@ -1388,44 +903,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(doubleNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(doubleNullAsync(), serviceCallback);
     }
 
     /**
      * Get null numeric value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> doubleNullAsync() {
-        return doubleNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> doubleNullWithServiceResponseAsync() {
+    public Single<Void> doubleNullAsync() {
         final Double doubleQuery = null;
-        return service.doubleNull(doubleQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = doubleNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.doubleNull(doubleQuery);
     }
 
     /**
@@ -1437,7 +926,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void doubleNull(Double doubleQuery) {
-        doubleNullWithServiceResponseAsync(doubleQuery).toBlocking().single().body();
+        doubleNullAsync(doubleQuery).toBlocking().value();
     }
 
     /**
@@ -1449,7 +938,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(doubleNullWithServiceResponseAsync(doubleQuery), serviceCallback);
+        return ServiceFuture.fromBody(doubleNullAsync(doubleQuery), serviceCallback);
     }
 
     /**
@@ -1459,43 +948,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> doubleNullAsync(Double doubleQuery) {
-        return doubleNullWithServiceResponseAsync(doubleQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> doubleNullAsync(Double doubleQuery) {
+        return service.doubleNull(doubleQuery);
     }
 
-    /**
-     * Get null numeric value (no query parameter).
-     *
-     * @param doubleQuery null numeric value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> doubleNullWithServiceResponseAsync(Double doubleQuery) {
-        return service.doubleNull(doubleQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = doubleNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -1505,7 +961,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringUnicode() {
-        stringUnicodeWithServiceResponseAsync().toBlocking().single().body();
+        stringUnicodeAsync().toBlocking().value();
     }
 
     /**
@@ -1516,7 +972,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(stringUnicodeAsync(), serviceCallback);
     }
 
     /**
@@ -1525,43 +981,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> stringUnicodeAsync() {
-        return stringUnicodeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync() {
+    public Single<Void> stringUnicodeAsync() {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
-        return service.stringUnicode(stringQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = stringUnicodeDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.stringUnicode(stringQuery);
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -1571,7 +995,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().body();
+        stringUrlEncodedAsync().toBlocking().value();
     }
 
     /**
@@ -1582,7 +1006,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(stringUrlEncodedAsync(), serviceCallback);
     }
 
     /**
@@ -1591,43 +1015,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> stringUrlEncodedAsync() {
-        return stringUrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync() {
+    public Single<Void> stringUrlEncodedAsync() {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
-        return service.stringUrlEncoded(stringQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = stringUrlEncodedDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.stringUrlEncoded(stringQuery);
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get ''.
@@ -1637,7 +1029,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringEmpty() {
-        stringEmptyWithServiceResponseAsync().toBlocking().single().body();
+        stringEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -1648,7 +1040,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(stringEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -1657,43 +1049,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> stringEmptyAsync() {
-        return stringEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync() {
+    public Single<Void> stringEmptyAsync() {
         final String stringQuery = "";
-        return service.stringEmpty(stringQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = stringEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.stringEmpty(stringQuery);
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null (no query parameter in url).
@@ -1703,7 +1063,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringNull() {
-        stringNullWithServiceResponseAsync().toBlocking().single().body();
+        stringNullAsync().toBlocking().value();
     }
 
     /**
@@ -1714,44 +1074,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(stringNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(stringNullAsync(), serviceCallback);
     }
 
     /**
      * Get null (no query parameter in url).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> stringNullAsync() {
-        return stringNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync() {
+    public Single<Void> stringNullAsync() {
         final String stringQuery = null;
-        return service.stringNull(stringQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = stringNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.stringNull(stringQuery);
     }
 
     /**
@@ -1763,7 +1097,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringNull(String stringQuery) {
-        stringNullWithServiceResponseAsync(stringQuery).toBlocking().single().body();
+        stringNullAsync(stringQuery).toBlocking().value();
     }
 
     /**
@@ -1775,7 +1109,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(stringNullWithServiceResponseAsync(stringQuery), serviceCallback);
+        return ServiceFuture.fromBody(stringNullAsync(stringQuery), serviceCallback);
     }
 
     /**
@@ -1785,43 +1119,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> stringNullAsync(String stringQuery) {
-        return stringNullWithServiceResponseAsync(stringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> stringNullAsync(String stringQuery) {
+        return service.stringNull(stringQuery);
     }
 
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @param stringQuery null string value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringQuery) {
-        return service.stringNull(stringQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = stringNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -1831,7 +1132,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void enumValid() {
-        enumValidWithServiceResponseAsync().toBlocking().single().body();
+        enumValidAsync().toBlocking().value();
     }
 
     /**
@@ -1842,44 +1143,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(enumValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(enumValidAsync(), serviceCallback);
     }
 
     /**
      * Get using uri with query parameter 'green color'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> enumValidAsync() {
-        return enumValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get using uri with query parameter 'green color'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync() {
+    public Single<Void> enumValidAsync() {
         final UriColor enumQuery = null;
-        return service.enumValid(enumQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = enumValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.enumValid(enumQuery);
     }
 
     /**
@@ -1891,7 +1166,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void enumValid(UriColor enumQuery) {
-        enumValidWithServiceResponseAsync(enumQuery).toBlocking().single().body();
+        enumValidAsync(enumQuery).toBlocking().value();
     }
 
     /**
@@ -1903,7 +1178,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(enumValidWithServiceResponseAsync(enumQuery), serviceCallback);
+        return ServiceFuture.fromBody(enumValidAsync(enumQuery), serviceCallback);
     }
 
     /**
@@ -1913,43 +1188,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> enumValidAsync(UriColor enumQuery) {
-        return enumValidWithServiceResponseAsync(enumQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> enumValidAsync(UriColor enumQuery) {
+        return service.enumValid(enumQuery);
     }
 
-    /**
-     * Get using uri with query parameter 'green color'.
-     *
-     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumQuery) {
-        return service.enumValid(enumQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = enumValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null (no query parameter in url).
@@ -1959,7 +1201,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void enumNull() {
-        enumNullWithServiceResponseAsync().toBlocking().single().body();
+        enumNullAsync().toBlocking().value();
     }
 
     /**
@@ -1970,44 +1212,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(enumNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(enumNullAsync(), serviceCallback);
     }
 
     /**
      * Get null (no query parameter in url).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> enumNullAsync() {
-        return enumNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync() {
+    public Single<Void> enumNullAsync() {
         final UriColor enumQuery = null;
-        return service.enumNull(enumQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = enumNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.enumNull(enumQuery);
     }
 
     /**
@@ -2019,7 +1235,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void enumNull(UriColor enumQuery) {
-        enumNullWithServiceResponseAsync(enumQuery).toBlocking().single().body();
+        enumNullAsync(enumQuery).toBlocking().value();
     }
 
     /**
@@ -2031,7 +1247,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(enumNullWithServiceResponseAsync(enumQuery), serviceCallback);
+        return ServiceFuture.fromBody(enumNullAsync(enumQuery), serviceCallback);
     }
 
     /**
@@ -2041,43 +1257,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> enumNullAsync(UriColor enumQuery) {
-        return enumNullWithServiceResponseAsync(enumQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> enumNullAsync(UriColor enumQuery) {
+        return service.enumNull(enumQuery);
     }
 
-    /**
-     * Get null (no query parameter in url).
-     *
-     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumQuery) {
-        return service.enumNull(enumQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = enumNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -2087,7 +1270,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteMultiByte() {
-        byteMultiByteWithServiceResponseAsync().toBlocking().single().body();
+        byteMultiByteAsync().toBlocking().value();
     }
 
     /**
@@ -2098,45 +1281,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(byteMultiByteWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(byteMultiByteAsync(), serviceCallback);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> byteMultiByteAsync() {
-        return byteMultiByteWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync() {
+    public Single<Void> byteMultiByteAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
-        return service.byteMultiByte(byteQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.byteMultiByte(byteQueryConverted);
     }
 
     /**
@@ -2148,7 +1305,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteMultiByte(byte[] byteQuery) {
-        byteMultiByteWithServiceResponseAsync(byteQuery).toBlocking().single().body();
+        byteMultiByteAsync(byteQuery).toBlocking().value();
     }
 
     /**
@@ -2160,7 +1317,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(byteMultiByteWithServiceResponseAsync(byteQuery), serviceCallback);
+        return ServiceFuture.fromBody(byteMultiByteAsync(byteQuery), serviceCallback);
     }
 
     /**
@@ -2170,44 +1327,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> byteMultiByteAsync(byte[] byteQuery) {
-        return byteMultiByteWithServiceResponseAsync(byteQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] byteQuery) {
+    public Single<Void> byteMultiByteAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
-        return service.byteMultiByte(byteQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = byteMultiByteDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.byteMultiByte(byteQueryConverted);
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '' as byte array.
@@ -2217,7 +1341,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteEmpty() {
-        byteEmptyWithServiceResponseAsync().toBlocking().single().body();
+        byteEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -2228,7 +1352,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(byteEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -2237,44 +1361,12 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> byteEmptyAsync() {
-        return byteEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '' as byte array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync() {
+    public Single<Void> byteEmptyAsync() {
         final byte[] byteQuery = "".getBytes();
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
-        return service.byteEmpty(byteQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = byteEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.byteEmpty(byteQueryConverted);
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -2284,7 +1376,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteNull() {
-        byteNullWithServiceResponseAsync().toBlocking().single().body();
+        byteNullAsync().toBlocking().value();
     }
 
     /**
@@ -2295,45 +1387,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(byteNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(byteNullAsync(), serviceCallback);
     }
 
     /**
      * Get null as byte array (no query parameters in uri).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> byteNullAsync() {
-        return byteNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null as byte array (no query parameters in uri).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync() {
+    public Single<Void> byteNullAsync() {
         final byte[] byteQuery = new byte[0];
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
-        return service.byteNull(byteQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = byteNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.byteNull(byteQueryConverted);
     }
 
     /**
@@ -2345,7 +1411,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteNull(byte[] byteQuery) {
-        byteNullWithServiceResponseAsync(byteQuery).toBlocking().single().body();
+        byteNullAsync(byteQuery).toBlocking().value();
     }
 
     /**
@@ -2357,7 +1423,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(byteNullWithServiceResponseAsync(byteQuery), serviceCallback);
+        return ServiceFuture.fromBody(byteNullAsync(byteQuery), serviceCallback);
     }
 
     /**
@@ -2367,44 +1433,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> byteNullAsync(byte[] byteQuery) {
-        return byteNullWithServiceResponseAsync(byteQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null as byte array (no query parameters in uri).
-     *
-     * @param byteQuery null as byte array (no query parameters in uri)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] byteQuery) {
+    public Single<Void> byteNullAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
-        return service.byteNull(byteQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = byteNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.byteNull(byteQueryConverted);
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '2012-01-01' as date.
@@ -2414,7 +1447,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateValid() {
-        dateValidWithServiceResponseAsync().toBlocking().single().body();
+        dateValidAsync().toBlocking().value();
     }
 
     /**
@@ -2425,7 +1458,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(dateValidAsync(), serviceCallback);
     }
 
     /**
@@ -2434,43 +1467,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> dateValidAsync() {
-        return dateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync() {
+    public Single<Void> dateValidAsync() {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
-        return service.dateValid(dateQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = dateValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.dateValid(dateQuery);
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -2480,7 +1481,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateNull() {
-        dateNullWithServiceResponseAsync().toBlocking().single().body();
+        dateNullAsync().toBlocking().value();
     }
 
     /**
@@ -2491,44 +1492,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(dateNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(dateNullAsync(), serviceCallback);
     }
 
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> dateNullAsync() {
-        return dateNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null as date - this should result in no query parameters in uri.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync() {
+    public Single<Void> dateNullAsync() {
         final LocalDate dateQuery = null;
-        return service.dateNull(dateQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = dateNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.dateNull(dateQuery);
     }
 
     /**
@@ -2540,7 +1515,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateNull(LocalDate dateQuery) {
-        dateNullWithServiceResponseAsync(dateQuery).toBlocking().single().body();
+        dateNullAsync(dateQuery).toBlocking().value();
     }
 
     /**
@@ -2552,7 +1527,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(dateNullWithServiceResponseAsync(dateQuery), serviceCallback);
+        return ServiceFuture.fromBody(dateNullAsync(dateQuery), serviceCallback);
     }
 
     /**
@@ -2562,43 +1537,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> dateNullAsync(LocalDate dateQuery) {
-        return dateNullWithServiceResponseAsync(dateQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> dateNullAsync(LocalDate dateQuery) {
+        return service.dateNull(dateQuery);
     }
 
-    /**
-     * Get null as date - this should result in no query parameters in uri.
-     *
-     * @param dateQuery null as date (no query parameters in uri)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate dateQuery) {
-        return service.dateNull(dateQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = dateNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -2608,7 +1550,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateTimeValid() {
-        dateTimeValidWithServiceResponseAsync().toBlocking().single().body();
+        dateTimeValidAsync().toBlocking().value();
     }
 
     /**
@@ -2619,7 +1561,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(dateTimeValidAsync(), serviceCallback);
     }
 
     /**
@@ -2628,43 +1570,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> dateTimeValidAsync() {
-        return dateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync() {
+    public Single<Void> dateTimeValidAsync() {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
-        return service.dateTimeValid(dateTimeQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = dateTimeValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.dateTimeValid(dateTimeQuery);
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -2674,7 +1584,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateTimeNull() {
-        dateTimeNullWithServiceResponseAsync().toBlocking().single().body();
+        dateTimeNullAsync().toBlocking().value();
     }
 
     /**
@@ -2685,44 +1595,18 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(dateTimeNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(dateTimeNullAsync(), serviceCallback);
     }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> dateTimeNullAsync() {
-        return dateTimeNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get null as date-time, should result in no query parameters in uri.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync() {
+    public Single<Void> dateTimeNullAsync() {
         final DateTime dateTimeQuery = null;
-        return service.dateTimeNull(dateTimeQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.dateTimeNull(dateTimeQuery);
     }
 
     /**
@@ -2734,7 +1618,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateTimeNull(DateTime dateTimeQuery) {
-        dateTimeNullWithServiceResponseAsync(dateTimeQuery).toBlocking().single().body();
+        dateTimeNullAsync(dateTimeQuery).toBlocking().value();
     }
 
     /**
@@ -2746,7 +1630,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimeQuery), serviceCallback);
+        return ServiceFuture.fromBody(dateTimeNullAsync(dateTimeQuery), serviceCallback);
     }
 
     /**
@@ -2756,43 +1640,10 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
-        return dateTimeNullWithServiceResponseAsync(dateTimeQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
+        return service.dateTimeNull(dateTimeQuery);
     }
 
-    /**
-     * Get null as date-time, should result in no query parameters in uri.
-     *
-     * @param dateTimeQuery null as date-time (no query parameters)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimeQuery) {
-        return service.dateTimeNull(dateTimeQuery)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = dateTimeNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -2802,7 +1653,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringCsvValid() {
-        arrayStringCsvValidWithServiceResponseAsync().toBlocking().single().body();
+        arrayStringCsvValidAsync().toBlocking().value();
     }
 
     /**
@@ -2813,45 +1664,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringCsvValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringCsvValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> arrayStringCsvValidAsync() {
-        return arrayStringCsvValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringCsvValidWithServiceResponseAsync() {
+    public Single<Void> arrayStringCsvValidAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringCsvValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringCsvValid(arrayQueryConverted);
     }
 
     /**
@@ -2863,7 +1688,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringCsvValid(List<String> arrayQuery) {
-        arrayStringCsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
+        arrayStringCsvValidAsync(arrayQuery).toBlocking().value();
     }
 
     /**
@@ -2875,7 +1700,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringCsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringCsvValidAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2885,45 +1710,12 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
-        return arrayStringCsvValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringCsvValidWithServiceResponseAsync(List<String> arrayQuery) {
+    public Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringCsvValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringCsvValid(arrayQueryConverted);
     }
 
-    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get a null array of string using the csv-array format.
@@ -2933,7 +1725,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringCsvNull() {
-        arrayStringCsvNullWithServiceResponseAsync().toBlocking().single().body();
+        arrayStringCsvNullAsync().toBlocking().value();
     }
 
     /**
@@ -2944,45 +1736,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringCsvNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringCsvNullAsync(), serviceCallback);
     }
 
     /**
      * Get a null array of string using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> arrayStringCsvNullAsync() {
-        return arrayStringCsvNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get a null array of string using the csv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringCsvNullWithServiceResponseAsync() {
+    public Single<Void> arrayStringCsvNullAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvNull(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringCsvNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringCsvNull(arrayQueryConverted);
     }
 
     /**
@@ -2994,7 +1760,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringCsvNull(List<String> arrayQuery) {
-        arrayStringCsvNullWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
+        arrayStringCsvNullAsync(arrayQuery).toBlocking().value();
     }
 
     /**
@@ -3006,7 +1772,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringCsvNullWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringCsvNullAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3016,45 +1782,12 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
-        return arrayStringCsvNullWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get a null array of string using the csv-array format.
-     *
-     * @param arrayQuery a null array of string using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringCsvNullWithServiceResponseAsync(List<String> arrayQuery) {
+    public Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvNull(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringCsvNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringCsvNull(arrayQueryConverted);
     }
 
-    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -3064,7 +1797,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringCsvEmpty() {
-        arrayStringCsvEmptyWithServiceResponseAsync().toBlocking().single().body();
+        arrayStringCsvEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -3075,45 +1808,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(), serviceCallback);
     }
 
     /**
      * Get an empty array [] of string using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> arrayStringCsvEmptyAsync() {
-        return arrayStringCsvEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an empty array [] of string using the csv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringCsvEmptyWithServiceResponseAsync() {
+    public Single<Void> arrayStringCsvEmptyAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvEmpty(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringCsvEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringCsvEmpty(arrayQueryConverted);
     }
 
     /**
@@ -3125,7 +1832,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
-        arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
+        arrayStringCsvEmptyAsync(arrayQuery).toBlocking().value();
     }
 
     /**
@@ -3137,7 +1844,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3147,45 +1854,12 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
-        return arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an empty array [] of string using the csv-array format.
-     *
-     * @param arrayQuery an empty array [] of string using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringCsvEmptyWithServiceResponseAsync(List<String> arrayQuery) {
+    public Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
-        return service.arrayStringCsvEmpty(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringCsvEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringCsvEmpty(arrayQueryConverted);
     }
 
-    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -3195,7 +1869,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringSsvValid() {
-        arrayStringSsvValidWithServiceResponseAsync().toBlocking().single().body();
+        arrayStringSsvValidAsync().toBlocking().value();
     }
 
     /**
@@ -3206,45 +1880,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringSsvValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringSsvValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> arrayStringSsvValidAsync() {
-        return arrayStringSsvValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringSsvValidWithServiceResponseAsync() {
+    public Single<Void> arrayStringSsvValidAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
-        return service.arrayStringSsvValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringSsvValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringSsvValid(arrayQueryConverted);
     }
 
     /**
@@ -3256,7 +1904,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringSsvValid(List<String> arrayQuery) {
-        arrayStringSsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
+        arrayStringSsvValidAsync(arrayQuery).toBlocking().value();
     }
 
     /**
@@ -3268,7 +1916,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringSsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringSsvValidAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3278,45 +1926,12 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
-        return arrayStringSsvValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringSsvValidWithServiceResponseAsync(List<String> arrayQuery) {
+    public Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
-        return service.arrayStringSsvValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringSsvValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringSsvValid(arrayQueryConverted);
     }
 
-    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -3326,7 +1941,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringTsvValid() {
-        arrayStringTsvValidWithServiceResponseAsync().toBlocking().single().body();
+        arrayStringTsvValidAsync().toBlocking().value();
     }
 
     /**
@@ -3337,45 +1952,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringTsvValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringTsvValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> arrayStringTsvValidAsync() {
-        return arrayStringTsvValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringTsvValidWithServiceResponseAsync() {
+    public Single<Void> arrayStringTsvValidAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
-        return service.arrayStringTsvValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringTsvValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringTsvValid(arrayQueryConverted);
     }
 
     /**
@@ -3387,7 +1976,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringTsvValid(List<String> arrayQuery) {
-        arrayStringTsvValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
+        arrayStringTsvValidAsync(arrayQuery).toBlocking().value();
     }
 
     /**
@@ -3399,7 +1988,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringTsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringTsvValidAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3409,45 +1998,12 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
-        return arrayStringTsvValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringTsvValidWithServiceResponseAsync(List<String> arrayQuery) {
+    public Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
-        return service.arrayStringTsvValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringTsvValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringTsvValid(arrayQueryConverted);
     }
 
-    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -3457,7 +2013,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringPipesValid() {
-        arrayStringPipesValidWithServiceResponseAsync().toBlocking().single().body();
+        arrayStringPipesValidAsync().toBlocking().value();
     }
 
     /**
@@ -3468,45 +2024,19 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringPipesValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringPipesValidAsync(), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> arrayStringPipesValidAsync() {
-        return arrayStringPipesValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringPipesValidWithServiceResponseAsync() {
+    public Single<Void> arrayStringPipesValidAsync() {
         final List<String> arrayQuery = null;
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
-        return service.arrayStringPipesValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringPipesValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringPipesValid(arrayQueryConverted);
     }
 
     /**
@@ -3518,7 +2048,7 @@ public class QueriesImpl implements Queries {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayStringPipesValid(List<String> arrayQuery) {
-        arrayStringPipesValidWithServiceResponseAsync(arrayQuery).toBlocking().single().body();
+        arrayStringPipesValidAsync(arrayQuery).toBlocking().value();
     }
 
     /**
@@ -3530,7 +2060,7 @@ public class QueriesImpl implements Queries {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(arrayStringPipesValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+        return ServiceFuture.fromBody(arrayStringPipesValidAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3540,44 +2070,11 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
-        return arrayStringPipesValidWithServiceResponseAsync(arrayQuery).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
-     *
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> arrayStringPipesValidWithServiceResponseAsync(List<String> arrayQuery) {
+    public Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
         String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
-        return service.arrayStringPipesValid(arrayQueryConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = arrayStringPipesValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.arrayStringPipesValid(arrayQueryConverted);
     }
 
-    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

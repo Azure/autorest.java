@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Siamese object
      */
-    Observable<Siamese> getValidAsync();
+    Single<Siamese> getValidAsync();
 
-    /**
-     * Get complex types that extend others.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Siamese object
-     */
-    Observable<ServiceResponse<Siamese>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types that extend others.
@@ -85,15 +79,7 @@ public interface Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putValidAsync(Siamese complexBody);
+    Single<Void> putValidAsync(Siamese complexBody);
 
-    /**
-     * Put complex types that extend others.
-     *
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Siamese complexBody);
 
 }

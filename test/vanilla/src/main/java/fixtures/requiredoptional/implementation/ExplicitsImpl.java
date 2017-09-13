@@ -10,13 +10,21 @@
 
 package fixtures.requiredoptional.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.requiredoptional.Explicits;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
@@ -31,21 +39,16 @@ import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import java.io.IOException;
 import java.util.List;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Explicits.
  */
 public class ExplicitsImpl implements Explicits {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private ExplicitsService service;
     /** The service client containing this operation class. */
     private AutoRestRequiredOptionalTestServiceImpl client;
@@ -53,106 +56,150 @@ public class ExplicitsImpl implements Explicits {
     /**
      * Initializes an instance of Explicits.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ExplicitsImpl(Retrofit retrofit, AutoRestRequiredOptionalTestServiceImpl client) {
-        this.service = retrofit.create(ExplicitsService.class);
+    public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
+        this.service = RestProxy.create(ExplicitsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Explicits to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface ExplicitsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
         @POST("reqopt/requied/integer/parameter")
-        Observable<Response<ResponseBody>> postRequiredIntegerParameter(@Body int bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredIntegerParameter(@BodyParam int bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerParameter" })
         @POST("reqopt/optional/integer/parameter")
-        Observable<Response<ResponseBody>> postOptionalIntegerParameter(@Body Integer bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalIntegerParameter(@BodyParam Integer bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerProperty" })
         @POST("reqopt/requied/integer/property")
-        Observable<Response<ResponseBody>> postRequiredIntegerProperty(@Body IntWrapper bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredIntegerProperty(@BodyParam IntWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerProperty" })
         @POST("reqopt/optional/integer/property")
-        Observable<Response<ResponseBody>> postOptionalIntegerProperty(@Body IntOptionalWrapper bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalIntegerProperty(@BodyParam IntOptionalWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerHeader" })
         @POST("reqopt/requied/integer/header")
-        Observable<Response<ResponseBody>> postRequiredIntegerHeader(@Header("headerParameter") int headerParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerHeader" })
         @POST("reqopt/optional/integer/header")
-        Observable<Response<ResponseBody>> postOptionalIntegerHeader(@Header("headerParameter") Integer headerParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringParameter" })
         @POST("reqopt/requied/string/parameter")
-        Observable<Response<ResponseBody>> postRequiredStringParameter(@Body String bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredStringParameter(@BodyParam String bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringParameter" })
         @POST("reqopt/optional/string/parameter")
-        Observable<Response<ResponseBody>> postOptionalStringParameter(@Body String bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalStringParameter(@BodyParam String bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringProperty" })
         @POST("reqopt/requied/string/property")
-        Observable<Response<ResponseBody>> postRequiredStringProperty(@Body StringWrapper bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredStringProperty(@BodyParam StringWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringProperty" })
         @POST("reqopt/optional/string/property")
-        Observable<Response<ResponseBody>> postOptionalStringProperty(@Body StringOptionalWrapper bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalStringProperty(@BodyParam StringOptionalWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringHeader" })
         @POST("reqopt/requied/string/header")
-        Observable<Response<ResponseBody>> postRequiredStringHeader(@Header("headerParameter") String headerParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringHeader" })
         @POST("reqopt/optional/string/header")
-        Observable<Response<ResponseBody>> postOptionalStringHeader(@Header("bodyParameter") String bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassParameter" })
         @POST("reqopt/requied/class/parameter")
-        Observable<Response<ResponseBody>> postRequiredClassParameter(@Body Product bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredClassParameter(@BodyParam Product bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassParameter" })
         @POST("reqopt/optional/class/parameter")
-        Observable<Response<ResponseBody>> postOptionalClassParameter(@Body Product bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalClassParameter(@BodyParam Product bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassProperty" })
         @POST("reqopt/requied/class/property")
-        Observable<Response<ResponseBody>> postRequiredClassProperty(@Body ClassWrapper bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredClassProperty(@BodyParam ClassWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassProperty" })
         @POST("reqopt/optional/class/property")
-        Observable<Response<ResponseBody>> postOptionalClassProperty(@Body ClassOptionalWrapper bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalClassProperty(@BodyParam ClassOptionalWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayParameter" })
         @POST("reqopt/requied/array/parameter")
-        Observable<Response<ResponseBody>> postRequiredArrayParameter(@Body List<String> bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredArrayParameter(@BodyParam List<String> bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayParameter" })
         @POST("reqopt/optional/array/parameter")
-        Observable<Response<ResponseBody>> postOptionalArrayParameter(@Body List<String> bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalArrayParameter(@BodyParam List<String> bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayProperty" })
         @POST("reqopt/requied/array/property")
-        Observable<Response<ResponseBody>> postRequiredArrayProperty(@Body ArrayWrapper bodyParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredArrayProperty(@BodyParam ArrayWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayProperty" })
         @POST("reqopt/optional/array/property")
-        Observable<Response<ResponseBody>> postOptionalArrayProperty(@Body ArrayOptionalWrapper bodyParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalArrayProperty(@BodyParam ArrayOptionalWrapper bodyParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayHeader" })
         @POST("reqopt/requied/array/header")
-        Observable<Response<ResponseBody>> postRequiredArrayHeader(@Header("headerParameter") String headerParameter);
+        @ExpectedResponses({})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Error> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayHeader" })
         @POST("reqopt/optional/array/header")
-        Observable<Response<ResponseBody>> postOptionalArrayHeader(@Header("headerParameter") String headerParameter);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> postOptionalArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 
     }
 
@@ -166,7 +213,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerParameter(int bodyParameter) {
-        return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredIntegerParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -178,7 +225,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredIntegerParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -188,42 +235,10 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredIntegerParameterAsync(int bodyParameter) {
-        return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
+    public Single<Error> postRequiredIntegerParameterAsync(int bodyParameter) {
+        return service.postRequiredIntegerParameter(bodyParameter);
     }
 
-    /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredIntegerParameterWithServiceResponseAsync(int bodyParameter) {
-        return service.postRequiredIntegerParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredIntegerParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -233,7 +248,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalIntegerParameter() {
-        postOptionalIntegerParameterWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalIntegerParameterAsync().toBlocking().value();
     }
 
     /**
@@ -244,44 +259,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalIntegerParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalIntegerParameterAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional integer. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalIntegerParameterAsync() {
-        return postOptionalIntegerParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalIntegerParameterWithServiceResponseAsync() {
+    public Single<Void> postOptionalIntegerParameterAsync() {
         final Integer bodyParameter = null;
-        return service.postOptionalIntegerParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalIntegerParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalIntegerParameter(bodyParameter);
     }
 
     /**
@@ -293,7 +282,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalIntegerParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -305,7 +294,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalIntegerParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -315,43 +304,10 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
-        return postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
+        return service.postOptionalIntegerParameter(bodyParameter);
     }
 
-    /**
-     * Test explicitly optional integer. Please put null.
-     *
-     * @param bodyParameter the Integer value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalIntegerParameterWithServiceResponseAsync(Integer bodyParameter) {
-        return service.postOptionalIntegerParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalIntegerParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -363,7 +319,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredIntegerPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -375,7 +331,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredIntegerPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -385,46 +341,14 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the IntWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredIntegerPropertyWithServiceResponseAsync(IntWrapper bodyParameter) {
+    public Single<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredIntegerProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredIntegerPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredIntegerProperty(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -434,7 +358,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalIntegerProperty() {
-        postOptionalIntegerPropertyWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalIntegerPropertyAsync().toBlocking().value();
     }
 
     /**
@@ -445,44 +369,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalIntegerPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalIntegerPropertyAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalIntegerPropertyAsync() {
-        return postOptionalIntegerPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalIntegerPropertyWithServiceResponseAsync() {
+    public Single<Void> postOptionalIntegerPropertyAsync() {
         final IntOptionalWrapper bodyParameter = null;
-        return service.postOptionalIntegerProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalIntegerPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalIntegerProperty(bodyParameter);
     }
 
     /**
@@ -494,7 +392,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalIntegerPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -506,7 +404,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalIntegerPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -516,44 +414,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
-        return postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
-     *
-     * @param bodyParameter the IntOptionalWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalIntegerPropertyWithServiceResponseAsync(IntOptionalWrapper bodyParameter) {
+    public Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalIntegerProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalIntegerPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalIntegerProperty(bodyParameter);
     }
 
-    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -565,7 +430,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerHeader(int headerParameter) {
-        return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
+        return postRequiredIntegerHeaderAsync(headerParameter).toBlocking().value();
     }
 
     /**
@@ -577,7 +442,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredIntegerHeaderAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -587,42 +452,10 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredIntegerHeaderAsync(int headerParameter) {
-        return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
+    public Single<Error> postRequiredIntegerHeaderAsync(int headerParameter) {
+        return service.postRequiredIntegerHeader(headerParameter);
     }
 
-    /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
-     *
-     * @param headerParameter the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredIntegerHeaderWithServiceResponseAsync(int headerParameter) {
-        return service.postRequiredIntegerHeader(headerParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredIntegerHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -632,7 +465,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalIntegerHeader() {
-        postOptionalIntegerHeaderWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalIntegerHeaderAsync().toBlocking().value();
     }
 
     /**
@@ -643,44 +476,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalIntegerHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalIntegerHeaderAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalIntegerHeaderAsync() {
-        return postOptionalIntegerHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalIntegerHeaderWithServiceResponseAsync() {
+    public Single<Void> postOptionalIntegerHeaderAsync() {
         final Integer headerParameter = null;
-        return service.postOptionalIntegerHeader(headerParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalIntegerHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalIntegerHeader(headerParameter);
     }
 
     /**
@@ -692,7 +499,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
+        postOptionalIntegerHeaderAsync(headerParameter).toBlocking().value();
     }
 
     /**
@@ -704,7 +511,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalIntegerHeaderAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -714,43 +521,10 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
-        return postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
+        return service.postOptionalIntegerHeader(headerParameter);
     }
 
-    /**
-     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
-     *
-     * @param headerParameter the Integer value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalIntegerHeaderWithServiceResponseAsync(Integer headerParameter) {
-        return service.postOptionalIntegerHeader(headerParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalIntegerHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -762,7 +536,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringParameter(String bodyParameter) {
-        return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredStringParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -774,7 +548,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredStringParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -784,45 +558,13 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredStringParameterAsync(String bodyParameter) {
-        return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required string. Please put null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the String value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredStringParameterWithServiceResponseAsync(String bodyParameter) {
+    public Single<Error> postRequiredStringParameterAsync(String bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
-        return service.postRequiredStringParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredStringParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredStringParameter(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional string. Please put null.
@@ -832,7 +574,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalStringParameter() {
-        postOptionalStringParameterWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalStringParameterAsync().toBlocking().value();
     }
 
     /**
@@ -843,44 +585,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalStringParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalStringParameterAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional string. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalStringParameterAsync() {
-        return postOptionalStringParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional string. Please put null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalStringParameterWithServiceResponseAsync() {
+    public Single<Void> postOptionalStringParameterAsync() {
         final String bodyParameter = null;
-        return service.postOptionalStringParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalStringParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalStringParameter(bodyParameter);
     }
 
     /**
@@ -892,7 +608,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalStringParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -904,7 +620,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalStringParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -914,43 +630,10 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalStringParameterAsync(String bodyParameter) {
-        return postOptionalStringParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> postOptionalStringParameterAsync(String bodyParameter) {
+        return service.postOptionalStringParameter(bodyParameter);
     }
 
-    /**
-     * Test explicitly optional string. Please put null.
-     *
-     * @param bodyParameter the String value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalStringParameterWithServiceResponseAsync(String bodyParameter) {
-        return service.postOptionalStringParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalStringParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -962,7 +645,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringProperty(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredStringPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -974,7 +657,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredStringPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -984,46 +667,14 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the StringWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredStringPropertyWithServiceResponseAsync(StringWrapper bodyParameter) {
+    public Single<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredStringProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredStringPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredStringProperty(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -1033,7 +684,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalStringProperty() {
-        postOptionalStringPropertyWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalStringPropertyAsync().toBlocking().value();
     }
 
     /**
@@ -1044,44 +695,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalStringPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalStringPropertyAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalStringPropertyAsync() {
-        return postOptionalStringPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalStringPropertyWithServiceResponseAsync() {
+    public Single<Void> postOptionalStringPropertyAsync() {
         final StringOptionalWrapper bodyParameter = null;
-        return service.postOptionalStringProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalStringPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalStringProperty(bodyParameter);
     }
 
     /**
@@ -1093,7 +718,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalStringPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1105,7 +730,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalStringPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1115,44 +740,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
-        return postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
-     *
-     * @param bodyParameter the StringOptionalWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalStringPropertyWithServiceResponseAsync(StringOptionalWrapper bodyParameter) {
+    public Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalStringProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalStringPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalStringProperty(bodyParameter);
     }
 
-    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -1164,7 +756,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringHeader(String headerParameter) {
-        return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
+        return postRequiredStringHeaderAsync(headerParameter).toBlocking().value();
     }
 
     /**
@@ -1176,7 +768,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredStringHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredStringHeaderAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -1186,45 +778,13 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredStringHeaderAsync(String headerParameter) {
-        return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
-     *
-     * @param headerParameter the String value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredStringHeaderWithServiceResponseAsync(String headerParameter) {
+    public Single<Error> postRequiredStringHeaderAsync(String headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
-        return service.postRequiredStringHeader(headerParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredStringHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredStringHeader(headerParameter);
     }
 
-    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -1234,7 +794,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalStringHeader() {
-        postOptionalStringHeaderWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalStringHeaderAsync().toBlocking().value();
     }
 
     /**
@@ -1245,44 +805,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalStringHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalStringHeaderAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalStringHeaderAsync() {
-        return postOptionalStringHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalStringHeaderWithServiceResponseAsync() {
+    public Single<Void> postOptionalStringHeaderAsync() {
         final String bodyParameter = null;
-        return service.postOptionalStringHeader(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalStringHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalStringHeader(bodyParameter);
     }
 
     /**
@@ -1294,7 +828,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalStringHeaderAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1306,7 +840,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalStringHeaderWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalStringHeaderAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1316,43 +850,10 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalStringHeaderAsync(String bodyParameter) {
-        return postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> postOptionalStringHeaderAsync(String bodyParameter) {
+        return service.postOptionalStringHeader(bodyParameter);
     }
 
-    /**
-     * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
-     *
-     * @param bodyParameter the String value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalStringHeaderWithServiceResponseAsync(String bodyParameter) {
-        return service.postOptionalStringHeader(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalStringHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -1364,7 +865,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassParameter(Product bodyParameter) {
-        return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredClassParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1376,7 +877,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredClassParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1386,46 +887,14 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredClassParameterAsync(Product bodyParameter) {
-        return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the Product value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredClassParameterWithServiceResponseAsync(Product bodyParameter) {
+    public Single<Error> postRequiredClassParameterAsync(Product bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredClassParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredClassParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredClassParameter(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -1435,7 +904,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalClassParameter() {
-        postOptionalClassParameterWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalClassParameterAsync().toBlocking().value();
     }
 
     /**
@@ -1446,44 +915,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalClassParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalClassParameterAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional complex object. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalClassParameterAsync() {
-        return postOptionalClassParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional complex object. Please put null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalClassParameterWithServiceResponseAsync() {
+    public Single<Void> postOptionalClassParameterAsync() {
         final Product bodyParameter = null;
-        return service.postOptionalClassParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalClassParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalClassParameter(bodyParameter);
     }
 
     /**
@@ -1495,7 +938,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalClassParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1507,7 +950,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalClassParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1517,44 +960,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalClassParameterAsync(Product bodyParameter) {
-        return postOptionalClassParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional complex object. Please put null.
-     *
-     * @param bodyParameter the Product value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalClassParameterWithServiceResponseAsync(Product bodyParameter) {
+    public Single<Void> postOptionalClassParameterAsync(Product bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalClassParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalClassParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalClassParameter(bodyParameter);
     }
 
-    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1566,7 +976,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredClassPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1578,7 +988,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredClassPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1588,46 +998,14 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the ClassWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredClassPropertyWithServiceResponseAsync(ClassWrapper bodyParameter) {
+    public Single<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredClassProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredClassPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredClassProperty(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -1637,7 +1015,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalClassProperty() {
-        postOptionalClassPropertyWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalClassPropertyAsync().toBlocking().value();
     }
 
     /**
@@ -1648,44 +1026,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalClassPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalClassPropertyAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalClassPropertyAsync() {
-        return postOptionalClassPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalClassPropertyWithServiceResponseAsync() {
+    public Single<Void> postOptionalClassPropertyAsync() {
         final ClassOptionalWrapper bodyParameter = null;
-        return service.postOptionalClassProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalClassPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalClassProperty(bodyParameter);
     }
 
     /**
@@ -1697,7 +1049,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalClassPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1709,7 +1061,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalClassPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1719,44 +1071,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
-        return postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
-     *
-     * @param bodyParameter the ClassOptionalWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalClassPropertyWithServiceResponseAsync(ClassOptionalWrapper bodyParameter) {
+    public Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalClassProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalClassPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalClassProperty(bodyParameter);
     }
 
-    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -1768,7 +1087,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayParameter(List<String> bodyParameter) {
-        return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredArrayParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1780,7 +1099,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredArrayParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1790,46 +1109,14 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredArrayParameterAsync(List<String> bodyParameter) {
-        return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required array. Please put null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the List&lt;String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredArrayParameterWithServiceResponseAsync(List<String> bodyParameter) {
+    public Single<Error> postRequiredArrayParameterAsync(List<String> bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredArrayParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredArrayParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredArrayParameter(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1839,7 +1126,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalArrayParameter() {
-        postOptionalArrayParameterWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalArrayParameterAsync().toBlocking().value();
     }
 
     /**
@@ -1850,44 +1137,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalArrayParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalArrayParameterAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional array. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalArrayParameterAsync() {
-        return postOptionalArrayParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional array. Please put null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalArrayParameterWithServiceResponseAsync() {
+    public Single<Void> postOptionalArrayParameterAsync() {
         final List<String> bodyParameter = null;
-        return service.postOptionalArrayParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalArrayParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalArrayParameter(bodyParameter);
     }
 
     /**
@@ -1899,7 +1160,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalArrayParameterAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1911,7 +1172,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalArrayParameterAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1921,44 +1182,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
-        return postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional array. Please put null.
-     *
-     * @param bodyParameter the List&lt;String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalArrayParameterWithServiceResponseAsync(List<String> bodyParameter) {
+    public Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalArrayParameter(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalArrayParameterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalArrayParameter(bodyParameter);
     }
 
-    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1970,7 +1198,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        return postRequiredArrayPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -1982,7 +1210,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredArrayPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1992,46 +1220,14 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
-     *
-     * @param bodyParameter the ArrayWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredArrayPropertyWithServiceResponseAsync(ArrayWrapper bodyParameter) {
+    public Single<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
         if (bodyParameter == null) {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Validator.validate(bodyParameter);
-        return service.postRequiredArrayProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredArrayPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredArrayProperty(bodyParameter);
     }
 
-    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -2041,7 +1237,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalArrayProperty() {
-        postOptionalArrayPropertyWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalArrayPropertyAsync().toBlocking().value();
     }
 
     /**
@@ -2052,44 +1248,18 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalArrayPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalArrayPropertyAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalArrayPropertyAsync() {
-        return postOptionalArrayPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalArrayPropertyWithServiceResponseAsync() {
+    public Single<Void> postOptionalArrayPropertyAsync() {
         final ArrayOptionalWrapper bodyParameter = null;
-        return service.postOptionalArrayProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalArrayPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalArrayProperty(bodyParameter);
     }
 
     /**
@@ -2101,7 +1271,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
+        postOptionalArrayPropertyAsync(bodyParameter).toBlocking().value();
     }
 
     /**
@@ -2113,7 +1283,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalArrayPropertyAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -2123,44 +1293,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
-        return postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
-     *
-     * @param bodyParameter the ArrayOptionalWrapper value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalArrayPropertyWithServiceResponseAsync(ArrayOptionalWrapper bodyParameter) {
+    public Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
-        return service.postOptionalArrayProperty(bodyParameter)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalArrayPropertyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalArrayProperty(bodyParameter);
     }
 
-    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -2172,7 +1309,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayHeader(List<String> headerParameter) {
-        return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
+        return postRequiredArrayHeaderAsync(headerParameter).toBlocking().value();
     }
 
     /**
@@ -2184,7 +1321,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Error> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceFuture.fromResponse(postRequiredArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceFuture.fromBody(postRequiredArrayHeaderAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -2194,47 +1331,15 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
-    public Observable<Error> postRequiredArrayHeaderAsync(List<String> headerParameter) {
-        return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
-            @Override
-            public Error call(ServiceResponse<Error> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
-     *
-     * @param headerParameter the List&lt;String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
-     */
-    public Observable<ServiceResponse<Error>> postRequiredArrayHeaderWithServiceResponseAsync(List<String> headerParameter) {
+    public Single<Error> postRequiredArrayHeaderAsync(List<String> headerParameter) {
         if (headerParameter == null) {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postRequiredArrayHeader(headerParameterConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
-                @Override
-                public Observable<ServiceResponse<Error>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Error> clientResponse = postRequiredArrayHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postRequiredArrayHeader(headerParameterConverted);
     }
 
-    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -2244,7 +1349,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalArrayHeader() {
-        postOptionalArrayHeaderWithServiceResponseAsync().toBlocking().single().body();
+        postOptionalArrayHeaderAsync().toBlocking().value();
     }
 
     /**
@@ -2255,45 +1360,19 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalArrayHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalArrayHeaderAsync(), serviceCallback);
     }
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> postOptionalArrayHeaderAsync() {
-        return postOptionalArrayHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync() {
+    public Single<Void> postOptionalArrayHeaderAsync() {
         final List<String> headerParameter = null;
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postOptionalArrayHeader(headerParameterConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalArrayHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalArrayHeader(headerParameterConverted);
     }
 
     /**
@@ -2305,7 +1384,7 @@ public class ExplicitsImpl implements Explicits {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
+        postOptionalArrayHeaderAsync(headerParameter).toBlocking().value();
     }
 
     /**
@@ -2317,7 +1396,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(postOptionalArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceFuture.fromBody(postOptionalArrayHeaderAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -2327,44 +1406,11 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
-        return postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
-     *
-     * @param headerParameter the List&lt;String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync(List<String> headerParameter) {
+    public Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
-        return service.postOptionalArrayHeader(headerParameterConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = postOptionalArrayHeaderDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.postOptionalArrayHeader(headerParameterConverted);
     }
 
-    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

@@ -17,6 +17,7 @@ import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,17 +55,8 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    Observable<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+    Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
 
-    /**
-     * Upload file.
-     *
-     * @param fileContent File to upload.
-     * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    Observable<ServiceResponse<InputStream>> uploadFileWithServiceResponseAsync(byte[] fileContent, String fileName);
 
     /**
      * Upload file.
@@ -94,15 +86,7 @@ public interface Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    Observable<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+    Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
 
-    /**
-     * Upload file.
-     *
-     * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    Observable<ServiceResponse<InputStream>> uploadFileViaBodyWithServiceResponseAsync(byte[] fileContent);
 
 }

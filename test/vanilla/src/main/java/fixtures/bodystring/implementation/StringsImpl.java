@@ -10,30 +10,33 @@
 
 package fixtures.bodystring.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodystring.Strings;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Strings.
  */
 public class StringsImpl implements Strings {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private StringsService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATServiceImpl client;
@@ -41,70 +44,96 @@ public class StringsImpl implements Strings {
     /**
      * Initializes an instance of Strings.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public StringsImpl(Retrofit retrofit, AutoRestSwaggerBATServiceImpl client) {
-        this.service = retrofit.create(StringsService.class);
+    public StringsImpl(AutoRestSwaggerBATServiceImpl client) {
+        this.service = RestProxy.create(StringsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Strings to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface StringsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNull" })
         @GET("string/null")
-        Observable<Response<ResponseBody>> getNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<String> getNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putNull" })
         @PUT("string/null")
-        Observable<Response<ResponseBody>> putNull(@Body String stringBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putNull(@BodyParam String stringBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getEmpty" })
         @GET("string/empty")
-        Observable<Response<ResponseBody>> getEmpty();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<String> getEmpty();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putEmpty" })
         @PUT("string/empty")
-        Observable<Response<ResponseBody>> putEmpty(@Body String stringBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putEmpty(@BodyParam String stringBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getMbcs" })
         @GET("string/mbcs")
-        Observable<Response<ResponseBody>> getMbcs();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<String> getMbcs();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putMbcs" })
         @PUT("string/mbcs")
-        Observable<Response<ResponseBody>> putMbcs(@Body String stringBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putMbcs(@BodyParam String stringBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getWhitespace" })
         @GET("string/whitespace")
-        Observable<Response<ResponseBody>> getWhitespace();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<String> getWhitespace();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putWhitespace" })
         @PUT("string/whitespace")
-        Observable<Response<ResponseBody>> putWhitespace(@Body String stringBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putWhitespace(@BodyParam String stringBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNotProvided" })
         @GET("string/notProvided")
-        Observable<Response<ResponseBody>> getNotProvided();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<String> getNotProvided();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getBase64Encoded" })
         @GET("string/base64Encoding")
-        Observable<Response<ResponseBody>> getBase64Encoded();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<byte[]> getBase64Encoded();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getBase64UrlEncoded" })
         @GET("string/base64UrlEncoding")
-        Observable<Response<ResponseBody>> getBase64UrlEncoded();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<byte[]> getBase64UrlEncoded();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putBase64UrlEncoded" })
         @PUT("string/base64UrlEncoding")
-        Observable<Response<ResponseBody>> putBase64UrlEncoded(@Body Base64Url stringBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putBase64UrlEncoded(@BodyParam Base64Url stringBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNullBase64UrlEncoded" })
         @GET("string/nullBase64UrlEncoding")
-        Observable<Response<ResponseBody>> getNullBase64UrlEncoded();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<byte[]> getNullBase64UrlEncoded();
 
     }
 
@@ -117,7 +146,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().body();
+        return getNullAsync().toBlocking().value();
     }
 
     /**
@@ -128,7 +157,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
@@ -137,42 +166,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    public Observable<String> getNullAsync() {
-        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
-            @Override
-            public String call(ServiceResponse<String> response) {
-                return response.body();
-            }
-        });
+    public Single<String> getNullAsync() {
+        return service.getNull();
     }
 
-    /**
-     * Get null string value value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    public Observable<ServiceResponse<String>> getNullWithServiceResponseAsync() {
-        return service.getNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
-                @Override
-                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<String> clientResponse = getNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<String, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<String>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set string value null.
@@ -182,7 +179,7 @@ public class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putNull() {
-        putNullWithServiceResponseAsync().toBlocking().single().body();
+        putNullAsync().toBlocking().value();
     }
 
     /**
@@ -193,44 +190,18 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(putNullAsync(), serviceCallback);
     }
 
     /**
      * Set string value null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> putNullAsync() {
-        return putNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set string value null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync() {
+    public Single<Void> putNullAsync() {
         final String stringBody = null;
-        return service.putNull(stringBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putNull(stringBody);
     }
 
     /**
@@ -242,7 +213,7 @@ public class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putNull(String stringBody) {
-        putNullWithServiceResponseAsync(stringBody).toBlocking().single().body();
+        putNullAsync(stringBody).toBlocking().value();
     }
 
     /**
@@ -254,7 +225,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putNullWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceFuture.fromBody(putNullAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -264,43 +235,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putNullAsync(String stringBody) {
-        return putNullWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putNullAsync(String stringBody) {
+        return service.putNull(stringBody);
     }
 
-    /**
-     * Set string value null.
-     *
-     * @param stringBody Possible values include: ''
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync(String stringBody) {
-        return service.putNull(stringBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get empty string value value ''.
@@ -311,7 +249,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -322,7 +260,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -331,42 +269,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    public Observable<String> getEmptyAsync() {
-        return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
-            @Override
-            public String call(ServiceResponse<String> response) {
-                return response.body();
-            }
-        });
+    public Single<String> getEmptyAsync() {
+        return service.getEmpty();
     }
 
-    /**
-     * Get empty string value value ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    public Observable<ServiceResponse<String>> getEmptyWithServiceResponseAsync() {
-        return service.getEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
-                @Override
-                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<String> clientResponse = getEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<String, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<String>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set string value empty ''.
@@ -377,7 +283,7 @@ public class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putEmpty(String stringBody) {
-        putEmptyWithServiceResponseAsync(stringBody).toBlocking().single().body();
+        putEmptyAsync(stringBody).toBlocking().value();
     }
 
     /**
@@ -389,7 +295,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putEmptyWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceFuture.fromBody(putEmptyAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -399,46 +305,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putEmptyAsync(String stringBody) {
-        return putEmptyWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set string value empty ''.
-     *
-     * @param stringBody Possible values include: ''
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(String stringBody) {
+    public Single<Void> putEmptyAsync(String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        return service.putEmpty(stringBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putEmpty(stringBody);
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -449,7 +322,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getMbcs() {
-        return getMbcsWithServiceResponseAsync().toBlocking().single().body();
+        return getMbcsAsync().toBlocking().value();
     }
 
     /**
@@ -460,7 +333,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(getMbcsWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getMbcsAsync(), serviceCallback);
     }
 
     /**
@@ -469,42 +342,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    public Observable<String> getMbcsAsync() {
-        return getMbcsWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
-            @Override
-            public String call(ServiceResponse<String> response) {
-                return response.body();
-            }
-        });
+    public Single<String> getMbcsAsync() {
+        return service.getMbcs();
     }
 
-    /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    public Observable<ServiceResponse<String>> getMbcsWithServiceResponseAsync() {
-        return service.getMbcs()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
-                @Override
-                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<String> clientResponse = getMbcsDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<String, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<String>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -515,7 +356,7 @@ public class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMbcs(String stringBody) {
-        putMbcsWithServiceResponseAsync(stringBody).toBlocking().single().body();
+        putMbcsAsync(stringBody).toBlocking().value();
     }
 
     /**
@@ -527,7 +368,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putMbcsWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceFuture.fromBody(putMbcsAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -537,46 +378,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putMbcsAsync(String stringBody) {
-        return putMbcsWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
-     *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putMbcsWithServiceResponseAsync(String stringBody) {
+    public Single<Void> putMbcsAsync(String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        return service.putMbcs(stringBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putMbcsDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putMbcs(stringBody);
     }
 
-    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -587,7 +395,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getWhitespace() {
-        return getWhitespaceWithServiceResponseAsync().toBlocking().single().body();
+        return getWhitespaceAsync().toBlocking().value();
     }
 
     /**
@@ -598,7 +406,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(getWhitespaceWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getWhitespaceAsync(), serviceCallback);
     }
 
     /**
@@ -607,42 +415,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    public Observable<String> getWhitespaceAsync() {
-        return getWhitespaceWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
-            @Override
-            public String call(ServiceResponse<String> response) {
-                return response.body();
-            }
-        });
+    public Single<String> getWhitespaceAsync() {
+        return service.getWhitespace();
     }
 
-    /**
-     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    public Observable<ServiceResponse<String>> getWhitespaceWithServiceResponseAsync() {
-        return service.getWhitespace()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
-                @Override
-                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<String> clientResponse = getWhitespaceDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<String, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<String>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -653,7 +429,7 @@ public class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putWhitespace(String stringBody) {
-        putWhitespaceWithServiceResponseAsync(stringBody).toBlocking().single().body();
+        putWhitespaceAsync(stringBody).toBlocking().value();
     }
 
     /**
@@ -665,7 +441,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putWhitespaceWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceFuture.fromBody(putWhitespaceAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -675,46 +451,13 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putWhitespaceAsync(String stringBody) {
-        return putWhitespaceWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync(String stringBody) {
+    public Single<Void> putWhitespaceAsync(String stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-        return service.putWhitespace(stringBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putWhitespaceDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putWhitespace(stringBody);
     }
 
-    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -725,7 +468,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
+        return getNotProvidedAsync().toBlocking().value();
     }
 
     /**
@@ -736,7 +479,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 
     /**
@@ -745,42 +488,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    public Observable<String> getNotProvidedAsync() {
-        return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<String>, String>() {
-            @Override
-            public String call(ServiceResponse<String> response) {
-                return response.body();
-            }
-        });
+    public Single<String> getNotProvidedAsync() {
+        return service.getNotProvided();
     }
 
-    /**
-     * Get String value when no string value is sent in response payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    public Observable<ServiceResponse<String>> getNotProvidedWithServiceResponseAsync() {
-        return service.getNotProvided()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<String>>>() {
-                @Override
-                public Observable<ServiceResponse<String>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<String> clientResponse = getNotProvidedDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<String, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<String>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get value that is base64 encoded.
@@ -791,7 +502,7 @@ public class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64Encoded() {
-        return getBase64EncodedWithServiceResponseAsync().toBlocking().single().body();
+        return getBase64EncodedAsync().toBlocking().value();
     }
 
     /**
@@ -802,7 +513,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceFuture.fromResponse(getBase64EncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBase64EncodedAsync(), serviceCallback);
     }
 
     /**
@@ -811,47 +522,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    public Observable<byte[]> getBase64EncodedAsync() {
-        return getBase64EncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
-            @Override
-            public byte[] call(ServiceResponse<byte[]> response) {
-                return response.body();
-            }
-        });
+    public Single<byte[]> getBase64EncodedAsync() {
+        return service.getBase64Encoded();
     }
 
-    /**
-     * Get value that is base64 encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    public Observable<ServiceResponse<byte[]>> getBase64EncodedWithServiceResponseAsync() {
-        return service.getBase64Encoded()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
-                @Override
-                public Observable<ServiceResponse<byte[]>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Base64Url> result = getBase64EncodedDelegate(response);
-                        byte[] body = null;
-                        if (result.body() != null) {
-                            body = result.body().decodedBytes();
-                        }
-                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Base64Url> getBase64EncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Base64Url, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Base64Url>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get value that is base64url encoded.
@@ -862,7 +536,7 @@ public class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64UrlEncoded() {
-        return getBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().body();
+        return getBase64UrlEncodedAsync().toBlocking().value();
     }
 
     /**
@@ -873,7 +547,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceFuture.fromResponse(getBase64UrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getBase64UrlEncodedAsync(), serviceCallback);
     }
 
     /**
@@ -882,47 +556,10 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    public Observable<byte[]> getBase64UrlEncodedAsync() {
-        return getBase64UrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
-            @Override
-            public byte[] call(ServiceResponse<byte[]> response) {
-                return response.body();
-            }
-        });
+    public Single<byte[]> getBase64UrlEncodedAsync() {
+        return service.getBase64UrlEncoded();
     }
 
-    /**
-     * Get value that is base64url encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    public Observable<ServiceResponse<byte[]>> getBase64UrlEncodedWithServiceResponseAsync() {
-        return service.getBase64UrlEncoded()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
-                @Override
-                public Observable<ServiceResponse<byte[]>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Base64Url> result = getBase64UrlEncodedDelegate(response);
-                        byte[] body = null;
-                        if (result.body() != null) {
-                            body = result.body().decodedBytes();
-                        }
-                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Base64Url> getBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Base64Url, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Base64Url>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put value that is base64url encoded.
@@ -933,7 +570,7 @@ public class StringsImpl implements Strings {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBase64UrlEncoded(byte[] stringBody) {
-        putBase64UrlEncodedWithServiceResponseAsync(stringBody).toBlocking().single().body();
+        putBase64UrlEncodedAsync(stringBody).toBlocking().value();
     }
 
     /**
@@ -945,7 +582,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBase64UrlEncodedWithServiceResponseAsync(stringBody), serviceCallback);
+        return ServiceFuture.fromBody(putBase64UrlEncodedAsync(stringBody), serviceCallback);
     }
 
     /**
@@ -955,47 +592,14 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
-        return putBase64UrlEncodedWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put value that is base64url encoded.
-     *
-     * @param stringBody the Base64Url value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putBase64UrlEncodedWithServiceResponseAsync(byte[] stringBody) {
+    public Single<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Base64Url stringBodyConverted = Base64Url.encode(stringBody);
-        return service.putBase64UrlEncoded(stringBodyConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putBase64UrlEncodedDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.putBase64UrlEncoded(stringBodyConverted);
     }
 
-    private ServiceResponse<Void> putBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null value that is expected to be base64url encoded.
@@ -1006,7 +610,7 @@ public class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getNullBase64UrlEncoded() {
-        return getNullBase64UrlEncodedWithServiceResponseAsync().toBlocking().single().body();
+        return getNullBase64UrlEncodedAsync().toBlocking().value();
     }
 
     /**
@@ -1017,7 +621,7 @@ public class StringsImpl implements Strings {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullBase64UrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullBase64UrlEncodedAsync(), serviceCallback);
     }
 
     /**
@@ -1026,46 +630,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    public Observable<byte[]> getNullBase64UrlEncodedAsync() {
-        return getNullBase64UrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
-            @Override
-            public byte[] call(ServiceResponse<byte[]> response) {
-                return response.body();
-            }
-        });
+    public Single<byte[]> getNullBase64UrlEncodedAsync() {
+        return service.getNullBase64UrlEncoded();
     }
 
-    /**
-     * Get null value that is expected to be base64url encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    public Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedWithServiceResponseAsync() {
-        return service.getNullBase64UrlEncoded()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<byte[]>>>() {
-                @Override
-                public Observable<ServiceResponse<byte[]>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Base64Url> result = getNullBase64UrlEncodedDelegate(response);
-                        byte[] body = null;
-                        if (result.body() != null) {
-                            body = result.body().decodedBytes();
-                        }
-                        ServiceResponse<byte[]> clientResponse = new ServiceResponse<byte[]>(body, result.response());
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Base64Url> getNullBase64UrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Base64Url, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Base64Url>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

@@ -17,6 +17,7 @@ import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getNullAsync();
+    Single<Double> getNullAsync();
 
-    /**
-     * Get null Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid float Number value.
@@ -83,15 +77,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getInvalidFloatAsync();
+    Single<Double> getInvalidFloatAsync();
 
-    /**
-     * Get invalid float Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getInvalidFloatWithServiceResponseAsync();
 
     /**
      * Get invalid double Number value.
@@ -118,15 +105,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getInvalidDoubleAsync();
+    Single<Double> getInvalidDoubleAsync();
 
-    /**
-     * Get invalid double Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getInvalidDoubleWithServiceResponseAsync();
 
     /**
      * Get invalid decimal Number value.
@@ -153,15 +133,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    Observable<BigDecimal> getInvalidDecimalAsync();
+    Single<BigDecimal> getInvalidDecimalAsync();
 
-    /**
-     * Get invalid decimal Number value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    Observable<ServiceResponse<BigDecimal>> getInvalidDecimalWithServiceResponseAsync();
 
     /**
      * Put big float value 3.402823e+20.
@@ -190,16 +163,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigFloatAsync(double numberBody);
+    Single<Void> putBigFloatAsync(double numberBody);
 
-    /**
-     * Put big float value 3.402823e+20.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigFloatWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big float value 3.402823e+20.
@@ -226,15 +191,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getBigFloatAsync();
+    Single<Double> getBigFloatAsync();
 
-    /**
-     * Get big float value 3.402823e+20.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getBigFloatWithServiceResponseAsync();
 
     /**
      * Put big double value 2.5976931e+101.
@@ -263,16 +221,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigDoubleAsync(double numberBody);
+    Single<Void> putBigDoubleAsync(double numberBody);
 
-    /**
-     * Put big double value 2.5976931e+101.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigDoubleWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value 2.5976931e+101.
@@ -299,15 +249,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getBigDoubleAsync();
+    Single<Double> getBigDoubleAsync();
 
-    /**
-     * Get big double value 2.5976931e+101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getBigDoubleWithServiceResponseAsync();
 
     /**
      * Put big double value 99999999.99.
@@ -336,16 +279,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigDoublePositiveDecimalAsync(double numberBody);
+    Single<Void> putBigDoublePositiveDecimalAsync(double numberBody);
 
-    /**
-     * Put big double value 99999999.99.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigDoublePositiveDecimalWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value 99999999.99.
@@ -372,15 +307,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getBigDoublePositiveDecimalAsync();
+    Single<Double> getBigDoublePositiveDecimalAsync();
 
-    /**
-     * Get big double value 99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getBigDoublePositiveDecimalWithServiceResponseAsync();
 
     /**
      * Put big double value -99999999.99.
@@ -409,16 +337,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
+    Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
 
-    /**
-     * Put big double value -99999999.99.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigDoubleNegativeDecimalWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value -99999999.99.
@@ -445,15 +365,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getBigDoubleNegativeDecimalAsync();
+    Single<Double> getBigDoubleNegativeDecimalAsync();
 
-    /**
-     * Get big double value -99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getBigDoubleNegativeDecimalWithServiceResponseAsync();
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -482,16 +395,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigDecimalAsync(BigDecimal numberBody);
+    Single<Void> putBigDecimalAsync(BigDecimal numberBody);
 
-    /**
-     * Put big decimal value 2.5976931e+101.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -518,15 +423,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    Observable<BigDecimal> getBigDecimalAsync();
+    Single<BigDecimal> getBigDecimalAsync();
 
-    /**
-     * Get big decimal value 2.5976931e+101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    Observable<ServiceResponse<BigDecimal>> getBigDecimalWithServiceResponseAsync();
 
     /**
      * Put big decimal value 99999999.99.
@@ -555,16 +453,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
+    Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
 
-    /**
-     * Put big decimal value 99999999.99.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigDecimalPositiveDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get big decimal value 99999999.99.
@@ -591,15 +481,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    Observable<BigDecimal> getBigDecimalPositiveDecimalAsync();
+    Single<BigDecimal> getBigDecimalPositiveDecimalAsync();
 
-    /**
-     * Get big decimal value 99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    Observable<ServiceResponse<BigDecimal>> getBigDecimalPositiveDecimalWithServiceResponseAsync();
 
     /**
      * Put big decimal value -99999999.99.
@@ -628,16 +511,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
+    Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
 
-    /**
-     * Put big decimal value -99999999.99.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBigDecimalNegativeDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get big decimal value -99999999.99.
@@ -664,15 +539,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    Observable<BigDecimal> getBigDecimalNegativeDecimalAsync();
+    Single<BigDecimal> getBigDecimalNegativeDecimalAsync();
 
-    /**
-     * Get big decimal value -99999999.99.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    Observable<ServiceResponse<BigDecimal>> getBigDecimalNegativeDecimalWithServiceResponseAsync();
 
     /**
      * Put small float value 3.402823e-20.
@@ -701,16 +569,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putSmallFloatAsync(double numberBody);
+    Single<Void> putSmallFloatAsync(double numberBody);
 
-    /**
-     * Put small float value 3.402823e-20.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putSmallFloatWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value 3.402823e-20.
@@ -737,15 +597,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getSmallFloatAsync();
+    Single<Double> getSmallFloatAsync();
 
-    /**
-     * Get big double value 3.402823e-20.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getSmallFloatWithServiceResponseAsync();
 
     /**
      * Put small double value 2.5976931e-101.
@@ -774,16 +627,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putSmallDoubleAsync(double numberBody);
+    Single<Void> putSmallDoubleAsync(double numberBody);
 
-    /**
-     * Put small double value 2.5976931e-101.
-     *
-     * @param numberBody the double value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putSmallDoubleWithServiceResponseAsync(double numberBody);
 
     /**
      * Get big double value 2.5976931e-101.
@@ -810,15 +655,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
-    Observable<Double> getSmallDoubleAsync();
+    Single<Double> getSmallDoubleAsync();
 
-    /**
-     * Get big double value 2.5976931e-101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the double object
-     */
-    Observable<ServiceResponse<Double>> getSmallDoubleWithServiceResponseAsync();
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -847,16 +685,8 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putSmallDecimalAsync(BigDecimal numberBody);
+    Single<Void> putSmallDecimalAsync(BigDecimal numberBody);
 
-    /**
-     * Put small decimal value 2.5976931e-101.
-     *
-     * @param numberBody the BigDecimal value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putSmallDecimalWithServiceResponseAsync(BigDecimal numberBody);
 
     /**
      * Get small decimal value 2.5976931e-101.
@@ -883,14 +713,7 @@ public interface Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
-    Observable<BigDecimal> getSmallDecimalAsync();
+    Single<BigDecimal> getSmallDecimalAsync();
 
-    /**
-     * Get small decimal value 2.5976931e-101.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BigDecimal object
-     */
-    Observable<ServiceResponse<BigDecimal>> getSmallDecimalWithServiceResponseAsync();
 
 }

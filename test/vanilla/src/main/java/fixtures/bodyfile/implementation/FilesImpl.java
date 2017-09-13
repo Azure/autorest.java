@@ -10,29 +10,31 @@
 
 package fixtures.bodyfile.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodyfile.Files;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Streaming;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Files.
  */
 public class FilesImpl implements Files {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private FilesService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATFileServiceImpl client;
@@ -40,33 +42,39 @@ public class FilesImpl implements Files {
     /**
      * Initializes an instance of Files.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public FilesImpl(Retrofit retrofit, AutoRestSwaggerBATFileServiceImpl client) {
-        this.service = retrofit.create(FilesService.class);
+    public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
+        this.service = RestProxy.create(FilesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Files to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface FilesService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getFile" })
         @GET("files/stream/nonempty")
-        @Streaming
-        Observable<Response<ResponseBody>> getFile();
+        // @Streaming not supported by RestProxy
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<InputStream> getFile();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getFileLarge" })
         @GET("files/stream/verylarge")
-        @Streaming
-        Observable<Response<ResponseBody>> getFileLarge();
+        // @Streaming not supported by RestProxy
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<InputStream> getFileLarge();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getEmptyFile" })
         @GET("files/stream/empty")
-        @Streaming
-        Observable<Response<ResponseBody>> getEmptyFile();
+        // @Streaming not supported by RestProxy
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<InputStream> getEmptyFile();
 
     }
 
@@ -79,7 +87,7 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFile() {
-        return getFileWithServiceResponseAsync().toBlocking().single().body();
+        return getFileAsync().toBlocking().value();
     }
 
     /**
@@ -90,7 +98,7 @@ public class FilesImpl implements Files {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceFuture.fromResponse(getFileWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
     /**
@@ -99,42 +107,10 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    public Observable<InputStream> getFileAsync() {
-        return getFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
-            @Override
-            public InputStream call(ServiceResponse<InputStream> response) {
-                return response.body();
-            }
-        });
+    public Single<InputStream> getFileAsync() {
+        return service.getFile();
     }
 
-    /**
-     * Get file.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    public Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync() {
-        return service.getFile()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
-                @Override
-                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<InputStream> clientResponse = getFileDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<InputStream>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get a large file.
@@ -145,7 +121,7 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFileLarge() {
-        return getFileLargeWithServiceResponseAsync().toBlocking().single().body();
+        return getFileLargeAsync().toBlocking().value();
     }
 
     /**
@@ -156,7 +132,7 @@ public class FilesImpl implements Files {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceFuture.fromResponse(getFileLargeWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
     /**
@@ -165,42 +141,10 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    public Observable<InputStream> getFileLargeAsync() {
-        return getFileLargeWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
-            @Override
-            public InputStream call(ServiceResponse<InputStream> response) {
-                return response.body();
-            }
-        });
+    public Single<InputStream> getFileLargeAsync() {
+        return service.getFileLarge();
     }
 
-    /**
-     * Get a large file.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    public Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync() {
-        return service.getFileLarge()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
-                @Override
-                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<InputStream> clientResponse = getFileLargeDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<InputStream>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get empty file.
@@ -211,7 +155,7 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getEmptyFile() {
-        return getEmptyFileWithServiceResponseAsync().toBlocking().single().body();
+        return getEmptyFileAsync().toBlocking().value();
     }
 
     /**
@@ -222,7 +166,7 @@ public class FilesImpl implements Files {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyFileWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 
     /**
@@ -231,41 +175,9 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    public Observable<InputStream> getEmptyFileAsync() {
-        return getEmptyFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
-            @Override
-            public InputStream call(ServiceResponse<InputStream> response) {
-                return response.body();
-            }
-        });
+    public Single<InputStream> getEmptyFileAsync() {
+        return service.getEmptyFile();
     }
 
-    /**
-     * Get empty file.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    public Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync() {
-        return service.getEmptyFile()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
-                @Override
-                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<InputStream> clientResponse = getEmptyFileDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<InputStream>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

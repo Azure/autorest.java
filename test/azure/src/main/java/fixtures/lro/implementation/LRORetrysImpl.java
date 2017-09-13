@@ -10,7 +10,7 @@
 
 package fixtures.lro.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.lro.LRORetrys;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
@@ -18,6 +18,16 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.DELETE;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.lro.models.LRORetrysDelete202Retry200Headers;
 import fixtures.lro.models.LRORetrysDeleteAsyncRelativeRetrySucceededHeaders;
@@ -27,23 +37,16 @@ import fixtures.lro.models.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.LRORetrysPutAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.Product;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in LRORetrys.
  */
 public class LRORetrysImpl implements LRORetrys {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private LRORetrysService service;
     /** The service client containing this operation class. */
     private AutoRestLongRunningOperationTestServiceImpl client;
@@ -51,11 +54,10 @@ public class LRORetrysImpl implements LRORetrys {
     /**
      * Initializes an instance of LRORetrysImpl.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LRORetrysImpl(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = retrofit.create(LRORetrysService.class);
+    public LRORetrysImpl(AutoRestLongRunningOperationTestServiceImpl client) {
+        this.service = RestProxy.create(LRORetrysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -66,59 +68,59 @@ public class LRORetrysImpl implements LRORetrys {
     interface LRORetrysService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys put201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
-        Observable<Response<ResponseBody>> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Product> put201CreatingSucceeded200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPut201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
-        Observable<Response<ResponseBody>> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Product> beginPut201CreatingSucceeded200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys putAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
-        Observable<Response<ResponseBody>> putAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Product> putAsyncRelativeRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPutAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
-        Observable<Response<ResponseBody>> beginPutAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Product> beginPutAsyncRelativeRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys deleteProvisioning202Accepted200Succeeded" })
-        @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
+        Single<Product> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteProvisioning202Accepted200Succeeded" })
-        @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
+        Single<Product> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys delete202Retry200" })
-        @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @DELETE("lro/retryerror/delete/202/retry/200")
+        Single<Void> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDelete202Retry200" })
-        @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDelete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @DELETE("lro/retryerror/delete/202/retry/200")
+        Single<Void> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys deleteAsyncRelativeRetrySucceeded" })
-        @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> deleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @DELETE("lro/retryerror/deleteasync/retry/succeeded")
+        Single<Void> deleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteAsyncRelativeRetrySucceeded" })
-        @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> beginDeleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        @DELETE("lro/retryerror/deleteasync/retry/succeeded")
+        Single<Void> beginDeleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys post202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
-        Observable<Response<ResponseBody>> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> post202Retry200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPost202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
-        Observable<Response<ResponseBody>> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> beginPost202Retry200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys postAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
-        Observable<Response<ResponseBody>> postAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> postAsyncRelativeRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPostAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
-        Observable<Response<ResponseBody>> beginPostAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> beginPostAsyncRelativeRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -142,7 +144,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -151,10 +153,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Product> put201CreatingSucceeded200Async() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
+    public Single<Product> put201CreatingSucceeded200Async() {
+        return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<Product, Product>() {
             @Override
-            public Product call(ServiceResponse<Product> response) {
+            public Product call(Product response) {
                 return response.body();
             }
         });
@@ -166,7 +168,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Product>> put201CreatingSucceeded200WithServiceResponseAsync() {
+    public Observable<Product> put201CreatingSucceeded200Async() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
@@ -181,7 +183,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
+        return put201CreatingSucceeded200Async(product).toBlocking().last();
     }
 
     /**
@@ -193,7 +195,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
     /**
@@ -204,9 +206,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Product> put201CreatingSucceeded200Async(Product product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<Product, Product>() {
             @Override
-            public Product call(ServiceResponse<Product> response) {
+            public Product call(Product response) {
                 return response.body();
             }
         });
@@ -219,7 +221,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<Product>> put201CreatingSucceeded200WithServiceResponseAsync(Product product) {
+    public Observable<Product> put201CreatingSucceeded200WithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<Product>() { }.getType());
@@ -234,7 +236,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
+        return beginPut201CreatingSucceeded200Async().toBlocking().value();
     }
 
     /**
@@ -245,7 +247,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
 
     /**
@@ -254,35 +256,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    public Observable<Product> beginPut201CreatingSucceeded200Async() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
-            @Override
-            public Product call(ServiceResponse<Product> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    public Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200WithServiceResponseAsync() {
+    public Single<Product> beginPut201CreatingSucceeded200Async() {
         final Product product = null;
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
-                @Override
-                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -295,7 +271,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
+        return beginPut201CreatingSucceeded200Async(product).toBlocking().value();
     }
 
     /**
@@ -307,7 +283,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(beginPut201CreatingSucceeded200Async(product), serviceCallback);
     }
 
     /**
@@ -317,45 +293,11 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    public Observable<Product> beginPut201CreatingSucceeded200Async(Product product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
-            @Override
-            public Product call(ServiceResponse<Product> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    public Observable<ServiceResponse<Product>> beginPut201CreatingSucceeded200WithServiceResponseAsync(Product product) {
+    public Single<Product> beginPut201CreatingSucceeded200Async(Product product) {
         Validator.validate(product);
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Product>>>() {
-                @Override
-                public Observable<ServiceResponse<Product>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Product> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Product> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Product>() { }.getType())
-                .register(201, new TypeToken<Product>() { }.getType())
-                .registerError(CloudException.class)
-                .build(response);
-    }
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -377,7 +319,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -386,10 +328,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Product> putAsyncRelativeRetrySucceededAsync() {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
+    public Single<Product> putAsyncRelativeRetrySucceededAsync() {
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<Product, Product>() {
             @Override
-            public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
+            public Product call(Product response) {
                 return response.body();
             }
         });
@@ -401,7 +343,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> putAsyncRelativeRetrySucceededWithServiceResponseAsync() {
+    public Observable<Product> putAsyncRelativeRetrySucceededAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
@@ -416,7 +358,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded(Product product) {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
+        return putAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -428,7 +370,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(putAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -439,9 +381,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Product> putAsyncRelativeRetrySucceededAsync(Product product) {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<Product, Product>() {
             @Override
-            public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
+            public Product call(Product response) {
                 return response.body();
             }
         });
@@ -454,7 +396,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> putAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product) {
+    public Observable<Product> putAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
@@ -469,7 +411,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
+        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().value();
     }
 
     /**
@@ -480,7 +422,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPutAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
     /**
@@ -489,35 +431,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    public Observable<Product> beginPutAsyncRelativeRetrySucceededAsync() {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
-            @Override
-            public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    public Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync() {
+    public Single<Product> beginPutAsyncRelativeRetrySucceededAsync() {
         final Product product = null;
-        return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -530,7 +446,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().value();
     }
 
     /**
@@ -542,7 +458,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPutAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -552,44 +468,11 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    public Observable<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product) {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
-            @Override
-            public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    public Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product) {
+    public Single<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> clientResponse = beginPutAsyncRelativeRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> beginPutAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Product>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
-    }
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -600,7 +483,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().body();
+        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -611,7 +494,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
     /**
@@ -621,9 +504,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Product> deleteProvisioning202Accepted200SucceededAsync() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>, Product>() {
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<Product, Product>() {
             @Override
-            public Product call(ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> response) {
+            public Product call(Product response) {
                 return response.body();
             }
         });
@@ -635,7 +518,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
+    public Observable<Product> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Product>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeaders.class);
     }
@@ -649,7 +532,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().body();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().value();
     }
 
     /**
@@ -660,7 +543,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginDeleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
     /**
@@ -669,43 +552,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    public Observable<Product> beginDeleteProvisioning202Accepted200SucceededAsync() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>, Product>() {
-            @Override
-            public Product call(ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> response) {
-                return response.body();
-            }
-        });
+    public Single<Product> beginDeleteProvisioning202Accepted200SucceededAsync() {
+        return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    public Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
-        return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> clientResponse = beginDeleteProvisioning202Accepted200SucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Product>() { }.getType())
-                .register(202, new TypeToken<Product>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders.class);
-    }
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -715,7 +565,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete202Retry200() {
-        delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
+        delete202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -726,7 +576,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(delete202Retry200Async(), serviceCallback);
     }
 
     /**
@@ -736,9 +586,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Void> delete202Retry200Async() {
-        return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>, Void>() {
+        return delete202Retry200WithServiceResponseAsync().map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -750,7 +600,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> delete202Retry200WithServiceResponseAsync() {
+    public Observable<Void> delete202Retry200WithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200Headers.class);
     }
@@ -763,7 +613,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
+        beginDelete202Retry200Async().toBlocking().value();
     }
 
     /**
@@ -774,7 +624,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginDelete202Retry200Async(), serviceCallback);
     }
 
     /**
@@ -783,42 +633,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> beginDelete202Retry200Async() {
-        return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> beginDelete202Retry200Async() {
+        return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> beginDelete202Retry200WithServiceResponseAsync() {
-        return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> clientResponse = beginDelete202Retry200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysDelete202Retry200Headers.class);
-    }
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -828,7 +646,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
+        deleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -839,7 +657,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(deleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(deleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
     /**
@@ -849,9 +667,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncRelativeRetrySucceededAsync() {
-        return deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>, Void>() {
+        return deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -863,7 +681,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> deleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
+    public Observable<Void> deleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
         Observable<Response<ResponseBody>> observable = service.deleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeaders.class);
     }
@@ -876,7 +694,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
+        beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().value();
     }
 
     /**
@@ -887,7 +705,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginDeleteAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
     /**
@@ -896,42 +714,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> beginDeleteAsyncRelativeRetrySucceededAsync() {
-        return beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> beginDeleteAsyncRelativeRetrySucceededAsync() {
+        return service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
-        return service.beginDeleteAsyncRelativeRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> clientResponse = beginDeleteAsyncRelativeRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> beginDeleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders.class);
-    }
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -952,7 +738,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -961,10 +747,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Void> post202Retry200Async() {
-        return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
+    public Single<Void> post202Retry200Async() {
+        return post202Retry200WithServiceResponseAsync().map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -976,7 +762,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200WithServiceResponseAsync() {
+    public Observable<Void> post202Retry200Async() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
@@ -990,7 +776,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post202Retry200(Product product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
+        post202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -1002,7 +788,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
     /**
@@ -1013,9 +799,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Void> post202Retry200Async(Product product) {
-        return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
+        return post202Retry200WithServiceResponseAsync(product).map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -1028,7 +814,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> post202Retry200WithServiceResponseAsync(Product product) {
+    public Observable<Void> post202Retry200WithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
@@ -1042,7 +828,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
+        beginPost202Retry200Async().toBlocking().value();
     }
 
     /**
@@ -1053,44 +839,18 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPost202Retry200Async(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> beginPost202Retry200Async() {
-        return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200WithServiceResponseAsync() {
+    public Single<Void> beginPost202Retry200Async() {
         final Product product = null;
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -1102,7 +862,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
+        beginPost202Retry200Async(product).toBlocking().value();
     }
 
     /**
@@ -1114,7 +874,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPost202Retry200Async(product), serviceCallback);
     }
 
     /**
@@ -1124,44 +884,11 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> beginPost202Retry200Async(Product product) {
-        return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> beginPost202Retry200WithServiceResponseAsync(Product product) {
+    public Single<Void> beginPost202Retry200Async(Product product) {
         Validator.validate(product);
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> clientResponse = beginPost202Retry200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysPost202Retry200Headers.class);
-    }
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1182,7 +909,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1191,10 +918,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Void> postAsyncRelativeRetrySucceededAsync() {
-        return postAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
+    public Single<Void> postAsyncRelativeRetrySucceededAsync() {
+        return postAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -1206,7 +933,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededWithServiceResponseAsync() {
+    public Observable<Void> postAsyncRelativeRetrySucceededAsync() {
         final Product product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
@@ -1220,7 +947,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postAsyncRelativeRetrySucceeded(Product product) {
-        postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
+        postAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -1232,7 +959,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(postAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -1243,9 +970,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRelativeRetrySucceededAsync(Product product) {
-        return postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
+        return postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -1258,7 +985,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> postAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product) {
+    public Observable<Void> postAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
@@ -1272,7 +999,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
+        beginPostAsyncRelativeRetrySucceededAsync().toBlocking().value();
     }
 
     /**
@@ -1283,44 +1010,18 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPostAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> beginPostAsyncRelativeRetrySucceededAsync() {
-        return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync() {
+    public Single<Void> beginPostAsyncRelativeRetrySucceededAsync() {
         final Product product = null;
-        return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -1332,7 +1033,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded(Product product) {
-        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
+        beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().value();
     }
 
     /**
@@ -1344,7 +1045,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPostAsyncRelativeRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -1354,43 +1055,10 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product) {
-        return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(Product product) {
+    public Single<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> clientResponse = beginPostAsyncRelativeRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> beginPostAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
-    }
 
 }

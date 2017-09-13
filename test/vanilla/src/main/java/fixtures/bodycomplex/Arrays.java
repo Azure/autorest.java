@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
-    Observable<ArrayWrapper> getValidAsync();
+    Single<ArrayWrapper> getValidAsync();
 
-    /**
-     * Get complex types with array property.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ArrayWrapper object
-     */
-    Observable<ServiceResponse<ArrayWrapper>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types with array property.
@@ -85,16 +79,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putValidAsync(ArrayWrapper complexBody);
+    Single<Void> putValidAsync(ArrayWrapper complexBody);
 
-    /**
-     * Put complex types with array property.
-     *
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property which is empty.
@@ -121,15 +107,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
-    Observable<ArrayWrapper> getEmptyAsync();
+    Single<ArrayWrapper> getEmptyAsync();
 
-    /**
-     * Get complex types with array property which is empty.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ArrayWrapper object
-     */
-    Observable<ServiceResponse<ArrayWrapper>> getEmptyWithServiceResponseAsync();
 
     /**
      * Put complex types with array property which is empty.
@@ -158,16 +137,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putEmptyAsync(ArrayWrapper complexBody);
+    Single<Void> putEmptyAsync(ArrayWrapper complexBody);
 
-    /**
-     * Put complex types with array property which is empty.
-     *
-     * @param complexBody Please put an empty array
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(ArrayWrapper complexBody);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -194,14 +165,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
-    Observable<ArrayWrapper> getNotProvidedAsync();
+    Single<ArrayWrapper> getNotProvidedAsync();
 
-    /**
-     * Get complex types with array property while server doesn't provide a response payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ArrayWrapper object
-     */
-    Observable<ServiceResponse<ArrayWrapper>> getNotProvidedWithServiceResponseAsync();
 
 }

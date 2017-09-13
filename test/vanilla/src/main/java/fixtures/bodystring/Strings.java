@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -47,15 +48,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    Observable<String> getNullAsync();
+    Single<String> getNullAsync();
 
-    /**
-     * Get null string value value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    Observable<ServiceResponse<String>> getNullWithServiceResponseAsync();
 
     /**
      * Set string value null.
@@ -81,15 +75,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putNullAsync();
-
-    /**
-     * Set string value null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync();
+    Single<Void> putNullAsync();
     /**
      * Set string value null.
      *
@@ -117,16 +103,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putNullAsync(String stringBody);
+    Single<Void> putNullAsync(String stringBody);
 
-    /**
-     * Set string value null.
-     *
-     * @param stringBody Possible values include: ''
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync(String stringBody);
 
     /**
      * Get empty string value value ''.
@@ -153,15 +131,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    Observable<String> getEmptyAsync();
+    Single<String> getEmptyAsync();
 
-    /**
-     * Get empty string value value ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    Observable<ServiceResponse<String>> getEmptyWithServiceResponseAsync();
 
     /**
      * Set string value empty ''.
@@ -190,16 +161,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putEmptyAsync(String stringBody);
+    Single<Void> putEmptyAsync(String stringBody);
 
-    /**
-     * Set string value empty ''.
-     *
-     * @param stringBody Possible values include: ''
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(String stringBody);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -226,15 +189,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    Observable<String> getMbcsAsync();
+    Single<String> getMbcsAsync();
 
-    /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    Observable<ServiceResponse<String>> getMbcsWithServiceResponseAsync();
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -263,16 +219,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMbcsAsync(String stringBody);
+    Single<Void> putMbcsAsync(String stringBody);
 
-    /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
-     *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMbcsWithServiceResponseAsync(String stringBody);
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -299,15 +247,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    Observable<String> getWhitespaceAsync();
+    Single<String> getWhitespaceAsync();
 
-    /**
-     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    Observable<ServiceResponse<String>> getWhitespaceWithServiceResponseAsync();
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -336,16 +277,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putWhitespaceAsync(String stringBody);
+    Single<Void> putWhitespaceAsync(String stringBody);
 
-    /**
-     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
-     *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync(String stringBody);
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -372,15 +305,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
-    Observable<String> getNotProvidedAsync();
+    Single<String> getNotProvidedAsync();
 
-    /**
-     * Get String value when no string value is sent in response payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
-     */
-    Observable<ServiceResponse<String>> getNotProvidedWithServiceResponseAsync();
 
     /**
      * Get value that is base64 encoded.
@@ -407,15 +333,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getBase64EncodedAsync();
+    Single<byte[]> getBase64EncodedAsync();
 
-    /**
-     * Get value that is base64 encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getBase64EncodedWithServiceResponseAsync();
 
     /**
      * Get value that is base64url encoded.
@@ -442,15 +361,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getBase64UrlEncodedAsync();
+    Single<byte[]> getBase64UrlEncodedAsync();
 
-    /**
-     * Get value that is base64url encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getBase64UrlEncodedWithServiceResponseAsync();
 
     /**
      * Put value that is base64url encoded.
@@ -479,16 +391,8 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBase64UrlEncodedAsync(byte[] stringBody);
+    Single<Void> putBase64UrlEncodedAsync(byte[] stringBody);
 
-    /**
-     * Put value that is base64url encoded.
-     *
-     * @param stringBody the Base64Url value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBase64UrlEncodedWithServiceResponseAsync(byte[] stringBody);
 
     /**
      * Get null value that is expected to be base64url encoded.
@@ -515,14 +419,7 @@ public interface Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getNullBase64UrlEncodedAsync();
+    Single<byte[]> getNullBase64UrlEncodedAsync();
 
-    /**
-     * Get null value that is expected to be base64url encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedWithServiceResponseAsync();
 
 }

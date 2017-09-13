@@ -14,6 +14,8 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
@@ -273,14 +275,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.xMsClientRequestIds = new XMsClientRequestIdsInner(restClient().retrofit(), this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsInner(restClient().retrofit(), this);
-        this.subscriptionInMethods = new SubscriptionInMethodsInner(restClient().retrofit(), this);
-        this.apiVersionDefaults = new ApiVersionDefaultsInner(restClient().retrofit(), this);
-        this.apiVersionLocals = new ApiVersionLocalsInner(restClient().retrofit(), this);
-        this.skipUrlEncodings = new SkipUrlEncodingsInner(restClient().retrofit(), this);
-        this.odatas = new OdatasInner(restClient().retrofit(), this);
-        this.headers = new HeadersInner(restClient().retrofit(), this);
+        this.xMsClientRequestIds = new XMsClientRequestIdsInner(this);
+        this.subscriptionInCredentials = new SubscriptionInCredentialsInner(this);
+        this.subscriptionInMethods = new SubscriptionInMethodsInner(this);
+        this.apiVersionDefaults = new ApiVersionDefaultsInner(this);
+        this.apiVersionLocals = new ApiVersionLocalsInner(this);
+        this.skipUrlEncodings = new SkipUrlEncodingsInner(this);
+        this.odatas = new OdatasInner(this);
+        this.headers = new HeadersInner(this);
         this.azureClient = new AzureClient(this);
     }
 

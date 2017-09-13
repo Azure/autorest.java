@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
-    Observable<Basic> getValidAsync();
+    Single<Basic> getValidAsync();
 
-    /**
-     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
-     */
-    Observable<ServiceResponse<Basic>> getValidWithServiceResponseAsync();
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -85,16 +79,8 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putValidAsync(Basic complexBody);
+    Single<Void> putValidAsync(Basic complexBody);
 
-    /**
-     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
-     *
-     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Basic complexBody);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -121,15 +107,8 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
-    Observable<Basic> getInvalidAsync();
+    Single<Basic> getInvalidAsync();
 
-    /**
-     * Get a basic complex type that is invalid for the local strong type.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
-     */
-    Observable<ServiceResponse<Basic>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get a basic complex type that is empty.
@@ -156,15 +135,8 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
-    Observable<Basic> getEmptyAsync();
+    Single<Basic> getEmptyAsync();
 
-    /**
-     * Get a basic complex type that is empty.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
-     */
-    Observable<ServiceResponse<Basic>> getEmptyWithServiceResponseAsync();
 
     /**
      * Get a basic complex type whose properties are null.
@@ -191,15 +163,8 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
-    Observable<Basic> getNullAsync();
+    Single<Basic> getNullAsync();
 
-    /**
-     * Get a basic complex type whose properties are null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
-     */
-    Observable<ServiceResponse<Basic>> getNullWithServiceResponseAsync();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
@@ -226,14 +191,7 @@ public interface Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
-    Observable<Basic> getNotProvidedAsync();
+    Single<Basic> getNotProvidedAsync();
 
-    /**
-     * Get a basic complex type while the server doesn't provide a response payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
-     */
-    Observable<ServiceResponse<Basic>> getNotProvidedWithServiceResponseAsync();
 
 }

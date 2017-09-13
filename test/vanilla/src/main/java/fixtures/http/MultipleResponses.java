@@ -19,6 +19,7 @@ import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -50,15 +51,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model204NoModelDefaultError200ValidAsync();
+    Single<A> get200Model204NoModelDefaultError200ValidAsync();
 
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError200ValidWithServiceResponseAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -85,15 +79,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model204NoModelDefaultError204ValidAsync();
+    Single<A> get200Model204NoModelDefaultError204ValidAsync();
 
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError204ValidWithServiceResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -120,15 +107,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model204NoModelDefaultError201InvalidAsync();
+    Single<A> get200Model204NoModelDefaultError201InvalidAsync();
 
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync();
 
     /**
      * Send a 202 response with no payload:.
@@ -155,15 +135,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model204NoModelDefaultError202NoneAsync();
+    Single<A> get200Model204NoModelDefaultError202NoneAsync();
 
-    /**
-     * Send a 202 response with no payload:.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError202NoneWithServiceResponseAsync();
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -190,15 +163,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model204NoModelDefaultError400ValidAsync();
+    Single<A> get200Model204NoModelDefaultError400ValidAsync();
 
-    /**
-     * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model204NoModelDefaultError400ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -225,15 +191,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model201ModelDefaultError200ValidAsync();
+    Single<A> get200Model201ModelDefaultError200ValidAsync();
 
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model201ModelDefaultError200ValidWithServiceResponseAsync();
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -260,15 +219,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model201ModelDefaultError201ValidAsync();
+    Single<A> get200Model201ModelDefaultError201ValidAsync();
 
-    /**
-     * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model201ModelDefaultError201ValidWithServiceResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -295,15 +247,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200Model201ModelDefaultError400ValidAsync();
+    Single<A> get200Model201ModelDefaultError400ValidAsync();
 
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200Model201ModelDefaultError400ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -330,15 +275,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Object object
      */
-    Observable<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
+    Single<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
 
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
-     */
-    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
@@ -365,15 +303,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Object object
      */
-    Observable<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
+    Single<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
 
-    /**
-     * Send a 200 response with valid payload: {'httpCode': '201'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
-     */
-    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -400,15 +331,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Object object
      */
-    Observable<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
+    Single<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
 
-    /**
-     * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
-     */
-    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -435,15 +359,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Object object
      */
-    Observable<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
+    Single<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
 
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Object object
-     */
-    Observable<ServiceResponse<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync();
 
     /**
      * Send a 202 response with no payload.
@@ -469,15 +386,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultError202NoneAsync();
+    Single<Void> get202None204NoneDefaultError202NoneAsync();
 
-    /**
-     * Send a 202 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultError202NoneWithServiceResponseAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -503,15 +413,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultError204NoneAsync();
+    Single<Void> get202None204NoneDefaultError204NoneAsync();
 
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultError204NoneWithServiceResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -537,15 +440,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultError400ValidAsync();
+    Single<Void> get202None204NoneDefaultError400ValidAsync();
 
-    /**
-     * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultError400ValidWithServiceResponseAsync();
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -571,15 +467,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultNone202InvalidAsync();
+    Single<Void> get202None204NoneDefaultNone202InvalidAsync();
 
-    /**
-     * Send a 202 response with an unexpected payload {'property': 'value'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone202InvalidWithServiceResponseAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -605,15 +494,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultNone204NoneAsync();
+    Single<Void> get202None204NoneDefaultNone204NoneAsync();
 
-    /**
-     * Send a 204 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone204NoneWithServiceResponseAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -639,15 +521,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultNone400NoneAsync();
+    Single<Void> get202None204NoneDefaultNone400NoneAsync();
 
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400NoneWithServiceResponseAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -673,15 +548,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> get202None204NoneDefaultNone400InvalidAsync();
+    Single<Void> get202None204NoneDefaultNone400InvalidAsync();
 
-    /**
-     * Send a 400 response with an unexpected payload {'property': 'value'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> get202None204NoneDefaultNone400InvalidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -708,15 +576,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> getDefaultModelA200ValidAsync();
+    Single<A> getDefaultModelA200ValidAsync();
 
-    /**
-     * Send a 200 response with valid payload: {'statusCode': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> getDefaultModelA200ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -743,15 +604,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> getDefaultModelA200NoneAsync();
+    Single<A> getDefaultModelA200NoneAsync();
 
-    /**
-     * Send a 200 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> getDefaultModelA200NoneWithServiceResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -778,15 +632,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> getDefaultModelA400ValidAsync();
+    Single<A> getDefaultModelA400ValidAsync();
 
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> getDefaultModelA400ValidWithServiceResponseAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -813,15 +660,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> getDefaultModelA400NoneAsync();
+    Single<A> getDefaultModelA400NoneAsync();
 
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> getDefaultModelA400NoneWithServiceResponseAsync();
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
@@ -847,15 +687,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getDefaultNone200InvalidAsync();
+    Single<Void> getDefaultNone200InvalidAsync();
 
-    /**
-     * Send a 200 response with invalid payload: {'statusCode': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getDefaultNone200InvalidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -881,15 +714,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getDefaultNone200NoneAsync();
+    Single<Void> getDefaultNone200NoneAsync();
 
-    /**
-     * Send a 200 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getDefaultNone200NoneWithServiceResponseAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -915,15 +741,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getDefaultNone400InvalidAsync();
+    Single<Void> getDefaultNone400InvalidAsync();
 
-    /**
-     * Send a 400 response with valid payload: {'statusCode': '400'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getDefaultNone400InvalidWithServiceResponseAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -949,15 +768,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getDefaultNone400NoneAsync();
+    Single<Void> getDefaultNone400NoneAsync();
 
-    /**
-     * Send a 400 response with no payload.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getDefaultNone400NoneWithServiceResponseAsync();
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
@@ -984,15 +796,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA200NoneAsync();
+    Single<A> get200ModelA200NoneAsync();
 
-    /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA200NoneWithServiceResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
@@ -1019,15 +824,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA200ValidAsync();
+    Single<A> get200ModelA200ValidAsync();
 
-    /**
-     * Send a 200 response with payload {'statusCode': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA200ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
@@ -1054,15 +852,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA200InvalidAsync();
+    Single<A> get200ModelA200InvalidAsync();
 
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA200InvalidWithServiceResponseAsync();
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
@@ -1089,15 +880,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA400NoneAsync();
+    Single<A> get200ModelA400NoneAsync();
 
-    /**
-     * Send a 400 response with no payload client should treat as an http error with no error model.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA400NoneWithServiceResponseAsync();
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
@@ -1124,15 +908,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA400ValidAsync();
+    Single<A> get200ModelA400ValidAsync();
 
-    /**
-     * Send a 200 response with payload {'statusCode': '400'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA400ValidWithServiceResponseAsync();
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
@@ -1159,15 +936,8 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA400InvalidAsync();
+    Single<A> get200ModelA400InvalidAsync();
 
-    /**
-     * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA400InvalidWithServiceResponseAsync();
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
@@ -1194,14 +964,7 @@ public interface MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the A object
      */
-    Observable<A> get200ModelA202ValidAsync();
+    Single<A> get200ModelA202ValidAsync();
 
-    /**
-     * Send a 202 response with payload {'statusCode': '202'}.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the A object
-     */
-    Observable<ServiceResponse<A>> get200ModelA202ValidWithServiceResponseAsync();
 
 }

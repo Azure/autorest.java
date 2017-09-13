@@ -10,26 +10,30 @@
 
 package fixtures.headexceptions.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HEAD;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import java.io.IOException;
-import retrofit2.http.HEAD;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HeadExceptions.
  */
 public class HeadExceptionsInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private HeadExceptionsService service;
     /** The service client containing this operation class. */
     private AutoRestHeadExceptionTestServiceImpl client;
@@ -37,11 +41,10 @@ public class HeadExceptionsInner {
     /**
      * Initializes an instance of HeadExceptionsInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadExceptionsInner(Retrofit retrofit, AutoRestHeadExceptionTestServiceImpl client) {
-        this.service = retrofit.create(HeadExceptionsService.class);
+    public HeadExceptionsInner(AutoRestHeadExceptionTestServiceImpl client) {
+        this.service = RestProxy.create(HeadExceptionsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -52,15 +55,15 @@ public class HeadExceptionsInner {
     interface HeadExceptionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")
-        Observable<Response<Void>> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
-        Observable<Response<Void>> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
-        Observable<Response<Void>> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -72,7 +75,7 @@ public class HeadExceptionsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head200() {
-        head200WithServiceResponseAsync().toBlocking().single().body();
+        head200Async().toBlocking().value();
     }
 
     /**
@@ -83,7 +86,7 @@ public class HeadExceptionsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
     /**
@@ -92,42 +95,10 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> head200Async() {
-        return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> head200Async() {
+        return service.head200(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> head200WithServiceResponseAsync() {
-        return service.head200(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = head200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildEmpty(response);
-    }
 
     /**
      * Return 204 status code if successful.
@@ -137,7 +108,7 @@ public class HeadExceptionsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head204() {
-        head204WithServiceResponseAsync().toBlocking().single().body();
+        head204Async().toBlocking().value();
     }
 
     /**
@@ -148,7 +119,7 @@ public class HeadExceptionsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
     /**
@@ -157,42 +128,10 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> head204Async() {
-        return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> head204Async() {
+        return service.head204(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> head204WithServiceResponseAsync() {
-        return service.head204(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = head204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildEmpty(response);
-    }
 
     /**
      * Return 404 status code if successful.
@@ -202,7 +141,7 @@ public class HeadExceptionsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head404() {
-        head404WithServiceResponseAsync().toBlocking().single().body();
+        head404Async().toBlocking().value();
     }
 
     /**
@@ -213,7 +152,7 @@ public class HeadExceptionsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
     /**
@@ -222,41 +161,9 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> head404Async() {
-        return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> head404Async() {
+        return service.head404(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Return 404 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> head404WithServiceResponseAsync() {
-        return service.head404(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = head404Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildEmpty(response);
-    }
 
 }

@@ -17,6 +17,7 @@ import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReadonlyObj object
      */
-    Observable<ReadonlyObj> getValidAsync();
+    Single<ReadonlyObj> getValidAsync();
 
-    /**
-     * Get complex types that have readonly properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ReadonlyObj object
-     */
-    Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync();
 
     /**
      * Put complex types that have readonly properties.
@@ -85,15 +79,7 @@ public interface Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putValidAsync(ReadonlyObj complexBody);
+    Single<Void> putValidAsync(ReadonlyObj complexBody);
 
-    /**
-     * Put complex types that have readonly properties.
-     *
-     * @param complexBody the ReadonlyObj value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody);
 
 }

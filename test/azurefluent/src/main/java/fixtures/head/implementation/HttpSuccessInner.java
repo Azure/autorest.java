@@ -10,26 +10,30 @@
 
 package fixtures.head.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HEAD;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import java.io.IOException;
-import retrofit2.http.HEAD;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
 public class HttpSuccessInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
     private AutoRestHeadTestServiceImpl client;
@@ -37,11 +41,10 @@ public class HttpSuccessInner {
     /**
      * Initializes an instance of HttpSuccessInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessInner(Retrofit retrofit, AutoRestHeadTestServiceImpl client) {
-        this.service = retrofit.create(HttpSuccessService.class);
+    public HttpSuccessInner(AutoRestHeadTestServiceImpl client) {
+        this.service = RestProxy.create(HttpSuccessService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -52,15 +55,15 @@ public class HttpSuccessInner {
     interface HttpSuccessService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")
-        Observable<Response<Void>> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Boolean> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
         @HEAD("http/success/204")
-        Observable<Response<Void>> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Boolean> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
         @HEAD("http/success/404")
-        Observable<Response<Void>> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Boolean> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -73,7 +76,7 @@ public class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head200() {
-        return head200WithServiceResponseAsync().toBlocking().single().body();
+        return head200Async().toBlocking().value();
     }
 
     /**
@@ -84,7 +87,7 @@ public class HttpSuccessInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
     /**
@@ -93,43 +96,10 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> head200Async() {
-        return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> head200Async() {
+        return service.head200(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync() {
-        return service.head200(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = head200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildEmpty(response);
-    }
 
     /**
      * Return 204 status code if successful.
@@ -140,7 +110,7 @@ public class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head204() {
-        return head204WithServiceResponseAsync().toBlocking().single().body();
+        return head204Async().toBlocking().value();
     }
 
     /**
@@ -151,7 +121,7 @@ public class HttpSuccessInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
     /**
@@ -160,43 +130,10 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> head204Async() {
-        return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> head204Async() {
+        return service.head204(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync() {
-        return service.head204(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = head204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildEmpty(response);
-    }
 
     /**
      * Return 404 status code if successful.
@@ -207,7 +144,7 @@ public class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head404() {
-        return head404WithServiceResponseAsync().toBlocking().single().body();
+        return head404Async().toBlocking().value();
     }
 
     /**
@@ -218,7 +155,7 @@ public class HttpSuccessInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
     /**
@@ -227,42 +164,9 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> head404Async() {
-        return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> head404Async() {
+        return service.head404(this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Return 404 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync() {
-        return service.head404(this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = head404Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildEmpty(response);
-    }
 
 }

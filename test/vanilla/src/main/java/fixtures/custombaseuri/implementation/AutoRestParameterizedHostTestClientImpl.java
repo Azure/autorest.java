@@ -12,10 +12,10 @@ package fixtures.custombaseuri.implementation;
 
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
@@ -60,13 +60,6 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     */
-    public AutoRestParameterizedHostTestClientImpl() {
-        this("http://{accountName}{host}");
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -78,23 +71,9 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestParameterizedHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://{accountName}{host}", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    private AutoRestParameterizedHostTestClientImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestParameterizedHostTestClientImpl() {
+        this("http://{accountName}{host}");
         initialize();
     }
 
@@ -110,6 +89,6 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
 
     private void initialize() {
         this.host = "host";
-        this.paths = new PathsImpl(retrofit(), this);
+        this.paths = new PathsImpl(this);
     }
 }

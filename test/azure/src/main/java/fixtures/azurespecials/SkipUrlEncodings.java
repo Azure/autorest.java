@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -49,16 +50,8 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodPathValidAsync(String unencodedPathParam);
+    Single<Void> getMethodPathValidAsync(String unencodedPathParam);
 
-    /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'.
-     *
-     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodPathValidWithServiceResponseAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -87,16 +80,8 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getPathPathValidAsync(String unencodedPathParam);
+    Single<Void> getPathPathValidAsync(String unencodedPathParam);
 
-    /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'.
-     *
-     * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getPathPathValidWithServiceResponseAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -122,15 +107,8 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getSwaggerPathValidAsync();
+    Single<Void> getSwaggerPathValidAsync();
 
-    /**
-     * Get method with unencoded path parameter with value 'path1/path2/path3'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getSwaggerPathValidWithServiceResponseAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -159,16 +137,8 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodQueryValidAsync(String q1);
+    Single<Void> getMethodQueryValidAsync(String q1);
 
-    /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
-     *
-     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodQueryValidWithServiceResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -194,15 +164,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodQueryNullAsync();
-
-    /**
-     * Get method with unencoded query parameter with value null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodQueryNullWithServiceResponseAsync();
+    Single<Void> getMethodQueryNullAsync();
     /**
      * Get method with unencoded query parameter with value null.
      *
@@ -230,16 +192,8 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodQueryNullAsync(String q1);
+    Single<Void> getMethodQueryNullAsync(String q1);
 
-    /**
-     * Get method with unencoded query parameter with value null.
-     *
-     * @param q1 Unencoded query parameter with value null
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodQueryNullWithServiceResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -268,16 +222,8 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getPathQueryValidAsync(String q1);
+    Single<Void> getPathQueryValidAsync(String q1);
 
-    /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
-     *
-     * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getPathQueryValidWithServiceResponseAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -303,14 +249,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getSwaggerQueryValidAsync();
+    Single<Void> getSwaggerQueryValidAsync();
 
-    /**
-     * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getSwaggerQueryValidWithServiceResponseAsync();
 
 }

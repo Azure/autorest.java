@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -46,15 +47,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> head200Async();
+    Single<Void> head200Async();
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> head200WithServiceResponseAsync();
 
     /**
      * Get 200 success.
@@ -81,15 +75,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> get200Async();
+    Single<Boolean> get200Async();
 
-    /**
-     * Get 200 success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> get200WithServiceResponseAsync();
 
     /**
      * Put boolean value true returning 200 success.
@@ -115,15 +102,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put200Async();
-
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put200WithServiceResponseAsync();
+    Single<Void> put200Async();
     /**
      * Put boolean value true returning 200 success.
      *
@@ -151,16 +130,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put200Async(Boolean booleanValue);
+    Single<Void> put200Async(Boolean booleanValue);
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put200WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -186,15 +157,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> patch200Async();
-
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> patch200WithServiceResponseAsync();
+    Single<Void> patch200Async();
     /**
      * Patch true Boolean value in request returning 200.
      *
@@ -222,16 +185,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> patch200Async(Boolean booleanValue);
+    Single<Void> patch200Async(Boolean booleanValue);
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> patch200WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -257,15 +212,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post200Async();
-
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post200WithServiceResponseAsync();
+    Single<Void> post200Async();
     /**
      * Post bollean value true in request that returns a 200.
      *
@@ -293,16 +240,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post200Async(Boolean booleanValue);
+    Single<Void> post200Async(Boolean booleanValue);
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post200WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -328,15 +267,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> delete200Async();
-
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> delete200WithServiceResponseAsync();
+    Single<Void> delete200Async();
     /**
      * Delete simple boolean value true returns 200.
      *
@@ -364,16 +295,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> delete200Async(Boolean booleanValue);
+    Single<Void> delete200Async(Boolean booleanValue);
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> delete200WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -399,15 +322,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put201Async();
-
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put201WithServiceResponseAsync();
+    Single<Void> put201Async();
     /**
      * Put true Boolean value in request returns 201.
      *
@@ -435,16 +350,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put201Async(Boolean booleanValue);
+    Single<Void> put201Async(Boolean booleanValue);
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put201WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -470,15 +377,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post201Async();
-
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post201WithServiceResponseAsync();
+    Single<Void> post201Async();
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
@@ -506,16 +405,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post201Async(Boolean booleanValue);
+    Single<Void> post201Async(Boolean booleanValue);
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post201WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -541,15 +432,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put202Async();
-
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put202WithServiceResponseAsync();
+    Single<Void> put202Async();
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
@@ -577,16 +460,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put202Async(Boolean booleanValue);
+    Single<Void> put202Async(Boolean booleanValue);
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put202WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -612,15 +487,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> patch202Async();
-
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> patch202WithServiceResponseAsync();
+    Single<Void> patch202Async();
     /**
      * Patch true Boolean value in request returns 202.
      *
@@ -648,16 +515,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> patch202Async(Boolean booleanValue);
+    Single<Void> patch202Async(Boolean booleanValue);
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> patch202WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -683,15 +542,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post202Async();
-
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post202WithServiceResponseAsync();
+    Single<Void> post202Async();
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
@@ -719,16 +570,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post202Async(Boolean booleanValue);
+    Single<Void> post202Async(Boolean booleanValue);
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post202WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -754,15 +597,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> delete202Async();
-
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> delete202WithServiceResponseAsync();
+    Single<Void> delete202Async();
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
@@ -790,16 +625,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> delete202Async(Boolean booleanValue);
+    Single<Void> delete202Async(Boolean booleanValue);
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> delete202WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 204 status code if successful.
@@ -825,15 +652,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> head204Async();
+    Single<Void> head204Async();
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> head204WithServiceResponseAsync();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -859,15 +679,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put204Async();
-
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put204WithServiceResponseAsync();
+    Single<Void> put204Async();
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
@@ -895,16 +707,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> put204Async(Boolean booleanValue);
+    Single<Void> put204Async(Boolean booleanValue);
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> put204WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -930,15 +734,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> patch204Async();
-
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> patch204WithServiceResponseAsync();
+    Single<Void> patch204Async();
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
@@ -966,16 +762,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> patch204Async(Boolean booleanValue);
+    Single<Void> patch204Async(Boolean booleanValue);
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> patch204WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1001,15 +789,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post204Async();
-
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post204WithServiceResponseAsync();
+    Single<Void> post204Async();
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
@@ -1037,16 +817,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> post204Async(Boolean booleanValue);
+    Single<Void> post204Async(Boolean booleanValue);
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> post204WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1072,15 +844,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> delete204Async();
-
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> delete204WithServiceResponseAsync();
+    Single<Void> delete204Async();
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
@@ -1108,16 +872,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> delete204Async(Boolean booleanValue);
+    Single<Void> delete204Async(Boolean booleanValue);
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> delete204WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 404 status code.
@@ -1143,14 +899,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> head404Async();
+    Single<Void> head404Async();
 
-    /**
-     * Return 404 status code.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> head404WithServiceResponseAsync();
 
 }

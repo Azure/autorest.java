@@ -10,29 +10,32 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PathParam;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Groups.
  */
 public class GroupsInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private GroupsService service;
     /** The service client containing this operation class. */
     private MicrosoftAzureTestUrlImpl client;
@@ -40,11 +43,10 @@ public class GroupsInner {
     /**
      * Initializes an instance of GroupsInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public GroupsInner(Retrofit retrofit, MicrosoftAzureTestUrlImpl client) {
-        this.service = retrofit.create(GroupsService.class);
+    public GroupsInner(MicrosoftAzureTestUrlImpl client) {
+        this.service = RestProxy.create(GroupsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -55,7 +57,7 @@ public class GroupsInner {
     interface GroupsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        Observable<Response<ResponseBody>> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<SampleResourceGroupInner> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -69,7 +71,7 @@ public class GroupsInner {
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().body();
+        return getSampleResourceGroupAsync(resourceGroupName).toBlocking().value();
     }
 
     /**
@@ -81,7 +83,7 @@ public class GroupsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
-        return ServiceFuture.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+        return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
     }
 
     /**
@@ -91,23 +93,7 @@ public class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SampleResourceGroupInner object
      */
-    public Observable<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
-        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroupInner>, SampleResourceGroupInner>() {
-            @Override
-            public SampleResourceGroupInner call(ServiceResponse<SampleResourceGroupInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Provides a resouce group with name 'testgroup101' and location 'West US'.
-     *
-     * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroupInner object
-     */
-    public Observable<ServiceResponse<SampleResourceGroupInner>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName) {
+    public Single<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -117,25 +103,8 @@ public class GroupsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SampleResourceGroupInner>>>() {
-                @Override
-                public Observable<ServiceResponse<SampleResourceGroupInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<SampleResourceGroupInner> clientResponse = getSampleResourceGroupDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<SampleResourceGroupInner, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<SampleResourceGroupInner>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

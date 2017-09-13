@@ -14,6 +14,7 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.azurespecials.ApiVersionDefaults;
 import fixtures.azurespecials.ApiVersionLocals;
 import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
@@ -23,6 +24,7 @@ import fixtures.azurespecials.SkipUrlEncodings;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.XMsClientRequestIds;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
@@ -282,14 +284,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.xMsClientRequestIds = new XMsClientRequestIdsImpl(restClient().retrofit(), this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(restClient().retrofit(), this);
-        this.subscriptionInMethods = new SubscriptionInMethodsImpl(restClient().retrofit(), this);
-        this.apiVersionDefaults = new ApiVersionDefaultsImpl(restClient().retrofit(), this);
-        this.apiVersionLocals = new ApiVersionLocalsImpl(restClient().retrofit(), this);
-        this.skipUrlEncodings = new SkipUrlEncodingsImpl(restClient().retrofit(), this);
-        this.odatas = new OdatasImpl(restClient().retrofit(), this);
-        this.headers = new HeadersImpl(restClient().retrofit(), this);
+        this.xMsClientRequestIds = new XMsClientRequestIdsImpl(this);
+        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(this);
+        this.subscriptionInMethods = new SubscriptionInMethodsImpl(this);
+        this.apiVersionDefaults = new ApiVersionDefaultsImpl(this);
+        this.apiVersionLocals = new ApiVersionLocalsImpl(this);
+        this.skipUrlEncodings = new SkipUrlEncodingsImpl(this);
+        this.odatas = new OdatasImpl(this);
+        this.headers = new HeadersImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

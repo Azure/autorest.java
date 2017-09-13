@@ -17,6 +17,7 @@ import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.LocalDate;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
-    Observable<LocalDate> getNullAsync();
+    Single<LocalDate> getNullAsync();
 
-    /**
-     * Get null date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
-     */
-    Observable<ServiceResponse<LocalDate>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid date value.
@@ -83,15 +77,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
-    Observable<LocalDate> getInvalidDateAsync();
+    Single<LocalDate> getInvalidDateAsync();
 
-    /**
-     * Get invalid date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
-     */
-    Observable<ServiceResponse<LocalDate>> getInvalidDateWithServiceResponseAsync();
 
     /**
      * Get overflow date value.
@@ -118,15 +105,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
-    Observable<LocalDate> getOverflowDateAsync();
+    Single<LocalDate> getOverflowDateAsync();
 
-    /**
-     * Get overflow date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
-     */
-    Observable<ServiceResponse<LocalDate>> getOverflowDateWithServiceResponseAsync();
 
     /**
      * Get underflow date value.
@@ -153,15 +133,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
-    Observable<LocalDate> getUnderflowDateAsync();
+    Single<LocalDate> getUnderflowDateAsync();
 
-    /**
-     * Get underflow date value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
-     */
-    Observable<ServiceResponse<LocalDate>> getUnderflowDateWithServiceResponseAsync();
 
     /**
      * Put max date value 9999-12-31.
@@ -190,16 +163,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMaxDateAsync(LocalDate dateBody);
+    Single<Void> putMaxDateAsync(LocalDate dateBody);
 
-    /**
-     * Put max date value 9999-12-31.
-     *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMaxDateWithServiceResponseAsync(LocalDate dateBody);
 
     /**
      * Get max date value 9999-12-31.
@@ -226,15 +191,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
-    Observable<LocalDate> getMaxDateAsync();
+    Single<LocalDate> getMaxDateAsync();
 
-    /**
-     * Get max date value 9999-12-31.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
-     */
-    Observable<ServiceResponse<LocalDate>> getMaxDateWithServiceResponseAsync();
 
     /**
      * Put min date value 0000-01-01.
@@ -263,16 +221,8 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMinDateAsync(LocalDate dateBody);
+    Single<Void> putMinDateAsync(LocalDate dateBody);
 
-    /**
-     * Put min date value 0000-01-01.
-     *
-     * @param dateBody the LocalDate value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMinDateWithServiceResponseAsync(LocalDate dateBody);
 
     /**
      * Get min date value 0000-01-01.
@@ -299,14 +249,7 @@ public interface Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
-    Observable<LocalDate> getMinDateAsync();
+    Single<LocalDate> getMinDateAsync();
 
-    /**
-     * Get min date value 0000-01-01.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
-     */
-    Observable<ServiceResponse<LocalDate>> getMinDateWithServiceResponseAsync();
 
 }

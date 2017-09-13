@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -46,15 +47,8 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodLocalValidAsync();
+    Single<Void> getMethodLocalValidAsync();
 
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodLocalValidWithServiceResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -80,15 +74,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodLocalNullAsync();
-
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync();
+    Single<Void> getMethodLocalNullAsync();
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
@@ -116,16 +102,8 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodLocalNullAsync(String apiVersion);
+    Single<Void> getMethodLocalNullAsync(String apiVersion);
 
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
-     *
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync(String apiVersion);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -151,15 +129,8 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getPathLocalValidAsync();
+    Single<Void> getPathLocalValidAsync();
 
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getPathLocalValidWithServiceResponseAsync();
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -185,14 +156,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getSwaggerLocalValidAsync();
+    Single<Void> getSwaggerLocalValidAsync();
 
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getSwaggerLocalValidWithServiceResponseAsync();
 
 }

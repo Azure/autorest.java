@@ -17,6 +17,7 @@ import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the int object
      */
-    Observable<Integer> getNullAsync();
+    Single<Integer> getNullAsync();
 
-    /**
-     * Get null Int value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
-     */
-    Observable<ServiceResponse<Integer>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid Int value.
@@ -83,15 +77,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the int object
      */
-    Observable<Integer> getInvalidAsync();
+    Single<Integer> getInvalidAsync();
 
-    /**
-     * Get invalid Int value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
-     */
-    Observable<ServiceResponse<Integer>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get overflow Int32 value.
@@ -118,15 +105,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the int object
      */
-    Observable<Integer> getOverflowInt32Async();
+    Single<Integer> getOverflowInt32Async();
 
-    /**
-     * Get overflow Int32 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
-     */
-    Observable<ServiceResponse<Integer>> getOverflowInt32WithServiceResponseAsync();
 
     /**
      * Get underflow Int32 value.
@@ -153,15 +133,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the int object
      */
-    Observable<Integer> getUnderflowInt32Async();
+    Single<Integer> getUnderflowInt32Async();
 
-    /**
-     * Get underflow Int32 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
-     */
-    Observable<ServiceResponse<Integer>> getUnderflowInt32WithServiceResponseAsync();
 
     /**
      * Get overflow Int64 value.
@@ -188,15 +161,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the long object
      */
-    Observable<Long> getOverflowInt64Async();
+    Single<Long> getOverflowInt64Async();
 
-    /**
-     * Get overflow Int64 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the long object
-     */
-    Observable<ServiceResponse<Long>> getOverflowInt64WithServiceResponseAsync();
 
     /**
      * Get underflow Int64 value.
@@ -223,15 +189,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the long object
      */
-    Observable<Long> getUnderflowInt64Async();
+    Single<Long> getUnderflowInt64Async();
 
-    /**
-     * Get underflow Int64 value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the long object
-     */
-    Observable<ServiceResponse<Long>> getUnderflowInt64WithServiceResponseAsync();
 
     /**
      * Put max int32 value.
@@ -260,16 +219,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMax32Async(int intBody);
+    Single<Void> putMax32Async(int intBody);
 
-    /**
-     * Put max int32 value.
-     *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMax32WithServiceResponseAsync(int intBody);
 
     /**
      * Put max int64 value.
@@ -298,16 +249,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMax64Async(long intBody);
+    Single<Void> putMax64Async(long intBody);
 
-    /**
-     * Put max int64 value.
-     *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMax64WithServiceResponseAsync(long intBody);
 
     /**
      * Put min int32 value.
@@ -336,16 +279,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMin32Async(int intBody);
+    Single<Void> putMin32Async(int intBody);
 
-    /**
-     * Put min int32 value.
-     *
-     * @param intBody the int value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMin32WithServiceResponseAsync(int intBody);
 
     /**
      * Put min int64 value.
@@ -374,16 +309,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putMin64Async(long intBody);
+    Single<Void> putMin64Async(long intBody);
 
-    /**
-     * Put min int64 value.
-     *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putMin64WithServiceResponseAsync(long intBody);
 
     /**
      * Get datetime encoded as Unix time value.
@@ -410,15 +337,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
-    Observable<DateTime> getUnixTimeAsync();
+    Single<DateTime> getUnixTimeAsync();
 
-    /**
-     * Get datetime encoded as Unix time value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
-     */
-    Observable<ServiceResponse<DateTime>> getUnixTimeWithServiceResponseAsync();
 
     /**
      * Put datetime encoded as Unix time.
@@ -447,16 +367,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putUnixTimeDateAsync(DateTime intBody);
+    Single<Void> putUnixTimeDateAsync(DateTime intBody);
 
-    /**
-     * Put datetime encoded as Unix time.
-     *
-     * @param intBody the long value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putUnixTimeDateWithServiceResponseAsync(DateTime intBody);
 
     /**
      * Get invalid Unix time value.
@@ -483,15 +395,8 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
-    Observable<DateTime> getInvalidUnixTimeAsync();
+    Single<DateTime> getInvalidUnixTimeAsync();
 
-    /**
-     * Get invalid Unix time value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
-     */
-    Observable<ServiceResponse<DateTime>> getInvalidUnixTimeWithServiceResponseAsync();
 
     /**
      * Get null Unix time value.
@@ -518,14 +423,7 @@ public interface Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
-    Observable<DateTime> getNullUnixTimeAsync();
+    Single<DateTime> getNullUnixTimeAsync();
 
-    /**
-     * Get null Unix time value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
-     */
-    Observable<ServiceResponse<DateTime>> getNullUnixTimeWithServiceResponseAsync();
 
 }

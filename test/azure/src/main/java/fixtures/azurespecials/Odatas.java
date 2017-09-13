@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -46,15 +47,7 @@ public interface Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getWithFilterAsync();
-
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync();
+    Single<Void> getWithFilterAsync();
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
@@ -88,17 +81,7 @@ public interface Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getWithFilterAsync(String filter, Integer top, String orderby);
+    Single<Void> getWithFilterAsync(String filter, Integer top, String orderby);
 
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
-     * @param top The top parameter with value 10.
-     * @param orderby The orderby parameter with value id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync(String filter, Integer top, String orderby);
 
 }

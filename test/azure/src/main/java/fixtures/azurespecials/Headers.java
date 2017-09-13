@@ -20,6 +20,7 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHead
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,16 +54,8 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> customNamedRequestIdAsync(String fooClientRequestId);
+    Single<Void> customNamedRequestIdAsync(String fooClientRequestId);
 
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -91,16 +84,8 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
-     *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -130,15 +115,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
+    Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
 
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> customNamedRequestIdHeadWithServiceResponseAsync(String fooClientRequestId);
 
 }

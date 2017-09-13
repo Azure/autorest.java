@@ -10,33 +10,36 @@
 
 package fixtures.http.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.http.HttpSuccess;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.DELETE;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HEAD;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PATCH;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.HEAD;
-import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.PATCH;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
 public class HttpSuccessImpl implements HttpSuccess {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
     private AutoRestHttpInfrastructureTestServiceImpl client;
@@ -44,90 +47,126 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Initializes an instance of HttpSuccess.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = retrofit.create(HttpSuccessService.class);
+    public HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+        this.service = RestProxy.create(HttpSuccessService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for HttpSuccess to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface HttpSuccessService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head200" })
         @HEAD("http/success/200")
-        Observable<Response<Void>> head200();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> head200();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess get200" })
         @GET("http/success/200")
-        Observable<Response<ResponseBody>> get200();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Boolean> get200();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put200" })
         @PUT("http/success/200")
-        Observable<Response<ResponseBody>> put200(@Body Boolean booleanValue);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> put200(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch200" })
         @PATCH("http/success/200")
-        Observable<Response<ResponseBody>> patch200(@Body Boolean booleanValue);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> patch200(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post200" })
         @POST("http/success/200")
-        Observable<Response<ResponseBody>> post200(@Body Boolean booleanValue);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> post200(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete200" })
-        @HTTP(path = "http/success/200", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete200(@Body Boolean booleanValue);
+        @DELETE("http/success/200")
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> delete200(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put201" })
         @PUT("http/success/201")
-        Observable<Response<ResponseBody>> put201(@Body Boolean booleanValue);
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> put201(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post201" })
         @POST("http/success/201")
-        Observable<Response<ResponseBody>> post201(@Body Boolean booleanValue);
+        @ExpectedResponses({201})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> post201(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put202" })
         @PUT("http/success/202")
-        Observable<Response<ResponseBody>> put202(@Body Boolean booleanValue);
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> put202(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch202" })
         @PATCH("http/success/202")
-        Observable<Response<ResponseBody>> patch202(@Body Boolean booleanValue);
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> patch202(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post202" })
         @POST("http/success/202")
-        Observable<Response<ResponseBody>> post202(@Body Boolean booleanValue);
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> post202(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete202" })
-        @HTTP(path = "http/success/202", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete202(@Body Boolean booleanValue);
+        @DELETE("http/success/202")
+        @ExpectedResponses({202})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> delete202(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head204" })
         @HEAD("http/success/204")
-        Observable<Response<Void>> head204();
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> head204();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put204" })
         @PUT("http/success/204")
-        Observable<Response<ResponseBody>> put204(@Body Boolean booleanValue);
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> put204(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch204" })
         @PATCH("http/success/204")
-        Observable<Response<ResponseBody>> patch204(@Body Boolean booleanValue);
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> patch204(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post204" })
         @POST("http/success/204")
-        Observable<Response<ResponseBody>> post204(@Body Boolean booleanValue);
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> post204(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete204" })
-        @HTTP(path = "http/success/204", method = "DELETE", hasBody = true)
-        Observable<Response<ResponseBody>> delete204(@Body Boolean booleanValue);
+        @DELETE("http/success/204")
+        @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> delete204(@BodyParam Boolean booleanValue);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head404" })
         @HEAD("http/success/404")
-        Observable<Response<Void>> head404();
+        @ExpectedResponses({204, 404})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> head404();
 
     }
 
@@ -139,7 +178,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head200() {
-        head200WithServiceResponseAsync().toBlocking().single().body();
+        head200Async().toBlocking().value();
     }
 
     /**
@@ -150,7 +189,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
     /**
@@ -159,42 +198,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> head200Async() {
-        return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> head200Async() {
+        return service.head200();
     }
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> head200WithServiceResponseAsync() {
-        return service.head200()
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = head200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> head200Delegate(Response<Void> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .buildEmpty(response);
-    }
 
     /**
      * Get 200 success.
@@ -205,7 +212,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the boolean object if successful.
      */
     public boolean get200() {
-        return get200WithServiceResponseAsync().toBlocking().single().body();
+        return get200Async().toBlocking().value();
     }
 
     /**
@@ -216,7 +223,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(get200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(get200Async(), serviceCallback);
     }
 
     /**
@@ -225,42 +232,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> get200Async() {
-        return get200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> get200Async() {
+        return service.get200();
     }
 
-    /**
-     * Get 200 success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> get200WithServiceResponseAsync() {
-        return service.get200()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = get200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> get200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put boolean value true returning 200 success.
@@ -270,7 +245,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put200() {
-        put200WithServiceResponseAsync().toBlocking().single().body();
+        put200Async().toBlocking().value();
     }
 
     /**
@@ -281,44 +256,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(put200Async(), serviceCallback);
     }
 
     /**
      * Put boolean value true returning 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> put200Async() {
-        return put200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put200WithServiceResponseAsync() {
+    public Single<Void> put200Async() {
         final Boolean booleanValue = null;
-        return service.put200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.put200(booleanValue);
     }
 
     /**
@@ -330,7 +279,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put200(Boolean booleanValue) {
-        put200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        put200Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -342,7 +291,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(put200Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -352,43 +301,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> put200Async(Boolean booleanValue) {
-        return put200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> put200Async(Boolean booleanValue) {
+        return service.put200(booleanValue);
     }
 
-    /**
-     * Put boolean value true returning 200 success.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put200WithServiceResponseAsync(Boolean booleanValue) {
-        return service.put200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> put200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -398,7 +314,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void patch200() {
-        patch200WithServiceResponseAsync().toBlocking().single().body();
+        patch200Async().toBlocking().value();
     }
 
     /**
@@ -409,44 +325,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> patch200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(patch200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(patch200Async(), serviceCallback);
     }
 
     /**
      * Patch true Boolean value in request returning 200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> patch200Async() {
-        return patch200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> patch200WithServiceResponseAsync() {
+    public Single<Void> patch200Async() {
         final Boolean booleanValue = null;
-        return service.patch200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = patch200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.patch200(booleanValue);
     }
 
     /**
@@ -458,7 +348,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void patch200(Boolean booleanValue) {
-        patch200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        patch200Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -470,7 +360,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(patch200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(patch200Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -480,43 +370,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> patch200Async(Boolean booleanValue) {
-        return patch200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> patch200Async(Boolean booleanValue) {
+        return service.patch200(booleanValue);
     }
 
-    /**
-     * Patch true Boolean value in request returning 200.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> patch200WithServiceResponseAsync(Boolean booleanValue) {
-        return service.patch200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = patch200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> patch200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -526,7 +383,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post200() {
-        post200WithServiceResponseAsync().toBlocking().single().body();
+        post200Async().toBlocking().value();
     }
 
     /**
@@ -537,44 +394,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(post200Async(), serviceCallback);
     }
 
     /**
      * Post bollean value true in request that returns a 200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> post200Async() {
-        return post200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post200WithServiceResponseAsync() {
+    public Single<Void> post200Async() {
         final Boolean booleanValue = null;
-        return service.post200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.post200(booleanValue);
     }
 
     /**
@@ -586,7 +417,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post200(Boolean booleanValue) {
-        post200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        post200Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -598,7 +429,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(post200Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -608,43 +439,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> post200Async(Boolean booleanValue) {
-        return post200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> post200Async(Boolean booleanValue) {
+        return service.post200(booleanValue);
     }
 
-    /**
-     * Post bollean value true in request that returns a 200.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post200WithServiceResponseAsync(Boolean booleanValue) {
-        return service.post200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> post200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Delete simple boolean value true returns 200.
@@ -654,7 +452,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete200() {
-        delete200WithServiceResponseAsync().toBlocking().single().body();
+        delete200Async().toBlocking().value();
     }
 
     /**
@@ -665,44 +463,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(delete200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(delete200Async(), serviceCallback);
     }
 
     /**
      * Delete simple boolean value true returns 200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> delete200Async() {
-        return delete200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> delete200WithServiceResponseAsync() {
+    public Single<Void> delete200Async() {
         final Boolean booleanValue = null;
-        return service.delete200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = delete200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.delete200(booleanValue);
     }
 
     /**
@@ -714,7 +486,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete200(Boolean booleanValue) {
-        delete200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        delete200Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -726,7 +498,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(delete200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(delete200Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -736,43 +508,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> delete200Async(Boolean booleanValue) {
-        return delete200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> delete200Async(Boolean booleanValue) {
+        return service.delete200(booleanValue);
     }
 
-    /**
-     * Delete simple boolean value true returns 200.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> delete200WithServiceResponseAsync(Boolean booleanValue) {
-        return service.delete200(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = delete200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> delete200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put true Boolean value in request returns 201.
@@ -782,7 +521,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put201() {
-        put201WithServiceResponseAsync().toBlocking().single().body();
+        put201Async().toBlocking().value();
     }
 
     /**
@@ -793,44 +532,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put201WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(put201Async(), serviceCallback);
     }
 
     /**
      * Put true Boolean value in request returns 201.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> put201Async() {
-        return put201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put201WithServiceResponseAsync() {
+    public Single<Void> put201Async() {
         final Boolean booleanValue = null;
-        return service.put201(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put201Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.put201(booleanValue);
     }
 
     /**
@@ -842,7 +555,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put201(Boolean booleanValue) {
-        put201WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        put201Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -854,7 +567,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put201WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(put201Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -864,43 +577,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> put201Async(Boolean booleanValue) {
-        return put201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> put201Async(Boolean booleanValue) {
+        return service.put201(booleanValue);
     }
 
-    /**
-     * Put true Boolean value in request returns 201.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put201WithServiceResponseAsync(Boolean booleanValue) {
-        return service.put201(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put201Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> put201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -910,7 +590,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post201() {
-        post201WithServiceResponseAsync().toBlocking().single().body();
+        post201Async().toBlocking().value();
     }
 
     /**
@@ -921,44 +601,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post201WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(post201Async(), serviceCallback);
     }
 
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> post201Async() {
-        return post201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post201WithServiceResponseAsync() {
+    public Single<Void> post201Async() {
         final Boolean booleanValue = null;
-        return service.post201(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post201Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.post201(booleanValue);
     }
 
     /**
@@ -970,7 +624,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post201(Boolean booleanValue) {
-        post201WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        post201Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -982,7 +636,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post201WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(post201Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -992,43 +646,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> post201Async(Boolean booleanValue) {
-        return post201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> post201Async(Boolean booleanValue) {
+        return service.post201(booleanValue);
     }
 
-    /**
-     * Post true Boolean value in request returns 201 (Created).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post201WithServiceResponseAsync(Boolean booleanValue) {
-        return service.post201(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post201Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> post201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(201, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -1038,7 +659,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put202() {
-        put202WithServiceResponseAsync().toBlocking().single().body();
+        put202Async().toBlocking().value();
     }
 
     /**
@@ -1049,44 +670,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put202WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(put202Async(), serviceCallback);
     }
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> put202Async() {
-        return put202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put202WithServiceResponseAsync() {
+    public Single<Void> put202Async() {
         final Boolean booleanValue = null;
-        return service.put202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.put202(booleanValue);
     }
 
     /**
@@ -1098,7 +693,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put202(Boolean booleanValue) {
-        put202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        put202Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1110,7 +705,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(put202Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1120,43 +715,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> put202Async(Boolean booleanValue) {
-        return put202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> put202Async(Boolean booleanValue) {
+        return service.put202(booleanValue);
     }
 
-    /**
-     * Put true Boolean value in request returns 202 (Accepted).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put202WithServiceResponseAsync(Boolean booleanValue) {
-        return service.put202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> put202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -1166,7 +728,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void patch202() {
-        patch202WithServiceResponseAsync().toBlocking().single().body();
+        patch202Async().toBlocking().value();
     }
 
     /**
@@ -1177,44 +739,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> patch202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(patch202WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(patch202Async(), serviceCallback);
     }
 
     /**
      * Patch true Boolean value in request returns 202.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> patch202Async() {
-        return patch202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> patch202WithServiceResponseAsync() {
+    public Single<Void> patch202Async() {
         final Boolean booleanValue = null;
-        return service.patch202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = patch202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.patch202(booleanValue);
     }
 
     /**
@@ -1226,7 +762,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void patch202(Boolean booleanValue) {
-        patch202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        patch202Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1238,7 +774,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(patch202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(patch202Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1248,43 +784,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> patch202Async(Boolean booleanValue) {
-        return patch202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> patch202Async(Boolean booleanValue) {
+        return service.patch202(booleanValue);
     }
 
-    /**
-     * Patch true Boolean value in request returns 202.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> patch202WithServiceResponseAsync(Boolean booleanValue) {
-        return service.patch202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = patch202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> patch202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -1294,7 +797,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post202() {
-        post202WithServiceResponseAsync().toBlocking().single().body();
+        post202Async().toBlocking().value();
     }
 
     /**
@@ -1305,44 +808,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post202WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(post202Async(), serviceCallback);
     }
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> post202Async() {
-        return post202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post202WithServiceResponseAsync() {
+    public Single<Void> post202Async() {
         final Boolean booleanValue = null;
-        return service.post202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.post202(booleanValue);
     }
 
     /**
@@ -1354,7 +831,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post202(Boolean booleanValue) {
-        post202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        post202Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1366,7 +843,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(post202Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1376,43 +853,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> post202Async(Boolean booleanValue) {
-        return post202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> post202Async(Boolean booleanValue) {
+        return service.post202(booleanValue);
     }
 
-    /**
-     * Post true Boolean value in request returns 202 (Accepted).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post202WithServiceResponseAsync(Boolean booleanValue) {
-        return service.post202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> post202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -1422,7 +866,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete202() {
-        delete202WithServiceResponseAsync().toBlocking().single().body();
+        delete202Async().toBlocking().value();
     }
 
     /**
@@ -1433,44 +877,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(delete202WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(delete202Async(), serviceCallback);
     }
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> delete202Async() {
-        return delete202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> delete202WithServiceResponseAsync() {
+    public Single<Void> delete202Async() {
         final Boolean booleanValue = null;
-        return service.delete202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = delete202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.delete202(booleanValue);
     }
 
     /**
@@ -1482,7 +900,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete202(Boolean booleanValue) {
-        delete202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        delete202Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1494,7 +912,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(delete202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(delete202Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1504,43 +922,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> delete202Async(Boolean booleanValue) {
-        return delete202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> delete202Async(Boolean booleanValue) {
+        return service.delete202(booleanValue);
     }
 
-    /**
-     * Delete true Boolean value in request returns 202 (accepted).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> delete202WithServiceResponseAsync(Boolean booleanValue) {
-        return service.delete202(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = delete202Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> delete202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Return 204 status code if successful.
@@ -1550,7 +935,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head204() {
-        head204WithServiceResponseAsync().toBlocking().single().body();
+        head204Async().toBlocking().value();
     }
 
     /**
@@ -1561,7 +946,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
     /**
@@ -1570,42 +955,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> head204Async() {
-        return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> head204Async() {
+        return service.head204();
     }
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> head204WithServiceResponseAsync() {
-        return service.head204()
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = head204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> head204Delegate(Response<Void> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .buildEmpty(response);
-    }
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -1615,7 +968,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put204() {
-        put204WithServiceResponseAsync().toBlocking().single().body();
+        put204Async().toBlocking().value();
     }
 
     /**
@@ -1626,44 +979,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(put204Async(), serviceCallback);
     }
 
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> put204Async() {
-        return put204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put204WithServiceResponseAsync() {
+    public Single<Void> put204Async() {
         final Boolean booleanValue = null;
-        return service.put204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.put204(booleanValue);
     }
 
     /**
@@ -1675,7 +1002,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void put204(Boolean booleanValue) {
-        put204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        put204Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1687,7 +1014,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(put204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(put204Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1697,43 +1024,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> put204Async(Boolean booleanValue) {
-        return put204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> put204Async(Boolean booleanValue) {
+        return service.put204(booleanValue);
     }
 
-    /**
-     * Put true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> put204WithServiceResponseAsync(Boolean booleanValue) {
-        return service.put204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = put204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> put204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -1743,7 +1037,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void patch204() {
-        patch204WithServiceResponseAsync().toBlocking().single().body();
+        patch204Async().toBlocking().value();
     }
 
     /**
@@ -1754,44 +1048,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> patch204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(patch204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(patch204Async(), serviceCallback);
     }
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> patch204Async() {
-        return patch204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> patch204WithServiceResponseAsync() {
+    public Single<Void> patch204Async() {
         final Boolean booleanValue = null;
-        return service.patch204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = patch204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.patch204(booleanValue);
     }
 
     /**
@@ -1803,7 +1071,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void patch204(Boolean booleanValue) {
-        patch204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        patch204Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1815,7 +1083,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(patch204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(patch204Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1825,43 +1093,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> patch204Async(Boolean booleanValue) {
-        return patch204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> patch204Async(Boolean booleanValue) {
+        return service.patch204(booleanValue);
     }
 
-    /**
-     * Patch true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> patch204WithServiceResponseAsync(Boolean booleanValue) {
-        return service.patch204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = patch204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> patch204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1871,7 +1106,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post204() {
-        post204WithServiceResponseAsync().toBlocking().single().body();
+        post204Async().toBlocking().value();
     }
 
     /**
@@ -1882,44 +1117,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(post204Async(), serviceCallback);
     }
 
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> post204Async() {
-        return post204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post204WithServiceResponseAsync() {
+    public Single<Void> post204Async() {
         final Boolean booleanValue = null;
-        return service.post204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.post204(booleanValue);
     }
 
     /**
@@ -1931,7 +1140,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post204(Boolean booleanValue) {
-        post204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        post204Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -1943,7 +1152,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(post204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(post204Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -1953,43 +1162,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> post204Async(Boolean booleanValue) {
-        return post204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> post204Async(Boolean booleanValue) {
+        return service.post204(booleanValue);
     }
 
-    /**
-     * Post true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> post204WithServiceResponseAsync(Boolean booleanValue) {
-        return service.post204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = post204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> post204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1999,7 +1175,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete204() {
-        delete204WithServiceResponseAsync().toBlocking().single().body();
+        delete204Async().toBlocking().value();
     }
 
     /**
@@ -2010,44 +1186,18 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(delete204WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(delete204Async(), serviceCallback);
     }
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> delete204Async() {
-        return delete204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> delete204WithServiceResponseAsync() {
+    public Single<Void> delete204Async() {
         final Boolean booleanValue = null;
-        return service.delete204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = delete204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.delete204(booleanValue);
     }
 
     /**
@@ -2059,7 +1209,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete204(Boolean booleanValue) {
-        delete204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
+        delete204Async(booleanValue).toBlocking().value();
     }
 
     /**
@@ -2071,7 +1221,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(delete204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceFuture.fromBody(delete204Async(booleanValue), serviceCallback);
     }
 
     /**
@@ -2081,43 +1231,10 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> delete204Async(Boolean booleanValue) {
-        return delete204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> delete204Async(Boolean booleanValue) {
+        return service.delete204(booleanValue);
     }
 
-    /**
-     * Delete true Boolean value in request returns 204 (no content).
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> delete204WithServiceResponseAsync(Boolean booleanValue) {
-        return service.delete204(booleanValue)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = delete204Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> delete204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Return 404 status code.
@@ -2127,7 +1244,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head404() {
-        head404WithServiceResponseAsync().toBlocking().single().body();
+        head404Async().toBlocking().value();
     }
 
     /**
@@ -2138,7 +1255,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
     /**
@@ -2147,42 +1264,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> head404Async() {
-        return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> head404Async() {
+        return service.head404();
     }
 
-    /**
-     * Return 404 status code.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> head404WithServiceResponseAsync() {
-        return service.head404()
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<Void> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = head404Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> head404Delegate(Response<Void> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
-                .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .buildEmpty(response);
-    }
 
 }

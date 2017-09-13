@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import java.util.Map;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -56,17 +57,7 @@ public interface AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags);
+    Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags);
 
-    /**
-     * Updates the tags for an availability set.
-     *
-     * @param resourceGroupName The name of the resource group.
-     * @param avset The name of the storage availability set.
-     * @param tags A set of tags. A description about the set of tags.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> updateWithServiceResponseAsync(String resourceGroupName, String avset, Map<String, String> tags);
 
 }

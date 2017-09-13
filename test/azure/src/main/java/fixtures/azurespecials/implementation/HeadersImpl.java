@@ -10,11 +10,19 @@
 
 package fixtures.azurespecials.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HEAD;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
@@ -22,21 +30,16 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.HEAD;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Headers.
  */
 public class HeadersImpl implements fixtures.azurespecials.Headers {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private HeadersService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
@@ -44,11 +47,10 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
     /**
      * Initializes an instance of HeadersImpl.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadersImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = retrofit.create(HeadersService.class);
+    public HeadersImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
+        this.service = RestProxy.create(HeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -59,15 +61,15 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
     interface HeadersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId" })
         @POST("azurespecials/customNamedRequestId")
-        Observable<Response<ResponseBody>> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
-        Observable<Response<ResponseBody>> customNamedRequestIdParamGrouping(@Header("accept-language") String acceptLanguage, @Header("foo-client-request-id") String fooClientRequestId, @Header("User-Agent") String userAgent);
+        Single<Void> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdHead" })
         @HEAD("azurespecials/customNamedRequestIdHead")
-        Observable<Response<Void>> customNamedRequestIdHead(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Boolean> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -80,7 +82,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
+        customNamedRequestIdAsync(fooClientRequestId).toBlocking().value();
     }
 
     /**
@@ -92,7 +94,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(customNamedRequestIdAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -102,46 +104,13 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> customNamedRequestIdAsync(String fooClientRequestId) {
-        return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId) {
+    public Single<Void> customNamedRequestIdAsync(String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        return service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> clientResponse = customNamedRequestIdDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);
-    }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -152,7 +121,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().body();
+        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().value();
     }
 
     /**
@@ -164,7 +133,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**
@@ -174,48 +143,15 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
-     *
-     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+    public Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         if (headerCustomNamedRequestIdParamGroupingParameters == null) {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
         Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
         String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
-        return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> clientResponse = customNamedRequestIdParamGroupingDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> customNamedRequestIdParamGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .buildWithHeaders(response, HeaderCustomNamedRequestIdParamGroupingHeaders.class);
-    }
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -227,7 +163,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the boolean object if successful.
      */
     public boolean customNamedRequestIdHead(String fooClientRequestId) {
-        return customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
+        return customNamedRequestIdHeadAsync(fooClientRequestId).toBlocking().value();
     }
 
     /**
@@ -239,7 +175,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(customNamedRequestIdHeadAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -249,46 +185,12 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
-        return customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
-     *
-     * @param fooClientRequestId The fooRequestId
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> customNamedRequestIdHeadWithServiceResponseAsync(String fooClientRequestId) {
+    public Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        return service.customNamedRequestIdHead(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> call(Response<Void> response) {
-                    try {
-                        ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> clientResponse = customNamedRequestIdHeadDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.customNamedRequestIdHead(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> customNamedRequestIdHeadDelegate(Response<Void> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .buildEmptyWithHeaders(response, HeaderCustomNamedRequestIdHeadHeaders.class);
-    }
 
 }

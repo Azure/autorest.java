@@ -11,21 +11,23 @@
 package fixtures.report.implementation;
 
 import fixtures.report.AutoRestReportService;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
 
@@ -40,13 +42,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
 
     /**
      * Initializes an instance of AutoRestReportService client.
-     */
-    public AutoRestReportServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -58,23 +53,9 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Initializes an instance of AutoRestReportService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestReportServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestReportServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestReportServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
@@ -93,17 +74,20 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     }
 
     private void initializeService() {
-        service = retrofit().create(AutoRestReportServiceService.class);
+        service = RestProxy.create(AutoRestReportServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 
     /**
      * The interface defining all the services for AutoRestReportService to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("http://localhost")
     interface AutoRestReportServiceService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.report.AutoRestReportService getReport" })
         @GET("report")
-        Observable<Response<ResponseBody>> getReport();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Map<String, Integer>> getReport();
 
     }
 
@@ -116,7 +100,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportWithServiceResponseAsync().toBlocking().single().body();
+        return getReportAsync().toBlocking().value();
     }
 
     /**
@@ -127,7 +111,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
     /**
@@ -136,41 +120,9 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    public Observable<Map<String, Integer>> getReportAsync() {
-        return getReportWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
-            @Override
-            public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.body();
-            }
-        });
+    public Single<Map<String, Integer>> getReportAsync() {
+        return service.getReport();
     }
 
-    /**
-     * Get test coverage report.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
-     */
-    public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync() {
-        return service.getReport()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Map<String, Integer>>>>() {
-                @Override
-                public Observable<ServiceResponse<Map<String, Integer>>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Map<String, Integer>> clientResponse = getReportDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.serializerAdapter())
-                .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

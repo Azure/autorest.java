@@ -10,31 +10,34 @@
 
 package fixtures.lro.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in LROsCustomHeaders.
  */
 public class LROsCustomHeadersInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private LROsCustomHeadersService service;
     /** The service client containing this operation class. */
     private AutoRestLongRunningOperationTestServiceImpl client;
@@ -42,11 +45,10 @@ public class LROsCustomHeadersInner {
     /**
      * Initializes an instance of LROsCustomHeadersInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public LROsCustomHeadersInner(Retrofit retrofit, AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = retrofit.create(LROsCustomHeadersService.class);
+    public LROsCustomHeadersInner(AutoRestLongRunningOperationTestServiceImpl client) {
+        this.service = RestProxy.create(LROsCustomHeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -57,35 +59,35 @@ public class LROsCustomHeadersInner {
     interface LROsCustomHeadersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders putAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
-        Observable<Response<ResponseBody>> putAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<ProductInner> putAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPutAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
-        Observable<Response<ResponseBody>> beginPutAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<ProductInner> beginPutAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders put201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
-        Observable<Response<ResponseBody>> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<ProductInner> put201CreatingSucceeded200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPut201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
-        Observable<Response<ResponseBody>> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<ProductInner> beginPut201CreatingSucceeded200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders post202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
-        Observable<Response<ResponseBody>> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> post202Retry200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPost202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
-        Observable<Response<ResponseBody>> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> beginPost202Retry200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders postAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
-        Observable<Response<ResponseBody>> postAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> postAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPostAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
-        Observable<Response<ResponseBody>> beginPostAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> beginPostAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -109,7 +111,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -118,10 +120,10 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ProductInner> putAsyncRetrySucceededAsync() {
-        return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
+    public Single<ProductInner> putAsyncRetrySucceededAsync() {
+        return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ProductInner, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ProductInner response) {
                 return response.body();
             }
         });
@@ -133,7 +135,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> putAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<ProductInner> putAsyncRetrySucceededAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeadersInner.class);
@@ -148,7 +150,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
+        return putAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -160,7 +162,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -171,9 +173,9 @@ public class LROsCustomHeadersInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ProductInner, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> response) {
+            public ProductInner call(ProductInner response) {
                 return response.body();
             }
         });
@@ -186,7 +188,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> putAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<ProductInner> putAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultWithHeadersAsync(observable, new TypeToken<ProductInner>() { }.getType(), LROsCustomHeaderPutAsyncRetrySucceededHeadersInner.class);
@@ -201,7 +203,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
+        return beginPutAsyncRetrySucceededAsync().toBlocking().value();
     }
 
     /**
@@ -212,7 +214,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPutAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
@@ -221,35 +223,9 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ProductInner> beginPutAsyncRetrySucceededAsync() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
-            @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
-     */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededWithServiceResponseAsync() {
+    public Single<ProductInner> beginPutAsyncRetrySucceededAsync() {
         final ProductInner product = null;
-        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -262,7 +238,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
+        return beginPutAsyncRetrySucceededAsync(product).toBlocking().value();
     }
 
     /**
@@ -274,7 +250,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPutAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -284,44 +260,11 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
-            @Override
-            public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
-     */
-    public Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> beginPutAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Single<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> clientResponse = beginPutAsyncRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<ProductInner, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ProductInner>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsCustomHeaderPutAsyncRetrySucceededHeadersInner.class);
-    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -343,7 +286,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -352,10 +295,10 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ProductInner> put201CreatingSucceeded200Async() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
+    public Single<ProductInner> put201CreatingSucceeded200Async() {
+        return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ProductInner, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponse<ProductInner> response) {
+            public ProductInner call(ProductInner response) {
                 return response.body();
             }
         });
@@ -367,7 +310,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200WithServiceResponseAsync() {
+    public Observable<ProductInner> put201CreatingSucceeded200Async() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
@@ -382,7 +325,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
+        return put201CreatingSucceeded200Async(product).toBlocking().last();
     }
 
     /**
@@ -394,7 +337,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
     /**
@@ -405,9 +348,9 @@ public class LROsCustomHeadersInner {
      * @return the observable for the request
      */
     public Observable<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ProductInner, ProductInner>() {
             @Override
-            public ProductInner call(ServiceResponse<ProductInner> response) {
+            public ProductInner call(ProductInner response) {
                 return response.body();
             }
         });
@@ -420,7 +363,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
+    public Observable<ProductInner> put201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPutOrPatchResultAsync(observable, new TypeToken<ProductInner>() { }.getType());
@@ -435,7 +378,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
+        return beginPut201CreatingSucceeded200Async().toBlocking().value();
     }
 
     /**
@@ -446,7 +389,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
 
     /**
@@ -455,35 +398,9 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ProductInner> beginPut201CreatingSucceeded200Async() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
-            @Override
-            public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
-     */
-    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200WithServiceResponseAsync() {
+    public Single<ProductInner> beginPut201CreatingSucceeded200Async() {
         final ProductInner product = null;
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ProductInner>>>() {
-                @Override
-                public Observable<ServiceResponse<ProductInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -496,7 +413,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
+        return beginPut201CreatingSucceeded200Async(product).toBlocking().value();
     }
 
     /**
@@ -508,7 +425,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(beginPut201CreatingSucceeded200Async(product), serviceCallback);
     }
 
     /**
@@ -518,45 +435,11 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
-    public Observable<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
-            @Override
-            public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
-     */
-    public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
+    public Single<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ProductInner>>>() {
-                @Override
-                public Observable<ServiceResponse<ProductInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<ProductInner> clientResponse = beginPut201CreatingSucceeded200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<ProductInner> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<ProductInner>() { }.getType())
-                .register(201, new TypeToken<ProductInner>() { }.getType())
-                .registerError(CloudException.class)
-                .build(response);
-    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -577,7 +460,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -586,10 +469,10 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Void> post202Retry200Async() {
-        return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>, Void>() {
+    public Single<Void> post202Retry200Async() {
+        return post202Retry200WithServiceResponseAsync().map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -601,7 +484,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync() {
+    public Observable<Void> post202Retry200Async() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200HeadersInner.class);
@@ -615,7 +498,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
+        post202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -627,7 +510,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
     /**
@@ -638,9 +521,9 @@ public class LROsCustomHeadersInner {
      * @return the observable for the request
      */
     public Observable<Void> post202Retry200Async(ProductInner product) {
-        return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>, Void>() {
+        return post202Retry200WithServiceResponseAsync(product).map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -653,7 +536,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync(ProductInner product) {
+    public Observable<Void> post202Retry200WithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPost202Retry200HeadersInner.class);
@@ -667,7 +550,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
+        beginPost202Retry200Async().toBlocking().value();
     }
 
     /**
@@ -678,44 +561,18 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPost202Retry200Async(), serviceCallback);
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> beginPost202Retry200Async() {
-        return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync() {
+    public Single<Void> beginPost202Retry200Async() {
         final ProductInner product = null;
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -727,7 +584,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
+        beginPost202Retry200Async(product).toBlocking().value();
     }
 
     /**
@@ -739,7 +596,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPost202Retry200Async(product), serviceCallback);
     }
 
     /**
@@ -749,44 +606,11 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> beginPost202Retry200Async(ProductInner product) {
-        return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync(ProductInner product) {
+    public Single<Void> beginPost202Retry200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> clientResponse = beginPost202Retry200Delegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200HeadersInner> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsCustomHeaderPost202Retry200HeadersInner.class);
-    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -807,7 +631,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -816,10 +640,10 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<Void> postAsyncRetrySucceededAsync() {
-        return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>, Void>() {
+    public Single<Void> postAsyncRetrySucceededAsync() {
+        return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -831,7 +655,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> postAsyncRetrySucceededWithServiceResponseAsync() {
+    public Observable<Void> postAsyncRetrySucceededAsync() {
         final ProductInner product = null;
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeadersInner.class);
@@ -845,7 +669,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postAsyncRetrySucceeded(ProductInner product) {
-        postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
+        postAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**
@@ -857,7 +681,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -868,9 +692,9 @@ public class LROsCustomHeadersInner {
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRetrySucceededAsync(ProductInner product) {
-        return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>, Void>() {
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<Void, Void>() {
             @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> response) {
+            public Void call(Void response) {
                 return response.body();
             }
         });
@@ -883,7 +707,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> postAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Observable<Void> postAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
         Validator.validate(product);
         Observable<Response<ResponseBody>> observable = service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
         return client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(observable, new TypeToken<Void>() { }.getType(), LROsCustomHeaderPostAsyncRetrySucceededHeadersInner.class);
@@ -897,7 +721,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
+        beginPostAsyncRetrySucceededAsync().toBlocking().value();
     }
 
     /**
@@ -908,44 +732,18 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPostAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> beginPostAsyncRetrySucceededAsync() {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededWithServiceResponseAsync() {
+    public Single<Void> beginPostAsyncRetrySucceededAsync() {
         final ProductInner product = null;
-        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -957,7 +755,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded(ProductInner product) {
-        beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
+        beginPostAsyncRetrySucceededAsync(product).toBlocking().value();
     }
 
     /**
@@ -969,7 +767,7 @@ public class LROsCustomHeadersInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(beginPostAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -979,43 +777,10 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public Observable<Void> beginPostAsyncRetrySucceededAsync(ProductInner product) {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>, Void>() {
-            @Override
-            public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
-     *
-     * @param product Product to put
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> beginPostAsyncRetrySucceededWithServiceResponseAsync(ProductInner product) {
+    public Single<Void> beginPostAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>>>() {
-                @Override
-                public Observable<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> clientResponse = beginPostAsyncRetrySucceededDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
-                .buildWithHeaders(response, LROsCustomHeaderPostAsyncRetrySucceededHeadersInner.class);
-    }
 
 }

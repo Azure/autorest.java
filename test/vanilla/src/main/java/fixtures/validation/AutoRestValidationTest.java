@@ -18,6 +18,7 @@ import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 import com.microsoft.rest.RestClient;
 
 /**
@@ -97,17 +98,8 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Observable<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
+    Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
 
-    /**
-     * Validates input parameters on the method. See swagger for details.
-     *
-     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-     * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    Observable<ServiceResponse<Product>> validationOfMethodParametersWithServiceResponseAsync(String resourceGroupName, int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -140,17 +132,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Observable<Product> validationOfBodyAsync(String resourceGroupName, int id);
-
-    /**
-     * Validates body parameters on the method. See swagger for details.
-     *
-     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-     * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    Observable<ServiceResponse<Product>> validationOfBodyWithServiceResponseAsync(String resourceGroupName, int id);
+    Single<Product> validationOfBodyAsync(String resourceGroupName, int id);
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -185,18 +167,8 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Observable<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
+    Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
 
-    /**
-     * Validates body parameters on the method. See swagger for details.
-     *
-     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
-     * @param id Required int multiple of 10 from 100 to 1000.
-     * @param body the Product value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    Observable<ServiceResponse<Product>> validationOfBodyWithServiceResponseAsync(String resourceGroupName, int id, Product body);
 
     /**
      *
@@ -219,14 +191,8 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getWithConstantInPathAsync();
+    Single<Void> getWithConstantInPathAsync();
 
-    /**
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getWithConstantInPathWithServiceResponseAsync();
 
     /**
      *
@@ -250,14 +216,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Observable<Product> postWithConstantInBodyAsync();
-
-    /**
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    Observable<ServiceResponse<Product>> postWithConstantInBodyWithServiceResponseAsync();
+    Single<Product> postWithConstantInBodyAsync();
     /**
      *
      * @param body the Product value
@@ -283,14 +242,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Observable<Product> postWithConstantInBodyAsync(Product body);
+    Single<Product> postWithConstantInBodyAsync(Product body);
 
-    /**
-     *
-     * @param body the Product value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
-     */
-    Observable<ServiceResponse<Product>> postWithConstantInBodyWithServiceResponseAsync(Product body);
 
 }

@@ -13,10 +13,10 @@ package fixtures.requiredoptional.implementation;
 import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.Explicits;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
@@ -120,13 +120,6 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
-     */
-    public AutoRestRequiredOptionalTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -138,23 +131,9 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestRequiredOptionalTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestRequiredOptionalTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestRequiredOptionalTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestRequiredOptionalTestServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
@@ -169,7 +148,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     }
 
     private void initialize() {
-        this.implicits = new ImplicitsImpl(retrofit(), this);
-        this.explicits = new ExplicitsImpl(retrofit(), this);
+        this.implicits = new ImplicitsImpl(this);
+        this.explicits = new ExplicitsImpl(this);
     }
 }

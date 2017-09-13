@@ -14,8 +14,10 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
@@ -148,7 +150,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.pagings = new PagingsImpl(restClient().retrofit(), this);
+        this.pagings = new PagingsImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

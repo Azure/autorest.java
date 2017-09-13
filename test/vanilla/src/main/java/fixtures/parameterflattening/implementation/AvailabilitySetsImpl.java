@@ -10,32 +10,35 @@
 
 package fixtures.parameterflattening.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.parameterflattening.AvailabilitySets;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PATCH;
+import com.microsoft.rest.v2.annotations.PathParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.PATCH;
-import retrofit2.http.Path;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in AvailabilitySets.
  */
 public class AvailabilitySetsImpl implements AvailabilitySets {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private AvailabilitySetsService service;
     /** The service client containing this operation class. */
     private AutoRestParameterFlatteningImpl client;
@@ -43,22 +46,23 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
     /**
      * Initializes an instance of AvailabilitySets.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public AvailabilitySetsImpl(Retrofit retrofit, AutoRestParameterFlatteningImpl client) {
-        this.service = retrofit.create(AvailabilitySetsService.class);
+    public AvailabilitySetsImpl(AutoRestParameterFlatteningImpl client) {
+        this.service = RestProxy.create(AvailabilitySetsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for AvailabilitySets to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface AvailabilitySetsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags);
+        @ExpectedResponses({200})
+        Single<Void> update(@PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam AvailabilitySetUpdateParameters tags);
 
     }
 
@@ -73,7 +77,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
-        updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().body();
+        updateAsync(resourceGroupName, avset, tags).toBlocking().value();
     }
 
     /**
@@ -87,7 +91,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
+        return ServiceFuture.fromBody(updateAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
     /**
@@ -99,25 +103,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
-        return updateWithServiceResponseAsync(resourceGroupName, avset, tags).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Updates the tags for an availability set.
-     *
-     * @param resourceGroupName The name of the resource group.
-     * @param avset The name of the storage availability set.
-     * @param tags A set of tags. A description about the set of tags.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> updateWithServiceResponseAsync(String resourceGroupName, String avset, Map<String, String> tags) {
+    public Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         if (resourceGroupName == null) {
             throw new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null.");
         }
@@ -130,24 +116,8 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
         Validator.validate(tags);
         AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
         tags1.withTags(tags);
-        return service.update(resourceGroupName, avset, tags1)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = updateDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.update(resourceGroupName, avset, tags1);
     }
 
-    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .build(response);
-    }
 
 }

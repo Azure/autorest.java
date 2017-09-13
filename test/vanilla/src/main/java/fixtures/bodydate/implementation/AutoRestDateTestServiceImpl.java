@@ -12,10 +12,10 @@ package fixtures.bodydate.implementation;
 
 import fixtures.bodydate.AutoRestDateTestService;
 import fixtures.bodydate.Dates;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestDateTestService class.
@@ -37,13 +37,6 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
 
     /**
      * Initializes an instance of AutoRestDateTestService client.
-     */
-    public AutoRestDateTestServiceImpl() {
-        this("https://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestDateTestService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -55,23 +48,9 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
     /**
      * Initializes an instance of AutoRestDateTestService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestDateTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("https://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestDateTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestDateTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestDateTestServiceImpl() {
+        this("https://localhost");
         initialize();
     }
 
@@ -86,6 +65,6 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
     }
 
     private void initialize() {
-        this.dates = new DatesImpl(retrofit(), this);
+        this.dates = new DatesImpl(this);
     }
 }

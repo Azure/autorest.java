@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -55,18 +56,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getEmptyAsync(String vault, String secret, String keyName);
-
-    /**
-     * Get a 200 to test a valid base uri.
-     *
-     * @param vault The vault name, e.g. https://myvault
-     * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName);
+    Single<Void> getEmptyAsync(String vault, String secret, String keyName);
     /**
      * Get a 200 to test a valid base uri.
      *
@@ -103,18 +93,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
+    Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
 
-    /**
-     * Get a 200 to test a valid base uri.
-     *
-     * @param vault The vault name, e.g. https://myvault
-     * @param secret Secret value.
-     * @param keyName The key name with value 'key1'.
-     * @param keyVersion The key version. Default value 'v1'.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName, String keyVersion);
 
 }

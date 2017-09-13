@@ -10,29 +10,32 @@
 
 package fixtures.bodyboolean.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodyboolean.Bools;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Bools.
  */
 public class BoolsImpl implements Bools {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private BoolsService service;
     /** The service client containing this operation class. */
     private AutoRestBoolTestServiceImpl client;
@@ -40,42 +43,54 @@ public class BoolsImpl implements Bools {
     /**
      * Initializes an instance of Bools.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public BoolsImpl(Retrofit retrofit, AutoRestBoolTestServiceImpl client) {
-        this.service = retrofit.create(BoolsService.class);
+    public BoolsImpl(AutoRestBoolTestServiceImpl client) {
+        this.service = RestProxy.create(BoolsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Bools to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface BoolsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
         @GET("bool/true")
-        Observable<Response<ResponseBody>> getTrue();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Boolean> getTrue();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
         @PUT("bool/true")
-        Observable<Response<ResponseBody>> putTrue(@Body boolean boolBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putTrue(@BodyParam boolean boolBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
         @GET("bool/false")
-        Observable<Response<ResponseBody>> getFalse();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Boolean> getFalse();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
         @PUT("bool/false")
-        Observable<Response<ResponseBody>> putFalse(@Body boolean boolBody);
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Void> putFalse(@BodyParam boolean boolBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
         @GET("bool/null")
-        Observable<Response<ResponseBody>> getNull();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Boolean> getNull();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
         @GET("bool/invalid")
-        Observable<Response<ResponseBody>> getInvalid();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Boolean> getInvalid();
 
     }
 
@@ -88,7 +103,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
-        return getTrueWithServiceResponseAsync().toBlocking().single().body();
+        return getTrueAsync().toBlocking().value();
     }
 
     /**
@@ -99,7 +114,7 @@ public class BoolsImpl implements Bools {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getTrueAsync(), serviceCallback);
     }
 
     /**
@@ -108,42 +123,10 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getTrueAsync() {
-        return getTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getTrueAsync() {
+        return service.getTrue();
     }
 
-    /**
-     * Get true Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getTrueWithServiceResponseAsync() {
-        return service.getTrue()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getTrueDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set Boolean value true.
@@ -154,7 +137,7 @@ public class BoolsImpl implements Bools {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putTrue(boolean boolBody) {
-        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().body();
+        putTrueAsync(boolBody).toBlocking().value();
     }
 
     /**
@@ -166,7 +149,7 @@ public class BoolsImpl implements Bools {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
+        return ServiceFuture.fromBody(putTrueAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -176,43 +159,10 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putTrueAsync(boolean boolBody) {
-        return putTrueWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putTrueAsync(boolean boolBody) {
+        return service.putTrue(boolBody);
     }
 
-    /**
-     * Set Boolean value true.
-     *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync(boolean boolBody) {
-        return service.putTrue(boolBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putTrueDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get false Boolean value.
@@ -223,7 +173,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
-        return getFalseWithServiceResponseAsync().toBlocking().single().body();
+        return getFalseAsync().toBlocking().value();
     }
 
     /**
@@ -234,7 +184,7 @@ public class BoolsImpl implements Bools {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getFalseAsync(), serviceCallback);
     }
 
     /**
@@ -243,42 +193,10 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getFalseAsync() {
-        return getFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getFalseAsync() {
+        return service.getFalse();
     }
 
-    /**
-     * Get false Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getFalseWithServiceResponseAsync() {
-        return service.getFalse()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getFalseDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Set Boolean value false.
@@ -289,7 +207,7 @@ public class BoolsImpl implements Bools {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putFalse(boolean boolBody) {
-        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().body();
+        putFalseAsync(boolBody).toBlocking().value();
     }
 
     /**
@@ -301,7 +219,7 @@ public class BoolsImpl implements Bools {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
+        return ServiceFuture.fromBody(putFalseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -311,43 +229,10 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putFalseAsync(boolean boolBody) {
-        return putFalseWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> putFalseAsync(boolean boolBody) {
+        return service.putFalse(boolBody);
     }
 
-    /**
-     * Set Boolean value false.
-     *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync(boolean boolBody) {
-        return service.putFalse(boolBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putFalseDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get null Boolean value.
@@ -358,7 +243,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().body();
+        return getNullAsync().toBlocking().value();
     }
 
     /**
@@ -369,7 +254,7 @@ public class BoolsImpl implements Bools {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
     /**
@@ -378,42 +263,10 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getNullAsync() {
-        return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getNullAsync() {
+        return service.getNull();
     }
 
-    /**
-     * Get null Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getNullWithServiceResponseAsync() {
-        return service.getNull()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get invalid Boolean value.
@@ -424,7 +277,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
+        return getInvalidAsync().toBlocking().value();
     }
 
     /**
@@ -435,7 +288,7 @@ public class BoolsImpl implements Bools {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
     /**
@@ -444,41 +297,9 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getInvalidAsync() {
-        return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getInvalidAsync() {
+        return service.getInvalid();
     }
 
-    /**
-     * Get invalid Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getInvalidWithServiceResponseAsync() {
-        return service.getInvalid()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getInvalidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -46,15 +47,8 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodGlobalValidAsync();
+    Single<Void> getMethodGlobalValidAsync();
 
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodGlobalValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -80,15 +74,8 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getMethodGlobalNotProvidedValidAsync();
+    Single<Void> getMethodGlobalNotProvidedValidAsync();
 
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -114,15 +101,8 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getPathGlobalValidAsync();
+    Single<Void> getPathGlobalValidAsync();
 
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getPathGlobalValidWithServiceResponseAsync();
 
     /**
      * GET method with api-version modeled in global settings.
@@ -148,14 +128,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getSwaggerGlobalValidAsync();
+    Single<Void> getSwaggerGlobalValidAsync();
 
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getSwaggerGlobalValidWithServiceResponseAsync();
 
 }

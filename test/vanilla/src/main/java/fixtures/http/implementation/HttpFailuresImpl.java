@@ -10,28 +10,31 @@
 
 package fixtures.http.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.http.HttpFailures;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpFailures.
  */
 public class HttpFailuresImpl implements HttpFailures {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private HttpFailuresService service;
     /** The service client containing this operation class. */
     private AutoRestHttpInfrastructureTestServiceImpl client;
@@ -39,30 +42,34 @@ public class HttpFailuresImpl implements HttpFailures {
     /**
      * Initializes an instance of HttpFailures.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpFailuresImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = retrofit.create(HttpFailuresService.class);
+    public HttpFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+        this.service = RestProxy.create(HttpFailuresService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for HttpFailures to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface HttpFailuresService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getEmptyError" })
         @GET("http/failure/emptybody/error")
-        Observable<Response<ResponseBody>> getEmptyError();
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<Boolean> getEmptyError();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getNoModelError" })
         @GET("http/failure/nomodel/error")
-        Observable<Response<ResponseBody>> getNoModelError();
+        @ExpectedResponses({200})
+        Single<Boolean> getNoModelError();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getNoModelEmpty" })
         @GET("http/failure/nomodel/empty")
-        Observable<Response<ResponseBody>> getNoModelEmpty();
+        @ExpectedResponses({200})
+        Single<Boolean> getNoModelEmpty();
 
     }
 
@@ -75,7 +82,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getEmptyError() {
-        return getEmptyErrorWithServiceResponseAsync().toBlocking().single().body();
+        return getEmptyErrorAsync().toBlocking().value();
     }
 
     /**
@@ -86,7 +93,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getEmptyErrorAsync(), serviceCallback);
     }
 
     /**
@@ -95,42 +102,10 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getEmptyErrorAsync() {
-        return getEmptyErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getEmptyErrorAsync() {
+        return service.getEmptyError();
     }
 
-    /**
-     * Get empty error form server.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync() {
-        return service.getEmptyError()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getEmptyErrorDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get empty error form server.
@@ -141,7 +116,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelError() {
-        return getNoModelErrorWithServiceResponseAsync().toBlocking().single().body();
+        return getNoModelErrorAsync().toBlocking().value();
     }
 
     /**
@@ -152,7 +127,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNoModelErrorAsync(), serviceCallback);
     }
 
     /**
@@ -161,41 +136,10 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getNoModelErrorAsync() {
-        return getNoModelErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getNoModelErrorAsync() {
+        return service.getNoModelError();
     }
 
-    /**
-     * Get empty error form server.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync() {
-        return service.getNoModelError()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getNoModelErrorDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws RestException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .build(response);
-    }
 
     /**
      * Get empty response from server.
@@ -206,7 +150,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelEmpty() {
-        return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().body();
+        return getNoModelEmptyAsync().toBlocking().value();
     }
 
     /**
@@ -217,7 +161,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceFuture.fromResponse(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getNoModelEmptyAsync(), serviceCallback);
     }
 
     /**
@@ -226,40 +170,9 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> getNoModelEmptyAsync() {
-        return getNoModelEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
-            @Override
-            public Boolean call(ServiceResponse<Boolean> response) {
-                return response.body();
-            }
-        });
+    public Single<Boolean> getNoModelEmptyAsync() {
+        return service.getNoModelEmpty();
     }
 
-    /**
-     * Get empty response from server.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
-     */
-    public Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync() {
-        return service.getNoModelEmpty()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Boolean>>>() {
-                @Override
-                public Observable<ServiceResponse<Boolean>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Boolean> clientResponse = getNoModelEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws RestException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Boolean, RestException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Boolean>() { }.getType())
-                .build(response);
-    }
 
 }

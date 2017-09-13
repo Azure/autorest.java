@@ -12,10 +12,10 @@ package fixtures.bodybyte.implementation;
 
 import fixtures.bodybyte.AutoRestSwaggerBATByteService;
 import fixtures.bodybyte.Bytes;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATByteService class.
@@ -37,13 +37,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
-     */
-    public AutoRestSwaggerBATByteServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATByteService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -55,23 +48,9 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestSwaggerBATByteServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATByteService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestSwaggerBATByteServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestSwaggerBATByteServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
@@ -86,6 +65,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
     }
 
     private void initialize() {
-        this.bytes = new BytesImpl(retrofit(), this);
+        this.bytes = new BytesImpl(this);
     }
 }

@@ -10,35 +10,35 @@
 
 package fixtures.bodyformdata.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.bodyformdata.Formdatas;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.Multipart;
-import retrofit2.http.Part;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Streaming;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Formdatas.
  */
 public class FormdatasImpl implements Formdatas {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private FormdatasService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATFormDataServiceImpl client;
@@ -46,28 +46,32 @@ public class FormdatasImpl implements Formdatas {
     /**
      * Initializes an instance of Formdatas.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public FormdatasImpl(Retrofit retrofit, AutoRestSwaggerBATFormDataServiceImpl client) {
-        this.service = retrofit.create(FormdatasService.class);
+    public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
+        this.service = RestProxy.create(FormdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
      * The interface defining all the services for Formdatas to be
-     * used by Retrofit to perform actually REST calls.
-     */
+     * used by RestProxy to perform REST calls.
+    */
+    @Host("http://localhost")
     interface FormdatasService {
-        @Multipart
+        // @Multipart not supported by RestProxy
         @POST("formdata/stream/uploadfile")
-        @Streaming
-        Observable<Response<ResponseBody>> uploadFile(@Part("fileContent") RequestBody fileContent, @Part("fileName") String fileName);
+        // @Streaming not supported by RestProxy
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<InputStream> uploadFile(/* @Part("fileContent") not supported by RestProxy */RequestBody fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
         @Headers({ "Content-Type: application/octet-stream", "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
         @PUT("formdata/stream/uploadfile")
-        @Streaming
-        Observable<Response<ResponseBody>> uploadFileViaBody(@Body RequestBody fileContent);
+        // @Streaming not supported by RestProxy
+        @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Single<InputStream> uploadFileViaBody(@BodyParam RequestBody fileContent);
 
     }
 
@@ -82,7 +86,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) {
-        return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().body();
+        return uploadFileAsync(fileContent, fileName).toBlocking().value();
     }
 
     /**
@@ -95,7 +99,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceFuture.fromResponse(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
+        return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
     /**
@@ -106,24 +110,7 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    public Observable<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
-        return uploadFileWithServiceResponseAsync(fileContent, fileName).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
-            @Override
-            public InputStream call(ServiceResponse<InputStream> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Upload file.
-     *
-     * @param fileContent File to upload.
-     * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    public Observable<ServiceResponse<InputStream>> uploadFileWithServiceResponseAsync(byte[] fileContent, String fileName) {
+    public Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -131,26 +118,9 @@ public class FormdatasImpl implements Formdatas {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
         RequestBody fileContentConverted = RequestBody.create(MediaType.parse("multipart/form-data"), fileContent);
-        return service.uploadFile(fileContentConverted, fileName)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
-                @Override
-                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<InputStream> clientResponse = uploadFileDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.uploadFile(fileContentConverted, fileName);
     }
 
-    private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<InputStream>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Upload file.
@@ -162,7 +132,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) {
-        return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().body();
+        return uploadFileViaBodyAsync(fileContent).toBlocking().value();
     }
 
     /**
@@ -174,7 +144,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceFuture.fromResponse(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
+        return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
     }
 
     /**
@@ -184,46 +154,13 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    public Observable<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
-        return uploadFileViaBodyWithServiceResponseAsync(fileContent).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
-            @Override
-            public InputStream call(ServiceResponse<InputStream> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Upload file.
-     *
-     * @param fileContent File to upload.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    public Observable<ServiceResponse<InputStream>> uploadFileViaBodyWithServiceResponseAsync(byte[] fileContent) {
+    public Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
         RequestBody fileContentConverted = RequestBody.create(MediaType.parse("application/octet-stream"), fileContent);
-        return service.uploadFileViaBody(fileContentConverted)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<InputStream>>>() {
-                @Override
-                public Observable<ServiceResponse<InputStream>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<InputStream> clientResponse = uploadFileViaBodyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.uploadFileViaBody(fileContentConverted);
     }
 
-    private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<InputStream>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

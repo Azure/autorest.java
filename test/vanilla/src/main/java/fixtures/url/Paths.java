@@ -20,6 +20,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -50,15 +51,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getBooleanTrueAsync();
+    Single<Void> getBooleanTrueAsync();
 
-    /**
-     * Get true Boolean value on path.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync();
 
     /**
      * Get false Boolean value on path.
@@ -84,15 +78,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getBooleanFalseAsync();
+    Single<Void> getBooleanFalseAsync();
 
-    /**
-     * Get false Boolean value on path.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync();
 
     /**
      * Get '1000000' integer value.
@@ -118,15 +105,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getIntOneMillionAsync();
+    Single<Void> getIntOneMillionAsync();
 
-    /**
-     * Get '1000000' integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -152,15 +132,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getIntNegativeOneMillionAsync();
+    Single<Void> getIntNegativeOneMillionAsync();
 
-    /**
-     * Get '-1000000' integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -186,15 +159,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getTenBillionAsync();
+    Single<Void> getTenBillionAsync();
 
-    /**
-     * Get '10000000000' 64 bit integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -220,15 +186,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> getNegativeTenBillionAsync();
+    Single<Void> getNegativeTenBillionAsync();
 
-    /**
-     * Get '-10000000000' 64 bit integer value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -254,15 +213,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> floatScientificPositiveAsync();
+    Single<Void> floatScientificPositiveAsync();
 
-    /**
-     * Get '1.034E+20' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -288,15 +240,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> floatScientificNegativeAsync();
+    Single<Void> floatScientificNegativeAsync();
 
-    /**
-     * Get '-1.034E-20' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync();
 
     /**
      * Get '9999999.999' numeric value.
@@ -322,15 +267,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> doubleDecimalPositiveAsync();
+    Single<Void> doubleDecimalPositiveAsync();
 
-    /**
-     * Get '9999999.999' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -356,15 +294,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> doubleDecimalNegativeAsync();
+    Single<Void> doubleDecimalNegativeAsync();
 
-    /**
-     * Get '-9999999.999' numeric value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -390,15 +321,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringUnicodeAsync();
+    Single<Void> stringUnicodeAsync();
 
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -424,15 +348,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringUrlEncodedAsync();
+    Single<Void> stringUrlEncodedAsync();
 
-    /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync();
 
     /**
      * Get ''.
@@ -458,15 +375,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringEmptyAsync();
+    Single<Void> stringEmptyAsync();
 
-    /**
-     * Get ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync();
 
     /**
      * Get null (should throw).
@@ -495,16 +405,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> stringNullAsync(String stringPath);
+    Single<Void> stringNullAsync(String stringPath);
 
-    /**
-     * Get null (should throw).
-     *
-     * @param stringPath null string value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -533,16 +435,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> enumValidAsync(UriColor enumPath);
+    Single<Void> enumValidAsync(UriColor enumPath);
 
-    /**
-     * Get using uri with 'green color' in path parameter.
-     *
-     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -571,16 +465,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> enumNullAsync(UriColor enumPath);
+    Single<Void> enumNullAsync(UriColor enumPath);
 
-    /**
-     * Get null (should throw on the client before the request is sent on wire).
-     *
-     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumPath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -609,16 +495,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteMultiByteAsync(byte[] bytePath);
+    Single<Void> byteMultiByteAsync(byte[] bytePath);
 
-    /**
-     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     *
-     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] bytePath);
 
     /**
      * Get '' as byte array.
@@ -644,15 +522,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteEmptyAsync();
+    Single<Void> byteEmptyAsync();
 
-    /**
-     * Get '' as byte array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync();
 
     /**
      * Get null as byte array (should throw).
@@ -681,16 +552,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> byteNullAsync(byte[] bytePath);
+    Single<Void> byteNullAsync(byte[] bytePath);
 
-    /**
-     * Get null as byte array (should throw).
-     *
-     * @param bytePath null as byte array (should throw)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] bytePath);
 
     /**
      * Get '2012-01-01' as date.
@@ -716,15 +579,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateValidAsync();
+    Single<Void> dateValidAsync();
 
-    /**
-     * Get '2012-01-01' as date.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync();
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -753,16 +609,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateNullAsync(LocalDate datePath);
+    Single<Void> dateNullAsync(LocalDate datePath);
 
-    /**
-     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
-     *
-     * @param datePath null as date (should throw)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate datePath);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -788,15 +636,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateTimeValidAsync();
+    Single<Void> dateTimeValidAsync();
 
-    /**
-     * Get '2012-01-01T01:01:01Z' as date-time.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync();
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -825,16 +666,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> dateTimeNullAsync(DateTime dateTimePath);
+    Single<Void> dateTimeNullAsync(DateTime dateTimePath);
 
-    /**
-     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
-     *
-     * @param dateTimePath null as date-time
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimePath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -863,16 +696,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> base64UrlAsync(byte[] base64UrlPath);
+    Single<Void> base64UrlAsync(byte[] base64UrlPath);
 
-    /**
-     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
-     *
-     * @param base64UrlPath base64url encoded value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> base64UrlWithServiceResponseAsync(byte[] base64UrlPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -901,16 +726,8 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> arrayCsvInPathAsync(List<String> arrayPath);
+    Single<Void> arrayCsvInPathAsync(List<String> arrayPath);
 
-    /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     *
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> arrayCsvInPathWithServiceResponseAsync(List<String> arrayPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -939,15 +756,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
+    Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
 
-    /**
-     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
-     *
-     * @param unixTimeUrlPath Unix time encoded value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> unixTimeUrlWithServiceResponseAsync(DateTime unixTimeUrlPath);
 
 }

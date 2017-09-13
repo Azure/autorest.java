@@ -10,28 +10,31 @@
 
 package fixtures.azurespecials.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Query;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ApiVersionLocals.
  */
 public class ApiVersionLocalsInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private ApiVersionLocalsService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
@@ -39,11 +42,10 @@ public class ApiVersionLocalsInner {
     /**
      * Initializes an instance of ApiVersionLocalsInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ApiVersionLocalsInner(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = retrofit.create(ApiVersionLocalsService.class);
+    public ApiVersionLocalsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
+        this.service = RestProxy.create(ApiVersionLocalsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -54,19 +56,19 @@ public class ApiVersionLocalsInner {
     interface ApiVersionLocalsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
-        Observable<Response<ResponseBody>> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalNull" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
-        Observable<Response<ResponseBody>> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getPathLocalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
-        Observable<Response<ResponseBody>> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getSwaggerLocalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
-        Observable<Response<ResponseBody>> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -78,7 +80,7 @@ public class ApiVersionLocalsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidWithServiceResponseAsync().toBlocking().single().body();
+        getMethodLocalValidAsync().toBlocking().value();
     }
 
     /**
@@ -89,7 +91,7 @@ public class ApiVersionLocalsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getMethodLocalValidAsync(), serviceCallback);
     }
 
     /**
@@ -98,43 +100,11 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getMethodLocalValidAsync() {
-        return getMethodLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getMethodLocalValidWithServiceResponseAsync() {
+    public Single<Void> getMethodLocalValidAsync() {
         final String apiVersion = "2.0";
-        return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getMethodLocalValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -144,7 +114,7 @@ public class ApiVersionLocalsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().body();
+        getMethodLocalNullAsync().toBlocking().value();
     }
 
     /**
@@ -155,44 +125,18 @@ public class ApiVersionLocalsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getMethodLocalNullAsync(), serviceCallback);
     }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> getMethodLocalNullAsync() {
-        return getMethodLocalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync() {
+    public Single<Void> getMethodLocalNullAsync() {
         final String apiVersion = null;
-        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -204,7 +148,7 @@ public class ApiVersionLocalsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().body();
+        getMethodLocalNullAsync(apiVersion).toBlocking().value();
     }
 
     /**
@@ -216,7 +160,7 @@ public class ApiVersionLocalsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
+        return ServiceFuture.fromBody(getMethodLocalNullAsync(apiVersion), serviceCallback);
     }
 
     /**
@@ -226,43 +170,10 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getMethodLocalNullAsync(String apiVersion) {
-        return getMethodLocalNullWithServiceResponseAsync(apiVersion).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> getMethodLocalNullAsync(String apiVersion) {
+        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
-     *
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync(String apiVersion) {
-        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getMethodLocalNullDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -272,7 +183,7 @@ public class ApiVersionLocalsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getPathLocalValid() {
-        getPathLocalValidWithServiceResponseAsync().toBlocking().single().body();
+        getPathLocalValidAsync().toBlocking().value();
     }
 
     /**
@@ -283,7 +194,7 @@ public class ApiVersionLocalsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getPathLocalValidAsync(), serviceCallback);
     }
 
     /**
@@ -292,43 +203,11 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getPathLocalValidAsync() {
-        return getPathLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getPathLocalValidWithServiceResponseAsync() {
+    public Single<Void> getPathLocalValidAsync() {
         final String apiVersion = "2.0";
-        return service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getPathLocalValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -338,7 +217,7 @@ public class ApiVersionLocalsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().body();
+        getSwaggerLocalValidAsync().toBlocking().value();
     }
 
     /**
@@ -349,7 +228,7 @@ public class ApiVersionLocalsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getSwaggerLocalValidAsync(), serviceCallback);
     }
 
     /**
@@ -358,42 +237,10 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getSwaggerLocalValidAsync() {
-        return getSwaggerLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getSwaggerLocalValidWithServiceResponseAsync() {
+    public Single<Void> getSwaggerLocalValidAsync() {
         final String apiVersion = "2.0";
-        return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getSwaggerLocalValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

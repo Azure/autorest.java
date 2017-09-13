@@ -14,8 +14,10 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
+import rx.Single;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
@@ -184,7 +186,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.groups = new GroupsImpl(restClient().retrofit(), this);
+        this.groups = new GroupsImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

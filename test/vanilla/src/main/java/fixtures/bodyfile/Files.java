@@ -17,6 +17,7 @@ import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    Observable<InputStream> getFileAsync();
+    Single<InputStream> getFileAsync();
 
-    /**
-     * Get file.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync();
 
     /**
      * Get a large file.
@@ -83,15 +77,8 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    Observable<InputStream> getFileLargeAsync();
+    Single<InputStream> getFileLargeAsync();
 
-    /**
-     * Get a large file.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync();
 
     /**
      * Get empty file.
@@ -118,14 +105,7 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
-    Observable<InputStream> getEmptyFileAsync();
+    Single<InputStream> getEmptyFileAsync();
 
-    /**
-     * Get empty file.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
-     */
-    Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync();
 
 }

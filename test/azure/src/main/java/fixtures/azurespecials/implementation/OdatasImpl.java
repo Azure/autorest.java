@@ -10,29 +10,32 @@
 
 package fixtures.azurespecials.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.azurespecials.Odatas;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Query;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Odatas.
  */
 public class OdatasImpl implements Odatas {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private OdatasService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
@@ -40,11 +43,10 @@ public class OdatasImpl implements Odatas {
     /**
      * Initializes an instance of OdatasImpl.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public OdatasImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = retrofit.create(OdatasService.class);
+    public OdatasImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
+        this.service = RestProxy.create(OdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -55,7 +57,7 @@ public class OdatasImpl implements Odatas {
     interface OdatasService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
-        Observable<Response<ResponseBody>> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -67,7 +69,7 @@ public class OdatasImpl implements Odatas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getWithFilter() {
-        getWithFilterWithServiceResponseAsync().toBlocking().single().body();
+        getWithFilterAsync().toBlocking().value();
     }
 
     /**
@@ -78,46 +80,20 @@ public class OdatasImpl implements Odatas {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getWithFilterWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getWithFilterAsync(), serviceCallback);
     }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Void} object if successful.
      */
-    public Observable<Void> getWithFilterAsync() {
-        return getWithFilterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync() {
+    public Single<Void> getWithFilterAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
-        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getWithFilterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
     }
 
     /**
@@ -131,7 +107,7 @@ public class OdatasImpl implements Odatas {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().body();
+        getWithFilterAsync(filter, top, orderby).toBlocking().value();
     }
 
     /**
@@ -145,7 +121,7 @@ public class OdatasImpl implements Odatas {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
+        return ServiceFuture.fromBody(getWithFilterAsync(filter, top, orderby), serviceCallback);
     }
 
     /**
@@ -157,44 +133,9 @@ public class OdatasImpl implements Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
-        return getWithFilterWithServiceResponseAsync(filter, top, orderby).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
+    public Single<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
+        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    /**
-     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
-     *
-     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
-     * @param top The top parameter with value 10.
-     * @param orderby The orderby parameter with value id.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync(String filter, Integer top, String orderby) {
-        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getWithFilterDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

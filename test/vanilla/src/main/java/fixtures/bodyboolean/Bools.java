@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -47,15 +48,8 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getTrueAsync();
+    Single<Boolean> getTrueAsync();
 
-    /**
-     * Get true Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getTrueWithServiceResponseAsync();
 
     /**
      * Set Boolean value true.
@@ -84,16 +78,8 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putTrueAsync(boolean boolBody);
+    Single<Void> putTrueAsync(boolean boolBody);
 
-    /**
-     * Set Boolean value true.
-     *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync(boolean boolBody);
 
     /**
      * Get false Boolean value.
@@ -120,15 +106,8 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getFalseAsync();
+    Single<Boolean> getFalseAsync();
 
-    /**
-     * Get false Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getFalseWithServiceResponseAsync();
 
     /**
      * Set Boolean value false.
@@ -157,16 +136,8 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putFalseAsync(boolean boolBody);
+    Single<Void> putFalseAsync(boolean boolBody);
 
-    /**
-     * Set Boolean value false.
-     *
-     * @param boolBody the boolean value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync(boolean boolBody);
 
     /**
      * Get null Boolean value.
@@ -193,15 +164,8 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getNullAsync();
+    Single<Boolean> getNullAsync();
 
-    /**
-     * Get null Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid Boolean value.
@@ -228,14 +192,7 @@ public interface Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getInvalidAsync();
+    Single<Boolean> getInvalidAsync();
 
-    /**
-     * Get invalid Boolean value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getInvalidWithServiceResponseAsync();
 
 }

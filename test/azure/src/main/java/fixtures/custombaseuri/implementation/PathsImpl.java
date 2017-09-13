@@ -10,29 +10,32 @@
 
 package fixtures.custombaseuri.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.custombaseuri.Paths;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
 public class PathsImpl implements Paths {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
     private AutoRestParameterizedHostTestClientImpl client;
@@ -40,11 +43,10 @@ public class PathsImpl implements Paths {
     /**
      * Initializes an instance of PathsImpl.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClientImpl client) {
-        this.service = retrofit.create(PathsService.class);
+    public PathsImpl(AutoRestParameterizedHostTestClientImpl client) {
+        this.service = RestProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -55,7 +57,7 @@ public class PathsImpl implements Paths {
     interface PathsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
-        Observable<Response<ResponseBody>> getEmpty(@Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
+        Single<Void> getEmpty(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("x-ms-parameterized-host") String parameterizedHost, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -68,7 +70,7 @@ public class PathsImpl implements Paths {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getEmpty(String accountName) {
-        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().body();
+        getEmptyAsync(accountName).toBlocking().value();
     }
 
     /**
@@ -80,7 +82,7 @@ public class PathsImpl implements Paths {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
+        return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
     }
 
     /**
@@ -90,23 +92,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getEmptyAsync(String accountName) {
-        return getEmptyWithServiceResponseAsync(accountName).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get a 200 to test a valid base uri.
-     *
-     * @param accountName Account Name
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName) {
+    public Single<Void> getEmptyAsync(String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
@@ -114,25 +100,8 @@ public class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
         String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
-        return service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getEmptyDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }

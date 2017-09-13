@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -47,15 +48,8 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getNullAsync();
+    Single<byte[]> getNullAsync();
 
-    /**
-     * Get null byte value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getNullWithServiceResponseAsync();
 
     /**
      * Get empty byte value ''.
@@ -82,15 +76,8 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getEmptyAsync();
+    Single<byte[]> getEmptyAsync();
 
-    /**
-     * Get empty byte value ''.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getEmptyWithServiceResponseAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -117,15 +104,8 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getNonAsciiAsync();
+    Single<byte[]> getNonAsciiAsync();
 
-    /**
-     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getNonAsciiWithServiceResponseAsync();
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -154,16 +134,8 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putNonAsciiAsync(byte[] byteBody);
+    Single<Void> putNonAsciiAsync(byte[] byteBody);
 
-    /**
-     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
-     *
-     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putNonAsciiWithServiceResponseAsync(byte[] byteBody);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -190,14 +162,7 @@ public interface Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
-    Observable<byte[]> getInvalidAsync();
+    Single<byte[]> getInvalidAsync();
 
-    /**
-     * Get invalid byte value ':::SWAGGER::::'.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
-     */
-    Observable<ServiceResponse<byte[]>> getInvalidWithServiceResponseAsync();
 
 }

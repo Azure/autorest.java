@@ -17,6 +17,7 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,15 +49,8 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getEmptyErrorAsync();
+    Single<Boolean> getEmptyErrorAsync();
 
-    /**
-     * Get empty error form server.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync();
 
     /**
      * Get empty error form server.
@@ -83,15 +77,8 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getNoModelErrorAsync();
+    Single<Boolean> getNoModelErrorAsync();
 
-    /**
-     * Get empty error form server.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync();
 
     /**
      * Get empty response from server.
@@ -118,14 +105,7 @@ public interface HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> getNoModelEmptyAsync();
+    Single<Boolean> getNoModelEmptyAsync();
 
-    /**
-     * Get empty response from server.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync();
 
 }

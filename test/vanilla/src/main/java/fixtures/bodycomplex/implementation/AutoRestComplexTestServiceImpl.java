@@ -19,10 +19,10 @@ import fixtures.bodycomplex.Inheritances;
 import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Readonlypropertys;
+import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService class.
@@ -158,13 +158,6 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Initializes an instance of AutoRestComplexTestService client.
-     */
-    public AutoRestComplexTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestComplexTestService client.
      *
      * @param baseUrl the base URL of the host
      */
@@ -176,23 +169,9 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
      */
-    public AutoRestComplexTestServiceImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        this("http://localhost", clientBuilder, restBuilder);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestComplexTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param clientBuilder the builder for building an OkHttp client, bundled with user configurations
-     * @param restBuilder the builder for building an Retrofit client, bundled with user configurations
-     */
-    public AutoRestComplexTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
-        super(baseUrl, clientBuilder, restBuilder);
+    public AutoRestComplexTestServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
@@ -208,13 +187,13 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     private void initialize() {
         this.apiVersion = "2014-04-01-preview";
-        this.basics = new BasicsImpl(retrofit(), this);
-        this.primitives = new PrimitivesImpl(retrofit(), this);
-        this.arrays = new ArraysImpl(retrofit(), this);
-        this.dictionarys = new DictionarysImpl(retrofit(), this);
-        this.inheritances = new InheritancesImpl(retrofit(), this);
-        this.polymorphisms = new PolymorphismsImpl(retrofit(), this);
-        this.polymorphicrecursives = new PolymorphicrecursivesImpl(retrofit(), this);
-        this.readonlypropertys = new ReadonlypropertysImpl(retrofit(), this);
+        this.basics = new BasicsImpl(this);
+        this.primitives = new PrimitivesImpl(this);
+        this.arrays = new ArraysImpl(this);
+        this.dictionarys = new DictionarysImpl(this);
+        this.inheritances = new InheritancesImpl(this);
+        this.polymorphisms = new PolymorphismsImpl(this);
+        this.polymorphicrecursives = new PolymorphicrecursivesImpl(this);
+        this.readonlypropertys = new ReadonlypropertysImpl(this);
     }
 }

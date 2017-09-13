@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -47,15 +48,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> head200Async();
+    Single<Boolean> head200Async();
 
-    /**
-     * Return 200 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync();
 
     /**
      * Return 204 status code if successful.
@@ -82,15 +76,8 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> head204Async();
+    Single<Boolean> head204Async();
 
-    /**
-     * Return 204 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync();
 
     /**
      * Return 404 status code if successful.
@@ -117,14 +104,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    Observable<Boolean> head404Async();
+    Single<Boolean> head404Async();
 
-    /**
-     * Return 404 status code if successful.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
-     */
-    Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync();
 
 }

@@ -32,6 +32,7 @@ import fixtures.http.models.HttpRedirectsPut307Headers;
 import java.io.IOException;
 import java.util.List;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -62,15 +63,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> head300Async();
+    Single<Void> head300Async();
 
-    /**
-     * Return 300 status code and redirect to /http/success/200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers>> head300WithServiceResponseAsync();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -97,15 +91,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<List<String>> get300Async();
+    Single<List<String>> get300Async();
 
-    /**
-     * Return 300 status code and redirect to /http/success/200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;String&gt; object
-     */
-    Observable<ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers>> get300WithServiceResponseAsync();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -131,15 +118,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> head301Async();
+    Single<Void> head301Async();
 
-    /**
-     * Return 301 status code and redirect to /http/success/200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers>> head301WithServiceResponseAsync();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -165,15 +145,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> get301Async();
+    Single<Void> get301Async();
 
-    /**
-     * Return 301 status code and redirect to /http/success/200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers>> get301WithServiceResponseAsync();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -199,15 +172,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> put301Async();
-
-    /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>> put301WithServiceResponseAsync();
+    Single<Void> put301Async();
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
@@ -235,16 +200,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> put301Async(Boolean booleanValue);
+    Single<Void> put301Async(Boolean booleanValue);
 
-    /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>> put301WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -270,15 +227,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> head302Async();
+    Single<Void> head302Async();
 
-    /**
-     * Return 302 status code and redirect to /http/success/200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers>> head302WithServiceResponseAsync();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -304,15 +254,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> get302Async();
+    Single<Void> get302Async();
 
-    /**
-     * Return 302 status code and redirect to /http/success/200.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers>> get302WithServiceResponseAsync();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -338,15 +281,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> patch302Async();
-
-    /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>> patch302WithServiceResponseAsync();
+    Single<Void> patch302Async();
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
@@ -374,16 +309,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> patch302Async(Boolean booleanValue);
+    Single<Void> patch302Async(Boolean booleanValue);
 
-    /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>> patch302WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -409,15 +336,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> post303Async();
-
-    /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>> post303WithServiceResponseAsync();
+    Single<Void> post303Async();
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
@@ -445,16 +364,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> post303Async(Boolean booleanValue);
+    Single<Void> post303Async(Boolean booleanValue);
 
-    /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>> post303WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -480,15 +391,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> head307Async();
+    Single<Void> head307Async();
 
-    /**
-     * Redirect with 307, resulting in a 200 success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers>> head307WithServiceResponseAsync();
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -514,15 +418,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> get307Async();
+    Single<Void> get307Async();
 
-    /**
-     * Redirect get with 307, resulting in a 200 success.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers>> get307WithServiceResponseAsync();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -548,15 +445,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> put307Async();
-
-    /**
-     * Put redirected with 307, resulting in a 200 after redirect.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>> put307WithServiceResponseAsync();
+    Single<Void> put307Async();
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
@@ -584,16 +473,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> put307Async(Boolean booleanValue);
+    Single<Void> put307Async(Boolean booleanValue);
 
-    /**
-     * Put redirected with 307, resulting in a 200 after redirect.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>> put307WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -619,15 +500,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> patch307Async();
-
-    /**
-     * Patch redirected with 307, resulting in a 200 after redirect.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>> patch307WithServiceResponseAsync();
+    Single<Void> patch307Async();
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
@@ -655,16 +528,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> patch307Async(Boolean booleanValue);
+    Single<Void> patch307Async(Boolean booleanValue);
 
-    /**
-     * Patch redirected with 307, resulting in a 200 after redirect.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>> patch307WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -690,15 +555,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> post307Async();
-
-    /**
-     * Post redirected with 307, resulting in a 200 after redirect.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>> post307WithServiceResponseAsync();
+    Single<Void> post307Async();
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
@@ -726,16 +583,8 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> post307Async(Boolean booleanValue);
+    Single<Void> post307Async(Boolean booleanValue);
 
-    /**
-     * Post redirected with 307, resulting in a 200 after redirect.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>> post307WithServiceResponseAsync(Boolean booleanValue);
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -761,15 +610,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> delete307Async();
-
-    /**
-     * Delete redirected with 307, resulting in a 200 after redirect.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>> delete307WithServiceResponseAsync();
+    Single<Void> delete307Async();
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
@@ -797,15 +638,7 @@ public interface HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    Observable<Void> delete307Async(Boolean booleanValue);
+    Single<Void> delete307Async(Boolean booleanValue);
 
-    /**
-     * Delete redirected with 307, resulting in a 200 after redirect.
-     *
-     * @param booleanValue Simple boolean value true
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
-     */
-    Observable<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>> delete307WithServiceResponseAsync(Boolean booleanValue);
 
 }

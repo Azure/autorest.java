@@ -14,11 +14,13 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
 import fixtures.lro.AutoRestLongRunningOperationTestService;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
 import fixtures.lro.LROSADs;
 import fixtures.lro.LROsCustomHeaders;
+import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
@@ -190,10 +192,10 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.lROs = new LROsImpl(restClient().retrofit(), this);
-        this.lRORetrys = new LRORetrysImpl(restClient().retrofit(), this);
-        this.lROSADs = new LROSADsImpl(restClient().retrofit(), this);
-        this.lROsCustomHeaders = new LROsCustomHeadersImpl(restClient().retrofit(), this);
+        this.lROs = new LROsImpl(this);
+        this.lRORetrys = new LRORetrysImpl(this);
+        this.lROSADs = new LROSADsImpl(this);
+        this.lROsCustomHeaders = new LROsCustomHeadersImpl(this);
         this.azureClient = new AzureClient(this);
     }
 

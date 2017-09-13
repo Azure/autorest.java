@@ -23,6 +23,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,15 +55,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<List<Integer>> getNullAsync();
+    Single<List<Integer>> getNullAsync();
 
-    /**
-     * Get null array value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Integer&gt; object
-     */
-    Observable<ServiceResponse<List<Integer>>> getNullWithServiceResponseAsync();
 
     /**
      * Get invalid array [1, 2, 3.
@@ -89,15 +83,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<List<Integer>> getInvalidAsync();
+    Single<List<Integer>> getInvalidAsync();
 
-    /**
-     * Get invalid array [1, 2, 3.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Integer&gt; object
-     */
-    Observable<ServiceResponse<List<Integer>>> getInvalidWithServiceResponseAsync();
 
     /**
      * Get empty array value [].
@@ -124,15 +111,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<List<Integer>> getEmptyAsync();
+    Single<List<Integer>> getEmptyAsync();
 
-    /**
-     * Get empty array value [].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Integer&gt; object
-     */
-    Observable<ServiceResponse<List<Integer>>> getEmptyWithServiceResponseAsync();
 
     /**
      * Set array value empty [].
@@ -161,16 +141,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putEmptyAsync(List<String> arrayBody);
+    Single<Void> putEmptyAsync(List<String> arrayBody);
 
-    /**
-     * Set array value empty [].
-     *
-     * @param arrayBody the List&lt;String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(List<String> arrayBody);
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -197,15 +169,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    Observable<List<Boolean>> getBooleanTfftAsync();
+    Single<List<Boolean>> getBooleanTfftAsync();
 
-    /**
-     * Get boolean array value [true, false, false, true].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Boolean&gt; object
-     */
-    Observable<ServiceResponse<List<Boolean>>> getBooleanTfftWithServiceResponseAsync();
 
     /**
      * Set array value empty [true, false, false, true].
@@ -234,16 +199,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
+    Single<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
 
-    /**
-     * Set array value empty [true, false, false, true].
-     *
-     * @param arrayBody the List&lt;Boolean&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putBooleanTfftWithServiceResponseAsync(List<Boolean> arrayBody);
 
     /**
      * Get boolean array value [true, null, false].
@@ -270,15 +227,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    Observable<List<Boolean>> getBooleanInvalidNullAsync();
+    Single<List<Boolean>> getBooleanInvalidNullAsync();
 
-    /**
-     * Get boolean array value [true, null, false].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Boolean&gt; object
-     */
-    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullWithServiceResponseAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -305,15 +255,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
-    Observable<List<Boolean>> getBooleanInvalidStringAsync();
+    Single<List<Boolean>> getBooleanInvalidStringAsync();
 
-    /**
-     * Get boolean array value [true, 'boolean', false].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Boolean&gt; object
-     */
-    Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringWithServiceResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -340,15 +283,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<List<Integer>> getIntegerValidAsync();
+    Single<List<Integer>> getIntegerValidAsync();
 
-    /**
-     * Get integer array value [1, -1, 3, 300].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Integer&gt; object
-     */
-    Observable<ServiceResponse<List<Integer>>> getIntegerValidWithServiceResponseAsync();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -377,16 +313,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putIntegerValidAsync(List<Integer> arrayBody);
+    Single<Void> putIntegerValidAsync(List<Integer> arrayBody);
 
-    /**
-     * Set array value empty [1, -1, 3, 300].
-     *
-     * @param arrayBody the List&lt;Integer&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putIntegerValidWithServiceResponseAsync(List<Integer> arrayBody);
 
     /**
      * Get integer array value [1, null, 0].
@@ -413,15 +341,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<List<Integer>> getIntInvalidNullAsync();
+    Single<List<Integer>> getIntInvalidNullAsync();
 
-    /**
-     * Get integer array value [1, null, 0].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Integer&gt; object
-     */
-    Observable<ServiceResponse<List<Integer>>> getIntInvalidNullWithServiceResponseAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -448,15 +369,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
-    Observable<List<Integer>> getIntInvalidStringAsync();
+    Single<List<Integer>> getIntInvalidStringAsync();
 
-    /**
-     * Get integer array value [1, 'integer', 0].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Integer&gt; object
-     */
-    Observable<ServiceResponse<List<Integer>>> getIntInvalidStringWithServiceResponseAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -483,15 +397,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
-    Observable<List<Long>> getLongValidAsync();
+    Single<List<Long>> getLongValidAsync();
 
-    /**
-     * Get integer array value [1, -1, 3, 300].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Long&gt; object
-     */
-    Observable<ServiceResponse<List<Long>>> getLongValidWithServiceResponseAsync();
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -520,16 +427,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putLongValidAsync(List<Long> arrayBody);
+    Single<Void> putLongValidAsync(List<Long> arrayBody);
 
-    /**
-     * Set array value empty [1, -1, 3, 300].
-     *
-     * @param arrayBody the List&lt;Long&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putLongValidWithServiceResponseAsync(List<Long> arrayBody);
 
     /**
      * Get long array value [1, null, 0].
@@ -556,15 +455,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
-    Observable<List<Long>> getLongInvalidNullAsync();
+    Single<List<Long>> getLongInvalidNullAsync();
 
-    /**
-     * Get long array value [1, null, 0].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Long&gt; object
-     */
-    Observable<ServiceResponse<List<Long>>> getLongInvalidNullWithServiceResponseAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -591,15 +483,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
-    Observable<List<Long>> getLongInvalidStringAsync();
+    Single<List<Long>> getLongInvalidStringAsync();
 
-    /**
-     * Get long array value [1, 'integer', 0].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Long&gt; object
-     */
-    Observable<ServiceResponse<List<Long>>> getLongInvalidStringWithServiceResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -626,15 +511,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<List<Double>> getFloatValidAsync();
+    Single<List<Double>> getFloatValidAsync();
 
-    /**
-     * Get float array value [0, -0.01, 1.2e20].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Double&gt; object
-     */
-    Observable<ServiceResponse<List<Double>>> getFloatValidWithServiceResponseAsync();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -663,16 +541,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putFloatValidAsync(List<Double> arrayBody);
+    Single<Void> putFloatValidAsync(List<Double> arrayBody);
 
-    /**
-     * Set array value [0, -0.01, 1.2e20].
-     *
-     * @param arrayBody the List&lt;Double&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putFloatValidWithServiceResponseAsync(List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -699,15 +569,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<List<Double>> getFloatInvalidNullAsync();
+    Single<List<Double>> getFloatInvalidNullAsync();
 
-    /**
-     * Get float array value [0.0, null, -1.2e20].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Double&gt; object
-     */
-    Observable<ServiceResponse<List<Double>>> getFloatInvalidNullWithServiceResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -734,15 +597,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<List<Double>> getFloatInvalidStringAsync();
+    Single<List<Double>> getFloatInvalidStringAsync();
 
-    /**
-     * Get boolean array value [1.0, 'number', 0.0].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Double&gt; object
-     */
-    Observable<ServiceResponse<List<Double>>> getFloatInvalidStringWithServiceResponseAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -769,15 +625,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<List<Double>> getDoubleValidAsync();
+    Single<List<Double>> getDoubleValidAsync();
 
-    /**
-     * Get float array value [0, -0.01, 1.2e20].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Double&gt; object
-     */
-    Observable<ServiceResponse<List<Double>>> getDoubleValidWithServiceResponseAsync();
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -806,16 +655,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDoubleValidAsync(List<Double> arrayBody);
+    Single<Void> putDoubleValidAsync(List<Double> arrayBody);
 
-    /**
-     * Set array value [0, -0.01, 1.2e20].
-     *
-     * @param arrayBody the List&lt;Double&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDoubleValidWithServiceResponseAsync(List<Double> arrayBody);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -842,15 +683,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<List<Double>> getDoubleInvalidNullAsync();
+    Single<List<Double>> getDoubleInvalidNullAsync();
 
-    /**
-     * Get float array value [0.0, null, -1.2e20].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Double&gt; object
-     */
-    Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullWithServiceResponseAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -877,15 +711,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
-    Observable<List<Double>> getDoubleInvalidStringAsync();
+    Single<List<Double>> getDoubleInvalidStringAsync();
 
-    /**
-     * Get boolean array value [1.0, 'number', 0.0].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Double&gt; object
-     */
-    Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringWithServiceResponseAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -912,15 +739,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<List<String>> getStringValidAsync();
+    Single<List<String>> getStringValidAsync();
 
-    /**
-     * Get string array value ['foo1', 'foo2', 'foo3'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;String&gt; object
-     */
-    Observable<ServiceResponse<List<String>>> getStringValidWithServiceResponseAsync();
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -949,16 +769,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putStringValidAsync(List<String> arrayBody);
+    Single<Void> putStringValidAsync(List<String> arrayBody);
 
-    /**
-     * Set array value ['foo1', 'foo2', 'foo3'].
-     *
-     * @param arrayBody the List&lt;String&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(List<String> arrayBody);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -985,15 +797,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<List<String>> getStringWithNullAsync();
+    Single<List<String>> getStringWithNullAsync();
 
-    /**
-     * Get string array value ['foo', null, 'foo2'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;String&gt; object
-     */
-    Observable<ServiceResponse<List<String>>> getStringWithNullWithServiceResponseAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -1020,15 +825,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
-    Observable<List<String>> getStringWithInvalidAsync();
+    Single<List<String>> getStringWithInvalidAsync();
 
-    /**
-     * Get string array value ['foo', 123, 'foo2'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;String&gt; object
-     */
-    Observable<ServiceResponse<List<String>>> getStringWithInvalidWithServiceResponseAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1055,15 +853,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UUID&gt; object
      */
-    Observable<List<UUID>> getUuidValidAsync();
+    Single<List<UUID>> getUuidValidAsync();
 
-    /**
-     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;UUID&gt; object
-     */
-    Observable<ServiceResponse<List<UUID>>> getUuidValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1092,16 +883,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putUuidValidAsync(List<UUID> arrayBody);
+    Single<Void> putUuidValidAsync(List<UUID> arrayBody);
 
-    /**
-     * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
-     *
-     * @param arrayBody the List&lt;UUID&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putUuidValidWithServiceResponseAsync(List<UUID> arrayBody);
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -1128,15 +911,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UUID&gt; object
      */
-    Observable<List<UUID>> getUuidInvalidCharsAsync();
+    Single<List<UUID>> getUuidInvalidCharsAsync();
 
-    /**
-     * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;UUID&gt; object
-     */
-    Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsWithServiceResponseAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1163,15 +939,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    Observable<List<LocalDate>> getDateValidAsync();
+    Single<List<LocalDate>> getDateValidAsync();
 
-    /**
-     * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;LocalDate&gt; object
-     */
-    Observable<ServiceResponse<List<LocalDate>>> getDateValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1200,16 +969,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDateValidAsync(List<LocalDate> arrayBody);
+    Single<Void> putDateValidAsync(List<LocalDate> arrayBody);
 
-    /**
-     * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
-     *
-     * @param arrayBody the List&lt;LocalDate&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDateValidWithServiceResponseAsync(List<LocalDate> arrayBody);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -1236,15 +997,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    Observable<List<LocalDate>> getDateInvalidNullAsync();
+    Single<List<LocalDate>> getDateInvalidNullAsync();
 
-    /**
-     * Get date array value ['2012-01-01', null, '1776-07-04'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;LocalDate&gt; object
-     */
-    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullWithServiceResponseAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -1271,15 +1025,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
-    Observable<List<LocalDate>> getDateInvalidCharsAsync();
+    Single<List<LocalDate>> getDateInvalidCharsAsync();
 
-    /**
-     * Get date array value ['2011-03-22', 'date'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;LocalDate&gt; object
-     */
-    Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsWithServiceResponseAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1306,15 +1053,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<List<DateTime>> getDateTimeValidAsync();
+    Single<List<DateTime>> getDateTimeValidAsync();
 
-    /**
-     * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;DateTime&gt; object
-     */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1343,16 +1083,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
+    Single<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
 
-    /**
-     * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
-     *
-     * @param arrayBody the List&lt;DateTime&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDateTimeValidWithServiceResponseAsync(List<DateTime> arrayBody);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1379,15 +1111,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<List<DateTime>> getDateTimeInvalidNullAsync();
+    Single<List<DateTime>> getDateTimeInvalidNullAsync();
 
-    /**
-     * Get date array value ['2000-12-01t00:00:01z', null].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;DateTime&gt; object
-     */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullWithServiceResponseAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1414,15 +1139,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<List<DateTime>> getDateTimeInvalidCharsAsync();
+    Single<List<DateTime>> getDateTimeInvalidCharsAsync();
 
-    /**
-     * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;DateTime&gt; object
-     */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsWithServiceResponseAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1449,15 +1167,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
-    Observable<List<DateTime>> getDateTimeRfc1123ValidAsync();
+    Single<List<DateTime>> getDateTimeRfc1123ValidAsync();
 
-    /**
-     * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;DateTime&gt; object
-     */
-    Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1486,16 +1197,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
+    Single<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
 
-    /**
-     * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
-     *
-     * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidWithServiceResponseAsync(List<DateTime> arrayBody);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1522,15 +1225,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Period&gt; object
      */
-    Observable<List<Period>> getDurationValidAsync();
+    Single<List<Period>> getDurationValidAsync();
 
-    /**
-     * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Period&gt; object
-     */
-    Observable<ServiceResponse<List<Period>>> getDurationValidWithServiceResponseAsync();
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1559,16 +1255,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDurationValidAsync(List<Period> arrayBody);
+    Single<Void> putDurationValidAsync(List<Period> arrayBody);
 
-    /**
-     * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
-     *
-     * @param arrayBody the List&lt;Period&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDurationValidWithServiceResponseAsync(List<Period> arrayBody);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1595,15 +1283,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    Observable<List<byte[]>> getByteValidAsync();
+    Single<List<byte[]>> getByteValidAsync();
 
-    /**
-     * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;byte[]&gt; object
-     */
-    Observable<ServiceResponse<List<byte[]>>> getByteValidWithServiceResponseAsync();
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1632,16 +1313,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putByteValidAsync(List<byte[]> arrayBody);
+    Single<Void> putByteValidAsync(List<byte[]> arrayBody);
 
-    /**
-     * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
-     *
-     * @param arrayBody the List&lt;byte[]&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putByteValidWithServiceResponseAsync(List<byte[]> arrayBody);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1668,15 +1341,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    Observable<List<byte[]>> getByteInvalidNullAsync();
+    Single<List<byte[]>> getByteInvalidNullAsync();
 
-    /**
-     * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;byte[]&gt; object
-     */
-    Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullWithServiceResponseAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1703,15 +1369,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
-    Observable<List<byte[]>> getBase64UrlAsync();
+    Single<List<byte[]>> getBase64UrlAsync();
 
-    /**
-     * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;byte[]&gt; object
-     */
-    Observable<ServiceResponse<List<byte[]>>> getBase64UrlWithServiceResponseAsync();
 
     /**
      * Get array of complex type null value.
@@ -1738,15 +1397,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<List<Product>> getComplexNullAsync();
+    Single<List<Product>> getComplexNullAsync();
 
-    /**
-     * Get array of complex type null value.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Product&gt; object
-     */
-    Observable<ServiceResponse<List<Product>>> getComplexNullWithServiceResponseAsync();
 
     /**
      * Get empty array of complex type [].
@@ -1773,15 +1425,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<List<Product>> getComplexEmptyAsync();
+    Single<List<Product>> getComplexEmptyAsync();
 
-    /**
-     * Get empty array of complex type [].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Product&gt; object
-     */
-    Observable<ServiceResponse<List<Product>>> getComplexEmptyWithServiceResponseAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1808,15 +1453,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<List<Product>> getComplexItemNullAsync();
+    Single<List<Product>> getComplexItemNullAsync();
 
-    /**
-     * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Product&gt; object
-     */
-    Observable<ServiceResponse<List<Product>>> getComplexItemNullWithServiceResponseAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1843,15 +1481,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<List<Product>> getComplexItemEmptyAsync();
+    Single<List<Product>> getComplexItemEmptyAsync();
 
-    /**
-     * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Product&gt; object
-     */
-    Observable<ServiceResponse<List<Product>>> getComplexItemEmptyWithServiceResponseAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1878,15 +1509,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
-    Observable<List<Product>> getComplexValidAsync();
+    Single<List<Product>> getComplexValidAsync();
 
-    /**
-     * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Product&gt; object
-     */
-    Observable<ServiceResponse<List<Product>>> getComplexValidWithServiceResponseAsync();
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1915,16 +1539,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putComplexValidAsync(List<Product> arrayBody);
+    Single<Void> putComplexValidAsync(List<Product> arrayBody);
 
-    /**
-     * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
-     *
-     * @param arrayBody the List&lt;Product&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putComplexValidWithServiceResponseAsync(List<Product> arrayBody);
 
     /**
      * Get a null array.
@@ -1951,15 +1567,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<List<List<String>>> getArrayNullAsync();
+    Single<List<List<String>>> getArrayNullAsync();
 
-    /**
-     * Get a null array.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<List<String>>>> getArrayNullWithServiceResponseAsync();
 
     /**
      * Get an empty array [].
@@ -1986,15 +1595,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<List<List<String>>> getArrayEmptyAsync();
+    Single<List<List<String>>> getArrayEmptyAsync();
 
-    /**
-     * Get an empty array [].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<List<String>>>> getArrayEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -2021,15 +1623,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<List<List<String>>> getArrayItemNullAsync();
+    Single<List<List<String>>> getArrayItemNullAsync();
 
-    /**
-     * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<List<String>>>> getArrayItemNullWithServiceResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -2056,15 +1651,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<List<List<String>>> getArrayItemEmptyAsync();
+    Single<List<List<String>>> getArrayItemEmptyAsync();
 
-    /**
-     * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2091,15 +1679,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
-    Observable<List<List<String>>> getArrayValidAsync();
+    Single<List<List<String>>> getArrayValidAsync();
 
-    /**
-     * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;List&lt;String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<List<String>>>> getArrayValidWithServiceResponseAsync();
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2128,16 +1709,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putArrayValidAsync(List<List<String>> arrayBody);
+    Single<Void> putArrayValidAsync(List<List<String>> arrayBody);
 
-    /**
-     * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
-     *
-     * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putArrayValidWithServiceResponseAsync(List<List<String>> arrayBody);
 
     /**
      * Get an array of Dictionaries with value null.
@@ -2164,15 +1737,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<List<Map<String, String>>> getDictionaryNullAsync();
+    Single<List<Map<String, String>>> getDictionaryNullAsync();
 
-    /**
-     * Get an array of Dictionaries with value null.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -2199,15 +1765,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<List<Map<String, String>>> getDictionaryEmptyAsync();
+    Single<List<Map<String, String>>> getDictionaryEmptyAsync();
 
-    /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2234,15 +1793,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<List<Map<String, String>>> getDictionaryItemNullAsync();
+    Single<List<Map<String, String>>> getDictionaryItemNullAsync();
 
-    /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2269,15 +1821,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<List<Map<String, String>>> getDictionaryItemEmptyAsync();
+    Single<List<Map<String, String>>> getDictionaryItemEmptyAsync();
 
-    /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2304,15 +1849,8 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
-    Observable<List<Map<String, String>>> getDictionaryValidAsync();
+    Single<List<Map<String, String>>> getDictionaryValidAsync();
 
-    /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
-     */
-    Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidWithServiceResponseAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2341,15 +1879,7 @@ public interface Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
+    Single<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
 
-    /**
-     * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
-     *
-     * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    Observable<ServiceResponse<Void>> putDictionaryValidWithServiceResponseAsync(List<Map<String, String>> arrayBody);
 
 }

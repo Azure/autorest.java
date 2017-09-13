@@ -10,28 +10,31 @@
 
 package fixtures.azurespecials.implementation;
 
-import retrofit2.Retrofit;
+import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Query;
-import retrofit2.Response;
 import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ApiVersionDefaults.
  */
 public class ApiVersionDefaultsInner {
-    /** The Retrofit service to perform REST calls. */
+    /** The RestProxy service to perform REST calls. */
     private ApiVersionDefaultsService service;
     /** The service client containing this operation class. */
     private AutoRestAzureSpecialParametersTestClientImpl client;
@@ -39,11 +42,10 @@ public class ApiVersionDefaultsInner {
     /**
      * Initializes an instance of ApiVersionDefaultsInner.
      *
-     * @param retrofit the Retrofit instance built from a Retrofit Builder.
      * @param client the instance of the service client containing this operation class.
      */
-    public ApiVersionDefaultsInner(Retrofit retrofit, AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = retrofit.create(ApiVersionDefaultsService.class);
+    public ApiVersionDefaultsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
+        this.service = RestProxy.create(ApiVersionDefaultsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -54,19 +56,19 @@ public class ApiVersionDefaultsInner {
     interface ApiVersionDefaultsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
-        Observable<Response<ResponseBody>> getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalNotProvidedValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
-        Observable<Response<ResponseBody>> getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getPathGlobalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
-        Observable<Response<ResponseBody>> getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getSwaggerGlobalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
-        Observable<Response<ResponseBody>> getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Single<Void> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -78,7 +80,7 @@ public class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
+        getMethodGlobalValidAsync().toBlocking().value();
     }
 
     /**
@@ -89,7 +91,7 @@ public class ApiVersionDefaultsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getMethodGlobalValidAsync(), serviceCallback);
     }
 
     /**
@@ -98,45 +100,13 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getMethodGlobalValidAsync() {
-        return getMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getMethodGlobalValidWithServiceResponseAsync() {
+    public Single<Void> getMethodGlobalValidAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getMethodGlobalValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * GET method with api-version modeled in global settings.
@@ -146,7 +116,7 @@ public class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
+        getMethodGlobalNotProvidedValidAsync().toBlocking().value();
     }
 
     /**
@@ -157,7 +127,7 @@ public class ApiVersionDefaultsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getMethodGlobalNotProvidedValidAsync(), serviceCallback);
     }
 
     /**
@@ -166,45 +136,13 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getMethodGlobalNotProvidedValidAsync() {
-        return getMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidWithServiceResponseAsync() {
+    public Single<Void> getMethodGlobalNotProvidedValidAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getMethodGlobalNotProvidedValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * GET method with api-version modeled in global settings.
@@ -214,7 +152,7 @@ public class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
+        getPathGlobalValidAsync().toBlocking().value();
     }
 
     /**
@@ -225,7 +163,7 @@ public class ApiVersionDefaultsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getPathGlobalValidAsync(), serviceCallback);
     }
 
     /**
@@ -234,45 +172,13 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getPathGlobalValidAsync() {
-        return getPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getPathGlobalValidWithServiceResponseAsync() {
+    public Single<Void> getPathGlobalValidAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getPathGlobalValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
     /**
      * GET method with api-version modeled in global settings.
@@ -282,7 +188,7 @@ public class ApiVersionDefaultsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
+        getSwaggerGlobalValidAsync().toBlocking().value();
     }
 
     /**
@@ -293,7 +199,7 @@ public class ApiVersionDefaultsInner {
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceFuture.fromBody(getSwaggerGlobalValidAsync(), serviceCallback);
     }
 
     /**
@@ -302,44 +208,12 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> getSwaggerGlobalValidAsync() {
-        return getSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * GET method with api-version modeled in global settings.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> getSwaggerGlobalValidWithServiceResponseAsync() {
+    public Single<Void> getSwaggerGlobalValidAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = getSwaggerGlobalValidDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
+        return service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
-    private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
 
 }
