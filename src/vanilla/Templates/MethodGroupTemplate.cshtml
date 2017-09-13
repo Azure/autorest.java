@@ -33,7 +33,7 @@ public class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
      * @@param client the instance of the service client containing this operation class.
      */
     public @(Model.MethodGroupImplType)(@(Model.ServiceClientType) client) {
-        this.service = RestProxy.create(@(Model.MethodGroupServiceType).class, client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(@(Model.MethodGroupServiceType).class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
     @EmptyLine

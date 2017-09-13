@@ -735,6 +735,8 @@ namespace AutoRest.Java.Model
                 imports.Add("rx.Single");
                 imports.Add("rx.functions.Func1");
                 imports.Add("com.microsoft.rest.v2.annotations.Headers");
+                imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
+                imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
                 imports.Add("com.microsoft.rest.v2.annotations.Host");
                 
                 imports.Add("com.microsoft.rest.v2.http.HttpClient");
@@ -775,6 +777,15 @@ namespace AutoRest.Java.Model
                     imports.Add("com.google.common.base.Joiner");
                 }
                 return imports.ToList();
+            }
+        }
+
+        public string ExpectedResponsesAnnotation
+        {
+            get
+            {
+                string annotationArgs = string.Join(", ", Responses.Keys.Select(k => k.ToString("D")));
+                return $"@ExpectedResponses({{{annotationArgs}}})";
             }
         }
     }

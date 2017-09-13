@@ -129,7 +129,7 @@ if(!property.IsReadOnly)
 @EmptyLine
 <text>
     private void initializeService() {
-        service = RestProxy.create(@(Model.ServiceClientServiceType).class, httpClient(), serializerAdapter());
+        service = RestProxy.create(@(Model.ServiceClientServiceType).class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 </text>
 @EmptyLine

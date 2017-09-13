@@ -24,6 +24,11 @@ if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
 {
 @:    // @@Streaming not supported by RestProxy
 }
+@:    @(method.ExpectedResponsesAnnotation)
+if (method.DefaultResponse.Body != null)
+{
+@:    @@UnexpectedResponseExceptionType(@(method.OperationExceptionTypeString).class)
+}
 @:    Single<@(method.ReturnTypeJv.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine
 }
