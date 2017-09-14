@@ -140,7 +140,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
-public Observable<OperationStatus<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<OperationStatus<@Model.ReturnTypeJva.ClientResponseTypeString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
