@@ -202,7 +202,7 @@ else
 @EmptyLine
 if (Model.RootMethods.Any())
 {
-@:    @Include(new AzureServiceClientRetrofitTemplate(), Model)
+@:    @Include(new AzureMethodGroupRetrofitTemplate(), (IMethodGroupJva)Model)
 @EmptyLine
 }
 <text>

@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Model;
@@ -13,7 +14,7 @@ using AutoRest.Core;
 
 namespace AutoRest.Java.Azure.Model
 {
-    public class CodeModelJva : CodeModelJv
+    public class CodeModelJva : CodeModelJv, IMethodGroupJva
     {
         public IDictionary<KeyValuePair<string, string>, string> pageClasses =
             new Dictionary<KeyValuePair<string, string>, string>();
@@ -122,5 +123,11 @@ namespace AutoRest.Java.Azure.Model
                 return result;
             }
         }
+
+        IEnumerable<MethodJva> IMethodGroupJva.Methods => RootMethods.Cast<MethodJva>();
+        string IMethodGroupJva.LoggingContext => FullyQualifiedDomainName;
+        string IMethodGroupJva.ServiceType => ServiceClientServiceType;
+        string IMethodGroupJva.Name => Name;
+        CodeModel IMethodGroupJva.CodeModel => this;
     }
 }
