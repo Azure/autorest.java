@@ -30,16 +30,7 @@ public class @(Model.Name)Impl@(Model.ParentDeclaration) {
 @:    /** The RestProxy service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
 }
-    /** the {@@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 @EmptyLine
-    /**
-     * Gets the {@@link AzureClient} used for long running operations.
-     * @@return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 @foreach (var property in Model.PropertiesEx)
 {
 @EmptyLine
@@ -167,7 +158,6 @@ else
 @:        this.@(operation.Name) = new @(operation.MethodGroupImplType)(this);
 }
         @Model.SetDefaultHeaders
-        this.azureClient = new AzureClient(this);
 @if (Model.RootMethods.Any())
 {
 @:        initializeService();
@@ -196,7 +186,7 @@ else
 @EmptyLine
 <text>
     private void initializeService() {
-        service = RestProxy.create(@(Model.ServiceClientServiceType).class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = AzureProxy.create(@(Model.ServiceClientServiceType).class, httpClient(), serializerAdapter());
     }
 </text>
 @EmptyLine

@@ -20,6 +20,17 @@ namespace AutoRest.Java.Azure.Model
         {
         }
 
+        public override IEnumerable<string> ImplImports
+        {
+            get
+            {
+                var imports = base.ImplImports.ToList();
+                imports.Remove("com.microsoft.rest.v2.RestProxy");
+                imports.Remove("com.microsoft.rest.v2.AzureProxy");
+                return imports;
+            }
+        }
+
         IEnumerable<MethodJva> IMethodGroupJva.Methods => Methods.Cast<MethodJva>().ToList();
         string IMethodGroupJva.LoggingContext => MethodGroupFullType;
         string IMethodGroupJva.ServiceType => MethodGroupServiceType;

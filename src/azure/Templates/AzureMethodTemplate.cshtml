@@ -34,7 +34,7 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
-public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+public Observable<OperationStatus<@Model.ReturnTypeJva.ClientResponseTypeString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -57,9 +57,8 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)As
     }
 }
     @Model.BuildInputMappings(true)
-    @Model.RequiredParameterConversion
-    Single<@(Model.ReturnTypeJva.ClientResponseTypeString)> observable = service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
-    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @Model.PollingResourceTypeArgs);
+    @Model.RequiredParameterConversion 
+    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
 }
 </text>
 }
@@ -124,7 +123,6 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
 }
 @EmptyLine
 
-
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -142,7 +140,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
  * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
-public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<OperationStatus<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -161,9 +159,8 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)As
     }
 }
     @Model.BuildInputMappings()
-    @Model.ParameterConversion
-    Observable<@(Model.ReturnTypeJva.ClientResponseTypeString)> observable = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    return client.getAzureClient().@(Model.PollingMethod)Async(observable, @Model.PollingResourceTypeArgs);
+    @Model.ParameterConversion 
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation);
 }
 </text>
 }
