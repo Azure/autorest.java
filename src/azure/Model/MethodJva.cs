@@ -745,6 +745,7 @@ namespace AutoRest.Java.Azure.Model
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
                 }
+                
                 return imports;
             }
         }
@@ -757,6 +758,7 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.ImplImports;
                 if (this.IsLongRunningOperation)
                 {
+                    imports.Add("com.microsoft.azure.v2.OperationStatus");
                     imports.Remove("com.microsoft.azure.AzureResponseBuilder");
                     this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())

@@ -20,7 +20,15 @@ else
 {
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
 }
+
+if (method.IsLongRunningOperation)
+{
+@:    Observable<OperationStatus<@(method.ReturnTypeJva.GenericBodyClientTypeString)>> @(method.Name)(@method.MethodParameterApiDeclaration);
+}
+else
+{
 @:    Single<@(method.ReturnTypeJva.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
+}
 @EmptyLine
 }
 }

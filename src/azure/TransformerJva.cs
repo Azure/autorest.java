@@ -98,15 +98,12 @@ namespace AutoRest.Java.Azure
                 foreach (var method in methods)
                 {
                     operation.Add(method);
-                    if (true == method.Extensions.Get<bool>(AzureExtensions.LongRunningExtension))
+                    if (method.Extensions.Get<bool>(AzureExtensions.LongRunningExtension) == true)
                     {
-                        // copy the method 
                         var m = Duplicate(method);
-
-                        // change the name, remove the extension.
-                        m.Name = "Begin" + m.Name.ToPascalCase();
+                        // Rename original method
+                        method.Name = "Begin" + m.Name.ToPascalCase();
                         m.Extensions.Remove(AzureExtensions.LongRunningExtension);
-
                         operation.Add(m);
                     }
                 }
