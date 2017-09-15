@@ -4,6 +4,7 @@ using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
+using System;
 
 namespace AutoRest.Java.Model
 {
@@ -200,6 +201,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
+        [Obsolete("Use ServiceResponseGenericParameterString")]
         public string ServiceResponseGenericParameterStringWrapped
         {
             get
@@ -252,20 +254,6 @@ namespace AutoRest.Java.Model
                 var sequenceType = Body as SequenceTypeJv;
                 return sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void";
             }
-        }
-
-        public string ServiceResponseCreation(string serviceResponse, string body, string response)
-        {
-            string format;
-            if (Headers == null)
-            {
-                format = "new {0}({1}, {2}.response())";
-            }
-            else
-            {
-                format = "new {0}({1}, {2}.headers(), {2}.response())";
-            }
-            return string.Format(format, serviceResponse, body, response);
         }
 
         #endregion
