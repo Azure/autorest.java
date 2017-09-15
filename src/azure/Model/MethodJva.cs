@@ -785,11 +785,6 @@ namespace AutoRest.Java.Azure.Model
                     imports.Add("com.microsoft.azure.AzureServiceFuture");
                     imports.AddRange(ctype.ImportSafe());
                 }
-                if (this.IsPagingNextOperation)
-                {
-                    imports.Remove("retrofit2.http.Path");
-                    imports.Add("retrofit2.http.Url");
-                }
                 if (this.IsPagingNonPollingOperation)
                 {
                     imports.AddRange(ctype.ImportSafe());

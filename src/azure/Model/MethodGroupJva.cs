@@ -25,8 +25,8 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var imports = base.ImplImports.ToList();
+                imports.Add("com.microsoft.azure.v2.AzureProxy");
                 imports.Remove("com.microsoft.rest.v2.RestProxy");
-                imports.Remove("com.microsoft.rest.v2.AzureProxy");
                 return imports;
             }
         }

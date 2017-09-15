@@ -51,7 +51,7 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.ImplImports.ToList();
                 
                 imports.Add("com.microsoft.azure.v2.AzureProxy");
-                imports.Remove("com.microsoft.azure.v2.RestProxy");
+                imports.Remove("com.microsoft.rest.v2.RestProxy");
                 
                 imports.Remove("com.microsoft.rest.ServiceClient");
                 imports.Remove("okhttp3.OkHttpClient");
