@@ -10,7 +10,6 @@
 
 package fixtures.azureresource;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.Resource;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
@@ -35,12 +34,6 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link RestClient} object.
     */
     RestClient restClient();
-
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    AzureClient getAzureClient();
 
     /**
      * Gets the User-Agent header for the client.

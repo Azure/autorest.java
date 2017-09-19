@@ -10,7 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.azurespecials.ApiVersionLocals;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
@@ -29,6 +28,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -46,7 +46,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param client the instance of the service client containing this operation class.
      */
     public ApiVersionLocalsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = RestProxy.create(ApiVersionLocalsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ApiVersionLocalsService.class, client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -54,6 +54,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * The interface defining all the services for ApiVersionLocals to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("http://localhost")
     interface ApiVersionLocalsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")

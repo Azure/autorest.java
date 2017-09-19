@@ -10,7 +10,6 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
@@ -28,6 +27,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,7 +45,7 @@ public class XMsClientRequestIdsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public XMsClientRequestIdsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = RestProxy.create(XMsClientRequestIdsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(XMsClientRequestIdsService.class, client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -53,6 +53,7 @@ public class XMsClientRequestIdsInner {
      * The interface defining all the services for XMsClientRequestIds to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("http://localhost")
     interface XMsClientRequestIdsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds get" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")

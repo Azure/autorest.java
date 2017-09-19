@@ -11,8 +11,8 @@
 package fixtures.azurereport.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
@@ -25,7 +25,6 @@ import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
@@ -40,16 +39,7 @@ import rx.Single;
 public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     /** The RestProxy service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
-    /** the {@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 
     /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
@@ -154,7 +144,6 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.azureClient = new AzureClient(this);
         initializeService();
     }
 
@@ -169,7 +158,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
     }
 
     private void initializeService() {
-        service = RestProxy.create(AutoRestReportServiceForAzureService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, httpClient(), serializerAdapter());
     }
 
     /**

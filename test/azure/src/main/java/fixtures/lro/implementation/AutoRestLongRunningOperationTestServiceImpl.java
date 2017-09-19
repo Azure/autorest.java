@@ -10,11 +10,10 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.lro.AutoRestLongRunningOperationTestService;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
@@ -26,16 +25,7 @@ import rx.Single;
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
  */
 public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
-    /** the {@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 
     /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
@@ -196,7 +186,6 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         this.lRORetrys = new LRORetrysImpl(this);
         this.lROSADs = new LROSADsImpl(this);
         this.lROsCustomHeaders = new LROsCustomHeadersImpl(this);
-        this.azureClient = new AzureClient(this);
     }
 
     /**

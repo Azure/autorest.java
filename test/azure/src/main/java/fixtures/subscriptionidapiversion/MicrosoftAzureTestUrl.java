@@ -10,7 +10,6 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.RestClient;
 
 /**
@@ -23,12 +22,6 @@ public interface MicrosoftAzureTestUrl {
      * @return the {@link RestClient} object.
     */
     RestClient restClient();
-
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    AzureClient getAzureClient();
 
     /**
      * Gets the User-Agent header for the client.

@@ -10,7 +10,6 @@
 
 package fixtures.head.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.head.HttpSuccess;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
@@ -28,6 +27,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,7 +45,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpSuccessImpl(AutoRestHeadTestServiceImpl client) {
-        this.service = RestProxy.create(HttpSuccessService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HttpSuccessService.class, client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -53,6 +53,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * The interface defining all the services for HttpSuccess to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("http://localhost")
     interface HttpSuccessService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")

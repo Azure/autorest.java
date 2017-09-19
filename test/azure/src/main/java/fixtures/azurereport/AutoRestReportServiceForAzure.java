@@ -10,7 +10,6 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -31,12 +30,6 @@ public interface AutoRestReportServiceForAzure {
      * @return the {@link RestClient} object.
     */
     RestClient restClient();
-
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    AzureClient getAzureClient();
 
     /**
      * Gets the User-Agent header for the client.

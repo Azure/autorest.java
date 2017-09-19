@@ -10,27 +10,17 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.v2.RestProxy;
 import rx.Single;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
  */
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
-    /** the {@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 
     /** Subscription Id. */
     private String subscriptionId;
@@ -185,7 +175,6 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.groups = new GroupsInner(this);
-        this.azureClient = new AzureClient(this);
     }
 
     /**

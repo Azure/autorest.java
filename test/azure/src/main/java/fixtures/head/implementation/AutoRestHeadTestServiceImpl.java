@@ -10,11 +10,10 @@
 
 package fixtures.head.implementation;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.head.AutoRestHeadTestService;
 import fixtures.head.HttpSuccess;
 import rx.Single;
@@ -23,16 +22,7 @@ import rx.Single;
  * Initializes a new instance of the AutoRestHeadTestServiceImpl class.
  */
 public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
-    /** the {@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 
     /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
@@ -151,7 +141,6 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.httpSuccess = new HttpSuccessImpl(this);
-        this.azureClient = new AzureClient(this);
     }
 
     /**

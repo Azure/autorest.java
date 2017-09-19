@@ -10,7 +10,6 @@
 
 package fixtures.azureparametergrouping.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,7 +48,7 @@ public class ParameterGroupingsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public ParameterGroupingsInner(AutoRestParameterGroupingTestServiceImpl client) {
-        this.service = RestProxy.create(ParameterGroupingsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ParameterGroupingsService.class, client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -56,6 +56,7 @@ public class ParameterGroupingsInner {
      * The interface defining all the services for ParameterGroupings to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("https://localhost")
     interface ParameterGroupingsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postRequired" })
         @POST("parameterGrouping/postRequired/{path}")

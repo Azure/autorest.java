@@ -11,9 +11,9 @@
 package fixtures.azureresource.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.Resource;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
@@ -28,7 +28,6 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.Validator;
 import fixtures.azureresource.ErrorException;
 import java.io.IOException;
@@ -44,16 +43,7 @@ import rx.Single;
 public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient {
     /** The RestProxy service to perform REST calls. */
     private AutoRestResourceFlatteningTestServiceService service;
-    /** the {@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 
     /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
@@ -158,7 +148,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.azureClient = new AzureClient(this);
         initializeService();
     }
 
@@ -173,7 +162,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     private void initializeService() {
-        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpClient(), serializerAdapter());
     }
 
     /**

@@ -10,7 +10,6 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.subscriptionidapiversion.Groups;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
@@ -31,6 +30,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -48,7 +48,7 @@ public class GroupsImpl implements Groups {
      * @param client the instance of the service client containing this operation class.
      */
     public GroupsImpl(MicrosoftAzureTestUrlImpl client) {
-        this.service = RestProxy.create(GroupsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(GroupsService.class, client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -56,6 +56,7 @@ public class GroupsImpl implements Groups {
      * The interface defining all the services for Groups to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("https://management.azure.com/")
     interface GroupsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")

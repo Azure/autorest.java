@@ -10,7 +10,6 @@
 
 package fixtures.headexceptions.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
 import fixtures.headexceptions.HeadExceptions;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
@@ -28,6 +27,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -45,7 +45,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @param client the instance of the service client containing this operation class.
      */
     public HeadExceptionsImpl(AutoRestHeadExceptionTestServiceImpl client) {
-        this.service = RestProxy.create(HeadExceptionsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HeadExceptionsService.class, client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -53,6 +53,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * The interface defining all the services for HeadExceptions to be
      * used by Retrofit to perform actually REST calls.
      */
+    @Host("http://localhost")
     interface HeadExceptionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")

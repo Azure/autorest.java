@@ -10,27 +10,17 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.v2.RestProxy;
 import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
  */
 public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
-    /** the {@link AzureClient} used for long running operations. */
-    private AzureClient azureClient;
 
-    /**
-     * Gets the {@link AzureClient} used for long running operations.
-     * @return the azure client;
-     */
-    public AzureClient getAzureClient() {
-        return this.azureClient;
-    }
 
     /** The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'. */
     private String subscriptionId;
@@ -283,7 +273,6 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.skipUrlEncodings = new SkipUrlEncodingsInner(this);
         this.odatas = new OdatasInner(this);
         this.headers = new HeadersInner(this);
-        this.azureClient = new AzureClient(this);
     }
 
     /**
