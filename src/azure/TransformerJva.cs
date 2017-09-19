@@ -102,8 +102,7 @@ namespace AutoRest.Java.Azure
                     {
                         var m = Duplicate(method);
                         // Rename original method
-                        method.Name = "Begin" + method.Name.ToPascalCase();
-                        method.Extensions["MY_CUSTOM_EXTENSION"] = true;
+                        method.Name = "Begin" + m.Name.ToPascalCase();
                         m.Extensions.Remove(AzureExtensions.LongRunningExtension);
                         operation.Add(m);
                     }

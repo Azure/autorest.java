@@ -74,7 +74,7 @@ else
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
  */
-@(Model.ReturnTypeJv.AsyncTypeString) @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
+Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
 </text>
 }
 /**
@@ -145,5 +145,5 @@ else
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
  */
-@(Model.ReturnTypeJv.AsyncTypeString) @(Model.Name)Async(@Model.MethodParameterDeclaration);
+Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
 @EmptyLine

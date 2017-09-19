@@ -1,7 +1,5 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using Newtonsoft.Json;
@@ -52,38 +50,9 @@ namespace AutoRest.Java.Azure.Model
                 var bodySequenceType = base.BodyClientType as SequenceTypeJva;
                 if (bodySequenceType != null && IsPagedResponse)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>",
-                        bodySequenceType.ElementType.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", bodySequenceType.ElementType.Name);
                 }
                 return base.GenericBodyClientTypeString;
-            }
-        }
-
-        [JsonIgnore]
-        public override string AsyncTypeString
-        {
-            get
-            {
-                Console.Error.WriteLine(Parent.Name);
-                if (Extensions.TryGetValue("MY_CUSTOM_EXTENSION", out object value))
-                {
-                    Console.Error.WriteLine("Found my extension");
-                    Console.Error.WriteLine(value);
-                }
-                
-                if (Parent.Name.StartsWith("Begin"))
-                {
-                    Console.Error.WriteLine("Found a begin method.");
-                }
-                
-                if (Parent.IsLongRunningOperation)
-                {
-                    return $"Observable<OperationStatus<{GenericBodyClientTypeString}>>";
-                }
-                else
-                {
-                    return base.AsyncTypeString;
-                }
             }
         }
 

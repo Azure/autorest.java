@@ -183,9 +183,6 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string AsyncTypeString => $"Single<{GenericBodyClientTypeString}>";
-
-        [JsonIgnore]
         public virtual string ServiceFutureGenericParameterString
         {
             get
