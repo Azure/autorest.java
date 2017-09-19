@@ -24,9 +24,9 @@ package @(Settings.Namespace.ToLower());
  * in @(Model.TypeName).
  */
 public interface @Model.TypeName {
-    @foreach (MethodJv method in Model.Methods)
+    @foreach (MethodJva method in Model.Methods)
     {
-    @:@Include(new MethodInterfaceTemplate(), method)
+    @:@Include(new AzureMethodInterfaceTemplate(), method)
     @EmptyLine
     }
 }
