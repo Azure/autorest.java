@@ -1,6 +1,10 @@
 package fixtures.lro;
 
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy.Factory;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import org.junit.AfterClass;
@@ -16,14 +20,21 @@ public class LROsCustomHeaderTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
-        client.restClient().headers().addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
+                .withCredentials(new BasicAuthenticationCredentials(null, null))
+                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .build();
+        client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
+//        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
     @AfterClass
     public static void cleanup() {
-        client.restClient().headers().removeHeader("x-ms-client-request-id");
+//        client.restClient().headers().removeHeader("x-ms-client-request-id");
     }
 
     @Test

@@ -3,6 +3,7 @@ package fixtures.paging;
 import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.azure.Page;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
@@ -13,6 +14,7 @@ import fixtures.paging.models.ProductProperties;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import rx.Observer;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -78,26 +80,23 @@ public class PagingTests {
     @Test
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
-        client.pagings().getMultiplePagesAsync("client-id", null, new ListOperationCallback<Product>() {
-            @Override
-            public void failure(Throwable t) {
-                fail();
-            }
+        client.pagings().getMultiplePagesAsync("client-id", null)
+                .toBlocking()
+                .subscribe(new Observer<Page<Product>>() {
+                    @Override
+                    public void onCompleted() {
+                        lock.countDown();
+                    }
 
-            @Override
-            public void success() {
-                lock.countDown();
-            }
+                    @Override
+                    public void onError(Throwable throwable) {
+                        fail();
+                    }
 
-            @Override
-            public PagingBehavior progress(List<Product> partial) {
-                if (pageCount() == 7) {
-                    return PagingBehavior.STOP;
-                } else {
-                    return PagingBehavior.CONTINUE;
-                }
-            }
-        });
+                    @Override
+                    public void onNext(Page<Product> productPage) { }
+                });
+
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
     }
 
