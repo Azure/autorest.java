@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import fixtures.azurereport.implementation.AutoRestReportServiceForAzureImpl;
 
 public final class CoverageReporter {
     private static AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));

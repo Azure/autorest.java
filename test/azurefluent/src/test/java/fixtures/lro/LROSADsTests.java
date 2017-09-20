@@ -16,7 +16,6 @@ public class LROSADsTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
-        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
     @Test
