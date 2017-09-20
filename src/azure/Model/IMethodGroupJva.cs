@@ -6,6 +6,9 @@ using AutoRest.Java.Model;
 
 namespace AutoRest.Java.Azure.Model
 {
+    /// <summary>
+    /// Contains properties common between CodeModel and MethodGroup for template rendering.
+    /// </summary>
     public interface IMethodGroupJva
     {
         IEnumerable<MethodJva> Methods { get; }

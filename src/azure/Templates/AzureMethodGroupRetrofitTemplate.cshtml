@@ -23,11 +23,11 @@ else
 
 if (method.IsLongRunningOperation)
 {
-@:    Observable<OperationStatus<@(method.ReturnTypeJva.GenericBodyClientTypeString)>> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Observable<OperationStatus<@(method.ReturnTypeJva.ServiceResponseGenericParameterString)>> @(method.Name)(@method.MethodParameterApiDeclaration);
 }
 else
 {
-@:    Single<@(method.ReturnTypeJva.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Single<@(method.ReturnTypeJva.ServiceResponseGenericParameterString)> @(method.Name)(@method.MethodParameterApiDeclaration);
 }
 @EmptyLine
 }

@@ -474,6 +474,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        [Obsolete]
         public override string SuccessCallback(bool filterRequired = false)
         {
             if (this.IsPagingOperation)
@@ -560,7 +561,7 @@ namespace AutoRest.Java.Azure.Model
 
         private MethodJva GetPagingNextMethodWithInvocation(out string invocation, bool async = false, bool singlePage = true)
         {
-            String methodSuffixString = "WithServiceResponse";
+            String methodSuffixString = "";
             if (singlePage)
             {
                 methodSuffixString = "SinglePage";
@@ -573,6 +574,9 @@ namespace AutoRest.Java.Azure.Model
             string name = this.Extensions.GetValue<Fixable<string>>("nextMethodName")?.ToCamelCase();
             string group = this.Extensions.GetValue<Fixable<string>>("nextMethodGroup")?.ToCamelCase();
             group = CodeNamerJva.Instance.GetMethodGroupName(group);
+
+            // The PagingNextMethod can be located in a different method group than this one.
+            // It may or may not be explicitly declared.
             var methodModel =
                 CodeModel.Methods.FirstOrDefault(m =>
                     (group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase))

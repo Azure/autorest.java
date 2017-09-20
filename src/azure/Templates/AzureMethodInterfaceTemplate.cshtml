@@ -3,6 +3,7 @@
 @using AutoRest.Java
 @using AutoRest.Java.Model
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodJva>
+
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
@@ -34,9 +35,13 @@
 @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration);
 @EmptyLine
 
+
 @* -------------------------------------- *@
 @* Callback with only required parameters *@
 @* -------------------------------------- *@
+@if (!Model.IsPagingOperation && !Model.IsPagingNextOperation)
+{
+<text>
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -57,7 +62,8 @@
  */
 ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
 @EmptyLine
-
+</text>
+}
 
 @* ---------------------------------------- *@
 @* Observable with only required parameters *@
@@ -89,6 +95,10 @@ else
 @if (Model.IsLongRunningOperation)
 {
 @:Observable<OperationStatus<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);  
+}
+else if (Model.IsPagingOperation)
+{
+@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);  
 }
 else
 {
@@ -130,6 +140,9 @@ else
 @* ---------------------------- *@
 @* Callback with all parameters *@
 @* ---------------------------- *@
+@if (!Model.IsPagingOperation && !Model.IsPagingNextOperation)
+{
+<text>
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -150,6 +163,8 @@ else
  */
 ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback);
 @EmptyLine
+</text>
+}
 
 
 @* ------------------------------ *@
@@ -182,6 +197,10 @@ else
 @if (Model.IsLongRunningOperation)
 {
 @:Observable<OperationStatus<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodParameterDeclaration);
+}
+else if (Model.IsPagingOperation)
+{
+@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
 }
 else
 {

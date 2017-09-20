@@ -8,6 +8,9 @@
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
+@* ----------------------------------------------- *@
+@* All pages. Synchronous with required parameters *@
+@* ----------------------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -31,48 +34,21 @@
 }
  */
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
-    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
+    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().value();
     return new @(Model.ReturnTypeJva.GenericBodyClientTypeString)(response) {
         @@Override
         public @Model.ReturnTypeJva.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation(filterRequired: true)
-            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation(filterRequired: true)).toBlocking().single();
+            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation(filterRequired: true)).toBlocking().value();
         }
     };
 }
 @EmptyLine
-/**
-@if (!string.IsNullOrEmpty(Model.Summary))
-{
-@: * @Model.Summary.EscapeXmlComment().Period()
-}
-@if (!string.IsNullOrEmpty(Model.Description))
-{
-@: * @Model.Description.EscapeXmlComment().Period()
-}
- *
-@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
-{
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
-}
-@Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@return the {@@link ServiceFuture} object
- */
-public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
-    return AzureServiceFuture.@(Model.ServiceFutureFactoryMethod)(
-        @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation),
-        new Func1<String, Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
-            @@Override
-            public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(String @Model.PagingNextPageLinkParameterName) {
-                @Model.PagingGroupedParameterTransformation(filterRequired: true)
-                return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation(filterRequired: true));
-            }
-        },
-        serviceCallback);
-}
-@EmptyLine
 
+
+@* ----------------------------------------------- *@
+@* All pages. Observable with required parameters. *@
+@* ----------------------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -99,19 +75,26 @@ else
  */
 public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation)
-        .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
+        .toObservable()
+        .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
             @@Override
-            public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
                 String @Model.PagingNextPageLinkParameterName = page.nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
                 }
-                @Model.PagingGroupedParameterTransformation(true)
+                @Model.PagingGroupedParameterTransformation(filterRequired: true)
                 return Observable.just(page).concatWith(@(Model.GetPagingNextMethodInvocation(async: true, singlePage: false))(@Model.NextMethodParameterInvocation(filterRequired: true)));
             }
         });
 }
 @EmptyLine
+
+
+
+@* ------------------------------------------------- *@
+@* Single page. Observable with required parameters. *@
+@* ------------------------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -166,6 +149,11 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 @EmptyLine
 </text>
 }
+
+
+@* ------------------------------------------- *@
+@* All pages. Synchronous with all parameters. *@
+@* ------------------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -189,48 +177,21 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 }
  */
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
-    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
+    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().value();
     return new @(Model.ReturnTypeJva.GenericBodyClientTypeString)(response) {
         @@Override
         public @Model.ReturnTypeJva.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation()
-            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation()).toBlocking().single();
+            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation()).toBlocking().value();
         }
     };
 }
 @EmptyLine
-/**
-@if (!string.IsNullOrEmpty(Model.Summary))
-{
-@: * @Model.Summary.EscapeXmlComment().Period()
-}
-@if (!string.IsNullOrEmpty(Model.Description))
-{
-@: * @Model.Description.EscapeXmlComment().Period()
-}
- *
-@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
-{
-@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
-}
-@Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@return the {@@link ServiceFuture} object
- */
-public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
-    return AzureServiceFuture.@(Model.ServiceFutureFactoryMethod)(
-        @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation),
-        new Func1<String, Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
-            @@Override
-            public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(String @Model.PagingNextPageLinkParameterName) {
-                @Model.PagingGroupedParameterTransformation()
-                return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation());
-            }
-        },
-        serviceCallback);
-}
-@EmptyLine
 
+
+@* ------------------------------------------ *@
+@* All pages. Observable with all parameters. *@
+@* ------------------------------------------ *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -257,10 +218,11 @@ else
  */
 public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation)
+        .toObservable()
         .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
             @@Override
-            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped page) {
-                String @Model.PagingNextPageLinkParameterName = page.body().nextPageLink();
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
+                String @Model.PagingNextPageLinkParameterName = page.nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
                 }
@@ -270,6 +232,11 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(
         });
 }
 @EmptyLine
+
+
+@* -------------------------------------------- *@
+@* Single page. Observable with all parameters. *@
+@* -------------------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
