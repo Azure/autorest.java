@@ -334,7 +334,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion);
+    Observable<Page<Product>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion);
 
 
     /**
@@ -357,7 +357,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroup customParameterGroup);
+    Observable<Page<Product>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroup customParameterGroup);
 
 
     /**
@@ -378,7 +378,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getSinglePagesNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getSinglePagesNextAsync(final String nextPageLink);
 
 
     /**
@@ -399,7 +399,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink);
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -422,7 +422,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
+    Observable<Page<Product>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions);
 
 
     /**
@@ -443,7 +443,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink);
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -466,7 +466,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
+    Observable<Page<Product>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions);
 
 
     /**
@@ -487,7 +487,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink);
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -510,7 +510,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions);
+    Observable<Page<Product>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions);
 
 
     /**
@@ -531,7 +531,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink);
 
 
     /**
@@ -552,7 +552,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink);
 
 
     /**
@@ -573,7 +573,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getSinglePagesFailureNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getSinglePagesFailureNextAsync(final String nextPageLink);
 
 
     /**
@@ -594,7 +594,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getMultiplePagesFailureNextAsync(final String nextPageLink);
 
 
     /**
@@ -615,7 +615,7 @@ public interface Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the PagedList&lt;Product&gt; object
      */
-    Single<Page<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink);
+    Observable<Page<Product>> getMultiplePagesFailureUriNextAsync(final String nextPageLink);
 
 
 }

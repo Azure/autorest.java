@@ -96,7 +96,7 @@ else
 {
 @:Observable<OperationStatus<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);  
 }
-else if (Model.IsPagingOperation)
+else if (Model.IsPagingOperation || Model.IsPagingNextOperation)
 {
 @:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);  
 }
@@ -198,7 +198,7 @@ else
 {
 @:Observable<OperationStatus<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodParameterDeclaration);
 }
-else if (Model.IsPagingOperation)
+else if (Model.IsPagingOperation || Model.IsPagingNextOperation)
 {
 @:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
 }
