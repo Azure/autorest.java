@@ -6,6 +6,7 @@ import com.microsoft.rest.interceptors.RequestIdHeaderInterceptor;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 
+import com.microsoft.rest.v2.policy.RequestIdPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class SubscriptionInMethodTests {
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
-                .withInterceptor(new RequestIdHeaderInterceptor())
+                .addCustomPolicy(new RequestIdPolicy.Factory())
                 .build();
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);
         client.withSubscriptionId("1234-5678-9012-3456");

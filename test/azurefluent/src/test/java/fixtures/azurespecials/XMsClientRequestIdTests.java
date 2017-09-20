@@ -1,7 +1,11 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy.Factory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,20 +18,26 @@ public class XMsClientRequestIdTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost.:3000", new TokenCredentials(null, UUID.randomUUID().toString()));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost.:3000")
+                .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
+                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .build();
+
+        client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);
         client.withSubscriptionId("1234-5678-9012-3456");
     }
 
     @Test
     public void get() throws Exception {
-        client.restClient().headers().addHeader("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         client.xMsClientRequestIds().get();
-        client.restClient().headers().removeHeader("x-ms-client-request-id");
     }
 
     @Test
     public void paramGet() throws Exception {
-        client.restClient().headers().removeHeader("x-ms-client-request-id");
         client.xMsClientRequestIds().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
     }
 }
