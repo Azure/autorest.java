@@ -62,14 +62,17 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
     interface HeadersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId" })
         @POST("azurespecials/customNamedRequestId")
+        @ExpectedResponses({200})
         Single<Void> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
+        @ExpectedResponses({200})
         Single<Void> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdHead" })
         @HEAD("azurespecials/customNamedRequestIdHead")
+        @ExpectedResponses({200, 404})
         Single<Boolean> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

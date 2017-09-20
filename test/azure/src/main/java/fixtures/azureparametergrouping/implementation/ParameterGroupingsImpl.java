@@ -65,18 +65,22 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     interface ParameterGroupingsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postRequired" })
         @POST("parameterGrouping/postRequired/{path}")
+        @ExpectedResponses({200})
         Single<Void> postRequired(@PathParam("path") String path, @HeaderParam("accept-language") String acceptLanguage, @BodyParam int body, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postOptional" })
         @POST("parameterGrouping/postOptional")
+        @ExpectedResponses({200})
         Single<Void> postOptional(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postMultiParamGroups" })
         @POST("parameterGrouping/postMultipleParameterGroups")
+        @ExpectedResponses({200})
         Single<Void> postMultiParamGroups(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("header-two") String headerTwo, @QueryParam("query-two") Integer queryTwo, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postSharedParameterGroupObject" })
         @POST("parameterGrouping/sharedParameterGroupObject")
+        @ExpectedResponses({200})
         Single<Void> postSharedParameterGroupObject(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("User-Agent") String userAgent);
 
     }

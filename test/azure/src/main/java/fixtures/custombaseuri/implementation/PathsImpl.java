@@ -58,6 +58,7 @@ public class PathsImpl implements Paths {
     interface PathsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
+        @ExpectedResponses({200})
         Single<Void> getEmpty(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("x-ms-parameterized-host") String parameterizedHost, @HeaderParam("User-Agent") String userAgent);
 
     }

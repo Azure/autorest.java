@@ -58,18 +58,22 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     interface ApiVersionDefaultsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
+        @ExpectedResponses({200})
         Single<Void> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalNotProvidedValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
+        @ExpectedResponses({200})
         Single<Void> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getPathGlobalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
+        @ExpectedResponses({200})
         Single<Void> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getSwaggerGlobalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
+        @ExpectedResponses({200})
         Single<Void> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

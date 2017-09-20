@@ -58,10 +58,12 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     interface XMsClientRequestIdsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds get" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
+        @ExpectedResponses({200})
         Single<Void> get(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds paramGet" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
+        @ExpectedResponses({200})
         Single<Void> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

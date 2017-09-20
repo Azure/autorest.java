@@ -169,6 +169,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
     interface AutoRestReportServiceForAzureService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
+        @ExpectedResponses({200})
         Single<Map<String, Integer>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

@@ -57,14 +57,17 @@ public class HeadExceptionsImpl implements HeadExceptions {
     interface HeadExceptionsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")
+        @ExpectedResponses({200})
         Single<Void> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
+        @ExpectedResponses({204})
         Single<Void> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
+        @ExpectedResponses({204})
         Single<Void> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

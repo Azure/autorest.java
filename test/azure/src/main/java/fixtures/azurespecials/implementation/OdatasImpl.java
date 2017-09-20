@@ -58,6 +58,7 @@ public class OdatasImpl implements Odatas {
     interface OdatasService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
+        @ExpectedResponses({200})
         Single<Void> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

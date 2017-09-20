@@ -72,90 +72,112 @@ public class PagingsImpl implements Pagings {
     interface PagingsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getSinglePages" })
         @GET("paging/single")
+        @ExpectedResponses({200})
         Single<Page<Product>> getSinglePages(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePages" })
         @GET("paging/multiple")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getOdataMultiplePages" })
         @GET("paging/multiple/odata")
+        @ExpectedResponses({200})
         Single<Page<Product>> getOdataMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesWithOffset" })
         @GET("paging/multiple/withpath/{offset}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesWithOffset(@PathParam("offset") int offset, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetryFirst" })
         @GET("paging/multiple/retryfirst")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesRetryFirst(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetrySecond" })
         @GET("paging/multiple/retrysecond")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesRetrySecond(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getSinglePagesFailure" })
         @GET("paging/single/failure")
+        @ExpectedResponses({200})
         Single<Page<Product>> getSinglePagesFailure(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailure" })
         @GET("paging/multiple/failure")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesFailure(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureUri" })
         @GET("paging/multiple/failureuri")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesFailureUri(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFragmentNextLink" })
         @GET("paging/multiple/fragment/{tenant}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesFragmentNextLink(@PathParam("tenant") String tenant, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFragmentWithGroupingNextLink" })
         @GET("paging/multiple/fragmentwithgrouping/{tenant}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesFragmentWithGroupingNextLink(@PathParam("tenant") String tenant, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings nextFragment" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> nextFragment(@PathParam("nextUrl") String nextUrl, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings nextFragmentWithGrouping" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> nextFragmentWithGrouping(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getSinglePagesNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getSinglePagesNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getOdataMultiplePagesNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getOdataMultiplePagesNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesWithOffsetNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesWithOffsetNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetryFirstNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesRetryFirstNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetrySecondNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesRetrySecondNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getSinglePagesFailureNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getSinglePagesFailureNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesFailureNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureUriNext" })
         @GET("{nextUrl}")
+        @ExpectedResponses({200})
         Single<Page<Product>> getMultiplePagesFailureUriNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

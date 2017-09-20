@@ -58,18 +58,22 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
     interface ApiVersionLocalsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
+        @ExpectedResponses({200})
         Single<Void> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalNull" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
+        @ExpectedResponses({200})
         Single<Void> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getPathLocalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
+        @ExpectedResponses({200})
         Single<Void> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getSwaggerLocalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
+        @ExpectedResponses({200})
         Single<Void> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
