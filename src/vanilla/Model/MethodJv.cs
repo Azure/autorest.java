@@ -597,22 +597,6 @@ namespace AutoRest.Java.Model
         [JsonIgnore]
         public virtual string ReturnTypeResponseName => ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
 
-        public virtual string ResponseGeneration(bool filterRequired = false)
-        {
-            if (ReturnTypeJv.NeedsConversion)
-            {
-                IndentedStringBuilder builder= new IndentedStringBuilder();
-                builder.AppendLine("ServiceResponse<{0}> response = {1}Delegate(call.execute());",
-                    ReturnTypeJv.GenericBodyWireTypeString, this.Name.ToCamelCase());
-                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType.Name)
-                    .AppendLine("if (response.body() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("response.body()", "body"))
-                    .Outdent().AppendLine("}");
-                return builder.ToString();
-            }
-            return "";
-        }
-
         [JsonIgnore]
         public virtual string ReturnValue
         {
@@ -624,54 +608,6 @@ namespace AutoRest.Java.Model
                 }
                 return this.Name + "Delegate(call.execute())";
             }
-        }
-
-        public virtual string SuccessCallback(bool filterRequired = false)
-        {
-            IndentedStringBuilder builder = new IndentedStringBuilder();
-            if (ReturnTypeJv.NeedsConversion)
-            {
-                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJv.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType.Name)
-                    .AppendLine("if (result.body() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("result.body()", "body"))
-                    .Outdent().AppendLine("}");
-                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.response());",
-                    ReturnTypeJv.GenericBodyClientTypeString);
-                builder.AppendLine("if (serviceCallback != null) {")
-                    .Indent().AppendLine("serviceCallback.success(clientResponse);", ReturnTypeJv.GenericBodyClientTypeString)
-                    .Outdent().AppendLine("}");
-                builder.AppendLine("serviceFuture.success(clientResponse);");
-            }
-            else
-            {
-                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeJv.WireResponseTypeString, this.Name);
-                builder.AppendLine("if (serviceCallback != null) {")
-                    .Indent().AppendLine("serviceCallback.success(clientResponse);", this.Name)
-                    .Outdent().AppendLine("}");
-                builder.AppendLine("serviceFuture.success(clientResponse);");
-            }
-            return builder.ToString();
-        }
-
-        public virtual string ClientResponse(bool filterRequired = false)
-        {
-            IndentedStringBuilder builder = new IndentedStringBuilder();
-            if (ReturnTypeJv.NeedsConversion)
-            {
-                builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJv.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("{0} body = null;", ReturnTypeJv.BodyClientType.Name)
-                    .AppendLine("if (result.body() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeJv.ConvertBodyToClientType("result.body()", "body"))
-                    .Outdent().AppendLine("}");
-                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.response());",
-                    ReturnTypeJv.GenericBodyClientTypeString);
-            }
-            else
-            {
-                builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeJv.WireResponseTypeString, this.Name);
-            }
-            return builder.ToString();
         }
 
         [JsonIgnore]
