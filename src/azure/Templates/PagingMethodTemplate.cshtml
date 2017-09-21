@@ -143,7 +143,16 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
     }
 }
     @Model.BuildInputMappings(true)
+
+@if (Model.IsParameterizedHost)
+{
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
+}
     @Model.ParameterConversion
+@if (Model.IsPagingNextOperation)
+{
+@:    String nextUrl = @(Model.NextUrlConstruction);
+}
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
 }
 @EmptyLine
@@ -281,6 +290,16 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>
     }
 }
     @Model.BuildInputMappings()
+
+@if (Model.IsParameterizedHost)
+{
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
+}
+    @Model.ParameterConversion
+@if (Model.IsPagingNextOperation)
+{
+@:    String nextUrl = @(Model.NextUrlConstruction);
+}
     return service.@(Model.Name)(@Model.MethodParameterApiInvocation);
 }
 @EmptyLine
