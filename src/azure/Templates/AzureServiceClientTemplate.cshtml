@@ -186,7 +186,7 @@ else
 @EmptyLine
 <text>
     private void initializeService() {
-        service = AzureProxy.create(@(Model.ServiceClientServiceType).class, httpClient(), serializerAdapter());
+        service = AzureProxy.create(@(Model.ServiceClientServiceType).class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 </text>
 @EmptyLine
