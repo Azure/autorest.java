@@ -1,8 +1,6 @@
 package fixtures.azurespecials;
 
-import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.interceptors.RequestIdHeaderInterceptor;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 

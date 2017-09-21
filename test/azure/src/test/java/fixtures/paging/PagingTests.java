@@ -1,8 +1,6 @@
 package fixtures.paging;
 
-import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.CloudException;
-import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;

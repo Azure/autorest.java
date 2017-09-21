@@ -1,13 +1,10 @@
 package fixtures.azurespecials;
 
-import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.interceptors.RequestIdHeaderInterceptor;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 
 import com.microsoft.rest.v2.policy.RequestIdPolicy;
-import com.microsoft.rest.v2.policy.RequestIdPolicy.Factory;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
