@@ -158,7 +158,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
     }
 
     private void initializeService() {
-        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 
     /**

@@ -47,7 +47,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param client the instance of the service client containing this operation class.
      */
     public SkipUrlEncodingsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(SkipUrlEncodingsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(SkipUrlEncodingsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

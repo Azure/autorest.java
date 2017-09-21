@@ -45,7 +45,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpSuccessImpl(AutoRestHeadTestServiceImpl client) {
-        this.service = AzureProxy.create(HttpSuccessService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HttpSuccessService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

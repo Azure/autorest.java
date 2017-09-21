@@ -44,7 +44,7 @@ public class HttpSuccessInner {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpSuccessInner(AutoRestHeadTestServiceImpl client) {
-        this.service = AzureProxy.create(HttpSuccessService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HttpSuccessService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -56,14 +56,17 @@ public class HttpSuccessInner {
     interface HttpSuccessService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")
+        @ExpectedResponses({200, 404})
         Single<Boolean> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
         @HEAD("http/success/204")
+        @ExpectedResponses({204, 404})
         Single<Boolean> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
         @HEAD("http/success/404")
+        @ExpectedResponses({204, 404})
         Single<Boolean> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

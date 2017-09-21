@@ -45,7 +45,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @param client the instance of the service client containing this operation class.
      */
     public HeadExceptionsImpl(AutoRestHeadExceptionTestServiceImpl client) {
-        this.service = AzureProxy.create(HeadExceptionsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HeadExceptionsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

@@ -157,7 +157,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     }
 
     private void initializeService() {
-        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 
     /**
@@ -168,6 +168,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     interface AutoRestReportServiceForAzureService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
+        @ExpectedResponses({200})
         Single<Map<String, Integer>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

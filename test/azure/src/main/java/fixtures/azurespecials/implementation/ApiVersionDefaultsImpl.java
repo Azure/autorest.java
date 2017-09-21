@@ -46,7 +46,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @param client the instance of the service client containing this operation class.
      */
     public ApiVersionDefaultsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(ApiVersionDefaultsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ApiVersionDefaultsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

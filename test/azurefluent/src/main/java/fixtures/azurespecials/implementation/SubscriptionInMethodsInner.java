@@ -45,7 +45,7 @@ public class SubscriptionInMethodsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public SubscriptionInMethodsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(SubscriptionInMethodsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(SubscriptionInMethodsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -57,18 +57,22 @@ public class SubscriptionInMethodsInner {
     interface SubscriptionInMethodsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
+        @ExpectedResponses({200})
         Single<Void> postMethodLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
+        @ExpectedResponses({200})
         Single<Void> postMethodLocalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postPathLocalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
+        @ExpectedResponses({200})
         Single<Void> postPathLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postSwaggerLocalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
+        @ExpectedResponses({200})
         Single<Void> postSwaggerLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

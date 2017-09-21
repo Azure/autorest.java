@@ -46,7 +46,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param client the instance of the service client containing this operation class.
      */
     public XMsClientRequestIdsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(XMsClientRequestIdsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(XMsClientRequestIdsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

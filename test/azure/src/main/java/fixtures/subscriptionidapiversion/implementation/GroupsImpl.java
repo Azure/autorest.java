@@ -48,7 +48,7 @@ public class GroupsImpl implements Groups {
      * @param client the instance of the service client containing this operation class.
      */
     public GroupsImpl(MicrosoftAzureTestUrlImpl client) {
-        this.service = AzureProxy.create(GroupsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(GroupsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

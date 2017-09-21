@@ -46,7 +46,7 @@ public class SkipUrlEncodingsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public SkipUrlEncodingsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(SkipUrlEncodingsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(SkipUrlEncodingsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -58,30 +58,37 @@ public class SkipUrlEncodingsInner {
     interface SkipUrlEncodingsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodPathValid" })
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
+        @ExpectedResponses({200})
         Single<Void> getMethodPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathPathValid" })
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
+        @ExpectedResponses({200})
         Single<Void> getPathPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerPathValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
+        @ExpectedResponses({200})
         Single<Void> getSwaggerPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryValid" })
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
+        @ExpectedResponses({200})
         Single<Void> getMethodQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryNull" })
         @GET("azurespecials/skipUrlEncoding/method/query/null")
+        @ExpectedResponses({200})
         Single<Void> getMethodQueryNull(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathQueryValid" })
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
+        @ExpectedResponses({200})
         Single<Void> getPathQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerQueryValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
+        @ExpectedResponses({200})
         Single<Void> getSwaggerQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

@@ -47,7 +47,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @param client the instance of the service client containing this operation class.
      */
     public SubscriptionInCredentialsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(SubscriptionInCredentialsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(SubscriptionInCredentialsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

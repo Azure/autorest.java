@@ -50,7 +50,7 @@ public class LROsCustomHeadersInner {
      * @param client the instance of the service client containing this operation class.
      */
     public LROsCustomHeadersInner(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LROsCustomHeadersService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LROsCustomHeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -62,34 +62,42 @@ public class LROsCustomHeadersInner {
     interface LROsCustomHeadersService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPutAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
+        @ExpectedResponses({200})
         Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders putAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
+        @ExpectedResponses({200})
         Single<ProductInner> putAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPut201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
+        @ExpectedResponses({200, 201})
         Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders put201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
+        @ExpectedResponses({200, 201})
         Single<ProductInner> put201CreatingSucceeded200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPost202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
+        @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders post202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
+        @ExpectedResponses({202})
         Single<Void> post202Retry200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPostAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
+        @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginPostAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders postAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
+        @ExpectedResponses({202})
         Single<Void> postAsyncRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

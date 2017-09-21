@@ -46,7 +46,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param client the instance of the service client containing this operation class.
      */
     public ApiVersionLocalsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(ApiVersionLocalsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ApiVersionLocalsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

@@ -45,7 +45,7 @@ public class PathsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public PathsInner(AutoRestParameterizedHostTestClientImpl client) {
-        this.service = AzureProxy.create(PathsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -57,6 +57,7 @@ public class PathsInner {
     interface PathsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
+        @ExpectedResponses({200})
         Single<Void> getEmpty(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("x-ms-parameterized-host") String parameterizedHost, @HeaderParam("User-Agent") String userAgent);
 
     }

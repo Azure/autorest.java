@@ -46,7 +46,7 @@ public class OdatasImpl implements Odatas {
      * @param client the instance of the service client containing this operation class.
      */
     public OdatasImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(OdatasService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(OdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

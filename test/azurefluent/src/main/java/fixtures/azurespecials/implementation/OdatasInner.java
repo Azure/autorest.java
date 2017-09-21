@@ -45,7 +45,7 @@ public class OdatasInner {
      * @param client the instance of the service client containing this operation class.
      */
     public OdatasInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(OdatasService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(OdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -57,6 +57,7 @@ public class OdatasInner {
     interface OdatasService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
+        @ExpectedResponses({200})
         Single<Void> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

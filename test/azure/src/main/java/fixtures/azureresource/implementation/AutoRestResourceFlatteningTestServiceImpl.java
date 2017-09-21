@@ -165,7 +165,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     private void initializeService() {
-        service = AzureProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestResourceFlatteningTestServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 
     /**

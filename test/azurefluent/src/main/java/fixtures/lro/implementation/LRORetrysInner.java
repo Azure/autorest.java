@@ -51,7 +51,7 @@ public class LRORetrysInner {
      * @param client the instance of the service client containing this operation class.
      */
     public LRORetrysInner(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LRORetrysService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LRORetrysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
@@ -63,58 +63,72 @@ public class LRORetrysInner {
     interface LRORetrysService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPut201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
+        @ExpectedResponses({200, 201})
         Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys put201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
+        @ExpectedResponses({200, 201})
         Single<ProductInner> put201CreatingSucceeded200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPutAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
+        @ExpectedResponses({200})
         Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys putAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
+        @ExpectedResponses({200})
         Single<ProductInner> putAsyncRelativeRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
+        @ExpectedResponses({200, 202})
         Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys deleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
+        @ExpectedResponses({200, 202})
         Single<ProductInner> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDelete202Retry200" })
         @DELETE("lro/retryerror/delete/202/retry/200")
+        @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys delete202Retry200" })
         @DELETE("lro/retryerror/delete/202/retry/200")
+        @ExpectedResponses({202})
         Single<Void> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteAsyncRelativeRetrySucceeded" })
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
+        @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys deleteAsyncRelativeRetrySucceeded" })
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
+        @ExpectedResponses({202})
         Single<Void> deleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPost202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
+        @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys post202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
+        @ExpectedResponses({202})
         Single<Void> post202Retry200(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPostAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
+        @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys postAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
+        @ExpectedResponses({202})
         Single<Void> postAsyncRelativeRetrySucceeded(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

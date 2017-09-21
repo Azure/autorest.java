@@ -59,7 +59,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @param client the instance of the service client containing this operation class.
      */
     public LRORetrysImpl(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LRORetrysService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LRORetrysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

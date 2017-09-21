@@ -46,7 +46,7 @@ public class PathsImpl implements Paths {
      * @param client the instance of the service client containing this operation class.
      */
     public PathsImpl(AutoRestParameterizedHostTestClientImpl client) {
-        this.service = AzureProxy.create(PathsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

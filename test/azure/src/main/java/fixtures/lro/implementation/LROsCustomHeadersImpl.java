@@ -55,7 +55,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @param client the instance of the service client containing this operation class.
      */
     public LROsCustomHeadersImpl(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LROsCustomHeadersService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LROsCustomHeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 

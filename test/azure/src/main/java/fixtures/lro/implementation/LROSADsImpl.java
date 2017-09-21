@@ -73,7 +73,7 @@ public class LROSADsImpl implements LROSADs {
      * @param client the instance of the service client containing this operation class.
      */
     public LROSADsImpl(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LROSADsService.class, client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LROSADsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
         this.client = client;
     }
 
