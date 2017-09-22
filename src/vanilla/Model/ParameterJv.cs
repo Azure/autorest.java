@@ -287,7 +287,7 @@ namespace AutoRest.Java.Model
             if (parameterLocation != Core.Model.ParameterLocation.None &&
                 parameterLocation != Core.Model.ParameterLocation.FormData)
             {
-                return "com.microsoft.rest.v2.annotations." + parameterLocation.ToString() + "Param";
+                return "com.microsoft.rest.annotations." + parameterLocation.ToString() + "Param";
             }
             else
             {

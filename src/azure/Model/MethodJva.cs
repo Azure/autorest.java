@@ -591,7 +591,7 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.InterfaceImports.ToList();
                 if (this.IsLongRunningOperation)
                 {
-                    imports.Add("com.microsoft.azure.v2.OperationStatus");
+                    imports.Add("com.microsoft.azure.OperationStatus");
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
@@ -613,8 +613,8 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.ImplImports;
                 if (this.IsLongRunningOperation)
                 {
-                    imports.Add("com.microsoft.azure.v2.OperationStatus");
-                    imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
+                    imports.Add("com.microsoft.azure.OperationStatus");
+                    imports.Add("com.microsoft.azure.util.ServiceFutureUtil");
                     imports.Remove("com.microsoft.azure.AzureResponseBuilder");
                     this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())

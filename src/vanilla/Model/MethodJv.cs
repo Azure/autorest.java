@@ -670,12 +670,12 @@ namespace AutoRest.Java.Model
                 imports.Add("rx.Observable");
                 imports.Add("rx.Single");
                 imports.Add("rx.functions.Func1");
-                imports.Add("com.microsoft.rest.v2.annotations.Headers");
-                imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
-                imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
-                imports.Add("com.microsoft.rest.v2.annotations.Host");
+                imports.Add("com.microsoft.rest.annotations.Headers");
+                imports.Add("com.microsoft.rest.annotations.ExpectedResponses");
+                imports.Add("com.microsoft.rest.annotations.UnexpectedResponseExceptionType");
+                imports.Add("com.microsoft.rest.annotations.Host");
                 
-                imports.Add("com.microsoft.rest.v2.http.HttpClient");
+                imports.Add("com.microsoft.rest.http.HttpClient");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
