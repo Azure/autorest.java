@@ -17,17 +17,17 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
+import com.microsoft.rest.annotations.ExpectedResponses;
+import com.microsoft.rest.annotations.GET;
+import com.microsoft.rest.annotations.HeaderParam;
+import com.microsoft.rest.annotations.Headers;
+import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.PathParam;
+import com.microsoft.rest.annotations.QueryParam;
+import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Headers;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.QueryParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PageImpl;
@@ -42,7 +42,7 @@ import java.util.List;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.azure.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined

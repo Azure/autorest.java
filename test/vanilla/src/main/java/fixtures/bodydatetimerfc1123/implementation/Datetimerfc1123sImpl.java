@@ -10,21 +10,21 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.RestProxy;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.annotations.BodyParam;
+import com.microsoft.rest.annotations.ExpectedResponses;
+import com.microsoft.rest.annotations.GET;
+import com.microsoft.rest.annotations.Headers;
+import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.PUT;
+import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.v2.annotations.BodyParam;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.GET;
-import com.microsoft.rest.v2.annotations.Headers;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.PUT;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;

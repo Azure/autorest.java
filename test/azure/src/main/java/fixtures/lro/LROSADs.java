@@ -11,7 +11,7 @@
 package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
-import com.microsoft.azure.v2.OperationStatus;
+import com.microsoft.azure.OperationStatus;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;

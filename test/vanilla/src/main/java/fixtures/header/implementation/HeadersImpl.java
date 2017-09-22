@@ -10,20 +10,20 @@
 
 package fixtures.header.implementation;
 
-import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.RestProxy;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.annotations.ExpectedResponses;
+import com.microsoft.rest.annotations.HeaderParam;
+import com.microsoft.rest.annotations.Headers;
+import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.POST;
+import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Headers;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;

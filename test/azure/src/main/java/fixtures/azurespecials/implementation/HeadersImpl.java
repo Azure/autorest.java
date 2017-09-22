@@ -11,17 +11,17 @@
 package fixtures.azurespecials.implementation;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.annotations.ExpectedResponses;
+import com.microsoft.rest.annotations.HEAD;
+import com.microsoft.rest.annotations.HeaderParam;
+import com.microsoft.rest.annotations.Headers;
+import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.POST;
+import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.microsoft.rest.v2.annotations.ExpectedResponses;
-import com.microsoft.rest.v2.annotations.HEAD;
-import com.microsoft.rest.v2.annotations.HeaderParam;
-import com.microsoft.rest.v2.annotations.Headers;
-import com.microsoft.rest.v2.annotations.Host;
-import com.microsoft.rest.v2.annotations.POST;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
@@ -32,7 +32,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.azure.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined

@@ -12,7 +12,7 @@ package fixtures.bodyinteger.implementation;
 
 import fixtures.bodyinteger.AutoRestIntegerTestService;
 import fixtures.bodyinteger.Ints;
-import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;

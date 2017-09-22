@@ -12,7 +12,7 @@ package fixtures.custombaseuri.implementation;
 
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
-import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.RestProxy;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;
