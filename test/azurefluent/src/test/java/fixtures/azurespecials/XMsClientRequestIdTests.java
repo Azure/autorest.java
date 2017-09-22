@@ -3,9 +3,9 @@ package fixtures.azurespecials;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 
-import com.microsoft.rest.v2.http.HttpHeaders;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy.Factory;
+import com.microsoft.rest.http.HttpHeaders;
+import com.microsoft.rest.policy.AddHeadersPolicy;
+import com.microsoft.rest.policy.AddHeadersPolicy.Factory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -2,12 +2,10 @@ package fixtures.http;
 
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.v2.http.HttpRequest;
-import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.policy.RequestPolicy;
+import com.microsoft.rest.http.HttpRequest;
+import com.microsoft.rest.http.HttpResponse;
+import com.microsoft.rest.policy.RequestPolicy;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-import fixtures.http.implementation.MultipleResponsesImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
 import fixtures.http.models.D;

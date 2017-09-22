@@ -2,9 +2,8 @@ package fixtures.lro;
 
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.v2.http.HttpHeaders;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy;
-import com.microsoft.rest.v2.policy.AddHeadersPolicy.Factory;
+import com.microsoft.rest.http.HttpHeaders;
+import com.microsoft.rest.policy.AddHeadersPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import org.junit.AfterClass;
