@@ -295,3 +295,11 @@ test/*/target/
 .settings/
 .project
 .classpath
+
+yarn.lock
+
+package/
+*.tar
+*.tgz
+src/obj/
+*.log
