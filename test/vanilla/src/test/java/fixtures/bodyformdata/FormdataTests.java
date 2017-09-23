@@ -3,6 +3,7 @@ package fixtures.bodyformdata;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -20,8 +21,9 @@ public class FormdataTests {
         client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost:3000");
     }
 
+    @Ignore("Multipart form data not currently supported")
     @Test
-    public void uploadFile() throws Exception {
+    public void uploadFileMultipart() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream stream = classLoader.getResourceAsStream("upload.txt");
         byte[] bytes = IOUtils.toByteArray(stream);
@@ -53,6 +55,5 @@ public class FormdataTests {
                     }).toBlocking().value();
             Assert.assertEquals(new String(bytes), IOUtils.toString(actual));
         }
-
     }
 }

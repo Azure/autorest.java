@@ -58,9 +58,8 @@ namespace AutoRest.Java.Model
             {
                 if (ModelType.IsPrimaryType(KnownPrimaryType.Stream))
                 {
-                    var res = new PrimaryTypeJv(KnownPrimaryType.Stream);
-                    res.Name.FixedValue = "RequestBody";
-                    return res;
+                    // Just pass whatever we give to clients to RestProxy
+                    return ClientType;
                 }
                 else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) && 
                     Location != Core.Model.ParameterLocation.Body &&
@@ -149,20 +148,6 @@ namespace AutoRest.Java.Model
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = Base64Url.encode({2});", IsRequired ? "Base64Url " : "", target, source);
-                if (!IsRequired)
-                {
-                    builder.Outdent().AppendLine("}");
-                }
-            }
-            else if (wireType.IsPrimaryType(KnownPrimaryType.Stream))
-            {
-                if (!IsRequired)
-                {
-                    builder.AppendLine("RequestBody {0} = {1};", target, wireType.GetDefaultValue(Method) ?? "null")
-                        .AppendLine("if ({0} != null) {{", source).Indent();
-                }
-                builder.AppendLine("{0}{1} = RequestBody.create(MediaType.parse(\"{2}\"), {3});",
-                    IsRequired ? "RequestBody " : "", target, Method.RequestContentType, source);
                 if (!IsRequired)
                 {
                     builder.Outdent().AppendLine("}");
@@ -272,11 +257,6 @@ namespace AutoRest.Java.Model
                     {
                         imports.Add("com.microsoft.rest.CollectionFormat");
                     }
-                }
-                if (ModelType.IsPrimaryType(KnownPrimaryType.Stream) && Location == Core.Model.ParameterLocation.Body)
-                {
-                    imports.Add("okhttp3.RequestBody");
-                    imports.Add("okhttp3.MediaType");
                 }
                 return imports;
             }

@@ -27,8 +27,6 @@ import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
@@ -64,14 +62,14 @@ public class FormdatasImpl implements Formdatas {
         // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<InputStream> uploadFile(/* @Part("fileContent") not supported by RestProxy */RequestBody fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
+        Single<InputStream> uploadFile(/* @Part("fileContent") not supported by RestProxy */byte[] fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
         @Headers({ "Content-Type: application/octet-stream", "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
         @PUT("formdata/stream/uploadfile")
         // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<InputStream> uploadFileViaBody(@BodyParam RequestBody fileContent);
+        Single<InputStream> uploadFileViaBody(@BodyParam byte[] fileContent);
 
     }
 
@@ -117,8 +115,7 @@ public class FormdatasImpl implements Formdatas {
         if (fileName == null) {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
-        RequestBody fileContentConverted = RequestBody.create(MediaType.parse("multipart/form-data"), fileContent);
-        return service.uploadFile(fileContentConverted, fileName);
+        return service.uploadFile(fileContent, fileName);
     }
 
 
@@ -158,8 +155,7 @@ public class FormdatasImpl implements Formdatas {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
-        RequestBody fileContentConverted = RequestBody.create(MediaType.parse("application/octet-stream"), fileContent);
-        return service.uploadFileViaBody(fileContentConverted);
+        return service.uploadFileViaBody(fileContent);
     }
 
 
