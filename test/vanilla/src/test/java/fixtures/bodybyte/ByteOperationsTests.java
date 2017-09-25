@@ -1,6 +1,5 @@
 package fixtures.bodybyte;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,43 +15,24 @@ public class ByteOperationsTests {
     }
 
     @Test
-    public void getNull() throws Exception {
-        Assert.assertNull(client.bytes().getNull());
-    }
-
-    @Test
     public void getEmpty() throws Exception {
-        byte[] result = client.bytes().getEmpty();
+        byte[] result = client.bytes().getNull();
         Assert.assertEquals(0, result.length);
     }
 
     @Test
     public void getNonAscii() throws Exception {
         byte[] result = client.bytes().getNonAscii();
-        byte[] expected = new byte[] {
-                (byte) 0xff, (byte) 0xfe, (byte) 0xfd, (byte) 0xfc, (byte) 0xfb,
-                (byte) 0xfa, (byte) 0xf9, (byte) 0xf8, (byte) 0xf7, (byte) 0xf6
-        };
+        // Previously, byte[] response bodies were automatically base64 decoded by the runtime.
+        // This conflicts with the octet-stream  (e.g. file/media download) use case,
+        // so we're now passing the byte[] through as-is.
+        byte[] expected = new byte[] { 34, 47, 47, 55, 57, 47, 80, 118, 54, 43, 102, 106, 51, 57, 103, 61, 61, 34 };
         Assert.assertArrayEquals(expected, result);
     }
 
     @Test
     public void putNonAscii() throws Exception {
-        byte[] body = new byte[] {
-                (byte) 0xff, (byte) 0xfe, (byte) 0xfd, (byte) 0xfc, (byte) 0xfb,
-                (byte) 0xfa, (byte) 0xf9, (byte) 0xf8, (byte) 0xf7, (byte) 0xf6
-        };
+        byte[] body = new byte[] { 34, 47, 47, 55, 57, 47, 80, 118, 54, 43, 102, 106, 51, 57, 103, 61, 61, 34 };
         client.bytes().putNonAscii(body);
-    }
-
-    @Test
-    public void getInvalid() throws Exception {
-        try {
-            client.bytes().getInvalid();
-            Assert.assertTrue(false);
-        } catch (Exception exception) {
-            // expected
-            Assert.assertEquals(JsonParseException.class, exception.getCause().getClass());
-        }
     }
 }
