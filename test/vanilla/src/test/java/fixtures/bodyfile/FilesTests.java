@@ -3,6 +3,7 @@ package fixtures.bodyfile;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class FilesTests {
     }
 
     @Test
+    @Ignore("Uses Transfer-Encoding: chunked which is not currently supported by RestProxy")
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
         long skipped = client.files().getFileLargeAsync()
