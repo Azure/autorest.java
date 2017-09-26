@@ -110,11 +110,6 @@ public Single<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Async(@
     }
 }
     @Model.BuildInputMappings(true)
-
-@if (Model.IsParameterizedHost)
-{
-@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
-}
     @Model.ParameterConversion
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
 }
@@ -223,11 +218,6 @@ public Single<@(Model.ReturnTypeJv.GenericBodyClientTypeString)> @(Model.Name)As
     }
 }
     @Model.BuildInputMappings()
-
-@if (Model.IsParameterizedHost)
-{
-@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
-}
     @Model.ParameterConversion
     return service.@(Model.Name)(@Model.MethodParameterApiInvocation);
 }

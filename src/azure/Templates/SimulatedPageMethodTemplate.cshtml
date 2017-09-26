@@ -95,11 +95,6 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
     }
 }
     @Model.BuildInputMappings(true)
-
-@if (Model.IsParameterizedHost)
-{
-@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
-}
     @Model.ParameterConversion
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
         @@Override
@@ -196,11 +191,6 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
     }
 }
     @Model.BuildInputMappings()
-
-@if (Model.IsParameterizedHost)
-{
-@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
-}
     @Model.ParameterConversion
     return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
         @@Override

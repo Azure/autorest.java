@@ -23,19 +23,10 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var parameters = LogicalParameters.OfType<ParameterJv>().Where(p => p.Location != ParameterLocation.None)
-                    .Where(p => !p.Extensions.ContainsKey("hostParameter")).ToList();
-                if (IsParameterizedHost)
-                {
-                    parameters.Add(new ParameterJv
-                    {
-                        Name = "parameterizedHost",
-                        SerializedName = "x-ms-parameterized-host",
-                        Location = ParameterLocation.Header,
-                        IsRequired = true,
-                        ModelType = new PrimaryTypeJv(KnownPrimaryType.String)
-                    });
-                }
+                var parameters = LogicalParameters.OfType<ParameterJv>()
+                    .Where(p => p.Location != ParameterLocation.None)
+                    .ToList();
+
                 return parameters;
             }
         }
@@ -66,27 +57,28 @@ namespace AutoRest.Java.Model
                     {
                         parameter.Location = ParameterLocation.Path;
                     }
-                    if (parameter.Location == ParameterLocation.Path ||
+
+                    var name = parameter.SerializedName;
+                    if (parameter.Extensions.ContainsKey("hostParameter"))
+                    {
+                        declarationBuilder.Append($"@HostParam(\"{name}\") ");
+                    }
+                    else if (parameter.Location == ParameterLocation.Path ||
                         parameter.Location == ParameterLocation.Query ||
                         parameter.Location == ParameterLocation.Header)
                     {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@{0}Param(\"{1}\") ",
-                            parameter.Location.ToString(),
-                            parameter.SerializedName));
+                        var location = parameter.Location;
+                        declarationBuilder.Append($"@{location}Param(\"{name}\") ");
                     }
                     else if (parameter.Location == ParameterLocation.Body)
                     {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "@{0}Param ",
-                            parameter.Location.ToString()));
+                        declarationBuilder.Append("@BodyParam ");
                     }
                     else if (parameter.Location == ParameterLocation.FormData)
                     {
-                        declarationBuilder.Append(string.Format(CultureInfo.InvariantCulture,
-                            "/* @Part(\"{0}\") not supported by RestProxy */",
-                            parameter.SerializedName));
+                        declarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
                     }
+
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
                     declarationBuilder.Append(parameter.WireType.Name);
                     declarationBuilder.Append(" " + declarativeName);
@@ -283,7 +275,7 @@ namespace AutoRest.Java.Model
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
-                            ((ParameterJv) transformation.OutputParameter).ClientType.ParameterVariant.Name,
+                            ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name,
                             outParamName);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
@@ -484,20 +476,6 @@ namespace AutoRest.Java.Model
             }
         }
 
-        [JsonIgnore]
-        public string HostParameterReplacementArgs
-        {
-            get
-            {
-                var args = new List<string>();
-                foreach (var param in Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-                {
-                    args.Add("\"{" + param.SerializedName + "}\", " + param.Name);
-                }
-                return string.Join(", ", args);
-            }
-        }
-
         /// <summary>
         /// Get the type for operation exception
         /// </summary>
@@ -656,7 +634,9 @@ namespace AutoRest.Java.Model
                     {
                         string exceptionImport = CodeNamerJv.GetJavaException(ex, CodeModel);
                         if (exceptionImport != null) imports.Add(CodeNamerJv.GetJavaException(ex, CodeModel));
-                    });                return imports.ToList();
+                    });
+
+                return imports.ToList();
             }
         }
 
@@ -674,7 +654,6 @@ namespace AutoRest.Java.Model
                 imports.Add("com.microsoft.rest.annotations.ExpectedResponses");
                 imports.Add("com.microsoft.rest.annotations.UnexpectedResponseExceptionType");
                 imports.Add("com.microsoft.rest.annotations.Host");
-                
                 imports.Add("com.microsoft.rest.http.HttpClient");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
@@ -710,7 +689,7 @@ namespace AutoRest.Java.Model
                 // parameterized host
                 if (IsParameterizedHost)
                 {
-                    imports.Add("com.google.common.base.Joiner");
+                    imports.Add("com.microsoft.rest.annotations.HostParam");
                 }
                 return imports.ToList();
             }
