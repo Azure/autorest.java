@@ -12,13 +12,13 @@ package fixtures.custombaseuri.implementation;
 
 import com.microsoft.rest.RestProxy;
 import fixtures.custombaseuri.Paths;
-import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
-import com.microsoft.rest.annotations.HeaderParam;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.HostParam;
+import com.microsoft.rest.annotations.PathParam;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
@@ -60,7 +60,7 @@ public class PathsImpl implements Paths {
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getEmpty(@HeaderParam("x-ms-parameterized-host") String parameterizedHost);
+        Single<Void> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host);
 
     }
 
@@ -102,8 +102,7 @@ public class PathsImpl implements Paths {
         if (this.client.host() == null) {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
-        String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
-        return service.getEmpty(parameterizedHost);
+        return service.getEmpty(accountName, this.client.host());
     }
 
 

@@ -12,13 +12,12 @@ package fixtures.custombaseurimoreoptions.implementation;
 
 import com.microsoft.rest.RestProxy;
 import fixtures.custombaseurimoreoptions.Paths;
-import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
-import com.microsoft.rest.annotations.HeaderParam;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.HostParam;
 import com.microsoft.rest.annotations.PathParam;
 import com.microsoft.rest.annotations.QueryParam;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
@@ -62,7 +61,7 @@ public class PathsImpl implements Paths {
         @GET("customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getEmpty(@PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion, @HeaderParam("x-ms-parameterized-host") String parameterizedHost);
+        Single<Void> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
 
     }
 
@@ -120,8 +119,7 @@ public class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         final String keyVersion = null;
-        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        return service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
+        return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
     }
 
     /**
@@ -180,8 +178,7 @@ public class PathsImpl implements Paths {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
-        String parameterizedHost = Joiner.on(", ").join("{vault}", vault, "{secret}", secret, "{dnsSuffix}", this.client.dnsSuffix());
-        return service.getEmpty(keyName, this.client.subscriptionId(), keyVersion, parameterizedHost);
+        return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
     }
 
 
