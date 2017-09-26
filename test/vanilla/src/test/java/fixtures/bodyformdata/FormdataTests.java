@@ -38,6 +38,7 @@ public class FormdataTests {
 
     @Test
     public void uploadFileViaBody() throws Exception {
+        // FIXME: generate FileRegion overload and pass the resource that way
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream stream = classLoader.getResourceAsStream("upload.txt")) {
             byte[] bytes = IOUtils.toByteArray(stream);
