@@ -1,7 +1,6 @@
 package fixtures.head;
 
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
-import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

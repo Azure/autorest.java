@@ -1,6 +1,5 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
