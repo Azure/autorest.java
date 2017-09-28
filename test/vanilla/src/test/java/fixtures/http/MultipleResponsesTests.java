@@ -5,6 +5,7 @@ import com.microsoft.rest.RestException;
 import com.microsoft.rest.http.HttpRequest;
 import com.microsoft.rest.http.HttpResponse;
 import com.microsoft.rest.policy.RequestPolicy;
+import com.microsoft.rest.serializer.JacksonAdapter;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
@@ -136,6 +137,7 @@ public class MultipleResponsesTests {
     public void get202None204NoneDefaultError202None() throws Exception {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
+                .withSerializerAdapter(new JacksonAdapter())
                 .addCustomPolicy(new RequestPolicy.Factory() {
                     @Override
                     public RequestPolicy create(final RequestPolicy next) {
@@ -171,6 +173,7 @@ public class MultipleResponsesTests {
     public void get202None204NoneDefaultError204None() throws Exception {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
+                .withSerializerAdapter(new JacksonAdapter())
                 .addCustomPolicy(new RequestPolicy.Factory() {
                     @Override
                     public RequestPolicy create(final RequestPolicy next) {
