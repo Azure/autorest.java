@@ -289,8 +289,17 @@ __pycache__/
 *.xsd.cs
 
 package-lock.json
+*.tgz
 *.class
 test/*/target/
 .settings/
 .project
 .classpath
+
+yarn.lock
+
+package/
+*.tar
+*.tgz
+src/obj/
+*.log

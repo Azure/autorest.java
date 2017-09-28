@@ -1,3 +1,8 @@
+# AutoRest Java Extension
+This project enables Java code generation in [AutoRest](https://github.com/Azure/AutoRest).
+
+**GitHub Issues** for this project should be filed [here](https://github.com/Azure/autorest/issues?q=is%3Aopen+is%3Aissue+label%3Ajava).
+
 
 # Contributing
 
@@ -17,7 +22,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ``` yaml
 use-extension:
-  "@microsoft.azure/autorest.modeler": "1.9.6"
+  "@microsoft.azure/autorest.modeler": "~2.0.0"
 
 pipeline:
   java/modeler:
