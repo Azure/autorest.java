@@ -171,46 +171,38 @@ public class MultipleResponsesImpl implements MultipleResponses {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200Valid" })
         @GET("http/payloads/default/A/response/200/valid")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(MyException.class)
         Single<A> getDefaultModelA200Valid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200None" })
         @GET("http/payloads/default/A/response/200/none")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(MyException.class)
         Single<A> getDefaultModelA200None();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400Valid" })
         @GET("http/payloads/default/A/response/400/valid")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(MyException.class)
         Single<A> getDefaultModelA400Valid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400None" })
         @GET("http/payloads/default/A/response/400/none")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(MyException.class)
         Single<A> getDefaultModelA400None();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200Invalid" })
         @GET("http/payloads/default/none/response/200/invalid")
-        @ExpectedResponses({})
         Single<Void> getDefaultNone200Invalid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200None" })
         @GET("http/payloads/default/none/response/200/none")
-        @ExpectedResponses({})
         Single<Void> getDefaultNone200None();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400Invalid" })
         @GET("http/payloads/default/none/response/400/invalid")
-        @ExpectedResponses({})
         Single<Void> getDefaultNone400Invalid();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400None" })
         @GET("http/payloads/default/none/response/400/none")
-        @ExpectedResponses({})
         Single<Void> getDefaultNone400None();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200None" })

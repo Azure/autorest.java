@@ -70,7 +70,6 @@ public class ExplicitsImpl implements Explicits {
     interface ExplicitsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
         @POST("reqopt/requied/integer/parameter")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredIntegerParameter(@BodyParam int bodyParameter);
 
@@ -82,7 +81,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerProperty" })
         @POST("reqopt/requied/integer/property")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredIntegerProperty(@BodyParam IntWrapper bodyParameter);
 
@@ -94,7 +92,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerHeader" })
         @POST("reqopt/requied/integer/header")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
 
@@ -106,7 +103,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringParameter" })
         @POST("reqopt/requied/string/parameter")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredStringParameter(@BodyParam String bodyParameter);
 
@@ -118,7 +114,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringProperty" })
         @POST("reqopt/requied/string/property")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredStringProperty(@BodyParam StringWrapper bodyParameter);
 
@@ -130,7 +125,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringHeader" })
         @POST("reqopt/requied/string/header")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
 
@@ -142,7 +136,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassParameter" })
         @POST("reqopt/requied/class/parameter")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredClassParameter(@BodyParam Product bodyParameter);
 
@@ -154,7 +147,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassProperty" })
         @POST("reqopt/requied/class/property")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredClassProperty(@BodyParam ClassWrapper bodyParameter);
 
@@ -166,7 +158,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayParameter" })
         @POST("reqopt/requied/array/parameter")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredArrayParameter(@BodyParam List<String> bodyParameter);
 
@@ -178,7 +169,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayProperty" })
         @POST("reqopt/requied/array/property")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredArrayProperty(@BodyParam ArrayWrapper bodyParameter);
 
@@ -190,7 +180,6 @@ public class ExplicitsImpl implements Explicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayHeader" })
         @POST("reqopt/requied/array/header")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 

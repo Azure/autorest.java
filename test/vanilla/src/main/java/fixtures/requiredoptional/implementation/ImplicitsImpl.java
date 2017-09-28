@@ -61,7 +61,6 @@ public class ImplicitsImpl implements Implicits {
     interface ImplicitsService {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })
         @GET("reqopt/implicit/required/path/{pathParameter}")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getRequiredPath(@PathParam("pathParameter") String pathParameter);
 
@@ -85,19 +84,16 @@ public class ImplicitsImpl implements Implicits {
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalPath" })
         @GET("reqopt/global/required/path/{required-global-path}")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getRequiredGlobalPath(@PathParam("required-global-path") String requiredGlobalPath);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalQuery" })
         @GET("reqopt/global/required/query")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getRequiredGlobalQuery(@QueryParam("required-global-query") String requiredGlobalQuery);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getOptionalGlobalQuery" })
         @GET("reqopt/global/optional/query")
-        @ExpectedResponses({})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);
 
