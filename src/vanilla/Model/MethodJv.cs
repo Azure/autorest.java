@@ -659,8 +659,19 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                string annotationArgs = string.Join(", ", Responses.Keys.Select(k => k.ToString("D")));
-                return $"@ExpectedResponses({{{annotationArgs}}})";
+                string result;
+
+                if (Responses.Count == 0)
+                {
+                    result = "";
+                }
+                else
+                {
+                    string annotationArgs = string.Join(", ", Responses.Keys.Select(k => k.ToString("D")));
+                    result = $"@ExpectedResponses({{{annotationArgs}}})";
+                }
+
+                return result;
             }
         }
     }
