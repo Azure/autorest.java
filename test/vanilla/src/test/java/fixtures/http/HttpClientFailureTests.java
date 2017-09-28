@@ -142,7 +142,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().delete407(true);
             fail();
         } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Received HTTP_PROXY_AUTH (407) code while not using proxy"));
+            Assert.assertTrue(ex.getMessage().contains("Status code 407"));
         }
     }
 
