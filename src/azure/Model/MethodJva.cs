@@ -338,11 +338,22 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public override string ResponseBuilder
+        public string AsyncClientReturnTypeString
         {
             get
             {
-                return "AzureResponseBuilder";
+                if (IsLongRunningOperation)
+                {
+                    return $"Observable<OperationStatus<{ReturnTypeJv.ServiceResponseGenericParameterString}>>";
+                }
+                else if (IsPagingOperation || IsPagingNextOperation)
+                {
+                    return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}";
+                }
+                else
+                {
+                    return $"Single<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
+                }
             }
         }
 
@@ -406,31 +417,6 @@ namespace AutoRest.Java.Azure.Model
                 string invocation;
                 MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
                 return nextMethod.Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
-            }
-        }
-
-        [JsonIgnore]
-        public override string ReturnValue
-        {
-            get
-            {
-                if (this.IsPagingOperation || this.IsPagingNonPollingOperation)
-                {
-                    if (ReturnType.Headers != null)
-                    {
-                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.headers(), response.response())",
-                            ReturnTypeJva.ClientResponseType);
-                    }
-                    else
-                    {
-                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.response())",
-                            ReturnTypeJva.ClientResponseType);
-                    }
-                }
-                else
-                {
-                    return base.ReturnValue;
-                }
             }
         }
 

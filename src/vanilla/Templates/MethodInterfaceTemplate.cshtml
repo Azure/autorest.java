@@ -67,11 +67,11 @@ ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.N
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnTypeResponseName.Else("void") != "void")
 {
-@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>} object if successful.
 }
  */
 Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
@@ -142,7 +142,7 @@ ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.N
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>} object if successful.
 }
  */
 Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);

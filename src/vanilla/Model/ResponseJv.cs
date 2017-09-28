@@ -110,22 +110,6 @@ namespace AutoRest.Java.Model
         #region template strings
 
         [JsonIgnore]
-        public string ClientResponseType
-        {
-            get
-            {
-                if (Headers == null)
-                {
-                    return "ServiceResponse";
-                }
-                else
-                {
-                    return "ServiceResponseWithHeaders";
-                }
-            }
-        }
-
-        [JsonIgnore]
         public string ClientResponseTypeString
         {
             get
@@ -135,36 +119,11 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ObservableClientResponseTypeString
-        {
-            get
-            {
-                return ClientResponseTypeString;
-            }
-        }
-
-        [JsonIgnore]
         public virtual string ClientCallbackTypeString
         {
             get
             {
                 return GenericBodyClientTypeString;
-            }
-        }
-
-        [JsonIgnore]
-        public string WireResponseTypeString
-        {
-            get
-            {
-                if (Headers == null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", ClientResponseType, GenericBodyWireTypeString);
-                }
-                else
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", ClientResponseType, GenericBodyWireTypeString, GenericHeaderWireTypeString);
-                }
             }
         }
 

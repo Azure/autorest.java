@@ -7,6 +7,9 @@
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
+@* ------------------------------------ *@
+@* Synchronous with required parameters *@
+@* ------------------------------------ *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -40,6 +43,11 @@ else
 }
 }
 @EmptyLine
+
+
+@* --------------------------------- *@
+@* Callback with required parameters *@
+@* --------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -62,6 +70,11 @@ public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(
     return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)Async(@Model.MethodRequiredParameterInvocation), serviceCallback);
 }
 @EmptyLine
+
+
+@* ----------------------------------- *@
+@* Observable with required parameters *@
+@* ----------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -116,6 +129,11 @@ public Single<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Async(@
 @EmptyLine
 </text>
 }
+
+
+@* ------------------------------- *@
+@* Synchronous with all parameters *@
+@* ------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -150,7 +168,10 @@ else
 }
 @EmptyLine
 
-
+    
+@* ---------------------------- *@
+@* Callback with all parameters *@
+@* ---------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -174,7 +195,10 @@ public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(
 }
 @EmptyLine
 
-
+    
+@* ----------------------------------- *@
+@* Observable with required parameters *@
+@* ----------------------------------- *@
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -196,7 +220,7 @@ public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJv.GenericBodyClientTypeString>} object if successful.
 }
  */
 public Single<@(Model.ReturnTypeJv.GenericBodyClientTypeString)> @(Model.Name)Async(@Model.MethodParameterDeclaration) {

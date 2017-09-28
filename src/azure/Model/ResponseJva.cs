@@ -110,18 +110,5 @@ namespace AutoRest.Java.Azure.Model
                 return base.ClientCallbackTypeString;
             }
         }
-
-        [JsonIgnore]
-        public override string ObservableClientResponseTypeString
-        {
-            get
-            {
-                if (IsPagedResponse)
-                {
-                    return "ServiceResponse<" + ServiceResponseGenericParameterString + ">";
-                }
-                return base.ObservableClientResponseTypeString;
-            }
-        }
     }
 }

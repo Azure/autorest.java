@@ -536,31 +536,6 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public string CallType
-        {
-            get
-            {
-                if (this.HttpMethod == HttpMethod.Head)
-                {
-                    return "Void";
-                }
-                else
-                {
-                    return "ResponseBody";
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public virtual string ResponseBuilder
-        {
-            get
-            {
-                return "ServiceResponseBuilder";
-            }
-        }
-
-        [JsonIgnore]
         public virtual string RuntimeBasePackage
         {
             get
@@ -574,19 +549,6 @@ namespace AutoRest.Java.Model
 
         [JsonIgnore]
         public virtual string ReturnTypeResponseName => ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
-
-        [JsonIgnore]
-        public virtual string ReturnValue
-        {
-            get
-            {
-                if (ReturnTypeJv.NeedsConversion)
-                {
-                    return "new ServiceResponse<" + ReturnTypeJv.GenericBodyClientTypeString + ">(body, response.response())";
-                }
-                return this.Name + "Delegate(call.execute())";
-            }
-        }
 
         [JsonIgnore]
         public virtual string ServiceFutureFactoryMethod
@@ -622,7 +584,6 @@ namespace AutoRest.Java.Model
                 imports.Add("rx.Observable");
                 imports.Add("rx.Single");
                 imports.Add("com.microsoft.rest.ServiceFuture");
-                imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
@@ -656,7 +617,6 @@ namespace AutoRest.Java.Model
                 imports.Add("com.microsoft.rest.annotations.Host");
                 imports.Add("com.microsoft.rest.http.HttpClient");
                 imports.Add("com.microsoft.rest.ServiceFuture");
-                imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                 // Http verb annotations

@@ -89,21 +89,10 @@ ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.N
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.AsyncClientReturnTypeString} object if successful.
 }
  */
-@if (Model.IsLongRunningOperation)
-{
-@:Observable<OperationStatus<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);  
-}
-else if (Model.IsPagingOperation || Model.IsPagingNextOperation)
-{
-@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);  
-}
-else
-{
-@:Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
-}
+@(Model.AsyncClientReturnTypeString) @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
 </text>
 }
 
@@ -191,19 +180,8 @@ ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.N
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.AsyncClientReturnTypeString} object if successful.
 }
  */
-@if (Model.IsLongRunningOperation)
-{
-@:Observable<OperationStatus<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>> @(Model.Name)Async(@Model.MethodParameterDeclaration);
-}
-else if (Model.IsPagingOperation || Model.IsPagingNextOperation)
-{
-@:Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
-}
-else
-{
-@:Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
-}
+@(Model.AsyncClientReturnTypeString) @(Model.Name)Async(@Model.MethodParameterDeclaration);
 @EmptyLine

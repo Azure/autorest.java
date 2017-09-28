@@ -70,7 +70,7 @@ public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParamete
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
+@: * @@return the {@@link Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>} object if successful.
 }
  */
 public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
@@ -112,11 +112,11 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeJva.ClientResponseType} if successful.
+@: * @@return the @Model.ReturnTypeResponseName object if successful.
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>} object if successful.
 }
  */
 public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterDeclaration) {
@@ -213,14 +213,14 @@ public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclara
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation)
         .toObservable()
         .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
@@ -259,11 +259,11 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(
  * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeJva.ClientResponseType} if successful.
+@: * @@return the @Model.ReturnTypeResponseName object if successful.
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>} object if successful.
 }
  */
 public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
