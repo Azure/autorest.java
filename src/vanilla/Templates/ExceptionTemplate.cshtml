@@ -11,8 +11,7 @@ package @(Settings.Namespace.ToLower())@Model.ModelsPackage;
 @EmptyLine
 
 import com.microsoft.rest.RestException;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
+import com.microsoft.rest.http.HttpResponse;
 @EmptyLine
 
 /**
@@ -25,7 +24,7 @@ public class @Model.ExceptionTypeDefinitionName extends RestException {
      * @@param message the exception message or the response content if a message is not available
      * @@param response the HTTP response
      */
-    public @(Model.ExceptionTypeDefinitionName)(final String message, final Response<ResponseBody> response) {
+    public @(Model.ExceptionTypeDefinitionName)(final String message, HttpResponse response) {
         super(message, response);
     }
 @EmptyLine
@@ -36,7 +35,7 @@ public class @Model.ExceptionTypeDefinitionName extends RestException {
      * @@param response the HTTP response
      * @@param body the deserialized response body
      */
-    public @(Model.ExceptionTypeDefinitionName)(final String message, final Response<ResponseBody> response, final @Model.Name body) {
+    public @(Model.ExceptionTypeDefinitionName)(final String message, final HttpResponse response, final @Model.Name body) {
         super(message, response, body);
     }
 @EmptyLine

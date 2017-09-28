@@ -624,7 +624,6 @@ namespace AutoRest.Java.Azure.Model
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");
-                    imports.Add("com.microsoft.azure.AzureServiceFuture");
                     imports.AddRange(ctype.ImportSafe());
                 }
                 if (this.IsPagingNonPollingOperation)

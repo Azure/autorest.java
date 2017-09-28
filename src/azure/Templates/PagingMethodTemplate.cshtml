@@ -220,7 +220,7 @@ else
 @: * @@return the {@@link Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>} object if successful.
 }
  */
-public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation)
         .toObservable()
         .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
