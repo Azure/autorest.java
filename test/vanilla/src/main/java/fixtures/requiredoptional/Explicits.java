@@ -12,7 +12,6 @@ package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -87,7 +86,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerParameterAsync();
     /**
@@ -115,7 +114,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter);
 
@@ -173,7 +172,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerPropertyAsync();
     /**
@@ -201,7 +200,7 @@ public interface Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
 
@@ -259,7 +258,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerHeaderAsync();
     /**
@@ -287,7 +286,7 @@ public interface Explicits {
      *
      * @param headerParameter the Integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter);
 
@@ -345,7 +344,7 @@ public interface Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringParameterAsync();
     /**
@@ -373,7 +372,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringParameterAsync(String bodyParameter);
 
@@ -431,7 +430,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringPropertyAsync();
     /**
@@ -459,7 +458,7 @@ public interface Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
 
@@ -517,7 +516,7 @@ public interface Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringHeaderAsync();
     /**
@@ -545,7 +544,7 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringHeaderAsync(String bodyParameter);
 
@@ -603,7 +602,7 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalClassParameterAsync();
     /**
@@ -631,7 +630,7 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalClassParameterAsync(Product bodyParameter);
 
@@ -689,7 +688,7 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalClassPropertyAsync();
     /**
@@ -717,7 +716,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
 
@@ -775,7 +774,7 @@ public interface Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayParameterAsync();
     /**
@@ -803,7 +802,7 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter);
 
@@ -861,7 +860,7 @@ public interface Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayPropertyAsync();
     /**
@@ -889,7 +888,7 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
 
@@ -947,7 +946,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayHeaderAsync();
     /**
@@ -975,7 +974,7 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter);
 

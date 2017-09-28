@@ -12,7 +12,6 @@ package fixtures.bodynumber;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -161,7 +160,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigFloatAsync(double numberBody);
 
@@ -219,7 +218,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoubleAsync(double numberBody);
 
@@ -277,7 +276,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoublePositiveDecimalAsync(double numberBody);
 
@@ -335,7 +334,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
 
@@ -393,7 +392,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalAsync(BigDecimal numberBody);
 
@@ -451,7 +450,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
 
@@ -509,7 +508,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
 
@@ -567,7 +566,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallFloatAsync(double numberBody);
 
@@ -625,7 +624,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallDoubleAsync(double numberBody);
 
@@ -683,7 +682,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallDecimalAsync(BigDecimal numberBody);
 

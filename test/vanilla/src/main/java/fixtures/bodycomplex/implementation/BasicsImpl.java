@@ -24,7 +24,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
@@ -160,7 +159,7 @@ public class BasicsImpl implements Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putValidAsync(Basic complexBody) {
         if (complexBody == null) {

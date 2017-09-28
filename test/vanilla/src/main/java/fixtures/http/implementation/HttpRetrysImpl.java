@@ -27,7 +27,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -136,7 +135,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head408Async() {
         return service.head408();
@@ -205,7 +204,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put500Async(Boolean booleanValue) {
         return service.put500(booleanValue);
@@ -274,7 +273,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch500Async(Boolean booleanValue) {
         return service.patch500(booleanValue);
@@ -307,7 +306,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> get502Async() {
         return service.get502();
@@ -376,7 +375,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post503Async(Boolean booleanValue) {
         return service.post503(booleanValue);
@@ -445,7 +444,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete503Async(Boolean booleanValue) {
         return service.delete503(booleanValue);
@@ -514,7 +513,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put504Async(Boolean booleanValue) {
         return service.put504(booleanValue);
@@ -583,7 +582,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch504Async(Boolean booleanValue) {
         return service.patch504(booleanValue);

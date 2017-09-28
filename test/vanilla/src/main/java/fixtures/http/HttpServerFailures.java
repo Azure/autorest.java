@@ -12,7 +12,6 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;

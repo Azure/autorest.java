@@ -12,8 +12,6 @@ package fixtures.header;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
@@ -67,7 +65,7 @@ public interface Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramExistingKeyAsync(String userAgent);
 
@@ -94,7 +92,7 @@ public interface Headers {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseExistingKeyAsync();
 
@@ -124,7 +122,7 @@ public interface Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramProtectedKeyAsync(String contentType);
 
@@ -151,7 +149,7 @@ public interface Headers {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseProtectedKeyAsync();
 
@@ -184,7 +182,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramIntegerAsync(String scenario, int value);
 
@@ -214,7 +212,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseIntegerAsync(String scenario);
 
@@ -247,7 +245,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramLongAsync(String scenario, long value);
 
@@ -277,7 +275,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseLongAsync(String scenario);
 
@@ -310,7 +308,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramFloatAsync(String scenario, double value);
 
@@ -340,7 +338,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseFloatAsync(String scenario);
 
@@ -373,7 +371,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDoubleAsync(String scenario, double value);
 
@@ -403,7 +401,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDoubleAsync(String scenario);
 
@@ -436,7 +434,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramBoolAsync(String scenario, boolean value);
 
@@ -466,7 +464,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseBoolAsync(String scenario);
 
@@ -496,7 +494,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramStringAsync(String scenario);
     /**
@@ -527,7 +525,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramStringAsync(String scenario, String value);
 
@@ -557,7 +555,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseStringAsync(String scenario);
 
@@ -590,7 +588,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDateAsync(String scenario, LocalDate value);
 
@@ -620,7 +618,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDateAsync(String scenario);
 
@@ -653,7 +651,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDatetimeAsync(String scenario, DateTime value);
 
@@ -683,7 +681,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDatetimeAsync(String scenario);
 
@@ -713,7 +711,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDatetimeRfc1123Async(String scenario);
     /**
@@ -744,7 +742,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDatetimeRfc1123Async(String scenario, DateTime value);
 
@@ -774,7 +772,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDatetimeRfc1123Async(String scenario);
 
@@ -807,7 +805,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDurationAsync(String scenario, Period value);
 
@@ -837,7 +835,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDurationAsync(String scenario);
 
@@ -870,7 +868,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramByteAsync(String scenario, byte[] value);
 
@@ -900,7 +898,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseByteAsync(String scenario);
 
@@ -930,7 +928,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramEnumAsync(String scenario);
     /**
@@ -961,7 +959,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramEnumAsync(String scenario, GreyscaleColors value);
 
@@ -991,7 +989,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseEnumAsync(String scenario);
 
@@ -1018,7 +1016,7 @@ public interface Headers {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> customRequestIdAsync();
 

@@ -12,7 +12,6 @@ package fixtures.bodyduration;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.Period;
@@ -77,7 +76,7 @@ public interface Durations {
      *
      * @param durationBody the Period value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putPositiveDurationAsync(Period durationBody);
 

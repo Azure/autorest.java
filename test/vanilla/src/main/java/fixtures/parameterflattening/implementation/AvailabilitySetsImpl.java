@@ -24,7 +24,6 @@ import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
@@ -101,7 +100,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         if (resourceGroupName == null) {

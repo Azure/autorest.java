@@ -21,7 +21,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
@@ -97,7 +96,7 @@ public class HeadExceptionsInner {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head200Async() {
         return service.head200(this.client.acceptLanguage(), this.client.userAgent());
@@ -130,7 +129,7 @@ public class HeadExceptionsInner {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head204Async() {
         return service.head204(this.client.acceptLanguage(), this.client.userAgent());
@@ -163,7 +162,7 @@ public class HeadExceptionsInner {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head404Async() {
         return service.head404(this.client.acceptLanguage(), this.client.userAgent());

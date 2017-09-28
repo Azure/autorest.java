@@ -25,7 +25,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
@@ -555,7 +554,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putEmptyAsync(Map<String, String> arrayBody) {
         if (arrayBody == null) {
@@ -765,7 +764,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
         if (arrayBody == null) {
@@ -907,7 +906,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
         if (arrayBody == null) {
@@ -1049,7 +1048,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLongValidAsync(Map<String, Long> arrayBody) {
         if (arrayBody == null) {
@@ -1191,7 +1190,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putFloatValidAsync(Map<String, Double> arrayBody) {
         if (arrayBody == null) {
@@ -1333,7 +1332,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
         if (arrayBody == null) {
@@ -1475,7 +1474,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putStringValidAsync(Map<String, String> arrayBody) {
         if (arrayBody == null) {
@@ -1617,7 +1616,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
         if (arrayBody == null) {
@@ -1759,7 +1758,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
@@ -1901,7 +1900,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
         if (arrayBody == null) {
@@ -1980,7 +1979,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDurationValidAsync(Map<String, Period> arrayBody) {
         if (arrayBody == null) {
@@ -2054,7 +2053,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
         if (arrayBody == null) {
@@ -2332,7 +2331,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
         if (arrayBody == null) {
@@ -2542,7 +2541,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
         if (arrayBody == null) {
@@ -2752,7 +2751,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
         if (arrayBody == null) {

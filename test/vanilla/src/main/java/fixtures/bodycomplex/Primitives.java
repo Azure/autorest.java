@@ -12,7 +12,6 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -87,7 +86,7 @@ public interface Primitives {
      *
      * @param complexBody Please put -1 and 2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putIntAsync(IntWrapper complexBody);
 
@@ -145,7 +144,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLongAsync(LongWrapper complexBody);
 
@@ -203,7 +202,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putFloatAsync(FloatWrapper complexBody);
 
@@ -261,7 +260,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDoubleAsync(DoubleWrapper complexBody);
 
@@ -319,7 +318,7 @@ public interface Primitives {
      *
      * @param complexBody Please put true and false
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBoolAsync(BooleanWrapper complexBody);
 
@@ -377,7 +376,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putStringAsync(StringWrapper complexBody);
 
@@ -435,7 +434,7 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateAsync(DateWrapper complexBody);
 
@@ -493,7 +492,7 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateTimeAsync(DatetimeWrapper complexBody);
 
@@ -551,7 +550,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
 
@@ -609,7 +608,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDurationAsync(DurationWrapper complexBody);
 
@@ -667,7 +666,7 @@ public interface Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putByteAsync(ByteWrapper complexBody);
 

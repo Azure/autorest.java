@@ -24,7 +24,6 @@ import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
@@ -248,7 +247,7 @@ public class PathsImpl implements Paths {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getBooleanTrueAsync() {
         final boolean boolPath = true;
@@ -282,7 +281,7 @@ public class PathsImpl implements Paths {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getBooleanFalseAsync() {
         final boolean boolPath = false;
@@ -316,7 +315,7 @@ public class PathsImpl implements Paths {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getIntOneMillionAsync() {
         final int intPath = 1000000;
@@ -350,7 +349,7 @@ public class PathsImpl implements Paths {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getIntNegativeOneMillionAsync() {
         final int intPath = -1000000;
@@ -384,7 +383,7 @@ public class PathsImpl implements Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getTenBillionAsync() {
         final long longPath = 10000000000L;
@@ -418,7 +417,7 @@ public class PathsImpl implements Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getNegativeTenBillionAsync() {
         final long longPath = -10000000000L;
@@ -452,7 +451,7 @@ public class PathsImpl implements Paths {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> floatScientificPositiveAsync() {
         final double floatPath = 1.034E+20;
@@ -486,7 +485,7 @@ public class PathsImpl implements Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> floatScientificNegativeAsync() {
         final double floatPath = -1.034E-20;
@@ -520,7 +519,7 @@ public class PathsImpl implements Paths {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> doubleDecimalPositiveAsync() {
         final double doublePath = 9999999.999;
@@ -554,7 +553,7 @@ public class PathsImpl implements Paths {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> doubleDecimalNegativeAsync() {
         final double doublePath = -9999999.999;
@@ -588,7 +587,7 @@ public class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringUnicodeAsync() {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
@@ -622,7 +621,7 @@ public class PathsImpl implements Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringUrlEncodedAsync() {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
@@ -656,7 +655,7 @@ public class PathsImpl implements Paths {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringEmptyAsync() {
         final String stringPath = "";
@@ -693,7 +692,7 @@ public class PathsImpl implements Paths {
      *
      * @param stringPath null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringNullAsync(String stringPath) {
         if (stringPath == null) {
@@ -732,7 +731,7 @@ public class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> enumValidAsync(UriColor enumPath) {
         if (enumPath == null) {
@@ -771,7 +770,7 @@ public class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> enumNullAsync(UriColor enumPath) {
         if (enumPath == null) {
@@ -810,7 +809,7 @@ public class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> byteMultiByteAsync(byte[] bytePath) {
         if (bytePath == null) {
@@ -847,7 +846,7 @@ public class PathsImpl implements Paths {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> byteEmptyAsync() {
         final byte[] bytePath = "".getBytes();
@@ -885,7 +884,7 @@ public class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> byteNullAsync(byte[] bytePath) {
         if (bytePath == null) {
@@ -922,7 +921,7 @@ public class PathsImpl implements Paths {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateValidAsync() {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
@@ -959,7 +958,7 @@ public class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateNullAsync(LocalDate datePath) {
         if (datePath == null) {
@@ -995,7 +994,7 @@ public class PathsImpl implements Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateTimeValidAsync() {
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
@@ -1032,7 +1031,7 @@ public class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateTimeNullAsync(DateTime dateTimePath) {
         if (dateTimePath == null) {
@@ -1071,7 +1070,7 @@ public class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> base64UrlAsync(byte[] base64UrlPath) {
         if (base64UrlPath == null) {
@@ -1111,7 +1110,7 @@ public class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayCsvInPathAsync(List<String> arrayPath) {
         if (arrayPath == null) {
@@ -1152,7 +1151,7 @@ public class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
         Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;

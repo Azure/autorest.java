@@ -12,7 +12,6 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
@@ -52,7 +51,7 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> customNamedRequestIdAsync(String fooClientRequestId);
 
@@ -82,7 +81,7 @@ public interface Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 

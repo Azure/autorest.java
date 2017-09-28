@@ -24,7 +24,6 @@ import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -233,7 +232,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putNullAsync(String stringBody) {
         return service.putNull(stringBody);
@@ -303,7 +302,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putEmptyAsync(String stringBody) {
         if (stringBody == null) {
@@ -376,7 +375,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMbcsAsync(String stringBody) {
         if (stringBody == null) {
@@ -449,7 +448,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putWhitespaceAsync(String stringBody) {
         if (stringBody == null) {
@@ -590,7 +589,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody the Base64Url value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
         if (stringBody == null) {

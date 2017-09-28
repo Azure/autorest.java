@@ -26,7 +26,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
@@ -206,7 +205,7 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putOptionalQueryAsync(String queryParameter) {
         return service.putOptionalQuery(queryParameter);
@@ -275,7 +274,7 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putOptionalHeaderAsync(String queryParameter) {
         return service.putOptionalHeader(queryParameter);
@@ -344,7 +343,7 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putOptionalBodyAsync(String bodyParameter) {
         return service.putOptionalBody(bodyParameter);

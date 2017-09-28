@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -157,7 +156,7 @@ public class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putTrueAsync(boolean boolBody) {
         return service.putTrue(boolBody);
@@ -227,7 +226,7 @@ public class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putFalseAsync(boolean boolBody) {
         return service.putFalse(boolBody);

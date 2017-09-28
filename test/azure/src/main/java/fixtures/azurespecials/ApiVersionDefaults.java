@@ -12,7 +12,6 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
@@ -45,7 +44,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodGlobalValidAsync();
 
@@ -72,7 +71,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodGlobalNotProvidedValidAsync();
 
@@ -99,7 +98,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getPathGlobalValidAsync();
 
@@ -126,7 +125,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getSwaggerGlobalValidAsync();
 

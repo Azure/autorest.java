@@ -12,7 +12,6 @@ package fixtures.report;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;

@@ -12,7 +12,6 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
@@ -173,7 +172,7 @@ public interface Polymorphisms {
              ]
            };
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(Fish complexBody);
 
@@ -278,7 +277,7 @@ public interface Polymorphisms {
          ]
      }
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidMissingRequiredAsync(Fish complexBody);
 

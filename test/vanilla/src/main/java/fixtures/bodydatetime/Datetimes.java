@@ -12,7 +12,6 @@ package fixtures.bodydatetime;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetime.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
@@ -161,7 +160,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
 
@@ -247,7 +246,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
 
@@ -333,7 +332,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
 
@@ -419,7 +418,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
 
@@ -477,7 +476,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
 
@@ -535,7 +534,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
 

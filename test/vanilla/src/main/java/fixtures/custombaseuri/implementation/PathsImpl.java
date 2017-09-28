@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -93,7 +92,7 @@ public class PathsImpl implements Paths {
      *
      * @param accountName Account Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getEmptyAsync(String accountName) {
         if (accountName == null) {

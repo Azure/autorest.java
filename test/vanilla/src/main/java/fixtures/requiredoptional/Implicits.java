@@ -12,7 +12,6 @@ package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
@@ -77,7 +76,7 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalQueryAsync();
     /**
@@ -105,7 +104,7 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalQueryAsync(String queryParameter);
 
@@ -132,7 +131,7 @@ public interface Implicits {
      * Test implicitly optional header parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalHeaderAsync();
     /**
@@ -160,7 +159,7 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalHeaderAsync(String queryParameter);
 
@@ -187,7 +186,7 @@ public interface Implicits {
      * Test implicitly optional body parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalBodyAsync();
     /**
@@ -215,7 +214,7 @@ public interface Implicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalBodyAsync(String bodyParameter);
 

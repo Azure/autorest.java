@@ -11,8 +11,7 @@
 package fixtures.azurereport;
 
 import com.microsoft.rest.RestException;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
+import com.microsoft.rest.http.HttpResponse;
 
 /**
  * Exception thrown for an invalid response with Error information.
@@ -24,7 +23,7 @@ public class ErrorException extends RestException {
      * @param message the exception message or the response content if a message is not available
      * @param response the HTTP response
      */
-    public ErrorException(final String message, final Response<ResponseBody> response) {
+    public ErrorException(final String message, HttpResponse response) {
         super(message, response);
     }
 
@@ -35,7 +34,7 @@ public class ErrorException extends RestException {
      * @param response the HTTP response
      * @param body the deserialized response body
      */
-    public ErrorException(final String message, final Response<ResponseBody> response, final Error body) {
+    public ErrorException(final String message, final HttpResponse response, final Error body) {
         super(message, response, body);
     }
 

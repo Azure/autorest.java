@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
@@ -377,7 +376,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMax32Async(int intBody) {
         return service.putMax32(intBody);
@@ -413,7 +412,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMax64Async(long intBody) {
         return service.putMax64(intBody);
@@ -449,7 +448,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMin32Async(int intBody) {
         return service.putMin32(intBody);
@@ -485,7 +484,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMin64Async(long intBody) {
         return service.putMin64(intBody);
@@ -555,7 +554,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putUnixTimeDateAsync(DateTime intBody) {
         Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;

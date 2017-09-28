@@ -12,7 +12,6 @@ package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import java.io.IOException;
@@ -77,7 +76,7 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(ReadonlyObj complexBody);
 

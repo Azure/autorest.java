@@ -23,7 +23,7 @@ public class HttpFailureTests {
             client.httpFailures().getEmptyError();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -33,7 +33,7 @@ public class HttpFailureTests {
             client.httpFailures().getNoModelError();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
             //Assert.assertTrue(ex.getResponse().raw().toString().contains("NoErrorModel"));
         }
     }

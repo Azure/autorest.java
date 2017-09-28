@@ -24,7 +24,6 @@ import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.azurereport.ErrorException;
 import java.io.IOException;
 import java.util.Map;

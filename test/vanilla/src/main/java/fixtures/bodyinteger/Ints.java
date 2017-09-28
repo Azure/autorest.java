@@ -12,7 +12,6 @@ package fixtures.bodyinteger;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
@@ -217,7 +216,7 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMax32Async(int intBody);
 
@@ -247,7 +246,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMax64Async(long intBody);
 
@@ -277,7 +276,7 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMin32Async(int intBody);
 
@@ -307,7 +306,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMin64Async(long intBody);
 
@@ -365,7 +364,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUnixTimeDateAsync(DateTime intBody);
 

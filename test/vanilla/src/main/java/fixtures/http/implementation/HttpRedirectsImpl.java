@@ -27,7 +27,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Headers;
 import fixtures.http.models.HttpRedirectsGet300Headers;
@@ -194,7 +193,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head300Async() {
         return service.head300();
@@ -261,7 +260,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head301Async() {
         return service.head301();
@@ -294,7 +293,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> get301Async() {
         return service.get301();
@@ -363,7 +362,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put301Async(Boolean booleanValue) {
         return service.put301(booleanValue);
@@ -396,7 +395,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head302Async() {
         return service.head302();
@@ -429,7 +428,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> get302Async() {
         return service.get302();
@@ -498,7 +497,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch302Async(Boolean booleanValue) {
         return service.patch302(booleanValue);
@@ -567,7 +566,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post303Async(Boolean booleanValue) {
         return service.post303(booleanValue);
@@ -600,7 +599,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Redirect with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head307Async() {
         return service.head307();
@@ -633,7 +632,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> get307Async() {
         return service.get307();
@@ -702,7 +701,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put307Async(Boolean booleanValue) {
         return service.put307(booleanValue);
@@ -771,7 +770,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch307Async(Boolean booleanValue) {
         return service.patch307(booleanValue);
@@ -840,7 +839,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post307Async(Boolean booleanValue) {
         return service.post307(booleanValue);
@@ -909,7 +908,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete307Async(Boolean booleanValue) {
         return service.delete307(booleanValue);

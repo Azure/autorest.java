@@ -12,7 +12,6 @@ package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
@@ -73,7 +72,7 @@ public interface Strings {
      * Set string value null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNullAsync();
     /**
@@ -101,7 +100,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNullAsync(String stringBody);
 
@@ -159,7 +158,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(String stringBody);
 
@@ -217,7 +216,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMbcsAsync(String stringBody);
 
@@ -275,7 +274,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putWhitespaceAsync(String stringBody);
 
@@ -389,7 +388,7 @@ public interface Strings {
      *
      * @param stringBody the Base64Url value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBase64UrlEncodedAsync(byte[] stringBody);
 

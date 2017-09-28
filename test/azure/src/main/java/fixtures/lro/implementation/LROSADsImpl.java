@@ -27,8 +27,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.lro.models.LROSADsDelete202NonRetry400Headers;
 import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderHeaders;
@@ -963,7 +961,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteNonRetry400Async() {
         return service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
@@ -1028,7 +1026,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete202NonRetry400Async() {
         return service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
@@ -1093,7 +1091,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRelativeRetry400Async() {
         return service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
@@ -1228,7 +1226,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postNonRetry400Async(Product product) {
         Validator.validate(product);
@@ -1364,7 +1362,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post202NonRetry400Async(Product product) {
         Validator.validate(product);
@@ -1500,7 +1498,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
@@ -1986,7 +1984,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete204SucceededAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
@@ -2051,7 +2049,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRelativeRetryNoStatusAsync() {
         return service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
@@ -2186,7 +2184,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post202NoLocationAsync(Product product) {
         Validator.validate(product);
@@ -2322,7 +2320,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRelativeRetryNoPayloadAsync(Product product) {
         Validator.validate(product);
@@ -2808,7 +2806,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete202RetryInvalidHeaderAsync() {
         return service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
@@ -2873,7 +2871,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRelativeRetryInvalidHeaderAsync() {
         return service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
@@ -2938,7 +2936,7 @@ public class LROSADsImpl implements LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
@@ -3073,7 +3071,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post202RetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
@@ -3209,7 +3207,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
@@ -3345,7 +3343,7 @@ public class LROSADsImpl implements LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);

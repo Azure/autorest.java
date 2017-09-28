@@ -51,7 +51,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200Model204NoModelDefaultError201Invalid();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(201, ex.response().code());
+            Assert.assertEquals(201, ex.response().statusCode());
         }
     }
 
@@ -60,7 +60,7 @@ public class MultipleResponsesTests {
         try {
             A result = client.multipleResponses().get200Model204NoModelDefaultError202None();
         } catch (ErrorException ex) {
-            Assert.assertEquals(202, ex.response().code());
+            Assert.assertEquals(202, ex.response().statusCode());
         }
     }
 
@@ -70,7 +70,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200Model204NoModelDefaultError400Valid();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -92,7 +92,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200Model201ModelDefaultError400Valid();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
             Assert.assertEquals(400, ex.body().status().intValue());
             Assert.assertEquals("client error", ex.body().message());
         }
@@ -125,7 +125,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200ModelA201ModelC404ModelDDefaultError400Valid();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
             Error model = ex.body();
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
@@ -208,7 +208,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get202None204NoneDefaultError400Valid();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
             Error model = ex.body();
             Assert.assertEquals(400, model.status().intValue());
             Assert.assertEquals("client error", model.message());
@@ -231,7 +231,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get202None204NoneDefaultNone400None();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -241,7 +241,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get202None204NoneDefaultNone400Invalid();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -263,7 +263,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().getDefaultModelA400Valid();
             fail();
         } catch (MyException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
             Assert.assertEquals("400", ex.body().statusCode());
         }
     }
@@ -274,7 +274,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().getDefaultModelA400None();
             fail();
         } catch (MyException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -294,7 +294,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().getDefaultNone400Invalid();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -304,7 +304,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().getDefaultNone400None();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -331,7 +331,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200ModelA400None();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
             Assert.assertNull(ex.body());
         }
     }
@@ -342,7 +342,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200ModelA400Valid();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -352,7 +352,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200ModelA400Invalid();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -362,7 +362,7 @@ public class MultipleResponsesTests {
             client.multipleResponses().get200ModelA202Valid();
             fail();
         } catch (RestException ex) {
-            Assert.assertEquals(202, ex.response().code());
+            Assert.assertEquals(202, ex.response().statusCode());
         }
     }
 }

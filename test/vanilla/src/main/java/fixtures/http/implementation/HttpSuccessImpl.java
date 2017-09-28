@@ -27,7 +27,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -196,7 +195,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head200Async() {
         return service.head200();
@@ -299,7 +298,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put200Async(Boolean booleanValue) {
         return service.put200(booleanValue);
@@ -368,7 +367,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch200Async(Boolean booleanValue) {
         return service.patch200(booleanValue);
@@ -437,7 +436,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post200Async(Boolean booleanValue) {
         return service.post200(booleanValue);
@@ -506,7 +505,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete200Async(Boolean booleanValue) {
         return service.delete200(booleanValue);
@@ -575,7 +574,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put201Async(Boolean booleanValue) {
         return service.put201(booleanValue);
@@ -644,7 +643,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post201Async(Boolean booleanValue) {
         return service.post201(booleanValue);
@@ -713,7 +712,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put202Async(Boolean booleanValue) {
         return service.put202(booleanValue);
@@ -782,7 +781,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch202Async(Boolean booleanValue) {
         return service.patch202(booleanValue);
@@ -851,7 +850,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post202Async(Boolean booleanValue) {
         return service.post202(booleanValue);
@@ -920,7 +919,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete202Async(Boolean booleanValue) {
         return service.delete202(booleanValue);
@@ -953,7 +952,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head204Async() {
         return service.head204();
@@ -1022,7 +1021,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> put204Async(Boolean booleanValue) {
         return service.put204(booleanValue);
@@ -1091,7 +1090,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> patch204Async(Boolean booleanValue) {
         return service.patch204(booleanValue);
@@ -1160,7 +1159,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post204Async(Boolean booleanValue) {
         return service.post204(booleanValue);
@@ -1229,7 +1228,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete204Async(Boolean booleanValue) {
         return service.delete204(booleanValue);
@@ -1262,7 +1261,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 404 status code.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> head404Async() {
         return service.head404();

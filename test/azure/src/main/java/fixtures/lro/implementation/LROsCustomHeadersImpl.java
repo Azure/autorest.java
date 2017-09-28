@@ -26,8 +26,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
 import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
@@ -515,7 +513,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post202Retry200Async(Product product) {
         Validator.validate(product);
@@ -651,7 +649,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);

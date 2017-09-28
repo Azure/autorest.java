@@ -21,7 +21,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -106,7 +105,7 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postMethodLocalValidAsync(String subscriptionId) {
         if (subscriptionId == null) {
@@ -145,7 +144,7 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postMethodLocalNullAsync(String subscriptionId) {
         if (subscriptionId == null) {
@@ -184,7 +183,7 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postPathLocalValidAsync(String subscriptionId) {
         if (subscriptionId == null) {
@@ -223,7 +222,7 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postSwaggerLocalValidAsync(String subscriptionId) {
         if (subscriptionId == null) {

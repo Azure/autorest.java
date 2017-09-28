@@ -27,8 +27,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.lro.models.LROsDelete202NoRetry204Headers;
 import fixtures.lro.models.LROsDelete202Retry200Headers;
@@ -3089,7 +3087,7 @@ public class LROsImpl implements LROs {
      * Long running delete succeeds and returns right away.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> delete204SucceededAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
@@ -3288,7 +3286,7 @@ public class LROsImpl implements LROs {
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteNoHeaderInRetryAsync() {
         return service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
@@ -3353,7 +3351,7 @@ public class LROsImpl implements LROs {
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncNoHeaderInRetryAsync() {
         return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
@@ -3418,7 +3416,7 @@ public class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRetrySucceededAsync() {
         return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
@@ -3483,7 +3481,7 @@ public class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncNoRetrySucceededAsync() {
         return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
@@ -3548,7 +3546,7 @@ public class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRetryFailedAsync() {
         return service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
@@ -3613,7 +3611,7 @@ public class LROsImpl implements LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> deleteAsyncRetrycanceledAsync() {
         return service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
@@ -3815,7 +3813,7 @@ public class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> post202Retry200Async(Product product) {
         Validator.validate(product);
@@ -4371,7 +4369,7 @@ public class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRetryFailedAsync(Product product) {
         Validator.validate(product);
@@ -4507,7 +4505,7 @@ public class LROsImpl implements LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postAsyncRetrycanceledAsync(Product product) {
         Validator.validate(product);

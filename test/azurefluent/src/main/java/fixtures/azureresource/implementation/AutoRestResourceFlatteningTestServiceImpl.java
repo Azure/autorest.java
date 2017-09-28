@@ -27,7 +27,6 @@ import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.azureresource.ErrorException;
 import java.io.IOException;
@@ -265,7 +264,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putArrayAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
@@ -369,7 +368,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
         Validator.validate(resourceDictionary);
@@ -473,7 +472,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
         Validator.validate(resourceComplexObject);

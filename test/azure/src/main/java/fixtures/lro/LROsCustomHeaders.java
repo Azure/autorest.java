@@ -14,8 +14,6 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.OperationStatus;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
 import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
 import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
@@ -279,7 +277,7 @@ public interface LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202Retry200Async();
     /**
@@ -307,7 +305,7 @@ public interface LROsCustomHeaders {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202Retry200Async(Product product);
 
@@ -334,7 +332,7 @@ public interface LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202Retry200Async();
     /**
@@ -362,7 +360,7 @@ public interface LROsCustomHeaders {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202Retry200Async(Product product);
 
@@ -389,7 +387,7 @@ public interface LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync();
     /**
@@ -417,7 +415,7 @@ public interface LROsCustomHeaders {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync(Product product);
 
@@ -444,7 +442,7 @@ public interface LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRetrySucceededAsync();
     /**
@@ -472,7 +470,7 @@ public interface LROsCustomHeaders {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRetrySucceededAsync(Product product);
 

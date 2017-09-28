@@ -12,7 +12,6 @@ package fixtures.bodydatetimerfc1123;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
@@ -161,7 +160,7 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
 
@@ -247,7 +246,7 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
 

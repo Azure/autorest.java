@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -368,7 +367,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigFloatAsync(double numberBody) {
         return service.putBigFloat(numberBody);
@@ -438,7 +437,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigDoubleAsync(double numberBody) {
         return service.putBigDouble(numberBody);
@@ -508,7 +507,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
         return service.putBigDoublePositiveDecimal(numberBody);
@@ -578,7 +577,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
         return service.putBigDoubleNegativeDecimal(numberBody);
@@ -648,7 +647,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
@@ -721,7 +720,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
@@ -794,7 +793,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {
@@ -867,7 +866,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putSmallFloatAsync(double numberBody) {
         return service.putSmallFloat(numberBody);
@@ -937,7 +936,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putSmallDoubleAsync(double numberBody) {
         return service.putSmallDouble(numberBody);
@@ -1007,7 +1006,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param numberBody the BigDecimal value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putSmallDecimalAsync(BigDecimal numberBody) {
         if (numberBody == null) {

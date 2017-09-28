@@ -13,7 +13,6 @@ package fixtures.http;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.A;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
@@ -384,7 +383,7 @@ public interface MultipleResponses {
      * Send a 202 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultError202NoneAsync();
 
@@ -411,7 +410,7 @@ public interface MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultError204NoneAsync();
 
@@ -438,7 +437,7 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultError400ValidAsync();
 
@@ -465,7 +464,7 @@ public interface MultipleResponses {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultNone202InvalidAsync();
 
@@ -492,7 +491,7 @@ public interface MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultNone204NoneAsync();
 
@@ -519,7 +518,7 @@ public interface MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultNone400NoneAsync();
 
@@ -546,7 +545,7 @@ public interface MultipleResponses {
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get202None204NoneDefaultNone400InvalidAsync();
 
@@ -685,7 +684,7 @@ public interface MultipleResponses {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getDefaultNone200InvalidAsync();
 
@@ -712,7 +711,7 @@ public interface MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getDefaultNone200NoneAsync();
 
@@ -739,7 +738,7 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getDefaultNone400InvalidAsync();
 
@@ -766,7 +765,7 @@ public interface MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getDefaultNone400NoneAsync();
 

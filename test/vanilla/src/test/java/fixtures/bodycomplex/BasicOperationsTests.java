@@ -6,9 +6,6 @@ import com.microsoft.rest.LogLevel;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.CMYKColors;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;

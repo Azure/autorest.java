@@ -12,7 +12,6 @@ package fixtures.bodyarray;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
@@ -139,7 +138,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(List<String> arrayBody);
 
@@ -197,7 +196,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
 
@@ -311,7 +310,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putIntegerValidAsync(List<Integer> arrayBody);
 
@@ -425,7 +424,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLongValidAsync(List<Long> arrayBody);
 
@@ -539,7 +538,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putFloatValidAsync(List<Double> arrayBody);
 
@@ -653,7 +652,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDoubleValidAsync(List<Double> arrayBody);
 
@@ -767,7 +766,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putStringValidAsync(List<String> arrayBody);
 
@@ -881,7 +880,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUuidValidAsync(List<UUID> arrayBody);
 
@@ -967,7 +966,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateValidAsync(List<LocalDate> arrayBody);
 
@@ -1081,7 +1080,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
 
@@ -1195,7 +1194,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
 
@@ -1253,7 +1252,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDurationValidAsync(List<Period> arrayBody);
 
@@ -1311,7 +1310,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putByteValidAsync(List<byte[]> arrayBody);
 
@@ -1537,7 +1536,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putComplexValidAsync(List<Product> arrayBody);
 
@@ -1707,7 +1706,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayValidAsync(List<List<String>> arrayBody);
 
@@ -1877,7 +1876,7 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
 

@@ -14,8 +14,6 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.OperationStatus;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.lro.models.LROSADsDelete202NonRetry400Headers;
 import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderHeaders;
 import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Headers;
@@ -524,7 +522,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDeleteNonRetry400Async();
 
@@ -551,7 +549,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> deleteNonRetry400Async();
 
@@ -578,7 +576,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDelete202NonRetry400Async();
 
@@ -605,7 +603,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete202NonRetry400Async();
 
@@ -632,7 +630,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400Async();
 
@@ -659,7 +657,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> deleteAsyncRelativeRetry400Async();
 
@@ -686,7 +684,7 @@ public interface LROSADs {
      * Long running post request, service returns a 400 with no error body.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostNonRetry400Async();
     /**
@@ -714,7 +712,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostNonRetry400Async(Product product);
 
@@ -741,7 +739,7 @@ public interface LROSADs {
      * Long running post request, service returns a 400 with no error body.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postNonRetry400Async();
     /**
@@ -769,7 +767,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postNonRetry400Async(Product product);
 
@@ -796,7 +794,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 with a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202NonRetry400Async();
     /**
@@ -824,7 +822,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202NonRetry400Async(Product product);
 
@@ -851,7 +849,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 with a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202NonRetry400Async();
     /**
@@ -879,7 +877,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202NonRetry400Async(Product product);
 
@@ -906,7 +904,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async();
     /**
@@ -934,7 +932,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async(Product product);
 
@@ -961,7 +959,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetry400Async();
     /**
@@ -989,7 +987,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetry400Async(Product product);
 
@@ -1358,7 +1356,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDelete204SucceededAsync();
 
@@ -1385,7 +1383,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete204SucceededAsync();
 
@@ -1412,7 +1410,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatusAsync();
 
@@ -1439,7 +1437,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> deleteAsyncRelativeRetryNoStatusAsync();
 
@@ -1466,7 +1464,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202NoLocationAsync();
     /**
@@ -1494,7 +1492,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202NoLocationAsync(Product product);
 
@@ -1521,7 +1519,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202NoLocationAsync();
     /**
@@ -1549,7 +1547,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202NoLocationAsync(Product product);
 
@@ -1576,7 +1574,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync();
     /**
@@ -1604,7 +1602,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync(Product product);
 
@@ -1631,7 +1629,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetryNoPayloadAsync();
     /**
@@ -1659,7 +1657,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetryNoPayloadAsync(Product product);
 
@@ -2028,7 +2026,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeaderAsync();
 
@@ -2055,7 +2053,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete202RetryInvalidHeaderAsync();
 
@@ -2082,7 +2080,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync();
 
@@ -2109,7 +2107,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> deleteAsyncRelativeRetryInvalidHeaderAsync();
 
@@ -2136,7 +2134,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync();
 
@@ -2163,7 +2161,7 @@ public interface LROSADs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync();
 
@@ -2190,7 +2188,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync();
     /**
@@ -2218,7 +2216,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync(Product product);
 
@@ -2245,7 +2243,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202RetryInvalidHeaderAsync();
     /**
@@ -2273,7 +2271,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202RetryInvalidHeaderAsync(Product product);
 
@@ -2300,7 +2298,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync();
     /**
@@ -2328,7 +2326,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
@@ -2355,7 +2353,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetryInvalidHeaderAsync();
     /**
@@ -2383,7 +2381,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product);
 
@@ -2410,7 +2408,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync();
     /**
@@ -2438,7 +2436,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 
@@ -2465,7 +2463,7 @@ public interface LROSADs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync();
     /**
@@ -2493,7 +2491,7 @@ public interface LROSADs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponseWithHeaders} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product);
 

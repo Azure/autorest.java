@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetime.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
@@ -338,7 +337,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
@@ -445,7 +444,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
@@ -552,7 +551,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
@@ -659,7 +658,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
@@ -732,7 +731,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
@@ -805,7 +804,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {

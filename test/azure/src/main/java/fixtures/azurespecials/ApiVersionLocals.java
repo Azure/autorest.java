@@ -12,7 +12,6 @@ package fixtures.azurespecials;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
@@ -45,7 +44,7 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodLocalValidAsync();
 
@@ -72,7 +71,7 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodLocalNullAsync();
     /**
@@ -100,7 +99,7 @@ public interface ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodLocalNullAsync(String apiVersion);
 
@@ -127,7 +126,7 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getPathLocalValidAsync();
 
@@ -154,7 +153,7 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getSwaggerLocalValidAsync();
 

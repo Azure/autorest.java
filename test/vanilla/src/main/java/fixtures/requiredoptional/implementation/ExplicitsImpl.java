@@ -24,7 +24,6 @@ import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
@@ -302,7 +301,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return service.postOptionalIntegerParameter(bodyParameter);
@@ -412,7 +411,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -519,7 +518,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the Integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return service.postOptionalIntegerHeader(headerParameter);
@@ -628,7 +627,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalStringParameterAsync(String bodyParameter) {
         return service.postOptionalStringParameter(bodyParameter);
@@ -738,7 +737,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -848,7 +847,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalStringHeaderAsync(String bodyParameter) {
         return service.postOptionalStringHeader(bodyParameter);
@@ -958,7 +957,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalClassParameterAsync(Product bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1069,7 +1068,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1180,7 +1179,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1291,7 +1290,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         Validator.validate(bodyParameter);
@@ -1404,7 +1403,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);

@@ -12,7 +12,6 @@ package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
@@ -78,7 +77,7 @@ public interface Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNotExpandableAsync(Colors stringBody);
 
@@ -136,7 +135,7 @@ public interface Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putReferencedAsync(Colors enumStringBody);
 
@@ -194,7 +193,7 @@ public interface Enums {
      *
      * @param enumStringBody the RefColorConstant value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
 

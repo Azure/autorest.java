@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.LocalDate;
@@ -272,7 +271,7 @@ public class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMaxDateAsync(LocalDate dateBody) {
         if (dateBody == null) {
@@ -345,7 +344,7 @@ public class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putMinDateAsync(LocalDate dateBody) {
         if (dateBody == null) {

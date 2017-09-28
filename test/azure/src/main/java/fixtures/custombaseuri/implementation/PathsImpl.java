@@ -11,18 +11,18 @@
 package fixtures.custombaseuri.implementation;
 
 import fixtures.custombaseuri.Paths;
-import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
 import com.microsoft.rest.annotations.HeaderParam;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
+import com.microsoft.rest.annotations.HostParam;
+import com.microsoft.rest.annotations.PathParam;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -59,7 +59,7 @@ public class PathsImpl implements Paths {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         @ExpectedResponses({200})
-        Single<Void> getEmpty(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("x-ms-parameterized-host") String parameterizedHost, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -92,7 +92,7 @@ public class PathsImpl implements Paths {
      *
      * @param accountName Account Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getEmptyAsync(String accountName) {
         if (accountName == null) {
@@ -101,8 +101,7 @@ public class PathsImpl implements Paths {
         if (this.client.host() == null) {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
-        String parameterizedHost = Joiner.on(", ").join("{accountName}", accountName, "{host}", this.client.host());
-        return service.getEmpty(this.client.acceptLanguage(), parameterizedHost, this.client.userAgent());
+        return service.getEmpty(accountName, this.client.host(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
 

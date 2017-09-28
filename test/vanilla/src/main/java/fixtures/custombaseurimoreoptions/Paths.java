@@ -12,7 +12,6 @@ package fixtures.custombaseurimoreoptions;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
@@ -54,7 +53,7 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String vault, String secret, String keyName);
     /**
@@ -91,7 +90,7 @@ public interface Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
 

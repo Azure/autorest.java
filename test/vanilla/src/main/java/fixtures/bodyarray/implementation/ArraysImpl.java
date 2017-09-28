@@ -25,7 +25,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
@@ -590,7 +589,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putEmptyAsync(List<String> arrayBody) {
         if (arrayBody == null) {
@@ -664,7 +663,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBooleanTfftAsync(List<Boolean> arrayBody) {
         if (arrayBody == null) {
@@ -806,7 +805,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putIntegerValidAsync(List<Integer> arrayBody) {
         if (arrayBody == null) {
@@ -948,7 +947,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLongValidAsync(List<Long> arrayBody) {
         if (arrayBody == null) {
@@ -1090,7 +1089,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putFloatValidAsync(List<Double> arrayBody) {
         if (arrayBody == null) {
@@ -1232,7 +1231,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDoubleValidAsync(List<Double> arrayBody) {
         if (arrayBody == null) {
@@ -1374,7 +1373,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putStringValidAsync(List<String> arrayBody) {
         if (arrayBody == null) {
@@ -1516,7 +1515,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putUuidValidAsync(List<UUID> arrayBody) {
         if (arrayBody == null) {
@@ -1624,7 +1623,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateValidAsync(List<LocalDate> arrayBody) {
         if (arrayBody == null) {
@@ -1766,7 +1765,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateTimeValidAsync(List<DateTime> arrayBody) {
         if (arrayBody == null) {
@@ -1908,7 +1907,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
         if (arrayBody == null) {
@@ -1987,7 +1986,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDurationValidAsync(List<Period> arrayBody) {
         if (arrayBody == null) {
@@ -2061,7 +2060,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putByteValidAsync(List<byte[]> arrayBody) {
         if (arrayBody == null) {
@@ -2339,7 +2338,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putComplexValidAsync(List<Product> arrayBody) {
         if (arrayBody == null) {
@@ -2549,7 +2548,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putArrayValidAsync(List<List<String>> arrayBody) {
         if (arrayBody == null) {
@@ -2759,7 +2758,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
         if (arrayBody == null) {

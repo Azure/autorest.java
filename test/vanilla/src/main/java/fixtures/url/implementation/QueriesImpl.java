@@ -23,7 +23,6 @@ import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
@@ -294,7 +293,7 @@ public class QueriesImpl implements Queries {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getBooleanTrueAsync() {
         final boolean boolQuery = true;
@@ -328,7 +327,7 @@ public class QueriesImpl implements Queries {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getBooleanFalseAsync() {
         final boolean boolQuery = false;
@@ -398,7 +397,7 @@ public class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getBooleanNullAsync(Boolean boolQuery) {
         return service.getBooleanNull(boolQuery);
@@ -431,7 +430,7 @@ public class QueriesImpl implements Queries {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getIntOneMillionAsync() {
         final int intQuery = 1000000;
@@ -465,7 +464,7 @@ public class QueriesImpl implements Queries {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getIntNegativeOneMillionAsync() {
         final int intQuery = -1000000;
@@ -535,7 +534,7 @@ public class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getIntNullAsync(Integer intQuery) {
         return service.getIntNull(intQuery);
@@ -568,7 +567,7 @@ public class QueriesImpl implements Queries {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getTenBillionAsync() {
         final long longQuery = 10000000000L;
@@ -602,7 +601,7 @@ public class QueriesImpl implements Queries {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getNegativeTenBillionAsync() {
         final long longQuery = -10000000000L;
@@ -672,7 +671,7 @@ public class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getLongNullAsync(Long longQuery) {
         return service.getLongNull(longQuery);
@@ -705,7 +704,7 @@ public class QueriesImpl implements Queries {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> floatScientificPositiveAsync() {
         final double floatQuery = 1.034E+20;
@@ -739,7 +738,7 @@ public class QueriesImpl implements Queries {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> floatScientificNegativeAsync() {
         final double floatQuery = -1.034E-20;
@@ -809,7 +808,7 @@ public class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> floatNullAsync(Double floatQuery) {
         return service.floatNull(floatQuery);
@@ -842,7 +841,7 @@ public class QueriesImpl implements Queries {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> doubleDecimalPositiveAsync() {
         final double doubleQuery = 9999999.999;
@@ -876,7 +875,7 @@ public class QueriesImpl implements Queries {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> doubleDecimalNegativeAsync() {
         final double doubleQuery = -9999999.999;
@@ -946,7 +945,7 @@ public class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> doubleNullAsync(Double doubleQuery) {
         return service.doubleNull(doubleQuery);
@@ -979,7 +978,7 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringUnicodeAsync() {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
@@ -1013,7 +1012,7 @@ public class QueriesImpl implements Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringUrlEncodedAsync() {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
@@ -1047,7 +1046,7 @@ public class QueriesImpl implements Queries {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringEmptyAsync() {
         final String stringQuery = "";
@@ -1117,7 +1116,7 @@ public class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> stringNullAsync(String stringQuery) {
         return service.stringNull(stringQuery);
@@ -1186,7 +1185,7 @@ public class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> enumValidAsync(UriColor enumQuery) {
         return service.enumValid(enumQuery);
@@ -1255,7 +1254,7 @@ public class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> enumNullAsync(UriColor enumQuery) {
         return service.enumNull(enumQuery);
@@ -1325,7 +1324,7 @@ public class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> byteMultiByteAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
@@ -1359,7 +1358,7 @@ public class QueriesImpl implements Queries {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> byteEmptyAsync() {
         final byte[] byteQuery = "".getBytes();
@@ -1431,7 +1430,7 @@ public class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> byteNullAsync(byte[] byteQuery) {
         String byteQueryConverted = Base64.encodeBase64String(byteQuery);
@@ -1465,7 +1464,7 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateValidAsync() {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
@@ -1535,7 +1534,7 @@ public class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateNullAsync(LocalDate dateQuery) {
         return service.dateNull(dateQuery);
@@ -1568,7 +1567,7 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateTimeValidAsync() {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
@@ -1638,7 +1637,7 @@ public class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
         return service.dateTimeNull(dateTimeQuery);
@@ -1708,7 +1707,7 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
@@ -1780,7 +1779,7 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
@@ -1852,7 +1851,7 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
@@ -1924,7 +1923,7 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
@@ -1996,7 +1995,7 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
@@ -2068,7 +2067,7 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);

@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
@@ -265,7 +264,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put -1 and 2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putIntAsync(IntWrapper complexBody) {
         if (complexBody == null) {
@@ -339,7 +338,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putLongAsync(LongWrapper complexBody) {
         if (complexBody == null) {
@@ -413,7 +412,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putFloatAsync(FloatWrapper complexBody) {
         if (complexBody == null) {
@@ -487,7 +486,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDoubleAsync(DoubleWrapper complexBody) {
         if (complexBody == null) {
@@ -561,7 +560,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put true and false
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putBoolAsync(BooleanWrapper complexBody) {
         if (complexBody == null) {
@@ -635,7 +634,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putStringAsync(StringWrapper complexBody) {
         if (complexBody == null) {
@@ -709,7 +708,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateAsync(DateWrapper complexBody) {
         if (complexBody == null) {
@@ -783,7 +782,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
         if (complexBody == null) {
@@ -857,7 +856,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
         if (complexBody == null) {
@@ -931,7 +930,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putDurationAsync(DurationWrapper complexBody) {
         if (complexBody == null) {
@@ -1005,7 +1004,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putByteAsync(ByteWrapper complexBody) {
         if (complexBody == null) {

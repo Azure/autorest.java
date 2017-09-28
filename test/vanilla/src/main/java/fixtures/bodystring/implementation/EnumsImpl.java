@@ -23,7 +23,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
@@ -160,7 +159,7 @@ public class EnumsImpl implements Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putNotExpandableAsync(Colors stringBody) {
         if (stringBody == null) {
@@ -233,7 +232,7 @@ public class EnumsImpl implements Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putReferencedAsync(Colors enumStringBody) {
         if (enumStringBody == null) {
@@ -306,7 +305,7 @@ public class EnumsImpl implements Enums {
      *
      * @param enumStringBody the RefColorConstant value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
         if (enumStringBody == null) {

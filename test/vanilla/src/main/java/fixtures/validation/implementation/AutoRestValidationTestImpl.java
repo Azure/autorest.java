@@ -30,7 +30,6 @@ import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
@@ -334,7 +333,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getWithConstantInPathAsync() {
         final String constantParam = "constant";

@@ -19,7 +19,7 @@ public class HttpServerFailureTests {
         try {
             client.httpServerFailures().head501();
         } catch (ErrorException ex) {
-            Assert.assertEquals(501, ex.response().code());
+            Assert.assertEquals(501, ex.response().statusCode());
         }
     }
 
@@ -28,7 +28,7 @@ public class HttpServerFailureTests {
         try {
             client.httpServerFailures().get501();
         } catch (ErrorException ex) {
-            Assert.assertEquals(501, ex.response().code());
+            Assert.assertEquals(501, ex.response().statusCode());
         }
     }
 
@@ -37,7 +37,7 @@ public class HttpServerFailureTests {
         try {
             client.httpServerFailures().post505(true);
         } catch (ErrorException ex) {
-            Assert.assertEquals(505, ex.response().code());
+            Assert.assertEquals(505, ex.response().statusCode());
         }
     }
 
@@ -46,7 +46,7 @@ public class HttpServerFailureTests {
         try {
             client.httpServerFailures().delete505(true);
         } catch (ErrorException ex) {
-            Assert.assertEquals(505, ex.response().code());
+            Assert.assertEquals(505, ex.response().statusCode());
         }
     }
 }

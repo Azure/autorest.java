@@ -21,7 +21,6 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
 import rx.functions.Func1;
@@ -103,7 +102,7 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getMethodGlobalValidAsync() {
         if (this.client.apiVersion() == null) {
@@ -139,7 +138,7 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getMethodGlobalNotProvidedValidAsync() {
         if (this.client.apiVersion() == null) {
@@ -175,7 +174,7 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getPathGlobalValidAsync() {
         if (this.client.apiVersion() == null) {
@@ -211,7 +210,7 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     public Single<Void> getSwaggerGlobalValidAsync() {
         if (this.client.apiVersion() == null) {

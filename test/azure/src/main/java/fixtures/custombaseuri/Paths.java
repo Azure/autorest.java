@@ -12,7 +12,6 @@ package fixtures.custombaseuri;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;
@@ -48,7 +47,7 @@ public interface Paths {
      *
      * @param accountName Account Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String accountName);
 

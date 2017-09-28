@@ -11,8 +11,6 @@ import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
 import rx.exceptions.Exceptions;
 import rx.functions.Func1;
 

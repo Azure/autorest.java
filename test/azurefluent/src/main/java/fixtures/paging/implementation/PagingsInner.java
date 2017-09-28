@@ -11,7 +11,6 @@
 package fixtures.paging.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
@@ -26,7 +25,6 @@ import com.microsoft.rest.annotations.QueryParam;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
 import java.util.List;
@@ -195,7 +193,7 @@ public class PagingsInner {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getSinglePagesAsync() {
         return getSinglePagesSinglePageAsync()
@@ -216,7 +214,7 @@ public class PagingsInner {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesSinglePageAsync() {
         return service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent());
@@ -266,7 +264,7 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesSinglePageAsync() {
         final String clientRequestId = null;
@@ -302,7 +300,7 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         return getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions)
@@ -325,7 +323,7 @@ public class PagingsInner {
     PageImpl<ProductInner> * @param clientRequestId the String value
     PageImpl<ProductInner> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         Validator.validate(pagingGetMultiplePagesOptions);
@@ -384,7 +382,7 @@ public class PagingsInner {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getOdataMultiplePagesSinglePageAsync() {
         final String clientRequestId = null;
@@ -420,7 +418,7 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions)
@@ -443,7 +441,7 @@ public class PagingsInner {
     PageImpl1<ProductInner> * @param clientRequestId the String value
     PageImpl1<ProductInner> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getOdataMultiplePagesSinglePageAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         Validator.validate(pagingGetOdataMultiplePagesOptions);
@@ -511,7 +509,7 @@ public class PagingsInner {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesWithOffsetSinglePageAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions) {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
@@ -554,7 +552,7 @@ public class PagingsInner {
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         return getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId)
@@ -580,7 +578,7 @@ public class PagingsInner {
     PageImpl<ProductInner> * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
     PageImpl<ProductInner> * @param clientRequestId the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesWithOffsetSinglePageAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         if (pagingGetMultiplePagesWithOffsetOptions == null) {
@@ -616,7 +614,7 @@ public class PagingsInner {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesRetryFirstAsync() {
         return getMultiplePagesRetryFirstSinglePageAsync()
@@ -637,7 +635,7 @@ public class PagingsInner {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetryFirstSinglePageAsync() {
         return service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent());
@@ -666,7 +664,7 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesRetrySecondAsync() {
         return getMultiplePagesRetrySecondSinglePageAsync()
@@ -687,7 +685,7 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetrySecondSinglePageAsync() {
         return service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent());
@@ -716,7 +714,7 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the first call.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getSinglePagesFailureAsync() {
         return getSinglePagesFailureSinglePageAsync()
@@ -737,7 +735,7 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the first call.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesFailureSinglePageAsync() {
         return service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
@@ -766,7 +764,7 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the second call.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesFailureAsync() {
         return getMultiplePagesFailureSinglePageAsync()
@@ -787,7 +785,7 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the second call.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureSinglePageAsync() {
         return service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
@@ -816,7 +814,7 @@ public class PagingsInner {
      * A paging operation that receives an invalid nextLink.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesFailureUriAsync() {
         return getMultiplePagesFailureUriSinglePageAsync()
@@ -837,7 +835,7 @@ public class PagingsInner {
      * A paging operation that receives an invalid nextLink.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureUriSinglePageAsync() {
         return service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent());
@@ -870,7 +868,7 @@ public class PagingsInner {
      * @param tenant Sets the tenant to use.
      * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion) {
         return getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion)
@@ -893,7 +891,7 @@ public class PagingsInner {
     PageImpl1<ProductInner> * @param tenant Sets the tenant to use.
     PageImpl1<ProductInner> * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFragmentNextLinkSinglePageAsync(final String tenant, final String apiVersion) {
         if (tenant == null) {
@@ -930,7 +928,7 @@ public class PagingsInner {
      *
      * @param customParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkAsync(final CustomParameterGroupInner customParameterGroup) {
         return getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup)
@@ -952,7 +950,7 @@ public class PagingsInner {
      *
     PageImpl1<ProductInner> * @param customParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(final CustomParameterGroupInner customParameterGroup) {
         if (customParameterGroup == null) {
@@ -993,7 +991,7 @@ public class PagingsInner {
      * @param nextLink Next link for list operation.
      * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion) {
         return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion)
@@ -1017,7 +1015,7 @@ public class PagingsInner {
     PageImpl1<ProductInner> * @param nextLink Next link for list operation.
     PageImpl1<ProductInner> * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> nextFragmentSinglePageAsync(final String tenant, final String nextLink, final String apiVersion) {
         if (tenant == null) {
@@ -1060,7 +1058,7 @@ public class PagingsInner {
      * @param nextLink Next link for list operation.
      * @param customParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
         return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup)
@@ -1083,7 +1081,7 @@ public class PagingsInner {
     PageImpl1<ProductInner> * @param nextLink Next link for list operation.
     PageImpl1<ProductInner> * @param customParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> nextFragmentWithGroupingSinglePageAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
         if (nextLink == null) {
@@ -1124,7 +1122,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getSinglePagesNextAsync(final String nextPageLink) {
         return getSinglePagesNextSinglePageAsync(nextPageLink)
@@ -1146,7 +1144,7 @@ public class PagingsInner {
      *
     PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1203,7 +1201,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1245,7 +1243,7 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions)
@@ -1269,7 +1267,7 @@ public class PagingsInner {
     PageImpl<ProductInner> * @param clientRequestId the String value
     PageImpl<ProductInner> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         if (nextPageLink == null) {
@@ -1335,7 +1333,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getOdataMultiplePagesNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1377,7 +1375,7 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions)
@@ -1401,7 +1399,7 @@ public class PagingsInner {
     PageImpl1<ProductInner> * @param clientRequestId the String value
     PageImpl1<ProductInner> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getOdataMultiplePagesNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         if (nextPageLink == null) {
@@ -1467,7 +1465,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesWithOffsetNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1509,7 +1507,7 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions) {
         return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions)
@@ -1533,7 +1531,7 @@ public class PagingsInner {
     PageImpl<ProductInner> * @param clientRequestId the String value
     PageImpl<ProductInner> * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesWithOffsetNextSinglePageAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions) {
         if (nextPageLink == null) {
@@ -1577,7 +1575,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink) {
         return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink)
@@ -1599,7 +1597,7 @@ public class PagingsInner {
      *
     PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetryFirstNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1634,7 +1632,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink) {
         return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink)
@@ -1656,7 +1654,7 @@ public class PagingsInner {
      *
     PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetrySecondNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1691,7 +1689,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getSinglePagesFailureNextAsync(final String nextPageLink) {
         return getSinglePagesFailureNextSinglePageAsync(nextPageLink)
@@ -1713,7 +1711,7 @@ public class PagingsInner {
      *
     PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesFailureNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1748,7 +1746,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesFailureNextAsync(final String nextPageLink) {
         return getMultiplePagesFailureNextSinglePageAsync(nextPageLink)
@@ -1770,7 +1768,7 @@ public class PagingsInner {
      *
     PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {
@@ -1805,7 +1803,7 @@ public class PagingsInner {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the PagedList&lt;ProductInner&gt; object
+     * @return the observable to the PagedList<ProductInner> object
      */
     public Observable<Page<ProductInner>> getMultiplePagesFailureUriNextAsync(final String nextPageLink) {
         return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink)
@@ -1827,7 +1825,7 @@ public class PagingsInner {
      *
     PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the PagedList&lt;ProductInner&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureUriNextSinglePageAsync(final String nextPageLink) {
         if (nextPageLink == null) {

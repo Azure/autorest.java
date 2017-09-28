@@ -22,7 +22,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().head400();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -32,7 +32,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().get400();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -42,7 +42,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().put400(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -52,7 +52,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().patch400(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -62,7 +62,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().post400(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -72,7 +72,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().delete400(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(400, ex.response().code());
+            Assert.assertEquals(400, ex.response().statusCode());
         }
     }
 
@@ -82,7 +82,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().head401();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(401, ex.response().code());
+            Assert.assertEquals(401, ex.response().statusCode());
         }
     }
 
@@ -92,7 +92,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().get402();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(402, ex.response().code());
+            Assert.assertEquals(402, ex.response().statusCode());
         }
     }
 
@@ -102,7 +102,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().get403();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(403, ex.response().code());
+            Assert.assertEquals(403, ex.response().statusCode());
         }
     }
 
@@ -112,7 +112,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().put404(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(404, ex.response().code());
+            Assert.assertEquals(404, ex.response().statusCode());
         }
     }
 
@@ -122,7 +122,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().patch405(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(405, ex.response().code());
+            Assert.assertEquals(405, ex.response().statusCode());
         }
     }
 
@@ -132,7 +132,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().post406(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(406, ex.response().code());
+            Assert.assertEquals(406, ex.response().statusCode());
         }
     }
 
@@ -152,7 +152,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().put409(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(409, ex.response().code());
+            Assert.assertEquals(409, ex.response().statusCode());
         }
     }
 
@@ -162,7 +162,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().head410();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(410, ex.response().code());
+            Assert.assertEquals(410, ex.response().statusCode());
         }
     }
 
@@ -172,7 +172,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().get411();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(411, ex.response().code());
+            Assert.assertEquals(411, ex.response().statusCode());
         }
     }
 
@@ -182,7 +182,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().get412();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(412, ex.response().code());
+            Assert.assertEquals(412, ex.response().statusCode());
         }
     }
 
@@ -192,7 +192,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().put413(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(413, ex.response().code());
+            Assert.assertEquals(413, ex.response().statusCode());
         }
     }
 
@@ -202,7 +202,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().patch414(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(414, ex.response().code());
+            Assert.assertEquals(414, ex.response().statusCode());
         }
     }
 
@@ -212,7 +212,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().post415(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(415, ex.response().code());
+            Assert.assertEquals(415, ex.response().statusCode());
         }
     }
 
@@ -222,7 +222,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().get416();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(416, ex.response().code());
+            Assert.assertEquals(416, ex.response().statusCode());
         }
     }
 
@@ -232,7 +232,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().delete417(true);
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(417, ex.response().code());
+            Assert.assertEquals(417, ex.response().statusCode());
         }
     }
 
@@ -242,7 +242,7 @@ public class HttpClientFailureTests {
             client.httpClientFailures().head429();
             fail();
         } catch (ErrorException ex) {
-            Assert.assertEquals(429, ex.response().code());
+            Assert.assertEquals(429, ex.response().statusCode());
         }
     }
 }
