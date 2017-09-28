@@ -348,7 +348,7 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else if (IsPagingOperation || IsPagingNextOperation)
                 {
-                    return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}";
+                    return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }
                 else
                 {
