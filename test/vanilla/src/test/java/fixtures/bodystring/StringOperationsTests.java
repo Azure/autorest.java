@@ -34,7 +34,7 @@ public class StringOperationsTests {
             client.strings().putNull(null);
         } catch (Exception ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
-            assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
+            assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
         }
     }
 
