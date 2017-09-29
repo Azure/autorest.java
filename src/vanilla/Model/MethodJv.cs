@@ -72,7 +72,7 @@ namespace AutoRest.Java.Model
                     }
                     else if (parameter.Location == ParameterLocation.Body)
                     {
-                        declarationBuilder.Append("@BodyParam ");
+                        declarationBuilder.Append($"@BodyParam(\"{RequestContentType}\") ");
                     }
                     else if (parameter.Location == ParameterLocation.FormData)
                     {

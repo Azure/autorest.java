@@ -17,7 +17,7 @@ if (method.RequestContentType == "multipart/form-data" || method.RequestContentT
 }
 else
 {
-@:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.FullyQualifiedDomainName @method.Name" })
+@:    @@Headers({ "x-ms-logging-context: @Model.FullyQualifiedDomainName @method.Name" })
 }
 @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
 if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))

@@ -5,13 +5,13 @@
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.IMethodGroupJva>
 /**
  * The interface defining all the services for @Model.Name to be
- * used by Retrofit to perform actually REST calls.
+ * used by RestProxy to perform REST calls.
  */
 @@Host("@(Model.CodeModel.BaseUrl)")
 interface @Model.ServiceType {
 @foreach (MethodJva method in Model.Methods)
 {
-@:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.LoggingContext @method.Name" })
+@:    @@Headers({ "x-ms-logging-context: @Model.LoggingContext @method.Name" })
 if (method.IsPagingNextOperation)
 {
 @:    @@GET("{nextUrl}")
