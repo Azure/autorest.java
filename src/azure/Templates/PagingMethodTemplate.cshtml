@@ -148,7 +148,12 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 {
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
-    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
+    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+            @@Override
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) productPage) {
+                return productPage;
+            }
+        });
 }
 @EmptyLine
 </text>
@@ -263,10 +268,10 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(
 }
 else
 {
-@: * @@return the {@@link Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>} object if successful.
+@: * @@return the {@@link Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>} object if successful.
 }
  */
-public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
+public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
     @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -290,6 +295,11 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>
 {
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation);
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+            @@Override
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) productPage) {
+                return productPage;
+            }
+        });
 }
 @EmptyLine

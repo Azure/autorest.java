@@ -85,6 +85,20 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
+        public string ServiceResponseConcreteTypeParameterString
+        {
+            get
+            {
+                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
+                if (bodySequenceType != null && IsPagedResponse)
+                {
+                    return bodySequenceType.PageImplType + "<" + bodySequenceType.ElementType.Name + ">";
+                }
+                return GenericBodyClientTypeString;
+            }
+        }
+
+        [JsonIgnore]
         public override string GenericBodyWireTypeString
         {
             get

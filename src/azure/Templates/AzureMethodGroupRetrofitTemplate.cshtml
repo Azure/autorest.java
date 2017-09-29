@@ -27,7 +27,7 @@ if (method.IsLongRunningOperation)
 }
 else
 {
-@:    Single<@(method.ReturnTypeJva.ServiceResponseGenericParameterString)> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Single<@(method.ReturnTypeJva.ServiceResponseConcreteTypeParameterString)> @(method.Name)(@method.MethodParameterApiDeclaration);
 }
 @EmptyLine
 }
