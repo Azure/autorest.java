@@ -42,7 +42,7 @@ public class ImplicitTests {
             client.implicits().putOptionalBody(null);
             fail();
         } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
+            Assert.assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
         }
     }
 

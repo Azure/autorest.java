@@ -11,6 +11,9 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 public class StringOperationsTests {
     private static AutoRestSwaggerBATService client;
     private CountDownLatch lock = new CountDownLatch(1);
@@ -31,7 +34,7 @@ public class StringOperationsTests {
             client.strings().putNull(null);
         } catch (Exception ex) {
             Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
-            Assert.assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
+            assertTrue(ex.getMessage().contains("Body parameter value must not be null"));
         }
     }
 
@@ -46,6 +49,7 @@ public class StringOperationsTests {
         client.strings().putEmptyAsync("", new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
+                fail(t.getMessage());
             }
 
             @Override
@@ -53,7 +57,7 @@ public class StringOperationsTests {
                 lock.countDown();
             }
         });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
@@ -86,7 +90,7 @@ public class StringOperationsTests {
             client.strings().getNotProvided();
         } catch (Exception ex) {
             Assert.assertEquals(RestException.class, ex.getClass());
-            Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
+            assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
     }
 
