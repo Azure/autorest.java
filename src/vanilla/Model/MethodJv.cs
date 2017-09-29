@@ -13,6 +13,7 @@ using AutoRest.Extensions;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities.Collections;
+using System.Collections.Immutable;
 
 namespace AutoRest.Java.Model
 {
@@ -601,57 +602,63 @@ namespace AutoRest.Java.Model
             }
         }
 
+        private ImmutableArray<string> cachedImplImports = default(ImmutableArray<string>);
         [JsonIgnore]
-        public virtual List<string> ImplImports
+        public virtual ImmutableArray<string> ImplImports
         {
             get
             {
-                HashSet<string> imports = new HashSet<string>();
-                // static imports
-                imports.Add("rx.Observable");
-                imports.Add("rx.Single");
-                imports.Add("rx.functions.Func1");
-                imports.Add("com.microsoft.rest.annotations.Headers");
-                imports.Add("com.microsoft.rest.annotations.ExpectedResponses");
-                imports.Add("com.microsoft.rest.annotations.UnexpectedResponseExceptionType");
-                imports.Add("com.microsoft.rest.annotations.Host");
-                imports.Add("com.microsoft.rest.http.HttpClient");
-                imports.Add("com.microsoft.rest.ServiceFuture");
-                imports.Add("com.microsoft.rest.ServiceCallback");
-                this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
-                // Http verb annotations
-                imports.Add(this.HttpMethod.ImportFrom());
-                // response type conversion
-                if (this.Responses.Any())
+                if (cachedImplImports.IsDefault)
                 {
-                    imports.Add("com.google.common.reflect.TypeToken");
-                }
-                // validation
-                if (!ParametersToValidate.IsNullOrEmpty())
-                {
-                    imports.Add("com.microsoft.rest.Validator");
-                }
-                // parameters
-                this.LocalParameters.Concat(this.LogicalParameters.OfType<ParameterJv>())
-                    .ForEach(p => imports.AddRange(p.ClientImplImports));
-                this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
-                // return type
-                imports.AddRange(this.ReturnTypeJv.ImplImports);
-                // response type (can be different from return type)
-                this.Responses.ForEach(r => imports.AddRange((r.Value as ResponseJv).ImplImports));
-                // exceptions
-                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
-                    .ForEach(ex =>
+                    HashSet<string> imports = new HashSet<string>();
+                    // static imports
+                    imports.Add("rx.Observable");
+                    imports.Add("rx.Single");
+                    imports.Add("rx.functions.Func1");
+                    imports.Add("com.microsoft.rest.annotations.Headers");
+                    imports.Add("com.microsoft.rest.annotations.ExpectedResponses");
+                    imports.Add("com.microsoft.rest.annotations.UnexpectedResponseExceptionType");
+                    imports.Add("com.microsoft.rest.annotations.Host");
+                    imports.Add("com.microsoft.rest.http.HttpClient");
+                    imports.Add("com.microsoft.rest.ServiceFuture");
+                    imports.Add("com.microsoft.rest.ServiceCallback");
+                    this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
+                    // Http verb annotations
+                    imports.Add(this.HttpMethod.ImportFrom());
+                    // response type conversion
+                    if (this.Responses.Any())
                     {
-                        string exceptionImport = CodeNamerJv.GetJavaException(ex, CodeModel);
-                        if (exceptionImport != null) imports.Add(CodeNamerJv.GetJavaException(ex, CodeModel));
-                    });
-                // parameterized host
-                if (IsParameterizedHost)
-                {
-                    imports.Add("com.microsoft.rest.annotations.HostParam");
+                        imports.Add("com.google.common.reflect.TypeToken");
+                    }
+                    // validation
+                    if (!ParametersToValidate.IsNullOrEmpty())
+                    {
+                        imports.Add("com.microsoft.rest.Validator");
+                    }
+                    // parameters
+                    this.LocalParameters.Concat(this.LogicalParameters.OfType<ParameterJv>())
+                        .ForEach(p => imports.AddRange(p.ClientImplImports));
+                    this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
+                    // return type
+                    imports.AddRange(this.ReturnTypeJv.ImplImports);
+                    // response type (can be different from return type)
+                    this.Responses.ForEach(r => imports.AddRange((r.Value as ResponseJv).ImplImports));
+                    // exceptions
+                    this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                        .ForEach(ex =>
+                        {
+                            string exceptionImport = CodeNamerJv.GetJavaException(ex, CodeModel);
+                            if (exceptionImport != null) imports.Add(CodeNamerJv.GetJavaException(ex, CodeModel));
+                        });
+                    // parameterized host
+                    if (IsParameterizedHost)
+                    {
+                        imports.Add("com.microsoft.rest.annotations.HostParam");
+                    }
+                    cachedImplImports = imports.ToImmutableArray();
                 }
-                return imports.ToList();
+
+                return cachedImplImports;
             }
         }
 

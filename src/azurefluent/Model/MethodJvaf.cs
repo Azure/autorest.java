@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System;
 using AutoRest.Core.Utilities.Collections;
 using System.Text.RegularExpressions;
+using System.Collections.Immutable;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -160,57 +161,63 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
+        ImmutableArray<string> cachedImplImports = default(ImmutableArray<string>);
         [JsonIgnore]
-        public override List<string> ImplImports
+        public override ImmutableArray<string> ImplImports
         {
             get
             {
-                var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
+                if (cachedImplImports.IsDefault)
+                {
+                    var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
 
-                var imports = base.ImplImports;
-                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
-                {
-                    imports.RemoveAll(i => new CompositeTypeJva(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe().Contains(i));
-                    imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe());
-                }
-                if (this.IsLongRunningOperation)
-                {
-                    imports.Remove("com.microsoft.azure.AzureResponseBuilder");
-                    this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
-                        .SelectMany(t => t.ImportSafe())
-                        .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
-                        .ForEach(i => imports.Remove(i));
-                    // return type may have been removed as a side effect
-                    imports.AddRange(this.ReturnTypeJva.ImplImports);
-                }
-                imports = imports.Distinct().ToList();
-                if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
-                {
-                    imports.Add("com.microsoft.azure.PagedList");
-
-                    if (this.IsPagingOperation || this.IsPagingNextOperation)
+                    var imports = base.ImplImports.ToHashSet();
+                    if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
                     {
-                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.RemoveWhere(i => new CompositeTypeJva(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe().Contains(i));
+                        imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe());
+                    }
+                    if (this.IsLongRunningOperation)
+                    {
+                        imports.Remove("com.microsoft.azure.AzureResponseBuilder");
+                        this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
+                            .SelectMany(t => t.ImportSafe())
+                            .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
+                            .ForEach(i => imports.Remove(i));
+                        // return type may have been removed as a side effect
+                        imports.AddRange(this.ReturnTypeJva.ImplImports);
                     }
 
-                    if (!this.SimulateAsPagingOperation)
+                    if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                     {
-                        imports.Remove("com.microsoft.rest.ServiceCallback");
+                        imports.Add("com.microsoft.azure.PagedList");
+
+                        if (this.IsPagingOperation || this.IsPagingNextOperation)
+                        {
+                            imports.Add("com.microsoft.azure.ListOperationCallback");
+                        }
+
+                        if (!this.SimulateAsPagingOperation)
+                        {
+                            imports.Remove("com.microsoft.rest.ServiceCallback");
+                        }
+
+                        imports.Remove("java.util.ArrayList");
+                        imports.Add("com.microsoft.azure.Page");
+                        if (pageType != null)
+                        {
+                            imports.RemoveWhere(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
+                        }
                     }
 
-                    imports.Remove("java.util.ArrayList");
-                    imports.Add("com.microsoft.azure.Page");
-                    if (pageType != null)
+                    if (this.IsPagingNonPollingOperation && pageType != null)
                     {
-                        imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
+                        imports.RemoveWhere(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                     }
+                    cachedImplImports = imports.OrderBy(i => i).ToImmutableArray();
                 }
 
-                if (this.IsPagingNonPollingOperation && pageType != null)
-                {
-                    imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
-                }
-                return imports;
+                return cachedImplImports;
             }
         }
 

@@ -16,6 +16,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Collections.Immutable;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -591,46 +592,53 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        private ImmutableArray<string> cachedImplImports = default(ImmutableArray<string>);
+
         [JsonIgnore]
-        public override List<string> ImplImports
+        public override ImmutableArray<string> ImplImports
         {
             get
             {
-                var imports = base.ImplImports;
-                if (this.IsLongRunningOperation)
+                if (cachedImplImports.IsDefault)
                 {
-                    imports.Add("com.microsoft.azure.OperationStatus");
-                    imports.Add("com.microsoft.azure.util.ServiceFutureUtil");
-                    imports.Remove("com.microsoft.azure.AzureResponseBuilder");
-                    this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
-                        .SelectMany(t => t.ImportSafe())
-                        .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
-                        .ForEach(i => imports.Remove(i));
-                    // return type may have been removed as a side effect
-                    imports.AddRange(ReturnTypeJva.ImplImports);
+                    var imports = base.ImplImports.ToList();
+                    if (this.IsLongRunningOperation)
+                    {
+                        imports.Add("com.microsoft.azure.OperationStatus");
+                        imports.Add("com.microsoft.azure.util.ServiceFutureUtil");
+                        imports.Remove("com.microsoft.azure.AzureResponseBuilder");
+                        this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
+                            .SelectMany(t => t.ImportSafe())
+                            .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
+                            .ForEach(i => imports.Remove(i));
+                        // return type may have been removed as a side effect
+                        imports.AddRange(ReturnTypeJva.ImplImports);
+                    }
+                    var typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
+                    CompositeType ctype = null;
+                    if (typeName != null)
+                    {
+                        ctype = new CompositeTypeJva();
+                        ctype.Name.CopyFrom(typeName);
+                        ctype.CodeModel = CodeModel;
+                    }
+                    if (this.IsPagingOperation || this.IsPagingNextOperation)
+                    {
+                        imports.Remove("java.util.ArrayList");
+                        imports.Remove("com.microsoft.rest.ServiceCallback");
+                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.Page");
+                        imports.Add("com.microsoft.azure.PagedList");
+                        imports.AddRange(ctype.ImportSafe());
+                    }
+                    if (this.IsPagingNonPollingOperation)
+                    {
+                        imports.AddRange(ctype.ImportSafe());
+                    }
+                    cachedImplImports = imports.ToImmutableArray();
                 }
-                var typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
-                CompositeType ctype = null;
-                if (typeName != null)
-                {
-                    ctype = new CompositeTypeJva();
-                    ctype.Name.CopyFrom(typeName);
-                    ctype.CodeModel = CodeModel;
-                }
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
-                {
-                    imports.Remove("java.util.ArrayList");
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.Add("com.microsoft.azure.Page");
-                    imports.Add("com.microsoft.azure.PagedList");
-                    imports.AddRange(ctype.ImportSafe());
-                }
-                if (this.IsPagingNonPollingOperation)
-                {
-                    imports.AddRange(ctype.ImportSafe());
-                }
-                return imports;
+
+                return cachedImplImports;
             }
         }
     }
