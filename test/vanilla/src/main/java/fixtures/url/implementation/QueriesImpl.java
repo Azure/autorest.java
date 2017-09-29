@@ -61,205 +61,205 @@ public class QueriesImpl implements Queries {
     */
     @Host("http://localhost")
     interface QueriesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })
         @GET("queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanFalse" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanFalse" })
         @GET("queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getBooleanNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanNull" })
         @GET("queries/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntOneMillion" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getIntOneMillion" })
         @GET("queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getIntOneMillion(@QueryParam("intQuery") int intQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntNegativeOneMillion" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getIntNegativeOneMillion" })
         @GET("queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getIntNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getIntNull" })
         @GET("queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getIntNull(@QueryParam("intQuery") Integer intQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getTenBillion" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getTenBillion" })
         @GET("queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getTenBillion(@QueryParam("longQuery") long longQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getNegativeTenBillion" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getNegativeTenBillion" })
         @GET("queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries getLongNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries getLongNull" })
         @GET("queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getLongNull(@QueryParam("longQuery") Long longQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatScientificPositive" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries floatScientificPositive" })
         @GET("queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatScientificNegative" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries floatScientificNegative" })
         @GET("queries/float/-1.034E-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries floatNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries floatNull" })
         @GET("queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> floatNull(@QueryParam("floatQuery") Double floatQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleDecimalPositive" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries doubleDecimalPositive" })
         @GET("queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleDecimalNegative" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries doubleDecimalNegative" })
         @GET("queries/double/-9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries doubleNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries doubleNull" })
         @GET("queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringUnicode" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries stringUnicode" })
         @GET("queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> stringUnicode(@QueryParam("stringQuery") String stringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringUrlEncoded" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries stringUrlEncoded" })
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries stringEmpty" })
         @GET("queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> stringEmpty(@QueryParam("stringQuery") String stringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries stringNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries stringNull" })
         @GET("queries/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> stringNull(@QueryParam("stringQuery") String stringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries enumValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries enumValid" })
         @GET("queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries enumNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries enumNull" })
         @GET("queries/enum/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteMultiByte" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries byteMultiByte" })
         @GET("queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries byteEmpty" })
         @GET("queries/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> byteEmpty(@QueryParam("byteQuery") String byteQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries byteNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries byteNull" })
         @GET("queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> byteNull(@QueryParam("byteQuery") String byteQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries dateValid" })
         @GET("queries/date/2012-01-01")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries dateNull" })
         @GET("queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateTimeValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries dateTimeValid" })
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries dateTimeNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries dateTimeNull" })
         @GET("queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringCsvValid" })
         @GET("queries/array/csv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringCsvNull" })
         @GET("queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringCsvEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringCsvEmpty" })
         @GET("queries/array/csv/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringSsvValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringSsvValid" })
         @GET("queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringTsvValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringTsvValid" })
         @GET("queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Queries arrayStringPipesValid" })
+        @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringPipesValid" })
         @GET("queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

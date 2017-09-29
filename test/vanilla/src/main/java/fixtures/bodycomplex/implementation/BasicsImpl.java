@@ -58,37 +58,37 @@ public class BasicsImpl implements Basics {
     */
     @Host("http://localhost")
     interface BasicsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getValid" })
         @GET("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Basic> getValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics putValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics putValid" })
         @PUT("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam Basic complexBody, @QueryParam("api-version") String apiVersion);
+        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getInvalid" })
         @GET("complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Basic> getInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getEmpty" })
         @GET("complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Basic> getEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getNull" })
         @GET("complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Basic> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getNotProvided" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getNotProvided" })
         @GET("complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -55,25 +55,25 @@ public class PathItemsImpl implements PathItems {
     */
     @Host("http://localhost")
     interface PathItemsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getAllWithValues" })
+        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getAllWithValues" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getAllWithValues(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getGlobalQueryNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getGlobalQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getGlobalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getGlobalAndLocalQueryNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getGlobalAndLocalQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getGlobalAndLocalQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getLocalPathItemQueryNull" })
+        @Headers({ "x-ms-logging-context: fixtures.url.PathItems getLocalPathItemQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

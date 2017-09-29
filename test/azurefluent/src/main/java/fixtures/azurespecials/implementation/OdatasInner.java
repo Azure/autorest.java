@@ -50,11 +50,11 @@ public class OdatasInner {
 
     /**
      * The interface defining all the services for Odatas to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface OdatasService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
+        @Headers({ "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         Single<Void> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);

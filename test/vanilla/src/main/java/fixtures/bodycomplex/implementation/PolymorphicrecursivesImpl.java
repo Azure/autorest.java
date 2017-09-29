@@ -57,17 +57,17 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     */
     @Host("http://localhost")
     interface PolymorphicrecursivesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives getValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives getValid" })
         @GET("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Fish> getValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives putValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives putValid" })
         @PUT("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam Fish complexBody);
+        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
     }
 

@@ -56,25 +56,25 @@ public class DurationsImpl implements Durations {
     */
     @Host("https://localhost")
     interface DurationsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getNull" })
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Period> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations putPositiveDuration" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations putPositiveDuration" })
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putPositiveDuration(@BodyParam Period durationBody);
+        Single<Void> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations getPositiveDuration" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getPositiveDuration" })
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Period> getPositiveDuration();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getInvalid" })
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

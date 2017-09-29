@@ -66,395 +66,395 @@ public class ArraysImpl implements Arrays {
     */
     @Host("http://localhost")
     interface ArraysService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getNull" })
         @GET("array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Integer>> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getInvalid" })
         @GET("array/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Integer>> getInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getEmpty" })
         @GET("array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Integer>> getEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putEmpty" })
         @PUT("array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putEmpty(@BodyParam List<String> arrayBody);
+        Single<Void> putEmpty(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanTfft" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanTfft" })
         @GET("array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Boolean>> getBooleanTfft();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putBooleanTfft" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putBooleanTfft" })
         @PUT("array/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBooleanTfft(@BodyParam List<Boolean> arrayBody);
+        Single<Void> putBooleanTfft(@BodyParam("application/json; charset=utf-8") List<Boolean> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidNull" })
         @GET("array/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Boolean>> getBooleanInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidString" })
         @GET("array/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Boolean>> getBooleanInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntegerValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getIntegerValid" })
         @GET("array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Integer>> getIntegerValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putIntegerValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putIntegerValid" })
         @PUT("array/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putIntegerValid(@BodyParam List<Integer> arrayBody);
+        Single<Void> putIntegerValid(@BodyParam("application/json; charset=utf-8") List<Integer> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidNull" })
         @GET("array/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Integer>> getIntInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidString" })
         @GET("array/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Integer>> getIntInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getLongValid" })
         @GET("array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Long>> getLongValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putLongValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putLongValid" })
         @PUT("array/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLongValid(@BodyParam List<Long> arrayBody);
+        Single<Void> putLongValid(@BodyParam("application/json; charset=utf-8") List<Long> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidNull" })
         @GET("array/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Long>> getLongInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidString" })
         @GET("array/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Long>> getLongInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatValid" })
         @GET("array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Double>> getFloatValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putFloatValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putFloatValid" })
         @PUT("array/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putFloatValid(@BodyParam List<Double> arrayBody);
+        Single<Void> putFloatValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidNull" })
         @GET("array/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Double>> getFloatInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidString" })
         @GET("array/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Double>> getFloatInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleValid" })
         @GET("array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Double>> getDoubleValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDoubleValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putDoubleValid" })
         @PUT("array/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDoubleValid(@BodyParam List<Double> arrayBody);
+        Single<Void> putDoubleValid(@BodyParam("application/json; charset=utf-8") List<Double> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidNull" })
         @GET("array/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Double>> getDoubleInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidString" })
         @GET("array/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Double>> getDoubleInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getStringValid" })
         @GET("array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<String>> getStringValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putStringValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putStringValid" })
         @PUT("array/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putStringValid(@BodyParam List<String> arrayBody);
+        Single<Void> putStringValid(@BodyParam("application/json; charset=utf-8") List<String> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithNull" })
         @GET("array/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<String>> getStringWithNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithInvalid" })
         @GET("array/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<String>> getStringWithInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidValid" })
         @GET("array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<UUID>> getUuidValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putUuidValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putUuidValid" })
         @PUT("array/prim/uuid/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putUuidValid(@BodyParam List<UUID> arrayBody);
+        Single<Void> putUuidValid(@BodyParam("application/json; charset=utf-8") List<UUID> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidInvalidChars" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidInvalidChars" })
         @GET("array/prim/uuid/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<UUID>> getUuidInvalidChars();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateValid" })
         @GET("array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<LocalDate>> getDateValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putDateValid" })
         @PUT("array/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateValid(@BodyParam List<LocalDate> arrayBody);
+        Single<Void> putDateValid(@BodyParam("application/json; charset=utf-8") List<LocalDate> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidNull" })
         @GET("array/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<LocalDate>> getDateInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidChars" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidChars" })
         @GET("array/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<LocalDate>> getDateInvalidChars();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeValid" })
         @GET("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<DateTime>> getDateTimeValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeValid" })
         @PUT("array/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateTimeValid(@BodyParam List<DateTime> arrayBody);
+        Single<Void> putDateTimeValid(@BodyParam("application/json; charset=utf-8") List<DateTime> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidNull" })
         @GET("array/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<DateTime>> getDateTimeInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidChars" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidChars" })
         @GET("array/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<DateTime>> getDateTimeInvalidChars();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeRfc1123Valid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeRfc1123Valid" })
         @GET("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<DateTime>> getDateTimeRfc1123Valid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeRfc1123Valid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeRfc1123Valid" })
         @PUT("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateTimeRfc1123Valid(@BodyParam List<DateTimeRfc1123> arrayBody);
+        Single<Void> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") List<DateTimeRfc1123> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDurationValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDurationValid" })
         @GET("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Period>> getDurationValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDurationValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putDurationValid" })
         @PUT("array/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDurationValid(@BodyParam List<Period> arrayBody);
+        Single<Void> putDurationValid(@BodyParam("application/json; charset=utf-8") List<Period> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getByteValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getByteValid" })
         @GET("array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<byte[]>> getByteValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putByteValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putByteValid" })
         @PUT("array/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putByteValid(@BodyParam List<byte[]> arrayBody);
+        Single<Void> putByteValid(@BodyParam("application/json; charset=utf-8") List<byte[]> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getByteInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getByteInvalidNull" })
         @GET("array/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<byte[]>> getByteInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBase64Url" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getBase64Url" })
         @GET("array/prim/base64url/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<byte[]>> getBase64Url();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexNull" })
         @GET("array/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Product>> getComplexNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexEmpty" })
         @GET("array/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Product>> getComplexEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemNull" })
         @GET("array/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Product>> getComplexItemNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemEmpty" })
         @GET("array/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Product>> getComplexItemEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexValid" })
         @GET("array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Product>> getComplexValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putComplexValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putComplexValid" })
         @PUT("array/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putComplexValid(@BodyParam List<Product> arrayBody);
+        Single<Void> putComplexValid(@BodyParam("application/json; charset=utf-8") List<Product> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayNull" })
         @GET("array/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<List<String>>> getArrayNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayEmpty" })
         @GET("array/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<List<String>>> getArrayEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemNull" })
         @GET("array/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<List<String>>> getArrayItemNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemEmpty" })
         @GET("array/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<List<String>>> getArrayItemEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayValid" })
         @GET("array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<List<String>>> getArrayValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putArrayValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putArrayValid" })
         @PUT("array/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putArrayValid(@BodyParam List<List<String>> arrayBody);
+        Single<Void> putArrayValid(@BodyParam("application/json; charset=utf-8") List<List<String>> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryNull" })
         @GET("array/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Map<String, String>>> getDictionaryNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryEmpty" })
         @GET("array/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Map<String, String>>> getDictionaryEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemNull" })
         @GET("array/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Map<String, String>>> getDictionaryItemNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemEmpty" })
         @GET("array/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Map<String, String>>> getDictionaryItemEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryValid" })
         @GET("array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<Map<String, String>>> getDictionaryValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDictionaryValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays putDictionaryValid" })
         @PUT("array/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDictionaryValid(@BodyParam List<Map<String, String>> arrayBody);
+        Single<Void> putDictionaryValid(@BodyParam("application/json; charset=utf-8") List<Map<String, String>> arrayBody);
 
     }
 

@@ -51,11 +51,11 @@ public class GroupsInner {
 
     /**
      * The interface defining all the services for Groups to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("https://management.azure.com/")
     interface GroupsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
+        @Headers({ "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         Single<SampleResourceGroupInner> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);

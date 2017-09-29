@@ -57,31 +57,31 @@ public class ArraysImpl implements Arrays {
     */
     @Host("http://localhost")
     interface ArraysService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getValid" })
         @GET("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<ArrayWrapper> getValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays putValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays putValid" })
         @PUT("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam ArrayWrapper complexBody);
+        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getEmpty" })
         @GET("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<ArrayWrapper> getEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays putEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays putEmpty" })
         @PUT("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putEmpty(@BodyParam ArrayWrapper complexBody);
+        Single<Void> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getNotProvided" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getNotProvided" })
         @GET("complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

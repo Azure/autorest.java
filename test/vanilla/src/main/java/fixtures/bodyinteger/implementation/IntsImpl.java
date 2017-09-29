@@ -57,85 +57,85 @@ public class IntsImpl implements Ints {
     */
     @Host("http://localhost")
     interface IntsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getNull" })
         @GET("int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Integer> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalid" })
         @GET("int/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Integer> getInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt32" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt32" })
         @GET("int/overflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Integer> getOverflowInt32();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt32" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt32" })
         @GET("int/underflowint32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Integer> getUnderflowInt32();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt64" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getOverflowInt64" })
         @GET("int/overflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Long> getOverflowInt64();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt64" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getUnderflowInt64" })
         @GET("int/underflowint64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Long> getUnderflowInt64();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMax32" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints putMax32" })
         @PUT("int/max/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMax32(@BodyParam int intBody);
+        Single<Void> putMax32(@BodyParam("application/json; charset=utf-8") int intBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMax64" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints putMax64" })
         @PUT("int/max/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMax64(@BodyParam long intBody);
+        Single<Void> putMax64(@BodyParam("application/json; charset=utf-8") long intBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMin32" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints putMin32" })
         @PUT("int/min/32")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMin32(@BodyParam int intBody);
+        Single<Void> putMin32(@BodyParam("application/json; charset=utf-8") int intBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putMin64" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints putMin64" })
         @PUT("int/min/64")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMin64(@BodyParam long intBody);
+        Single<Void> putMin64(@BodyParam("application/json; charset=utf-8") long intBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getUnixTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getUnixTime" })
         @GET("int/unixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUnixTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints putUnixTimeDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints putUnixTimeDate" })
         @PUT("int/unixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putUnixTimeDate(@BodyParam long intBody);
+        Single<Void> putUnixTimeDate(@BodyParam("application/json; charset=utf-8") long intBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalidUnixTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalidUnixTime" })
         @GET("int/invalidunixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getInvalidUnixTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyinteger.Ints getNullUnixTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getNullUnixTime" })
         @GET("int/nullunixtime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -56,79 +56,79 @@ public class StringsImpl implements Strings {
     */
     @Host("http://localhost")
     interface StringsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNull" })
         @GET("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<String> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putNull" })
         @PUT("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putNull(@BodyParam String stringBody);
+        Single<Void> putNull(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getEmpty" })
         @GET("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<String> getEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putEmpty" })
         @PUT("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putEmpty(@BodyParam String stringBody);
+        Single<Void> putEmpty(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getMbcs" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getMbcs" })
         @GET("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<String> getMbcs();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putMbcs" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putMbcs" })
         @PUT("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMbcs(@BodyParam String stringBody);
+        Single<Void> putMbcs(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getWhitespace" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getWhitespace" })
         @GET("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<String> getWhitespace();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putWhitespace" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putWhitespace" })
         @PUT("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putWhitespace(@BodyParam String stringBody);
+        Single<Void> putWhitespace(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNotProvided" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNotProvided" })
         @GET("string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<String> getNotProvided();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getBase64Encoded" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getBase64Encoded" })
         @GET("string/base64Encoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getBase64Encoded();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getBase64UrlEncoded" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getBase64UrlEncoded" })
         @GET("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getBase64UrlEncoded();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings putBase64UrlEncoded" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putBase64UrlEncoded" })
         @PUT("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBase64UrlEncoded(@BodyParam Base64Url stringBody);
+        Single<Void> putBase64UrlEncoded(@BodyParam("application/json; charset=utf-8") Base64Url stringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Strings getNullBase64UrlEncoded" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNullBase64UrlEncoded" })
         @GET("string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

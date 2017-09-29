@@ -87,7 +87,7 @@ public class PagingTests {
 
                     @Override
                     public void onError(Throwable throwable) {
-                        fail();
+                        fail(throwable.getMessage());
                     }
 
                     @Override

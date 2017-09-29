@@ -52,31 +52,31 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
 
     /**
      * The interface defining all the services for SubscriptionInCredentials to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface SubscriptionInCredentialsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalValid" })
+        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         Single<Void> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNull" })
+        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
         @ExpectedResponses({200})
         Single<Void> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNotProvidedValid" })
+        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNotProvidedValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         Single<Void> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postPathGlobalValid" })
+        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postPathGlobalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         Single<Void> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postSwaggerGlobalValid" })
+        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postSwaggerGlobalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         Single<Void> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);

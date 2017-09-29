@@ -57,17 +57,17 @@ public class InheritancesImpl implements Inheritances {
     */
     @Host("http://localhost")
     interface InheritancesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Inheritances getValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Inheritances getValid" })
         @GET("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Siamese> getValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Inheritances putValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Inheritances putValid" })
         @PUT("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam Siamese complexBody);
+        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
 
     }
 

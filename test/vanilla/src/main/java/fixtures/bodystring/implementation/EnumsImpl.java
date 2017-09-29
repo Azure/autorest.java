@@ -58,41 +58,41 @@ public class EnumsImpl implements Enums {
     */
     @Host("http://localhost")
     interface EnumsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Enums getNotExpandable" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getNotExpandable" })
         @GET("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Colors> getNotExpandable();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Enums putNotExpandable" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums putNotExpandable" })
         @PUT("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putNotExpandable(@BodyParam Colors stringBody);
+        Single<Void> putNotExpandable(@BodyParam("application/json; charset=utf-8") Colors stringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Enums getReferenced" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getReferenced" })
         @GET("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Colors> getReferenced();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Enums putReferenced" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums putReferenced" })
         @PUT("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putReferenced(@BodyParam Colors enumStringBody);
+        Single<Void> putReferenced(@BodyParam("application/json; charset=utf-8") Colors enumStringBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Enums getReferencedConstant" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getReferencedConstant" })
         @GET("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RefColorConstant> getReferencedConstant();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodystring.Enums putReferencedConstant" })
+        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums putReferencedConstant" })
         @PUT("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putReferencedConstant(@BodyParam RefColorConstant enumStringBody);
+        Single<Void> putReferencedConstant(@BodyParam("application/json; charset=utf-8") RefColorConstant enumStringBody);
 
     }
 

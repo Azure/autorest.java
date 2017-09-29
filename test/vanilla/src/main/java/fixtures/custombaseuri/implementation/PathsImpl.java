@@ -55,7 +55,7 @@ public class PathsImpl implements Paths {
     */
     @Host("http://{accountName}{host}")
     interface PathsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

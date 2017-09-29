@@ -82,369 +82,369 @@ public class LROsImpl implements LROs {
 
     /**
      * The interface defining all the services for LROs to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface LROsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Succeeded" })
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 204})
-        Observable<OperationStatus<Product>> beginPut200Succeeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut200Succeeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200Succeeded" })
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 204})
-        Single<Product> put200Succeeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put200Succeeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200SucceededNoState" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPut200SucceededNoState(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut200SucceededNoState(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200SucceededNoState" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200})
-        Single<Product> put200SucceededNoState(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut202Retry200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut202Retry200" })
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Product>> beginPut202Retry200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put202Retry200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put202Retry200" })
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({202})
-        Single<Product> put202Retry200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingSucceeded200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201})
-        Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put201CreatingSucceeded200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201})
-        Single<Product> put201CreatingSucceeded200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200UpdatingSucceeded204" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPut200UpdatingSucceeded204(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200UpdatingSucceeded204" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200})
-        Single<Product> put200UpdatingSucceeded204(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingFailed200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201})
-        Observable<OperationStatus<Product>> beginPut201CreatingFailed200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut201CreatingFailed200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put201CreatingFailed200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201})
-        Single<Product> put201CreatingFailed200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200Acceptedcanceled200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPut200Acceptedcanceled200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200Acceptedcanceled200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200})
-        Single<Product> put200Acceptedcanceled200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Product>> beginPutNoHeaderInRetry(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({202})
-        Single<Product> putNoHeaderInRetry(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPutAsyncRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200})
-        Single<Product> putAsyncRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPutAsyncNoRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200})
-        Single<Product> putAsyncNoRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetryFailed" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPutAsyncRetryFailed(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncRetryFailed" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200})
-        Single<Product> putAsyncRetryFailed(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrycanceled" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200})
-        Observable<OperationStatus<Product>> beginPutAsyncNoRetrycanceled(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrycanceled" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200})
-        Single<Product> putAsyncNoRetrycanceled(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({201})
-        Observable<OperationStatus<Product>> beginPutAsyncNoHeaderInRetry(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({201})
-        Single<Product> putAsyncNoHeaderInRetry(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutNonResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNonResource" })
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Sku>> beginPutNonResource(@BodyParam Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Sku>> beginPutNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putNonResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putNonResource" })
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({202})
-        Single<Sku> putNonResource(@BodyParam Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Sku> putNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNonResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Sku>> beginPutAsyncNonResource(@BodyParam Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Sku>> beginPutAsyncNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNonResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({202})
-        Single<Sku> putAsyncNonResource(@BodyParam Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Sku> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") Sku sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutSubResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutSubResource" })
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<SubProduct>> beginPutSubResource(@BodyParam SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SubProduct>> beginPutSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putSubResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putSubResource" })
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({202})
-        Single<SubProduct> putSubResource(@BodyParam SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<SubProduct> putSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncSubResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<SubProduct>> beginPutAsyncSubResource(@BodyParam SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SubProduct>> beginPutAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncSubResource" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({202})
-        Single<SubProduct> putAsyncSubResource(@BodyParam SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<SubProduct> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProduct product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Accepted200Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202})
         Observable<OperationStatus<Product>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Accepted200Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202})
         Single<Product> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202DeletingFailed200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202})
         Observable<OperationStatus<Product>> beginDeleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202DeletingFailed200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202})
         Single<Product> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Deletingcanceled200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202})
         Observable<OperationStatus<Product>> beginDeleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Deletingcanceled200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202})
         Single<Product> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDelete204Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({204})
         Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs delete204Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({204})
         Single<Void> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDelete202Retry200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202})
         Observable<OperationStatus<Product>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs delete202Retry200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202})
         Single<Product> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDelete202NoRetry204" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202})
         Observable<OperationStatus<Product>> beginDelete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs delete202NoRetry204" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202})
         Single<Product> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({204, 202})
         Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({204, 202})
         Single<Void> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({204, 202})
         Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoHeaderInRetry" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({204, 202})
         Single<Void> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetryFailed" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetryFailed" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrycanceled" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrycanceled" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPost200WithPayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost200WithPayload" })
         @POST("lro/post/payload/200")
         @ExpectedResponses({202, 200})
         Observable<OperationStatus<Sku>> beginPost200WithPayload(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs post200WithPayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs post200WithPayload" })
         @POST("lro/post/payload/200")
         @ExpectedResponses({202, 200})
         Single<Sku> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPost202Retry200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202Retry200" })
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs post202Retry200" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs post202Retry200" })
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({202})
-        Single<Void> post202Retry200(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPost202NoRetry204" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Product>> beginPost202NoRetry204(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPost202NoRetry204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs post202NoRetry204" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs post202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({202})
-        Single<Product> post202NoRetry204(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> post202NoRetry204(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({202, 200})
-        Observable<OperationStatus<Product>> beginPostAsyncRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({202, 200})
-        Single<Product> postAsyncRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncNoRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({202, 200})
-        Observable<OperationStatus<Product>> beginPostAsyncNoRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPostAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncNoRetrySucceeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({202, 200})
-        Single<Product> postAsyncNoRetrySucceeded(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Product> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetryFailed" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostAsyncRetryFailed(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetryFailed" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({202})
-        Single<Void> postAsyncRetryFailed(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrycanceled" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostAsyncRetrycanceled(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrycanceled" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({202})
-        Single<Void> postAsyncRetrycanceled(@BodyParam Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 

@@ -67,137 +67,137 @@ public class PrimitivesImpl implements Primitives {
     */
     @Host("http://localhost")
     interface PrimitivesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getInt" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getInt" })
         @GET("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<IntWrapper> getInt();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putInt" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putInt" })
         @PUT("complex/primitive/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putInt(@BodyParam IntWrapper complexBody);
+        Single<Void> putInt(@BodyParam("application/json; charset=utf-8") IntWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getLong" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getLong" })
         @GET("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<LongWrapper> getLong();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putLong" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putLong" })
         @PUT("complex/primitive/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLong(@BodyParam LongWrapper complexBody);
+        Single<Void> putLong(@BodyParam("application/json; charset=utf-8") LongWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getFloat" })
         @GET("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<FloatWrapper> getFloat();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putFloat" })
         @PUT("complex/primitive/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putFloat(@BodyParam FloatWrapper complexBody);
+        Single<Void> putFloat(@BodyParam("application/json; charset=utf-8") FloatWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDouble" })
         @GET("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DoubleWrapper> getDouble();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDouble" })
         @PUT("complex/primitive/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDouble(@BodyParam DoubleWrapper complexBody);
+        Single<Void> putDouble(@BodyParam("application/json; charset=utf-8") DoubleWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getBool" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getBool" })
         @GET("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<BooleanWrapper> getBool();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putBool" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putBool" })
         @PUT("complex/primitive/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBool(@BodyParam BooleanWrapper complexBody);
+        Single<Void> putBool(@BodyParam("application/json; charset=utf-8") BooleanWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getString" })
         @GET("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<StringWrapper> getString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putString" })
         @PUT("complex/primitive/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putString(@BodyParam StringWrapper complexBody);
+        Single<Void> putString(@BodyParam("application/json; charset=utf-8") StringWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDate" })
         @GET("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateWrapper> getDate();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDate" })
         @PUT("complex/primitive/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDate(@BodyParam DateWrapper complexBody);
+        Single<Void> putDate(@BodyParam("application/json; charset=utf-8") DateWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDateTime" })
         @GET("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DatetimeWrapper> getDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDateTime" })
         @PUT("complex/primitive/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateTime(@BodyParam DatetimeWrapper complexBody);
+        Single<Void> putDateTime(@BodyParam("application/json; charset=utf-8") DatetimeWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getDateTimeRfc1123" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDateTimeRfc1123" })
         @GET("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Datetimerfc1123Wrapper> getDateTimeRfc1123();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putDateTimeRfc1123" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDateTimeRfc1123" })
         @PUT("complex/primitive/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateTimeRfc1123(@BodyParam Datetimerfc1123Wrapper complexBody);
+        Single<Void> putDateTimeRfc1123(@BodyParam("application/json; charset=utf-8") Datetimerfc1123Wrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getDuration" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getDuration" })
         @GET("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DurationWrapper> getDuration();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putDuration" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putDuration" })
         @PUT("complex/primitive/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDuration(@BodyParam DurationWrapper complexBody);
+        Single<Void> putDuration(@BodyParam("application/json; charset=utf-8") DurationWrapper complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives getByte" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getByte" })
         @GET("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<ByteWrapper> getByte();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Primitives putByte" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives putByte" })
         @PUT("complex/primitive/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putByte(@BodyParam ByteWrapper complexBody);
+        Single<Void> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
 
     }
 

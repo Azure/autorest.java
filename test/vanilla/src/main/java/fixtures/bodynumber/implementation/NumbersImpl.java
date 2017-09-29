@@ -56,145 +56,145 @@ public class NumbersImpl implements Numbers {
     */
     @Host("https://localhost")
     interface NumbersService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getNull" })
         @GET("number/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidFloat" })
         @GET("number/invalidfloat")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getInvalidFloat();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidDouble" })
         @GET("number/invaliddouble")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getInvalidDouble();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getInvalidDecimal" })
         @GET("number/invaliddecimal")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<BigDecimal> getInvalidDecimal();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigFloat" })
         @PUT("number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigFloat(@BodyParam double numberBody);
+        Single<Void> putBigFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigFloat" })
         @GET("number/big/float/3.402823e+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getBigFloat();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDouble" })
         @PUT("number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigDouble(@BodyParam double numberBody);
+        Single<Void> putBigDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDouble" })
         @GET("number/big/double/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getBigDouble();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDoublePositiveDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDoublePositiveDecimal" })
         @PUT("number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigDoublePositiveDecimal(@BodyParam double numberBody);
+        Single<Void> putBigDoublePositiveDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDoublePositiveDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDoublePositiveDecimal" })
         @GET("number/big/double/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getBigDoublePositiveDecimal();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDoubleNegativeDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDoubleNegativeDecimal" })
         @PUT("number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigDoubleNegativeDecimal(@BodyParam double numberBody);
+        Single<Void> putBigDoubleNegativeDecimal(@BodyParam("application/json; charset=utf-8") double numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDoubleNegativeDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDoubleNegativeDecimal" })
         @GET("number/big/double/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getBigDoubleNegativeDecimal();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimal" })
         @PUT("number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigDecimal(@BodyParam BigDecimal numberBody);
+        Single<Void> putBigDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimal" })
         @GET("number/big/decimal/2.5976931e+101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<BigDecimal> getBigDecimal();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimalPositiveDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimalPositiveDecimal" })
         @PUT("number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigDecimalPositiveDecimal(@BodyParam BigDecimal numberBody);
+        Single<Void> putBigDecimalPositiveDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimalPositiveDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimalPositiveDecimal" })
         @GET("number/big/decimal/99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<BigDecimal> getBigDecimalPositiveDecimal();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimalNegativeDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putBigDecimalNegativeDecimal" })
         @PUT("number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBigDecimalNegativeDecimal(@BodyParam BigDecimal numberBody);
+        Single<Void> putBigDecimalNegativeDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimalNegativeDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getBigDecimalNegativeDecimal" })
         @GET("number/big/decimal/-99999999.99")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<BigDecimal> getBigDecimalNegativeDecimal();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallFloat" })
         @PUT("number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putSmallFloat(@BodyParam double numberBody);
+        Single<Void> putSmallFloat(@BodyParam("application/json; charset=utf-8") double numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallFloat" })
         @GET("number/small/float/3.402823e-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getSmallFloat();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallDouble" })
         @PUT("number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putSmallDouble(@BodyParam double numberBody);
+        Single<Void> putSmallDouble(@BodyParam("application/json; charset=utf-8") double numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallDouble" })
         @GET("number/small/double/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Double> getSmallDouble();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers putSmallDecimal" })
         @PUT("number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putSmallDecimal(@BodyParam BigDecimal numberBody);
+        Single<Void> putSmallDecimal(@BodyParam("application/json; charset=utf-8") BigDecimal numberBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallDecimal" })
+        @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getSmallDecimal" })
         @GET("number/small/decimal/2.5976931e-101")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

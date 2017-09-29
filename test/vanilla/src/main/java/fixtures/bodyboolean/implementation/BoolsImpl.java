@@ -55,37 +55,37 @@ public class BoolsImpl implements Bools {
     */
     @Host("http://localhost")
     interface BoolsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
         @GET("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Boolean> getTrue();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
         @PUT("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putTrue(@BodyParam boolean boolBody);
+        Single<Void> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
         @GET("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Boolean> getFalse();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
         @PUT("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putFalse(@BodyParam boolean boolBody);
+        Single<Void> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
         @GET("bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Boolean> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
         @GET("bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

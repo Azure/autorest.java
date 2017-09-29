@@ -169,36 +169,36 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     /**
      * The interface defining all the services for AutoRestResourceFlatteningTestService to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface AutoRestResourceFlatteningTestServiceService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putArray" })
+        @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putArray" })
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
-        Single<Void> putArray(@BodyParam List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getArray" })
+        @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getArray" })
         @GET("azure/resource-flatten/array")
         @ExpectedResponses({200})
         Single<List<FlattenedProduct>> getArray(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putDictionary" })
+        @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
-        Single<Void> putDictionary(@BodyParam Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getDictionary" })
+        @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getDictionary" })
         @GET("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         Single<Map<String, FlattenedProduct>> getDictionary(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putResourceCollection" })
+        @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
-        Single<Void> putResourceCollection(@BodyParam ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getResourceCollection" })
+        @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         Single<ResourceCollection> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);

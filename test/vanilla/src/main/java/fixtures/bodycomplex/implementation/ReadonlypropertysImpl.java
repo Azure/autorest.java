@@ -57,17 +57,17 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
     */
     @Host("http://localhost")
     interface ReadonlypropertysService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
         @GET("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<ReadonlyObj> getValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
         @PUT("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam ReadonlyObj complexBody);
+        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
 
     }
 

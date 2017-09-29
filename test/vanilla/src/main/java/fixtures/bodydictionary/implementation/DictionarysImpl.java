@@ -65,395 +65,395 @@ public class DictionarysImpl implements Dictionarys {
     */
     @Host("http://localhost")
     interface DictionarysService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNull" })
         @GET("dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Integer>> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmpty" })
         @GET("dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Integer>> getEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putEmpty" })
         @PUT("dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putEmpty(@BodyParam Map<String, String> arrayBody);
+        Single<Void> putEmpty(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullValue" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullValue" })
         @GET("dictionary/nullvalue")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getNullValue();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullKey" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullKey" })
         @GET("dictionary/nullkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getNullKey();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmptyStringKey" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmptyStringKey" })
         @GET("dictionary/keyemptystring")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getEmptyStringKey();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getInvalid" })
         @GET("dictionary/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanTfft" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanTfft" })
         @GET("dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Boolean>> getBooleanTfft();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putBooleanTfft" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putBooleanTfft" })
         @PUT("dictionary/prim/boolean/tfft")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putBooleanTfft(@BodyParam Map<String, Boolean> arrayBody);
+        Single<Void> putBooleanTfft(@BodyParam("application/json; charset=utf-8") Map<String, Boolean> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidNull" })
         @GET("dictionary/prim/boolean/true.null.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Boolean>> getBooleanInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidString" })
         @GET("dictionary/prim/boolean/true.boolean.false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Boolean>> getBooleanInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntegerValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntegerValid" })
         @GET("dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Integer>> getIntegerValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putIntegerValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putIntegerValid" })
         @PUT("dictionary/prim/integer/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putIntegerValid(@BodyParam Map<String, Integer> arrayBody);
+        Single<Void> putIntegerValid(@BodyParam("application/json; charset=utf-8") Map<String, Integer> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidNull" })
         @GET("dictionary/prim/integer/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Integer>> getIntInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidString" })
         @GET("dictionary/prim/integer/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Integer>> getIntInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongValid" })
         @GET("dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Long>> getLongValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putLongValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putLongValid" })
         @PUT("dictionary/prim/long/1.-1.3.300")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLongValid(@BodyParam Map<String, Long> arrayBody);
+        Single<Void> putLongValid(@BodyParam("application/json; charset=utf-8") Map<String, Long> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidNull" })
         @GET("dictionary/prim/long/1.null.zero")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Long>> getLongInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidString" })
         @GET("dictionary/prim/long/1.integer.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Long>> getLongInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatValid" })
         @GET("dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Double>> getFloatValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putFloatValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putFloatValid" })
         @PUT("dictionary/prim/float/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putFloatValid(@BodyParam Map<String, Double> arrayBody);
+        Single<Void> putFloatValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidNull" })
         @GET("dictionary/prim/float/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Double>> getFloatInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidString" })
         @GET("dictionary/prim/float/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Double>> getFloatInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleValid" })
         @GET("dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Double>> getDoubleValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDoubleValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDoubleValid" })
         @PUT("dictionary/prim/double/0--0.01-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDoubleValid(@BodyParam Map<String, Double> arrayBody);
+        Single<Void> putDoubleValid(@BodyParam("application/json; charset=utf-8") Map<String, Double> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidNull" })
         @GET("dictionary/prim/double/0.0-null-1.2e20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Double>> getDoubleInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidString" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidString" })
         @GET("dictionary/prim/double/1.number.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Double>> getDoubleInvalidString();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringValid" })
         @GET("dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getStringValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putStringValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putStringValid" })
         @PUT("dictionary/prim/string/foo1.foo2.foo3")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putStringValid(@BodyParam Map<String, String> arrayBody);
+        Single<Void> putStringValid(@BodyParam("application/json; charset=utf-8") Map<String, String> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithNull" })
         @GET("dictionary/prim/string/foo.null.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getStringWithNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithInvalid" })
         @GET("dictionary/prim/string/foo.123.foo2")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, String>> getStringWithInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateValid" })
         @GET("dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, LocalDate>> getDateValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateValid" })
         @PUT("dictionary/prim/date/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateValid(@BodyParam Map<String, LocalDate> arrayBody);
+        Single<Void> putDateValid(@BodyParam("application/json; charset=utf-8") Map<String, LocalDate> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidNull" })
         @GET("dictionary/prim/date/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, LocalDate>> getDateInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidChars" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidChars" })
         @GET("dictionary/prim/date/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, LocalDate>> getDateInvalidChars();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeValid" })
         @GET("dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, DateTime>> getDateTimeValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeValid" })
         @PUT("dictionary/prim/date-time/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateTimeValid(@BodyParam Map<String, DateTime> arrayBody);
+        Single<Void> putDateTimeValid(@BodyParam("application/json; charset=utf-8") Map<String, DateTime> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidNull" })
         @GET("dictionary/prim/date-time/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, DateTime>> getDateTimeInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidChars" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidChars" })
         @GET("dictionary/prim/date-time/invalidchars")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, DateTime>> getDateTimeInvalidChars();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeRfc1123Valid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeRfc1123Valid" })
         @GET("dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, DateTime>> getDateTimeRfc1123Valid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeRfc1123Valid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeRfc1123Valid" })
         @PUT("dictionary/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDateTimeRfc1123Valid(@BodyParam Map<String, DateTimeRfc1123> arrayBody);
+        Single<Void> putDateTimeRfc1123Valid(@BodyParam("application/json; charset=utf-8") Map<String, DateTimeRfc1123> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDurationValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDurationValid" })
         @GET("dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Period>> getDurationValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDurationValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDurationValid" })
         @PUT("dictionary/prim/duration/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDurationValid(@BodyParam Map<String, Period> arrayBody);
+        Single<Void> putDurationValid(@BodyParam("application/json; charset=utf-8") Map<String, Period> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteValid" })
         @GET("dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, byte[]>> getByteValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putByteValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putByteValid" })
         @PUT("dictionary/prim/byte/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putByteValid(@BodyParam Map<String, byte[]> arrayBody);
+        Single<Void> putByteValid(@BodyParam("application/json; charset=utf-8") Map<String, byte[]> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteInvalidNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteInvalidNull" })
         @GET("dictionary/prim/byte/invalidnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, byte[]>> getByteInvalidNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBase64Url" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBase64Url" })
         @GET("dictionary/prim/base64url/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, byte[]>> getBase64Url();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexNull" })
         @GET("dictionary/complex/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Widget>> getComplexNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexEmpty" })
         @GET("dictionary/complex/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Widget>> getComplexEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemNull" })
         @GET("dictionary/complex/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Widget>> getComplexItemNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemEmpty" })
         @GET("dictionary/complex/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Widget>> getComplexItemEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexValid" })
         @GET("dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Widget>> getComplexValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putComplexValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putComplexValid" })
         @PUT("dictionary/complex/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putComplexValid(@BodyParam Map<String, Widget> arrayBody);
+        Single<Void> putComplexValid(@BodyParam("application/json; charset=utf-8") Map<String, Widget> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayNull" })
         @GET("dictionary/array/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, List<String>>> getArrayNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayEmpty" })
         @GET("dictionary/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, List<String>>> getArrayEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemNull" })
         @GET("dictionary/array/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, List<String>>> getArrayItemNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemEmpty" })
         @GET("dictionary/array/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, List<String>>> getArrayItemEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayValid" })
         @GET("dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, List<String>>> getArrayValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putArrayValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putArrayValid" })
         @PUT("dictionary/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putArrayValid(@BodyParam Map<String, List<String>> arrayBody);
+        Single<Void> putArrayValid(@BodyParam("application/json; charset=utf-8") Map<String, List<String>> arrayBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryNull" })
         @GET("dictionary/dictionary/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Map<String, String>>> getDictionaryNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryEmpty" })
         @GET("dictionary/dictionary/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Map<String, String>>> getDictionaryEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemNull" })
         @GET("dictionary/dictionary/itemnull")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Map<String, String>>> getDictionaryItemNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemEmpty" })
         @GET("dictionary/dictionary/itemempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Map<String, String>>> getDictionaryItemEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryValid" })
         @GET("dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Map<String, String>>> getDictionaryValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDictionaryValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDictionaryValid" })
         @PUT("dictionary/dictionary/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDictionaryValid(@BodyParam Map<String, Map<String, String>> arrayBody);
+        Single<Void> putDictionaryValid(@BodyParam("application/json; charset=utf-8") Map<String, Map<String, String>> arrayBody);
 
     }
 

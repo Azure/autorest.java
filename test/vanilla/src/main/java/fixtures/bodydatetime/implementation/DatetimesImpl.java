@@ -56,115 +56,115 @@ public class DatetimesImpl implements Datetimes {
     */
     @Host("https://localhost")
     interface DatetimesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getNull" })
         @GET("datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getInvalid" })
         @GET("datetime/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getInvalid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getOverflow" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getOverflow" })
         @GET("datetime/overflow")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getOverflow();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUnderflow" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUnderflow" })
         @GET("datetime/underflow")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUnderflow();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putUtcMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes putUtcMaxDateTime" })
         @PUT("datetime/max/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putUtcMaxDateTime(@BodyParam DateTime datetimeBody);
+        Single<Void> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcLowercaseMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcLowercaseMaxDateTime" })
         @GET("datetime/max/utc/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUtcLowercaseMaxDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcUppercaseMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcUppercaseMaxDateTime" })
         @GET("datetime/max/utc/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUtcUppercaseMaxDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalPositiveOffsetMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalPositiveOffsetMaxDateTime" })
         @PUT("datetime/max/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLocalPositiveOffsetMaxDateTime(@BodyParam DateTime datetimeBody);
+        Single<Void> putLocalPositiveOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetLowercaseMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetLowercaseMaxDateTime" })
         @GET("datetime/max/localpositiveoffset/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getLocalPositiveOffsetLowercaseMaxDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetUppercaseMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetUppercaseMaxDateTime" })
         @GET("datetime/max/localpositiveoffset/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getLocalPositiveOffsetUppercaseMaxDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalNegativeOffsetMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalNegativeOffsetMaxDateTime" })
         @PUT("datetime/max/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLocalNegativeOffsetMaxDateTime(@BodyParam DateTime datetimeBody);
+        Single<Void> putLocalNegativeOffsetMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetUppercaseMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetUppercaseMaxDateTime" })
         @GET("datetime/max/localnegativeoffset/uppercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getLocalNegativeOffsetUppercaseMaxDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetLowercaseMaxDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetLowercaseMaxDateTime" })
         @GET("datetime/max/localnegativeoffset/lowercase")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getLocalNegativeOffsetLowercaseMaxDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putUtcMinDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes putUtcMinDateTime" })
         @PUT("datetime/min/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putUtcMinDateTime(@BodyParam DateTime datetimeBody);
+        Single<Void> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcMinDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcMinDateTime" })
         @GET("datetime/min/utc")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUtcMinDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalPositiveOffsetMinDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalPositiveOffsetMinDateTime" })
         @PUT("datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLocalPositiveOffsetMinDateTime(@BodyParam DateTime datetimeBody);
+        Single<Void> putLocalPositiveOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetMinDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetMinDateTime" })
         @GET("datetime/min/localpositiveoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getLocalPositiveOffsetMinDateTime();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalNegativeOffsetMinDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalNegativeOffsetMinDateTime" })
         @PUT("datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putLocalNegativeOffsetMinDateTime(@BodyParam DateTime datetimeBody);
+        Single<Void> putLocalNegativeOffsetMinDateTime(@BodyParam("application/json; charset=utf-8") DateTime datetimeBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetMinDateTime" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetMinDateTime" })
         @GET("datetime/min/localnegativeoffset")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

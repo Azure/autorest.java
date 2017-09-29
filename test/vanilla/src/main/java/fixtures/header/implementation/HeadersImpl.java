@@ -73,175 +73,175 @@ public class HeadersImpl implements fixtures.header.Headers {
     */
     @Host("http://localhost")
     interface HeadersService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramExistingKey" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramExistingKey" })
         @POST("header/param/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramExistingKey(@HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseExistingKey" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseExistingKey" })
         @POST("header/response/existingkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseExistingKey();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramProtectedKey" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramProtectedKey" })
         @POST("header/param/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramProtectedKey(@HeaderParam("Content-Type") String contentType);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseProtectedKey" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseProtectedKey" })
         @POST("header/response/protectedkey")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseProtectedKey();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramInteger" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramInteger" })
         @POST("header/param/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramInteger(@HeaderParam("scenario") String scenario, @HeaderParam("value") int value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseInteger" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseInteger" })
         @POST("header/response/prim/integer")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseInteger(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramLong" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramLong" })
         @POST("header/param/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramLong(@HeaderParam("scenario") String scenario, @HeaderParam("value") long value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseLong" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseLong" })
         @POST("header/response/prim/long")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseLong(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramFloat" })
         @POST("header/param/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramFloat(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseFloat" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseFloat" })
         @POST("header/response/prim/float")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseFloat(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramDouble" })
         @POST("header/param/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramDouble(@HeaderParam("scenario") String scenario, @HeaderParam("value") double value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDouble" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseDouble" })
         @POST("header/response/prim/double")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseDouble(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramBool" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramBool" })
         @POST("header/param/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramBool(@HeaderParam("scenario") String scenario, @HeaderParam("value") boolean value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseBool" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseBool" })
         @POST("header/response/prim/bool")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseBool(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramString" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramString" })
         @POST("header/param/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramString(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseString" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseString" })
         @POST("header/response/prim/string")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseString(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDate" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramDate" })
         @POST("header/param/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramDate(@HeaderParam("scenario") String scenario, @HeaderParam("value") LocalDate value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDate" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseDate" })
         @POST("header/response/prim/date")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseDate(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDatetime" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramDatetime" })
         @POST("header/param/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramDatetime(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTime value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDatetime" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseDatetime" })
         @POST("header/response/prim/datetime")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseDatetime(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDatetimeRfc1123" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramDatetimeRfc1123" })
         @POST("header/param/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramDatetimeRfc1123(@HeaderParam("scenario") String scenario, @HeaderParam("value") DateTimeRfc1123 value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDatetimeRfc1123" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseDatetimeRfc1123" })
         @POST("header/response/prim/datetimerfc1123")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseDatetimeRfc1123(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDuration" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramDuration" })
         @POST("header/param/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramDuration(@HeaderParam("scenario") String scenario, @HeaderParam("value") Period value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDuration" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseDuration" })
         @POST("header/response/prim/duration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseDuration(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramByte" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramByte" })
         @POST("header/param/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramByte(@HeaderParam("scenario") String scenario, @HeaderParam("value") String value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseByte" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseByte" })
         @POST("header/response/prim/byte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseByte(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramEnum" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers paramEnum" })
         @POST("header/param/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> paramEnum(@HeaderParam("scenario") String scenario, @HeaderParam("value") GreyscaleColors value);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseEnum" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers responseEnum" })
         @POST("header/response/prim/enum")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> responseEnum(@HeaderParam("scenario") String scenario);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers customRequestId" })
+        @Headers({ "x-ms-logging-context: fixtures.header.Headers customRequestId" })
         @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -57,23 +57,23 @@ public class PolymorphismsImpl implements Polymorphisms {
     */
     @Host("http://localhost")
     interface PolymorphismsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValid" })
         @GET("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Fish> getValid();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam Fish complexBody);
+        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
+        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValidMissingRequired(@BodyParam Fish complexBody);
+        Single<Void> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
     }
 

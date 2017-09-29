@@ -56,49 +56,49 @@ public class DatesImpl implements Dates {
     */
     @Host("https://localhost")
     interface DatesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getNull" })
         @GET("date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<LocalDate> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getInvalidDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getInvalidDate" })
         @GET("date/invaliddate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<LocalDate> getInvalidDate();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getOverflowDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getOverflowDate" })
         @GET("date/overflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<LocalDate> getOverflowDate();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getUnderflowDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getUnderflowDate" })
         @GET("date/underflowdate")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<LocalDate> getUnderflowDate();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates putMaxDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates putMaxDate" })
         @PUT("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMaxDate(@BodyParam LocalDate dateBody);
+        Single<Void> putMaxDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getMaxDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getMaxDate" })
         @GET("date/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<LocalDate> getMaxDate();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates putMinDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates putMinDate" })
         @PUT("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putMinDate(@BodyParam LocalDate dateBody);
+        Single<Void> putMinDate(@BodyParam("application/json; charset=utf-8") LocalDate dateBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydate.Dates getMinDate" })
+        @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getMinDate" })
         @GET("date/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

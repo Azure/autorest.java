@@ -51,11 +51,11 @@ public class PathsInner {
 
     /**
      * The interface defining all the services for Paths to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://{accountName}{host}")
     interface PathsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         @ExpectedResponses({200})
         Single<Void> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);

@@ -58,10 +58,10 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
     */
     @Host("http://localhost")
     interface AvailabilitySetsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
+        @Headers({ "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
-        Single<Void> update(@PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam AvailabilitySetUpdateParameters tags);
+        Single<Void> update(@PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam("application/json; charset=utf-8") AvailabilitySetUpdateParameters tags);
 
     }
 

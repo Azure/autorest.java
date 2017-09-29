@@ -68,122 +68,122 @@ public class ExplicitsImpl implements Explicits {
     */
     @Host("http://localhost")
     interface ExplicitsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
         @POST("reqopt/requied/integer/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredIntegerParameter(@BodyParam int bodyParameter);
+        Single<Error> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerParameter" })
         @POST("reqopt/optional/integer/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalIntegerParameter(@BodyParam Integer bodyParameter);
+        Single<Void> postOptionalIntegerParameter(@BodyParam("application/json; charset=utf-8") Integer bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerProperty" })
         @POST("reqopt/requied/integer/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredIntegerProperty(@BodyParam IntWrapper bodyParameter);
+        Single<Error> postRequiredIntegerProperty(@BodyParam("application/json; charset=utf-8") IntWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerProperty" })
         @POST("reqopt/optional/integer/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalIntegerProperty(@BodyParam IntOptionalWrapper bodyParameter);
+        Single<Void> postOptionalIntegerProperty(@BodyParam("application/json; charset=utf-8") IntOptionalWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerHeader" })
         @POST("reqopt/requied/integer/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerHeader" })
         @POST("reqopt/optional/integer/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringParameter" })
         @POST("reqopt/requied/string/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredStringParameter(@BodyParam String bodyParameter);
+        Single<Error> postRequiredStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringParameter" })
         @POST("reqopt/optional/string/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalStringParameter(@BodyParam String bodyParameter);
+        Single<Void> postOptionalStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringProperty" })
         @POST("reqopt/requied/string/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredStringProperty(@BodyParam StringWrapper bodyParameter);
+        Single<Error> postRequiredStringProperty(@BodyParam("application/json; charset=utf-8") StringWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringProperty" })
         @POST("reqopt/optional/string/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalStringProperty(@BodyParam StringOptionalWrapper bodyParameter);
+        Single<Void> postOptionalStringProperty(@BodyParam("application/json; charset=utf-8") StringOptionalWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringHeader" })
         @POST("reqopt/requied/string/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringHeader" })
         @POST("reqopt/optional/string/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassParameter" })
         @POST("reqopt/requied/class/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredClassParameter(@BodyParam Product bodyParameter);
+        Single<Error> postRequiredClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassParameter" })
         @POST("reqopt/optional/class/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalClassParameter(@BodyParam Product bodyParameter);
+        Single<Void> postOptionalClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassProperty" })
         @POST("reqopt/requied/class/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredClassProperty(@BodyParam ClassWrapper bodyParameter);
+        Single<Error> postRequiredClassProperty(@BodyParam("application/json; charset=utf-8") ClassWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassProperty" })
         @POST("reqopt/optional/class/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalClassProperty(@BodyParam ClassOptionalWrapper bodyParameter);
+        Single<Void> postOptionalClassProperty(@BodyParam("application/json; charset=utf-8") ClassOptionalWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayParameter" })
         @POST("reqopt/requied/array/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredArrayParameter(@BodyParam List<String> bodyParameter);
+        Single<Error> postRequiredArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayParameter" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayParameter" })
         @POST("reqopt/optional/array/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalArrayParameter(@BodyParam List<String> bodyParameter);
+        Single<Void> postOptionalArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayProperty" })
         @POST("reqopt/requied/array/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> postRequiredArrayProperty(@BodyParam ArrayWrapper bodyParameter);
+        Single<Error> postRequiredArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayProperty" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayProperty" })
         @POST("reqopt/optional/array/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postOptionalArrayProperty(@BodyParam ArrayOptionalWrapper bodyParameter);
+        Single<Void> postOptionalArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayOptionalWrapper bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayHeader" })
         @POST("reqopt/requied/array/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayHeader" })
         @POST("reqopt/optional/array/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

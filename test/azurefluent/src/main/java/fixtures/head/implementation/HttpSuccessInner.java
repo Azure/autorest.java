@@ -49,21 +49,21 @@ public class HttpSuccessInner {
 
     /**
      * The interface defining all the services for HttpSuccess to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface HttpSuccessService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
+        @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         Single<Boolean> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
+        @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204, 404})
         Single<Boolean> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
+        @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         Single<Boolean> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);

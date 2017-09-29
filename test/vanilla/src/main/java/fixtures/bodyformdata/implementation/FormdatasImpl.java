@@ -63,12 +63,12 @@ public class FormdatasImpl implements Formdatas {
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<InputStream> uploadFile(/* @Part("fileContent") not supported by RestProxy */byte[] fileContent, /* @Part("fileName") not supported by RestProxy */String fileName);
 
-        @Headers({ "Content-Type: application/octet-stream", "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
+        @Headers({ "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
         @PUT("formdata/stream/uploadfile")
         // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<InputStream> uploadFileViaBody(@BodyParam byte[] fileContent);
+        Single<InputStream> uploadFileViaBody(@BodyParam("application/octet-stream") byte[] fileContent);
 
     }
 

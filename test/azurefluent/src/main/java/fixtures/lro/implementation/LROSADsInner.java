@@ -55,269 +55,269 @@ public class LROSADsInner {
 
     /**
      * The interface defining all the services for LROSADs to be
-     * used by Retrofit to perform actually REST calls.
+     * used by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface LROSADsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry400" })
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201})
-        Observable<OperationStatus<ProductInner>> beginPutNonRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry400" })
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201})
-        Single<ProductInner> putNonRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry201Creating400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry201Creating400" })
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201})
-        Observable<OperationStatus<ProductInner>> beginPutNonRetry201Creating400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry201Creating400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry201Creating400" })
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201})
-        Single<ProductInner> putNonRetry201Creating400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry201Creating400InvalidJson" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry201Creating400InvalidJson" })
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201})
-        Observable<OperationStatus<ProductInner>> beginPutNonRetry201Creating400InvalidJson(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry201Creating400InvalidJson" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry201Creating400InvalidJson" })
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201})
-        Single<ProductInner> putNonRetry201Creating400InvalidJson(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetry400" })
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200})
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetry400" })
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200})
-        Single<ProductInner> putAsyncRelativeRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteNonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteNonRetry400" })
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs deleteNonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteNonRetry400" })
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({202})
         Single<Void> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDelete202NonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDelete202NonRetry400" })
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDelete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs delete202NonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs delete202NonRetry400" })
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({202})
         Single<Void> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetry400" })
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetry400" })
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPostNonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostNonRetry400" })
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostNonRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs postNonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postNonRetry400" })
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({202})
-        Single<Void> postNonRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postNonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPost202NonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPost202NonRetry400" })
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPost202NonRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202NonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs post202NonRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs post202NonRetry400" })
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({202})
-        Single<Void> post202NonRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> post202NonRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetry400" })
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetry400" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetry400" })
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({202})
-        Single<Void> postAsyncRelativeRetry400(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutError201NoProvisioningStatePayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutError201NoProvisioningStatePayload" })
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201})
-        Observable<OperationStatus<ProductInner>> beginPutError201NoProvisioningStatePayload(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putError201NoProvisioningStatePayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putError201NoProvisioningStatePayload" })
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201})
-        Single<ProductInner> putError201NoProvisioningStatePayload(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryNoStatus" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryNoStatus" })
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200})
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryNoStatus(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryNoStatus" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryNoStatus" })
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200})
-        Single<ProductInner> putAsyncRelativeRetryNoStatus(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryNoStatusPayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryNoStatusPayload" })
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200})
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryNoStatusPayload(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryNoStatusPayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryNoStatusPayload" })
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200})
-        Single<ProductInner> putAsyncRelativeRetryNoStatusPayload(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDelete204Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDelete204Succeeded" })
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({204})
         Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs delete204Succeeded" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs delete204Succeeded" })
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({204})
         Single<Void> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryNoStatus" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryNoStatus" })
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryNoStatus" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryNoStatus" })
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPost202NoLocation" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPost202NoLocation" })
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPost202NoLocation(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202NoLocation(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs post202NoLocation" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs post202NoLocation" })
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({202})
-        Single<Void> post202NoLocation(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> post202NoLocation(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryNoPayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryNoPayload" })
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayload(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryNoPayload" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryNoPayload" })
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({202})
-        Single<Void> postAsyncRelativeRetryNoPayload(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPut200InvalidJson" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPut200InvalidJson" })
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 204})
-        Observable<OperationStatus<ProductInner>> beginPut200InvalidJson(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut200InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs put200InvalidJson" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs put200InvalidJson" })
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 204})
-        Single<ProductInner> put200InvalidJson(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> put200InvalidJson(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryInvalidHeader" })
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200})
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryInvalidHeader(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryInvalidHeader" })
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200})
-        Single<ProductInner> putAsyncRelativeRetryInvalidHeader(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryInvalidJsonPolling" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryInvalidJsonPolling" })
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200})
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryInvalidJsonPolling(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryInvalidJsonPolling" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryInvalidJsonPolling" })
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200})
-        Single<ProductInner> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<ProductInner> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDelete202RetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDelete202RetryInvalidHeader" })
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs delete202RetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs delete202RetryInvalidHeader" })
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({202})
         Single<Void> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryInvalidHeader" })
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryInvalidHeader" })
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryInvalidJsonPolling" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryInvalidJsonPolling" })
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({202})
         Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryInvalidJsonPolling" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryInvalidJsonPolling" })
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({202})
         Single<Void> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPost202RetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPost202RetryInvalidHeader" })
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPost202RetryInvalidHeader(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs post202RetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs post202RetryInvalidHeader" })
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({202})
-        Single<Void> post202RetryInvalidHeader(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryInvalidHeader" })
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeader(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryInvalidHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryInvalidHeader" })
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({202})
-        Single<Void> postAsyncRelativeRetryInvalidHeader(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryInvalidJsonPolling" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryInvalidJsonPolling" })
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({202})
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPolling(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryInvalidJsonPolling" })
+        @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryInvalidJsonPolling" })
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({202})
-        Single<Void> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<Void> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 

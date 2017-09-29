@@ -59,40 +59,40 @@ public class ImplicitsImpl implements Implicits {
     */
     @Host("http://localhost")
     interface ImplicitsService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })
         @GET("reqopt/implicit/required/path/{pathParameter}")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getRequiredPath(@PathParam("pathParameter") String pathParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalQuery" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalQuery" })
         @PUT("reqopt/implicit/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> putOptionalQuery(@QueryParam("queryParameter") String queryParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalHeader" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalHeader" })
         @PUT("reqopt/implicit/optional/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> putOptionalHeader(@HeaderParam("queryParameter") String queryParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalBody" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalBody" })
         @PUT("reqopt/implicit/optional/body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putOptionalBody(@BodyParam String bodyParameter);
+        Single<Void> putOptionalBody(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalPath" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalPath" })
         @GET("reqopt/global/required/path/{required-global-path}")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getRequiredGlobalPath(@PathParam("required-global-path") String requiredGlobalPath);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalQuery" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalQuery" })
         @GET("reqopt/global/required/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getRequiredGlobalQuery(@QueryParam("required-global-query") String requiredGlobalQuery);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Implicits getOptionalGlobalQuery" })
+        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getOptionalGlobalQuery" })
         @GET("reqopt/global/optional/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Error> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);

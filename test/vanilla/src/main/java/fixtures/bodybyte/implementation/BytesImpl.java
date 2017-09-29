@@ -55,31 +55,31 @@ public class BytesImpl implements Bytes {
     */
     @Host("http://localhost")
     interface BytesService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getNull" })
+        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getNull" })
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getNull();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getEmpty" })
+        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getEmpty" })
         @GET("byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getEmpty();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getNonAscii" })
+        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getNonAscii" })
         @GET("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getNonAscii();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes putNonAscii" })
+        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes putNonAscii" })
         @PUT("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putNonAscii(@BodyParam byte[] byteBody);
+        Single<Void> putNonAscii(@BodyParam("application/json; charset=utf-8") byte[] byteBody);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getInvalid" })
+        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getInvalid" })
         @GET("byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

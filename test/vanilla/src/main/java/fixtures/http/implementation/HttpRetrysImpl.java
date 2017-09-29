@@ -59,53 +59,53 @@ public class HttpRetrysImpl implements HttpRetrys {
     */
     @Host("http://localhost")
     interface HttpRetrysService {
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys head408" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys head408" })
         @HEAD("http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> head408();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys put500" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys put500" })
         @PUT("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> put500(@BodyParam Boolean booleanValue);
+        Single<Void> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys patch500" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys patch500" })
         @PATCH("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> patch500(@BodyParam Boolean booleanValue);
+        Single<Void> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys get502" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys get502" })
         @GET("http/retry/502")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> get502();
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys post503" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys post503" })
         @POST("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> post503(@BodyParam Boolean booleanValue);
+        Single<Void> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys delete503" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys delete503" })
         @DELETE("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> delete503(@BodyParam Boolean booleanValue);
+        Single<Void> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys put504" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys put504" })
         @PUT("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> put504(@BodyParam Boolean booleanValue);
+        Single<Void> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRetrys patch504" })
+        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys patch504" })
         @PATCH("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> patch504(@BodyParam Boolean booleanValue);
+        Single<Void> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
     }
 
