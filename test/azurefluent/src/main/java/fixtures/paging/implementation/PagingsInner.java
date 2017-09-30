@@ -62,112 +62,112 @@ public class PagingsInner {
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getSinglePages" })
         @GET("paging/single")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getSinglePages(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getSinglePages(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePages" })
         @GET("paging/multiple")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getOdataMultiplePages" })
         @GET("paging/multiple/odata")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getOdataMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl1<ProductInner>> getOdataMultiplePages(@HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesWithOffset" })
         @GET("paging/multiple/withpath/{offset}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesWithOffset(@PathParam("offset") int offset, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesWithOffset(@PathParam("offset") int offset, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetryFirst" })
         @GET("paging/multiple/retryfirst")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesRetryFirst(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesRetryFirst(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetrySecond" })
         @GET("paging/multiple/retrysecond")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesRetrySecond(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesRetrySecond(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getSinglePagesFailure" })
         @GET("paging/single/failure")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getSinglePagesFailure(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getSinglePagesFailure(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailure" })
         @GET("paging/multiple/failure")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesFailure(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesFailure(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureUri" })
         @GET("paging/multiple/failureuri")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesFailureUri(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesFailureUri(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFragmentNextLink" })
         @GET("paging/multiple/fragment/{tenant}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesFragmentNextLink(@PathParam("tenant") String tenant, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl1<ProductInner>> getMultiplePagesFragmentNextLink(@PathParam("tenant") String tenant, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFragmentWithGroupingNextLink" })
         @GET("paging/multiple/fragmentwithgrouping/{tenant}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesFragmentWithGroupingNextLink(@PathParam("tenant") String tenant, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl1<ProductInner>> getMultiplePagesFragmentWithGroupingNextLink(@PathParam("tenant") String tenant, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings nextFragment" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> nextFragment(@PathParam("nextUrl") String nextUrl, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl1<ProductInner>> nextFragment(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @QueryParam("api_version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings nextFragmentWithGrouping" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> nextFragmentWithGrouping(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl1<ProductInner>> nextFragmentWithGrouping(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @QueryParam("api_version") String apiVersion, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getSinglePagesNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getSinglePagesNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getSinglePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getOdataMultiplePagesNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getOdataMultiplePagesNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl1<ProductInner>> getOdataMultiplePagesNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesWithOffsetNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesWithOffsetNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesWithOffsetNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("client-request-id") String clientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("maxresults") Integer maxresults, @HeaderParam("timeout") Integer timeout, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetryFirstNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesRetryFirstNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesRetryFirstNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesRetrySecondNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesRetrySecondNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesRetrySecondNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getSinglePagesFailureNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getSinglePagesFailureNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getSinglePagesFailureNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesFailureNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesFailureNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getMultiplePagesFailureUriNext" })
-        @GET("{nextUrl}")
+        @GET(value = "{nextUrl}")
         @ExpectedResponses({200})
-        Single<Page<ProductInner>> getMultiplePagesFailureUriNext(@PathParam("nextUrl") String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<PageImpl<ProductInner>> getMultiplePagesFailureUriNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -217,7 +217,12 @@ public class PagingsInner {
      * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesSinglePageAsync() {
-        return service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent());
+        return service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -271,7 +276,12 @@ public class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
     /**
@@ -335,7 +345,12 @@ public class PagingsInner {
         if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
-        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -389,7 +404,12 @@ public class PagingsInner {
         final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
-        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
     /**
@@ -453,7 +473,12 @@ public class PagingsInner {
         if (pagingGetOdataMultiplePagesOptions != null) {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
-        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -520,7 +545,12 @@ public class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
     /**
@@ -588,7 +618,12 @@ public class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
-        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -638,7 +673,12 @@ public class PagingsInner {
      * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetryFirstSinglePageAsync() {
-        return service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -688,7 +728,12 @@ public class PagingsInner {
      * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesRetrySecondSinglePageAsync() {
-        return service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -738,7 +783,12 @@ public class PagingsInner {
      * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getSinglePagesFailureSinglePageAsync() {
-        return service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
+        return service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -788,7 +838,12 @@ public class PagingsInner {
      * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureSinglePageAsync() {
-        return service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -838,7 +893,12 @@ public class PagingsInner {
      * @return the PagedList<ProductInner> object if successful.
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureUriSinglePageAsync() {
-        return service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -900,7 +960,12 @@ public class PagingsInner {
         if (apiVersion == null) {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
-        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -959,7 +1024,12 @@ public class PagingsInner {
         Validator.validate(customParameterGroup);
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
-        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion, this.client.userAgent());
+        return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion, this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1028,7 +1098,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         String nextUrl = String.format("paging/multiple/fragment/%s/%s", tenant, nextLink);
-        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1094,7 +1169,12 @@ public class PagingsInner {
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
         String nextUrl = String.format("paging/multiple/fragmentwithgrouping/%s/%s", tenant, nextLink);
-        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion, this.client.userAgent());
+        return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion, this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1151,7 +1231,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1212,7 +1297,12 @@ public class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
     /**
@@ -1283,7 +1373,12 @@ public class PagingsInner {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1344,7 +1439,12 @@ public class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
     /**
@@ -1415,7 +1515,12 @@ public class PagingsInner {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl1<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl1<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1476,7 +1581,12 @@ public class PagingsInner {
         Integer maxresults = null;
         Integer timeout = null;
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
     /**
@@ -1547,7 +1657,12 @@ public class PagingsInner {
             timeout = pagingGetMultiplePagesWithOffsetNextOptions.timeout();
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent());
+        return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1604,7 +1719,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1661,7 +1781,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1718,7 +1843,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1775,7 +1905,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
@@ -1832,7 +1967,12 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         String nextUrl = String.format("%s", nextPageLink);
-        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<PageImpl<ProductInner>, Page<ProductInner>>() {
+                @Override
+                public Page<ProductInner> call(PageImpl<ProductInner> productPage) {
+                    return productPage;
+                }
+            });
     }
 
 
