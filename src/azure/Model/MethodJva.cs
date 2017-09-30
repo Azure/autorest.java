@@ -105,7 +105,8 @@ namespace AutoRest.Java.Azure.Model
                 if (IsPagingNextOperation)
                 {
                     parameters.RemoveAll(p => p.Location == ParameterLocation.Path);
-                    parameters.Insert(0, new ParameterJv
+
+                    var nextUrlParam = new ParameterJv
                     {
                         Name = "nextUrl",
                         SerializedName = "nextUrl",
@@ -113,7 +114,9 @@ namespace AutoRest.Java.Azure.Model
                         Documentation = "The URL to get the next page of items.",
                         Location = ParameterLocation.Path,
                         IsRequired = true
-                    });
+                    };
+                    nextUrlParam.Extensions.Add(AzureExtensions.SkipUrlEncodingExtension, true);
+                    parameters.Insert(0, nextUrlParam);
                 }
 
                 return parameters;
