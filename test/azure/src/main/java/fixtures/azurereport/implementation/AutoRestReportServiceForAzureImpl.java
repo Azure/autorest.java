@@ -169,6 +169,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         @Headers({ "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Map<String, Integer>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

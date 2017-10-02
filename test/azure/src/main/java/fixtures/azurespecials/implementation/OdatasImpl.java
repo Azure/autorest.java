@@ -58,6 +58,7 @@ public class OdatasImpl implements Odatas {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
