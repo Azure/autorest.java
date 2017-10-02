@@ -32,7 +32,11 @@ public class ByteOperationsTests {
 
     @Test
     public void putNonAscii() throws Exception {
-        byte[] body = new byte[] { 34, 47, 47, 55, 57, 47, 80, 118, 54, 43, 102, 106, 51, 57, 103, 61, 61, 34 };
+        byte[] body = new byte[] {
+                (byte) 255, (byte) 254, (byte) 253, (byte) 252, (byte) 251,
+                (byte) 250, (byte) 249, (byte) 248, (byte) 247, (byte) 246
+        };
+
         client.bytes().putNonAscii(body);
     }
 }
