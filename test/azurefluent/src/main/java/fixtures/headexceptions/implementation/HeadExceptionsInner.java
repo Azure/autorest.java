@@ -56,16 +56,19 @@ public class HeadExceptionsInner {
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(CloudException.class)
         Single<Void> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(CloudException.class)
         Single<Void> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204})
+        @UnexpectedResponseExceptionType(CloudException.class)
         Single<Void> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

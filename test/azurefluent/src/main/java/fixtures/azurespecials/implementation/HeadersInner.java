@@ -58,16 +58,19 @@ public class HeadersInner {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId" })
         @POST("azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdHead" })
         @HEAD("azurespecials/customNamedRequestIdHead")
         @ExpectedResponses({200, 404})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Boolean> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

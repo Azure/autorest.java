@@ -58,6 +58,7 @@ public class PathsInner {
         @Headers({ "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<Void> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }

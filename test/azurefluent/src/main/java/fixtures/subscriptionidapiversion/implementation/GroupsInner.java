@@ -58,6 +58,7 @@ public class GroupsInner {
         @Headers({ "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
+        @UnexpectedResponseExceptionType(ErrorException.class)
         Single<SampleResourceGroupInner> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
