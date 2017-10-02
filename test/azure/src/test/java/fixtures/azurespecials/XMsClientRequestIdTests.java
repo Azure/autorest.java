@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.TokenCredentials;
 import com.microsoft.rest.http.HttpHeaders;
@@ -7,6 +8,7 @@ import com.microsoft.rest.policy.AddHeadersPolicy;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -22,6 +24,7 @@ public class XMsClientRequestIdTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
+                .withSerializerAdapter(new AzureJacksonAdapter())
                 .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
 
@@ -30,12 +33,14 @@ public class XMsClientRequestIdTests {
     }
 
     @Test
+    @Ignore("RestProxy doesn't support reading HTTP response codes yet")
     public void get() throws Exception {
         Void response = client.xMsClientRequestIds().getAsync().toBlocking().value();
 //        Assert.assertEquals(200, response.response().code());
     }
 
     @Test
+    @Ignore("RestProxy doesn't support reading HTTP response codes yet")
     public void paramGet() throws Exception {
         Void response = client.xMsClientRequestIds().paramGetAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").toBlocking().value();
 //        Assert.assertEquals(200, response.response().code());

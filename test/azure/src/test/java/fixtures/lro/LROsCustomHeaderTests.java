@@ -1,5 +1,6 @@
 package fixtures.lro;
 
+import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.http.HttpHeaders;
@@ -25,6 +26,7 @@ public class LROsCustomHeaderTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withCredentials(new BasicAuthenticationCredentials(null, null))
+                .withSerializerAdapter(new AzureJacksonAdapter())
                 .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);

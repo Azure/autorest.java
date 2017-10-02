@@ -132,10 +132,9 @@ public class PagingTests {
         }
     }
 
-    @Test
+    @Test(expected = CloudException.class)
     public void getMultiplePagesFailureUri() throws Exception {
-        List<Product> response = client.pagings().getMultiplePagesFailureUri();
-        Assert.assertEquals(1, response.size());
+        client.pagings().getMultiplePagesFailureUri();
     }
 
     @Test

@@ -2,6 +2,7 @@ package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCallback;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
@@ -25,6 +26,7 @@ public class LROsTests {
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
+                .withLogLevel(LogLevel.BODY_AND_HEADERS)
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
