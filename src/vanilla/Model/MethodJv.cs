@@ -674,7 +674,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    string annotationArgs = string.Join(", ", Responses.Keys.Select(k => k.ToString("D")));
+                    string annotationArgs = string.Join(", ", Responses.Keys.OrderBy(k => k).Select(k => k.ToString("D")));
                     result = $"@ExpectedResponses({{{annotationArgs}}})";
                 }
 
