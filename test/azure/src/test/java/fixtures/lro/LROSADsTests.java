@@ -1,7 +1,11 @@
 package fixtures.lro;
 
+import com.microsoft.azure.AzureProxy;
 import com.microsoft.azure.CloudException;
 
+import com.microsoft.azure.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.LogLevel;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -17,7 +21,15 @@ public class LROSADsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        client = new AutoRestLongRunningOperationTestServiceImpl(
+                new RestClient.Builder()
+                    .withBaseUrl("http://localhost:3000")
+                    .withCredentials(new BasicAuthenticationCredentials(null, null))
+                    .withLogLevel(LogLevel.BODY_AND_HEADERS)
+                    .withSerializerAdapter(new AzureJacksonAdapter())
+                    .build()
+        );
+        AzureProxy.setDefaultDelayInMilliseconds(0);
 //        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 

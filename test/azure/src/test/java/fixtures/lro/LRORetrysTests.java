@@ -1,5 +1,6 @@
 package fixtures.lro;
 
+import com.microsoft.azure.AzureProxy;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.RestClient;
@@ -19,8 +20,9 @@ public class LRORetrysTests {
                 .withLogLevel(LogLevel.BODY_AND_HEADERS)
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .build();
-        client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
-//        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
+        AzureProxy.setDefaultDelayInMilliseconds(0);
+        client = new AutoRestLongRunningOperationTestServiceImpl(restClient)
+            .withLongRunningOperationRetryTimeout(0);
     }
 
     @Test

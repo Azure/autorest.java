@@ -1,5 +1,6 @@
 package fixtures.lro;
 
+import com.microsoft.azure.AzureProxy;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
@@ -29,6 +30,7 @@ public class LROsCustomHeaderTests {
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
+        AzureProxy.setDefaultDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
 //        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }

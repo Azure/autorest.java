@@ -1,5 +1,6 @@
 package fixtures.lro;
 
+import com.microsoft.azure.AzureProxy;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.LogLevel;
@@ -30,6 +31,7 @@ public class LROsTests {
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
+        AzureProxy.setDefaultDelayInMilliseconds(0);
 //        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
 
