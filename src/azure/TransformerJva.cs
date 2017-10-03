@@ -16,6 +16,7 @@ using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.Net;
 
 namespace AutoRest.Java.Azure
 {
@@ -100,6 +101,20 @@ namespace AutoRest.Java.Azure
                     operation.Add(method);
                     if (method.Extensions.Get<bool>(AzureExtensions.LongRunningExtension) == true)
                     {
+                        var response = method.Responses.Values.First();
+                        if (!method.Responses.ContainsKey(HttpStatusCode.OK))
+                        {
+                            method.Responses[HttpStatusCode.OK] = response;
+                        }
+                        if (!method.Responses.ContainsKey(HttpStatusCode.Accepted))
+                        {
+                            method.Responses[HttpStatusCode.Accepted] = response;
+                        }
+                        if (method.HttpMethod == HttpMethod.Head && !method.Responses.ContainsKey(HttpStatusCode.NoContent))
+                        {
+                            method.Responses[HttpStatusCode.NoContent] = response;
+                        }
+
                         var m = Duplicate(method);
                         // Rename original method
                         method.Name = "Begin" + m.Name.ToPascalCase();
