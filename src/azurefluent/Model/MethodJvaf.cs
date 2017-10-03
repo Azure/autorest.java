@@ -38,19 +38,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     switch (methodType)
                     {
                         case MethodType.ListBySubscription:
-                            newName = WellKnowMethodNames.List;
+                            newName = WellKnownMethodNames.List;
                             break;
 
                         case MethodType.ListByResourceGroup:
-                            newName = WellKnowMethodNames.ListByResourceGroup;
+                            newName = WellKnownMethodNames.ListByResourceGroup;
                             break;
 
                         case MethodType.Delete:
-                            newName = WellKnowMethodNames.Delete;
+                            newName = WellKnownMethodNames.Delete;
                             break;
 
                         case MethodType.Get:
-                            newName = WellKnowMethodNames.GetByResourceGroup;
+                            newName = WellKnownMethodNames.GetByResourceGroup;
                             break;
 
                         default:
