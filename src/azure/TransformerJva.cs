@@ -110,7 +110,7 @@ namespace AutoRest.Java.Azure
                         {
                             method.Responses[HttpStatusCode.Accepted] = response;
                         }
-                        if (method.HttpMethod == HttpMethod.Head && !method.Responses.ContainsKey(HttpStatusCode.NoContent))
+                        if (method.HttpMethod != HttpMethod.Get && !method.Responses.ContainsKey(HttpStatusCode.NoContent))
                         {
                             method.Responses[HttpStatusCode.NoContent] = response;
                         }

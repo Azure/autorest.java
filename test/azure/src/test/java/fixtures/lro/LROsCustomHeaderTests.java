@@ -8,16 +8,12 @@ import com.microsoft.rest.http.HttpHeaders;
 import com.microsoft.rest.policy.AddHeadersPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Map;
-
 public class LROsCustomHeaderTests {
     private static AutoRestLongRunningOperationTestServiceImpl client;
-    private static Map<String, String> customHeaders;
 
     @BeforeClass
     public static void setup() {
@@ -32,12 +28,6 @@ public class LROsCustomHeaderTests {
                 .build();
         AzureProxy.setDefaultDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
-//        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
-    }
-
-    @AfterClass
-    public static void cleanup() {
-//        client.restClient().headers().removeHeader("x-ms-client-request-id");
     }
 
     @Test
