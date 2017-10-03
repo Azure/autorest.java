@@ -1,6 +1,7 @@
 package fixtures.lro;
 
 import com.microsoft.azure.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.LogLevel;
 import com.microsoft.rest.RestClient;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
@@ -14,9 +15,10 @@ public class LRORetrysTests {
     @BeforeClass
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
-            .withBaseUrl("http://localhost:3000")
-            .withSerializerAdapter(new AzureJacksonAdapter())
-            .build();
+                .withBaseUrl("http://localhost:3000")
+                .withLogLevel(LogLevel.BODY_AND_HEADERS)
+                .withSerializerAdapter(new AzureJacksonAdapter())
+                .build();
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
 //        client.getAzureClient().setLongRunningOperationRetryTimeout(0);
     }
