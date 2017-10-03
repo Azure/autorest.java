@@ -1,26 +1,25 @@
-//package fixtures.http;
-//
-//import com.microsoft.rest.ServiceResponse;
-//
-//import org.junit.Assert;
-//import org.junit.BeforeClass;
-//import org.junit.Test;
-//
-//import java.util.concurrent.CountDownLatch;
-//import java.util.concurrent.TimeUnit;
-//
-//import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
-//import rx.functions.Action1;
-//
-//public class HttpRetryTests {
-//    private static AutoRestHttpInfrastructureTestService client;
-//    private CountDownLatch lock = new CountDownLatch(1);
-//
-//    @BeforeClass
-//    public static void setup() {
-//        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
-//    }
-//
+package fixtures.http;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
+
+@Ignore("TODO: reimplement")
+public class HttpRetryTests {
+    private static AutoRestHttpInfrastructureTestService client;
+    private CountDownLatch lock = new CountDownLatch(1);
+
+    @BeforeClass
+    public static void setup() {
+        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
+    }
+
 //    @Test
 //    public void head408() throws Exception {
 //        client.httpRetrys().head408WithServiceResponseAsync()
@@ -124,4 +123,4 @@
 //            });
 //        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
 //    }
-//}
+}

@@ -1,51 +1,49 @@
-//package fixtures.header;
-//
-//import com.microsoft.rest.ServiceResponseWithHeaders;
-//
-//import org.apache.commons.codec.binary.Base64;
-//import org.joda.time.DateTime;
-//import org.joda.time.DateTimeZone;
-//import org.joda.time.LocalDate;
-//import org.joda.time.Period;
-//import org.junit.Assert;
-//import org.junit.BeforeClass;
-//import org.junit.Ignore;
-//import org.junit.Test;
-//
-//import java.nio.charset.Charset;
-//import java.util.concurrent.CountDownLatch;
-//import java.util.concurrent.TimeUnit;
-//
-//import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
-//import fixtures.header.models.GreyscaleColors;
-//import fixtures.header.models.HeaderResponseBoolHeaders;
-//import fixtures.header.models.HeaderResponseByteHeaders;
-//import fixtures.header.models.HeaderResponseDateHeaders;
-//import fixtures.header.models.HeaderResponseDatetimeHeaders;
-//import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
-//import fixtures.header.models.HeaderResponseDoubleHeaders;
-//import fixtures.header.models.HeaderResponseDurationHeaders;
-//import fixtures.header.models.HeaderResponseEnumHeaders;
-//import fixtures.header.models.HeaderResponseExistingKeyHeaders;
-//import fixtures.header.models.HeaderResponseFloatHeaders;
-//import fixtures.header.models.HeaderResponseIntegerHeaders;
-//import fixtures.header.models.HeaderResponseLongHeaders;
-//import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
-//import fixtures.header.models.HeaderResponseStringHeaders;
-//import okhttp3.Headers;
-//import rx.functions.Action1;
-//
-//import static org.junit.Assert.fail;
-//
-//public class HeaderOperationsTests {
-//    private static AutoRestSwaggerBATHeaderService client;
-//    private CountDownLatch lock;
-//
-//    @BeforeClass
-//    public static void setup() {
-//        client = new AutoRestSwaggerBATHeaderServiceImpl("http://localhost:3000");
-//    }
-//
+package fixtures.header;
+
+import org.apache.commons.codec.binary.Base64;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.nio.charset.Charset;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
+import fixtures.header.models.GreyscaleColors;
+import fixtures.header.models.HeaderResponseBoolHeaders;
+import fixtures.header.models.HeaderResponseByteHeaders;
+import fixtures.header.models.HeaderResponseDateHeaders;
+import fixtures.header.models.HeaderResponseDatetimeHeaders;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
+import fixtures.header.models.HeaderResponseDoubleHeaders;
+import fixtures.header.models.HeaderResponseDurationHeaders;
+import fixtures.header.models.HeaderResponseEnumHeaders;
+import fixtures.header.models.HeaderResponseExistingKeyHeaders;
+import fixtures.header.models.HeaderResponseFloatHeaders;
+import fixtures.header.models.HeaderResponseIntegerHeaders;
+import fixtures.header.models.HeaderResponseLongHeaders;
+import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
+import fixtures.header.models.HeaderResponseStringHeaders;
+import rx.functions.Action1;
+
+import static org.junit.Assert.fail;
+
+@Ignore("RestProxy doesn't currently support reading response headers")
+public class HeaderOperationsTests {
+    private static AutoRestSwaggerBATHeaderService client;
+    private CountDownLatch lock;
+
+    @BeforeClass
+    public static void setup() {
+        client = new AutoRestSwaggerBATHeaderServiceImpl("http://localhost:3000");
+    }
+
 //    @Test
 //    public void paramExistingKey() throws Exception {
 //        client.headers().paramExistingKey("overwrite");
@@ -648,4 +646,4 @@
 //    public void customRequestId() throws Exception {
 //        client.headers().customRequestId();
 //    }
-//}
+}
