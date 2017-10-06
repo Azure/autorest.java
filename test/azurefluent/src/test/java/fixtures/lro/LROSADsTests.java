@@ -1,12 +1,21 @@
 package fixtures.lro;
 
+import com.microsoft.azure.AzureProxy;
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.LogLevel;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.LoggerFactory;
+
+import java.util.logging.LogManager;
 
 import static org.junit.Assert.fail;
 
@@ -15,7 +24,15 @@ public class LROSADsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        AzureProxy.setDefaultDelayInMilliseconds(0);
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
+                .withCredentials(new BasicAuthenticationCredentials(null, null))
+                .withSerializerAdapter(new AzureJacksonAdapter())
+                .withLogLevel(LogLevel.BODY_AND_HEADERS)
+                .build();
+
+        client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
     }
 
     @Test
@@ -184,7 +201,6 @@ public class LROSADsTests {
             fail();
         } catch (CloudException ex) {
             Assert.assertEquals(202, ex.response().statusCode());
-            Assert.assertTrue(ex.getMessage().contains("Response does not contain an Azure"));
         }
     }
 
@@ -220,8 +236,7 @@ public class LROSADsTests {
         try {
             client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (CloudException ignored) {
         }
     }
 
@@ -242,8 +257,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().delete202RetryInvalidHeader();
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (IllegalArgumentException ignored) {
+
         }
     }
 
@@ -252,8 +267,7 @@ public class LROSADsTests {
         try {
             client.lROSADs().deleteAsyncRelativeRetryInvalidHeader();
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (IllegalArgumentException ignored) {
         }
     }
 
@@ -274,8 +288,7 @@ public class LROSADsTests {
         try {
             client.lROSADs().post202RetryInvalidHeader(product);
             fail();
-        } catch (NumberFormatException ex) {
-            Assert.assertEquals("For input string: \"/bar\"", ex.getMessage());
+        } catch (IllegalArgumentException ignored) {
         }
     }
 
