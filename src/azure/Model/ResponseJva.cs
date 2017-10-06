@@ -90,7 +90,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && IsPagedResponse)
+                if (bodySequenceType != null && (IsPagedResponse || Parent.SimulateAsPagingOperation))
                 {
                     return bodySequenceType.PageImplType + "<" + bodySequenceType.ElementType.Name + ">";
                 }

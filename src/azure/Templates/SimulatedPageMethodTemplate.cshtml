@@ -96,11 +96,9 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings(true)
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
+    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
         @@Override
-        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
-            @Model.ReturnTypeJv.GenericBodyWireTypeString page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
-            page.setItems(response);
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) page) {
             return page;
         }
     }).toObservable();
@@ -192,11 +190,9 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings()
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
+    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
         @@Override
-        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
-            @Model.ReturnTypeJv.GenericBodyWireTypeString page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
-            page.setItems(response);
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) page) {
             return page;
         }
     }).toObservable();
