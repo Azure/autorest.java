@@ -1,17 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Java.Azure.Model;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class MethodGroupJvaf : MethodGroupJva
     {
+        private static readonly StringComparer stringComparer = StringComparer.OrdinalIgnoreCase;
+
         private List<string> supportedInterfaces = new List<string>();
         private List<string> interfacesToImport = new List<string>();
 
@@ -81,16 +83,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
         }
 
-        private bool AnyMethodSupportsInnerListing()
-        {
-            var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.List));
-            var listByResourceGroup = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.ListByResourceGroup));
-            return listMethod != null && listByResourceGroup != null
-                && StringComparer.OrdinalIgnoreCase.Equals(
-                    ((ResponseJva)listMethod.ReturnType).SequenceElementTypeString,
-                    ((ResponseJva)listByResourceGroup.ReturnType).SequenceElementTypeString);
-        }
-
         private void DiscoverAllSupportedInterfaces()
         {
             const string InnerSupportsGet = "InnerSupportsGet";
@@ -104,34 +96,77 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
 
             const string packageName = "com.microsoft.azure.management.resources.fluentcore.collection";
-            var getMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.GetByResourceGroup));
-            if (getMethod != null && Take2RequiredParameters(getMethod))
+
+            Method getMethod = FindGetMethod(this.Methods);
+            if (getMethod != null)
             {
                 supportedInterfaces.Add($"{InnerSupportsGet}<{((ResponseJva)getMethod.ReturnType).GenericBodyClientTypeString}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsGet}");
             }
 
-            var deleteMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.Delete));
-            if (deleteMethod != null && Take2RequiredParameters(deleteMethod))
+            Method deleteMethod = FindDeleteMethod(this.Methods);
+            if (deleteMethod != null)
             {
                 supportedInterfaces.Add($"{InnerSupportsDelete}<{((ResponseJva)deleteMethod.ReturnType).ClientCallbackTypeString}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsDelete}");
             }
 
-            if (AnyMethodSupportsInnerListing())
+            Method listMethod = FindListMethod(this.Methods);
+            if (listMethod != null)
             {
-                // Getting list method to get the name of the type to be supported.
-                var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.List));
-
                 supportedInterfaces.Add($"{InnerSupportsListing}<{((ResponseJva)listMethod.ReturnType).SequenceElementTypeString}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsListing}");
             }
         }
 
-        private static bool Take2RequiredParameters(Method method)
+        private static Method FindGetMethod(IEnumerable<Method> methods)
+        {
+            Method result = FindFirstMethodByName(methods, WellKnownMethodNames.GetByResourceGroup);
+            return result != null && HasNonClientNonConstantRequiredParameters(result, 2) ? result : null;
+        }
+
+        private static Method FindDeleteMethod(IEnumerable<Method> methods)
+        {
+            Method deleteMethod = FindFirstMethodByName(methods, WellKnownMethodNames.Delete);
+            return deleteMethod != null && HasNonClientNonConstantRequiredParameters(deleteMethod, 2) ? deleteMethod : null;
+        }
+
+        private static Method FindListMethod(IEnumerable<Method> methods)
+        {
+            Method result = null;
+
+            Method list = FindFirstMethodByName(methods, WellKnownMethodNames.List);
+            if (list != null && HasNonClientNonConstantRequiredParameters(list, 0))
+            {
+                Method listByResourceGroup = FindFirstMethodByName(methods, WellKnownMethodNames.ListByResourceGroup);
+                if (listByResourceGroup != null && HasNonClientNonConstantRequiredParameters(listByResourceGroup, 1))
+                {
+                    string listReturnType = GetSequenceElementTypeString(list);
+                    string listByResourceGroupReturnType = GetSequenceElementTypeString(listByResourceGroup);
+                    if (stringComparer.Equals(listReturnType, listByResourceGroupReturnType))
+                    {
+                        result = list;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private static String GetSequenceElementTypeString(Method method)
+        {
+            return ((ResponseJva)method.ReturnType).SequenceElementTypeString;
+        }
+
+        private static Method FindFirstMethodByName(IEnumerable<Method> methods, String methodName)
+        {
+            return methods.FirstOrDefault(method => stringComparer.Equals(method.Name, methodName));
+        }
+
+        private static bool HasNonClientNonConstantRequiredParameters(Method method, int requiredParameterCount)
         {
             // When parameters are optional we generate more methods.
-            return method.Parameters.Count(x => !x.IsClientProperty && !x.IsConstant && x.IsRequired) == 2;
+            return method.Parameters.Count(x => !x.IsClientProperty && !x.IsConstant && x.IsRequired) == requiredParameterCount;
         }
     }
 }
