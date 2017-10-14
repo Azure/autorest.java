@@ -29,6 +29,20 @@ namespace AutoRest.Java.Azure.Fluent
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
+
+        class ModelNameComparer : IEqualityComparer<ModelType>
+        {
+            public bool Equals(ModelType x, ModelType y)
+            {
+                return x.Name.Equals(y.Name) || x.XmlName.Equals(y.XmlName);
+            }
+
+            public int GetHashCode(ModelType obj)
+            {
+                return obj.Name.GetHashCode() ^ obj.XmlName.GetHashCode();
+            }
+        }
+
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
@@ -72,6 +86,31 @@ namespace AutoRest.Java.Azure.Fluent
 
                 var modelTemplate = new ModelTemplate { Model = modelType };
                 await Write(modelTemplate, $"{packagePath}/{modelType.ModelsPackage.Trim('.')}/{modelType.Name.ToPascalCase()}{ImplementationFileExtension}");
+            }
+
+            //XML wrappers
+            if (true)//(codeModel.ShouldGenerateXmlSerialization)
+            {
+                var allMethods = cm.Operations
+                    .SelectMany(o => o.Methods)
+                    .ToArray();
+                // Every sequence type that is returned by an API method.
+                var returnedSequenceTypes = allMethods
+                    .Select(m => m.ReturnType.Body)
+                    //.Concat(allMethods
+                    //    .SelectMany(m => m.Parameters)
+                    //    .Select(p => p.ModelType))
+                    .OfType<SequenceTypeJv>()
+                    .Where(st => st.Name != st.XmlName)
+                    .Distinct(new ModelNameComparer())
+                    .ToArray();
+
+                foreach (SequenceTypeJv st in returnedSequenceTypes)
+                {
+                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
+                    await Write(wrapperTemplate, $"{packagePath}/{codeModel.ModelsPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                    //st.XmlName
+                }
             }
 
             //Enums

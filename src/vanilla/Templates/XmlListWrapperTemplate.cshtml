@@ -1,0 +1,85 @@
+﻿@using System.Linq
+@using System.Collections.Generic
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Model.SequenceTypeJv>
+/**
+@Header(" * ").TrimMultilineHeader()
+ */
+@EmptyLine
+ 
+package @(Settings.Namespace.ToLower()).models;
+@EmptyLine
+
+@foreach (var importClass in Model.Imports)
+{
+@:import @importClass;
+}
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+@EmptyLine
+
+@*/**
+@if (string.IsNullOrEmpty(Model.Summary) && string.IsNullOrEmpty(Model.Documentation))
+{
+@:@WrapComment(" * ", "The " + Model.XmlName + " model.")
+}
+else
+{
+@:@WrapComment(" * ", Model.Summary.EscapeXmlComment().Period())
+@:@WrapComment(" * ", Model.Documentation.EscapeXmlComment().Period())
+}
+ */
+@if (Model.BaseIsPolymorphic)
+{
+@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.BasePolymorphicDiscriminator)")
+@:@@JsonTypeName("@(Model.SerializedName)")
+var types = Model.SubTypes.ToList();
+if (types.Any())
+{
+@:@@JsonSubTypes({
+for (int i = 0; i < types.Count - 1; i++)
+{
+var type = types[i];
+@:    @@JsonSubTypes.Type(name = "@(type.SerializedName)", value = @(type.Name).class),
+}
+@:    @@JsonSubTypes.Type(name = "@(types.Last().SerializedName)", value = @(types.Last().Name).class)
+@:})
+}
+}
+@if (Model.NeedsFlatten)
+{
+@:@@JsonFlatten
+}*@
+@@JacksonXmlRootElement(localName = "@Model.XmlName")
+public class @(Model.XmlName)Wrapper {
+
+    @@JacksonXmlProperty(localName = "@(Model.ElementXmlName)")
+    @@JacksonXmlElementWrapper(useWrapping = false)
+    private @(Model.Name) @(Model.XmlName.ToCamelCase());
+
+    /**
+     * Get the @Model.XmlName value.
+     *
+     * @@return the @Model.XmlName value
+     */
+    public @(Model.Name) @(Model.XmlName.ToCamelCase())() {
+        return @(Model.XmlName.ToCamelCase());
+    }
+
+    /**
+     * Set the @Model.XmlName value.
+     *
+     * @@param @Model.XmlName.ToCamelCase() the @Model.Name value to set
+     * @@return the @Model.XmlName object itself.
+     */
+    public @(Model.XmlName)Wrapper with@(Model.XmlName)(@Model.Name @Model.XmlName.ToCamelCase()) {
+        this.@(Model.XmlName.ToCamelCase()) = @(Model.XmlName.ToCamelCase());
+        return this;
+    }
+}
