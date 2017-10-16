@@ -10,7 +10,7 @@
  */
 @EmptyLine
  
-package @(Settings.Namespace.ToLower()).models;
+package @(Settings.Namespace.ToLower()).implementation;
 @EmptyLine
 
 @foreach (var importClass in Model.Imports)
@@ -18,6 +18,8 @@ package @(Settings.Namespace.ToLower()).models;
 @:import @importClass;
 }
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -56,30 +58,29 @@ var type = types[i];
 {
 @:@@JsonFlatten
 }*@
+
+@{ 
+    var wrappedVariableName = Model.XmlName.ToCamelCase();
+}
+
 @@JacksonXmlRootElement(localName = "@Model.XmlName")
 public class @(Model.XmlName)Wrapper {
 
     @@JacksonXmlProperty(localName = "@(Model.ElementXmlName)")
     @@JacksonXmlElementWrapper(useWrapping = false)
-    private @(Model.Name) @(Model.XmlName.ToCamelCase());
+    private final @(Model.Name) @(wrappedVariableName);
+
+    @@JsonCreator
+    public @(Model.XmlName)Wrapper(@@JsonProperty("@(wrappedVariableName)") @(Model.Name) @(wrappedVariableName)) {
+        this.@(wrappedVariableName) = @(wrappedVariableName);
+    }
 
     /**
      * Get the @Model.XmlName value.
      *
      * @@return the @Model.XmlName value
      */
-    public @(Model.Name) @(Model.XmlName.ToCamelCase())() {
-        return @(Model.XmlName.ToCamelCase());
-    }
-
-    /**
-     * Set the @Model.XmlName value.
-     *
-     * @@param @Model.XmlName.ToCamelCase() the @Model.Name value to set
-     * @@return the @Model.XmlName object itself.
-     */
-    public @(Model.XmlName)Wrapper with@(Model.XmlName)(@Model.Name @Model.XmlName.ToCamelCase()) {
-        this.@(Model.XmlName.ToCamelCase()) = @(Model.XmlName.ToCamelCase());
-        return this;
+    public @(Model.Name) @(wrappedVariableName)() {
+        return @(wrappedVariableName);
     }
 }

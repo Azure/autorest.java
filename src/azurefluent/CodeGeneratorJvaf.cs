@@ -89,17 +89,15 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             //XML wrappers
-            if (true)//(codeModel.ShouldGenerateXmlSerialization)
+            if (codeModel.ShouldGenerateXmlSerialization)
             {
                 var allMethods = cm.Operations
                     .SelectMany(o => o.Methods)
                     .ToArray();
                 // Every sequence type that is returned by an API method.
                 var returnedSequenceTypes = allMethods
-                    .Select(m => m.ReturnType.Body)
-                    //.Concat(allMethods
-                    //    .SelectMany(m => m.Parameters)
-                    //    .Select(p => p.ModelType))
+                    .SelectMany(m => m.Parameters)
+                    .Select(p => p.ModelType)
                     .OfType<SequenceTypeJv>()
                     .Where(st => st.Name != st.XmlName)
                     .Distinct(new ModelNameComparer())
@@ -108,7 +106,7 @@ namespace AutoRest.Java.Azure.Fluent
                 foreach (SequenceTypeJv st in returnedSequenceTypes)
                 {
                     var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
-                    await Write(wrapperTemplate, $"{packagePath}/{codeModel.ModelsPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                    await Write(wrapperTemplate, $"{packagePath}/{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
                     //st.XmlName
                 }
             }
