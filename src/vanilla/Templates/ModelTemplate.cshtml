@@ -68,8 +68,17 @@ else
 var jsonSetting = property.GetJsonProperty();
 if (!jsonSetting.IsNullOrEmpty())
 {
+if (property.XmlIsAttribute)
+{
+@:    @@JacksonXmlProperty(localName = @(property.SerializedName), isAttribute = true)
+}
+else
+{
 @:    @@JsonProperty(@(jsonSetting))
 }
+
+}
+
 @:    private @property.ModelType.Name @property.Name;
 @EmptyLine
 }

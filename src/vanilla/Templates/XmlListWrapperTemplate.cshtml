@@ -26,39 +26,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 @EmptyLine
 
-@*/**
-@if (string.IsNullOrEmpty(Model.Summary) && string.IsNullOrEmpty(Model.Documentation))
-{
-@:@WrapComment(" * ", "The " + Model.XmlName + " model.")
-}
-else
-{
-@:@WrapComment(" * ", Model.Summary.EscapeXmlComment().Period())
-@:@WrapComment(" * ", Model.Documentation.EscapeXmlComment().Period())
-}
- */
-@if (Model.BaseIsPolymorphic)
-{
-@:@@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@(Model.BasePolymorphicDiscriminator)")
-@:@@JsonTypeName("@(Model.SerializedName)")
-var types = Model.SubTypes.ToList();
-if (types.Any())
-{
-@:@@JsonSubTypes({
-for (int i = 0; i < types.Count - 1; i++)
-{
-var type = types[i];
-@:    @@JsonSubTypes.Type(name = "@(type.SerializedName)", value = @(type.Name).class),
-}
-@:    @@JsonSubTypes.Type(name = "@(types.Last().SerializedName)", value = @(types.Last().Name).class)
-@:})
-}
-}
-@if (Model.NeedsFlatten)
-{
-@:@@JsonFlatten
-}*@
-
 @{ 
     var wrappedVariableName = Model.XmlName.ToCamelCase();
 }
@@ -67,7 +34,6 @@ var type = types[i];
 public class @(Model.XmlName)Wrapper {
 
     @@JacksonXmlProperty(localName = "@(Model.ElementXmlName)")
-    @@JacksonXmlElementWrapper(useWrapping = false)
     private final @(Model.Name) @(wrappedVariableName);
 
     @@JsonCreator
