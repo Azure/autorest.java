@@ -215,11 +215,11 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual IModelType ReturnValueWireType
+        public virtual string ReturnValueWireType
         {
             get
             {
-                IModelType returnValueWireType = null;
+                string returnValueWireType = null;
 
                 Stack<IModelType> typeStack = new Stack<IModelType>();
                 typeStack.Push(Body);
@@ -236,11 +236,12 @@ namespace AutoRest.Java.Model
                     }
                     else if (currentType is PrimaryType currentPrimaryType)
                     {
-                        string currentPrimaryTypeName = currentPrimaryType.Name;
+                        string currentPrimaryTypeName = currentPrimaryType.Name.FixedValue;
                         if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                            currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123"))
+                            currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
+                            currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
                         {
-                            returnValueWireType = currentPrimaryType;
+                            returnValueWireType = currentPrimaryTypeName;
                             break;
                         }
                     }

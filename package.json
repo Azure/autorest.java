@@ -12,7 +12,8 @@
     "publish-preview": "gulp publish-preview",
     "regenerate": "gulp regenerate",
     "clean": "gulp clean",
-    "nuke": "git clean -xdf"
+    "nuke": "git clean -xdf",
+    "start-test-server": "npm --prefix node_modules/@microsoft.azure/autorest.testserver run start"
   },
   "repository": {
     "type": "git",
