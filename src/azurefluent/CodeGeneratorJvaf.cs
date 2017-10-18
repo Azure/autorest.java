@@ -94,15 +94,12 @@ namespace AutoRest.Java.Azure.Fluent
             //XML wrappers
             if (codeModel.ShouldGenerateXmlSerialization)
             {
-                var allMethods = cm.Operations
-                    .SelectMany(o => o.Methods)
-                    .ToArray();
                 // Every sequence type used as a parameter to a service method.
-                var parameterSequenceTypes = allMethods
+                var parameterSequenceTypes = cm.Operations
+                    .SelectMany(o => o.Methods)
                     .SelectMany(m => m.Parameters)
                     .Select(p => p.ModelType)
                     .OfType<SequenceTypeJv>()
-                    .Where(st => st.Name != st.XmlName)
                     .Distinct(ModelNameComparer.Instance)
                     .ToArray();
 
@@ -110,7 +107,6 @@ namespace AutoRest.Java.Azure.Fluent
                 {
                     var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
                     await Write(wrapperTemplate, $"{packagePath}/{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
-                    //st.XmlName
                 }
             }
 
