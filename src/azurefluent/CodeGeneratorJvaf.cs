@@ -30,10 +30,10 @@ namespace AutoRest.Java.Azure.Fluent
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
 
-        public class ModelNameComparer : IEqualityComparer<ModelType>
+        class ModelNameComparer : IEqualityComparer<ModelType>
         {
             private ModelNameComparer() { }
-            public static ModelNameComparer Instance { get; } = new ModelNameComparer();
+            internal static ModelNameComparer Instance { get; } = new ModelNameComparer();
 
             public bool Equals(ModelType x, ModelType y)
             {
