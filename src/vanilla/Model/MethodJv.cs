@@ -210,6 +210,68 @@ namespace AutoRest.Java.Model
             }
         }
 
+        public string Javadoc(List<ParameterJv> parameters)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine("/**");
+            if (!string.IsNullOrEmpty(Summary))
+            {
+                builder.AppendLine(" * " + Summary.EscapeXmlComment().Period());
+            }
+
+            if (!string.IsNullOrEmpty(Description))
+            {
+                builder.AppendLine(" * " + Description.EscapeXmlComment().Period());
+            }
+
+            builder.AppendLine(" * ");
+
+            foreach (var param in parameters)
+            {
+                var paramDoc = param.Documentation.Else($"the {param.ModelType.Name} value").EscapeXmlComment().Trim();
+                builder.AppendLine($" * @param {param.Name} {paramDoc}");
+            }
+
+            builder.AppendLine(" * @throws IllegalArgumentException thrown if parameters fail the validation");
+            builder.AppendLine($" * @throws {OperationExceptionTypeString} thrown if the request is rejected by server");
+            builder.AppendLine(" * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent");
+
+            if (ReturnType.Body != null)
+            {
+                builder.AppendLine($" * @return the {ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+            }
+
+            builder.AppendLine(" */");
+            return builder.ToString();
+        }
+
+        public string SyncImpl(List<ParameterJv> parameters)
+        {
+            var paramDecls = parameters.Select(parameter => parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+            var paramString = string.Join(", ", paramDecls);
+
+            var args = parameters.Select(parameter => parameter.Name.Value);
+            var argsString = string.Join(", ", args);
+
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public {ReturnTypeResponseName} {Name}({paramString}) {{");
+            builder.Indent();
+
+            if (ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
+            {
+                builder.AppendLine($"{Name}Async({argsString}).toBlocking().value();");
+            }
+            else
+            {
+                builder.AppendLine($"return {Name}Async({argsString}).toBlocking().value();");
+            }
+
+            builder.Outdent();
+            builder.AppendLine("}");
+
+            return builder.ToString();
+        }
+
         [JsonIgnore]
         [Obsolete("Use MethodParameterApiInvocation")]
         public string MethodRequiredParameterApiInvocation => MethodParameterApiInvocation;
