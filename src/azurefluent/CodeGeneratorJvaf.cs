@@ -30,8 +30,11 @@ namespace AutoRest.Java.Azure.Fluent
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
 
-        class ModelNameComparer : IEqualityComparer<ModelType>
+        public class ModelNameComparer : IEqualityComparer<ModelType>
         {
+            private ModelNameComparer() { }
+            public static ModelNameComparer Instance { get; } = new ModelNameComparer();
+
             public bool Equals(ModelType x, ModelType y)
             {
                 return x.Name.Equals(y.Name) || x.XmlName.Equals(y.XmlName);
@@ -94,16 +97,16 @@ namespace AutoRest.Java.Azure.Fluent
                 var allMethods = cm.Operations
                     .SelectMany(o => o.Methods)
                     .ToArray();
-                // Every sequence type that is returned by an API method.
-                var returnedSequenceTypes = allMethods
+                // Every sequence type used as a parameter to a service method.
+                var parameterSequenceTypes = allMethods
                     .SelectMany(m => m.Parameters)
                     .Select(p => p.ModelType)
                     .OfType<SequenceTypeJv>()
                     .Where(st => st.Name != st.XmlName)
-                    .Distinct(new ModelNameComparer())
+                    .Distinct(ModelNameComparer.Instance)
                     .ToArray();
 
-                foreach (SequenceTypeJv st in returnedSequenceTypes)
+                foreach (SequenceTypeJv st in parameterSequenceTypes)
                 {
                     var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
                     await Write(wrapperTemplate, $"{packagePath}/{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
