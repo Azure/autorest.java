@@ -215,6 +215,42 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
+        public virtual IModelType ReturnValueWireType
+        {
+            get
+            {
+                IModelType returnValueWireType = null;
+
+                Stack<IModelType> typeStack = new Stack<IModelType>();
+                typeStack.Push(Body);
+                while (typeStack.Any())
+                {
+                    IModelType currentType = typeStack.Pop();
+                    if (currentType is SequenceType currentSequenceType)
+                    {
+                        typeStack.Push(currentSequenceType.ElementType);
+                    }
+                    else if (currentType is DictionaryType currentDictionaryType)
+                    {
+                        typeStack.Push(currentDictionaryType.ValueType);
+                    }
+                    else if (currentType is PrimaryType currentPrimaryType)
+                    {
+                        string currentPrimaryTypeName = currentPrimaryType.Name;
+                        if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
+                            currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123"))
+                        {
+                            returnValueWireType = currentPrimaryType;
+                            break;
+                        }
+                    }
+                }
+
+                return returnValueWireType;
+            }
+        }
+
         #endregion
 
         [JsonIgnore]
@@ -234,13 +270,22 @@ namespace AutoRest.Java.Model
                 var imports = new List<string>(InterfaceImports);
                 imports.AddRange(BodyWireType.ImportSafe());
                 imports.AddRange(HeaderWireType.ImportSafe());
-                if (this.NeedsConversion && (Body is SequenceType || Headers is SequenceType))
+
+                if (ReturnValueWireType != null)
                 {
-                    imports.Add("java.util.ArrayList");
+                    imports.Add("com.microsoft.rest.annotations.ReturnValueWireType");
                 }
-                if (this.NeedsConversion && (Body is DictionaryType || Headers is DictionaryType))
+
+                if (this.NeedsConversion)
                 {
-                    imports.Add("java.util.HashMap");
+                    if (Body is SequenceType || Headers is SequenceType)
+                    {
+                        imports.Add("java.util.ArrayList");
+                    }
+                    else if (Body is DictionaryType || Headers is DictionaryType)
+                    {
+                        imports.Add("java.util.HashMap");
+                    }
                 }
                 return imports;
             }

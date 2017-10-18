@@ -19,6 +19,7 @@ import com.microsoft.rest.annotations.GET;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
 import com.microsoft.rest.annotations.PUT;
+import com.microsoft.rest.annotations.ReturnValueWireType;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.http.HttpClient;
@@ -60,24 +61,28 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getNull" })
         @GET("datetimerfc1123/null")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getNull();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getInvalid" })
         @GET("datetimerfc1123/invalid")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getInvalid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getOverflow" })
         @GET("datetimerfc1123/overflow")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getOverflow();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUnderflow" })
         @GET("datetimerfc1123/underflow")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUnderflow();
 
@@ -90,12 +95,14 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcLowercaseMaxDateTime" })
         @GET("datetimerfc1123/max/lowercase")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUtcLowercaseMaxDateTime();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcUppercaseMaxDateTime" })
         @GET("datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUtcUppercaseMaxDateTime();
 
@@ -108,6 +115,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcMinDateTime" })
         @GET("datetimerfc1123/min")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUtcMinDateTime();
 

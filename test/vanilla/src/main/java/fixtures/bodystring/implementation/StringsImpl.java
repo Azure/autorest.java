@@ -19,6 +19,7 @@ import com.microsoft.rest.annotations.GET;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
 import com.microsoft.rest.annotations.PUT;
+import com.microsoft.rest.annotations.ReturnValueWireType;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.http.HttpClient;
@@ -113,12 +114,14 @@ public class StringsImpl implements Strings {
         @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getBase64Encoded" })
         @GET("string/base64Encoding")
         @ExpectedResponses({200})
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getBase64Encoded();
 
         @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getBase64UrlEncoded" })
         @GET("string/base64UrlEncoding")
         @ExpectedResponses({200})
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getBase64UrlEncoded();
 
@@ -131,6 +134,7 @@ public class StringsImpl implements Strings {
         @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNullBase64UrlEncoded" })
         @GET("string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<byte[]> getNullBase64UrlEncoded();
 
