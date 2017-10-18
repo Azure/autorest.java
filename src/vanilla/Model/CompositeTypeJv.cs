@@ -117,6 +117,11 @@ namespace AutoRest.Java.Model
                 {
                     classes.Add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
+                if (Properties.Any(p => p.XmlIsAttribute))
+                {
+                    classes.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                }
+
                 // For polymorphism
                 if (BaseIsPolymorphic)
                 {

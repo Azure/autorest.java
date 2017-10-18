@@ -29,6 +29,23 @@ namespace AutoRest.Java.Azure.Fluent
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
 
+
+        class ModelNameComparer : IEqualityComparer<ModelType>
+        {
+            private ModelNameComparer() { }
+            internal static ModelNameComparer Instance { get; } = new ModelNameComparer();
+
+            public bool Equals(ModelType x, ModelType y)
+            {
+                return x.Name.Equals(y.Name) || x.XmlName.Equals(y.XmlName);
+            }
+
+            public int GetHashCode(ModelType obj)
+            {
+                return obj.Name.GetHashCode() ^ obj.XmlName.GetHashCode();
+            }
+        }
+
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
@@ -72,6 +89,25 @@ namespace AutoRest.Java.Azure.Fluent
 
                 var modelTemplate = new ModelTemplate { Model = modelType };
                 await Write(modelTemplate, $"{packagePath}/{modelType.ModelsPackage.Trim('.')}/{modelType.Name.ToPascalCase()}{ImplementationFileExtension}");
+            }
+
+            //XML wrappers
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                // Every sequence type used as a parameter to a service method.
+                var parameterSequenceTypes = cm.Operations
+                    .SelectMany(o => o.Methods)
+                    .SelectMany(m => m.Parameters)
+                    .Select(p => p.ModelType)
+                    .OfType<SequenceTypeJv>()
+                    .Distinct(ModelNameComparer.Instance)
+                    .ToArray();
+
+                foreach (SequenceTypeJv st in parameterSequenceTypes)
+                {
+                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
+                    await Write(wrapperTemplate, $"{packagePath}/{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                }
             }
 
             //Enums
