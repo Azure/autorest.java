@@ -17,8 +17,23 @@ using System.Collections.Immutable;
 
 namespace AutoRest.Java.Model
 {
+    public struct ParameterVariants
+    {
+        public ImmutableArray<ParameterJv> AllParameters { get; }
+        public ImmutableArray<ParameterJv> RequiredParameters { get; }
+
+        public bool HasOptionalParameters => AllParameters.Length != RequiredParameters.Length;
+
+        public ParameterVariants(ImmutableArray<ParameterJv> allParameters, ImmutableArray<ParameterJv> requiredParameters)
+        {
+            AllParameters = allParameters;
+            RequiredParameters = requiredParameters;
+        }
+    }
+
     public class MethodJv : Method
     {
+
         [JsonIgnore]
         public virtual IEnumerable<ParameterJv> RetrofitParameters
         {
@@ -210,7 +225,37 @@ namespace AutoRest.Java.Model
             }
         }
 
-        public string Javadoc(List<ParameterJv> parameters)
+        [JsonIgnore]
+        public ParameterJv CallbackParam
+        {
+            get
+            {
+                var modelType = new CompositeTypeJv();
+                modelType.Name.FixedValue = $"ServiceCallback<{ReturnTypeJv.GenericBodyClientTypeString}>";
+                var callbackParam = new ParameterJv()
+                {
+                    ModelType = modelType,
+                    Name = "serviceCallback",
+                    SerializedName = "serviceCallback",
+                    Documentation = "the async ServiceCallback to handle successful and failed responses."
+                };
+                return callbackParam;
+            }
+        }
+
+        [JsonIgnore]
+        public ParameterVariants ParameterVariants
+        {
+            get
+            {
+                return new ParameterVariants(
+                    allParameters: LocalParameters.Where(p => !p.IsConstant).ToImmutableArray(),
+                    requiredParameters: LocalParameters.Where(p => p.IsRequired && !p.IsConstant).ToImmutableArray()
+                );
+            }
+        }
+
+        public string Javadoc(IEnumerable<ParameterJv> parameters, IEnumerable<string> exceptionsDocumentation, string optionalReturnDocumentation)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine("/**");
@@ -232,26 +277,119 @@ namespace AutoRest.Java.Model
                 builder.AppendLine($" * @param {param.Name} {paramDoc}");
             }
 
-            builder.AppendLine(" * @throws IllegalArgumentException thrown if parameters fail the validation");
-            builder.AppendLine($" * @throws {OperationExceptionTypeString} thrown if the request is rejected by server");
-            builder.AppendLine(" * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent");
-
-            if (ReturnType.Body != null)
+            foreach (var exception in exceptionsDocumentation)
             {
-                builder.AppendLine($" * @return the {ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                builder.AppendLine(exception);
+            }
+
+            if (!string.IsNullOrEmpty(optionalReturnDocumentation))
+            {
+                builder.AppendLine($" * @return {optionalReturnDocumentation}");
             }
 
             builder.AppendLine(" */");
             return builder.ToString();
         }
 
-        public string SyncImpl(List<ParameterJv> parameters)
+        public static string ParameterDeclaration(IEnumerable<ParameterJv> parameters)
         {
             var paramDecls = parameters.Select(parameter => parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
             var paramString = string.Join(", ", paramDecls);
-
+            return paramString;
+        }
+        
+        public static string Arguments(IEnumerable<ParameterJv> parameters)
+        {
             var args = parameters.Select(parameter => parameter.Name.Value);
             var argsString = string.Join(", ", args);
+            return argsString;
+        }
+
+        public IEnumerable<string> AsyncExceptionDocumentation => new[] { " * @throws IllegalArgumentException thrown if parameters fail the validation" };
+
+        // Observable overload generation helpers
+
+
+
+        public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the RestResponse<{ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()}> object";
+
+        public string ObservableRestResponseImpl(IEnumerable<ParameterJv> parameters, bool filterRequired)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}WithRestResponseAsync({ParameterDeclaration(parameters)}) {{");
+            builder.Indent();
+
+            // Check presence of required parameters
+            foreach (var param in parameters)
+            {
+                builder.AppendLine($"if ({param.Name} == null) {{");
+                builder.Indent();
+                builder.AppendLine($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                builder.Outdent();
+                builder.AppendLine("}");
+            }
+
+            // Validate
+            var parametersToValidate = parameters.Where(p => !(p.ModelType is PrimaryType && p.ModelType is EnumType));
+            foreach (var param in parametersToValidate)
+            {
+                builder.AppendLine($"Validator.validate({param.Name});");
+            }
+
+            // Declare constants
+            foreach (var param in LocalParameters.Where(p => p.IsConstant))
+            {
+                builder.AppendLine($"final {param.ModelType.Name} {param.Name} = {param.DefaultValue ?? "null"});");
+            }
+            
+            var beginning = builder.ToString();
+            var mappings = BuildInputMappings(filterRequired);
+            var parameterConversion = ParameterConversion;
+            var epilogue = $"    return service.{Name}({MethodParameterApiInvocation});\n}}";
+
+            return string.Join("\n", beginning, mappings, parameterConversion, epilogue);
+        }
+
+        public string ObservableImpl(IEnumerable<ParameterJv> parameters, bool filterRequired)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
+            builder.Indent();
+        }
+
+        // Callback overload generation helpers
+
+        public string CallbackReturnDocumentation => "the {@link ServiceFuture} object";
+
+        public string CallbackImpl(IEnumerable<ParameterJv> parameters, ParameterJv callbackParam)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public ServiceFuture<{ReturnTypeJv.ServiceFutureGenericParameterString}> {Name}Async({ParameterDeclaration(parameters.ConcatSingleItem(callbackParam))}) {{");
+            builder.Indent();
+            builder.AppendLine($"return ServiceFuture.{ServiceFutureFactoryMethod}({Name}Async({Arguments(parameters)}), {callbackParam.Name});");
+            builder.Outdent();
+            builder.AppendLine("}");
+
+            return builder.ToString();
+        }
+
+        // Sync overload generation helpers
+
+        public IEnumerable<string> SyncExceptionDocumentation => new[]
+        {
+            " * @throws IllegalArgumentException thrown if parameters fail the validation",
+            $" * @throws {OperationExceptionTypeString} thrown if the request is rejected by server",
+            " * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent"
+        };
+
+        public string SyncReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) && ReturnTypeResponseName != "void"
+            ? ""
+            : $"the {ReturnTypeResponseName.EscapeXmlComment()} object if successful.";
+
+        public string SyncImpl(IEnumerable<ParameterJv> parameters)
+        {
+            var paramString = ParameterDeclaration(parameters);
+            var argsString = Arguments(parameters);
 
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine($"public {ReturnTypeResponseName} {Name}({paramString}) {{");
