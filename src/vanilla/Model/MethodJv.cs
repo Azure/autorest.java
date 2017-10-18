@@ -50,6 +50,8 @@ namespace AutoRest.Java.Model
         {
             get
             {
+                bool shouldGenerateXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
+
                 List<string> declarations = new List<string>();
                 foreach (ParameterJv parameter in OrderedRetrofitParameters)
                 {
@@ -81,7 +83,17 @@ namespace AutoRest.Java.Model
                     }
 
                     var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
-                    declarationBuilder.Append(parameter.WireType.Name);
+
+                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameter.ModelType is SequenceType);
+                    if (shouldUseXmlListWrapper)
+                    {
+                        declarationBuilder.Append(parameter.ModelType.XmlName + "Wrapper");
+                    }
+                    else
+                    {
+                        declarationBuilder.Append(parameter.WireType.Name);
+                    }
+
                     declarationBuilder.Append(" " + declarativeName);
                     declarations.Add(declarationBuilder.ToString());
                 }
@@ -186,32 +198,21 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                List<string> invocations = new List<string>();
-                foreach (var parameter in OrderedRetrofitParameters)
-                {
-                    invocations.Add(parameter.WireName);
-                }
-
-                var declaration = string.Join(", ", invocations);
+                var shouldUseXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
+                
+                var arguments = OrderedRetrofitParameters.Select(
+                    p => shouldUseXmlSerialization && (p.WireType is SequenceType)
+                        ? $"new {p.WireType.XmlName}Wrapper({p.WireName})"
+                        : p.WireName);
+                
+                var declaration = string.Join(", ", arguments);
                 return declaration;
             }
         }
 
         [JsonIgnore]
-        public string MethodRequiredParameterApiInvocation
-        {
-            get
-            {
-                List<string> invocations = new List<string>();
-                foreach (var parameter in OrderedRetrofitParameters)
-                {
-                    invocations.Add(parameter.WireName);
-                }
-
-                var declaration = string.Join(", ", invocations);
-                return declaration;
-            }
-        }
+        [Obsolete("Use MethodParameterApiInvocation")]
+        public string MethodRequiredParameterApiInvocation => MethodParameterApiInvocation;
 
         [JsonIgnore]
         public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
@@ -680,6 +681,21 @@ namespace AutoRest.Java.Model
 
                 return result;
             }
+        }
+        
+        internal static bool HasSequenceType(IModelType mt)
+        {
+            if (mt is SequenceType)
+            {
+                return true;
+            }
+
+            if (mt is CompositeType ct)
+            {
+                return ct.Properties.Any(p => HasSequenceType(p.ModelType));
+            }
+
+            return false;
         }
     }
 }

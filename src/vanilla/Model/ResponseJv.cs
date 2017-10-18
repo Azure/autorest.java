@@ -160,12 +160,11 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        [Obsolete("Use ServiceResponseGenericParameterString")]
-        public string ServiceResponseGenericParameterStringWrapped
+        public string XmlWrapperGenericParameterString
         {
             get
             {
-                return ServiceResponseGenericParameterString;
+                return Body.XmlName + "Wrapper";
             }
         }
 

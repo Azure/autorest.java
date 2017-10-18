@@ -124,7 +124,7 @@ public Single<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Async(@
 }
     @Model.BuildInputMappings(true)
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation);
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation);
 }
 @EmptyLine
 </text>

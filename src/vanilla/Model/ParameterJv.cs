@@ -41,7 +41,7 @@ namespace AutoRest.Java.Model
                 base.ModelType = value;
             }
         }
-
+        
         [JsonIgnore]
         public IModelTypeJv ClientType
         {

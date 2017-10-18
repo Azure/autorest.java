@@ -230,21 +230,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             Delete
         }
 
-        private static bool HasSequenceType(IModelType mt)
-        {
-            if (mt is SequenceType)
-            {
-                return true;
-            }
-
-            if (mt is CompositeType ct)
-            {
-                return ct.Properties.Any(p => HasSequenceType(p.ModelType));
-            }
-            
-            return false;
-        }
-
         private static MethodType GetMethodType(MethodJvaf method)
         {
             Regex leading = new Regex("^/+");
