@@ -214,12 +214,12 @@ namespace AutoRest.Java.Model
             get
             {
                 var shouldUseXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
-                
+
                 var arguments = OrderedRetrofitParameters.Select(
                     p => shouldUseXmlSerialization && (p.WireType is SequenceType)
                         ? $"new {p.WireType.XmlName}Wrapper({p.WireName})"
                         : p.WireName);
-                
+
                 var declaration = string.Join(", ", arguments);
                 return declaration;
             }
@@ -297,7 +297,7 @@ namespace AutoRest.Java.Model
             var paramString = string.Join(", ", paramDecls);
             return paramString;
         }
-        
+
         public static string Arguments(IEnumerable<ParameterJv> parameters)
         {
             var args = parameters.Select(parameter => parameter.Name.Value);
@@ -313,14 +313,14 @@ namespace AutoRest.Java.Model
 
         public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the RestResponse<{ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()}> object";
 
-        public string ObservableRestResponseImpl(IEnumerable<ParameterJv> parameters, bool filterRequired)
+        public string ObservableRestResponseImpl(IEnumerable<ParameterJv> parameters, bool takeOnlyRequiredParameters)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}WithRestResponseAsync({ParameterDeclaration(parameters)}) {{");
+            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
 
             // Check presence of required parameters
-            foreach (var param in parameters)
+            foreach (var param in RequiredNullableParameters)
             {
                 builder.AppendLine($"if ({param.Name} == null) {{");
                 builder.Indent();
@@ -329,21 +329,25 @@ namespace AutoRest.Java.Model
                 builder.AppendLine("}");
             }
 
-            // Validate
-            var parametersToValidate = parameters.Where(p => !(p.ModelType is PrimaryType && p.ModelType is EnumType));
-            foreach (var param in parametersToValidate)
+            foreach (var param in LocalParameters)
+            {
+                if (takeOnlyRequiredParameters && !param.IsRequired)
+                {
+                    builder.AppendLine($"final {param.ClientType.Name} {param.Name} = {param.ClientType.GetDefaultValue(this) ?? "null"};");
+                }
+                else if (param.IsConstant)
+                {
+                    builder.AppendLine($"final {param.ClientType.Name} {param.Name} = {param.DefaultValue ?? "null"};");
+                }
+            }
+
+            foreach (var param in ParametersToValidate)
             {
                 builder.AppendLine($"Validator.validate({param.Name});");
             }
 
-            // Declare constants
-            foreach (var param in LocalParameters.Where(p => p.IsConstant))
-            {
-                builder.AppendLine($"final {param.ModelType.Name} {param.Name} = {param.DefaultValue ?? "null"});");
-            }
-            
             var beginning = builder.ToString();
-            var mappings = BuildInputMappings(filterRequired);
+            var mappings = BuildInputMappings(takeOnlyRequiredParameters);
             var parameterConversion = ParameterConversion;
             var epilogue = $"    return service.{Name}({MethodParameterApiInvocation});\n}}";
 
@@ -355,6 +359,7 @@ namespace AutoRest.Java.Model
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
+            throw new NotImplementedException();
         }
 
         // Callback overload generation helpers
@@ -416,7 +421,7 @@ namespace AutoRest.Java.Model
 
         [JsonIgnore]
         public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
-        
+
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
@@ -586,7 +591,7 @@ namespace AutoRest.Java.Model
         }
 
         /// <summary>
-        /// Gets the expression for response body initialization 
+        /// Gets the expression for response body initialization
         /// </summary>
         [JsonIgnore]
         public virtual string InitializeResponseBody
@@ -882,7 +887,7 @@ namespace AutoRest.Java.Model
                 return result;
             }
         }
-        
+
         internal static bool HasSequenceType(IModelType mt)
         {
             if (mt is SequenceType)
