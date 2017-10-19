@@ -10,16 +10,59 @@ namespace AutoRest.Java.Model
 {
     public class ResponseJv : Response
     {
-        protected List<string> _interfaceImports = new List<string>();
-        protected List<string> _implImports = new List<string>();
+        protected readonly List<string> _interfaceImports = new List<string>();
+        protected readonly List<string> _implImports = new List<string>();
+        private readonly Lazy<string> returnValueWireType;
 
         public ResponseJv()
         {
+            returnValueWireType = createReturnValueWireTypeLazy();
         }
 
         public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
             : base(body, headers)
         {
+            returnValueWireType = createReturnValueWireTypeLazy();
+        }
+
+        private Lazy<string> createReturnValueWireTypeLazy()
+        {
+            return new Lazy<string>(() =>
+            {
+                string returnValueWireType = null;
+
+                IModelType body = Body;
+                if (body != null)
+                {
+                    Stack<IModelType> typeStack = new Stack<IModelType>();
+                    typeStack.Push(body);
+                    while (typeStack.Any())
+                    {
+                        IModelType currentType = typeStack.Pop();
+                        if (currentType is SequenceType currentSequenceType)
+                        {
+                            typeStack.Push(currentSequenceType.ElementType);
+                        }
+                        else if (currentType is DictionaryType currentDictionaryType)
+                        {
+                            typeStack.Push(currentDictionaryType.ValueType);
+                        }
+                        else if (currentType is PrimaryType currentPrimaryType)
+                        {
+                            string currentPrimaryTypeName = currentPrimaryType.Name.FixedValue;
+                            if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
+                                currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
+                                currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
+                            {
+                                returnValueWireType = currentPrimaryTypeName;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                return returnValueWireType;
+            });
         }
 
         #region types
@@ -219,35 +262,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                string returnValueWireType = null;
-
-                Stack<IModelType> typeStack = new Stack<IModelType>();
-                typeStack.Push(Body);
-                while (typeStack.Any())
-                {
-                    IModelType currentType = typeStack.Pop();
-                    if (currentType is SequenceType currentSequenceType)
-                    {
-                        typeStack.Push(currentSequenceType.ElementType);
-                    }
-                    else if (currentType is DictionaryType currentDictionaryType)
-                    {
-                        typeStack.Push(currentDictionaryType.ValueType);
-                    }
-                    else if (currentType is PrimaryType currentPrimaryType)
-                    {
-                        string currentPrimaryTypeName = currentPrimaryType.Name.FixedValue;
-                        if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
-                            currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
-                            currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
-                        {
-                            returnValueWireType = currentPrimaryTypeName;
-                            break;
-                        }
-                    }
-                }
-
-                return returnValueWireType;
+                return returnValueWireType.Value;
             }
         }
 
