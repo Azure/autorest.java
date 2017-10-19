@@ -11,6 +11,7 @@
 package fixtures.bodyboolean.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodyboolean.Bools;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -59,37 +60,37 @@ public class BoolsImpl implements Bools {
         @GET("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Boolean> getTrue();
+        Single<RestResponse<Void, Boolean>> getTrue();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
         @PUT("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
+        Single<RestResponse<Void, Void>> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
         @GET("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Boolean> getFalse();
+        Single<RestResponse<Void, Boolean>> getFalse();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
         @PUT("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
+        Single<RestResponse<Void, Void>> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
         @GET("bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Boolean> getNull();
+        Single<RestResponse<Void, Boolean>> getNull();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
         @GET("bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Boolean> getInvalid();
+        Single<RestResponse<Void, Boolean>> getInvalid();
 
     }
 
@@ -112,7 +113,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getTrueAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getTrueAsync(), serviceCallback);
     }
 
@@ -120,11 +121,22 @@ public class BoolsImpl implements Bools {
      * Get true Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getTrueAsync() {
+    public Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync() {
         return service.getTrue();
     }
+
+    /**
+     * Get true Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getTrueAsync() {
+        return getTrueWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -134,6 +146,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putTrue(boolean boolBody) {
         putTrueAsync(boolBody).toBlocking().value();
@@ -147,7 +160,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putTrueAsync(boolean boolBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putTrueAsync(boolBody), serviceCallback);
     }
 
@@ -156,11 +169,23 @@ public class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putTrueAsync(boolean boolBody) {
+    public Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody) {
         return service.putTrue(boolBody);
     }
+
+    /**
+     * Set Boolean value true.
+     *
+     * @param boolBody the boolean value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putTrueAsync(boolean boolBody) {
+        return putTrueWithRestResponseAsync(boolBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -182,7 +207,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getFalseAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getFalseAsync(), serviceCallback);
     }
 
@@ -190,11 +215,22 @@ public class BoolsImpl implements Bools {
      * Get false Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getFalseAsync() {
+    public Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync() {
         return service.getFalse();
     }
+
+    /**
+     * Get false Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getFalseAsync() {
+        return getFalseWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -204,6 +240,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putFalse(boolean boolBody) {
         putFalseAsync(boolBody).toBlocking().value();
@@ -217,7 +254,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putFalseAsync(boolean boolBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putFalseAsync(boolBody), serviceCallback);
     }
 
@@ -226,11 +263,23 @@ public class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFalseAsync(boolean boolBody) {
+    public Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody) {
         return service.putFalse(boolBody);
     }
+
+    /**
+     * Set Boolean value false.
+     *
+     * @param boolBody the boolean value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putFalseAsync(boolean boolBody) {
+        return putFalseWithRestResponseAsync(boolBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -252,7 +301,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNullAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -260,11 +309,22 @@ public class BoolsImpl implements Bools {
      * Get null Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getNullAsync() {
+    public Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
+
+    /**
+     * Get null Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getNullAsync() {
+        return getNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -286,7 +346,7 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getInvalidAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -294,11 +354,22 @@ public class BoolsImpl implements Bools {
      * Get invalid Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getInvalidAsync() {
+    public Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
+
+    /**
+     * Get invalid Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getInvalidAsync() {
+        return getInvalidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

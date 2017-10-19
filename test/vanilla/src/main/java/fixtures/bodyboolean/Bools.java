@@ -10,6 +10,7 @@
 
 package fixtures.bodyboolean;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodyboolean.models.ErrorException;
@@ -48,6 +49,13 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getTrueAsync();
+    /**
+     * Get true Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync();
 
 
     /**
@@ -78,6 +86,14 @@ public interface Bools {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putTrueAsync(boolean boolBody);
+    /**
+     * Set Boolean value true.
+     *
+     * @param boolBody the boolean value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody);
 
 
     /**
@@ -106,6 +122,13 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getFalseAsync();
+    /**
+     * Get false Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync();
 
 
     /**
@@ -136,6 +159,14 @@ public interface Bools {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putFalseAsync(boolean boolBody);
+    /**
+     * Set Boolean value false.
+     *
+     * @param boolBody the boolean value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody);
 
 
     /**
@@ -164,6 +195,13 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getNullAsync();
+    /**
+     * Get null Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync();
 
 
     /**
@@ -192,6 +230,13 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getInvalidAsync();
+    /**
+     * Get invalid Boolean value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync();
 
 
 }

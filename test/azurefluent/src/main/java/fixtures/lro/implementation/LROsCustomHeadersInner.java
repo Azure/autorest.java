@@ -10,6 +10,7 @@
 
 package fixtures.lro.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.OperationStatus;
@@ -68,7 +69,7 @@ public class LROsCustomHeadersInner {
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPut201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
@@ -80,7 +81,7 @@ public class LROsCustomHeadersInner {
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPost202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
@@ -92,7 +93,7 @@ public class LROsCustomHeadersInner {
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPostAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
@@ -104,7 +105,7 @@ public class LROsCustomHeadersInner {
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -195,20 +196,32 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetrySucceededAsync() {
+    public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncRetrySucceededAsync() {
+        return putAsyncRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -231,8 +244,8 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetrySucceededAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -240,12 +253,24 @@ public class LROsCustomHeadersInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
+    public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
+        return putAsyncRetrySucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -335,7 +360,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -343,12 +368,24 @@ public class LROsCustomHeadersInner {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async() {
+    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put201CreatingSucceeded200Async() {
+        return put201CreatingSucceeded200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -371,7 +408,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -380,12 +417,24 @@ public class LROsCustomHeadersInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+        return put201CreatingSucceeded200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -460,6 +509,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void post202Retry200() {
         post202Retry200Async().toBlocking().value();
@@ -472,20 +522,32 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202Retry200Async(), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Single<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> object
+     */
+    public Single<Void> post202Retry200Async() {
+        return post202Retry200WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -494,6 +556,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void post202Retry200(ProductInner product) {
         post202Retry200Async(product).toBlocking().value();
@@ -507,8 +570,8 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202Retry200Async(product), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
     /**
@@ -516,12 +579,24 @@ public class LROsCustomHeadersInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async(ProductInner product) {
+    public Single<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> object
+     */
+    public Single<Void> post202Retry200Async(ProductInner product) {
+        return post202Retry200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -596,6 +671,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded() {
         postAsyncRetrySucceededAsync().toBlocking().value();
@@ -608,20 +684,32 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrySucceededAsync() {
+    public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> object
+     */
+    public Single<Void> postAsyncRetrySucceededAsync() {
+        return postAsyncRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -630,6 +718,7 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded(ProductInner product) {
         postAsyncRetrySucceededAsync(product).toBlocking().value();
@@ -643,8 +732,8 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrySucceededAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -652,12 +741,24 @@ public class LROsCustomHeadersInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrySucceededAsync(ProductInner product) {
+    public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> object
+     */
+    public Single<Void> postAsyncRetrySucceededAsync(ProductInner product) {
+        return postAsyncRetrySucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

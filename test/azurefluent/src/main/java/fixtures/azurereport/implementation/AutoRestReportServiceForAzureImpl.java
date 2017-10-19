@@ -22,6 +22,7 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurereport.ErrorException;
@@ -169,7 +170,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Map<String, Integer>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Map<String, Integer>>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -192,7 +193,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
@@ -200,11 +201,22 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getReportAsync() {
+    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
         return service.getReport(this.acceptLanguage(), this.userAgent());
     }
+
+    /**
+     * Get test coverage report.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
+     */
+    public Single<Map<String, Integer>> getReportAsync() {
+        return getReportWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

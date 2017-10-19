@@ -10,6 +10,7 @@
 
 package fixtures.head.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -57,19 +58,19 @@ public class HttpSuccessInner {
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Boolean> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Boolean> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Boolean> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -92,7 +93,7 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -100,11 +101,22 @@ public class HttpSuccessInner {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> head200Async() {
+    public Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> head200Async() {
+        return head200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -126,7 +138,7 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -134,11 +146,22 @@ public class HttpSuccessInner {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> head204Async() {
+    public Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> head204Async() {
+        return head204WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -160,7 +183,7 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
@@ -168,11 +191,22 @@ public class HttpSuccessInner {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> head404Async() {
+    public Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> head404Async() {
+        return head404WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

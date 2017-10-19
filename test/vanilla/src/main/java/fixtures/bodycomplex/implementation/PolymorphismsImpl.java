@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodycomplex.Polymorphisms;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -61,19 +62,19 @@ public class PolymorphismsImpl implements Polymorphisms {
         @GET("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Fish> getValid();
+        Single<RestResponse<Void, Fish>> getValid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
+        Single<RestResponse<Void, Void>> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
     }
 
@@ -96,7 +97,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+    public ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -104,11 +105,22 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Fish object
+     * @return a {@link Single} emitting the RestResponse<Void, Fish> object
      */
-    public Single<Fish> getValidAsync() {
+    public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
+
+    /**
+     * Get complex types that are polymorphic.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Fish> object
+     */
+    public Single<Fish> getValidAsync() {
+        return getValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Fish>, Fish>() { public Fish call(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -150,6 +162,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
         putValidAsync(complexBody).toBlocking().value();
@@ -159,43 +172,43 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Put complex types that are polymorphic.
      *
      * @param complexBody Please put a salmon that looks like this:
-     {
-             'fishtype':'Salmon',
-             'location':'alaska',
-             'iswild':true,
-             'species':'king',
-             'length':1.0,
-             'siblings':[
-               {
-                 'fishtype':'Shark',
-                 'age':6,
-                 'birthday': '2012-01-05T01:00:00Z',
-                 'length':20.0,
-                 'species':'predator',
-               },
-               {
-                 'fishtype':'Sawshark',
-                 'age':105,
-                 'birthday': '1900-01-05T01:00:00Z',
-                 'length':10.0,
-                 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                 'species':'dangerous',
-               },
-               {
-                 'fishtype': 'goblin',
-                 'age': 1,
-                 'birthday': '2015-08-08T00:00:00Z',
-                 'length': 30.0,
-                 'species': 'scary',
-                 'jawsize': 5
-               }
-             ]
-           };
+    {
+            'fishtype':'Salmon',
+            'location':'alaska',
+            'iswild':true,
+            'species':'king',
+            'length':1.0,
+            'siblings':[
+              {
+                'fishtype':'Shark',
+                'age':6,
+                'birthday': '2012-01-05T01:00:00Z',
+                'length':20.0,
+                'species':'predator',
+              },
+              {
+                'fishtype':'Sawshark',
+                'age':105,
+                'birthday': '1900-01-05T01:00:00Z',
+                'length':10.0,
+                'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                'species':'dangerous',
+              },
+              {
+                'fishtype': 'goblin',
+                'age': 1,
+                'birthday': '2015-08-08T00:00:00Z',
+                'length': 30.0,
+                'species': 'scary',
+                'jawsize': 5
+              }
+            ]
+          };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Fish complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -203,48 +216,92 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Put complex types that are polymorphic.
      *
      * @param complexBody Please put a salmon that looks like this:
-     {
-             'fishtype':'Salmon',
-             'location':'alaska',
-             'iswild':true,
-             'species':'king',
-             'length':1.0,
-             'siblings':[
-               {
-                 'fishtype':'Shark',
-                 'age':6,
-                 'birthday': '2012-01-05T01:00:00Z',
-                 'length':20.0,
-                 'species':'predator',
-               },
-               {
-                 'fishtype':'Sawshark',
-                 'age':105,
-                 'birthday': '1900-01-05T01:00:00Z',
-                 'length':10.0,
-                 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-                 'species':'dangerous',
-               },
-               {
-                 'fishtype': 'goblin',
-                 'age': 1,
-                 'birthday': '2015-08-08T00:00:00Z',
-                 'length': 30.0,
-                 'species': 'scary',
-                 'jawsize': 5
-               }
-             ]
-           };
+    {
+            'fishtype':'Salmon',
+            'location':'alaska',
+            'iswild':true,
+            'species':'king',
+            'length':1.0,
+            'siblings':[
+              {
+                'fishtype':'Shark',
+                'age':6,
+                'birthday': '2012-01-05T01:00:00Z',
+                'length':20.0,
+                'species':'predator',
+              },
+              {
+                'fishtype':'Sawshark',
+                'age':105,
+                'birthday': '1900-01-05T01:00:00Z',
+                'length':10.0,
+                'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                'species':'dangerous',
+              },
+              {
+                'fishtype': 'goblin',
+                'age': 1,
+                'birthday': '2015-08-08T00:00:00Z',
+                'length': 30.0,
+                'species': 'scary',
+                'jawsize': 5
+              }
+            ]
+          };
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Fish complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putValid(complexBody);
     }
+
+    /**
+     * Put complex types that are polymorphic.
+     *
+     * @param complexBody Please put a salmon that looks like this:
+    {
+            'fishtype':'Salmon',
+            'location':'alaska',
+            'iswild':true,
+            'species':'king',
+            'length':1.0,
+            'siblings':[
+              {
+                'fishtype':'Shark',
+                'age':6,
+                'birthday': '2012-01-05T01:00:00Z',
+                'length':20.0,
+                'species':'predator',
+              },
+              {
+                'fishtype':'Sawshark',
+                'age':105,
+                'birthday': '1900-01-05T01:00:00Z',
+                'length':10.0,
+                'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+                'species':'dangerous',
+              },
+              {
+                'fishtype': 'goblin',
+                'age': 1,
+                'birthday': '2015-08-08T00:00:00Z',
+                'length': 30.0,
+                'species': 'scary',
+                'jawsize': 5
+              }
+            ]
+          };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putValidAsync(Fish complexBody) {
+        return putValidWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -279,6 +336,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putValidMissingRequired(Fish complexBody) {
         putValidMissingRequiredAsync(complexBody).toBlocking().value();
@@ -288,36 +346,36 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
-     {
-         "fishtype": "sawshark",
-         "species": "snaggle toothed",
-         "length": 18.5,
-         "age": 2,
-         "birthday": "2013-06-01T01:00:00Z",
-         "location": "alaska",
-         "picture": base64(FF FF FF FF FE),
-         "siblings": [
-             {
-                 "fishtype": "shark",
-                 "species": "predator",
-                 "birthday": "2012-01-05T01:00:00Z",
-                 "length": 20,
-                 "age": 6
-             },
-             {
-                 "fishtype": "sawshark",
-                 "species": "dangerous",
-                 "picture": base64(FF FF FF FF FE),
-                 "length": 10,
-                 "age": 105
-             }
-         ]
-     }
+    {
+        "fishtype": "sawshark",
+        "species": "snaggle toothed",
+        "length": 18.5,
+        "age": 2,
+        "birthday": "2013-06-01T01:00:00Z",
+        "location": "alaska",
+        "picture": base64(FF FF FF FF FE),
+        "siblings": [
+            {
+                "fishtype": "shark",
+                "species": "predator",
+                "birthday": "2012-01-05T01:00:00Z",
+                "length": 20,
+                "age": 6
+            },
+            {
+                "fishtype": "sawshark",
+                "species": "dangerous",
+                "picture": base64(FF FF FF FF FE),
+                "length": 10,
+                "age": 105
+            }
+        ]
+    }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidMissingRequiredAsync(complexBody), serviceCallback);
     }
 
@@ -325,41 +383,78 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      *
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
-     {
-         "fishtype": "sawshark",
-         "species": "snaggle toothed",
-         "length": 18.5,
-         "age": 2,
-         "birthday": "2013-06-01T01:00:00Z",
-         "location": "alaska",
-         "picture": base64(FF FF FF FF FE),
-         "siblings": [
-             {
-                 "fishtype": "shark",
-                 "species": "predator",
-                 "birthday": "2012-01-05T01:00:00Z",
-                 "length": 20,
-                 "age": 6
-             },
-             {
-                 "fishtype": "sawshark",
-                 "species": "dangerous",
-                 "picture": base64(FF FF FF FF FE),
-                 "length": 10,
-                 "age": 105
-             }
-         ]
-     }
+    {
+        "fishtype": "sawshark",
+        "species": "snaggle toothed",
+        "length": 18.5,
+        "age": 2,
+        "birthday": "2013-06-01T01:00:00Z",
+        "location": "alaska",
+        "picture": base64(FF FF FF FF FE),
+        "siblings": [
+            {
+                "fishtype": "shark",
+                "species": "predator",
+                "birthday": "2012-01-05T01:00:00Z",
+                "length": 20,
+                "age": 6
+            },
+            {
+                "fishtype": "sawshark",
+                "species": "dangerous",
+                "picture": base64(FF FF FF FF FE),
+                "length": 10,
+                "age": 105
+            }
+        ]
+    }
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidMissingRequiredAsync(Fish complexBody) {
+    public Single<RestResponse<Void, Void>> putValidMissingRequiredWithRestResponseAsync(Fish complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putValidMissingRequired(complexBody);
     }
+
+    /**
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     *
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+    {
+        "fishtype": "sawshark",
+        "species": "snaggle toothed",
+        "length": 18.5,
+        "age": 2,
+        "birthday": "2013-06-01T01:00:00Z",
+        "location": "alaska",
+        "picture": base64(FF FF FF FF FE),
+        "siblings": [
+            {
+                "fishtype": "shark",
+                "species": "predator",
+                "birthday": "2012-01-05T01:00:00Z",
+                "length": 20,
+                "age": 6
+            },
+            {
+                "fishtype": "sawshark",
+                "species": "dangerous",
+                "picture": base64(FF FF FF FF FE),
+                "length": 10,
+                "age": 105
+            }
+        ]
+    }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putValidMissingRequiredAsync(Fish complexBody) {
+        return putValidMissingRequiredWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

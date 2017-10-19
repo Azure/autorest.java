@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
@@ -58,25 +59,25 @@ public class ApiVersionLocalsInner {
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalNull" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getPathLocalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getSwaggerLocalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -86,6 +87,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getMethodLocalValid() {
         getMethodLocalValidAsync().toBlocking().value();
@@ -98,7 +100,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalValidAsync(), serviceCallback);
     }
 
@@ -106,12 +108,23 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalValidAsync() {
+    public Single<RestResponse<Void, Void>> getMethodLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
         return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getMethodLocalValidAsync() {
+        return getMethodLocalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -120,6 +133,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getMethodLocalNull() {
         getMethodLocalNullAsync().toBlocking().value();
@@ -132,7 +146,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodLocalNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalNullAsync(), serviceCallback);
     }
 
@@ -140,12 +154,23 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalNullAsync() {
+    public Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync() {
         final String apiVersion = null;
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getMethodLocalNullAsync() {
+        return getMethodLocalNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -154,6 +179,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getMethodLocalNull(String apiVersion) {
         getMethodLocalNullAsync(apiVersion).toBlocking().value();
@@ -167,7 +193,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodLocalNullAsync(apiVersion), serviceCallback);
     }
 
@@ -176,11 +202,23 @@ public class ApiVersionLocalsInner {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalNullAsync(String apiVersion) {
+    public Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync(String apiVersion) {
         return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getMethodLocalNullAsync(String apiVersion) {
+        return getMethodLocalNullWithRestResponseAsync(apiVersion)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -189,6 +227,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getPathLocalValid() {
         getPathLocalValidAsync().toBlocking().value();
@@ -201,7 +240,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathLocalValidAsync(), serviceCallback);
     }
 
@@ -209,12 +248,23 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathLocalValidAsync() {
+    public Single<RestResponse<Void, Void>> getPathLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
         return service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getPathLocalValidAsync() {
+        return getPathLocalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -223,6 +273,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getSwaggerLocalValid() {
         getSwaggerLocalValidAsync().toBlocking().value();
@@ -235,7 +286,7 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerLocalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerLocalValidAsync(), serviceCallback);
     }
 
@@ -243,12 +294,23 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerLocalValidAsync() {
+    public Single<RestResponse<Void, Void>> getSwaggerLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
         return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getSwaggerLocalValidAsync() {
+        return getSwaggerLocalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

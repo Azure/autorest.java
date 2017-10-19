@@ -10,6 +10,7 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.url.models.ErrorException;
@@ -51,6 +52,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanTrueAsync();
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
 
 
     /**
@@ -78,6 +86,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanFalseAsync();
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanNullAsync();
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync();
     /**
      * Get null Boolean value on query (query string should be absent).
      *
@@ -133,6 +156,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanNullAsync(Boolean boolQuery);
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
 
 
     /**
@@ -160,6 +191,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntOneMillionAsync();
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
 
 
     /**
@@ -187,6 +225,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNegativeOneMillionAsync();
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
 
 
     /**
@@ -214,6 +259,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNullAsync();
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync();
     /**
      * Get null integer value (no query parameter).
      *
@@ -242,6 +295,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNullAsync(Integer intQuery);
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery);
 
 
     /**
@@ -269,6 +330,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getTenBillionAsync();
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
 
 
     /**
@@ -296,6 +364,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getNegativeTenBillionAsync();
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
 
 
     /**
@@ -323,6 +398,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getLongNullAsync();
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync();
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
@@ -351,6 +434,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getLongNullAsync(Long longQuery);
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery);
 
 
     /**
@@ -378,6 +469,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificPositiveAsync();
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
 
 
     /**
@@ -405,6 +503,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificNegativeAsync();
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
 
 
     /**
@@ -432,6 +537,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatNullAsync();
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync();
     /**
      * Get null numeric value (no query parameter).
      *
@@ -460,6 +573,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatNullAsync(Double floatQuery);
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery);
 
 
     /**
@@ -487,6 +608,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalPositiveAsync();
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
 
 
     /**
@@ -514,6 +642,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalNegativeAsync();
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
 
 
     /**
@@ -541,6 +676,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleNullAsync();
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync();
     /**
      * Get null numeric value (no query parameter).
      *
@@ -569,6 +712,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleNullAsync(Double doubleQuery);
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery);
 
 
     /**
@@ -596,6 +747,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUnicodeAsync();
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
 
 
     /**
@@ -623,6 +781,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUrlEncodedAsync();
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
 
 
     /**
@@ -650,6 +815,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringEmptyAsync();
+    /**
+     * Get ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
 
 
     /**
@@ -677,6 +849,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringNullAsync();
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync();
     /**
      * Get null (no query parameter in url).
      *
@@ -705,6 +885,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringNullAsync(String stringQuery);
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery);
 
 
     /**
@@ -732,6 +920,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumValidAsync();
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync();
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -760,6 +956,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumValidAsync(UriColor enumQuery);
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery);
 
 
     /**
@@ -787,6 +991,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumNullAsync();
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync();
     /**
      * Get null (no query parameter in url).
      *
@@ -815,6 +1027,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumNullAsync(UriColor enumQuery);
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery);
 
 
     /**
@@ -842,6 +1062,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteMultiByteAsync();
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync();
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -870,6 +1098,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteMultiByteAsync(byte[] byteQuery);
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
 
 
     /**
@@ -897,6 +1133,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteEmptyAsync();
+    /**
+     * Get '' as byte array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
 
 
     /**
@@ -924,6 +1167,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteNullAsync();
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync();
     /**
      * Get null as byte array (no query parameters in uri).
      *
@@ -952,6 +1203,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteNullAsync(byte[] byteQuery);
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery);
 
 
     /**
@@ -979,6 +1238,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateValidAsync();
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
 
 
     /**
@@ -1006,6 +1272,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateNullAsync();
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync();
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -1034,6 +1308,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateNullAsync(LocalDate dateQuery);
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery);
 
 
     /**
@@ -1061,6 +1343,13 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeValidAsync();
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
 
 
     /**
@@ -1088,6 +1377,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeNullAsync();
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync();
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
@@ -1116,6 +1413,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeNullAsync(DateTime dateTimeQuery);
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
 
 
     /**
@@ -1143,6 +1448,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -1171,6 +1484,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
 
 
     /**
@@ -1198,6 +1519,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvNullAsync();
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync();
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -1226,6 +1555,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
 
 
     /**
@@ -1253,6 +1590,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvEmptyAsync();
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync();
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -1281,6 +1626,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
 
 
     /**
@@ -1308,6 +1661,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringSsvValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -1336,6 +1697,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
 
 
     /**
@@ -1363,6 +1732,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringTsvValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
@@ -1391,6 +1768,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
 
 
     /**
@@ -1418,6 +1803,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringPipesValidAsync();
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync();
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -1446,6 +1839,14 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
 
 
 }

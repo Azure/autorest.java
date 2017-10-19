@@ -11,6 +11,7 @@
 package fixtures.validation;
 
 import com.microsoft.rest.RestException;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.validation.models.ErrorException;
@@ -98,6 +99,15 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(String resourceGroupName, int id);
 
 
     /**
@@ -132,6 +142,16 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfBodyAsync(String resourceGroupName, int id);
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id);
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -167,6 +187,16 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id, Product body);
 
 
     /**
@@ -191,6 +221,12 @@ public interface AutoRestValidationTest {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getWithConstantInPathAsync();
+    /**
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync();
 
 
     /**
@@ -216,6 +252,13 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> postWithConstantInBodyAsync();
+
+    /**
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync();
     /**
      *
      * @param body the Product value
@@ -242,6 +285,13 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> postWithConstantInBodyAsync(Product body);
+    /**
+     *
+     * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body);
 
 
 }

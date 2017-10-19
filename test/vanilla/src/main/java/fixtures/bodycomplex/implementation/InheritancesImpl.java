@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodycomplex.Inheritances;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -61,13 +62,13 @@ public class InheritancesImpl implements Inheritances {
         @GET("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Siamese> getValid();
+        Single<RestResponse<Void, Siamese>> getValid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Inheritances putValid" })
         @PUT("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
+        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
 
     }
 
@@ -90,7 +91,7 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
+    public ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -98,11 +99,22 @@ public class InheritancesImpl implements Inheritances {
      * Get complex types that extend others.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Siamese object
+     * @return a {@link Single} emitting the RestResponse<Void, Siamese> object
      */
-    public Single<Siamese> getValidAsync() {
+    public Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
+
+    /**
+     * Get complex types that extend others.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Siamese> object
+     */
+    public Single<Siamese> getValidAsync() {
+        return getValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Siamese>, Siamese>() { public Siamese call(RestResponse<Void, Siamese> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -112,6 +124,7 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putValid(Siamese complexBody) {
         putValidAsync(complexBody).toBlocking().value();
@@ -125,7 +138,7 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Siamese complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -134,15 +147,27 @@ public class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Siamese complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Siamese complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putValid(complexBody);
     }
+
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putValidAsync(Siamese complexBody) {
+        return putValidWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

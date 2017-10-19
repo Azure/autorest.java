@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodycomplex.Arrays;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -61,31 +62,31 @@ public class ArraysImpl implements Arrays {
         @GET("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<ArrayWrapper> getValid();
+        Single<RestResponse<Void, ArrayWrapper>> getValid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays putValid" })
         @PUT("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
+        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getEmpty" })
         @GET("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<ArrayWrapper> getEmpty();
+        Single<RestResponse<Void, ArrayWrapper>> getEmpty();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays putEmpty" })
         @PUT("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
+        Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getNotProvided" })
         @GET("complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<ArrayWrapper> getNotProvided();
+        Single<RestResponse<Void, ArrayWrapper>> getNotProvided();
 
     }
 
@@ -108,7 +109,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceFuture<ArrayWrapper> getValidAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -116,11 +117,22 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ArrayWrapper object
+     * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getValidAsync() {
+    public Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
+
+    /**
+     * Get complex types with array property.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
+     */
+    public Single<ArrayWrapper> getValidAsync() {
+        return getValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -130,6 +142,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putValid(ArrayWrapper complexBody) {
         putValidAsync(complexBody).toBlocking().value();
@@ -143,7 +156,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -152,15 +165,27 @@ public class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(ArrayWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putValid(complexBody);
     }
+
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putValidAsync(ArrayWrapper complexBody) {
+        return putValidWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -182,7 +207,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceFuture<ArrayWrapper> getEmptyAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -190,11 +215,22 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property which is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ArrayWrapper object
+     * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getEmptyAsync() {
+    public Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
+
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
+     */
+    public Single<ArrayWrapper> getEmptyAsync() {
+        return getEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -204,6 +240,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putEmpty(ArrayWrapper complexBody) {
         putEmptyAsync(complexBody).toBlocking().value();
@@ -217,7 +254,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putEmptyAsync(ArrayWrapper complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putEmptyAsync(complexBody), serviceCallback);
     }
 
@@ -226,15 +263,27 @@ public class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(ArrayWrapper complexBody) {
+    public Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(ArrayWrapper complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putEmpty(complexBody);
     }
+
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putEmptyAsync(ArrayWrapper complexBody) {
+        return putEmptyWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -256,7 +305,7 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceFuture<ArrayWrapper> getNotProvidedAsync(ServiceCallback<ArrayWrapper> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 
@@ -264,11 +313,22 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ArrayWrapper object
+     * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getNotProvidedAsync() {
+    public Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
+
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
+     */
+    public Single<ArrayWrapper> getNotProvidedAsync() {
+        return getNotProvidedWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

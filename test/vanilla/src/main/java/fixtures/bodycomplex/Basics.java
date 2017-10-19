@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodycomplex.models.Basic;
@@ -49,6 +50,13 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getValidAsync();
+    /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Basic object
+     */
+    Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync();
 
 
     /**
@@ -79,6 +87,14 @@ public interface Basics {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(Basic complexBody);
+    /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Basic complexBody);
 
 
     /**
@@ -107,6 +123,13 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getInvalidAsync();
+    /**
+     * Get a basic complex type that is invalid for the local strong type.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Basic object
+     */
+    Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync();
 
 
     /**
@@ -135,6 +158,13 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getEmptyAsync();
+    /**
+     * Get a basic complex type that is empty.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Basic object
+     */
+    Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync();
 
 
     /**
@@ -163,6 +193,13 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getNullAsync();
+    /**
+     * Get a basic complex type whose properties are null.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Basic object
+     */
+    Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync();
 
 
     /**
@@ -191,6 +228,13 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getNotProvidedAsync();
+    /**
+     * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Basic object
+     */
+    Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync();
 
 
 }

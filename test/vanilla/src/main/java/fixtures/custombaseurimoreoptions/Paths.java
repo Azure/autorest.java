@@ -10,6 +10,7 @@
 
 package fixtures.custombaseurimoreoptions;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
@@ -56,6 +57,17 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String vault, String secret, String keyName);
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName);
     /**
      * Get a 200 to test a valid base uri.
      *
@@ -93,6 +105,17 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion);
 
 
 }

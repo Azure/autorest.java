@@ -11,6 +11,7 @@
 package fixtures.bodybyte.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodybyte.Bytes;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -59,31 +60,31 @@ public class BytesImpl implements Bytes {
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<byte[]> getNull();
+        Single<RestResponse<Void, byte[]>> getNull();
 
         @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getEmpty" })
         @GET("byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<byte[]> getEmpty();
+        Single<RestResponse<Void, byte[]>> getEmpty();
 
         @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getNonAscii" })
         @GET("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<byte[]> getNonAscii();
+        Single<RestResponse<Void, byte[]>> getNonAscii();
 
         @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes putNonAscii" })
         @PUT("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putNonAscii(@BodyParam("application/json; charset=utf-8") byte[] byteBody);
+        Single<RestResponse<Void, Void>> putNonAscii(@BodyParam("application/json; charset=utf-8") byte[] byteBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getInvalid" })
         @GET("byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<byte[]> getInvalid();
+        Single<RestResponse<Void, byte[]>> getInvalid();
 
     }
 
@@ -106,7 +107,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNullAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -114,11 +115,22 @@ public class BytesImpl implements Bytes {
      * Get null byte value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getNullAsync() {
+    public Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
+
+    /**
+     * Get null byte value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
+     */
+    public Single<byte[]> getNullAsync() {
+        return getNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -140,7 +152,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getEmptyAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -148,11 +160,22 @@ public class BytesImpl implements Bytes {
      * Get empty byte value ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getEmptyAsync() {
+    public Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
+
+    /**
+     * Get empty byte value ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
+     */
+    public Single<byte[]> getEmptyAsync() {
+        return getEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -174,7 +197,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getNonAsciiAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getNonAsciiAsync(), serviceCallback);
     }
 
@@ -182,11 +205,22 @@ public class BytesImpl implements Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getNonAsciiAsync() {
+    public Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync() {
         return service.getNonAscii();
     }
+
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
+     */
+    public Single<byte[]> getNonAsciiAsync() {
+        return getNonAsciiWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -196,6 +230,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putNonAscii(byte[] byteBody) {
         putNonAsciiAsync(byteBody).toBlocking().value();
@@ -209,7 +244,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putNonAsciiAsync(byteBody), serviceCallback);
     }
 
@@ -218,14 +253,26 @@ public class BytesImpl implements Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNonAsciiAsync(byte[] byteBody) {
+    public Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody) {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
         return service.putNonAscii(byteBody);
     }
+
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putNonAsciiAsync(byte[] byteBody) {
+        return putNonAsciiWithRestResponseAsync(byteBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -247,7 +294,7 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceFuture<byte[]> getInvalidAsync(ServiceCallback<byte[]> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -255,11 +302,22 @@ public class BytesImpl implements Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getInvalidAsync() {
+    public Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
+
+    /**
+     * Get invalid byte value ':::SWAGGER::::'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
+     */
+    public Single<byte[]> getInvalidAsync() {
+        return getInvalidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

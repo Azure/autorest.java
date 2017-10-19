@@ -11,6 +11,7 @@
 package fixtures.bodyduration.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodyduration.Durations;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -60,25 +61,25 @@ public class DurationsImpl implements Durations {
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Period> getNull();
+        Single<RestResponse<Void, Period>> getNull();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations putPositiveDuration" })
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
+        Single<RestResponse<Void, Void>> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getPositiveDuration" })
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Period> getPositiveDuration();
+        Single<RestResponse<Void, Period>> getPositiveDuration();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getInvalid" })
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Period> getInvalid();
+        Single<RestResponse<Void, Period>> getInvalid();
 
     }
 
@@ -101,7 +102,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getNullAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -109,11 +110,22 @@ public class DurationsImpl implements Durations {
      * Get null duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getNullAsync() {
+    public Single<RestResponse<Void, Period>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
+
+    /**
+     * Get null duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     */
+    public Single<Period> getNullAsync() {
+        return getNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -123,6 +135,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putPositiveDuration(Period durationBody) {
         putPositiveDurationAsync(durationBody).toBlocking().value();
@@ -136,7 +149,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putPositiveDurationAsync(durationBody), serviceCallback);
     }
 
@@ -145,14 +158,26 @@ public class DurationsImpl implements Durations {
      *
      * @param durationBody the Period value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putPositiveDurationAsync(Period durationBody) {
+    public Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody) {
         if (durationBody == null) {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
         return service.putPositiveDuration(durationBody);
     }
+
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putPositiveDurationAsync(Period durationBody) {
+        return putPositiveDurationWithRestResponseAsync(durationBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -174,7 +199,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getPositiveDurationAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getPositiveDurationAsync(), serviceCallback);
     }
 
@@ -182,11 +207,22 @@ public class DurationsImpl implements Durations {
      * Get a positive duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getPositiveDurationAsync() {
+    public Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync() {
         return service.getPositiveDuration();
     }
+
+    /**
+     * Get a positive duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     */
+    public Single<Period> getPositiveDurationAsync() {
+        return getPositiveDurationWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -208,7 +244,7 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceFuture<Period> getInvalidAsync(ServiceCallback<Period> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -216,11 +252,22 @@ public class DurationsImpl implements Durations {
      * Get an invalid duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getInvalidAsync() {
+    public Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
+
+    /**
+     * Get an invalid duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Period> object
+     */
+    public Single<Period> getInvalidAsync() {
+        return getInvalidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

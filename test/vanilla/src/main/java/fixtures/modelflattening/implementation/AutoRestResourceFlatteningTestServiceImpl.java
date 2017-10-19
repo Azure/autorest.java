@@ -12,6 +12,7 @@ package fixtures.modelflattening.implementation;
 
 import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;
@@ -99,67 +100,67 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         @PUT("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray);
+        Single<RestResponse<Void, Void>> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray);
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getArray" })
         @GET("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<List<FlattenedProduct>> getArray();
+        Single<RestResponse<Void, List<FlattenedProduct>>> getArray();
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putWrappedArray" })
         @PUT("model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putWrappedArray(@BodyParam("application/json; charset=utf-8") List<WrappedProduct> resourceArray);
+        Single<RestResponse<Void, Void>> putWrappedArray(@BodyParam("application/json; charset=utf-8") List<WrappedProduct> resourceArray);
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getWrappedArray" })
         @GET("model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<List<ProductWrapper>> getWrappedArray();
+        Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArray();
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary);
+        Single<RestResponse<Void, Void>> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary);
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getDictionary" })
         @GET("model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Map<String, FlattenedProduct>> getDictionary();
+        Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionary();
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject);
+        Single<RestResponse<Void, Void>> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject);
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<ResourceCollection> getResourceCollection();
+        Single<RestResponse<Void, ResourceCollection>> getResourceCollection();
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putSimpleProduct" })
         @PUT("model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<SimpleProduct> putSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
+        Single<RestResponse<Void, SimpleProduct>> putSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService postFlattenedSimpleProduct" })
         @POST("model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<SimpleProduct> postFlattenedSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
+        Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putSimpleProductWithGrouping" })
         @PUT("model-flatten/customFlattening/parametergrouping/{name}/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<SimpleProduct> putSimpleProductWithGrouping(@PathParam("name") String name, @BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
+        Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGrouping(@PathParam("name") String name, @BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
     }
 
@@ -169,6 +170,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putArray() {
         putArrayAsync().toBlocking().value();
@@ -181,7 +183,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(), serviceCallback);
     }
 
@@ -189,12 +191,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as an Array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync() {
+    public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
+        Validator.validate(resourceArray);
         return service.putArray(resourceArray);
     }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putArrayAsync() {
+        return putArrayWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Put External Resource as an Array.
@@ -203,6 +217,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putArray(List<Resource> resourceArray) {
         putArrayAsync(resourceArray).toBlocking().value();
@@ -216,7 +231,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putArrayAsync(resourceArray), serviceCallback);
     }
 
@@ -225,12 +240,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync(List<Resource> resourceArray) {
+    public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
         return service.putArray(resourceArray);
     }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putArrayAsync(List<Resource> resourceArray) {
+        return putArrayWithRestResponseAsync(resourceArray)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -252,7 +279,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getArrayAsync(), serviceCallback);
     }
 
@@ -260,11 +287,22 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as an Array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
      */
-    public Single<List<FlattenedProduct>> getArrayAsync() {
+    public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
         return service.getArray();
     }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
+     */
+    public Single<List<FlattenedProduct>> getArrayAsync() {
+        return getArrayWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, List<FlattenedProduct>>, List<FlattenedProduct>>() { public List<FlattenedProduct> call(RestResponse<Void, List<FlattenedProduct>> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -273,6 +311,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putWrappedArray() {
         putWrappedArrayAsync().toBlocking().value();
@@ -285,7 +324,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putWrappedArrayAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWrappedArrayAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(), serviceCallback);
     }
 
@@ -293,12 +332,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWrappedArrayAsync() {
+    public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync() {
         final List<WrappedProduct> resourceArray = null;
+        Validator.validate(resourceArray);
         return service.putWrappedArray(resourceArray);
     }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putWrappedArrayAsync() {
+        return putWrappedArrayWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -307,6 +358,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putWrappedArray(List<WrappedProduct> resourceArray) {
         putWrappedArrayAsync(resourceArray).toBlocking().value();
@@ -320,7 +372,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putWrappedArrayAsync(resourceArray), serviceCallback);
     }
 
@@ -329,12 +381,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
+    public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
         Validator.validate(resourceArray);
         return service.putWrappedArray(resourceArray);
     }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
+        return putWrappedArrayWithRestResponseAsync(resourceArray)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -356,7 +420,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(final ServiceCallback<List<ProductWrapper>> serviceCallback) {
+    public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(ServiceCallback<List<ProductWrapper>> serviceCallback) {
         return ServiceFuture.fromBody(getWrappedArrayAsync(), serviceCallback);
     }
 
@@ -364,11 +428,22 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;ProductWrapper&gt; object
+     * @return a {@link Single} emitting the RestResponse<Void, List<ProductWrapper>> object
      */
-    public Single<List<ProductWrapper>> getWrappedArrayAsync() {
+    public Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync() {
         return service.getWrappedArray();
     }
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, List<ProductWrapper>> object
+     */
+    public Single<List<ProductWrapper>> getWrappedArrayAsync() {
+        return getWrappedArrayWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, List<ProductWrapper>>, List<ProductWrapper>>() { public List<ProductWrapper> call(RestResponse<Void, List<ProductWrapper>> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -377,6 +452,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putDictionary() {
         putDictionaryAsync().toBlocking().value();
@@ -389,7 +465,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(), serviceCallback);
     }
 
@@ -397,12 +473,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as a Dictionary.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync() {
+    public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
+        Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary);
     }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putDictionaryAsync() {
+        return putDictionaryWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Put External Resource as a Dictionary.
@@ -411,6 +499,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
         putDictionaryAsync(resourceDictionary).toBlocking().value();
@@ -424,7 +513,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putDictionaryAsync(resourceDictionary), serviceCallback);
     }
 
@@ -433,12 +522,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary);
     }
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+        return putDictionaryWithRestResponseAsync(resourceDictionary)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -460,7 +561,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
+    public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         return ServiceFuture.fromBody(getDictionaryAsync(), serviceCallback);
     }
 
@@ -468,11 +569,22 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as a Dictionary.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
      */
-    public Single<Map<String, FlattenedProduct>> getDictionaryAsync() {
+    public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
         return service.getDictionary();
     }
+
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
+     */
+    public Single<Map<String, FlattenedProduct>> getDictionaryAsync() {
+        return getDictionaryWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() { public Map<String, FlattenedProduct> call(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -481,6 +593,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putResourceCollection() {
         putResourceCollectionAsync().toBlocking().value();
@@ -493,7 +606,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(), serviceCallback);
     }
 
@@ -501,12 +614,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync() {
+    public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
+        Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject);
     }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putResourceCollectionAsync() {
+        return putResourceCollectionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -515,6 +640,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
         putResourceCollectionAsync(resourceComplexObject).toBlocking().value();
@@ -528,7 +654,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putResourceCollectionAsync(resourceComplexObject), serviceCallback);
     }
 
@@ -537,12 +663,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+    public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject);
     }
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+        return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -564,7 +702,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
+    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(ServiceCallback<ResourceCollection> serviceCallback) {
         return ServiceFuture.fromBody(getResourceCollectionAsync(), serviceCallback);
     }
 
@@ -572,11 +710,22 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ResourceCollection object
+     * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
      */
-    public Single<ResourceCollection> getResourceCollectionAsync() {
+    public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
         return service.getResourceCollection();
     }
+
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
+     */
+    public Single<ResourceCollection> getResourceCollectionAsync() {
+        return getResourceCollectionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ResourceCollection>, ResourceCollection>() { public ResourceCollection call(RestResponse<Void, ResourceCollection> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -598,7 +747,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> putSimpleProductAsync(ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(), serviceCallback);
     }
 
@@ -606,12 +755,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put Simple Product with client flattening true on the model.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> putSimpleProductAsync() {
+    public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync() {
         final SimpleProduct simpleBodyProduct = null;
+        Validator.validate(simpleBodyProduct);
         return service.putSimpleProduct(simpleBodyProduct);
     }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     */
+    public Single<SimpleProduct> putSimpleProductAsync() {
+        return putSimpleProductWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -634,7 +795,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductAsync(simpleBodyProduct), serviceCallback);
     }
 
@@ -643,12 +804,24 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param simpleBodyProduct Simple body product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
+    public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
         Validator.validate(simpleBodyProduct);
         return service.putSimpleProduct(simpleBodyProduct);
     }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     */
+    public Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
+        return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
+            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -674,7 +847,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName), serviceCallback);
     }
 
@@ -684,9 +857,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
+    public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(String productId, String maxProductDisplayName) {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
@@ -696,14 +869,27 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         final String description = null;
         final String genericValue = null;
         final String odatavalue = null;
-        SimpleProduct simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.withProductId(productId);
-        simpleBodyProduct.withDescription(null);
-        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.withGenericValue(null);
-        simpleBodyProduct.withOdatavalue(null);
+    SimpleProduct simpleBodyProduct = new SimpleProduct();
+    simpleBodyProduct.withProductId(productId);
+    simpleBodyProduct.withDescription(null);
+    simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+    simpleBodyProduct.withGenericValue(null);
+    simpleBodyProduct.withOdatavalue(null);
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     */
+    public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
+        return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
+            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -734,7 +920,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
     }
 
@@ -747,26 +933,42 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
+    public Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         if (productId == null) {
             throw new IllegalArgumentException("Parameter productId is required and cannot be null.");
         }
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
-        SimpleProduct simpleBodyProduct = null;
-        if (description != null || genericValue != null || odatavalue != null) {
-            simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.withProductId(productId);
-            simpleBodyProduct.withDescription(description);
-            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.withGenericValue(genericValue);
-            simpleBodyProduct.withOdatavalue(odatavalue);
-        }
+    SimpleProduct simpleBodyProduct = null;
+    if (description != null || genericValue != null || odatavalue != null) {
+        simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.withProductId(productId);
+        simpleBodyProduct.withDescription(description);
+        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct.withGenericValue(genericValue);
+        simpleBodyProduct.withOdatavalue(odatavalue);
+    }
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param description Description of product.
+     * @param genericValue Generic URL value.
+     * @param odatavalue URL value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     */
+    public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
+        return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
+            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -790,7 +992,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, ServiceCallback<SimpleProduct> serviceCallback) {
         return ServiceFuture.fromBody(putSimpleProductWithGroupingAsync(flattenParameterGroup), serviceCallback);
     }
 
@@ -799,30 +1001,42 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param flattenParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SimpleProduct object
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
+    public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(FlattenParameterGroup flattenParameterGroup) {
         if (flattenParameterGroup == null) {
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }
         Validator.validate(flattenParameterGroup);
-        String name = flattenParameterGroup.name();
-        String productId = flattenParameterGroup.productId();
-        String description = flattenParameterGroup.description();
-        String maxProductDisplayName = flattenParameterGroup.maxProductDisplayName();
-        String genericValue = flattenParameterGroup.genericValue();
-        String odatavalue = flattenParameterGroup.odatavalue();
-        SimpleProduct simpleBodyProduct = null;
-        if (description != null || genericValue != null || odatavalue != null) {
-            simpleBodyProduct = new SimpleProduct();
-            simpleBodyProduct.withProductId(productId);
-            simpleBodyProduct.withDescription(description);
-            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProduct.withGenericValue(genericValue);
-            simpleBodyProduct.withOdatavalue(odatavalue);
-        }
+    String name = flattenParameterGroup.name();
+    String productId = flattenParameterGroup.productId();
+    String description = flattenParameterGroup.description();
+    String maxProductDisplayName = flattenParameterGroup.maxProductDisplayName();
+    String genericValue = flattenParameterGroup.genericValue();
+    String odatavalue = flattenParameterGroup.odatavalue();
+    SimpleProduct simpleBodyProduct = null;
+    if (description != null || genericValue != null || odatavalue != null) {
+        simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.withProductId(productId);
+        simpleBodyProduct.withDescription(description);
+        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct.withGenericValue(genericValue);
+        simpleBodyProduct.withOdatavalue(odatavalue);
+    }
         return service.putSimpleProductWithGrouping(name, simpleBodyProduct);
     }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
+     */
+    public Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
+        return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
+            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

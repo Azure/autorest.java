@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
@@ -58,7 +59,7 @@ public class OdatasInner {
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -68,6 +69,7 @@ public class OdatasInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getWithFilter() {
         getWithFilterAsync().toBlocking().value();
@@ -80,7 +82,7 @@ public class OdatasInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithFilterAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(), serviceCallback);
     }
 
@@ -88,14 +90,25 @@ public class OdatasInner {
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithFilterAsync() {
+    public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync() {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getWithFilterAsync() {
+        return getWithFilterWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -106,6 +119,7 @@ public class OdatasInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
         getWithFilterAsync(filter, top, orderby).toBlocking().value();
@@ -121,7 +135,7 @@ public class OdatasInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithFilterAsync(filter, top, orderby), serviceCallback);
     }
 
@@ -132,11 +146,25 @@ public class OdatasInner {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
+    public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
         return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
+        return getWithFilterWithRestResponseAsync(filter, top, orderby)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

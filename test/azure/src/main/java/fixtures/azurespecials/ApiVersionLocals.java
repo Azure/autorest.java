@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
@@ -48,6 +49,14 @@ public interface ApiVersionLocals {
      */
     Single<Void> getMethodLocalValidAsync();
 
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getMethodLocalValidWithRestResponseAsync();
+
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -77,6 +86,14 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getMethodLocalNullWithRestResponseAsync();
+    }
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -102,6 +119,15 @@ public interface ApiVersionLocals {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodLocalNullAsync(String apiVersion);
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     *
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getMethodLocalNullWithRestResponseAsync(String apiVersion);
 
 
     /**
@@ -130,6 +156,14 @@ public interface ApiVersionLocals {
      */
     Single<Void> getPathLocalValidAsync();
 
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getPathLocalValidWithRestResponseAsync();
+
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -156,6 +190,14 @@ public interface ApiVersionLocals {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getSwaggerLocalValidAsync();
+
+    /**
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getSwaggerLocalValidWithRestResponseAsync();
 
 
 }

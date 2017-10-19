@@ -10,6 +10,7 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
+import com.microsoft.rest.RestResponse;
 import fixtures.subscriptionidapiversion.Groups;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -61,7 +62,7 @@ public class GroupsImpl implements Groups {
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<SampleResourceGroup> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -86,7 +87,7 @@ public class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
+    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, ServiceCallback<SampleResourceGroup> serviceCallback) {
         return ServiceFuture.fromBody(getSampleResourceGroupAsync(resourceGroupName), serviceCallback);
     }
 
@@ -95,9 +96,9 @@ public class GroupsImpl implements Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroup object
+     * @return a {@link Single} emitting the RestResponse<Void, SampleResourceGroup> object
      */
-    public Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -109,6 +110,18 @@ public class GroupsImpl implements Groups {
         }
         return service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
+     *
+     * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SampleResourceGroup> object
+     */
+    public Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
+        return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
+            .map(new Func1<RestResponse<Void, SampleResourceGroup>, SampleResourceGroup>() { public SampleResourceGroup call(RestResponse<Void, SampleResourceGroup> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

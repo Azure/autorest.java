@@ -10,6 +10,7 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.url.models.ErrorException;
@@ -51,6 +52,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanTrueAsync();
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
 
 
     /**
@@ -78,6 +86,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanFalseAsync();
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntOneMillionAsync();
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
 
 
     /**
@@ -132,6 +154,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNegativeOneMillionAsync();
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
 
 
     /**
@@ -159,6 +188,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getTenBillionAsync();
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
 
 
     /**
@@ -186,6 +222,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getNegativeTenBillionAsync();
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
 
 
     /**
@@ -213,6 +256,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificPositiveAsync();
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
 
 
     /**
@@ -240,6 +290,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificNegativeAsync();
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
 
 
     /**
@@ -267,6 +324,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalPositiveAsync();
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
 
 
     /**
@@ -294,6 +358,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalNegativeAsync();
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
 
 
     /**
@@ -321,6 +392,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUnicodeAsync();
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
 
 
     /**
@@ -348,6 +426,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUrlEncodedAsync();
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
 
 
     /**
@@ -375,6 +460,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringEmptyAsync();
+    /**
+     * Get ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
 
 
     /**
@@ -405,6 +497,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringNullAsync(String stringPath);
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringPath);
 
 
     /**
@@ -435,6 +535,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumValidAsync(UriColor enumPath);
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumPath);
 
 
     /**
@@ -465,6 +573,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumNullAsync(UriColor enumPath);
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumPath);
 
 
     /**
@@ -495,6 +611,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteMultiByteAsync(byte[] bytePath);
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] bytePath);
 
 
     /**
@@ -522,6 +646,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteEmptyAsync();
+    /**
+     * Get '' as byte array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
 
 
     /**
@@ -552,6 +683,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteNullAsync(byte[] bytePath);
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] bytePath);
 
 
     /**
@@ -579,6 +718,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateValidAsync();
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
 
 
     /**
@@ -609,6 +755,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateNullAsync(LocalDate datePath);
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate datePath);
 
 
     /**
@@ -636,6 +790,13 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeValidAsync();
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
 
 
     /**
@@ -666,6 +827,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeNullAsync(DateTime dateTimePath);
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimePath);
 
 
     /**
@@ -696,6 +865,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> base64UrlAsync(byte[] base64UrlPath);
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(byte[] base64UrlPath);
 
 
     /**
@@ -726,6 +903,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayCsvInPathAsync(List<String> arrayPath);
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(List<String> arrayPath);
 
 
     /**
@@ -756,6 +941,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath);
 
 
 }

@@ -11,6 +11,7 @@
 package fixtures.head;
 
 import com.microsoft.azure.CloudException;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import java.io.IOException;
@@ -49,6 +50,14 @@ public interface HttpSuccess {
      */
     Single<Boolean> head200Async();
 
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    RestResponse<Void, Boolean> head200WithRestResponseAsync();
+
 
     /**
      * Return 204 status code if successful.
@@ -77,6 +86,14 @@ public interface HttpSuccess {
      */
     Single<Boolean> head204Async();
 
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    RestResponse<Void, Boolean> head204WithRestResponseAsync();
+
 
     /**
      * Return 404 status code if successful.
@@ -104,6 +121,14 @@ public interface HttpSuccess {
      * @return the observable to the boolean object
      */
     Single<Boolean> head404Async();
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    RestResponse<Void, Boolean> head404WithRestResponseAsync();
 
 
 }

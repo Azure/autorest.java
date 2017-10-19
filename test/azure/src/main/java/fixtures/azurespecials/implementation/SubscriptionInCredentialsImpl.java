@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation;
 
+import com.microsoft.rest.RestResponse;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -60,31 +61,31 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postMethodGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postMethodGlobalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNotProvidedValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postMethodGlobalNotProvidedValid(@PathParam("subscriptionId") String subscriptionId, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postPathGlobalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postPathGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postSwaggerGlobalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -94,6 +95,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postMethodGlobalValid() {
         postMethodGlobalValidAsync().toBlocking().value();
@@ -106,7 +108,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalValidAsync(), serviceCallback);
     }
 
@@ -114,14 +116,25 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodGlobalValidAsync() {
+    public Single<RestResponse<Void, Void>> postMethodGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         return service.postMethodGlobalValid(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> postMethodGlobalValidAsync() {
+        return postMethodGlobalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -130,6 +143,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postMethodGlobalNull() {
         postMethodGlobalNullAsync().toBlocking().value();
@@ -142,7 +156,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodGlobalNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalNullAsync(), serviceCallback);
     }
 
@@ -150,14 +164,25 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodGlobalNullAsync() {
+    public Single<RestResponse<Void, Void>> postMethodGlobalNullWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         return service.postMethodGlobalNull(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> postMethodGlobalNullAsync() {
+        return postMethodGlobalNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -166,6 +191,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postMethodGlobalNotProvidedValid() {
         postMethodGlobalNotProvidedValidAsync().toBlocking().value();
@@ -178,7 +204,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalNotProvidedValidAsync(), serviceCallback);
     }
 
@@ -186,9 +212,9 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodGlobalNotProvidedValidAsync() {
+    public Single<RestResponse<Void, Void>> postMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -198,6 +224,17 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         return service.postMethodGlobalNotProvidedValid(this.client.subscriptionId(), this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
 
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> postMethodGlobalNotProvidedValidAsync() {
+        return postMethodGlobalNotProvidedValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
+
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -205,6 +242,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postPathGlobalValid() {
         postPathGlobalValidAsync().toBlocking().value();
@@ -217,7 +255,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postPathGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathGlobalValidAsync(), serviceCallback);
     }
 
@@ -225,14 +263,25 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postPathGlobalValidAsync() {
+    public Single<RestResponse<Void, Void>> postPathGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         return service.postPathGlobalValid(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> postPathGlobalValidAsync() {
+        return postPathGlobalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -241,6 +290,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postSwaggerGlobalValid() {
         postSwaggerGlobalValidAsync().toBlocking().value();
@@ -253,7 +303,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerGlobalValidAsync(), serviceCallback);
     }
 
@@ -261,14 +311,25 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSwaggerGlobalValidAsync() {
+    public Single<RestResponse<Void, Void>> postSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
         return service.postSwaggerGlobalValid(this.client.subscriptionId(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> postSwaggerGlobalValidAsync() {
+        return postSwaggerGlobalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

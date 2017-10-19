@@ -11,6 +11,7 @@
 package fixtures.headexceptions;
 
 import com.microsoft.azure.CloudException;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import java.io.IOException;
@@ -48,6 +49,14 @@ public interface HeadExceptions {
      */
     Single<Void> head200Async();
 
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> head200WithRestResponseAsync();
+
 
     /**
      * Return 204 status code if successful.
@@ -75,6 +84,14 @@ public interface HeadExceptions {
      */
     Single<Void> head204Async();
 
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> head204WithRestResponseAsync();
+
 
     /**
      * Return 404 status code if successful.
@@ -101,6 +118,14 @@ public interface HeadExceptions {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head404Async();
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> head404WithRestResponseAsync();
 
 
 }

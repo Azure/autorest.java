@@ -10,6 +10,7 @@
 
 package fixtures.headexceptions.implementation;
 
+import com.microsoft.rest.RestResponse;
 import fixtures.headexceptions.HeadExceptions;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
@@ -58,19 +59,19 @@ public class HeadExceptionsImpl implements HeadExceptions {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -80,6 +81,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void head200() {
         head200Async().toBlocking().value();
@@ -92,7 +94,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -100,11 +102,22 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head200Async() {
+    public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> head200Async() {
+        return head200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -113,6 +126,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void head204() {
         head204Async().toBlocking().value();
@@ -125,7 +139,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -133,11 +147,22 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head204Async() {
+    public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> head204Async() {
+        return head204WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -146,6 +171,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void head404() {
         head404Async().toBlocking().value();
@@ -158,7 +184,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
@@ -166,11 +192,22 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head404Async() {
+    public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Return 404 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> head404Async() {
+        return head404WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

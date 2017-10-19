@@ -10,6 +10,7 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.url.models.ErrorException;
@@ -53,6 +54,16 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath);
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
@@ -90,6 +101,17 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getAllWithValuesWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
 
     /**
@@ -123,6 +145,16 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath);
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
@@ -160,6 +192,17 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value 'localStringQuery'
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getGlobalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
 
     /**
@@ -193,6 +236,16 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath);
+
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      *
@@ -230,6 +283,17 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    /**
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain null value
+     * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getGlobalAndLocalQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
 
     /**
@@ -263,6 +327,16 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath);
+
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath);
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
@@ -300,6 +374,17 @@ public interface PathItems {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
+    /**
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
+     *
+     * @param localStringPath should contain value 'localStringPath'
+     * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
+     * @param localStringQuery should contain value null
+     * @param pathItemStringQuery should contain value null
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getLocalPathItemQueryNullWithRestResponseAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery);
 
 
 }

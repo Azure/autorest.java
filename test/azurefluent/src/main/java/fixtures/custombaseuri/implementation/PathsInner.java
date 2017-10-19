@@ -10,6 +10,7 @@
 
 package fixtures.custombaseuri.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
@@ -59,7 +60,7 @@ public class PathsInner {
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -70,6 +71,7 @@ public class PathsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getEmpty(String accountName) {
         getEmptyAsync(accountName).toBlocking().value();
@@ -83,7 +85,7 @@ public class PathsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(String accountName, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(accountName), serviceCallback);
     }
 
@@ -92,9 +94,9 @@ public class PathsInner {
      *
      * @param accountName Account Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getEmptyAsync(String accountName) {
+    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName) {
         if (accountName == null) {
             throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
         }
@@ -103,6 +105,18 @@ public class PathsInner {
         }
         return service.getEmpty(accountName, this.client.host(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getEmptyAsync(String accountName) {
+        return getEmptyWithRestResponseAsync(accountName)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

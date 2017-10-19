@@ -10,6 +10,7 @@
 
 package fixtures.lro.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.OperationStatus;
@@ -69,7 +70,7 @@ public class LROsInner {
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
@@ -81,7 +82,7 @@ public class LROsInner {
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut202Retry200" })
         @PUT("lro/put/202/retry/200")
@@ -93,7 +94,7 @@ public class LROsInner {
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
@@ -105,7 +106,7 @@ public class LROsInner {
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
@@ -117,7 +118,7 @@ public class LROsInner {
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
@@ -129,7 +130,7 @@ public class LROsInner {
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
@@ -141,7 +142,7 @@ public class LROsInner {
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
@@ -153,7 +154,7 @@ public class LROsInner {
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
@@ -165,7 +166,7 @@ public class LROsInner {
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
@@ -177,7 +178,7 @@ public class LROsInner {
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
@@ -189,7 +190,7 @@ public class LROsInner {
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
@@ -201,7 +202,7 @@ public class LROsInner {
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
@@ -213,7 +214,7 @@ public class LROsInner {
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNonResource" })
         @PUT("lro/putnonresource/202/200")
@@ -225,7 +226,7 @@ public class LROsInner {
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<SkuInner> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
@@ -237,7 +238,7 @@ public class LROsInner {
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<SkuInner> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutSubResource" })
         @PUT("lro/putsubresource/202/200")
@@ -249,7 +250,7 @@ public class LROsInner {
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<SubProductInner> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
@@ -261,7 +262,7 @@ public class LROsInner {
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<SubProductInner> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
@@ -273,7 +274,7 @@ public class LROsInner {
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
@@ -285,7 +286,7 @@ public class LROsInner {
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
@@ -297,7 +298,7 @@ public class LROsInner {
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
@@ -309,7 +310,7 @@ public class LROsInner {
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
@@ -321,7 +322,7 @@ public class LROsInner {
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
@@ -333,7 +334,7 @@ public class LROsInner {
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
@@ -345,7 +346,7 @@ public class LROsInner {
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
@@ -357,7 +358,7 @@ public class LROsInner {
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
@@ -369,7 +370,7 @@ public class LROsInner {
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
@@ -381,7 +382,7 @@ public class LROsInner {
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
@@ -393,7 +394,7 @@ public class LROsInner {
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
@@ -405,7 +406,7 @@ public class LROsInner {
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost200WithPayload" })
         @POST("lro/post/payload/200")
@@ -417,7 +418,7 @@ public class LROsInner {
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<SkuInner> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202Retry200" })
         @POST("lro/post/202/retry/200")
@@ -429,7 +430,7 @@ public class LROsInner {
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202NoRetry204" })
         @POST("lro/post/202/noretry/204")
@@ -441,7 +442,7 @@ public class LROsInner {
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
@@ -453,7 +454,7 @@ public class LROsInner {
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
@@ -465,7 +466,7 @@ public class LROsInner {
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<ProductInner> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
@@ -477,7 +478,7 @@ public class LROsInner {
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
@@ -489,7 +490,7 @@ public class LROsInner {
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -580,7 +581,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(), serviceCallback);
     }
 
@@ -588,12 +589,24 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200SucceededAsync() {
+    public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200SucceededAsync() {
+        return put200SucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -616,7 +629,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededAsync(product), serviceCallback);
     }
 
@@ -625,12 +638,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200SucceededAsync(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200SucceededAsync(ProductInner product) {
+        return put200SucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -720,7 +745,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(), serviceCallback);
     }
 
@@ -728,12 +753,24 @@ public class LROsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200SucceededNoStateAsync() {
+    public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200SucceededNoStateAsync() {
+        return put200SucceededNoStateWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -756,7 +793,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200SucceededNoStateAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200SucceededNoStateAsync(product), serviceCallback);
     }
 
@@ -765,12 +802,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200SucceededNoStateAsync(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200SucceededNoStateAsync(ProductInner product) {
+        return put200SucceededNoStateWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -860,7 +909,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(), serviceCallback);
     }
 
@@ -868,12 +917,24 @@ public class LROsInner {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put202Retry200Async() {
+    public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put202Retry200Async() {
+        return put202Retry200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -896,7 +957,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put202Retry200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put202Retry200Async(product), serviceCallback);
     }
 
@@ -905,12 +966,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put202Retry200Async(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put202Retry200Async(ProductInner product) {
+        return put202Retry200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1000,7 +1073,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(), serviceCallback);
     }
 
@@ -1008,12 +1081,24 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async() {
+    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put201CreatingSucceeded200Async() {
+        return put201CreatingSucceeded200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1036,7 +1121,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingSucceeded200Async(product), serviceCallback);
     }
 
@@ -1045,12 +1130,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+        return put201CreatingSucceeded200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1140,7 +1237,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(), serviceCallback);
     }
 
@@ -1148,12 +1245,24 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200UpdatingSucceeded204Async() {
+    public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200UpdatingSucceeded204Async() {
+        return put200UpdatingSucceeded204WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1176,7 +1285,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200UpdatingSucceeded204Async(product), serviceCallback);
     }
 
@@ -1185,12 +1294,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200UpdatingSucceeded204Async(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200UpdatingSucceeded204Async(ProductInner product) {
+        return put200UpdatingSucceeded204WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1280,7 +1401,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(), serviceCallback);
     }
 
@@ -1288,12 +1409,24 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingFailed200Async() {
+    public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put201CreatingFailed200Async() {
+        return put201CreatingFailed200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -1316,7 +1449,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put201CreatingFailed200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put201CreatingFailed200Async(product), serviceCallback);
     }
 
@@ -1325,12 +1458,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingFailed200Async(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put201CreatingFailed200Async(ProductInner product) {
+        return put201CreatingFailed200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1420,7 +1565,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(), serviceCallback);
     }
 
@@ -1428,12 +1573,24 @@ public class LROsInner {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200Acceptedcanceled200Async() {
+    public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200Acceptedcanceled200Async() {
+        return put200Acceptedcanceled200WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1456,7 +1613,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+    public ServiceFuture<ProductInner> put200Acceptedcanceled200Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFuture.fromBody(put200Acceptedcanceled200Async(product), serviceCallback);
     }
 
@@ -1465,12 +1622,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put200Acceptedcanceled200Async(ProductInner product) {
+    public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
+     */
+    public Single<ProductInner> put200Acceptedcanceled200Async(ProductInner product) {
+        return put200Acceptedcanceled200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1560,20 +1729,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putNoHeaderInRetryAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putNoHeaderInRetryAsync(), serviceCallback);
     }
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putNoHeaderInRetryAsync() {
+    public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putNoHeaderInRetryAsync() {
+        return putNoHeaderInRetryWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1596,8 +1777,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putNoHeaderInRetryAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putNoHeaderInRetryAsync(product), serviceCallback);
     }
 
     /**
@@ -1605,12 +1786,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putNoHeaderInRetryAsync(ProductInner product) {
+    public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putNoHeaderInRetryAsync(ProductInner product) {
+        return putNoHeaderInRetryWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1700,20 +1893,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetrySucceededAsync() {
+    public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncRetrySucceededAsync() {
+        return putAsyncRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1736,8 +1941,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetrySucceededAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -1745,12 +1950,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
+    public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
+        return putAsyncRetrySucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1840,20 +2057,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncNoRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncNoRetrySucceededAsync() {
+    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncNoRetrySucceededAsync() {
+        return putAsyncNoRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1876,8 +2105,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncNoRetrySucceededAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncNoRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -1885,12 +2114,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product) {
+    public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product) {
+        return putAsyncNoRetrySucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1980,20 +2221,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetryFailedAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncRetryFailedAsync(), serviceCallback);
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetryFailedAsync() {
+    public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncRetryFailedAsync() {
+        return putAsyncRetryFailedWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2016,8 +2269,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncRetryFailedAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRetryFailedAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncRetryFailedAsync(product), serviceCallback);
     }
 
     /**
@@ -2025,12 +2278,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetryFailedAsync(ProductInner product) {
+    public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncRetryFailedAsync(ProductInner product) {
+        return putAsyncRetryFailedWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2120,20 +2385,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncNoRetrycanceledAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(), serviceCallback);
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncNoRetrycanceledAsync() {
+    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncNoRetrycanceledAsync() {
+        return putAsyncNoRetrycanceledWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2156,8 +2433,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncNoRetrycanceledAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncNoRetrycanceledAsync(product), serviceCallback);
     }
 
     /**
@@ -2165,12 +2442,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product) {
+    public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product) {
+        return putAsyncNoRetrycanceledWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2260,20 +2549,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncNoHeaderInRetryAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncNoHeaderInRetryAsync() {
+    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncNoHeaderInRetryAsync() {
+        return putAsyncNoHeaderInRetryWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -2296,8 +2597,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(putAsyncNoHeaderInRetryAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(putAsyncNoHeaderInRetryAsync(product), serviceCallback);
     }
 
     /**
@@ -2305,12 +2606,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product) {
+    public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product) {
+        return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2400,7 +2713,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SkuInner> putNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(), serviceCallback);
     }
 
@@ -2408,12 +2721,24 @@ public class LROsInner {
      * Long running put request with non resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SkuInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
      */
-    public Single<SkuInner> putNonResourceAsync() {
+    public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
+        Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     */
+    public Single<SkuInner> putNonResourceAsync() {
+        return putNonResourceWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, SkuInner>, SkuInner>() { public SkuInner call(RestResponse<Void, SkuInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request with non resource.
@@ -2436,7 +2761,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SkuInner> putNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putNonResourceAsync(sku), serviceCallback);
     }
 
@@ -2445,12 +2770,24 @@ public class LROsInner {
      *
      * @param sku sku to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SkuInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
      */
-    public Single<SkuInner> putNonResourceAsync(SkuInner sku) {
+    public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku sku to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     */
+    public Single<SkuInner> putNonResourceAsync(SkuInner sku) {
+        return putNonResourceWithRestResponseAsync(sku)
+            .map(new Func1<RestResponse<Void, SkuInner>, SkuInner>() { public SkuInner call(RestResponse<Void, SkuInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2540,7 +2877,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(), serviceCallback);
     }
 
@@ -2548,12 +2885,24 @@ public class LROsInner {
      * Long running put request with non resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SkuInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
      */
-    public Single<SkuInner> putAsyncNonResourceAsync() {
+    public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
+        Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     */
+    public Single<SkuInner> putAsyncNonResourceAsync() {
+        return putAsyncNonResourceWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, SkuInner>, SkuInner>() { public SkuInner call(RestResponse<Void, SkuInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request with non resource.
@@ -2576,7 +2925,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> putAsyncNonResourceAsync(SkuInner sku, ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncNonResourceAsync(sku), serviceCallback);
     }
 
@@ -2585,12 +2934,24 @@ public class LROsInner {
      *
      * @param sku Sku to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SkuInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
      */
-    public Single<SkuInner> putAsyncNonResourceAsync(SkuInner sku) {
+    public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with non resource.
+     *
+     * @param sku Sku to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     */
+    public Single<SkuInner> putAsyncNonResourceAsync(SkuInner sku) {
+        return putAsyncNonResourceWithRestResponseAsync(sku)
+            .map(new Func1<RestResponse<Void, SkuInner>, SkuInner>() { public SkuInner call(RestResponse<Void, SkuInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2680,7 +3041,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SubProductInner> putSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(), serviceCallback);
     }
 
@@ -2688,12 +3049,24 @@ public class LROsInner {
      * Long running put request with sub resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SubProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
      */
-    public Single<SubProductInner> putSubResourceAsync() {
+    public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
+        Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     */
+    public Single<SubProductInner> putSubResourceAsync() {
+        return putSubResourceWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, SubProductInner>, SubProductInner>() { public SubProductInner call(RestResponse<Void, SubProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request with sub resource.
@@ -2716,7 +3089,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SubProductInner> putSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putSubResourceAsync(product), serviceCallback);
     }
 
@@ -2725,12 +3098,24 @@ public class LROsInner {
      *
      * @param product Sub Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SubProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
      */
-    public Single<SubProductInner> putSubResourceAsync(SubProductInner product) {
+    public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     */
+    public Single<SubProductInner> putSubResourceAsync(SubProductInner product) {
+        return putSubResourceWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, SubProductInner>, SubProductInner>() { public SubProductInner call(RestResponse<Void, SubProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2820,7 +3205,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(), serviceCallback);
     }
 
@@ -2828,12 +3213,24 @@ public class LROsInner {
      * Long running put request with sub resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SubProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
      */
-    public Single<SubProductInner> putAsyncSubResourceAsync() {
+    public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
+        Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     */
+    public Single<SubProductInner> putAsyncSubResourceAsync() {
+        return putAsyncSubResourceWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, SubProductInner>, SubProductInner>() { public SubProductInner call(RestResponse<Void, SubProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running put request with sub resource.
@@ -2856,7 +3253,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
+    public ServiceFuture<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFuture.fromBody(putAsyncSubResourceAsync(product), serviceCallback);
     }
 
@@ -2865,12 +3262,24 @@ public class LROsInner {
      *
      * @param product Sub Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SubProductInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
      */
-    public Single<SubProductInner> putAsyncSubResourceAsync(SubProductInner product) {
+    public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running put request with sub resource.
+     *
+     * @param product Sub Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SubProductInner> object
+     */
+    public Single<SubProductInner> putAsyncSubResourceAsync(SubProductInner product) {
+        return putAsyncSubResourceWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<Void, SubProductInner>, SubProductInner>() { public SubProductInner call(RestResponse<Void, SubProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2925,19 +3334,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(deleteProvisioning202Accepted200SucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
+    public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
         return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
+        return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2992,19 +3412,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteProvisioning202DeletingFailed200Async(), serviceCallback);
+    public ServiceFuture<ProductInner> deleteProvisioning202DeletingFailed200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(deleteProvisioning202DeletingFailed200Async(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> object
      */
-    public Single<ProductInner> deleteProvisioning202DeletingFailed200Async() {
+    public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
         return service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> deleteProvisioning202DeletingFailed200Async() {
+        return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3059,19 +3490,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteProvisioning202Deletingcanceled200Async(), serviceCallback);
+    public ServiceFuture<ProductInner> deleteProvisioning202Deletingcanceled200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(deleteProvisioning202Deletingcanceled200Async(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> object
      */
-    public Single<ProductInner> deleteProvisioning202Deletingcanceled200Async() {
+    public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
         return service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> deleteProvisioning202Deletingcanceled200Async() {
+        return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3112,6 +3554,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void delete204Succeeded() {
         delete204SucceededAsync().toBlocking().value();
@@ -3124,7 +3567,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete204SucceededAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete204SucceededAsync(), serviceCallback);
     }
 
@@ -3132,11 +3575,22 @@ public class LROsInner {
      * Long running delete succeeds and returns right away.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204SucceededAsync() {
+    public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
         return service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete succeeds and returns right away.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> delete204SucceededAsync() {
+        return delete204SucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3191,19 +3645,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> delete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(delete202Retry200Async(), serviceCallback);
+    public ServiceFuture<ProductInner> delete202Retry200Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(delete202Retry200Async(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> object
      */
-    public Single<ProductInner> delete202Retry200Async() {
+    public Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200WithRestResponseAsync() {
         return service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> delete202Retry200Async() {
+        return delete202Retry200WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3258,19 +3723,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> delete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(delete202NoRetry204Async(), serviceCallback);
+    public ServiceFuture<ProductInner> delete202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(delete202NoRetry204Async(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> object
      */
-    public Single<ProductInner> delete202NoRetry204Async() {
+    public Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204WithRestResponseAsync() {
         return service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> delete202NoRetry204Async() {
+        return delete202NoRetry204WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3311,6 +3787,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void deleteNoHeaderInRetry() {
         deleteNoHeaderInRetryAsync().toBlocking().value();
@@ -3323,19 +3800,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteNoHeaderInRetryAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(deleteNoHeaderInRetryAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> object
      */
-    public Single<Void> deleteNoHeaderInRetryAsync() {
+    public Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> object
+     */
+    public Single<Void> deleteNoHeaderInRetryAsync() {
+        return deleteNoHeaderInRetryWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3376,6 +3864,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void deleteAsyncNoHeaderInRetry() {
         deleteAsyncNoHeaderInRetryAsync().toBlocking().value();
@@ -3388,19 +3877,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteAsyncNoHeaderInRetryAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncNoHeaderInRetryAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(deleteAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncNoHeaderInRetryAsync() {
+    public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
         return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> object
+     */
+    public Single<Void> deleteAsyncNoHeaderInRetryAsync() {
+        return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3441,6 +3941,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void deleteAsyncRetrySucceeded() {
         deleteAsyncRetrySucceededAsync().toBlocking().value();
@@ -3453,19 +3954,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteAsyncRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(deleteAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRetrySucceededAsync() {
+    public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> object
+     */
+    public Single<Void> deleteAsyncRetrySucceededAsync() {
+        return deleteAsyncRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3506,6 +4018,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void deleteAsyncNoRetrySucceeded() {
         deleteAsyncNoRetrySucceededAsync().toBlocking().value();
@@ -3518,19 +4031,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteAsyncNoRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncNoRetrySucceededAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(deleteAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncNoRetrySucceededAsync() {
+    public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
         return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> object
+     */
+    public Single<Void> deleteAsyncNoRetrySucceededAsync() {
+        return deleteAsyncNoRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3571,6 +4095,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void deleteAsyncRetryFailed() {
         deleteAsyncRetryFailedAsync().toBlocking().value();
@@ -3583,19 +4108,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteAsyncRetryFailedAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(deleteAsyncRetryFailedAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRetryFailedAsync() {
+    public Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
         return service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> object
+     */
+    public Single<Void> deleteAsyncRetryFailedAsync() {
+        return deleteAsyncRetryFailedWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3636,6 +4172,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void deleteAsyncRetrycanceled() {
         deleteAsyncRetrycanceledAsync().toBlocking().value();
@@ -3648,19 +4185,30 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(deleteAsyncRetrycanceledAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(deleteAsyncRetrycanceledAsync(), serviceCallback);
     }
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRetrycanceledAsync() {
+    public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
         return service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> object
+     */
+    public Single<Void> deleteAsyncRetrycanceledAsync() {
+        return deleteAsyncRetrycanceledWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3715,7 +4263,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SkuInner> post200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
+    public ServiceFuture<SkuInner> post200WithPayloadAsync(ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFuture.fromBody(post200WithPayloadAsync(), serviceCallback);
     }
 
@@ -3723,11 +4271,22 @@ public class LROsInner {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SkuInner object
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
      */
-    public Single<SkuInner> post200WithPayloadAsync() {
+    public Single<RestResponse<Void, SkuInner>> post200WithPayloadWithRestResponseAsync() {
         return service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
+     */
+    public Single<SkuInner> post200WithPayloadAsync() {
+        return post200WithPayloadWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, SkuInner>, SkuInner>() { public SkuInner call(RestResponse<Void, SkuInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3802,6 +4361,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void post202Retry200() {
         post202Retry200Async().toBlocking().value();
@@ -3814,20 +4374,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202Retry200Async(), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(post202Retry200Async(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
+     */
+    public Single<Void> post202Retry200Async() {
+        return post202Retry200WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LROsPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -3836,6 +4408,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void post202Retry200(ProductInner product) {
         post202Retry200Async(product).toBlocking().value();
@@ -3849,8 +4422,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202Retry200Async(product), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(post202Retry200Async(product), serviceCallback);
     }
 
     /**
@@ -3858,12 +4431,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async(ProductInner product) {
+    public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
+     */
+    public Single<Void> post202Retry200Async(ProductInner product) {
+        return post202Retry200WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LROsPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -3953,20 +4538,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> post202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202NoRetry204Async(), serviceCallback);
+    public ServiceFuture<ProductInner> post202NoRetry204Async(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(post202NoRetry204Async(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> object
      */
-    public Single<ProductInner> post202NoRetry204Async() {
+    public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> post202NoRetry204Async() {
+        return post202NoRetry204WithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -3989,8 +4586,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> post202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(post202NoRetry204Async(product), serviceCallback);
+    public ServiceFuture<ProductInner> post202NoRetry204Async(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(post202NoRetry204Async(product), serviceCallback);
     }
 
     /**
@@ -3998,12 +4595,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> object
      */
-    public Single<ProductInner> post202NoRetry204Async(ProductInner product) {
+    public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> post202NoRetry204Async(ProductInner product) {
+        return post202NoRetry204WithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -4093,20 +4702,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> postAsyncRetrySucceededAsync() {
+    public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> postAsyncRetrySucceededAsync() {
+        return postAsyncRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -4129,8 +4750,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrySucceededAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -4138,12 +4759,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> postAsyncRetrySucceededAsync(ProductInner product) {
+    public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> postAsyncRetrySucceededAsync(ProductInner product) {
+        return postAsyncRetrySucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -4233,20 +4866,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncNoRetrySucceededAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> postAsyncNoRetrySucceededAsync() {
+    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> postAsyncNoRetrySucceededAsync() {
+        return postAsyncNoRetrySucceededWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -4269,8 +4914,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncNoRetrySucceededAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncNoRetrySucceededAsync(product), serviceCallback);
     }
 
     /**
@@ -4278,12 +4923,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ProductInner object
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product) {
+    public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> object
+     */
+    public Single<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product) {
+        return postAsyncNoRetrySucceededWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -4358,6 +5015,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postAsyncRetryFailed() {
         postAsyncRetryFailedAsync().toBlocking().value();
@@ -4370,20 +5028,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetryFailedAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetryFailedAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetryFailedAsync(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetryFailedAsync() {
+    public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
+     */
+    public Single<Void> postAsyncRetryFailedAsync() {
+        return postAsyncRetryFailedWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -4392,6 +5062,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postAsyncRetryFailed(ProductInner product) {
         postAsyncRetryFailedAsync(product).toBlocking().value();
@@ -4405,8 +5076,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetryFailedAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetryFailedAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetryFailedAsync(product), serviceCallback);
     }
 
     /**
@@ -4414,12 +5085,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetryFailedAsync(ProductInner product) {
+    public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
+     */
+    public Single<Void> postAsyncRetryFailedAsync(ProductInner product) {
+        return postAsyncRetryFailedWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -4494,6 +5177,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postAsyncRetrycanceled() {
         postAsyncRetrycanceledAsync().toBlocking().value();
@@ -4506,20 +5190,32 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrycanceledAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetrycanceledAsync(ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(), serviceCallback);
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrycanceledAsync() {
+    public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
+        Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
+     */
+    public Single<Void> postAsyncRetrycanceledAsync() {
+        return postAsyncRetrycanceledWithRestResponseAsync()
+            .map(new Func1<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -4528,6 +5224,7 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void postAsyncRetrycanceled(ProductInner product) {
         postAsyncRetrycanceledAsync(product).toBlocking().value();
@@ -4541,8 +5238,8 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromBody/* RestProxy doesn't support headers */(postAsyncRetrycanceledAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetrycanceledAsync(ProductInner product, ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromBody(postAsyncRetrycanceledAsync(product), serviceCallback);
     }
 
     /**
@@ -4550,12 +5247,24 @@ public class LROsInner {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrycanceledAsync(ProductInner product) {
+    public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
+     */
+    public Single<Void> postAsyncRetrycanceledAsync(ProductInner product) {
+        return postAsyncRetrycanceledWithRestResponseAsync(product)
+            .map(new Func1<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

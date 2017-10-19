@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodycomplex.Readonlypropertys;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -61,13 +62,13 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
         @GET("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<ReadonlyObj> getValid();
+        Single<RestResponse<Void, ReadonlyObj>> getValid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
         @PUT("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
+        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
 
     }
 
@@ -90,7 +91,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
+    public ServiceFuture<ReadonlyObj> getValidAsync(ServiceCallback<ReadonlyObj> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -98,11 +99,22 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ReadonlyObj object
+     * @return a {@link Single} emitting the RestResponse<Void, ReadonlyObj> object
      */
-    public Single<ReadonlyObj> getValidAsync() {
+    public Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
+
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, ReadonlyObj> object
+     */
+    public Single<ReadonlyObj> getValidAsync() {
+        return getValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, ReadonlyObj>, ReadonlyObj>() { public ReadonlyObj call(RestResponse<Void, ReadonlyObj> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -112,6 +124,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putValid(ReadonlyObj complexBody) {
         putValidAsync(complexBody).toBlocking().value();
@@ -125,7 +138,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -134,15 +147,27 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(ReadonlyObj complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putValid(complexBody);
     }
+
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putValidAsync(ReadonlyObj complexBody) {
+        return putValidWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

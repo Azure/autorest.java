@@ -11,6 +11,7 @@
 package fixtures.http;
 
 import com.microsoft.rest.RestException;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.http.models.ErrorException;
@@ -49,6 +50,13 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<Boolean> getEmptyErrorAsync();
+    /**
+     * Get empty error form server.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync();
 
 
     /**
@@ -77,6 +85,13 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<Boolean> getNoModelErrorAsync();
+    /**
+     * Get empty error form server.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,13 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<Boolean> getNoModelEmptyAsync();
+    /**
+     * Get empty response from server.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync();
 
 
 }

@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
@@ -55,6 +56,15 @@ public interface Headers {
      */
     Single<Void> customNamedRequestIdAsync(String fooClientRequestId);
 
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<HeaderCustomNamedRequestIdHeaders, Void>} object if successful.
+     */
+    RestResponse<HeaderCustomNamedRequestIdHeaders, Void> customNamedRequestIdWithRestResponseAsync(String fooClientRequestId);
+
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -84,6 +94,15 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     *
+     * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>} object if successful.
+     */
+    RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> customNamedRequestIdParamGroupingWithRestResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
 
     /**
@@ -115,6 +134,15 @@ public interface Headers {
      * @return the observable to the boolean object
      */
     Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId);
 
 
 }

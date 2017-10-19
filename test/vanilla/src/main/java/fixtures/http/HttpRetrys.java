@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.http.models.ErrorException;
@@ -47,6 +48,13 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head408Async();
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> head408WithRestResponseAsync();
 
 
     /**
@@ -74,6 +82,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put500Async();
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put500WithRestResponseAsync();
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -102,6 +118,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put500Async(Boolean booleanValue);
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put500WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -129,6 +153,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch500Async();
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch500WithRestResponseAsync();
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -157,6 +189,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch500Async(Boolean booleanValue);
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch500WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -184,6 +224,13 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get502Async();
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> get502WithRestResponseAsync();
 
 
     /**
@@ -211,6 +258,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post503Async();
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post503WithRestResponseAsync();
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -239,6 +294,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post503Async(Boolean booleanValue);
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post503WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -266,6 +329,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete503Async();
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete503WithRestResponseAsync();
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -294,6 +365,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete503Async(Boolean booleanValue);
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete503WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -321,6 +400,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put504Async();
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put504WithRestResponseAsync();
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -349,6 +436,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put504Async(Boolean booleanValue);
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put504WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -376,6 +471,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch504Async();
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch504WithRestResponseAsync();
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -404,6 +507,14 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch504Async(Boolean booleanValue);
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch504WithRestResponseAsync(Boolean booleanValue);
 
 
 }

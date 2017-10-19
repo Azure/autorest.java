@@ -10,6 +10,7 @@
 
 package fixtures.bodyfile;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodyfile.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<InputStream> getFileAsync();
+    /**
+     * Get file.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the InputStream object
+     */
+    Single<RestResponse<Void, InputStream>> getFileWithRestResponseAsync();
 
 
     /**
@@ -77,6 +85,13 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<InputStream> getFileLargeAsync();
+    /**
+     * Get a large file.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the InputStream object
+     */
+    Single<RestResponse<Void, InputStream>> getFileLargeWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,13 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<InputStream> getEmptyFileAsync();
+    /**
+     * Get empty file.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the InputStream object
+     */
+    Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync();
 
 
 }

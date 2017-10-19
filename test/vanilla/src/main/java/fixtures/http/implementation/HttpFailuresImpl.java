@@ -11,6 +11,7 @@
 package fixtures.http.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.http.HttpFailures;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -58,17 +59,17 @@ public class HttpFailuresImpl implements HttpFailures {
         @GET("http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Boolean> getEmptyError();
+        Single<RestResponse<Void, Boolean>> getEmptyError();
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getNoModelError" })
         @GET("http/failure/nomodel/error")
         @ExpectedResponses({200})
-        Single<Boolean> getNoModelError();
+        Single<RestResponse<Void, Boolean>> getNoModelError();
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getNoModelEmpty" })
         @GET("http/failure/nomodel/empty")
         @ExpectedResponses({200})
-        Single<Boolean> getNoModelEmpty();
+        Single<RestResponse<Void, Boolean>> getNoModelEmpty();
 
     }
 
@@ -91,7 +92,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getEmptyErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyErrorAsync(), serviceCallback);
     }
 
@@ -99,11 +100,22 @@ public class HttpFailuresImpl implements HttpFailures {
      * Get empty error form server.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getEmptyErrorAsync() {
+    public Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync() {
         return service.getEmptyError();
     }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getEmptyErrorAsync() {
+        return getEmptyErrorWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -125,7 +137,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNoModelErrorAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelErrorAsync(), serviceCallback);
     }
 
@@ -133,11 +145,22 @@ public class HttpFailuresImpl implements HttpFailures {
      * Get empty error form server.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getNoModelErrorAsync() {
+    public Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync() {
         return service.getNoModelError();
     }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getNoModelErrorAsync() {
+        return getNoModelErrorWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -159,7 +182,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> getNoModelEmptyAsync(ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(getNoModelEmptyAsync(), serviceCallback);
     }
 
@@ -167,11 +190,22 @@ public class HttpFailuresImpl implements HttpFailures {
      * Get empty response from server.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Boolean object
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getNoModelEmptyAsync() {
+    public Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync() {
         return service.getNoModelEmpty();
     }
+
+    /**
+     * Get empty response from server.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     */
+    public Single<Boolean> getNoModelEmptyAsync() {
+        return getNoModelEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

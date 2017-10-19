@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
@@ -48,6 +49,14 @@ public interface SubscriptionInCredentials {
      */
     Single<Void> postMethodGlobalValidAsync();
 
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMethodGlobalValidWithRestResponseAsync();
+
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
@@ -74,6 +83,14 @@ public interface SubscriptionInCredentials {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postMethodGlobalNullAsync();
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMethodGlobalNullWithRestResponseAsync();
 
 
     /**
@@ -102,6 +119,14 @@ public interface SubscriptionInCredentials {
      */
     Single<Void> postMethodGlobalNotProvidedValidAsync();
 
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMethodGlobalNotProvidedValidWithRestResponseAsync();
+
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -129,6 +154,14 @@ public interface SubscriptionInCredentials {
      */
     Single<Void> postPathGlobalValidAsync();
 
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postPathGlobalValidWithRestResponseAsync();
+
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -155,6 +188,14 @@ public interface SubscriptionInCredentials {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postSwaggerGlobalValidAsync();
+
+    /**
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postSwaggerGlobalValidWithRestResponseAsync();
 
 
 }

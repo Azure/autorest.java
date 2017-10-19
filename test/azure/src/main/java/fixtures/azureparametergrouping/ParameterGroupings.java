@@ -10,6 +10,7 @@
 
 package fixtures.azureparametergrouping;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azureparametergrouping.models.ErrorException;
@@ -55,6 +56,15 @@ public interface ParameterGroupings {
      */
     Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
+    /**
+     * Post a bunch of required parameters grouped.
+     *
+     * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postRequiredWithRestResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -84,6 +94,14 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postOptionalWithRestResponseAsync();
+    }
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -109,6 +127,15 @@ public interface ParameterGroupings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+
+    /**
+     * Post a bunch of optional parameters grouped.
+     *
+     * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
 
     /**
@@ -136,6 +163,14 @@ public interface ParameterGroupings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postMultiParamGroupsAsync();
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMultiParamGroupsWithRestResponseAsync();
+    }
     /**
      * Post parameters from multiple different parameter groups.
      *
@@ -168,6 +203,16 @@ public interface ParameterGroupings {
      */
     Single<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
+    /**
+     * Post parameters from multiple different parameter groups.
+     *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+
 
     /**
      * Post parameters with a shared parameter group object.
@@ -197,6 +242,14 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postSharedParameterGroupObjectWithRestResponseAsync();
+    }
+    /**
+     * Post parameters with a shared parameter group object.
+     *
      * @param firstParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -222,6 +275,15 @@ public interface ParameterGroupings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
+
+    /**
+     * Post parameters with a shared parameter group object.
+     *
+     * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroup firstParameterGroup);
 
 
 }

@@ -10,6 +10,7 @@
 
 package fixtures.bodydate;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodydate.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getNullAsync();
+    /**
+     * Get null date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the LocalDate object
+     */
+    Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
 
 
     /**
@@ -77,6 +85,13 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getInvalidDateAsync();
+    /**
+     * Get invalid date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the LocalDate object
+     */
+    Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,13 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getOverflowDateAsync();
+    /**
+     * Get overflow date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the LocalDate object
+     */
+    Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
 
 
     /**
@@ -133,6 +155,13 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getUnderflowDateAsync();
+    /**
+     * Get underflow date value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the LocalDate object
+     */
+    Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
 
 
     /**
@@ -163,6 +192,14 @@ public interface Dates {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMaxDateAsync(LocalDate dateBody);
+    /**
+     * Put max date value 9999-12-31.
+     *
+     * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(LocalDate dateBody);
 
 
     /**
@@ -191,6 +228,13 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getMaxDateAsync();
+    /**
+     * Get max date value 9999-12-31.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the LocalDate object
+     */
+    Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
 
 
     /**
@@ -221,6 +265,14 @@ public interface Dates {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMinDateAsync(LocalDate dateBody);
+    /**
+     * Put min date value 0000-01-01.
+     *
+     * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(LocalDate dateBody);
 
 
     /**
@@ -249,6 +301,13 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getMinDateAsync();
+    /**
+     * Get min date value 0000-01-01.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the LocalDate object
+     */
+    Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
 
 
 }
