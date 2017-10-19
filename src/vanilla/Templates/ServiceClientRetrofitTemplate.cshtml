@@ -29,7 +29,7 @@ if (method.DefaultResponse.Body != null)
 {
 @:    @@UnexpectedResponseExceptionType(@(method.OperationExceptionTypeString).class)
 }
-@:    Single<@(method.ReturnTypeJv.GenericBodyClientTypeString)> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Single<@(method.RestResponseTypeName)> @(method.Name)(@method.MethodParameterApiDeclaration);
 @EmptyLine
 }
 }

@@ -73,6 +73,7 @@ namespace AutoRest.Java.Model
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.RestProxy",
+                        "com.microsoft.rest.RestResponse",
                         "com.microsoft.rest.ServiceClient",
                         "com.microsoft.rest.RestClient",
                         "rx.Single"

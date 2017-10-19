@@ -185,6 +185,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
+        [Obsolete("Use GenericBodyClientTypeString")]
         public virtual string ServiceFutureGenericParameterString
         {
             get
@@ -194,6 +195,8 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
+
+        [Obsolete("Use GenericBodyClientTypeString")]
         public virtual string ServiceResponseGenericParameterString
         {
             get

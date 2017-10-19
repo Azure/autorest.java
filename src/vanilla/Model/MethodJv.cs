@@ -307,16 +307,24 @@ namespace AutoRest.Java.Model
 
         public IEnumerable<string> AsyncExceptionDocumentation => new[] { " * @throws IllegalArgumentException thrown if parameters fail the validation" };
 
+        public string RestResponseHeadersName => ReturnType.Headers == null
+            ? "Void"
+            : ReturnTypeJv.HeaderClientType.Name.Value;
+
+        public string RestResponseBodyName => ReturnType.Body == null
+            ? "Void"
+            : ReturnTypeJv.GenericBodyClientTypeString;
+
+        public string RestResponseTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseBodyName}>";
+
         // Observable overload generation helpers
 
-
-
-        public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the RestResponse<{ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()}> object";
-
+        public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {RestResponseTypeName} object";
+        
         public string ObservableRestResponseImpl(IEnumerable<ParameterJv> parameters, bool takeOnlyRequiredParameters)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
+            builder.AppendLine($"public Single<{RestResponseTypeName}> {Name}WithRestResponseAsync({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
 
             // Check presence of required parameters
@@ -353,13 +361,19 @@ namespace AutoRest.Java.Model
 
             return string.Join("\n", beginning, mappings, parameterConversion, epilogue);
         }
+        public string ObservableBodyDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()} object";
 
-        public string ObservableImpl(IEnumerable<ParameterJv> parameters, bool filterRequired)
+        public string ObservableImpl(IEnumerable<ParameterJv> parameters)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
-            throw new NotImplementedException();
+            builder.AppendLine($"return {Name}WithRestResponseAsync({Arguments(parameters)})");
+            builder.Indent();
+            builder.AppendLine($".map(new Func1<{RestResponseTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} call({RestResponseTypeName} restResponse) {{ return restResponse.body(); }} }});");
+            builder.Outdent();
+            builder.AppendLine("}");
+            return builder.ToString();
         }
 
         // Callback overload generation helpers
@@ -758,19 +772,7 @@ namespace AutoRest.Java.Model
         public virtual string ReturnTypeResponseName => ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
 
         [JsonIgnore]
-        public virtual string ServiceFutureFactoryMethod
-        {
-            get
-            {
-                string factoryMethod = "fromBody";
-                if (ReturnType.Headers != null)
-                {
-                    // FIXME
-                    factoryMethod = "fromBody/* RestProxy doesn't support headers */";
-                }
-                return factoryMethod;
-            }
-        }
+        public virtual string ServiceFutureFactoryMethod => "fromBody";
 
         [JsonIgnore]
         public virtual string CallbackDocumentation
