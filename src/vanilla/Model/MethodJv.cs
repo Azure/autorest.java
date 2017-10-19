@@ -65,7 +65,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                bool shouldGenerateXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
+                bool shouldGenerateXmlSerialization = ((CodeModelJv)CodeModel).ShouldGenerateXmlSerializationCached;
 
                 List<string> declarations = new List<string>();
                 foreach (ParameterJv parameter in OrderedRetrofitParameters)
@@ -213,7 +213,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var shouldUseXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
+                var shouldUseXmlSerialization = ((CodeModelJv)CodeModel).ShouldGenerateXmlSerializationCached;
 
                 var arguments = OrderedRetrofitParameters.Select(
                     p => shouldUseXmlSerialization && (p.WireType is SequenceType)
@@ -311,20 +311,26 @@ namespace AutoRest.Java.Model
             ? "Void"
             : ReturnTypeJv.HeaderClientType.Name.Value;
 
-        public string RestResponseBodyName => ReturnType.Body == null
+        public string RestResponseAbstractBodyName => ReturnType.Body == null
             ? "Void"
-            : ReturnTypeJv.GenericBodyClientTypeString;
+            : (ReturnTypeJv).ServiceResponseGenericParameterString;
 
-        public string RestResponseTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseBodyName}>";
+        public string RestResponseConcreteBodyName => ReturnType.Body == null
+            ? "Void"
+            : (ReturnTypeJv).ServiceResponseConcreteParameterString;
+
+        public string RestResponseAbstractTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseAbstractBodyName}>";
+
+        public string RestResponseConcreteTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseConcreteBodyName}>";
 
         // Observable overload generation helpers
 
-        public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {RestResponseTypeName} object";
-        
+        public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {RestResponseAbstractTypeName} object";
+
         public string ObservableRestResponseImpl(IEnumerable<ParameterJv> parameters, bool takeOnlyRequiredParameters)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            builder.AppendLine($"public Single<{RestResponseTypeName}> {Name}WithRestResponseAsync({ParameterDeclaration(parameters)}) {{");
+            builder.AppendLine($"public Single<{RestResponseAbstractTypeName}> {Name}WithRestResponseAsync({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
 
             // Check presence of required parameters
@@ -370,7 +376,7 @@ namespace AutoRest.Java.Model
             builder.Indent();
             builder.AppendLine($"return {Name}WithRestResponseAsync({Arguments(parameters)})");
             builder.Indent();
-            builder.AppendLine($".map(new Func1<{RestResponseTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} call({RestResponseTypeName} restResponse) {{ return restResponse.body(); }} }});");
+            builder.AppendLine($".map(new Func1<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} call({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
             builder.Outdent();
             builder.AppendLine("}");
             return builder.ToString();

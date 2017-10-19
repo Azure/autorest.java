@@ -31,7 +31,7 @@ if (method.IsLongRunningOperation)
 }
 else
 {
-@:    Single<@(method.RestResponseTypeName)> @(method.Name)(@method.MethodParameterApiDeclaration);
+@:    Single<@(method.RestResponseConcreteTypeName)> @(method.Name)(@method.MethodParameterApiDeclaration);
 }
 @EmptyLine
 }

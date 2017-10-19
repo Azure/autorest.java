@@ -85,7 +85,7 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public string ServiceResponseConcreteTypeParameterString
+        public override string ServiceResponseConcreteParameterString
         {
             get
             {

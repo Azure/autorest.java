@@ -153,13 +153,8 @@ namespace AutoRest.Java.Model
         #region template strings
 
         [JsonIgnore]
-        public string ClientResponseTypeString
-        {
-            get
-            {
-                return GenericBodyClientTypeString;
-            }
-        }
+        [Obsolete]
+        public string ClientResponseTypeString => GenericBodyClientTypeString;
 
         [JsonIgnore]
         public virtual string ClientCallbackTypeString
@@ -184,71 +179,37 @@ namespace AutoRest.Java.Model
             }
         }
 
+        // The virtual properties below seem redundant in vanilla, but they are needed to allow fine-grained distinctions when generating paging methods in Azure.
+
+        /// <summary>
+        /// The generic type argument to a method overload with a ServiceFuture return type.
+        /// </summary>
         [JsonIgnore]
-        [Obsolete("Use GenericBodyClientTypeString")]
-        public virtual string ServiceFutureGenericParameterString
-        {
-            get
-            {
-                return GenericBodyClientTypeString;
-            }
-        }
+        public virtual string ServiceFutureGenericParameterString => GenericBodyClientTypeString;
+
+        /// <summary>
+        /// The generic type argument to a method overload with an Observable or Single return type.
+        /// </summary>
+        [JsonIgnore]
+        public virtual string ServiceResponseGenericParameterString => GenericBodyClientTypeString;
+
+        /// <summary>
+        /// The generic type argument to a service interface method, which uses concrete types for serialization.
+        /// </summary>
+        [JsonIgnore]
+        public virtual string ServiceResponseConcreteParameterString => GenericBodyClientTypeString;
 
         [JsonIgnore]
-
-        [Obsolete("Use GenericBodyClientTypeString")]
-        public virtual string ServiceResponseGenericParameterString
-        {
-            get
-            {
-                return ServiceFutureGenericParameterString;
-            }
-        }
+        public virtual string GenericHeaderClientTypeString => HeaderClientType.ResponseVariant.Name;
 
         [JsonIgnore]
-        public string XmlWrapperGenericParameterString
-        {
-            get
-            {
-                return Body.XmlName + "Wrapper";
-            }
-        }
+        public virtual string GenericBodyWireTypeString => BodyWireType.Name;
 
         [JsonIgnore]
-        public virtual string GenericHeaderClientTypeString
-        {
-            get
-            {
-                return HeaderClientType.ResponseVariant.Name;
-            }
-        }
+        public string GenericBodyWireTypeStringWrapped => GenericBodyWireTypeString;
 
         [JsonIgnore]
-        public virtual string GenericBodyWireTypeString
-        {
-            get
-            {
-                return BodyWireType.Name;
-            }
-        }
-
-        [JsonIgnore]
-        public string GenericBodyWireTypeStringWrapped
-        {
-            get
-            {
-                return GenericBodyWireTypeString;
-            }
-        }
-
-        [JsonIgnore]
-        public virtual string GenericHeaderWireTypeString
-        {
-            get
-            {
-                return HeaderWireType.Name;
-            }
-        }
+        public virtual string GenericHeaderWireTypeString => HeaderWireType.Name;
 
         [JsonIgnore]
         public virtual string SequenceElementTypeString

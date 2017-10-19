@@ -148,10 +148,10 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 {
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
             @@Override
-            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) productPage) {
-                return productPage;
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+                return response.body();
             }
         });
 }
@@ -295,10 +295,10 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 {
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
             @@Override
-            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) productPage) {
-                return productPage;
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+                return response.body();
             }
         });
 }

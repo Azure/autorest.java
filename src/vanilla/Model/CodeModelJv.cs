@@ -35,6 +35,19 @@ namespace AutoRest.Java.Model
         [JsonIgnore]
         public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
+        private bool? shouldGenerateXmlSerializationCached = null;
+        public bool ShouldGenerateXmlSerializationCached
+        {
+            get
+            {
+                if (!shouldGenerateXmlSerializationCached.HasValue)
+                {
+                    shouldGenerateXmlSerializationCached = ShouldGenerateXmlSerialization;
+                }
+                return shouldGenerateXmlSerializationCached.Value;
+            }
+        }
+
         [JsonIgnore]
         public string ServiceClientServiceType
         {
