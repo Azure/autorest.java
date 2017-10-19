@@ -1,6 +1,12 @@
 package fixtures.header;
 
+import com.microsoft.rest.RestClient;
+import com.microsoft.rest.RestClient.Builder;
 import com.microsoft.rest.RestResponse;
+import com.microsoft.rest.http.HttpHeaders;
+import com.microsoft.rest.policy.AddHeadersPolicy;
+import com.microsoft.rest.policy.RequestPolicy;
+import com.microsoft.rest.serializer.JacksonAdapter;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -42,7 +48,18 @@ public class HeaderOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATHeaderServiceImpl("http://localhost:3000");
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        RequestPolicy.Factory addHeadersFactory = new AddHeadersPolicy.Factory(headers);
+
+        RestClient restClient = new RestClient.Builder()
+                .withUserAgent("")
+                .withBaseUrl("http://localhost:3000")
+                .withSerializerAdapter(new JacksonAdapter())
+                .addCustomPolicy(addHeadersFactory)
+                .build();
+
+        client = new AutoRestSwaggerBATHeaderServiceImpl(restClient);
     }
 
     @Test
@@ -640,7 +657,6 @@ public class HeaderOperationsTests {
     }
 
     @Test
-    @Ignore("Custom header not supported yet")
     public void customRequestId() throws Exception {
         client.headers().customRequestId();
     }
