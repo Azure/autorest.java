@@ -800,6 +800,7 @@ namespace AutoRest.Java.Model
                 imports.Add("rx.Single");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest.ServiceCallback");
+                imports.Add("com.microsoft.rest.RestResponse");
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type

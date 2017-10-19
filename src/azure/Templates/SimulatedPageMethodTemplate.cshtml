@@ -96,9 +96,9 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings(true)
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
         @@Override
-        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) page) {
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteParameterString) page) {
             return page;
         }
     }).toObservable();
@@ -190,9 +190,9 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings()
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
         @@Override
-        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) page) {
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteParameterString) page) {
             return page;
         }
     }).toObservable();
