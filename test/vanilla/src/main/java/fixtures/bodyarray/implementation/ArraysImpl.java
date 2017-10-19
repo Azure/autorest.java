@@ -19,6 +19,7 @@ import com.microsoft.rest.annotations.GET;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
 import com.microsoft.rest.annotations.PUT;
+import com.microsoft.rest.annotations.ReturnValueWireType;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.DateTimeRfc1123;
@@ -303,6 +304,7 @@ public class ArraysImpl implements Arrays {
         @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeRfc1123Valid" })
         @GET("array/prim/date-time-rfc1123/valid")
         @ExpectedResponses({200})
+        @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<DateTime>> getDateTimeRfc1123Valid();
 
@@ -345,6 +347,7 @@ public class ArraysImpl implements Arrays {
         @Headers({ "x-ms-logging-context: fixtures.bodyarray.Arrays getBase64Url" })
         @GET("array/prim/base64url/valid")
         @ExpectedResponses({200})
+        @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<List<byte[]>> getBase64Url();
 

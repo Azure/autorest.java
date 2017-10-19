@@ -19,10 +19,12 @@ import com.microsoft.rest.annotations.GET;
 import com.microsoft.rest.annotations.Headers;
 import com.microsoft.rest.annotations.Host;
 import com.microsoft.rest.annotations.PUT;
+import com.microsoft.rest.annotations.ReturnValueWireType;
 import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.UnixTime;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
@@ -120,6 +122,7 @@ public class IntsImpl implements Ints {
         @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getUnixTime" })
         @GET("int/unixtime")
         @ExpectedResponses({200})
+        @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getUnixTime();
 
@@ -132,12 +135,14 @@ public class IntsImpl implements Ints {
         @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getInvalidUnixTime" })
         @GET("int/invalidunixtime")
         @ExpectedResponses({200})
+        @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getInvalidUnixTime();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getNullUnixTime" })
         @GET("int/nullunixtime")
         @ExpectedResponses({200})
+        @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<DateTime> getNullUnixTime();
 

@@ -10,16 +10,59 @@ namespace AutoRest.Java.Model
 {
     public class ResponseJv : Response
     {
-        protected List<string> _interfaceImports = new List<string>();
-        protected List<string> _implImports = new List<string>();
+        protected readonly List<string> _interfaceImports = new List<string>();
+        protected readonly List<string> _implImports = new List<string>();
+        private readonly Lazy<string> returnValueWireType;
 
         public ResponseJv()
         {
+            returnValueWireType = createReturnValueWireTypeLazy();
         }
 
         public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
             : base(body, headers)
         {
+            returnValueWireType = createReturnValueWireTypeLazy();
+        }
+
+        private Lazy<string> createReturnValueWireTypeLazy()
+        {
+            return new Lazy<string>(() =>
+            {
+                string returnValueWireType = null;
+
+                IModelType body = Body;
+                if (body != null)
+                {
+                    Stack<IModelType> typeStack = new Stack<IModelType>();
+                    typeStack.Push(body);
+                    while (typeStack.Any())
+                    {
+                        IModelType currentType = typeStack.Pop();
+                        if (currentType is SequenceType currentSequenceType)
+                        {
+                            typeStack.Push(currentSequenceType.ElementType);
+                        }
+                        else if (currentType is DictionaryType currentDictionaryType)
+                        {
+                            typeStack.Push(currentDictionaryType.ValueType);
+                        }
+                        else if (currentType is PrimaryType currentPrimaryType)
+                        {
+                            string currentPrimaryTypeName = currentPrimaryType.Name.FixedValue;
+                            if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
+                                currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
+                                currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
+                            {
+                                returnValueWireType = currentPrimaryTypeName;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                return returnValueWireType;
+            });
         }
 
         #region types
@@ -214,6 +257,15 @@ namespace AutoRest.Java.Model
             }
         }
 
+        [JsonIgnore]
+        public virtual string ReturnValueWireType
+        {
+            get
+            {
+                return returnValueWireType.Value;
+            }
+        }
+
         #endregion
 
         [JsonIgnore]
@@ -233,13 +285,23 @@ namespace AutoRest.Java.Model
                 var imports = new List<string>(InterfaceImports);
                 imports.AddRange(BodyWireType.ImportSafe());
                 imports.AddRange(HeaderWireType.ImportSafe());
-                if (this.NeedsConversion && (Body is SequenceType || Headers is SequenceType))
+
+                if (ReturnValueWireType != null)
                 {
-                    imports.Add("java.util.ArrayList");
+                    imports.Add("com.microsoft.rest.annotations.ReturnValueWireType");
+                    imports.Add("com.microsoft.rest." + ReturnValueWireType);
                 }
-                if (this.NeedsConversion && (Body is DictionaryType || Headers is DictionaryType))
+
+                if (this.NeedsConversion)
                 {
-                    imports.Add("java.util.HashMap");
+                    if (Body is SequenceType || Headers is SequenceType)
+                    {
+                        imports.Add("java.util.ArrayList");
+                    }
+                    else if (Body is DictionaryType || Headers is DictionaryType)
+                    {
+                        imports.Add("java.util.HashMap");
+                    }
                 }
                 return imports;
             }
