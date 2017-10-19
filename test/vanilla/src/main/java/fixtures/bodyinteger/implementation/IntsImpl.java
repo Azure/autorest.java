@@ -24,6 +24,7 @@ import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.http.HttpClient;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.UnixTime;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;

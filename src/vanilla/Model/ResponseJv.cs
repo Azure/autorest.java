@@ -274,6 +274,7 @@ namespace AutoRest.Java.Model
                 if (ReturnValueWireType != null)
                 {
                     imports.Add("com.microsoft.rest.annotations.ReturnValueWireType");
+                    imports.Add("com.microsoft.rest." + ReturnValueWireType);
                 }
 
                 if (this.NeedsConversion)
