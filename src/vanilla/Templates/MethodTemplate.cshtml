@@ -14,17 +14,17 @@
 @if (parameterVariants.HasOptionalParameters)
 {
 <text>
-@* ---------------------------------------------- *@
-@* Synchronous, RestResponse, required parameters *@
-@* ---------------------------------------------- *@
+@* -------------------------------------- *@
+@* Synchronous, Body, required parameters *@
+@* -------------------------------------- *@
 @Model.Javadoc(parameterVariants.RequiredParameters, Model.SyncExceptionDocumentation, Model.SyncReturnDocumentation)
 @Model.SyncImpl(parameterVariants.RequiredParameters)
 @EmptyLine
 
 
-@* ------------------------------------------- *@
-@* Callback, RestResponse, required parameters *@
-@* ------------------------------------------- *@
+@* ----------------------------------- *@
+@* Callback, Body, required parameters *@
+@* ----------------------------------- *@
 @Model.Javadoc(parameterVariants.RequiredParameters.ConcatSingleItem(callbackParam), Model.AsyncExceptionDocumentation, Model.CallbackReturnDocumentation)
 @Model.CallbackImpl(parameterVariants.RequiredParameters, callbackParam)
 @EmptyLine
@@ -38,23 +38,6 @@
 @EmptyLine
 
 
-
-@* -------------------------------------- *@
-@* Synchronous, Body, required parameters *@
-@* -------------------------------------- *@
-@*@Model.Javadoc(parameterVariants.RequiredParameters, Model.SyncExceptionDocumentation, Model.SyncReturnDocumentation)
-@Model.SyncImpl(parameterVariants.RequiredParameters)
-@EmptyLine*@
-
-
-@* ----------------------------------- *@
-@* Callback, Body, required parameters *@
-@* ----------------------------------- *@
-@*@Model.Javadoc(parameterVariants.RequiredParameters.ConcatSingleItem(callbackParam), Model.AsyncExceptionDocumentation, Model.CallbackReturnDocumentation)
-@Model.CallbackImpl(parameterVariants.RequiredParameters, callbackParam)
-@EmptyLine*@
-
-
 @* ------------------------------------- *@
 @* Observable, Body, required parameters *@
 @* ------------------------------------- *@
@@ -66,17 +49,17 @@
 }
 
 
-@* ----------------------------------------- *@
-@* Synchronous, RestResponse, all parameters *@
-@* ----------------------------------------- *@
+@* --------------------------------- *@
+@* Synchronous, Body, all parameters *@
+@* --------------------------------- *@
 @Model.Javadoc(parameterVariants.AllParameters, Model.SyncExceptionDocumentation, Model.SyncReturnDocumentation)
 @Model.SyncImpl(parameterVariants.AllParameters)
 @EmptyLine
 
 
-@* -------------------------------------- *@
-@* Callback, RestResponse, all parameters *@
-@* -------------------------------------- *@
+@* ------------------------------ *@
+@* Callback, Body, all parameters *@
+@* ------------------------------ *@
 @Model.Javadoc(parameterVariants.AllParameters.ConcatSingleItem(callbackParam), Model.AsyncExceptionDocumentation, Model.CallbackReturnDocumentation)
 @Model.CallbackImpl(parameterVariants.AllParameters, callbackParam)
 @EmptyLine
@@ -88,23 +71,6 @@
 @Model.Javadoc(parameterVariants.AllParameters, Model.AsyncExceptionDocumentation, Model.ObservableReturnDocumentation)
 @Model.ObservableRestResponseImpl(parameterVariants.AllParameters, takeOnlyRequiredParameters: false)
 @EmptyLine
-
-
-
-@* --------------------------------- *@
-@* Synchronous, Body, all parameters *@
-@* --------------------------------- *@
-@*@Model.Javadoc(parameterVariants.AllParameters, Model.SyncExceptionDocumentation, Model.SyncReturnDocumentation)
-@Model.SyncImpl(parameterVariants.AllParameters)
-@EmptyLine*@
-
-
-@* ------------------------------ *@
-@* Callback, Body, all parameters *@
-@* ------------------------------ *@
-@*@Model.Javadoc(parameterVariants.AllParameters.ConcatSingleItem(callbackParam), Model.AsyncExceptionDocumentation, Model.CallbackReturnDocumentation)
-@Model.CallbackImpl(parameterVariants.AllParameters, callbackParam)
-@EmptyLine*@
 
 
 @* -------------------------------- *@
