@@ -206,9 +206,6 @@ namespace AutoRest.Java.Model
         public virtual string GenericBodyWireTypeString => BodyWireType.Name;
 
         [JsonIgnore]
-        public string GenericBodyWireTypeStringWrapped => GenericBodyWireTypeString;
-
-        [JsonIgnore]
         public virtual string GenericHeaderWireTypeString => HeaderWireType.Name;
 
         [JsonIgnore]
