@@ -10,6 +10,7 @@
 
 package fixtures.bodyduration;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodyduration.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<Period> getNullAsync();
+    /**
+     * Get null duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Period object
+     */
+    Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
 
 
     /**
@@ -79,6 +87,14 @@ public interface Durations {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putPositiveDurationAsync(Period durationBody);
+    /**
+     * Put a positive duration value.
+     *
+     * @param durationBody the Period value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody);
 
 
     /**
@@ -107,6 +123,13 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<Period> getPositiveDurationAsync();
+    /**
+     * Get a positive duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Period object
+     */
+    Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
 
 
     /**
@@ -135,6 +158,13 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<Period> getInvalidAsync();
+    /**
+     * Get an invalid duration value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Period object
+     */
+    Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
 
 
 }

@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
@@ -51,6 +52,15 @@ public interface SubscriptionInMethods {
      */
     Single<Void> postMethodLocalValidAsync(String subscriptionId);
 
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMethodLocalValidWithRestResponseAsync(String subscriptionId);
+
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
@@ -80,6 +90,15 @@ public interface SubscriptionInMethods {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postMethodLocalNullAsync(String subscriptionId);
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
+     *
+     * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postMethodLocalNullWithRestResponseAsync(String subscriptionId);
 
 
     /**
@@ -111,6 +130,15 @@ public interface SubscriptionInMethods {
      */
     Single<Void> postPathLocalValidAsync(String subscriptionId);
 
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postPathLocalValidWithRestResponseAsync(String subscriptionId);
+
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -140,6 +168,15 @@ public interface SubscriptionInMethods {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postSwaggerLocalValidAsync(String subscriptionId);
+
+    /**
+     * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
+     *
+     * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> postSwaggerLocalValidWithRestResponseAsync(String subscriptionId);
 
 
 }

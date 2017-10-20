@@ -12,6 +12,7 @@ package fixtures.report.implementation;
 
 import fixtures.report.AutoRestReportService;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;
@@ -86,7 +87,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
         @GET("report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Map<String, Integer>> getReport();
+        Single<RestResponse<Void, Map<String, Integer>>> getReport();
 
     }
 
@@ -109,7 +110,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceFuture<Map<String, Integer>> getReportAsync(ServiceCallback<Map<String, Integer>> serviceCallback) {
         return ServiceFuture.fromBody(getReportAsync(), serviceCallback);
     }
 
@@ -117,11 +118,22 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getReportAsync() {
+    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
         return service.getReport();
     }
+
+    /**
+     * Get test coverage report.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
+     */
+    public Single<Map<String, Integer>> getReportAsync() {
+        return getReportWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

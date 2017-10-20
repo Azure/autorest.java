@@ -13,6 +13,7 @@ package fixtures.bodyboolean.implementation;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.Bools;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;

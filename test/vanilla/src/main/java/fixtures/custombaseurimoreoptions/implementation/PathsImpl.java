@@ -11,6 +11,7 @@
 package fixtures.custombaseurimoreoptions.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.custombaseurimoreoptions.Paths;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -60,7 +61,7 @@ public class PathsImpl implements Paths {
         @GET("customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
+        Single<RestResponse<Void, Void>> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
 
     }
 
@@ -73,6 +74,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName) {
         getEmptyAsync(vault, secret, keyName).toBlocking().value();
@@ -88,7 +90,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName), serviceCallback);
     }
 
@@ -99,9 +101,9 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getEmptyAsync(String vault, String secret, String keyName) {
+    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -127,10 +129,25 @@ public class PathsImpl implements Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getEmptyAsync(String vault, String secret, String keyName) {
+        return getEmptyWithRestResponseAsync(vault, secret, keyName)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
         getEmptyAsync(vault, secret, keyName, keyVersion).toBlocking().value();
@@ -147,7 +164,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
@@ -159,9 +176,9 @@ public class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
+    public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {
             throw new IllegalArgumentException("Parameter vault is required and cannot be null.");
         }
@@ -179,6 +196,21 @@ public class PathsImpl implements Paths {
         }
         return service.getEmpty(vault, secret, this.client.dnsSuffix(), keyName, this.client.subscriptionId(), keyVersion);
     }
+
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param vault The vault name, e.g. https://myvault
+     * @param secret Secret value.
+     * @param keyName The key name with value 'key1'.
+     * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
+        return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

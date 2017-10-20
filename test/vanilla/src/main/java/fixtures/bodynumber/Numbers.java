@@ -10,6 +10,7 @@
 
 package fixtures.bodynumber;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodynumber.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getNullAsync();
+    /**
+     * Get null Number value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getNullWithRestResponseAsync();
 
 
     /**
@@ -77,6 +85,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getInvalidFloatAsync();
+    /**
+     * Get invalid float Number value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getInvalidFloatWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getInvalidDoubleAsync();
+    /**
+     * Get invalid double Number value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getInvalidDoubleWithRestResponseAsync();
 
 
     /**
@@ -133,6 +155,13 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getInvalidDecimalAsync();
+    /**
+     * Get invalid decimal Number value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BigDecimal object
+     */
+    Single<RestResponse<Void, BigDecimal>> getInvalidDecimalWithRestResponseAsync();
 
 
     /**
@@ -163,6 +192,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigFloatAsync(double numberBody);
+    /**
+     * Put big float value 3.402823e+20.
+     *
+     * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigFloatWithRestResponseAsync(double numberBody);
 
 
     /**
@@ -191,6 +228,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigFloatAsync();
+    /**
+     * Get big float value 3.402823e+20.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getBigFloatWithRestResponseAsync();
 
 
     /**
@@ -221,6 +265,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoubleAsync(double numberBody);
+    /**
+     * Put big double value 2.5976931e+101.
+     *
+     * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigDoubleWithRestResponseAsync(double numberBody);
 
 
     /**
@@ -249,6 +301,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigDoubleAsync();
+    /**
+     * Get big double value 2.5976931e+101.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getBigDoubleWithRestResponseAsync();
 
 
     /**
@@ -279,6 +338,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoublePositiveDecimalAsync(double numberBody);
+    /**
+     * Put big double value 99999999.99.
+     *
+     * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigDoublePositiveDecimalWithRestResponseAsync(double numberBody);
 
 
     /**
@@ -307,6 +374,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigDoublePositiveDecimalAsync();
+    /**
+     * Get big double value 99999999.99.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getBigDoublePositiveDecimalWithRestResponseAsync();
 
 
     /**
@@ -337,6 +411,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
+    /**
+     * Put big double value -99999999.99.
+     *
+     * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigDoubleNegativeDecimalWithRestResponseAsync(double numberBody);
 
 
     /**
@@ -365,6 +447,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigDoubleNegativeDecimalAsync();
+    /**
+     * Get big double value -99999999.99.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimalWithRestResponseAsync();
 
 
     /**
@@ -395,6 +484,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalAsync(BigDecimal numberBody);
+    /**
+     * Put big decimal value 2.5976931e+101.
+     *
+     * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigDecimalWithRestResponseAsync(BigDecimal numberBody);
 
 
     /**
@@ -423,6 +520,13 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getBigDecimalAsync();
+    /**
+     * Get big decimal value 2.5976931e+101.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BigDecimal object
+     */
+    Single<RestResponse<Void, BigDecimal>> getBigDecimalWithRestResponseAsync();
 
 
     /**
@@ -453,6 +557,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
+    /**
+     * Put big decimal value 99999999.99.
+     *
+     * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigDecimalPositiveDecimalWithRestResponseAsync(BigDecimal numberBody);
 
 
     /**
@@ -481,6 +593,13 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getBigDecimalPositiveDecimalAsync();
+    /**
+     * Get big decimal value 99999999.99.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BigDecimal object
+     */
+    Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync();
 
 
     /**
@@ -511,6 +630,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
+    /**
+     * Put big decimal value -99999999.99.
+     *
+     * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBigDecimalNegativeDecimalWithRestResponseAsync(BigDecimal numberBody);
 
 
     /**
@@ -539,6 +666,13 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getBigDecimalNegativeDecimalAsync();
+    /**
+     * Get big decimal value -99999999.99.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BigDecimal object
+     */
+    Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync();
 
 
     /**
@@ -569,6 +703,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallFloatAsync(double numberBody);
+    /**
+     * Put small float value 3.402823e-20.
+     *
+     * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putSmallFloatWithRestResponseAsync(double numberBody);
 
 
     /**
@@ -597,6 +739,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getSmallFloatAsync();
+    /**
+     * Get big double value 3.402823e-20.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getSmallFloatWithRestResponseAsync();
 
 
     /**
@@ -627,6 +776,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallDoubleAsync(double numberBody);
+    /**
+     * Put small double value 2.5976931e-101.
+     *
+     * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putSmallDoubleWithRestResponseAsync(double numberBody);
 
 
     /**
@@ -655,6 +812,13 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getSmallDoubleAsync();
+    /**
+     * Get big double value 2.5976931e-101.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the double object
+     */
+    Single<RestResponse<Void, Double>> getSmallDoubleWithRestResponseAsync();
 
 
     /**
@@ -685,6 +849,14 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallDecimalAsync(BigDecimal numberBody);
+    /**
+     * Put small decimal value 2.5976931e-101.
+     *
+     * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putSmallDecimalWithRestResponseAsync(BigDecimal numberBody);
 
 
     /**
@@ -713,6 +885,13 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getSmallDecimalAsync();
+    /**
+     * Get small decimal value 2.5976931e-101.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the BigDecimal object
+     */
+    Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync();
 
 
 }

@@ -13,6 +13,7 @@ package fixtures.bodybyte.implementation;
 import fixtures.bodybyte.AutoRestSwaggerBATByteService;
 import fixtures.bodybyte.Bytes;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;

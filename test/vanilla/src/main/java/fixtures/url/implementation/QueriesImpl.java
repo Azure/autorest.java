@@ -11,6 +11,7 @@
 package fixtures.url.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.url.Queries;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -65,205 +66,205 @@ public class QueriesImpl implements Queries {
         @GET("queries/bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
+        Single<RestResponse<Void, Void>> getBooleanTrue(@QueryParam("boolQuery") boolean boolQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanFalse" })
         @GET("queries/bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
+        Single<RestResponse<Void, Void>> getBooleanFalse(@QueryParam("boolQuery") boolean boolQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanNull" })
         @GET("queries/bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
+        Single<RestResponse<Void, Void>> getBooleanNull(@QueryParam("boolQuery") Boolean boolQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getIntOneMillion" })
         @GET("queries/int/1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getIntOneMillion(@QueryParam("intQuery") int intQuery);
+        Single<RestResponse<Void, Void>> getIntOneMillion(@QueryParam("intQuery") int intQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getIntNegativeOneMillion" })
         @GET("queries/int/-1000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
+        Single<RestResponse<Void, Void>> getIntNegativeOneMillion(@QueryParam("intQuery") int intQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getIntNull" })
         @GET("queries/int/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getIntNull(@QueryParam("intQuery") Integer intQuery);
+        Single<RestResponse<Void, Void>> getIntNull(@QueryParam("intQuery") Integer intQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getTenBillion" })
         @GET("queries/long/10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getTenBillion(@QueryParam("longQuery") long longQuery);
+        Single<RestResponse<Void, Void>> getTenBillion(@QueryParam("longQuery") long longQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getNegativeTenBillion" })
         @GET("queries/long/-10000000000")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
+        Single<RestResponse<Void, Void>> getNegativeTenBillion(@QueryParam("longQuery") long longQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getLongNull" })
         @GET("queries/long/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getLongNull(@QueryParam("longQuery") Long longQuery);
+        Single<RestResponse<Void, Void>> getLongNull(@QueryParam("longQuery") Long longQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries floatScientificPositive" })
         @GET("queries/float/1.034E+20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
+        Single<RestResponse<Void, Void>> floatScientificPositive(@QueryParam("floatQuery") double floatQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries floatScientificNegative" })
         @GET("queries/float/-1.034E-20")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
+        Single<RestResponse<Void, Void>> floatScientificNegative(@QueryParam("floatQuery") double floatQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries floatNull" })
         @GET("queries/float/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> floatNull(@QueryParam("floatQuery") Double floatQuery);
+        Single<RestResponse<Void, Void>> floatNull(@QueryParam("floatQuery") Double floatQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries doubleDecimalPositive" })
         @GET("queries/double/9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
+        Single<RestResponse<Void, Void>> doubleDecimalPositive(@QueryParam("doubleQuery") double doubleQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries doubleDecimalNegative" })
         @GET("queries/double/-9999999.999")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
+        Single<RestResponse<Void, Void>> doubleDecimalNegative(@QueryParam("doubleQuery") double doubleQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries doubleNull" })
         @GET("queries/double/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
+        Single<RestResponse<Void, Void>> doubleNull(@QueryParam("doubleQuery") Double doubleQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries stringUnicode" })
         @GET("queries/string/unicode/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringUnicode(@QueryParam("stringQuery") String stringQuery);
+        Single<RestResponse<Void, Void>> stringUnicode(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries stringUrlEncoded" })
         @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
+        Single<RestResponse<Void, Void>> stringUrlEncoded(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries stringEmpty" })
         @GET("queries/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringEmpty(@QueryParam("stringQuery") String stringQuery);
+        Single<RestResponse<Void, Void>> stringEmpty(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries stringNull" })
         @GET("queries/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringNull(@QueryParam("stringQuery") String stringQuery);
+        Single<RestResponse<Void, Void>> stringNull(@QueryParam("stringQuery") String stringQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries enumValid" })
         @GET("queries/enum/green%20color")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
+        Single<RestResponse<Void, Void>> enumValid(@QueryParam("enumQuery") UriColor enumQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries enumNull" })
         @GET("queries/enum/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
+        Single<RestResponse<Void, Void>> enumNull(@QueryParam("enumQuery") UriColor enumQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries byteMultiByte" })
         @GET("queries/byte/multibyte")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
+        Single<RestResponse<Void, Void>> byteMultiByte(@QueryParam("byteQuery") String byteQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries byteEmpty" })
         @GET("queries/byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> byteEmpty(@QueryParam("byteQuery") String byteQuery);
+        Single<RestResponse<Void, Void>> byteEmpty(@QueryParam("byteQuery") String byteQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries byteNull" })
         @GET("queries/byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> byteNull(@QueryParam("byteQuery") String byteQuery);
+        Single<RestResponse<Void, Void>> byteNull(@QueryParam("byteQuery") String byteQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries dateValid" })
         @GET("queries/date/2012-01-01")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
+        Single<RestResponse<Void, Void>> dateValid(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries dateNull" })
         @GET("queries/date/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
+        Single<RestResponse<Void, Void>> dateNull(@QueryParam("dateQuery") LocalDate dateQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries dateTimeValid" })
         @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<RestResponse<Void, Void>> dateTimeValid(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries dateTimeNull" })
         @GET("queries/datetime/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
+        Single<RestResponse<Void, Void>> dateTimeNull(@QueryParam("dateTimeQuery") DateTime dateTimeQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringCsvValid" })
         @GET("queries/array/csv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<RestResponse<Void, Void>> arrayStringCsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringCsvNull" })
         @GET("queries/array/csv/string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
+        Single<RestResponse<Void, Void>> arrayStringCsvNull(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringCsvEmpty" })
         @GET("queries/array/csv/string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
+        Single<RestResponse<Void, Void>> arrayStringCsvEmpty(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringSsvValid" })
         @GET("queries/array/ssv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<RestResponse<Void, Void>> arrayStringSsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringTsvValid" })
         @GET("queries/array/tsv/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<RestResponse<Void, Void>> arrayStringTsvValid(@QueryParam("arrayQuery") String arrayQuery);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Queries arrayStringPipesValid" })
         @GET("queries/array/pipes/string/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
+        Single<RestResponse<Void, Void>> arrayStringPipesValid(@QueryParam("arrayQuery") String arrayQuery);
 
     }
 
@@ -273,6 +274,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getBooleanTrue() {
         getBooleanTrueAsync().toBlocking().value();
@@ -285,7 +287,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTrueAsync(), serviceCallback);
     }
 
@@ -293,12 +295,23 @@ public class QueriesImpl implements Queries {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanTrueAsync() {
+    public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
         final boolean boolQuery = true;
         return service.getBooleanTrue(boolQuery);
     }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getBooleanTrueAsync() {
+        return getBooleanTrueWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -307,6 +320,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getBooleanFalse() {
         getBooleanFalseAsync().toBlocking().value();
@@ -319,7 +333,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanFalseAsync(), serviceCallback);
     }
 
@@ -327,12 +341,23 @@ public class QueriesImpl implements Queries {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanFalseAsync() {
+    public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
         final boolean boolQuery = false;
         return service.getBooleanFalse(boolQuery);
     }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getBooleanFalseAsync() {
+        return getBooleanFalseWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -341,6 +366,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getBooleanNull() {
         getBooleanNullAsync().toBlocking().value();
@@ -353,7 +379,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanNullAsync(), serviceCallback);
     }
 
@@ -361,12 +387,23 @@ public class QueriesImpl implements Queries {
      * Get null Boolean value on query (query string should be absent).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanNullAsync() {
+    public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync() {
         final Boolean boolQuery = null;
         return service.getBooleanNull(boolQuery);
     }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getBooleanNullAsync() {
+        return getBooleanNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -375,6 +412,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getBooleanNull(Boolean boolQuery) {
         getBooleanNullAsync(boolQuery).toBlocking().value();
@@ -388,7 +426,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanNullAsync(boolQuery), serviceCallback);
     }
 
@@ -397,11 +435,23 @@ public class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanNullAsync(Boolean boolQuery) {
+    public Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery) {
         return service.getBooleanNull(boolQuery);
     }
+
+    /**
+     * Get null Boolean value on query (query string should be absent).
+     *
+     * @param boolQuery null boolean value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getBooleanNullAsync(Boolean boolQuery) {
+        return getBooleanNullWithRestResponseAsync(boolQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -410,6 +460,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getIntOneMillion() {
         getIntOneMillionAsync().toBlocking().value();
@@ -422,7 +473,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntOneMillionAsync(), serviceCallback);
     }
 
@@ -430,12 +481,23 @@ public class QueriesImpl implements Queries {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntOneMillionAsync() {
+    public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
         final int intQuery = 1000000;
         return service.getIntOneMillion(intQuery);
     }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getIntOneMillionAsync() {
+        return getIntOneMillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -444,6 +506,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
         getIntNegativeOneMillionAsync().toBlocking().value();
@@ -456,7 +519,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNegativeOneMillionAsync(), serviceCallback);
     }
 
@@ -464,12 +527,23 @@ public class QueriesImpl implements Queries {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNegativeOneMillionAsync() {
+    public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intQuery = -1000000;
         return service.getIntNegativeOneMillion(intQuery);
     }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getIntNegativeOneMillionAsync() {
+        return getIntNegativeOneMillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -478,6 +552,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getIntNull() {
         getIntNullAsync().toBlocking().value();
@@ -490,7 +565,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNullAsync(), serviceCallback);
     }
 
@@ -498,12 +573,23 @@ public class QueriesImpl implements Queries {
      * Get null integer value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNullAsync() {
+    public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync() {
         final Integer intQuery = null;
         return service.getIntNull(intQuery);
     }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getIntNullAsync() {
+        return getIntNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null integer value (no query parameter).
@@ -512,6 +598,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getIntNull(Integer intQuery) {
         getIntNullAsync(intQuery).toBlocking().value();
@@ -525,7 +612,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNullAsync(Integer intQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNullAsync(intQuery), serviceCallback);
     }
 
@@ -534,11 +621,23 @@ public class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNullAsync(Integer intQuery) {
+    public Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery) {
         return service.getIntNull(intQuery);
     }
+
+    /**
+     * Get null integer value (no query parameter).
+     *
+     * @param intQuery null integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getIntNullAsync(Integer intQuery) {
+        return getIntNullWithRestResponseAsync(intQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -547,6 +646,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getTenBillion() {
         getTenBillionAsync().toBlocking().value();
@@ -559,7 +659,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getTenBillionAsync(), serviceCallback);
     }
 
@@ -567,12 +667,23 @@ public class QueriesImpl implements Queries {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getTenBillionAsync() {
+    public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
         final long longQuery = 10000000000L;
         return service.getTenBillion(longQuery);
     }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getTenBillionAsync() {
+        return getTenBillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -581,6 +692,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
         getNegativeTenBillionAsync().toBlocking().value();
@@ -593,7 +705,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getNegativeTenBillionAsync(), serviceCallback);
     }
 
@@ -601,12 +713,23 @@ public class QueriesImpl implements Queries {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getNegativeTenBillionAsync() {
+    public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
         final long longQuery = -10000000000L;
         return service.getNegativeTenBillion(longQuery);
     }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getNegativeTenBillionAsync() {
+        return getNegativeTenBillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -615,6 +738,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getLongNull() {
         getLongNullAsync().toBlocking().value();
@@ -627,7 +751,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getLongNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLongNullAsync(), serviceCallback);
     }
 
@@ -635,12 +759,23 @@ public class QueriesImpl implements Queries {
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getLongNullAsync() {
+    public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync() {
         final Long longQuery = null;
         return service.getLongNull(longQuery);
     }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getLongNullAsync() {
+        return getLongNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -649,6 +784,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getLongNull(Long longQuery) {
         getLongNullAsync(longQuery).toBlocking().value();
@@ -662,7 +798,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getLongNullAsync(Long longQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getLongNullAsync(longQuery), serviceCallback);
     }
 
@@ -671,11 +807,23 @@ public class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getLongNullAsync(Long longQuery) {
+    public Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery) {
         return service.getLongNull(longQuery);
     }
+
+    /**
+     * Get 'null 64 bit integer value (no query param in uri).
+     *
+     * @param longQuery null 64 bit integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getLongNullAsync(Long longQuery) {
+        return getLongNullWithRestResponseAsync(longQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -684,6 +832,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void floatScientificPositive() {
         floatScientificPositiveAsync().toBlocking().value();
@@ -696,7 +845,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificPositiveAsync(), serviceCallback);
     }
 
@@ -704,12 +853,23 @@ public class QueriesImpl implements Queries {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificPositiveAsync() {
+    public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
         final double floatQuery = 1.034E+20;
         return service.floatScientificPositive(floatQuery);
     }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> floatScientificPositiveAsync() {
+        return floatScientificPositiveWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -718,6 +878,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void floatScientificNegative() {
         floatScientificNegativeAsync().toBlocking().value();
@@ -730,7 +891,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificNegativeAsync(), serviceCallback);
     }
 
@@ -738,12 +899,23 @@ public class QueriesImpl implements Queries {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificNegativeAsync() {
+    public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
         final double floatQuery = -1.034E-20;
         return service.floatScientificNegative(floatQuery);
     }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> floatScientificNegativeAsync() {
+        return floatScientificNegativeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -752,6 +924,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void floatNull() {
         floatNullAsync().toBlocking().value();
@@ -764,7 +937,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatNullAsync(), serviceCallback);
     }
 
@@ -772,12 +945,23 @@ public class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatNullAsync() {
+    public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync() {
         final Double floatQuery = null;
         return service.floatNull(floatQuery);
     }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> floatNullAsync() {
+        return floatNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null numeric value (no query parameter).
@@ -786,6 +970,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void floatNull(Double floatQuery) {
         floatNullAsync(floatQuery).toBlocking().value();
@@ -799,7 +984,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatNullAsync(Double floatQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatNullAsync(floatQuery), serviceCallback);
     }
 
@@ -808,11 +993,23 @@ public class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatNullAsync(Double floatQuery) {
+    public Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery) {
         return service.floatNull(floatQuery);
     }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param floatQuery null numeric value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> floatNullAsync(Double floatQuery) {
+        return floatNullWithRestResponseAsync(floatQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -821,6 +1018,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
         doubleDecimalPositiveAsync().toBlocking().value();
@@ -833,7 +1031,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalPositiveAsync(), serviceCallback);
     }
 
@@ -841,12 +1039,23 @@ public class QueriesImpl implements Queries {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalPositiveAsync() {
+    public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
         final double doubleQuery = 9999999.999;
         return service.doubleDecimalPositive(doubleQuery);
     }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> doubleDecimalPositiveAsync() {
+        return doubleDecimalPositiveWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -855,6 +1064,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
         doubleDecimalNegativeAsync().toBlocking().value();
@@ -867,7 +1077,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalNegativeAsync(), serviceCallback);
     }
 
@@ -875,12 +1085,23 @@ public class QueriesImpl implements Queries {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalNegativeAsync() {
+    public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
         final double doubleQuery = -9999999.999;
         return service.doubleDecimalNegative(doubleQuery);
     }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> doubleDecimalNegativeAsync() {
+        return doubleDecimalNegativeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -889,6 +1110,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void doubleNull() {
         doubleNullAsync().toBlocking().value();
@@ -901,7 +1123,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleNullAsync(), serviceCallback);
     }
 
@@ -909,12 +1131,23 @@ public class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleNullAsync() {
+    public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync() {
         final Double doubleQuery = null;
         return service.doubleNull(doubleQuery);
     }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> doubleNullAsync() {
+        return doubleNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null numeric value (no query parameter).
@@ -923,6 +1156,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void doubleNull(Double doubleQuery) {
         doubleNullAsync(doubleQuery).toBlocking().value();
@@ -936,7 +1170,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleNullAsync(doubleQuery), serviceCallback);
     }
 
@@ -945,11 +1179,23 @@ public class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleNullAsync(Double doubleQuery) {
+    public Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery) {
         return service.doubleNull(doubleQuery);
     }
+
+    /**
+     * Get null numeric value (no query parameter).
+     *
+     * @param doubleQuery null numeric value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> doubleNullAsync(Double doubleQuery) {
+        return doubleNullWithRestResponseAsync(doubleQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -958,6 +1204,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringUnicode() {
         stringUnicodeAsync().toBlocking().value();
@@ -970,7 +1217,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUnicodeAsync(), serviceCallback);
     }
 
@@ -978,12 +1225,23 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUnicodeAsync() {
+    public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
         final String stringQuery = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringQuery);
     }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringUnicodeAsync() {
+        return stringUnicodeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -992,6 +1250,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringUrlEncoded() {
         stringUrlEncodedAsync().toBlocking().value();
@@ -1004,7 +1263,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUrlEncodedAsync(), serviceCallback);
     }
 
@@ -1012,12 +1271,23 @@ public class QueriesImpl implements Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUrlEncodedAsync() {
+    public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
         final String stringQuery = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringQuery);
     }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringUrlEncodedAsync() {
+        return stringUrlEncodedWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1026,6 +1296,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringEmpty() {
         stringEmptyAsync().toBlocking().value();
@@ -1038,7 +1309,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringEmptyAsync(), serviceCallback);
     }
 
@@ -1046,12 +1317,23 @@ public class QueriesImpl implements Queries {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringEmptyAsync() {
+    public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
         final String stringQuery = "";
         return service.stringEmpty(stringQuery);
     }
+
+    /**
+     * Get ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringEmptyAsync() {
+        return stringEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1060,6 +1342,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringNull() {
         stringNullAsync().toBlocking().value();
@@ -1072,7 +1355,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(), serviceCallback);
     }
 
@@ -1080,12 +1363,23 @@ public class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringNullAsync() {
+    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync() {
         final String stringQuery = null;
         return service.stringNull(stringQuery);
     }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringNullAsync() {
+        return stringNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null (no query parameter in url).
@@ -1094,6 +1388,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringNull(String stringQuery) {
         stringNullAsync(stringQuery).toBlocking().value();
@@ -1107,7 +1402,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringNullAsync(String stringQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(stringQuery), serviceCallback);
     }
 
@@ -1116,11 +1411,23 @@ public class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringNullAsync(String stringQuery) {
+    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery) {
         return service.stringNull(stringQuery);
     }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param stringQuery null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringNullAsync(String stringQuery) {
+        return stringNullWithRestResponseAsync(stringQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1129,6 +1436,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void enumValid() {
         enumValidAsync().toBlocking().value();
@@ -1141,7 +1449,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(), serviceCallback);
     }
 
@@ -1149,12 +1457,23 @@ public class QueriesImpl implements Queries {
      * Get using uri with query parameter 'green color'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumValidAsync() {
+    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumValid(enumQuery);
     }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> enumValidAsync() {
+        return enumValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -1163,6 +1482,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void enumValid(UriColor enumQuery) {
         enumValidAsync(enumQuery).toBlocking().value();
@@ -1176,7 +1496,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(enumQuery), serviceCallback);
     }
 
@@ -1185,11 +1505,23 @@ public class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumValidAsync(UriColor enumQuery) {
+    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery) {
         return service.enumValid(enumQuery);
     }
+
+    /**
+     * Get using uri with query parameter 'green color'.
+     *
+     * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> enumValidAsync(UriColor enumQuery) {
+        return enumValidWithRestResponseAsync(enumQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1198,6 +1530,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void enumNull() {
         enumNullAsync().toBlocking().value();
@@ -1210,7 +1543,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(), serviceCallback);
     }
 
@@ -1218,12 +1551,23 @@ public class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumNullAsync() {
+    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync() {
         final UriColor enumQuery = null;
         return service.enumNull(enumQuery);
     }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> enumNullAsync() {
+        return enumNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null (no query parameter in url).
@@ -1232,6 +1576,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void enumNull(UriColor enumQuery) {
         enumNullAsync(enumQuery).toBlocking().value();
@@ -1245,7 +1590,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(enumQuery), serviceCallback);
     }
 
@@ -1254,11 +1599,23 @@ public class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumNullAsync(UriColor enumQuery) {
+    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery) {
         return service.enumNull(enumQuery);
     }
+
+    /**
+     * Get null (no query parameter in url).
+     *
+     * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> enumNullAsync(UriColor enumQuery) {
+        return enumNullWithRestResponseAsync(enumQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1267,6 +1624,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteMultiByte() {
         byteMultiByteAsync().toBlocking().value();
@@ -1279,7 +1637,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteMultiByteAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(), serviceCallback);
     }
 
@@ -1287,13 +1645,24 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteMultiByteAsync() {
+    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteMultiByteAsync() {
+        return byteMultiByteWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1302,6 +1671,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteMultiByte(byte[] byteQuery) {
         byteMultiByteAsync(byteQuery).toBlocking().value();
@@ -1315,7 +1685,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(byteQuery), serviceCallback);
     }
 
@@ -1324,12 +1694,24 @@ public class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteMultiByteAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
+    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteMultiByteAsync(byte[] byteQuery) {
+        return byteMultiByteWithRestResponseAsync(byteQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1338,6 +1720,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteEmpty() {
         byteEmptyAsync().toBlocking().value();
@@ -1350,7 +1733,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteEmptyAsync(), serviceCallback);
     }
 
@@ -1358,13 +1741,24 @@ public class QueriesImpl implements Queries {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteEmptyAsync() {
+    public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
         final byte[] byteQuery = "".getBytes();
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteEmpty(byteQueryConverted);
     }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteEmptyAsync() {
+        return byteEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1373,6 +1767,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteNull() {
         byteNullAsync().toBlocking().value();
@@ -1385,7 +1780,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(), serviceCallback);
     }
 
@@ -1393,13 +1788,24 @@ public class QueriesImpl implements Queries {
      * Get null as byte array (no query parameters in uri).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteNullAsync() {
+    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteNullAsync() {
+        return byteNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1408,6 +1814,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteNull(byte[] byteQuery) {
         byteNullAsync(byteQuery).toBlocking().value();
@@ -1421,7 +1828,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(byteQuery), serviceCallback);
     }
 
@@ -1430,12 +1837,24 @@ public class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteNullAsync(byte[] byteQuery) {
-        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery) {
+    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
+
+    /**
+     * Get null as byte array (no query parameters in uri).
+     *
+     * @param byteQuery null as byte array (no query parameters in uri)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteNullAsync(byte[] byteQuery) {
+        return byteNullWithRestResponseAsync(byteQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1444,6 +1863,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateValid() {
         dateValidAsync().toBlocking().value();
@@ -1456,7 +1876,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateValidAsync(), serviceCallback);
     }
 
@@ -1464,12 +1884,23 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateValidAsync() {
+    public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
         final LocalDate dateQuery = LocalDate.parse("2012-01-01");
         return service.dateValid(dateQuery);
     }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateValidAsync() {
+        return dateValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1478,6 +1909,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateNull() {
         dateNullAsync().toBlocking().value();
@@ -1490,7 +1922,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(), serviceCallback);
     }
 
@@ -1498,12 +1930,23 @@ public class QueriesImpl implements Queries {
      * Get null as date - this should result in no query parameters in uri.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateNullAsync() {
+    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync() {
         final LocalDate dateQuery = null;
         return service.dateNull(dateQuery);
     }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateNullAsync() {
+        return dateNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1512,6 +1955,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateNull(LocalDate dateQuery) {
         dateNullAsync(dateQuery).toBlocking().value();
@@ -1525,7 +1969,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(dateQuery), serviceCallback);
     }
 
@@ -1534,11 +1978,23 @@ public class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateNullAsync(LocalDate dateQuery) {
+    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery) {
         return service.dateNull(dateQuery);
     }
+
+    /**
+     * Get null as date - this should result in no query parameters in uri.
+     *
+     * @param dateQuery null as date (no query parameters in uri)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateNullAsync(LocalDate dateQuery) {
+        return dateNullWithRestResponseAsync(dateQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1547,6 +2003,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateTimeValid() {
         dateTimeValidAsync().toBlocking().value();
@@ -1559,7 +2016,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeValidAsync(), serviceCallback);
     }
 
@@ -1567,12 +2024,23 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeValidAsync() {
+    public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
         final DateTime dateTimeQuery = DateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimeQuery);
     }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateTimeValidAsync() {
+        return dateTimeValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1581,6 +2049,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateTimeNull() {
         dateTimeNullAsync().toBlocking().value();
@@ -1593,7 +2062,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(), serviceCallback);
     }
 
@@ -1601,12 +2070,23 @@ public class QueriesImpl implements Queries {
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeNullAsync() {
+    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync() {
         final DateTime dateTimeQuery = null;
         return service.dateTimeNull(dateTimeQuery);
     }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateTimeNullAsync() {
+        return dateTimeNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1615,6 +2095,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimeQuery) {
         dateTimeNullAsync(dateTimeQuery).toBlocking().value();
@@ -1628,7 +2109,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimeQuery), serviceCallback);
     }
 
@@ -1637,11 +2118,23 @@ public class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
+    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery) {
         return service.dateTimeNull(dateTimeQuery);
     }
+
+    /**
+     * Get null as date-time, should result in no query parameters in uri.
+     *
+     * @param dateTimeQuery null as date-time (no query parameters)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
+        return dateTimeNullWithRestResponseAsync(dateTimeQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1650,6 +2143,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringCsvValid() {
         arrayStringCsvValidAsync().toBlocking().value();
@@ -1662,7 +2156,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvValidAsync(), serviceCallback);
     }
 
@@ -1670,13 +2164,25 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvValidAsync() {
+    public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Validator.validate(arrayQuery);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringCsvValidAsync() {
+        return arrayStringCsvValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1685,6 +2191,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringCsvValid(List<String> arrayQuery) {
         arrayStringCsvValidAsync(arrayQuery).toBlocking().value();
@@ -1698,7 +2205,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -1707,13 +2214,25 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
+    public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
+        return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1722,6 +2241,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringCsvNull() {
         arrayStringCsvNullAsync().toBlocking().value();
@@ -1734,7 +2254,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvNullAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvNullAsync(), serviceCallback);
     }
 
@@ -1742,13 +2262,25 @@ public class QueriesImpl implements Queries {
      * Get a null array of string using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvNullAsync() {
+    public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync() {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Validator.validate(arrayQuery);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
     }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringCsvNullAsync() {
+        return arrayStringCsvNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1757,6 +2289,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringCsvNull(List<String> arrayQuery) {
         arrayStringCsvNullAsync(arrayQuery).toBlocking().value();
@@ -1770,7 +2303,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvNullAsync(arrayQuery), serviceCallback);
     }
 
@@ -1779,13 +2312,25 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
+    public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
     }
+
+    /**
+     * Get a null array of string using the csv-array format.
+     *
+     * @param arrayQuery a null array of string using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
+        return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1794,6 +2339,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringCsvEmpty() {
         arrayStringCsvEmptyAsync().toBlocking().value();
@@ -1806,7 +2352,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(), serviceCallback);
     }
 
@@ -1814,13 +2360,25 @@ public class QueriesImpl implements Queries {
      * Get an empty array [] of string using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvEmptyAsync() {
+    public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync() {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        Validator.validate(arrayQuery);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
     }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringCsvEmptyAsync() {
+        return arrayStringCsvEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1829,6 +2387,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
         arrayStringCsvEmptyAsync(arrayQuery).toBlocking().value();
@@ -1842,7 +2401,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringCsvEmptyAsync(arrayQuery), serviceCallback);
     }
 
@@ -1851,13 +2410,25 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
+    public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
     }
+
+    /**
+     * Get an empty array [] of string using the csv-array format.
+     *
+     * @param arrayQuery an empty array [] of string using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
+        return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1866,6 +2437,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringSsvValid() {
         arrayStringSsvValidAsync().toBlocking().value();
@@ -1878,7 +2450,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringSsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringSsvValidAsync(), serviceCallback);
     }
 
@@ -1886,13 +2458,25 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringSsvValidAsync() {
+    public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        Validator.validate(arrayQuery);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringSsvValidAsync() {
+        return arrayStringSsvValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1901,6 +2485,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringSsvValid(List<String> arrayQuery) {
         arrayStringSsvValidAsync(arrayQuery).toBlocking().value();
@@ -1914,7 +2499,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringSsvValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -1923,13 +2508,25 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
+    public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
+        return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1938,6 +2535,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringTsvValid() {
         arrayStringTsvValidAsync().toBlocking().value();
@@ -1950,7 +2548,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringTsvValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringTsvValidAsync(), serviceCallback);
     }
 
@@ -1958,13 +2556,25 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringTsvValidAsync() {
+    public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        Validator.validate(arrayQuery);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringTsvValidAsync() {
+        return arrayStringTsvValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1973,6 +2583,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringTsvValid(List<String> arrayQuery) {
         arrayStringTsvValidAsync(arrayQuery).toBlocking().value();
@@ -1986,7 +2597,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringTsvValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -1995,13 +2606,25 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
+    public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
+        return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -2010,6 +2633,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringPipesValid() {
         arrayStringPipesValidAsync().toBlocking().value();
@@ -2022,7 +2646,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringPipesValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringPipesValidAsync(), serviceCallback);
     }
 
@@ -2030,13 +2654,25 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringPipesValidAsync() {
+    public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        Validator.validate(arrayQuery);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringPipesValidAsync() {
+        return arrayStringPipesValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -2045,6 +2681,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayStringPipesValid(List<String> arrayQuery) {
         arrayStringPipesValidAsync(arrayQuery).toBlocking().value();
@@ -2058,7 +2695,7 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayStringPipesValidAsync(arrayQuery), serviceCallback);
     }
 
@@ -2067,13 +2704,25 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
+    public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     *
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
+        return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

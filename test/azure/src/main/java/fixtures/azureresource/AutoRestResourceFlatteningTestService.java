@@ -12,6 +12,7 @@ package fixtures.azureresource;
 
 import com.microsoft.azure.Resource;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azureresource.models.ErrorException;
@@ -111,6 +112,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayAsync();
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync();
     /**
      * Put External Resource as an Array.
      *
@@ -139,6 +148,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayAsync(List<Resource> resourceArray);
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray);
 
 
     /**
@@ -167,6 +184,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
     Single<List<FlattenedProduct>> getArrayAsync();
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     */
+    Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync();
 
 
     /**
@@ -194,6 +218,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryAsync();
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync();
     /**
      * Put External Resource as a Dictionary.
      *
@@ -222,6 +254,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
 
     /**
@@ -250,6 +290,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
     Single<Map<String, FlattenedProduct>> getDictionaryAsync();
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     */
+    Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
 
 
     /**
@@ -277,6 +324,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putResourceCollectionAsync();
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync();
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -305,6 +360,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
 
 
     /**
@@ -333,6 +396,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the ResourceCollection object
      */
     Single<ResourceCollection> getResourceCollectionAsync();
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ResourceCollection object
+     */
+    Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync();
 
 
 }

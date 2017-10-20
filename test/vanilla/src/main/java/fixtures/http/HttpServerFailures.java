@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.http.models.Error;
@@ -49,6 +50,13 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> head501Async();
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Error object
+     */
+    Single<RestResponse<Void, Error>> head501WithRestResponseAsync();
 
 
     /**
@@ -77,6 +85,13 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> get501Async();
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Error object
+     */
+    Single<RestResponse<Void, Error>> get501WithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,14 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> post505Async();
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Error object
+     */
+    Single<RestResponse<Void, Error>> post505WithRestResponseAsync();
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -134,6 +157,14 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> post505Async(Boolean booleanValue);
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Error object
+     */
+    Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -162,6 +193,14 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> delete505Async();
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Error object
+     */
+    Single<RestResponse<Void, Error>> delete505WithRestResponseAsync();
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -191,6 +230,14 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> delete505Async(Boolean booleanValue);
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Error object
+     */
+    Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue);
 
 
 }

@@ -11,6 +11,7 @@
 package fixtures.bodydatetimerfc1123.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -63,61 +64,61 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getNull();
+        Single<RestResponse<Void, DateTime>> getNull();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getInvalid" })
         @GET("datetimerfc1123/invalid")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getInvalid();
+        Single<RestResponse<Void, DateTime>> getInvalid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getOverflow" })
         @GET("datetimerfc1123/overflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getOverflow();
+        Single<RestResponse<Void, DateTime>> getOverflow();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUnderflow" })
         @GET("datetimerfc1123/underflow")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getUnderflow();
+        Single<RestResponse<Void, DateTime>> getUnderflow();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s putUtcMaxDateTime" })
         @PUT("datetimerfc1123/max")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
+        Single<RestResponse<Void, Void>> putUtcMaxDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcLowercaseMaxDateTime" })
         @GET("datetimerfc1123/max/lowercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getUtcLowercaseMaxDateTime();
+        Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTime();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcUppercaseMaxDateTime" })
         @GET("datetimerfc1123/max/uppercase")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getUtcUppercaseMaxDateTime();
+        Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTime();
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s putUtcMinDateTime" })
         @PUT("datetimerfc1123/min")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
+        Single<RestResponse<Void, Void>> putUtcMinDateTime(@BodyParam("application/json; charset=utf-8") DateTimeRfc1123 datetimeBody);
 
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcMinDateTime" })
         @GET("datetimerfc1123/min")
         @ExpectedResponses({200})
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<DateTime> getUtcMinDateTime();
+        Single<RestResponse<Void, DateTime>> getUtcMinDateTime();
 
     }
 
@@ -140,7 +141,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getNullAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -148,11 +149,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get null datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getNullAsync() {
+    public Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
+
+    /**
+     * Get null datetime value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getNullAsync() {
+        return getNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -174,7 +186,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getInvalidAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -182,11 +194,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getInvalidAsync() {
+    public Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
+
+    /**
+     * Get invalid datetime value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getInvalidAsync() {
+        return getInvalidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -208,7 +231,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getOverflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getOverflowAsync(), serviceCallback);
     }
 
@@ -216,11 +239,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getOverflowAsync() {
+    public Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync() {
         return service.getOverflow();
     }
+
+    /**
+     * Get overflow datetime value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getOverflowAsync() {
+        return getOverflowWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -242,7 +276,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUnderflowAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUnderflowAsync(), serviceCallback);
     }
 
@@ -250,11 +284,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUnderflowAsync() {
+    public Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync() {
         return service.getUnderflow();
     }
+
+    /**
+     * Get underflow datetime value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getUnderflowAsync() {
+        return getUnderflowWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -264,6 +309,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
         putUtcMaxDateTimeAsync(datetimeBody).toBlocking().value();
@@ -277,7 +323,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMaxDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -286,15 +332,27 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+    public Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+    DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return service.putUtcMaxDateTime(datetimeBodyConverted);
     }
+
+    /**
+     * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
+     *
+     * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+        return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -316,7 +374,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcLowercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -324,11 +382,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUtcLowercaseMaxDateTimeAsync() {
+    public Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcLowercaseMaxDateTime();
     }
+
+    /**
+     * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getUtcLowercaseMaxDateTimeAsync() {
+        return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -350,7 +419,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcUppercaseMaxDateTimeAsync(), serviceCallback);
     }
 
@@ -358,11 +427,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUtcUppercaseMaxDateTimeAsync() {
+    public Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync() {
         return service.getUtcUppercaseMaxDateTime();
     }
+
+    /**
+     * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getUtcUppercaseMaxDateTimeAsync() {
+        return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -372,6 +452,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
         putUtcMinDateTimeAsync(datetimeBody).toBlocking().value();
@@ -385,7 +466,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putUtcMinDateTimeAsync(datetimeBody), serviceCallback);
     }
 
@@ -394,15 +475,27 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+    public Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(DateTime datetimeBody) {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+    DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return service.putUtcMinDateTime(datetimeBodyConverted);
     }
+
+    /**
+     * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+        return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -424,7 +517,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(ServiceCallback<DateTime> serviceCallback) {
         return ServiceFuture.fromBody(getUtcMinDateTimeAsync(), serviceCallback);
     }
 
@@ -432,11 +525,22 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUtcMinDateTimeAsync() {
+    public Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync() {
         return service.getUtcMinDateTime();
     }
+
+    /**
+     * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
+     */
+    public Single<DateTime> getUtcMinDateTimeAsync() {
+        return getUtcMinDateTimeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

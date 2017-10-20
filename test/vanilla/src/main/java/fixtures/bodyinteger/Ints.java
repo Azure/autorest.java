@@ -10,6 +10,7 @@
 
 package fixtures.bodyinteger;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodyinteger.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getNullAsync();
+    /**
+     * Get null Int value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the int object
+     */
+    Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync();
 
 
     /**
@@ -77,6 +85,13 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getInvalidAsync();
+    /**
+     * Get invalid Int value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the int object
+     */
+    Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync();
 
 
     /**
@@ -105,6 +120,13 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getOverflowInt32Async();
+    /**
+     * Get overflow Int32 value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the int object
+     */
+    Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync();
 
 
     /**
@@ -133,6 +155,13 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getUnderflowInt32Async();
+    /**
+     * Get underflow Int32 value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the int object
+     */
+    Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync();
 
 
     /**
@@ -161,6 +190,13 @@ public interface Ints {
      * @return the observable to the long object
      */
     Single<Long> getOverflowInt64Async();
+    /**
+     * Get overflow Int64 value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the long object
+     */
+    Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync();
 
 
     /**
@@ -189,6 +225,13 @@ public interface Ints {
      * @return the observable to the long object
      */
     Single<Long> getUnderflowInt64Async();
+    /**
+     * Get underflow Int64 value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the long object
+     */
+    Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync();
 
 
     /**
@@ -219,6 +262,14 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMax32Async(int intBody);
+    /**
+     * Put max int32 value.
+     *
+     * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(int intBody);
 
 
     /**
@@ -249,6 +300,14 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMax64Async(long intBody);
+    /**
+     * Put max int64 value.
+     *
+     * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(long intBody);
 
 
     /**
@@ -279,6 +338,14 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMin32Async(int intBody);
+    /**
+     * Put min int32 value.
+     *
+     * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(int intBody);
 
 
     /**
@@ -309,6 +376,14 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMin64Async(long intBody);
+    /**
+     * Put min int64 value.
+     *
+     * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(long intBody);
 
 
     /**
@@ -337,6 +412,13 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUnixTimeAsync();
+    /**
+     * Get datetime encoded as Unix time value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DateTime object
+     */
+    Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync();
 
 
     /**
@@ -367,6 +449,14 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUnixTimeDateAsync(DateTime intBody);
+    /**
+     * Put datetime encoded as Unix time.
+     *
+     * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(DateTime intBody);
 
 
     /**
@@ -395,6 +485,13 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getInvalidUnixTimeAsync();
+    /**
+     * Get invalid Unix time value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DateTime object
+     */
+    Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync();
 
 
     /**
@@ -423,6 +520,13 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getNullUnixTimeAsync();
+    /**
+     * Get null Unix time value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the DateTime object
+     */
+    Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync();
 
 
 }

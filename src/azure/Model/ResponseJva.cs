@@ -76,7 +76,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && IsPagedResponse)
+                if (bodySequenceType != null && (IsPagedResponse || Parent.SimulateAsPagingOperation))
                 {
                     return string.Format(CultureInfo.InvariantCulture, "Page<{0}>", bodySequenceType.ElementType.Name);
                 }
@@ -85,7 +85,7 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public string ServiceResponseConcreteTypeParameterString
+        public override string ServiceResponseConcreteParameterString
         {
             get
             {

@@ -11,6 +11,7 @@
 package fixtures.parameterflattening;
 
 import com.microsoft.rest.RestException;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import java.io.IOException;
@@ -57,6 +58,16 @@ public interface AvailabilitySets {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags);
+    /**
+     * Updates the tags for an availability set.
+     *
+     * @param resourceGroupName The name of the resource group.
+     * @param avset The name of the storage availability set.
+     * @param tags A set of tags. A description about the set of tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> updateWithRestResponseAsync(String resourceGroupName, String avset, Map<String, String> tags);
 
 
 }

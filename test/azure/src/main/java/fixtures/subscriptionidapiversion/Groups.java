@@ -10,6 +10,7 @@
 
 package fixtures.subscriptionidapiversion;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.subscriptionidapiversion.models.ErrorException;
@@ -52,6 +53,15 @@ public interface Groups {
      * @return the observable to the SampleResourceGroup object
      */
     Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
+
+    /**
+     * Provides a resouce group with name 'testgroup101' and location 'West US'.
+     *
+     * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SampleResourceGroup object
+     */
+    RestResponse<Void, SampleResourceGroup> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName);
 
 
 }

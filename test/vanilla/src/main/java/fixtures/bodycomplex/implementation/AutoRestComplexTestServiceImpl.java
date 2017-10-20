@@ -20,6 +20,7 @@ import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Readonlypropertys;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;

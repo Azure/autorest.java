@@ -12,6 +12,7 @@ package fixtures.validation.implementation;
 
 import fixtures.validation.AutoRestValidationTest;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;
@@ -139,23 +140,23 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Product> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
+        Single<RestResponse<Void, Product>> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
 
         @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest validationOfBody" })
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Product> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
+        Single<RestResponse<Void, Product>> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
 
         @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest getWithConstantInPath" })
         @GET("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
-        Single<Void> getWithConstantInPath(@PathParam("constantParam") String constantParam);
+        Single<RestResponse<Void, Void>> getWithConstantInPath(@PathParam("constantParam") String constantParam);
 
         @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest postWithConstantInBody" })
         @POST("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
-        Single<Product> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
+        Single<RestResponse<Void, Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
 
     }
 
@@ -182,7 +183,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(validationOfMethodParametersAsync(resourceGroupName, id), serviceCallback);
     }
 
@@ -192,9 +193,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
+    public Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(String resourceGroupName, int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -206,6 +207,19 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         }
         return service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
     }
+
+    /**
+     * Validates input parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
+     */
+    public Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
+        return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
+            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -231,7 +245,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(validationOfBodyAsync(resourceGroupName, id), serviceCallback);
     }
 
@@ -241,9 +255,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> validationOfBodyAsync(String resourceGroupName, int id) {
+    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -254,8 +268,22 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         final Product body = null;
+        Validator.validate(body);
         return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
+
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
+     */
+    public Single<Product> validationOfBodyAsync(String resourceGroupName, int id) {
+        return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
+            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -282,7 +310,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(validationOfBodyAsync(resourceGroupName, id, body), serviceCallback);
     }
 
@@ -293,9 +321,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
+    public Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id, Product body) {
         if (this.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.subscriptionId() is required and cannot be null.");
         }
@@ -309,12 +337,27 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
 
+    /**
+     * Validates body parameters on the method. See swagger for details.
+     *
+     * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
+     * @param id Required int multiple of 10 from 100 to 1000.
+     * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
+     */
+    public Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
+        return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
+            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+        }
+
 
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getWithConstantInPath() {
         getWithConstantInPathAsync().toBlocking().value();
@@ -326,19 +369,29 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getWithConstantInPathAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getWithConstantInPathAsync(), serviceCallback);
     }
 
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithConstantInPathAsync() {
+    public Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync() {
         final String constantParam = "constant";
         return service.getWithConstantInPath(constantParam);
     }
+
+    /**
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getWithConstantInPathAsync() {
+        return getWithConstantInPathWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -358,20 +411,31 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> postWithConstantInBodyAsync(ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(postWithConstantInBodyAsync(), serviceCallback);
     }
 
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> postWithConstantInBodyAsync() {
+    public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync() {
         final String constantParam = "constant";
         final Product body = null;
+        Validator.validate(body);
         return service.postWithConstantInBody(constantParam, body);
     }
+
+    /**
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
+     */
+    public Single<Product> postWithConstantInBodyAsync() {
+        return postWithConstantInBodyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      *
@@ -392,7 +456,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
+    public ServiceFuture<Product> postWithConstantInBodyAsync(Product body, ServiceCallback<Product> serviceCallback) {
         return ServiceFuture.fromBody(postWithConstantInBodyAsync(body), serviceCallback);
     }
 
@@ -400,13 +464,24 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param body the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Product object
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> postWithConstantInBodyAsync(Product body) {
-        Validator.validate(body);
+    public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
         final String constantParam = "constant";
+        Validator.validate(body);
         return service.postWithConstantInBody(constantParam, body);
     }
+
+    /**
+     *
+     * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Product> object
+     */
+    public Single<Product> postWithConstantInBodyAsync(Product body) {
+        return postWithConstantInBodyWithRestResponseAsync(body)
+            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

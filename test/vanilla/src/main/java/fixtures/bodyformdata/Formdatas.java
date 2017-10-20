@@ -10,6 +10,7 @@
 
 package fixtures.bodyformdata;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodyformdata.models.ErrorException;
@@ -55,6 +56,15 @@ public interface Formdatas {
      * @return the observable to the InputStream object
      */
     Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the InputStream object
+     */
+    Single<RestResponse<Void, InputStream>> uploadFileWithRestResponseAsync(byte[] fileContent, String fileName);
 
 
     /**
@@ -86,6 +96,14 @@ public interface Formdatas {
      * @return the observable to the InputStream object
      */
     Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the InputStream object
+     */
+    Single<RestResponse<Void, InputStream>> uploadFileViaBodyWithRestResponseAsync(byte[] fileContent);
 
 
 }

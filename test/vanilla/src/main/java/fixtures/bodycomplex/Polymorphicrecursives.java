@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Polymorphicrecursives {
      * @return the observable to the Fish object
      */
     Single<Fish> getValidAsync();
+    /**
+     * Get complex types that are polymorphic and have recursive references.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Fish object
+     */
+    Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
 
 
     /**
@@ -235,6 +243,66 @@ public interface Polymorphicrecursives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(Fish complexBody);
+    /**
+     * Put complex types that are polymorphic and have recursive references.
+     *
+     * @param complexBody Please put a salmon that looks like this:
+     {
+         "fishtype": "salmon",
+         "species": "king",
+         "length": 1,
+         "age": 1,
+         "location": "alaska",
+         "iswild": true,
+         "siblings": [
+             {
+                 "fishtype": "shark",
+                 "species": "predator",
+                 "length": 20,
+                 "age": 6,
+                 "siblings": [
+                     {
+                         "fishtype": "salmon",
+                         "species": "coho",
+                         "length": 2,
+                         "age": 2,
+                         "location": "atlantic",
+                         "iswild": true,
+                         "siblings": [
+                             {
+                                 "fishtype": "shark",
+                                 "species": "predator",
+                                 "length": 20,
+                                 "age": 6
+                             },
+                             {
+                                 "fishtype": "sawshark",
+                                 "species": "dangerous",
+                                 "length": 10,
+                                 "age": 105
+                             }
+                         ]
+                     },
+                     {
+                         "fishtype": "sawshark",
+                         "species": "dangerous",
+                         "length": 10,
+                         "age": 105
+                     }
+                 ]
+             },
+             {
+                 "fishtype": "sawshark",
+                 "species": "dangerous",
+                 "length": 10,
+                 "age": 105
+             }
+         ]
+     }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
 
 
 }

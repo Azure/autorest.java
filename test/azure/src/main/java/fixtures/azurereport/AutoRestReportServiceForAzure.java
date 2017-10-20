@@ -11,6 +11,7 @@
 package fixtures.azurereport;
 
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurereport.models.ErrorException;
@@ -108,6 +109,13 @@ public interface AutoRestReportServiceForAzure {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<Map<String, Integer>> getReportAsync();
+    /**
+     * Get test coverage report.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
 
 
 }

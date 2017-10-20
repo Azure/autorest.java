@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodycomplex.models.ArrayWrapper;
@@ -49,6 +50,13 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<ArrayWrapper> getValidAsync();
+    /**
+     * Get complex types with array property.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ArrayWrapper object
+     */
+    Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync();
 
 
     /**
@@ -79,6 +87,14 @@ public interface Arrays {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(ArrayWrapper complexBody);
+    /**
+     * Put complex types with array property.
+     *
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ArrayWrapper complexBody);
 
 
     /**
@@ -107,6 +123,13 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<ArrayWrapper> getEmptyAsync();
+    /**
+     * Get complex types with array property which is empty.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ArrayWrapper object
+     */
+    Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync();
 
 
     /**
@@ -137,6 +160,14 @@ public interface Arrays {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(ArrayWrapper complexBody);
+    /**
+     * Put complex types with array property which is empty.
+     *
+     * @param complexBody Please put an empty array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(ArrayWrapper complexBody);
 
 
     /**
@@ -165,6 +196,13 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<ArrayWrapper> getNotProvidedAsync();
+    /**
+     * Get complex types with array property while server doesn't provide a response payload.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ArrayWrapper object
+     */
+    Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync();
 
 
 }

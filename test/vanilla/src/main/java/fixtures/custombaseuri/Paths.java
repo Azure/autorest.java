@@ -10,6 +10,7 @@
 
 package fixtures.custombaseuri;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.custombaseuri.models.ErrorException;
@@ -50,6 +51,14 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String accountName);
+    /**
+     * Get a 200 to test a valid base uri.
+     *
+     * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName);
 
 
 }
