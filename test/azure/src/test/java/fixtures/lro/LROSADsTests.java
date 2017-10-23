@@ -143,8 +143,8 @@ public class LROSADsTests {
             client.lROSADs().putError201NoProvisioningStatePayload(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.response().statusCode());
-            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
+            Assert.assertEquals(201, ex.response().statusCode());
+            Assert.assertTrue(ex.getMessage().contains("does not contain a body"));
         }
     }
 
@@ -314,7 +314,8 @@ public class LROSADsTests {
             client.lROSADs().postAsyncRelativeRetryInvalidJsonPolling(product);
             fail();
         } catch (RuntimeException ex) {
-            Assert.assertTrue(ex.getMessage().contains("polling response does not contain a valid body"));
+            final String exMessage = ex.getMessage();
+            Assert.assertTrue(exMessage.contains("polling response does not contain a valid body"));
         }
     }
 }
