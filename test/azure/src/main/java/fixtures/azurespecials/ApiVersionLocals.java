@@ -90,7 +90,6 @@ public interface ApiVersionLocals {
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
     RestResponse<Void, Void> getMethodLocalNullWithRestResponseAsync();
-    }
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *

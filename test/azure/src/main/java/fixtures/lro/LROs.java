@@ -83,7 +83,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut200SucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -157,7 +156,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put200SucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -231,7 +229,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut200SucceededNoStateWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -305,7 +302,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put200SucceededNoStateWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -379,7 +375,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut202Retry200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -453,7 +448,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put202Retry200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -527,7 +521,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut201CreatingSucceeded200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -601,7 +594,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put201CreatingSucceeded200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -675,7 +667,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut200UpdatingSucceeded204WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -749,7 +740,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put200UpdatingSucceeded204WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -823,7 +813,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut201CreatingFailed200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -897,7 +886,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put201CreatingFailed200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -971,7 +959,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut200Acceptedcanceled200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -1045,7 +1032,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put200Acceptedcanceled200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -1119,7 +1105,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutNoHeaderInRetryHeaders, Product> beginPutNoHeaderInRetryWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -1193,7 +1178,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutNoHeaderInRetryHeaders, Product> putNoHeaderInRetryWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -1267,7 +1251,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> beginPutAsyncRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1341,7 +1324,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> putAsyncRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1415,7 +1397,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> beginPutAsyncNoRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1489,7 +1470,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> putAsyncNoRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1563,7 +1543,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncRetryFailedHeaders, Product> beginPutAsyncRetryFailedWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1637,7 +1616,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncRetryFailedHeaders, Product> putAsyncRetryFailedWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1711,7 +1689,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> beginPutAsyncNoRetrycanceledWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1785,7 +1762,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> putAsyncNoRetrycanceledWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1859,7 +1835,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> beginPutAsyncNoHeaderInRetryWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -1933,7 +1908,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> putAsyncNoHeaderInRetryWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -2007,7 +1981,6 @@ public interface LROs {
      * @return the observable to the Sku object
      */
     RestResponse<Void, Sku> beginPutNonResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with non resource.
      *
@@ -2081,7 +2054,6 @@ public interface LROs {
      * @return the observable to the Sku object
      */
     RestResponse<Void, Sku> putNonResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with non resource.
      *
@@ -2155,7 +2127,6 @@ public interface LROs {
      * @return the observable to the Sku object
      */
     RestResponse<Void, Sku> beginPutAsyncNonResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with non resource.
      *
@@ -2229,7 +2200,6 @@ public interface LROs {
      * @return the observable to the Sku object
      */
     RestResponse<Void, Sku> putAsyncNonResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with non resource.
      *
@@ -2303,7 +2273,6 @@ public interface LROs {
      * @return the observable to the SubProduct object
      */
     RestResponse<Void, SubProduct> beginPutSubResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with sub resource.
      *
@@ -2377,7 +2346,6 @@ public interface LROs {
      * @return the observable to the SubProduct object
      */
     RestResponse<Void, SubProduct> putSubResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with sub resource.
      *
@@ -2451,7 +2419,6 @@ public interface LROs {
      * @return the observable to the SubProduct object
      */
     RestResponse<Void, SubProduct> beginPutAsyncSubResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with sub resource.
      *
@@ -2525,7 +2492,6 @@ public interface LROs {
      * @return the observable to the SubProduct object
      */
     RestResponse<Void, SubProduct> putAsyncSubResourceWithRestResponseAsync();
-    }
     /**
      * Long running put request with sub resource.
      *
@@ -3520,7 +3486,6 @@ public interface LROs {
      * @return the {@link RestResponse<LROsPost202Retry200Headers, Void>} object if successful.
      */
     RestResponse<LROsPost202Retry200Headers, Void> beginPost202Retry200WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -3592,7 +3557,6 @@ public interface LROs {
      * @return the {@link RestResponse<LROsPost202Retry200Headers, Void>} object if successful.
      */
     RestResponse<LROsPost202Retry200Headers, Void> post202Retry200WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -3665,7 +3629,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPost202NoRetry204Headers, Product> beginPost202NoRetry204WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -3739,7 +3702,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPost202NoRetry204Headers, Product> post202NoRetry204WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -3813,7 +3775,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> beginPostAsyncRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3887,7 +3848,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> postAsyncRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3961,7 +3921,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> beginPostAsyncNoRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4035,7 +3994,6 @@ public interface LROs {
      * @return the observable to the Product object
      */
     RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> postAsyncNoRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4108,7 +4066,6 @@ public interface LROs {
      * @return the {@link RestResponse<LROsPostAsyncRetryFailedHeaders, Void>} object if successful.
      */
     RestResponse<LROsPostAsyncRetryFailedHeaders, Void> beginPostAsyncRetryFailedWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4180,7 +4137,6 @@ public interface LROs {
      * @return the {@link RestResponse<LROsPostAsyncRetryFailedHeaders, Void>} object if successful.
      */
     RestResponse<LROsPostAsyncRetryFailedHeaders, Void> postAsyncRetryFailedWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4252,7 +4208,6 @@ public interface LROs {
      * @return the {@link RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>} object if successful.
      */
     RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> beginPostAsyncRetrycanceledWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4324,7 +4279,6 @@ public interface LROs {
      * @return the {@link RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>} object if successful.
      */
     RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> postAsyncRetrycanceledWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *

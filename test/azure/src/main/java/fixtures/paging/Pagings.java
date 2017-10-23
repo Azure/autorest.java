@@ -83,7 +83,6 @@ public interface Pagings {
      * @return the observable to the PagedList&lt;Product&gt; object
      */
     RestResponse<Void, Page<Product>> getMultiplePagesWithRestResponseAsync();
-    }
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -141,7 +140,6 @@ public interface Pagings {
      * @return the observable to the PagedList&lt;Product&gt; object
      */
     RestResponse<Void, Page<Product>> getOdataMultiplePagesWithRestResponseAsync();
-    }
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -202,7 +200,6 @@ public interface Pagings {
      * @return the observable to the PagedList&lt;Product&gt; object
      */
     RestResponse<Void, Page<Product>> getMultiplePagesWithOffsetWithRestResponseAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions);
-    }
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -560,7 +557,6 @@ public interface Pagings {
      * @return the observable to the PagedList&lt;Product&gt; object
      */
     RestResponse<Void, Page<Product>> getMultiplePagesNextWithRestResponseAsync(final String nextPageLink);
-    }
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -624,7 +620,6 @@ public interface Pagings {
      * @return the observable to the PagedList&lt;Product&gt; object
      */
     RestResponse<Void, Page<Product>> getOdataMultiplePagesNextWithRestResponseAsync(final String nextPageLink);
-    }
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -688,7 +683,6 @@ public interface Pagings {
      * @return the observable to the PagedList&lt;Product&gt; object
      */
     RestResponse<Void, Page<Product>> getMultiplePagesWithOffsetNextWithRestResponseAsync(final String nextPageLink);
-    }
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *

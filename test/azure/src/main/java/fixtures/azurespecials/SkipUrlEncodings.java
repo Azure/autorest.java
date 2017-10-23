@@ -207,7 +207,6 @@ public interface SkipUrlEncodings {
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
     RestResponse<Void, Void> getMethodQueryNullWithRestResponseAsync();
-    }
     /**
      * Get method with unencoded query parameter with value null.
      *

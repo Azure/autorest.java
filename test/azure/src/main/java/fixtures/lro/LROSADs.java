@@ -78,7 +78,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPutNonRetry400WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -152,7 +151,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> putNonRetry400WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -226,7 +224,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPutNonRetry201Creating400WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -300,7 +297,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> putNonRetry201Creating400WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -374,7 +370,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPutNonRetry201Creating400InvalidJsonWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -448,7 +443,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> putNonRetry201Creating400InvalidJsonWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -522,7 +516,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> beginPutAsyncRelativeRetry400WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -596,7 +589,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> putAsyncRelativeRetry400WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -879,7 +871,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostNonRetry400Headers, Void>} object if successful.
      */
     RestResponse<LROSADsPostNonRetry400Headers, Void> beginPostNonRetry400WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -951,7 +942,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostNonRetry400Headers, Void>} object if successful.
      */
     RestResponse<LROSADsPostNonRetry400Headers, Void> postNonRetry400WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -1023,7 +1013,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPost202NonRetry400Headers, Void>} object if successful.
      */
     RestResponse<LROSADsPost202NonRetry400Headers, Void> beginPost202NonRetry400WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -1095,7 +1084,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPost202NonRetry400Headers, Void>} object if successful.
      */
     RestResponse<LROSADsPost202NonRetry400Headers, Void> post202NonRetry400WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -1167,7 +1155,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void> beginPostAsyncRelativeRetry400WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1239,7 +1226,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void> postAsyncRelativeRetry400WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1312,7 +1298,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPutError201NoProvisioningStatePayloadWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -1386,7 +1371,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> putError201NoProvisioningStatePayloadWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -1460,7 +1444,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> beginPutAsyncRelativeRetryNoStatusWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1534,7 +1517,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> putAsyncRelativeRetryNoStatusWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1608,7 +1590,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> beginPutAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1682,7 +1663,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1895,7 +1875,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPost202NoLocationHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPost202NoLocationHeaders, Void> beginPost202NoLocationWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -1967,7 +1946,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPost202NoLocationHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPost202NoLocationHeaders, Void> post202NoLocationWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -2039,7 +2017,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void> beginPostAsyncRelativeRetryNoPayloadWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2111,7 +2088,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void> postAsyncRelativeRetryNoPayloadWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2184,7 +2160,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut200InvalidJsonWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -2258,7 +2233,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put200InvalidJsonWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -2332,7 +2306,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> beginPutAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -2406,7 +2379,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -2480,7 +2452,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> beginPutAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2554,7 +2525,6 @@ public interface LROSADs {
      * @return the observable to the Product object
      */
     RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2837,7 +2807,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void> beginPost202RetryInvalidHeaderWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -2909,7 +2878,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void> post202RetryInvalidHeaderWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -2981,7 +2949,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void> beginPostAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -3053,7 +3020,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -3125,7 +3091,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void> beginPostAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3197,7 +3162,6 @@ public interface LROSADs {
      * @return the {@link RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>} object if successful.
      */
     RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *

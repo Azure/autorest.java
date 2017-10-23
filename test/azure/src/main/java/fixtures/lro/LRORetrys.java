@@ -64,7 +64,6 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> beginPut201CreatingSucceeded200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -138,7 +137,6 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     RestResponse<Void, Product> put201CreatingSucceeded200WithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -212,7 +210,6 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> beginPutAsyncRelativeRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -286,7 +283,6 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> putAsyncRelativeRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -571,7 +567,6 @@ public interface LRORetrys {
      * @return the {@link RestResponse<LRORetrysPost202Retry200Headers, Void>} object if successful.
      */
     RestResponse<LRORetrysPost202Retry200Headers, Void> beginPost202Retry200WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -643,7 +638,6 @@ public interface LRORetrys {
      * @return the {@link RestResponse<LRORetrysPost202Retry200Headers, Void>} object if successful.
      */
     RestResponse<LRORetrysPost202Retry200Headers, Void> post202Retry200WithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -715,7 +709,6 @@ public interface LRORetrys {
      * @return the {@link RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
      */
     RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> beginPostAsyncRelativeRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -787,7 +780,6 @@ public interface LRORetrys {
      * @return the {@link RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
      */
     RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> postAsyncRelativeRetrySucceededWithRestResponseAsync();
-    }
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *

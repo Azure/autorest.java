@@ -55,7 +55,6 @@ public interface Odatas {
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
     RestResponse<Void, Void> getWithFilterWithRestResponseAsync();
-    }
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *

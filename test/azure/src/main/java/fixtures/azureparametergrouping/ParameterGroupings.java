@@ -98,7 +98,6 @@ public interface ParameterGroupings {
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
     RestResponse<Void, Void> postOptionalWithRestResponseAsync();
-    }
     /**
      * Post a bunch of optional parameters grouped.
      *
@@ -170,7 +169,6 @@ public interface ParameterGroupings {
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
     RestResponse<Void, Void> postMultiParamGroupsWithRestResponseAsync();
-    }
     /**
      * Post parameters from multiple different parameter groups.
      *
@@ -246,7 +244,6 @@ public interface ParameterGroupings {
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
     RestResponse<Void, Void> postSharedParameterGroupObjectWithRestResponseAsync();
-    }
     /**
      * Post parameters with a shared parameter group object.
      *
