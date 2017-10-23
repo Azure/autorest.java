@@ -96,11 +96,11 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings(true)
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
-        @@Override
-        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) page) {
-            return page;
-        }
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+            @@Override
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+                return response.body();
+            }
     }).toObservable();
 }
 @EmptyLine
@@ -190,11 +190,11 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings()
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString), Page<@(Model.ReturnTypeJv.SequenceElementTypeString)>>() {
-        @@Override
-        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@(Model.ReturnTypeJva.ServiceResponseConcreteTypeParameterString) page) {
-            return page;
-        }
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+            @@Override
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+                return response.body();
+            }
     }).toObservable();
 }
 @EmptyLine

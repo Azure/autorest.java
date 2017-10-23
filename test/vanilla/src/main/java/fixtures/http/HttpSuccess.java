@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.http.models.ErrorException;
@@ -47,6 +48,13 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head200Async();
+    /**
+     * Return 200 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> head200WithRestResponseAsync();
 
 
     /**
@@ -75,6 +83,13 @@ public interface HttpSuccess {
      * @return the observable to the boolean object
      */
     Single<Boolean> get200Async();
+    /**
+     * Get 200 success.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the boolean object
+     */
+    Single<RestResponse<Void, Boolean>> get200WithRestResponseAsync();
 
 
     /**
@@ -102,6 +117,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put200Async();
+
+    /**
+     * Put boolean value true returning 200 success.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put200WithRestResponseAsync();
     /**
      * Put boolean value true returning 200 success.
      *
@@ -130,6 +153,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put200Async(Boolean booleanValue);
+    /**
+     * Put boolean value true returning 200 success.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put200WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -157,6 +188,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch200Async();
+
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch200WithRestResponseAsync();
     /**
      * Patch true Boolean value in request returning 200.
      *
@@ -185,6 +224,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch200Async(Boolean booleanValue);
+    /**
+     * Patch true Boolean value in request returning 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch200WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -212,6 +259,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post200Async();
+
+    /**
+     * Post bollean value true in request that returns a 200.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post200WithRestResponseAsync();
     /**
      * Post bollean value true in request that returns a 200.
      *
@@ -240,6 +295,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post200Async(Boolean booleanValue);
+    /**
+     * Post bollean value true in request that returns a 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post200WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -267,6 +330,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete200Async();
+
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete200WithRestResponseAsync();
     /**
      * Delete simple boolean value true returns 200.
      *
@@ -295,6 +366,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete200Async(Boolean booleanValue);
+    /**
+     * Delete simple boolean value true returns 200.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete200WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -322,6 +401,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put201Async();
+
+    /**
+     * Put true Boolean value in request returns 201.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put201WithRestResponseAsync();
     /**
      * Put true Boolean value in request returns 201.
      *
@@ -350,6 +437,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put201Async(Boolean booleanValue);
+    /**
+     * Put true Boolean value in request returns 201.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put201WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -377,6 +472,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post201Async();
+
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post201WithRestResponseAsync();
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
@@ -405,6 +508,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post201Async(Boolean booleanValue);
+    /**
+     * Post true Boolean value in request returns 201 (Created).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post201WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -432,6 +543,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put202Async();
+
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put202WithRestResponseAsync();
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
@@ -460,6 +579,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put202Async(Boolean booleanValue);
+    /**
+     * Put true Boolean value in request returns 202 (Accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put202WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -487,6 +614,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch202Async();
+
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch202WithRestResponseAsync();
     /**
      * Patch true Boolean value in request returns 202.
      *
@@ -515,6 +650,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch202Async(Boolean booleanValue);
+    /**
+     * Patch true Boolean value in request returns 202.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch202WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -542,6 +685,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202Async();
+
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post202WithRestResponseAsync();
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
@@ -570,6 +721,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202Async(Boolean booleanValue);
+    /**
+     * Post true Boolean value in request returns 202 (Accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post202WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -597,6 +756,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete202Async();
+
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete202WithRestResponseAsync();
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
@@ -625,6 +792,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete202Async(Boolean booleanValue);
+    /**
+     * Delete true Boolean value in request returns 202 (accepted).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete202WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -652,6 +827,13 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head204Async();
+    /**
+     * Return 204 status code if successful.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> head204WithRestResponseAsync();
 
 
     /**
@@ -679,6 +861,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put204Async();
+
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put204WithRestResponseAsync();
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
@@ -707,6 +897,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put204Async(Boolean booleanValue);
+    /**
+     * Put true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> put204WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -734,6 +932,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch204Async();
+
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch204WithRestResponseAsync();
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
@@ -762,6 +968,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch204Async(Boolean booleanValue);
+    /**
+     * Patch true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> patch204WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -789,6 +1003,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post204Async();
+
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post204WithRestResponseAsync();
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
@@ -817,6 +1039,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post204Async(Boolean booleanValue);
+    /**
+     * Post true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> post204WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -844,6 +1074,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete204Async();
+
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete204WithRestResponseAsync();
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
@@ -872,6 +1110,14 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete204Async(Boolean booleanValue);
+    /**
+     * Delete true Boolean value in request returns 204 (no content).
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> delete204WithRestResponseAsync(Boolean booleanValue);
 
 
     /**
@@ -899,6 +1145,13 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head404Async();
+    /**
+     * Return 404 status code.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> head404WithRestResponseAsync();
 
 
 }

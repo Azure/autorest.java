@@ -10,6 +10,7 @@
 
 package fixtures.modelflattening;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.modelflattening.models.ErrorException;
@@ -68,6 +69,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayAsync();
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync();
     /**
      * Put External Resource as an Array.
      *
@@ -96,6 +105,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayAsync(List<Resource> resourceArray);
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray);
 
 
     /**
@@ -124,6 +141,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
     Single<List<FlattenedProduct>> getArrayAsync();
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;FlattenedProduct&gt; object
+     */
+    Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync();
 
 
     /**
@@ -151,6 +175,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putWrappedArrayAsync();
+
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync();
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
@@ -179,6 +211,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray);
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray);
 
 
     /**
@@ -207,6 +247,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the List&lt;ProductWrapper&gt; object
      */
     Single<List<ProductWrapper>> getWrappedArrayAsync();
+    /**
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;ProductWrapper&gt; object
+     */
+    Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync();
 
 
     /**
@@ -234,6 +281,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryAsync();
+
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync();
     /**
      * Put External Resource as a Dictionary.
      *
@@ -262,6 +317,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    /**
+     * Put External Resource as a Dictionary.
+     *
+     * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
 
     /**
@@ -290,6 +353,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
     Single<Map<String, FlattenedProduct>> getDictionaryAsync();
+    /**
+     * Get External Resource as a Dictionary.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
+     */
+    Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
 
 
     /**
@@ -317,6 +387,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putResourceCollectionAsync();
+
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync();
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -345,6 +423,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    /**
+     * Put External Resource as a ResourceCollection.
+     *
+     * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
 
 
     /**
@@ -373,6 +459,13 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the ResourceCollection object
      */
     Single<ResourceCollection> getResourceCollectionAsync();
+    /**
+     * Get External Resource as a ResourceCollection.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ResourceCollection object
+     */
+    Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync();
 
 
     /**
@@ -401,6 +494,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> putSimpleProductAsync();
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SimpleProduct object
+     */
+    Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync();
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -430,6 +531,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct);
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SimpleProduct object
+     */
+    Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct);
 
 
     /**
@@ -464,6 +573,16 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName);
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SimpleProduct object
+     */
+    Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(String productId, String maxProductDisplayName);
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -505,6 +624,18 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param description Description of product.
+     * @param genericValue Generic URL value.
+     * @param odatavalue URL value.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SimpleProduct object
+     */
+    Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProductWithRestResponseAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
 
 
     /**
@@ -536,6 +667,14 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup);
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the SimpleProduct object
+     */
+    Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGroupingWithRestResponseAsync(FlattenParameterGroup flattenParameterGroup);
 
 
 }

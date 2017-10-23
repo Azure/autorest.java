@@ -509,44 +509,6 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public override string ServiceFutureFactoryMethod
-        {
-            get
-            {
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
-                {
-                    if (ReturnType.Headers == null)
-                    {
-                        return "fromPageResponse";
-                    }
-                    else
-                    {
-                        return "fromHeaderPageResponse";
-                    }
-                }
-                else
-                {
-                    return base.ServiceFutureFactoryMethod;
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public override string CallbackDocumentation
-        {
-            get
-            {
-                IndentedStringBuilder builder = new IndentedStringBuilder();
-                if (this.IsPagingNextOperation)
-                {
-                    builder.AppendLine(" * @param serviceFuture the ServiceFuture object tracking the Retrofit calls");
-                }
-                builder.Append(" * @param serviceCallback the async ServiceCallback to handle successful and failed responses.");
-                return builder.ToString();
-            }
-        }
-
-        [JsonIgnore]
         public string NextUrlConstruction
         {
             get

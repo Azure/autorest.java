@@ -11,6 +11,7 @@
 package fixtures.url.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.url.Paths;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -67,157 +68,157 @@ public class PathsImpl implements Paths {
         @GET("paths/bool/true/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getBooleanTrue(@PathParam("boolPath") boolean boolPath);
+        Single<RestResponse<Void, Void>> getBooleanTrue(@PathParam("boolPath") boolean boolPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getBooleanFalse" })
         @GET("paths/bool/false/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getBooleanFalse(@PathParam("boolPath") boolean boolPath);
+        Single<RestResponse<Void, Void>> getBooleanFalse(@PathParam("boolPath") boolean boolPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getIntOneMillion" })
         @GET("paths/int/1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getIntOneMillion(@PathParam("intPath") int intPath);
+        Single<RestResponse<Void, Void>> getIntOneMillion(@PathParam("intPath") int intPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getIntNegativeOneMillion" })
         @GET("paths/int/-1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getIntNegativeOneMillion(@PathParam("intPath") int intPath);
+        Single<RestResponse<Void, Void>> getIntNegativeOneMillion(@PathParam("intPath") int intPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getTenBillion" })
         @GET("paths/long/10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getTenBillion(@PathParam("longPath") long longPath);
+        Single<RestResponse<Void, Void>> getTenBillion(@PathParam("longPath") long longPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getNegativeTenBillion" })
         @GET("paths/long/-10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getNegativeTenBillion(@PathParam("longPath") long longPath);
+        Single<RestResponse<Void, Void>> getNegativeTenBillion(@PathParam("longPath") long longPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths floatScientificPositive" })
         @GET("paths/float/1.034E+20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> floatScientificPositive(@PathParam("floatPath") double floatPath);
+        Single<RestResponse<Void, Void>> floatScientificPositive(@PathParam("floatPath") double floatPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths floatScientificNegative" })
         @GET("paths/float/-1.034E-20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> floatScientificNegative(@PathParam("floatPath") double floatPath);
+        Single<RestResponse<Void, Void>> floatScientificNegative(@PathParam("floatPath") double floatPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths doubleDecimalPositive" })
         @GET("paths/double/9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> doubleDecimalPositive(@PathParam("doublePath") double doublePath);
+        Single<RestResponse<Void, Void>> doubleDecimalPositive(@PathParam("doublePath") double doublePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths doubleDecimalNegative" })
         @GET("paths/double/-9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> doubleDecimalNegative(@PathParam("doublePath") double doublePath);
+        Single<RestResponse<Void, Void>> doubleDecimalNegative(@PathParam("doublePath") double doublePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths stringUnicode" })
         @GET("paths/string/unicode/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringUnicode(@PathParam("stringPath") String stringPath);
+        Single<RestResponse<Void, Void>> stringUnicode(@PathParam("stringPath") String stringPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths stringUrlEncoded" })
         @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringUrlEncoded(@PathParam("stringPath") String stringPath);
+        Single<RestResponse<Void, Void>> stringUrlEncoded(@PathParam("stringPath") String stringPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths stringEmpty" })
         @GET("paths/string/empty/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringEmpty(@PathParam("stringPath") String stringPath);
+        Single<RestResponse<Void, Void>> stringEmpty(@PathParam("stringPath") String stringPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths stringNull" })
         @GET("paths/string/null/{stringPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> stringNull(@PathParam("stringPath") String stringPath);
+        Single<RestResponse<Void, Void>> stringNull(@PathParam("stringPath") String stringPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths enumValid" })
         @GET("paths/enum/green%20color/{enumPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> enumValid(@PathParam("enumPath") UriColor enumPath);
+        Single<RestResponse<Void, Void>> enumValid(@PathParam("enumPath") UriColor enumPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths enumNull" })
         @GET("paths/string/null/{enumPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> enumNull(@PathParam("enumPath") UriColor enumPath);
+        Single<RestResponse<Void, Void>> enumNull(@PathParam("enumPath") UriColor enumPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths byteMultiByte" })
         @GET("paths/byte/multibyte/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> byteMultiByte(@PathParam("bytePath") String bytePath);
+        Single<RestResponse<Void, Void>> byteMultiByte(@PathParam("bytePath") String bytePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths byteEmpty" })
         @GET("paths/byte/empty/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> byteEmpty(@PathParam("bytePath") String bytePath);
+        Single<RestResponse<Void, Void>> byteEmpty(@PathParam("bytePath") String bytePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths byteNull" })
         @GET("paths/byte/null/{bytePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> byteNull(@PathParam("bytePath") String bytePath);
+        Single<RestResponse<Void, Void>> byteNull(@PathParam("bytePath") String bytePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths dateValid" })
         @GET("paths/date/2012-01-01/{datePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateValid(@PathParam("datePath") LocalDate datePath);
+        Single<RestResponse<Void, Void>> dateValid(@PathParam("datePath") LocalDate datePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths dateNull" })
         @GET("paths/date/null/{datePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateNull(@PathParam("datePath") LocalDate datePath);
+        Single<RestResponse<Void, Void>> dateNull(@PathParam("datePath") LocalDate datePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths dateTimeValid" })
         @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateTimeValid(@PathParam("dateTimePath") DateTime dateTimePath);
+        Single<RestResponse<Void, Void>> dateTimeValid(@PathParam("dateTimePath") DateTime dateTimePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths dateTimeNull" })
         @GET("paths/datetime/null/{dateTimePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> dateTimeNull(@PathParam("dateTimePath") DateTime dateTimePath);
+        Single<RestResponse<Void, Void>> dateTimeNull(@PathParam("dateTimePath") DateTime dateTimePath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths base64Url" })
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> base64Url(@PathParam("base64UrlPath") Base64Url base64UrlPath);
+        Single<RestResponse<Void, Void>> base64Url(@PathParam("base64UrlPath") Base64Url base64UrlPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths arrayCsvInPath" })
         @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> arrayCsvInPath(@PathParam("arrayPath") String arrayPath);
+        Single<RestResponse<Void, Void>> arrayCsvInPath(@PathParam("arrayPath") String arrayPath);
 
         @Headers({ "x-ms-logging-context: fixtures.url.Paths unixTimeUrl" })
         @GET("paths/int/1460505600/{unixTimeUrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> unixTimeUrl(@PathParam("unixTimeUrlPath") long unixTimeUrlPath);
+        Single<RestResponse<Void, Void>> unixTimeUrl(@PathParam("unixTimeUrlPath") long unixTimeUrlPath);
 
     }
 
@@ -227,6 +228,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getBooleanTrue() {
         getBooleanTrueAsync().toBlocking().value();
@@ -239,7 +241,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanTrueAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanTrueAsync(), serviceCallback);
     }
 
@@ -247,12 +249,23 @@ public class PathsImpl implements Paths {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanTrueAsync() {
+    public Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync() {
         final boolean boolPath = true;
         return service.getBooleanTrue(boolPath);
     }
+
+    /**
+     * Get true Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getBooleanTrueAsync() {
+        return getBooleanTrueWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -261,6 +274,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getBooleanFalse() {
         getBooleanFalseAsync().toBlocking().value();
@@ -273,7 +287,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getBooleanFalseAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getBooleanFalseAsync(), serviceCallback);
     }
 
@@ -281,12 +295,23 @@ public class PathsImpl implements Paths {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanFalseAsync() {
+    public Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync() {
         final boolean boolPath = false;
         return service.getBooleanFalse(boolPath);
     }
+
+    /**
+     * Get false Boolean value on path.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getBooleanFalseAsync() {
+        return getBooleanFalseWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -295,6 +320,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getIntOneMillion() {
         getIntOneMillionAsync().toBlocking().value();
@@ -307,7 +333,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntOneMillionAsync(), serviceCallback);
     }
 
@@ -315,12 +341,23 @@ public class PathsImpl implements Paths {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntOneMillionAsync() {
+    public Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync() {
         final int intPath = 1000000;
         return service.getIntOneMillion(intPath);
     }
+
+    /**
+     * Get '1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getIntOneMillionAsync() {
+        return getIntOneMillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -329,6 +366,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
         getIntNegativeOneMillionAsync().toBlocking().value();
@@ -341,7 +379,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getIntNegativeOneMillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getIntNegativeOneMillionAsync(), serviceCallback);
     }
 
@@ -349,12 +387,23 @@ public class PathsImpl implements Paths {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNegativeOneMillionAsync() {
+    public Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync() {
         final int intPath = -1000000;
         return service.getIntNegativeOneMillion(intPath);
     }
+
+    /**
+     * Get '-1000000' integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getIntNegativeOneMillionAsync() {
+        return getIntNegativeOneMillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -363,6 +412,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getTenBillion() {
         getTenBillionAsync().toBlocking().value();
@@ -375,7 +425,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getTenBillionAsync(), serviceCallback);
     }
 
@@ -383,12 +433,23 @@ public class PathsImpl implements Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getTenBillionAsync() {
+    public Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync() {
         final long longPath = 10000000000L;
         return service.getTenBillion(longPath);
     }
+
+    /**
+     * Get '10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getTenBillionAsync() {
+        return getTenBillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -397,6 +458,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
         getNegativeTenBillionAsync().toBlocking().value();
@@ -409,7 +471,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getNegativeTenBillionAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getNegativeTenBillionAsync(), serviceCallback);
     }
 
@@ -417,12 +479,23 @@ public class PathsImpl implements Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getNegativeTenBillionAsync() {
+    public Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync() {
         final long longPath = -10000000000L;
         return service.getNegativeTenBillion(longPath);
     }
+
+    /**
+     * Get '-10000000000' 64 bit integer value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getNegativeTenBillionAsync() {
+        return getNegativeTenBillionWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -431,6 +504,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void floatScientificPositive() {
         floatScientificPositiveAsync().toBlocking().value();
@@ -443,7 +517,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatScientificPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificPositiveAsync(), serviceCallback);
     }
 
@@ -451,12 +525,23 @@ public class PathsImpl implements Paths {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificPositiveAsync() {
+    public Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync() {
         final double floatPath = 1.034E+20;
         return service.floatScientificPositive(floatPath);
     }
+
+    /**
+     * Get '1.034E+20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> floatScientificPositiveAsync() {
+        return floatScientificPositiveWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -465,6 +550,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void floatScientificNegative() {
         floatScientificNegativeAsync().toBlocking().value();
@@ -477,7 +563,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> floatScientificNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(floatScientificNegativeAsync(), serviceCallback);
     }
 
@@ -485,12 +571,23 @@ public class PathsImpl implements Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificNegativeAsync() {
+    public Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync() {
         final double floatPath = -1.034E-20;
         return service.floatScientificNegative(floatPath);
     }
+
+    /**
+     * Get '-1.034E-20' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> floatScientificNegativeAsync() {
+        return floatScientificNegativeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -499,6 +596,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
         doubleDecimalPositiveAsync().toBlocking().value();
@@ -511,7 +609,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleDecimalPositiveAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalPositiveAsync(), serviceCallback);
     }
 
@@ -519,12 +617,23 @@ public class PathsImpl implements Paths {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalPositiveAsync() {
+    public Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync() {
         final double doublePath = 9999999.999;
         return service.doubleDecimalPositive(doublePath);
     }
+
+    /**
+     * Get '9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> doubleDecimalPositiveAsync() {
+        return doubleDecimalPositiveWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -533,6 +642,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
         doubleDecimalNegativeAsync().toBlocking().value();
@@ -545,7 +655,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> doubleDecimalNegativeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(doubleDecimalNegativeAsync(), serviceCallback);
     }
 
@@ -553,12 +663,23 @@ public class PathsImpl implements Paths {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalNegativeAsync() {
+    public Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync() {
         final double doublePath = -9999999.999;
         return service.doubleDecimalNegative(doublePath);
     }
+
+    /**
+     * Get '-9999999.999' numeric value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> doubleDecimalNegativeAsync() {
+        return doubleDecimalNegativeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -567,6 +688,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringUnicode() {
         stringUnicodeAsync().toBlocking().value();
@@ -579,7 +701,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringUnicodeAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUnicodeAsync(), serviceCallback);
     }
 
@@ -587,12 +709,23 @@ public class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUnicodeAsync() {
+    public Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync() {
         final String stringPath = "啊齄丂狛狜隣郎隣兀﨩";
         return service.stringUnicode(stringPath);
     }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringUnicodeAsync() {
+        return stringUnicodeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -601,6 +734,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringUrlEncoded() {
         stringUrlEncodedAsync().toBlocking().value();
@@ -613,7 +747,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringUrlEncodedAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringUrlEncodedAsync(), serviceCallback);
     }
 
@@ -621,12 +755,23 @@ public class PathsImpl implements Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUrlEncodedAsync() {
+    public Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync() {
         final String stringPath = "begin!*'();:@ &=+$,/?#[]end";
         return service.stringUrlEncoded(stringPath);
     }
+
+    /**
+     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringUrlEncodedAsync() {
+        return stringUrlEncodedWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -635,6 +780,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringEmpty() {
         stringEmptyAsync().toBlocking().value();
@@ -647,7 +793,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringEmptyAsync(), serviceCallback);
     }
 
@@ -655,12 +801,23 @@ public class PathsImpl implements Paths {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringEmptyAsync() {
+    public Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync() {
         final String stringPath = "";
         return service.stringEmpty(stringPath);
     }
+
+    /**
+     * Get ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringEmptyAsync() {
+        return stringEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -670,6 +827,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void stringNull(String stringPath) {
         stringNullAsync(stringPath).toBlocking().value();
@@ -683,7 +841,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> stringNullAsync(String stringPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(stringNullAsync(stringPath), serviceCallback);
     }
 
@@ -692,14 +850,26 @@ public class PathsImpl implements Paths {
      *
      * @param stringPath null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringNullAsync(String stringPath) {
+    public Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringPath) {
         if (stringPath == null) {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
         return service.stringNull(stringPath);
     }
+
+    /**
+     * Get null (should throw).
+     *
+     * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> stringNullAsync(String stringPath) {
+        return stringNullWithRestResponseAsync(stringPath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -709,6 +879,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void enumValid(UriColor enumPath) {
         enumValidAsync(enumPath).toBlocking().value();
@@ -722,7 +893,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumValidAsync(UriColor enumPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumValidAsync(enumPath), serviceCallback);
     }
 
@@ -731,14 +902,26 @@ public class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumValidAsync(UriColor enumPath) {
+    public Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
         return service.enumValid(enumPath);
     }
+
+    /**
+     * Get using uri with 'green color' in path parameter.
+     *
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> enumValidAsync(UriColor enumPath) {
+        return enumValidWithRestResponseAsync(enumPath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -748,6 +931,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void enumNull(UriColor enumPath) {
         enumNullAsync(enumPath).toBlocking().value();
@@ -761,7 +945,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> enumNullAsync(UriColor enumPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(enumNullAsync(enumPath), serviceCallback);
     }
 
@@ -770,14 +954,26 @@ public class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumNullAsync(UriColor enumPath) {
+    public Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumPath) {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
         return service.enumNull(enumPath);
     }
+
+    /**
+     * Get null (should throw on the client before the request is sent on wire).
+     *
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> enumNullAsync(UriColor enumPath) {
+        return enumNullWithRestResponseAsync(enumPath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -787,6 +983,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteMultiByte(byte[] bytePath) {
         byteMultiByteAsync(bytePath).toBlocking().value();
@@ -800,7 +997,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteMultiByteAsync(byte[] bytePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteMultiByteAsync(bytePath), serviceCallback);
     }
 
@@ -809,15 +1006,27 @@ public class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteMultiByteAsync(byte[] bytePath) {
+    public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
+    String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteMultiByte(bytePathConverted);
     }
+
+    /**
+     * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
+     *
+     * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteMultiByteAsync(byte[] bytePath) {
+        return byteMultiByteWithRestResponseAsync(bytePath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -826,6 +1035,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteEmpty() {
         byteEmptyAsync().toBlocking().value();
@@ -838,7 +1048,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteEmptyAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteEmptyAsync(), serviceCallback);
     }
 
@@ -846,13 +1056,24 @@ public class PathsImpl implements Paths {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteEmptyAsync() {
+    public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
         final byte[] bytePath = "".getBytes();
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
+    String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteEmpty(bytePathConverted);
     }
+
+    /**
+     * Get '' as byte array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteEmptyAsync() {
+        return byteEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -862,6 +1083,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void byteNull(byte[] bytePath) {
         byteNullAsync(bytePath).toBlocking().value();
@@ -875,7 +1097,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> byteNullAsync(byte[] bytePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(byteNullAsync(bytePath), serviceCallback);
     }
 
@@ -884,15 +1106,27 @@ public class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteNullAsync(byte[] bytePath) {
+    public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] bytePath) {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-        String bytePathConverted = Base64.encodeBase64String(bytePath);
+    String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteNull(bytePathConverted);
     }
+
+    /**
+     * Get null as byte array (should throw).
+     *
+     * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> byteNullAsync(byte[] bytePath) {
+        return byteNullWithRestResponseAsync(bytePath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -901,6 +1135,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateValid() {
         dateValidAsync().toBlocking().value();
@@ -913,7 +1148,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateValidAsync(), serviceCallback);
     }
 
@@ -921,12 +1156,23 @@ public class PathsImpl implements Paths {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateValidAsync() {
+    public Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync() {
         final LocalDate datePath = LocalDate.parse("2012-01-01");
         return service.dateValid(datePath);
     }
+
+    /**
+     * Get '2012-01-01' as date.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateValidAsync() {
+        return dateValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -936,6 +1182,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateNull(LocalDate datePath) {
         dateNullAsync(datePath).toBlocking().value();
@@ -949,7 +1196,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateNullAsync(LocalDate datePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateNullAsync(datePath), serviceCallback);
     }
 
@@ -958,14 +1205,26 @@ public class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateNullAsync(LocalDate datePath) {
+    public Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate datePath) {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
         return service.dateNull(datePath);
     }
+
+    /**
+     * Get null as date - this should throw or be unusable on the client side, depending on date representation.
+     *
+     * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateNullAsync(LocalDate datePath) {
+        return dateNullWithRestResponseAsync(datePath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -974,6 +1233,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateTimeValid() {
         dateTimeValidAsync().toBlocking().value();
@@ -986,7 +1246,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeValidAsync(), serviceCallback);
     }
 
@@ -994,12 +1254,23 @@ public class PathsImpl implements Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeValidAsync() {
+    public Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync() {
         final DateTime dateTimePath = DateTime.parse("2012-01-01T01:01:01Z");
         return service.dateTimeValid(dateTimePath);
     }
+
+    /**
+     * Get '2012-01-01T01:01:01Z' as date-time.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateTimeValidAsync() {
+        return dateTimeValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1009,6 +1280,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimePath) {
         dateTimeNullAsync(dateTimePath).toBlocking().value();
@@ -1022,7 +1294,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimePath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(dateTimeNullAsync(dateTimePath), serviceCallback);
     }
 
@@ -1031,14 +1303,26 @@ public class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeNullAsync(DateTime dateTimePath) {
+    public Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimePath) {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
         return service.dateTimeNull(dateTimePath);
     }
+
+    /**
+     * Get null as date-time, should be disallowed or throw depending on representation of date-time.
+     *
+     * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> dateTimeNullAsync(DateTime dateTimePath) {
+        return dateTimeNullWithRestResponseAsync(dateTimePath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1048,6 +1332,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void base64Url(byte[] base64UrlPath) {
         base64UrlAsync(base64UrlPath).toBlocking().value();
@@ -1061,7 +1346,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> base64UrlAsync(byte[] base64UrlPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(base64UrlAsync(base64UrlPath), serviceCallback);
     }
 
@@ -1070,15 +1355,27 @@ public class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> base64UrlAsync(byte[] base64UrlPath) {
+    public Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(byte[] base64UrlPath) {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
-        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+    Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
         return service.base64Url(base64UrlPathConverted);
     }
+
+    /**
+     * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
+     *
+     * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> base64UrlAsync(byte[] base64UrlPath) {
+        return base64UrlWithRestResponseAsync(base64UrlPath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1088,6 +1385,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void arrayCsvInPath(List<String> arrayPath) {
         arrayCsvInPathAsync(arrayPath).toBlocking().value();
@@ -1101,7 +1399,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> arrayCsvInPathAsync(List<String> arrayPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(arrayCsvInPathAsync(arrayPath), serviceCallback);
     }
 
@@ -1110,16 +1408,28 @@ public class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayCsvInPathAsync(List<String> arrayPath) {
+    public Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(List<String> arrayPath) {
         if (arrayPath == null) {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
-        String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+    String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return service.arrayCsvInPath(arrayPathConverted);
     }
+
+    /**
+     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     *
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> arrayCsvInPathAsync(List<String> arrayPath) {
+        return arrayCsvInPathWithRestResponseAsync(arrayPath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -1129,6 +1439,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
         unixTimeUrlAsync(unixTimeUrlPath).toBlocking().value();
@@ -1142,7 +1453,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(unixTimeUrlAsync(unixTimeUrlPath), serviceCallback);
     }
 
@@ -1151,12 +1462,24 @@ public class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
-        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+    public Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath) {
+    Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
+
+    /**
+     * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
+     *
+     * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
+        return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

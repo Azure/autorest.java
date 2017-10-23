@@ -11,6 +11,7 @@
 package fixtures.http.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.http.HttpServerFailures;
 import com.microsoft.rest.annotations.BodyParam;
 import com.microsoft.rest.annotations.DELETE;
@@ -60,22 +61,22 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures head501" })
         @HEAD("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> head501();
+        Single<RestResponse<Void, Error>> head501();
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures get501" })
         @GET("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> get501();
+        Single<RestResponse<Void, Error>> get501();
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures post505" })
         @POST("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures delete505" })
         @DELETE("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Error> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
     }
 
@@ -98,7 +99,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Error> head501Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> head501Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(head501Async(), serviceCallback);
     }
 
@@ -106,11 +107,22 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> head501Async() {
+    public Single<RestResponse<Void, Error>> head501WithRestResponseAsync() {
         return service.head501();
     }
+
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     */
+    public Single<Error> head501Async() {
+        return head501WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -132,7 +144,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Error> get501Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> get501Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(get501Async(), serviceCallback);
     }
 
@@ -140,11 +152,22 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> get501Async() {
+    public Single<RestResponse<Void, Error>> get501WithRestResponseAsync() {
         return service.get501();
     }
+
+    /**
+     * Return 501 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     */
+    public Single<Error> get501Async() {
+        return get501WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -166,7 +189,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Error> post505Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post505Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post505Async(), serviceCallback);
     }
 
@@ -174,12 +197,23 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> post505Async() {
+    public Single<RestResponse<Void, Error>> post505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post505(booleanValue);
     }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     */
+    public Single<Error> post505Async() {
+        return post505WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -202,7 +236,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> post505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(post505Async(booleanValue), serviceCallback);
     }
 
@@ -211,11 +245,23 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> post505Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue) {
         return service.post505(booleanValue);
     }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     */
+    public Single<Error> post505Async(Boolean booleanValue) {
+        return post505WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -237,7 +283,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Error> delete505Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete505Async(ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete505Async(), serviceCallback);
     }
 
@@ -245,12 +291,23 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> delete505Async() {
+    public Single<RestResponse<Void, Error>> delete505WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete505(booleanValue);
     }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     */
+    public Single<Error> delete505Async() {
+        return delete505WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -273,7 +330,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceFuture<Error> delete505Async(Boolean booleanValue, ServiceCallback<Error> serviceCallback) {
         return ServiceFuture.fromBody(delete505Async(booleanValue), serviceCallback);
     }
 
@@ -282,11 +339,23 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> delete505Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue) {
         return service.delete505(booleanValue);
     }
+
+    /**
+     * Return 505 status code - should be represented in the client as an error.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Error> object
+     */
+    public Single<Error> delete505Async(Boolean booleanValue) {
+        return delete505WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

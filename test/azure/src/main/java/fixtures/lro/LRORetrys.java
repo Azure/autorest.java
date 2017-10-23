@@ -12,6 +12,7 @@ package fixtures.lro;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.OperationStatus;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.lro.models.LRORetrysDelete202Retry200Headers;
@@ -59,6 +60,14 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<Void, Product> beginPut201CreatingSucceeded200WithRestResponseAsync();
+    }
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -85,6 +94,15 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200Async(Product product);
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<Void, Product> beginPut201CreatingSucceeded200WithRestResponseAsync(Product product);
 
 
     /**
@@ -116,6 +134,14 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<Void, Product> put201CreatingSucceeded200WithRestResponseAsync();
+    }
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -142,6 +168,15 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     Single<Product> put201CreatingSucceeded200Async(Product product);
+
+    /**
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<Void, Product> put201CreatingSucceeded200WithRestResponseAsync(Product product);
 
 
     /**
@@ -173,6 +208,14 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> beginPutAsyncRelativeRetrySucceededWithRestResponseAsync();
+    }
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -199,6 +242,15 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     Observable<OperationStatus<Product>> beginPutAsyncRelativeRetrySucceededAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> beginPutAsyncRelativeRetrySucceededWithRestResponseAsync(Product product);
 
 
     /**
@@ -230,6 +282,14 @@ public interface LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> putAsyncRelativeRetrySucceededWithRestResponseAsync();
+    }
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -256,6 +316,15 @@ public interface LRORetrys {
      * @return the observable to the Product object
      */
     Single<Product> putAsyncRelativeRetrySucceededAsync(Product product);
+
+    /**
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> putAsyncRelativeRetrySucceededWithRestResponseAsync(Product product);
 
 
     /**
@@ -285,6 +354,14 @@ public interface LRORetrys {
      */
     Observable<OperationStatus<Product>> beginDeleteProvisioning202Accepted200SucceededAsync();
 
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product> beginDeleteProvisioning202Accepted200SucceededWithRestResponseAsync();
+
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -313,6 +390,14 @@ public interface LRORetrys {
      */
     Single<Product> deleteProvisioning202Accepted200SucceededAsync();
 
+    /**
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Product object
+     */
+    RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product> deleteProvisioning202Accepted200SucceededWithRestResponseAsync();
+
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -339,6 +424,14 @@ public interface LRORetrys {
      * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginDelete202Retry200Async();
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysDelete202Retry200Headers, Void>} object if successful.
+     */
+    RestResponse<LRORetrysDelete202Retry200Headers, Void> beginDelete202Retry200WithRestResponseAsync();
 
 
     /**
@@ -367,6 +460,14 @@ public interface LRORetrys {
      */
     Single<Void> delete202Retry200Async();
 
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysDelete202Retry200Headers, Void>} object if successful.
+     */
+    RestResponse<LRORetrysDelete202Retry200Headers, Void> delete202Retry200WithRestResponseAsync();
+
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -394,6 +495,14 @@ public interface LRORetrys {
      */
     Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceededAsync();
 
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
+     */
+    RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void> beginDeleteAsyncRelativeRetrySucceededWithRestResponseAsync();
+
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -420,6 +529,14 @@ public interface LRORetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> deleteAsyncRelativeRetrySucceededAsync();
+
+    /**
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
+     */
+    RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void> deleteAsyncRelativeRetrySucceededWithRestResponseAsync();
 
 
     /**
@@ -450,6 +567,14 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPost202Retry200Headers, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPost202Retry200Headers, Void> beginPost202Retry200WithRestResponseAsync();
+    }
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -475,6 +600,15 @@ public interface LRORetrys {
      * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPost202Retry200Async(Product product);
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPost202Retry200Headers, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPost202Retry200Headers, Void> beginPost202Retry200WithRestResponseAsync(Product product);
 
 
     /**
@@ -505,6 +639,14 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPost202Retry200Headers, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPost202Retry200Headers, Void> post202Retry200WithRestResponseAsync();
+    }
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -530,6 +672,15 @@ public interface LRORetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202Retry200Async(Product product);
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPost202Retry200Headers, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPost202Retry200Headers, Void> post202Retry200WithRestResponseAsync(Product product);
 
 
     /**
@@ -560,6 +711,14 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> beginPostAsyncRelativeRetrySucceededWithRestResponseAsync();
+    }
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -585,6 +744,15 @@ public interface LRORetrys {
      * @return the {@link Observable<OperationStatus<Void>>} object if successful.
      */
     Observable<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceededAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> beginPostAsyncRelativeRetrySucceededWithRestResponseAsync(Product product);
 
 
     /**
@@ -615,6 +783,14 @@ public interface LRORetrys {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> postAsyncRelativeRetrySucceededWithRestResponseAsync();
+    }
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
@@ -640,6 +816,15 @@ public interface LRORetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postAsyncRelativeRetrySucceededAsync(Product product);
+
+    /**
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     *
+     * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>} object if successful.
+     */
+    RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> postAsyncRelativeRetrySucceededWithRestResponseAsync(Product product);
 
 
 }

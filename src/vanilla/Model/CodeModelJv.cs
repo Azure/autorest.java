@@ -35,6 +35,19 @@ namespace AutoRest.Java.Model
         [JsonIgnore]
         public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
+        private bool? shouldGenerateXmlSerializationCached = null;
+        public bool ShouldGenerateXmlSerializationCached
+        {
+            get
+            {
+                if (!shouldGenerateXmlSerializationCached.HasValue)
+                {
+                    shouldGenerateXmlSerializationCached = ShouldGenerateXmlSerialization;
+                }
+                return shouldGenerateXmlSerializationCached.Value;
+            }
+        }
+
         [JsonIgnore]
         public string ServiceClientServiceType
         {
@@ -73,6 +86,7 @@ namespace AutoRest.Java.Model
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.RestProxy",
+                        "com.microsoft.rest.RestResponse",
                         "com.microsoft.rest.ServiceClient",
                         "com.microsoft.rest.RestClient",
                         "rx.Single"

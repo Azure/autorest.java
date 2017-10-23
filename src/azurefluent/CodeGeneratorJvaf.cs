@@ -92,7 +92,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             //XML wrappers
-            if (codeModel.ShouldGenerateXmlSerialization)
+            if (codeModel.ShouldGenerateXmlSerializationCached)
             {
                 // Every sequence type used as a parameter to a service method.
                 var parameterSequenceTypes = cm.Operations

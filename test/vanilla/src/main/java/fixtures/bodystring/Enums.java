@@ -10,6 +10,7 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodystring.models.Colors;
@@ -50,6 +51,13 @@ public interface Enums {
      * @return the observable to the Colors object
      */
     Single<Colors> getNotExpandableAsync();
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Colors object
+     */
+    Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync();
 
 
     /**
@@ -80,6 +88,14 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNotExpandableAsync(Colors stringBody);
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(Colors stringBody);
 
 
     /**
@@ -108,6 +124,13 @@ public interface Enums {
      * @return the observable to the Colors object
      */
     Single<Colors> getReferencedAsync();
+    /**
+     * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Colors object
+     */
+    Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync();
 
 
     /**
@@ -138,6 +161,14 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putReferencedAsync(Colors enumStringBody);
+    /**
+     * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
+     *
+     * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(Colors enumStringBody);
 
 
     /**
@@ -166,6 +197,13 @@ public interface Enums {
      * @return the observable to the RefColorConstant object
      */
     Single<RefColorConstant> getReferencedConstantAsync();
+    /**
+     * Get value 'green-color' from the constant.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the RefColorConstant object
+     */
+    Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync();
 
 
     /**
@@ -196,6 +234,14 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
+    /**
+     * Sends value 'green-color' from a constant.
+     *
+     * @param enumStringBody the RefColorConstant value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(RefColorConstant enumStringBody);
 
 
 }

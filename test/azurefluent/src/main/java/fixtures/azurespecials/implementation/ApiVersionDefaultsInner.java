@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation;
 
+import com.microsoft.rest.RestResponse;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
 import com.microsoft.rest.annotations.GET;
@@ -58,25 +59,25 @@ public class ApiVersionDefaultsInner {
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalNotProvidedValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getPathGlobalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getSwaggerGlobalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -86,6 +87,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getMethodGlobalValid() {
         getMethodGlobalValidAsync().toBlocking().value();
@@ -98,7 +100,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodGlobalValidAsync(), serviceCallback);
     }
 
@@ -106,14 +108,25 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodGlobalValidAsync() {
+    public Single<RestResponse<Void, Void>> getMethodGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getMethodGlobalValidAsync() {
+        return getMethodGlobalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -122,6 +135,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getMethodGlobalNotProvidedValid() {
         getMethodGlobalNotProvidedValidAsync().toBlocking().value();
@@ -134,7 +148,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getMethodGlobalNotProvidedValidAsync(), serviceCallback);
     }
 
@@ -142,14 +156,25 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodGlobalNotProvidedValidAsync() {
+    public Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getMethodGlobalNotProvidedValidAsync() {
+        return getMethodGlobalNotProvidedValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -158,6 +183,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getPathGlobalValid() {
         getPathGlobalValidAsync().toBlocking().value();
@@ -170,7 +196,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getPathGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getPathGlobalValidAsync(), serviceCallback);
     }
 
@@ -178,14 +204,25 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathGlobalValidAsync() {
+    public Single<RestResponse<Void, Void>> getPathGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getPathGlobalValidAsync() {
+        return getPathGlobalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -194,6 +231,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void getSwaggerGlobalValid() {
         getSwaggerGlobalValidAsync().toBlocking().value();
@@ -206,7 +244,7 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getSwaggerGlobalValidAsync(), serviceCallback);
     }
 
@@ -214,14 +252,25 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerGlobalValidAsync() {
+    public Single<RestResponse<Void, Void>> getSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getSwaggerGlobalValidAsync() {
+        return getSwaggerGlobalValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

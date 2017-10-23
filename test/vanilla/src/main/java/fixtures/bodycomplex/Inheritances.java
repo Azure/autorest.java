@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Inheritances {
      * @return the observable to the Siamese object
      */
     Single<Siamese> getValidAsync();
+    /**
+     * Get complex types that extend others.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Siamese object
+     */
+    Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
 
 
     /**
@@ -79,6 +87,14 @@ public interface Inheritances {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(Siamese complexBody);
+    /**
+     * Put complex types that extend others.
+     *
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Siamese complexBody);
 
 
 }

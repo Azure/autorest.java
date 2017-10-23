@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
@@ -48,6 +49,14 @@ public interface ApiVersionDefaults {
      */
     Single<Void> getMethodGlobalValidAsync();
 
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getMethodGlobalValidWithRestResponseAsync();
+
 
     /**
      * GET method with api-version modeled in global settings.
@@ -74,6 +83,14 @@ public interface ApiVersionDefaults {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getMethodGlobalNotProvidedValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getMethodGlobalNotProvidedValidWithRestResponseAsync();
 
 
     /**
@@ -102,6 +119,14 @@ public interface ApiVersionDefaults {
      */
     Single<Void> getPathGlobalValidAsync();
 
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getPathGlobalValidWithRestResponseAsync();
+
 
     /**
      * GET method with api-version modeled in global settings.
@@ -128,6 +153,14 @@ public interface ApiVersionDefaults {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getSwaggerGlobalValidAsync();
+
+    /**
+     * GET method with api-version modeled in global settings.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getSwaggerGlobalValidWithRestResponseAsync();
 
 
 }

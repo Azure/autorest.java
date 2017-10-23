@@ -11,6 +11,7 @@
 package fixtures.http.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.http.HttpRetrys;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -63,49 +64,49 @@ public class HttpRetrysImpl implements HttpRetrys {
         @HEAD("http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> head408();
+        Single<RestResponse<Void, Void>> head408();
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys put500" })
         @PUT("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Void>> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys patch500" })
         @PATCH("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Void>> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys get502" })
         @GET("http/retry/502")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> get502();
+        Single<RestResponse<Void, Void>> get502();
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys post503" })
         @POST("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Void>> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys delete503" })
         @DELETE("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Void>> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys put504" })
         @PUT("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Void>> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys patch504" })
         @PATCH("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
+        Single<RestResponse<Void, Void>> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
     }
 
@@ -115,6 +116,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void head408() {
         head408Async().toBlocking().value();
@@ -127,7 +129,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head408Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head408Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head408Async(), serviceCallback);
     }
 
@@ -135,11 +137,22 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head408Async() {
+    public Single<RestResponse<Void, Void>> head408WithRestResponseAsync() {
         return service.head408();
     }
+
+    /**
+     * Return 408 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> head408Async() {
+        return head408WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -148,6 +161,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void put500() {
         put500Async().toBlocking().value();
@@ -160,7 +174,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> put500Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put500Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put500Async(), serviceCallback);
     }
 
@@ -168,12 +182,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put500Async() {
+    public Single<RestResponse<Void, Void>> put500WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put500(booleanValue);
     }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> put500Async() {
+        return put500WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -182,6 +207,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void put500(Boolean booleanValue) {
         put500Async(booleanValue).toBlocking().value();
@@ -195,7 +221,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put500Async(booleanValue), serviceCallback);
     }
 
@@ -204,11 +230,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put500Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Void>> put500WithRestResponseAsync(Boolean booleanValue) {
         return service.put500(booleanValue);
     }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> put500Async(Boolean booleanValue) {
+        return put500WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -217,6 +255,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void patch500() {
         patch500Async().toBlocking().value();
@@ -229,7 +268,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> patch500Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch500Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch500Async(), serviceCallback);
     }
 
@@ -237,12 +276,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch500Async() {
+    public Single<RestResponse<Void, Void>> patch500WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch500(booleanValue);
     }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> patch500Async() {
+        return patch500WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -251,6 +301,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void patch500(Boolean booleanValue) {
         patch500Async(booleanValue).toBlocking().value();
@@ -264,7 +315,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch500Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch500Async(booleanValue), serviceCallback);
     }
 
@@ -273,11 +324,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch500Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Void>> patch500WithRestResponseAsync(Boolean booleanValue) {
         return service.patch500(booleanValue);
     }
+
+    /**
+     * Return 500 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> patch500Async(Boolean booleanValue) {
+        return patch500WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -286,6 +349,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void get502() {
         get502Async().toBlocking().value();
@@ -298,7 +362,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> get502Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> get502Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(get502Async(), serviceCallback);
     }
 
@@ -306,11 +370,22 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get502Async() {
+    public Single<RestResponse<Void, Void>> get502WithRestResponseAsync() {
         return service.get502();
     }
+
+    /**
+     * Return 502 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> get502Async() {
+        return get502WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -319,6 +394,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void post503() {
         post503Async().toBlocking().value();
@@ -331,7 +407,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> post503Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post503Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post503Async(), serviceCallback);
     }
 
@@ -339,12 +415,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post503Async() {
+    public Single<RestResponse<Void, Void>> post503WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.post503(booleanValue);
     }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> post503Async() {
+        return post503WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -353,6 +440,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void post503(Boolean booleanValue) {
         post503Async(booleanValue).toBlocking().value();
@@ -366,7 +454,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> post503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(post503Async(booleanValue), serviceCallback);
     }
 
@@ -375,11 +463,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post503Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Void>> post503WithRestResponseAsync(Boolean booleanValue) {
         return service.post503(booleanValue);
     }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> post503Async(Boolean booleanValue) {
+        return post503WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -388,6 +488,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void delete503() {
         delete503Async().toBlocking().value();
@@ -400,7 +501,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> delete503Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete503Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete503Async(), serviceCallback);
     }
 
@@ -408,12 +509,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete503Async() {
+    public Single<RestResponse<Void, Void>> delete503WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.delete503(booleanValue);
     }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> delete503Async() {
+        return delete503WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -422,6 +534,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void delete503(Boolean booleanValue) {
         delete503Async(booleanValue).toBlocking().value();
@@ -435,7 +548,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> delete503Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(delete503Async(booleanValue), serviceCallback);
     }
 
@@ -444,11 +557,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete503Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Void>> delete503WithRestResponseAsync(Boolean booleanValue) {
         return service.delete503(booleanValue);
     }
+
+    /**
+     * Return 503 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> delete503Async(Boolean booleanValue) {
+        return delete503WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -457,6 +582,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void put504() {
         put504Async().toBlocking().value();
@@ -469,7 +595,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> put504Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put504Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put504Async(), serviceCallback);
     }
 
@@ -477,12 +603,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put504Async() {
+    public Single<RestResponse<Void, Void>> put504WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.put504(booleanValue);
     }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> put504Async() {
+        return put504WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -491,6 +628,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void put504(Boolean booleanValue) {
         put504Async(booleanValue).toBlocking().value();
@@ -504,7 +642,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> put504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(put504Async(booleanValue), serviceCallback);
     }
 
@@ -513,11 +651,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put504Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Void>> put504WithRestResponseAsync(Boolean booleanValue) {
         return service.put504(booleanValue);
     }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> put504Async(Boolean booleanValue) {
+        return put504WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -526,6 +676,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void patch504() {
         patch504Async().toBlocking().value();
@@ -538,7 +689,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> patch504Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch504Async(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch504Async(), serviceCallback);
     }
 
@@ -546,12 +697,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Void} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch504Async() {
+    public Single<RestResponse<Void, Void>> patch504WithRestResponseAsync() {
         final Boolean booleanValue = null;
         return service.patch504(booleanValue);
     }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> patch504Async() {
+        return patch504WithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -560,6 +722,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void patch504(Boolean booleanValue) {
         patch504Async(booleanValue).toBlocking().value();
@@ -573,7 +736,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> patch504Async(Boolean booleanValue, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(patch504Async(booleanValue), serviceCallback);
     }
 
@@ -582,11 +745,23 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch504Async(Boolean booleanValue) {
+    public Single<RestResponse<Void, Void>> patch504WithRestResponseAsync(Boolean booleanValue) {
         return service.patch504(booleanValue);
     }
+
+    /**
+     * Return 504 status code, then 200 after retry.
+     *
+     * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> patch504Async(Boolean booleanValue) {
+        return patch504WithRestResponseAsync(booleanValue)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

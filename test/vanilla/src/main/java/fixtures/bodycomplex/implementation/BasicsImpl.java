@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodycomplex.Basics;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.BodyParam;
@@ -62,37 +63,37 @@ public class BasicsImpl implements Basics {
         @GET("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Basic> getValid();
+        Single<RestResponse<Void, Basic>> getValid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics putValid" })
         @PUT("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
+        Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getInvalid" })
         @GET("complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Basic> getInvalid();
+        Single<RestResponse<Void, Basic>> getInvalid();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getEmpty" })
         @GET("complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Basic> getEmpty();
+        Single<RestResponse<Void, Basic>> getEmpty();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getNull" })
         @GET("complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Basic> getNull();
+        Single<RestResponse<Void, Basic>> getNull();
 
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getNotProvided" })
         @GET("complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Basic> getNotProvided();
+        Single<RestResponse<Void, Basic>> getNotProvided();
 
     }
 
@@ -115,7 +116,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getValidAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -123,11 +124,22 @@ public class BasicsImpl implements Basics {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getValidAsync() {
+    public Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync() {
         return service.getValid();
     }
+
+    /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     */
+    public Single<Basic> getValidAsync() {
+        return getValidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -137,6 +149,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void putValid(Basic complexBody) {
         putValidAsync(complexBody).toBlocking().value();
@@ -150,7 +163,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Basic complexBody, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -159,15 +172,27 @@ public class BasicsImpl implements Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Basic complexBody) {
+    public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Basic complexBody) {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
         Validator.validate(complexBody);
         return service.putValid(complexBody, this.client.apiVersion());
     }
+
+    /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}.
+     *
+     * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> putValidAsync(Basic complexBody) {
+        return putValidWithRestResponseAsync(complexBody)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -189,7 +214,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getInvalidAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -197,11 +222,22 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getInvalidAsync() {
+    public Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
     }
+
+    /**
+     * Get a basic complex type that is invalid for the local strong type.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     */
+    public Single<Basic> getInvalidAsync() {
+        return getInvalidWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -223,7 +259,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getEmptyAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -231,11 +267,22 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type that is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getEmptyAsync() {
+    public Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
     }
+
+    /**
+     * Get a basic complex type that is empty.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     */
+    public Single<Basic> getEmptyAsync() {
+        return getEmptyWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -257,7 +304,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNullAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -265,11 +312,22 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type whose properties are null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getNullAsync() {
+    public Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync() {
         return service.getNull();
     }
+
+    /**
+     * Get a basic complex type whose properties are null.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     */
+    public Single<Basic> getNullAsync() {
+        return getNullWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -291,7 +349,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNotProvidedAsync(ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 
@@ -299,11 +357,22 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Basic object
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getNotProvidedAsync() {
+    public Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();
     }
+
+    /**
+     * Get a basic complex type while the server doesn't provide a response payload.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     */
+    public Single<Basic> getNotProvidedAsync() {
+        return getNotProvidedWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

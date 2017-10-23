@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
@@ -49,6 +50,13 @@ public interface Readonlypropertys {
      * @return the observable to the ReadonlyObj object
      */
     Single<ReadonlyObj> getValidAsync();
+    /**
+     * Get complex types that have readonly properties.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the ReadonlyObj object
+     */
+    Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
 
 
     /**
@@ -79,6 +87,14 @@ public interface Readonlypropertys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(ReadonlyObj complexBody);
+    /**
+     * Put complex types that have readonly properties.
+     *
+     * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody);
 
 
 }

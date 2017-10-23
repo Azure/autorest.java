@@ -10,6 +10,7 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodystring.models.ErrorException;
@@ -48,6 +49,13 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getNullAsync();
+    /**
+     * Get null string value value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the String object
+     */
+    Single<RestResponse<Void, String>> getNullWithRestResponseAsync();
 
 
     /**
@@ -75,6 +83,14 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNullAsync();
+
+    /**
+     * Set string value null.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putNullWithRestResponseAsync();
     /**
      * Set string value null.
      *
@@ -103,6 +119,14 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNullAsync(String stringBody);
+    /**
+     * Set string value null.
+     *
+     * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody);
 
 
     /**
@@ -131,6 +155,13 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getEmptyAsync();
+    /**
+     * Get empty string value value ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the String object
+     */
+    Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync();
 
 
     /**
@@ -161,6 +192,14 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(String stringBody);
+    /**
+     * Set string value empty ''.
+     *
+     * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(String stringBody);
 
 
     /**
@@ -189,6 +228,13 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getMbcsAsync();
+    /**
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the String object
+     */
+    Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync();
 
 
     /**
@@ -219,6 +265,14 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMbcsAsync(String stringBody);
+    /**
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     *
+     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(String stringBody);
 
 
     /**
@@ -247,6 +301,13 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getWhitespaceAsync();
+    /**
+     * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the String object
+     */
+    Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync();
 
 
     /**
@@ -277,6 +338,14 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putWhitespaceAsync(String stringBody);
+    /**
+     * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
+     *
+     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(String stringBody);
 
 
     /**
@@ -305,6 +374,13 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getNotProvidedAsync();
+    /**
+     * Get String value when no string value is sent in response payload.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the String object
+     */
+    Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync();
 
 
     /**
@@ -333,6 +409,13 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getBase64EncodedAsync();
+    /**
+     * Get value that is base64 encoded.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync();
 
 
     /**
@@ -361,6 +444,13 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getBase64UrlEncodedAsync();
+    /**
+     * Get value that is base64url encoded.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync();
 
 
     /**
@@ -391,6 +481,14 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBase64UrlEncodedAsync(byte[] stringBody);
+    /**
+     * Put value that is base64url encoded.
+     *
+     * @param stringBody the Base64Url value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(byte[] stringBody);
 
 
     /**
@@ -419,6 +517,13 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getNullBase64UrlEncodedAsync();
+    /**
+     * Get null value that is expected to be base64url encoded.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
 
 
 }

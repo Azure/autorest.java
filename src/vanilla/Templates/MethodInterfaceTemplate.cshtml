@@ -75,6 +75,35 @@ else
 }
  */
 Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
+ 
+ 
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+}
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
+{
+@: * @@return the observable to the @Model.ReturnTypeResponseName object
+}
+else
+{
+@: * @@return the {@@link Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>} object if successful.
+}
+ */
+Single<@Model.RestResponseAbstractTypeName> @(Model.Name)WithRestResponseAsync(@Model.MethodRequiredParameterDeclaration);
+ 
 </text>
 }
 /**
@@ -146,4 +175,30 @@ else
 }
  */
 Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
+
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.ModelType.Name + " value" : param.Documentation.ToString()).EscapeXmlComment().Trim())
+}
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
+@if (Model.ReturnTypeResponseName.Else("void") != "void")
+{
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString>} object if successful.
+}
+ */
+Single<@Model.RestResponseAbstractTypeName> @(Model.Name)WithRestResponseAsync(@Model.MethodParameterDeclaration);
 @EmptyLine

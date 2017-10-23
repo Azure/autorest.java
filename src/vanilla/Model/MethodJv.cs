@@ -17,8 +17,23 @@ using System.Collections.Immutable;
 
 namespace AutoRest.Java.Model
 {
+    public struct ParameterVariants
+    {
+        public ImmutableArray<ParameterJv> AllParameters { get; }
+        public ImmutableArray<ParameterJv> RequiredParameters { get; }
+
+        public bool HasOptionalParameters => AllParameters.Length != RequiredParameters.Length;
+
+        public ParameterVariants(ImmutableArray<ParameterJv> allParameters, ImmutableArray<ParameterJv> requiredParameters)
+        {
+            AllParameters = allParameters;
+            RequiredParameters = requiredParameters;
+        }
+    }
+
     public class MethodJv : Method
     {
+
         [JsonIgnore]
         public virtual IEnumerable<ParameterJv> RetrofitParameters
         {
@@ -50,7 +65,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                bool shouldGenerateXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
+                bool shouldGenerateXmlSerialization = ((CodeModelJv)CodeModel).ShouldGenerateXmlSerializationCached;
 
                 List<string> declarations = new List<string>();
                 foreach (ParameterJv parameter in OrderedRetrofitParameters)
@@ -198,16 +213,226 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var shouldUseXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
-                
+                var shouldUseXmlSerialization = ((CodeModelJv)CodeModel).ShouldGenerateXmlSerializationCached;
+
                 var arguments = OrderedRetrofitParameters.Select(
                     p => shouldUseXmlSerialization && (p.WireType is SequenceType)
                         ? $"new {p.WireType.XmlName}Wrapper({p.WireName})"
                         : p.WireName);
-                
+
                 var declaration = string.Join(", ", arguments);
                 return declaration;
             }
+        }
+
+        [JsonIgnore]
+        public ParameterJv CallbackParam
+        {
+            get
+            {
+                var modelType = new CompositeTypeJv();
+                modelType.Name.FixedValue = $"ServiceCallback<{ReturnTypeJv.GenericBodyClientTypeString}>";
+                var callbackParam = new ParameterJv()
+                {
+                    ModelType = modelType,
+                    Name = "serviceCallback",
+                    SerializedName = "serviceCallback",
+                    Documentation = "the async ServiceCallback to handle successful and failed responses."
+                };
+                return callbackParam;
+            }
+        }
+
+        [JsonIgnore]
+        public ParameterVariants ParameterVariants
+        {
+            get
+            {
+                return new ParameterVariants(
+                    allParameters: LocalParameters.Where(p => !p.IsConstant).ToImmutableArray(),
+                    requiredParameters: LocalParameters.Where(p => p.IsRequired && !p.IsConstant).ToImmutableArray()
+                );
+            }
+        }
+
+        public string Javadoc(IEnumerable<ParameterJv> parameters, IEnumerable<string> exceptionsDocumentation, string optionalReturnDocumentation)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine("/**");
+            if (!string.IsNullOrEmpty(Summary))
+            {
+                builder.AppendLine(" * " + Summary.EscapeXmlComment().Period());
+            }
+
+            if (!string.IsNullOrEmpty(Description))
+            {
+                builder.AppendLine(" * " + Description.EscapeXmlComment().Period());
+            }
+
+            builder.AppendLine(" * ");
+
+            foreach (var param in parameters)
+            {
+                var paramDoc = param.Documentation.Else($"the {param.ModelType.Name} value").EscapeXmlComment().Trim();
+                builder.AppendLine($" * @param {param.Name} {paramDoc}");
+            }
+
+            foreach (var exception in exceptionsDocumentation)
+            {
+                builder.AppendLine(exception);
+            }
+
+            if (!string.IsNullOrEmpty(optionalReturnDocumentation))
+            {
+                builder.AppendLine($" * @return {optionalReturnDocumentation}");
+            }
+
+            builder.AppendLine(" */");
+            return builder.ToString();
+        }
+
+        public static string ParameterDeclaration(IEnumerable<ParameterJv> parameters)
+        {
+            var paramDecls = parameters.Select(parameter => parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+            var paramString = string.Join(", ", paramDecls);
+            return paramString;
+        }
+
+        public static string Arguments(IEnumerable<ParameterJv> parameters)
+        {
+            var args = parameters.Select(parameter => parameter.Name.Value);
+            var argsString = string.Join(", ", args);
+            return argsString;
+        }
+
+        public IEnumerable<string> AsyncExceptionDocumentation => new[] { " * @throws IllegalArgumentException thrown if parameters fail the validation" };
+
+        public string RestResponseHeadersName => ReturnType.Headers == null
+            ? "Void"
+            : ReturnTypeJv.HeaderClientType.Name.Value;
+
+        public string RestResponseAbstractBodyName => ReturnType.Body == null
+            ? "Void"
+            : (ReturnTypeJv).ServiceResponseGenericParameterString;
+
+        public string RestResponseConcreteBodyName => ReturnType.Body == null
+            ? "Void"
+            : (ReturnTypeJv).ServiceResponseConcreteParameterString;
+
+        public string RestResponseAbstractTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseAbstractBodyName}>";
+
+        public string RestResponseConcreteTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseConcreteBodyName}>";
+
+        // Observable overload generation helpers
+
+        public string ObservableReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {RestResponseAbstractTypeName} object";
+
+        public string ObservableRestResponseImpl(IEnumerable<ParameterJv> parameters, bool takeOnlyRequiredParameters)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public Single<{RestResponseAbstractTypeName}> {Name}WithRestResponseAsync({ParameterDeclaration(parameters)}) {{");
+            builder.Indent();
+
+            // Check presence of required parameters
+            foreach (var param in RequiredNullableParameters)
+            {
+                builder.AppendLine($"if ({param.Name} == null) {{");
+                builder.Indent();
+                builder.AppendLine($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                builder.Outdent();
+                builder.AppendLine("}");
+            }
+
+            foreach (var param in LocalParameters)
+            {
+                if (takeOnlyRequiredParameters && !param.IsRequired)
+                {
+                    builder.AppendLine($"final {param.ClientType.Name} {param.Name} = {param.ClientType.GetDefaultValue(this) ?? "null"};");
+                }
+                else if (param.IsConstant)
+                {
+                    builder.AppendLine($"final {param.ClientType.Name} {param.Name} = {param.DefaultValue ?? "null"};");
+                }
+            }
+
+            foreach (var param in ParametersToValidate)
+            {
+                builder.AppendLine($"Validator.validate({param.Name});");
+            }
+
+            var beginning = builder.ToString();
+            var mappings = BuildInputMappings(takeOnlyRequiredParameters);
+            var parameterConversion = ParameterConversion;
+            var epilogue = $"    return service.{Name}({MethodParameterApiInvocation});\n}}";
+
+            return string.Join("\n", beginning, mappings, parameterConversion, epilogue);
+        }
+        public string ObservableBodyDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()} object";
+
+        public string ObservableImpl(IEnumerable<ParameterJv> parameters)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
+            builder.Indent();
+            builder.AppendLine($"return {Name}WithRestResponseAsync({Arguments(parameters)})");
+            builder.Indent();
+            builder.AppendLine($".map(new Func1<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} call({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
+            builder.Outdent();
+            builder.AppendLine("}");
+            return builder.ToString();
+        }
+
+        // Callback overload generation helpers
+
+        public string CallbackReturnDocumentation => "the {@link ServiceFuture} object";
+
+        public string CallbackImpl(IEnumerable<ParameterJv> parameters, ParameterJv callbackParam)
+        {
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public ServiceFuture<{ReturnTypeJv.ServiceFutureGenericParameterString}> {Name}Async({ParameterDeclaration(parameters.ConcatSingleItem(callbackParam))}) {{");
+            builder.Indent();
+            builder.AppendLine($"return ServiceFuture.{ServiceFutureFactoryMethod}({Name}Async({Arguments(parameters)}), {callbackParam.Name});");
+            builder.Outdent();
+            builder.AppendLine("}");
+
+            return builder.ToString();
+        }
+
+        // Sync overload generation helpers
+
+        public IEnumerable<string> SyncExceptionDocumentation => new[]
+        {
+            " * @throws IllegalArgumentException thrown if parameters fail the validation",
+            $" * @throws {OperationExceptionTypeString} thrown if the request is rejected by server",
+            " * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent"
+        };
+
+        public string SyncReturnDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) && ReturnTypeResponseName != "void"
+            ? ""
+            : $"the {ReturnTypeResponseName.EscapeXmlComment()} object if successful.";
+
+        public string SyncImpl(IEnumerable<ParameterJv> parameters)
+        {
+            var paramString = ParameterDeclaration(parameters);
+            var argsString = Arguments(parameters);
+
+            var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
+            builder.AppendLine($"public {ReturnTypeResponseName} {Name}({paramString}) {{");
+            builder.Indent();
+
+            if (ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
+            {
+                builder.AppendLine($"{Name}Async({argsString}).toBlocking().value();");
+            }
+            else
+            {
+                builder.AppendLine($"return {Name}Async({argsString}).toBlocking().value();");
+            }
+
+            builder.Outdent();
+            builder.AppendLine("}");
+
+            return builder.ToString();
         }
 
         [JsonIgnore]
@@ -216,7 +441,7 @@ namespace AutoRest.Java.Model
 
         [JsonIgnore]
         public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
-        
+
         /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
@@ -386,7 +611,7 @@ namespace AutoRest.Java.Model
         }
 
         /// <summary>
-        /// Gets the expression for response body initialization 
+        /// Gets the expression for response body initialization
         /// </summary>
         [JsonIgnore]
         public virtual string InitializeResponseBody
@@ -553,19 +778,7 @@ namespace AutoRest.Java.Model
         public virtual string ReturnTypeResponseName => ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
 
         [JsonIgnore]
-        public virtual string ServiceFutureFactoryMethod
-        {
-            get
-            {
-                string factoryMethod = "fromBody";
-                if (ReturnType.Headers != null)
-                {
-                    // FIXME
-                    factoryMethod = "fromBody/* RestProxy doesn't support headers */";
-                }
-                return factoryMethod;
-            }
-        }
+        public virtual string ServiceFutureFactoryMethod => "fromBody";
 
         [JsonIgnore]
         public virtual string CallbackDocumentation
@@ -587,6 +800,7 @@ namespace AutoRest.Java.Model
                 imports.Add("rx.Single");
                 imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest.ServiceCallback");
+                imports.Add("com.microsoft.rest.RestResponse");
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
@@ -682,7 +896,7 @@ namespace AutoRest.Java.Model
                 return result;
             }
         }
-        
+
         internal static bool HasSequenceType(IModelType mt)
         {
             if (mt is SequenceType)

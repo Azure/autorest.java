@@ -13,6 +13,7 @@ package fixtures.bodydictionary.implementation;
 import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import fixtures.bodydictionary.Dictionarys;
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.rest.RestClient;
 import rx.Single;

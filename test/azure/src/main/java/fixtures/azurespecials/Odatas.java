@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
@@ -50,6 +51,14 @@ public interface Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getWithFilterWithRestResponseAsync();
+    }
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
@@ -81,6 +90,17 @@ public interface Odatas {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getWithFilterAsync(String filter, Integer top, String orderby);
+
+    /**
+     * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
+     *
+     * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
+     * @param top The top parameter with value 10.
+     * @param orderby The orderby parameter with value id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link RestResponse<Void, Void>} object if successful.
+     */
+    RestResponse<Void, Void> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby);
 
 
 }

@@ -10,6 +10,7 @@
 
 package fixtures.bodybyte;
 
+import com.microsoft.rest.RestResponse;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import fixtures.bodybyte.models.ErrorException;
@@ -48,6 +49,13 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getNullAsync();
+    /**
+     * Get null byte value.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync();
 
 
     /**
@@ -76,6 +84,13 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getEmptyAsync();
+    /**
+     * Get empty byte value ''.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync();
 
 
     /**
@@ -104,6 +119,13 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getNonAsciiAsync();
+    /**
+     * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync();
 
 
     /**
@@ -134,6 +156,14 @@ public interface Bytes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNonAsciiAsync(byte[] byteBody);
+    /**
+     * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
+     *
+     * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link Single<Void>} object if successful.
+     */
+    Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody);
 
 
     /**
@@ -162,6 +192,13 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getInvalidAsync();
+    /**
+     * Get invalid byte value ':::SWAGGER::::'.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the byte[] object
+     */
+    Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
 
 
 }

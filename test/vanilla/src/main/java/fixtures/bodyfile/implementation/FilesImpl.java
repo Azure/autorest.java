@@ -11,6 +11,7 @@
 package fixtures.bodyfile.implementation;
 
 import com.microsoft.rest.RestProxy;
+import com.microsoft.rest.RestResponse;
 import fixtures.bodyfile.Files;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.annotations.ExpectedResponses;
@@ -59,21 +60,21 @@ public class FilesImpl implements Files {
         // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<InputStream> getFile();
+        Single<RestResponse<Void, InputStream>> getFile();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getFileLarge" })
         @GET("files/stream/verylarge")
         // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<InputStream> getFileLarge();
+        Single<RestResponse<Void, InputStream>> getFileLarge();
 
         @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getEmptyFile" })
         @GET("files/stream/empty")
         // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<InputStream> getEmptyFile();
+        Single<RestResponse<Void, InputStream>> getEmptyFile();
 
     }
 
@@ -96,7 +97,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<InputStream> getFileAsync(ServiceCallback<InputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
@@ -104,11 +105,22 @@ public class FilesImpl implements Files {
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> getFileAsync() {
+    public Single<RestResponse<Void, InputStream>> getFileWithRestResponseAsync() {
         return service.getFile();
     }
+
+    /**
+     * Get file.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     */
+    public Single<InputStream> getFileAsync() {
+        return getFileWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -130,7 +142,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<InputStream> getFileLargeAsync(ServiceCallback<InputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
@@ -138,11 +150,22 @@ public class FilesImpl implements Files {
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> getFileLargeAsync() {
+    public Single<RestResponse<Void, InputStream>> getFileLargeWithRestResponseAsync() {
         return service.getFileLarge();
     }
+
+    /**
+     * Get a large file.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     */
+    public Single<InputStream> getFileLargeAsync() {
+        return getFileLargeWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -164,7 +187,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<InputStream> getEmptyFileAsync(ServiceCallback<InputStream> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 
@@ -172,11 +195,22 @@ public class FilesImpl implements Files {
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> getEmptyFileAsync() {
+    public Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync() {
         return service.getEmptyFile();
     }
+
+    /**
+     * Get empty file.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     */
+    public Single<InputStream> getEmptyFileAsync() {
+        return getEmptyFileWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+        }
 
 
 }

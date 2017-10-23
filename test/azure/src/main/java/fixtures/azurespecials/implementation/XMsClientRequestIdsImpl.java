@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.implementation;
 
+import com.microsoft.rest.RestResponse;
 import fixtures.azurespecials.XMsClientRequestIds;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
@@ -59,13 +60,13 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<Void> get(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> get(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds paramGet" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<Void> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
 
     }
 
@@ -75,6 +76,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void get() {
         getAsync().toBlocking().value();
@@ -87,7 +89,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getAsync(ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getAsync(), serviceCallback);
     }
 
@@ -95,11 +97,22 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getAsync() {
+    public Single<RestResponse<Void, Void>> getWithRestResponseAsync() {
         return service.get(this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> getAsync() {
+        return getWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
     /**
@@ -109,6 +122,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the void object if successful.
      */
     public void paramGet(String xMsClientRequestId) {
         paramGetAsync(xMsClientRequestId).toBlocking().value();
@@ -122,7 +136,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(paramGetAsync(xMsClientRequestId), serviceCallback);
     }
 
@@ -131,14 +145,26 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramGetAsync(String xMsClientRequestId) {
+    public Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(String xMsClientRequestId) {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
         return service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
     }
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     */
+    public Single<Void> paramGetAsync(String xMsClientRequestId) {
+        return paramGetWithRestResponseAsync(xMsClientRequestId)
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+        }
 
 
 }
