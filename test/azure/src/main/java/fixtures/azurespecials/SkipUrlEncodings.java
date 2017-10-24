@@ -59,7 +59,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodPathValidWithRestResponseAsync(String unencodedPathParam);
+    Single<RestResponse<Void, Void>> getMethodPathValidWithRestResponseAsync(String unencodedPathParam);
 
 
     /**
@@ -98,7 +98,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getPathPathValidWithRestResponseAsync(String unencodedPathParam);
+    Single<RestResponse<Void, Void>> getPathPathValidWithRestResponseAsync(String unencodedPathParam);
 
 
     /**
@@ -133,7 +133,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getSwaggerPathValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getSwaggerPathValidWithRestResponseAsync();
 
 
     /**
@@ -172,7 +172,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodQueryValidWithRestResponseAsync(String q1);
+    Single<RestResponse<Void, Void>> getMethodQueryValidWithRestResponseAsync(String q1);
 
 
     /**
@@ -206,8 +206,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodQueryNullWithRestResponseAsync();
-    }
+    Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync();
     /**
      * Get method with unencoded query parameter with value null.
      *
@@ -244,7 +243,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodQueryNullWithRestResponseAsync(String q1);
+    Single<RestResponse<Void, Void>> getMethodQueryNullWithRestResponseAsync(String q1);
 
 
     /**
@@ -283,7 +282,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getPathQueryValidWithRestResponseAsync(String q1);
+    Single<RestResponse<Void, Void>> getPathQueryValidWithRestResponseAsync(String q1);
 
 
     /**
@@ -318,7 +317,7 @@ public interface SkipUrlEncodings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getSwaggerQueryValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getSwaggerQueryValidWithRestResponseAsync();
 
 
 }

@@ -63,7 +63,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<HeaderCustomNamedRequestIdHeaders, Void>} object if successful.
      */
-    RestResponse<HeaderCustomNamedRequestIdHeaders, Void> customNamedRequestIdWithRestResponseAsync(String fooClientRequestId);
+    Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestIdWithRestResponseAsync(String fooClientRequestId);
 
 
     /**
@@ -102,7 +102,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>} object if successful.
      */
-    RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> customNamedRequestIdParamGroupingWithRestResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+    Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
 
     /**
@@ -142,7 +142,7 @@ public interface Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId);
+    Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId);
 
 
 }

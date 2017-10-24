@@ -55,7 +55,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodGlobalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getMethodGlobalValidWithRestResponseAsync();
 
 
     /**
@@ -90,7 +90,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodGlobalNotProvidedValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValidWithRestResponseAsync();
 
 
     /**
@@ -125,7 +125,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getPathGlobalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getPathGlobalValidWithRestResponseAsync();
 
 
     /**
@@ -160,7 +160,7 @@ public interface ApiVersionDefaults {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getSwaggerGlobalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getSwaggerGlobalValidWithRestResponseAsync();
 
 
 }

@@ -4,6 +4,7 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.http.HttpResponse;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.ProductInner;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class PagingTests {
     private static AutoRestPagingTestServiceImpl client;
@@ -111,8 +112,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailure() throws Exception {
         try {
-            List<ProductInner> response = client.pagings().getMultiplePagesFailure();
-            response.size();
+            client.pagings().getMultiplePagesFailure();
             fail();
         } catch (CloudException ex) {
             Assert.assertNotNull(ex.response());
@@ -121,7 +121,11 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesFailureUri() throws Exception {
-        List<ProductInner> response = client.pagings().getMultiplePagesFailureUri();
-        Assert.assertEquals(1, response.size());
+        try {
+            client.pagings().getMultiplePagesFailureUri();
+            fail();
+        } catch (CloudException ex) {
+            assertEquals(404, ex.response().statusCode());
+        }
     }
 }

@@ -95,24 +95,21 @@ public class StringOperationsTests {
     }
 
     @Test
-    @Ignore("byte[] return types aren't automatically base64 decoded any more")
     public void getBase64Encoded() throws Exception {
         byte[] result = client.strings().getBase64Encoded();
         Assert.assertEquals("a string that gets encoded with base64", new String(result));
     }
 
     @Test
-    @Ignore("byte[] return types aren't automatically base64 decoded any more")
     public void getBase64UrlEncoded() throws Exception {
         byte[] result = client.strings().getBase64UrlEncoded();
         Assert.assertEquals("a string that gets encoded with base64url", new String(result));
     }
 
     @Test
-    @Ignore("byte[] return types aren't automatically base64 decoded any more")
     public void getNullBase64UrlEncoded() throws Exception {
         byte[] result = client.strings().getNullBase64UrlEncoded();
-        Assert.assertNull(result);
+        Assert.assertArrayEquals("There is no concept of null in HTTP, so a 'null' response body is translated into an empty byte[].", new byte[0], result);
     }
 
     @Test

@@ -8,16 +8,11 @@ import com.microsoft.rest.RestClient;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.ILoggerFactory;
-import org.slf4j.LoggerFactory;
 
-import java.util.logging.LogManager;
-
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class LROSADsTests {
     private static AutoRestLongRunningOperationTestServiceImpl client;
@@ -145,8 +140,8 @@ public class LROSADsTests {
             client.lROSADs().putError201NoProvisioningStatePayload(product);
             fail();
         } catch (CloudException ex) {
-            Assert.assertEquals(200, ex.response().statusCode());
-            Assert.assertTrue(ex.getMessage().contains("does not contain a valid body"));
+            Assert.assertEquals(201, ex.response().statusCode());
+            Assert.assertTrue(ex.getMessage().contains("does not contain a body"));
         }
     }
 
@@ -236,7 +231,8 @@ public class LROSADsTests {
         try {
             client.lROSADs().putAsyncRelativeRetryInvalidHeader(product);
             fail();
-        } catch (CloudException ignored) {
+        } catch (NumberFormatException e) {
+            assertEquals("For input string: \"/bar\"", e.getMessage());
         }
     }
 

@@ -95,6 +95,9 @@ else
 @(Model.AsyncClientReturnTypeString) @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
 
 
+@if (Model.ShouldGenerateBeginRestResponseMethod())
+{
+<text>
 @* --------------------------------------------- *@
 @* Observable, RestResponse, required parameters *@
 @* --------------------------------------------- *@
@@ -122,7 +125,8 @@ else
 @: * @@return the {@@link @Model.RestResponseAbstractTypeName} object if successful.
 }
  */
-@(Model.RestResponseAbstractTypeName) @(Model.Name)WithRestResponseAsync(@Model.MethodRequiredParameterDeclaration);
+Single<@(Model.RestResponseAbstractTypeName)> @(Model.Name)WithRestResponseAsync(@Model.MethodRequiredParameterDeclaration);
+</text>
 }
 </text>
 }
@@ -219,7 +223,9 @@ else
 @EmptyLine
 
 
-
+@if (Model.ShouldGenerateBeginRestResponseMethod())
+{
+<text>
 @* ---------------------------------------- *@
 @* Observable, RestResponse, all parameters *@
 @* ---------------------------------------- *@
@@ -247,5 +253,7 @@ else
 @: * @@return the {@@link @Model.RestResponseAbstractTypeName} object if successful.
 }
  */
-@(Model.RestResponseAbstractTypeName) @(Model.Name)WithRestResponseAsync(@Model.MethodParameterDeclaration);
+Single<@(Model.RestResponseAbstractTypeName)> @(Model.Name)WithRestResponseAsync(@Model.MethodParameterDeclaration);
 @EmptyLine
+</text>
+}

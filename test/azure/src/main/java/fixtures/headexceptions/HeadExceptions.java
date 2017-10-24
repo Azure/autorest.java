@@ -55,7 +55,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> head200WithRestResponseAsync();
+    Single<RestResponse<Void, Void>> head200WithRestResponseAsync();
 
 
     /**
@@ -90,7 +90,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> head204WithRestResponseAsync();
+    Single<RestResponse<Void, Void>> head204WithRestResponseAsync();
 
 
     /**
@@ -125,7 +125,7 @@ public interface HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> head404WithRestResponseAsync();
+    Single<RestResponse<Void, Void>> head404WithRestResponseAsync();
 
 
 }

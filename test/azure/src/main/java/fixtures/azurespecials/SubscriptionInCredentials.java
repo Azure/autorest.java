@@ -55,7 +55,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postMethodGlobalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> postMethodGlobalValidWithRestResponseAsync();
 
 
     /**
@@ -90,7 +90,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postMethodGlobalNullWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> postMethodGlobalNullWithRestResponseAsync();
 
 
     /**
@@ -125,7 +125,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postMethodGlobalNotProvidedValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> postMethodGlobalNotProvidedValidWithRestResponseAsync();
 
 
     /**
@@ -160,7 +160,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postPathGlobalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> postPathGlobalValidWithRestResponseAsync();
 
 
     /**
@@ -195,7 +195,7 @@ public interface SubscriptionInCredentials {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postSwaggerGlobalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> postSwaggerGlobalValidWithRestResponseAsync();
 
 
 }

@@ -557,6 +557,11 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
+        public override bool ShouldGenerateBeginRestResponseMethod()
+        {
+            return !IsLongRunningOperation && !IsPagingOperation && !IsPagingNextOperation;
+        }
+
         private ImmutableArray<string> cachedImplImports = default(ImmutableArray<string>);
 
         [JsonIgnore]

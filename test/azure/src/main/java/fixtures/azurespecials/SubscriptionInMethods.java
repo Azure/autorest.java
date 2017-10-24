@@ -59,7 +59,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postMethodLocalValidWithRestResponseAsync(String subscriptionId);
+    Single<RestResponse<Void, Void>> postMethodLocalValidWithRestResponseAsync(String subscriptionId);
 
 
     /**
@@ -98,7 +98,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postMethodLocalNullWithRestResponseAsync(String subscriptionId);
+    Single<RestResponse<Void, Void>> postMethodLocalNullWithRestResponseAsync(String subscriptionId);
 
 
     /**
@@ -137,7 +137,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postPathLocalValidWithRestResponseAsync(String subscriptionId);
+    Single<RestResponse<Void, Void>> postPathLocalValidWithRestResponseAsync(String subscriptionId);
 
 
     /**
@@ -176,7 +176,7 @@ public interface SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> postSwaggerLocalValidWithRestResponseAsync(String subscriptionId);
+    Single<RestResponse<Void, Void>> postSwaggerLocalValidWithRestResponseAsync(String subscriptionId);
 
 
 }

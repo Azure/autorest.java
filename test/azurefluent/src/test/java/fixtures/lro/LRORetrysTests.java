@@ -1,5 +1,6 @@
 package fixtures.lro;
 
+import com.microsoft.azure.AzureProxy;
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -14,6 +15,7 @@ public class LRORetrysTests {
 
     @BeforeClass
     public static void setup() {
+        AzureProxy.setDefaultDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 

@@ -59,7 +59,7 @@ public interface Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getEmptyWithRestResponseAsync(String accountName);
+    Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName);
 
 
 }

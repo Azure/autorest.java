@@ -61,7 +61,7 @@ public interface Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SampleResourceGroup object
      */
-    RestResponse<Void, SampleResourceGroup> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName);
+    Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName);
 
 
 }
