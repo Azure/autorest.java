@@ -56,7 +56,7 @@ public interface XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getWithRestResponseAsync();
 
 
     /**
@@ -95,7 +95,7 @@ public interface XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> paramGetWithRestResponseAsync(String xMsClientRequestId);
+    Single<RestResponse<Void, Void>> paramGetWithRestResponseAsync(String xMsClientRequestId);
 
 
 }

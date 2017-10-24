@@ -122,7 +122,7 @@ else
 @: * @@return the {@@link @Model.RestResponseAbstractTypeName} object if successful.
 }
  */
-@(Model.RestResponseAbstractTypeName) @(Model.Name)WithRestResponseAsync(@Model.MethodRequiredParameterDeclaration);
+Single<@(Model.RestResponseAbstractTypeName)> @(Model.Name)WithRestResponseAsync(@Model.MethodRequiredParameterDeclaration);
 </text>
 }
 
@@ -246,5 +246,5 @@ else
 @: * @@return the {@@link @Model.RestResponseAbstractTypeName} object if successful.
 }
  */
-@(Model.RestResponseAbstractTypeName) @(Model.Name)WithRestResponseAsync(@Model.MethodParameterDeclaration);
+Single<@(Model.RestResponseAbstractTypeName)> @(Model.Name)WithRestResponseAsync(@Model.MethodParameterDeclaration);
 @EmptyLine

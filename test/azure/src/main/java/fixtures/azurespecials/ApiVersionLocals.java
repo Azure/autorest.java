@@ -55,7 +55,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodLocalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getMethodLocalValidWithRestResponseAsync();
 
 
     /**
@@ -89,7 +89,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodLocalNullWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync();
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
@@ -126,7 +126,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getMethodLocalNullWithRestResponseAsync(String apiVersion);
+    Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync(String apiVersion);
 
 
     /**
@@ -161,7 +161,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getPathLocalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getPathLocalValidWithRestResponseAsync();
 
 
     /**
@@ -196,7 +196,7 @@ public interface ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getSwaggerLocalValidWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getSwaggerLocalValidWithRestResponseAsync();
 
 
 }

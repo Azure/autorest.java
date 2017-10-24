@@ -56,7 +56,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    RestResponse<Void, Boolean> head200WithRestResponseAsync();
+    Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync();
 
 
     /**
@@ -92,7 +92,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    RestResponse<Void, Boolean> head204WithRestResponseAsync();
+    Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync();
 
 
     /**
@@ -128,7 +128,7 @@ public interface HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
-    RestResponse<Void, Boolean> head404WithRestResponseAsync();
+    Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync();
 
 
 }

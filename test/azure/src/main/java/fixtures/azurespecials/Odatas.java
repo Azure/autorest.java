@@ -54,7 +54,7 @@ public interface Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getWithFilterWithRestResponseAsync();
+    Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync();
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
@@ -99,7 +99,7 @@ public interface Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link RestResponse<Void, Void>} object if successful.
      */
-    RestResponse<Void, Void> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby);
+    Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby);
 
 
 }
