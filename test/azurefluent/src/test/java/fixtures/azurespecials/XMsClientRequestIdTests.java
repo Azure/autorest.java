@@ -6,6 +6,7 @@ import com.microsoft.rest.credentials.TokenCredentials;
 import com.microsoft.rest.http.HttpHeaders;
 import com.microsoft.rest.policy.AddHeadersPolicy;
 import com.microsoft.rest.policy.AddHeadersPolicy.Factory;
+import com.microsoft.rest.serializer.JacksonAdapter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,6 +26,7 @@ public class XMsClientRequestIdTests {
                 .withBaseUrl("http://localhost.:3000")
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
                 .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .withSerializerAdapter(new JacksonAdapter())
                 .build();
 
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);

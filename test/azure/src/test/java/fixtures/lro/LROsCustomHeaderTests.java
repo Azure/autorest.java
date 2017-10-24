@@ -18,7 +18,7 @@ public class LROsCustomHeaderTests {
     @BeforeClass
     public static void setup() {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
 
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")

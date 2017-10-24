@@ -76,7 +76,9 @@ else
  */
 Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration);
  
- 
+@if (Model.ShouldGenerateBeginRestResponseMethod())
+{
+<text>
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -103,7 +105,8 @@ else
 }
  */
 Single<@Model.RestResponseAbstractTypeName> @(Model.Name)WithRestResponseAsync(@Model.MethodRequiredParameterDeclaration);
- 
+</text>
+}
 </text>
 }
 /**
@@ -176,6 +179,9 @@ else
  */
 Single<@Model.ReturnTypeJv.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration);
 
+@if (Model.ShouldGenerateBeginRestResponseMethod())
+{
+<text>
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
 {
@@ -202,3 +208,5 @@ else
  */
 Single<@Model.RestResponseAbstractTypeName> @(Model.Name)WithRestResponseAsync(@Model.MethodParameterDeclaration);
 @EmptyLine
+</text>
+}
