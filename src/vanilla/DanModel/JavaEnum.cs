@@ -9,20 +9,12 @@ namespace AutoRest.Java.DanModel
     {
         public const string RelativePackage = "models";
 
-        private readonly IList<JavaEnumValue> values;
-
-        public JavaEnum(string headerCommentText, string package, string enumName)
+        public JavaEnum(string headerCommentText, string package, string enumName, IEnumerable<JavaEnumValue> values)
         {
             HeaderCommentText = headerCommentText;
             Package = package;
             EnumName = enumName;
-            values = new List<JavaEnumValue>();
-        }
-
-        public JavaEnum AddValue(string valueName, string valueString)
-        {
-            values.Add(new JavaEnumValue(valueName, valueString));
-            return this;
+            Values = values ?? Enumerable.Empty<JavaEnumValue>();
         }
 
         public JavaEnum WithMaximumMultipleLineCommentWidth(int maximumMultipleLineCommentWidth)
@@ -31,10 +23,7 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        protected IEnumerable<JavaEnumValue> Values
-        {
-            get { return values; }
-        }
+        protected IEnumerable<JavaEnumValue> Values { get; }
 
         protected int? MaximumMultipleLineCommentWidth { get; private set; }
 

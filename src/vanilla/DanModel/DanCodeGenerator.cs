@@ -1,6 +1,7 @@
 ﻿using AutoRest.Core;
 using AutoRest.Core.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.DanModel
 {
@@ -45,16 +46,12 @@ namespace AutoRest.Java.DanModel
         {
             string enumName = enumType.Name;
 
-            JavaEnum result = enumType.ModelAsString ?
-                new JavaExpandableStringEnum(headerCommentText, package, enumName) :
-                new JavaEnum(headerCommentText, package, enumName);
+            IEnumerable<JavaEnumValue> enumValues = enumType.Values
+                .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
 
-            foreach (EnumValue value in enumType.Values)
-            {
-                result.AddValue(value.MemberName, value.SerializedName);
-            }
-
-            return result;
+            return enumType.ModelAsString ?
+                new JavaExpandableStringEnum(headerCommentText, package, enumName, enumValues) :
+                new JavaEnum(headerCommentText, package, enumName, enumValues);
         }
     }
 }

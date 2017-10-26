@@ -1,9 +1,11 @@
-﻿namespace AutoRest.Java.DanModel
+﻿using System.Collections.Generic;
+
+namespace AutoRest.Java.DanModel
 {
     public class JavaExpandableStringEnum : JavaEnum
     {
-        public JavaExpandableStringEnum(string headerCommentText, string package, string enumName)
-            : base(headerCommentText, package, enumName)
+        public JavaExpandableStringEnum(string headerCommentText, string package, string enumName, IEnumerable<JavaEnumValue> values)
+            : base(headerCommentText, package, enumName, values)
         {   
         }
 
