@@ -17,6 +17,7 @@ using AutoRest.Java.Model;
 using AutoRest.Java.vanilla.Templates;
 using System;
 using System.Text.RegularExpressions;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure.Fluent
 {
@@ -111,11 +112,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             //Enums
-            foreach (EnumTypeJvaf enumType in cm.EnumTypes)
-            {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, $"{packagePath}/{enumType.ModelsPackage.Trim('.')}/{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}");
-            }
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings.Instance)).ConfigureAwait(false);
 
             // Page class
             foreach (var pageClass in codeModel.pageClasses)

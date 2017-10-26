@@ -12,6 +12,8 @@ using AutoRest.Java.vanilla.Templates;
 using AutoRest.Java.Model;
 using AutoRest.Core.Model;
 using System;
+using AutoRest.Java.DanModel;
+using System.Collections.Generic;
 
 namespace AutoRest.Java
 {
@@ -67,12 +69,8 @@ namespace AutoRest.Java
                 await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
             }
 
-            // Enums
-            foreach (EnumTypeJv enumType in cm.EnumTypes)
-            {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine("models", $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
-            }
+            //Enums
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings.Instance)).ConfigureAwait(false);
 
             // Exceptions
             foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
@@ -94,6 +92,14 @@ namespace AutoRest.Java
             {
                 Model = new PackageInfoTemplateModel(cm, "models")
             }, Path.Combine("models", _packageInfoFileName));
+        }
+
+        protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)
+        {
+            foreach (JavaFile javaFile in javaFiles)
+            {
+                await Write(javaFile.Contents.ToString(), javaFile.FilePath).ConfigureAwait(false);
+            }
         }
     }
 }

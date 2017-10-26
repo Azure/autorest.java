@@ -10,7 +10,7 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void GetFilesWithNullCodeModel()
         {
-            IEnumerable<JavaFile> files = DanCodeGenerator.GetFiles(null);
+            IEnumerable<JavaFile> files = DanCodeGenerator.GetFiles(null, null);
             Assert.IsNotNull(files);
             Assert.AreEqual(0, files.Count());
         }

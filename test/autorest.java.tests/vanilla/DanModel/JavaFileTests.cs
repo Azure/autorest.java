@@ -10,7 +10,7 @@ namespace AutoRest.Java.DanModel
         {
             JavaFile file = new JavaFile(null);
             Assert.IsNull(file.FilePath);
-            Assert.AreEqual("", file.GetContents());
+            Assert.AreEqual("", file.Contents.ToString());
         }
 
         [TestMethod]
@@ -18,7 +18,7 @@ namespace AutoRest.Java.DanModel
         {
             JavaFile file = new JavaFile("");
             Assert.AreEqual("", file.FilePath);
-            Assert.AreEqual("", file.GetContents());
+            Assert.AreEqual("", file.Contents.ToString());
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace AutoRest.Java.DanModel
         {
             JavaFile file = new JavaFile("hello.java");
             Assert.AreEqual("hello.java", file.FilePath);
-            Assert.AreEqual("", file.GetContents());
+            Assert.AreEqual("", file.Contents.ToString());
         }
 
         [TestMethod]
@@ -34,9 +34,9 @@ namespace AutoRest.Java.DanModel
         {
             JavaFile file = createJavaFile();
 
-            file.Add(null);
+            file.Text(null);
 
-            Assert.AreEqual("", file.GetContents());
+            Assert.AreEqual("", file.Contents.ToString());
         }
 
         [TestMethod]
@@ -44,9 +44,9 @@ namespace AutoRest.Java.DanModel
         {
             JavaFile file = createJavaFile();
 
-            file.Add("");
+            file.Text("");
 
-            Assert.AreEqual("", file.GetContents());
+            Assert.AreEqual("", file.Contents.ToString());
         }
 
         [TestMethod]
@@ -54,49 +54,49 @@ namespace AutoRest.Java.DanModel
         {
             JavaFile file = createJavaFile();
 
-            file.Add("testing, 1, 2, 3");
+            file.Text("testing, 1, 2, 3");
 
-            Assert.AreEqual("testing, 1, 2, 3", file.GetContents());
+            Assert.AreEqual("testing, 1, 2, 3", file.Contents.ToString());
         }
 
         [TestMethod]
-        public void AddLineWithNoArguments()
+        public void LineWithNoArguments()
         {
             JavaFile file = createJavaFile();
 
-            file.AddLine();
+            file.Line();
 
-            Assert.AreEqual("\n", file.GetContents());
+            Assert.AreEqual("\n", file.Contents.ToString());
         }
 
         [TestMethod]
-        public void AddLineWithNull()
+        public void LineWithNull()
         {
             JavaFile file = createJavaFile();
 
-            file.AddLine(null);
+            file.Line(null);
 
-            Assert.AreEqual("\n", file.GetContents());
+            Assert.AreEqual("\n", file.Contents.ToString());
         }
 
         [TestMethod]
-        public void AddLineWithEmpty()
+        public void LineWithEmpty()
         {
             JavaFile file = createJavaFile();
 
-            file.AddLine("");
+            file.Line("");
 
-            Assert.AreEqual("\n", file.GetContents());
+            Assert.AreEqual("\n", file.Contents.ToString());
         }
 
         [TestMethod]
-        public void AddLineWithNonEmpty()
+        public void LineWithNonEmpty()
         {
             JavaFile file = createJavaFile();
 
-            file.AddLine("12345");
+            file.Line("12345");
 
-            Assert.AreEqual("12345\n", file.GetContents());
+            Assert.AreEqual("12345\n", file.Contents.ToString());
         }
 
         private static JavaFile createJavaFile()
