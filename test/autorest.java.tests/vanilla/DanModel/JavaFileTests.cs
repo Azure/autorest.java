@@ -8,7 +8,7 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void ConstructorWithNullFilePath()
         {
-            JavaFile file = new JavaFile(null);
+            JavaFile file = new JavaFile(null, null, null, null);
             Assert.IsNull(file.FilePath);
             Assert.AreEqual("", file.Contents.ToString());
         }
@@ -16,7 +16,7 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void ConstructorWithEmptyFilePath()
         {
-            JavaFile file = new JavaFile("");
+            JavaFile file = new JavaFile("", null, null, null);
             Assert.AreEqual("", file.FilePath);
             Assert.AreEqual("", file.Contents.ToString());
         }
@@ -24,7 +24,7 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void ConstructorWithNonEmptyFilePath()
         {
-            JavaFile file = new JavaFile("hello.java");
+            JavaFile file = new JavaFile("hello.java", null, null, null);
             Assert.AreEqual("hello.java", file.FilePath);
             Assert.AreEqual("", file.Contents.ToString());
         }
@@ -101,7 +101,7 @@ namespace AutoRest.Java.DanModel
 
         private static JavaFile createJavaFile()
         {
-            return new JavaFile("hello.java");
+            return new JavaFile("hello.java", null, null, null);
         }
     }
 }

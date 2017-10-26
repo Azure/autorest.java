@@ -4,21 +4,31 @@ namespace AutoRest.Java.DanModel
 {
     public class JavaFile
     {
-        public JavaFile(string filePath)
+        public JavaFile(string filePath, string headerComment, string package, int? maximumMultipleLineCommentWidth)
         {
             FilePath = filePath;
-            Contents = new JavaFileContents();
+            Contents = new JavaFileContents()
+                .MaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
+
+            if (!string.IsNullOrEmpty(headerComment))
+            {
+                Contents.MultipleLineComment((comment) =>
+                    {
+                        comment.Line(headerComment);
+                    })
+                    .Line();
+            }
+
+            if (!string.IsNullOrEmpty(package))
+            {
+                Contents.Package(package)
+                    .Line();
+            }   
         }
 
         public string FilePath { get; }
 
         public JavaFileContents Contents { get; }
-
-        public JavaFile MaximumMultipleLineCommentWidth(int? maximumMultipleLineCommentWidth)
-        {
-            Contents.MaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
-            return this;
-        }
 
         public JavaFile Text(string text)
         {
@@ -36,11 +46,6 @@ namespace AutoRest.Java.DanModel
         {
             Contents.Line();
             return this;
-        }
-
-        public JavaFile Package(string package)
-        {
-            return Line($"package {package};");
         }
 
         public JavaFile Block(string text, Action<JavaBlock> bodyAction)

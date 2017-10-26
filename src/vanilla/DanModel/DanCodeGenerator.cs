@@ -34,20 +34,19 @@ namespace AutoRest.Java.DanModel
 
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                JavaEnum javaEnum = GetEnum(headerCommentText, package, enumType);
-                javaEnum.WithMaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
-                JavaFile javaFile = javaEnum.GenerateJavaFile();
+                JavaEnum javaEnum = GetEnum(enumType);
+                JavaFile javaFile = javaEnum.GenerateJavaFile(headerCommentText, package, maximumMultipleLineCommentWidth);
                 javaFiles.Add(javaFile);
             }
         }
 
-        public static JavaEnum GetEnum(string headerCommentText, string package, EnumType enumType)
+        public static JavaEnum GetEnum(EnumType enumType)
         {
             string enumName = enumType.Name;
 
             JavaEnum result = enumType.ModelAsString ?
-                new JavaExpandableStringEnum(headerCommentText, package, enumName) :
-                new JavaEnum(headerCommentText, package, enumName);
+                new JavaExpandableStringEnum(enumName) :
+                new JavaEnum(enumName);
 
             foreach (EnumValue value in enumType.Values)
             {

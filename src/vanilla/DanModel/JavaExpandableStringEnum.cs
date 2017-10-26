@@ -2,19 +2,14 @@
 {
     public class JavaExpandableStringEnum : JavaEnum
     {
-        public JavaExpandableStringEnum(string headerCommentText, string package, string enumName)
-            : base(headerCommentText, package, enumName)
+        public JavaExpandableStringEnum(string enumName)
+            : base(enumName)
         {   
         }
 
-        public override JavaFile GenerateJavaFile()
+        public override JavaFile GenerateJavaFile(string headerComment, string package, int maximumMultipleLineCommentWidth)
         {
-            return new JavaFile(GetFilePath())
-                .MaximumMultipleLineCommentWidth(MaximumMultipleLineCommentWidth)
-                .MultipleLineComment(HeaderComment())
-                .Line()
-                .Package(Package)
-                .Line()
+            return new JavaFile(GetFilePath(), headerComment, package, maximumMultipleLineCommentWidth)
                 .Import("java.util.Collection",
                         "com.fasterxml.jackson.annotation.JsonCreator",
                         "com.microsoft.rest.ExpandableStringEnum")

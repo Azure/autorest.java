@@ -9,7 +9,7 @@ namespace AutoRest.Java.DanModel
         public void WithNoValues()
         {
             JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum();
-            JavaFile javaFile = javaEnum.GenerateJavaFile();
+            JavaFile javaFile = GenerateJavaFile(javaEnum);
 
             string expectedFilePath = "models\\MyEnum.java";
             string actualFilePath = javaFile.FilePath;
@@ -57,7 +57,7 @@ namespace AutoRest.Java.DanModel
             JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum();
             javaEnum.AddValue("Grapes", "Yummy");
 
-            JavaFile javaFile = javaEnum.GenerateJavaFile();
+            JavaFile javaFile = GenerateJavaFile(javaEnum);
 
             string expectedFilePath = "models\\MyEnum.java";
             string actualFilePath = javaFile.FilePath;
@@ -110,7 +110,7 @@ namespace AutoRest.Java.DanModel
             javaEnum.AddValue("C", "D");
             javaEnum.AddValue("E", "F");
 
-            JavaFile javaFile = javaEnum.GenerateJavaFile();
+            JavaFile javaFile = GenerateJavaFile(javaEnum);
 
             string expectedFilePath = "models\\MyEnum.java";
             string actualFilePath = javaFile.FilePath;
@@ -163,7 +163,12 @@ namespace AutoRest.Java.DanModel
 
         private static JavaExpandableStringEnum GetJavaExpandableStringEnum()
         {
-            return new JavaExpandableStringEnum("MOCK HEADER COMMENT TEXT", "mock.package", "MyEnum");
+            return new JavaExpandableStringEnum("MyEnum");
+        }
+
+        private static JavaFile GenerateJavaFile(JavaExpandableStringEnum javaEnum)
+        {
+            return javaEnum.GenerateJavaFile("MOCK HEADER COMMENT TEXT", "mock.package", 80);
         }
     }
 }

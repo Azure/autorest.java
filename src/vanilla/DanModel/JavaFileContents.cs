@@ -150,6 +150,11 @@ namespace AutoRest.Java.DanModel
             return Line("");
         }
 
+        public JavaFileContents Package(string package)
+        {
+            return Line($"package {package};");
+        }
+
         public JavaFileContents Block(string text, Action<JavaBlock> bodyAction)
         {
             return Line($"{text} {{")

@@ -9,7 +9,7 @@ namespace AutoRest.Java.DanModel
         public void WithNoValues()
         {
             JavaEnum javaEnum = GetJavaEnum();
-            JavaFile javaFile = javaEnum.GenerateJavaFile();
+            JavaFile javaFile = GenerateJavaFile(javaEnum);
 
             string expectedFilePath = "models\\MyEnum.java";
             string actualFilePath = javaFile.FilePath;
@@ -18,7 +18,7 @@ namespace AutoRest.Java.DanModel
             JavaFileContents expectedContents = new JavaFileContents()
                 .Line("/**")
                 .Line(" * MOCK")
-                .Text(" * HEADER\r\n")
+                .Line(" * HEADER")
                 .Line(" * COMMENT")
                 .Line(" * TEXT")
                 .Line(" */")
@@ -72,7 +72,7 @@ namespace AutoRest.Java.DanModel
             JavaEnum javaEnum = GetJavaEnum();
             javaEnum.AddValue("Grapes", "Yummy");
 
-            JavaFile javaFile = javaEnum.GenerateJavaFile();
+            JavaFile javaFile = GenerateJavaFile(javaEnum);
 
             string expectedFilePath = "models\\MyEnum.java";
             string actualFilePath = javaFile.FilePath;
@@ -81,7 +81,7 @@ namespace AutoRest.Java.DanModel
             JavaFileContents expectedContents = new JavaFileContents()
                 .Line("/**")
                 .Line(" * MOCK")
-                .Text(" * HEADER\r\n")
+                .Line(" * HEADER")
                 .Line(" * COMMENT")
                 .Line(" * TEXT")
                 .Line(" */")
@@ -140,7 +140,7 @@ namespace AutoRest.Java.DanModel
             javaEnum.AddValue("C", "D");
             javaEnum.AddValue("E", "F");
 
-            JavaFile javaFile = javaEnum.GenerateJavaFile();
+            JavaFile javaFile = GenerateJavaFile(javaEnum);
 
             string expectedFilePath = "models\\MyEnum.java";
             string actualFilePath = javaFile.FilePath;
@@ -149,7 +149,7 @@ namespace AutoRest.Java.DanModel
             JavaFileContents expectedContents = new JavaFileContents()
                 .Line("/**")
                 .Line(" * MOCK")
-                .Text(" * HEADER\r\n")
+                .Line(" * HEADER")
                 .Line(" * COMMENT")
                 .Line(" * TEXT")
                 .Line(" */")
@@ -208,7 +208,12 @@ namespace AutoRest.Java.DanModel
 
         private static JavaEnum GetJavaEnum()
         {
-            return new JavaEnum("MOCK\nHEADER\r\nCOMMENT\nTEXT", "mock.package", "MyEnum");
+            return new JavaEnum("MyEnum");
+        }
+
+        private static JavaFile GenerateJavaFile(JavaEnum javaEnum)
+        {
+            return javaEnum.GenerateJavaFile("MOCK\nHEADER\r\nCOMMENT\nTEXT", "mock.package", 80);
         }
     }
 }
