@@ -1,47 +1,70 @@
-﻿using System.Text;
+﻿using System;
 
 namespace AutoRest.Java.DanModel
 {
     public class JavaFile
     {
-        private readonly string filePath;
-        private readonly StringBuilder contents;
-
         public JavaFile(string filePath)
         {
-            this.filePath = filePath;
-            contents = new StringBuilder();
+            FilePath = filePath;
+            Contents = new JavaFileContents();
         }
 
-        public string FilePath
-        {
-            get { return filePath; }
-        }
+        public string FilePath { get; }
 
-        public string GetContents()
-        {
-            return contents.ToString();
-        }
+        public JavaFileContents Contents { get; }
 
-        public JavaFile Add(string formattedText, params object[] formattedArguments)
+        public JavaFile MaximumMultipleLineCommentWidth(int? maximumMultipleLineCommentWidth)
         {
-            if (!string.IsNullOrEmpty(formattedText))
-            {
-                string text = string.Format(formattedText, formattedArguments);
-                contents.Append(text);
-            }
+            Contents.MaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
             return this;
         }
 
-        public JavaFile AddLine(string formattedText, params object[] formattedArguments)
+        public JavaFile Text(string text)
         {
-            Add(formattedText, formattedArguments);
-            return AddLine();
+            Contents.Text(text);
+            return this;
         }
 
-        public JavaFile AddLine()
+        public JavaFile Line(string text)
         {
-            return Add("\n");
+            Contents.Line(text);
+            return this;
+        }
+
+        public JavaFile Line()
+        {
+            Contents.Line();
+            return this;
+        }
+
+        public JavaFile Package(string package)
+        {
+            return Line($"package {package};");
+        }
+
+        public JavaFile Block(string text, Action<JavaBlock> bodyAction)
+        {
+            Contents.Block(text, bodyAction);
+            return this;
+        }
+
+        public JavaFile Import(params string[] imports)
+        {
+            Contents.Import(imports);
+            return this;
+        }
+
+        public JavaFile SingleLineComment(string text)
+        {
+            Contents.SingleLineComment(text);
+            return this;
+        }
+
+        public JavaFile MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        {
+            Contents.MultipleLineComment(commentAction);
+            return this;
         }
     }
 }

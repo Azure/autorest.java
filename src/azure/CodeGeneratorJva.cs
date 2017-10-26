@@ -16,6 +16,7 @@ using AutoRest.Java.azure.Templates;
 using AutoRest.Java.Model;
 using AutoRest.Java.vanilla.Templates;
 using System;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure
 {
@@ -80,11 +81,7 @@ namespace AutoRest.Java.Azure
             }
 
             //Enums
-            foreach (EnumTypeJva enumType in cm.EnumTypes)
-            {
-                var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine("models", $"{enumTemplate.Model.Name.ToPascalCase()}{ImplementationFileExtension}"));
-            }
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings.Instance)).ConfigureAwait(false);
 
             // Page class
             foreach (var pageClass in codeModel.pageClasses)
