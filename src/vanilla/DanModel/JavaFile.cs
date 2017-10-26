@@ -4,17 +4,19 @@ namespace AutoRest.Java.DanModel
 {
     public class JavaFile
     {
-        public JavaFile(string filePath, string headerComment, string package, int? maximumMultipleLineCommentWidth)
+        public JavaFile(string filePath, string headerComment, string package, int? headerCommentWrapWidth)
         {
             FilePath = filePath;
-            Contents = new JavaFileContents()
-                .MaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
-
+            Contents = new JavaFileContents();
+                
             if (!string.IsNullOrEmpty(headerComment))
             {
-                Contents.MultipleLineComment((comment) =>
+                Contents.SetWordWrapIndex(headerCommentWrapWidth)
+                    .MultipleLineComment((comment) =>
                     {
-                        comment.Line(headerComment);
+                        comment.SetWordWrapIndex(headerCommentWrapWidth)
+                            .Line(headerComment)
+                            .SetWordWrapIndex(null);
                     })
                     .Line();
             }

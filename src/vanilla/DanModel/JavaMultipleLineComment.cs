@@ -9,6 +9,12 @@
             this.contents = contents;
         }
 
+        public JavaMultipleLineComment SetWordWrapIndex(int? wordWrapIndex)
+        {
+            contents.SetWordWrapIndex(wordWrapIndex);
+            return this;
+        }
+
         public JavaMultipleLineComment Line(string text)
         {
             contents.Line(text);

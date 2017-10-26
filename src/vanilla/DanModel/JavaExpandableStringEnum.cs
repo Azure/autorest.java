@@ -9,7 +9,8 @@
 
         public override JavaFile GenerateJavaFile(string headerComment, string package, int maximumMultipleLineCommentWidth)
         {
-            return new JavaFile(GetFilePath(), headerComment, package, maximumMultipleLineCommentWidth)
+            string filePath = GetFilePath();
+            return new JavaFile(filePath, headerComment, package, maximumMultipleLineCommentWidth)
                 .Import("java.util.Collection",
                         "com.fasterxml.jackson.annotation.JsonCreator",
                         "com.microsoft.rest.ExpandableStringEnum")

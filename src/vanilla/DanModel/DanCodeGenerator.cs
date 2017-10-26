@@ -1,12 +1,13 @@
 ﻿using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Java.Model;
 using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
-        public static IEnumerable<JavaFile> GetFiles(CodeModel codeModel, Settings settings)
+        public static IEnumerable<JavaFile> GetFiles(CodeModelJv codeModel, Settings settings)
         {
             IList<JavaFile> result = new List<JavaFile>();
 
@@ -16,6 +17,28 @@ namespace AutoRest.Java.DanModel
             }
 
             return result;
+        }
+
+        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings)
+        {
+            List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
+            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles);
+            return exceptionJavaFiles;
+        }
+
+        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles)
+        {
+            string headerCommentText = settings.Header;
+
+            string package = $"{codeModel.Namespace.ToLowerInvariant()}.{JavaException.RelativePackage}";
+            int maximumMultipleLineCommentWidth = settings.MaximumCommentColumns;
+
+            foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
+            {
+                JavaException javaException = new JavaException(exceptionType.ExceptionTypeDefinitionName, exceptionType.Name);
+                JavaFile javaFile = javaException.GenerateJavaFile(headerCommentText, package, maximumMultipleLineCommentWidth);
+                javaFiles.Add(javaFile);
+            }
         }
 
         public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings)

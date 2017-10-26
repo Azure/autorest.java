@@ -42,6 +42,8 @@ namespace AutoRest.Java
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
 
+            Settings settings = Settings.Instance;
+
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate, $"{Path.Combine("implementation", cm.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
@@ -70,15 +72,11 @@ namespace AutoRest.Java
             }
 
             //Enums
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings.Instance)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, settings)).ConfigureAwait(false);
 
             // Exceptions
-            foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
-            {
-                var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine("models", $"{exceptionTemplate.Model.ExceptionTypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
-            }
-
+            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, settings)).ConfigureAwait(false);
+            
             // package-info.java
             await Write(new PackageInfoTemplate
             {

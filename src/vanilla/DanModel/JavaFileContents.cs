@@ -13,7 +13,6 @@ namespace AutoRest.Java.DanModel
         private readonly StringBuilder contents = new StringBuilder();
         private readonly StringBuilder linePrefix = new StringBuilder();
 
-        private int? maximumMultipleLineCommentWidth;
         private int? wordWrapIndex;
 
         public override string ToString()
@@ -43,12 +42,6 @@ namespace AutoRest.Java.DanModel
             {
                 linePrefix.Remove(linePrefix.Length - toRemoveLength, toRemoveLength);
             }
-            return this;
-        }
-
-        public JavaFileContents MaximumMultipleLineCommentWidth(int? maximumMultipleLineCommentWidth)
-        {
-            this.maximumMultipleLineCommentWidth = maximumMultipleLineCommentWidth;
             return this;
         }
 
@@ -167,7 +160,7 @@ namespace AutoRest.Java.DanModel
 
         public JavaFileContents Import(params string[] imports)
         {
-            ISet<string> importSet = new SortedSet<string>(imports);
+            ISet<string> importSet = new SortedSet<string>(imports, new JavaImportComparer());
             foreach (string import in importSet)
             {
                 Line($"import {import};");
@@ -185,9 +178,8 @@ namespace AutoRest.Java.DanModel
         {
             Line("/**");
             AddToPrefix(" * ");
-            SetWordWrapIndex(maximumMultipleLineCommentWidth);
-            commentAction.Invoke(new JavaMultipleLineComment(this));
-            SetWordWrapIndex(null);
+            JavaMultipleLineComment comment = new JavaMultipleLineComment(this);
+            commentAction.Invoke(comment);
             RemoveFromPrefix(" * ");
             return Line(" */");
         }
