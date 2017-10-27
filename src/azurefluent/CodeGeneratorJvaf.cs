@@ -76,21 +76,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             //Models
-            foreach (CompositeTypeJvaf modelType in cm.ModelTypes.Concat(codeModel.HeaderTypes))
-            {
-                if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
-                {
-                    continue;
-                }
-                if (modelType.IsResource)
-                {
-                    continue;
-                }
-
-                var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, $"{packagePath}/{modelType.ModelsPackage.Trim('.')}/{modelType.Name.ToPascalCase()}{ImplementationFileExtension}");
-            }
+            await WriteModelJavaFiles(codeModel, packagePath, null).ConfigureAwait(false);
 
             //XML wrappers
             if (codeModel.ShouldGenerateXmlSerializationCached)

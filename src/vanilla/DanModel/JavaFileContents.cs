@@ -160,12 +160,23 @@ namespace AutoRest.Java.DanModel
 
         public JavaFileContents Import(params string[] imports)
         {
-            ISet<string> importSet = new SortedSet<string>(imports, new JavaImportComparer());
-            foreach (string import in importSet)
+            return Import((IEnumerable<string>)imports);
+        }
+
+        public JavaFileContents Import(IEnumerable<string> imports)
+        {
+            if (imports != null && imports.Any())
             {
-                Line($"import {import};");
+                ISet<string> importSet = new SortedSet<string>(imports, new JavaImportComparer());
+                foreach (string import in importSet)
+                {
+                    if (!string.IsNullOrEmpty(import))
+                    {
+                        Line($"import {import};");
+                    }
+                }
+                Line();
             }
-            Line();
             return this;
         }
 
@@ -187,6 +198,58 @@ namespace AutoRest.Java.DanModel
         public JavaFileContents Return(string text)
         {
             return Line($"return {text};");
+        }
+
+        public JavaFileContents Annotation(params string[] annotations)
+        {
+            return Annotation((IEnumerable<string>)annotations);
+        }
+
+        public JavaFileContents Annotation(IEnumerable<string> annotations)
+        {
+            if (annotations != null && annotations.Any())
+            {
+                foreach (string annotation in annotations)
+                {
+                    if (!string.IsNullOrEmpty(annotation))
+                    {
+                        Line($"@{annotation}");
+                    }
+                }
+            }
+            return this;
+        }
+
+        public JavaFileContents PublicFinalClass(string className, Action<JavaClass> classAction)
+        {
+            Block($"public final class {className}", (blockAction) =>
+            {
+                if (classAction != null)
+                {
+                    JavaClass javaClass = new JavaClass(this);
+                    classAction.Invoke(javaClass);
+                }
+            });
+            return this;
+        }
+
+        public JavaFileContents PublicClass(string className, Action<JavaClass> classAction)
+        {
+            Block($"public class {className}", (blockAction) =>
+            {
+                if (classAction != null)
+                {
+                    JavaClass javaClass = new JavaClass(this);
+                    classAction.Invoke(javaClass);
+                }
+            });
+            return this;
+        }
+
+        public JavaFileContents PublicEnum(string enumName, Action<JavaBlock> enumAction)
+        {
+            Block($"public enum {enumName}", enumAction);
+            return this;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        public abstract JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumMultipleLineCommentWidth);
+        public abstract JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth);
 
         protected JavaFile GenerateJavaFileWithHeaderAndPackage(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {

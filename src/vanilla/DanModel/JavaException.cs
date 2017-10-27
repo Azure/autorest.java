@@ -31,8 +31,8 @@ namespace AutoRest.Java.DanModel
                         {
                             comment.Line($"Initializes a new instance of the {ExceptionName} class.")
                                 .Line()
-                                .Line("@param message the exception message or the response content if a message is not available")
-                                .Line("@param response the HTTP response");
+                                .Param("message", "the exception message or the response content if a message is not available")
+                                .Param("response", "the HTTP response");
                         })
                         .Block($"public {ExceptionName}(final String message, HttpResponse response)", (constructorBlock) =>
                         {
@@ -43,16 +43,16 @@ namespace AutoRest.Java.DanModel
                         {
                             comment.Line($"Initializes a new instance of the {ExceptionName} class.")
                                 .Line()
-                                .Line("@param message the exception message or the response content if a message is not available")
-                                .Line("@param response the HTTP response")
-                                .Line("@param body the deserialized response body");
+                                .Param("message", "the exception message or the response content if a message is not available")
+                                .Param("response", "the HTTP response")
+                                .Param("body", "the deserialized response body");
                         })
                         .Block($"public {ExceptionName}(final String message, final HttpResponse response, final {ExceptionBodyTypeName} body)", (constructorBlock) =>
                         {
                             constructorBlock.Line("super(message, response, body);");
                         })
                         .Line()
-                        .Line("@Override")
+                        .Annotation("Override")
                         .Block($"public {ExceptionBodyTypeName} body()", (methodBlock) =>
                         {
                             methodBlock.Return($"({ExceptionBodyTypeName}) super.body()");

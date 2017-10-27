@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
@@ -50,6 +51,12 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaFile Import(IEnumerable<string> imports)
+        {
+            Contents.Import(imports);
+            return this;
+        }
+
         public JavaFile SingleLineComment(string text)
         {
             Contents.SingleLineComment(text);
@@ -59,6 +66,36 @@ namespace AutoRest.Java.DanModel
         public JavaFile MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
             Contents.MultipleLineComment(commentAction);
+            return this;
+        }
+
+        public JavaFile Annotation(params string[] annotations)
+        {
+            Contents.Annotation(annotations);
+            return this;
+        }
+
+        public JavaFile Annotation(IEnumerable<string> annotations)
+        {
+            Contents.Annotation(annotations);
+            return this;
+        }
+
+        public JavaFile PublicFinalClass(string className, Action<JavaClass> classAction)
+        {
+            Contents.PublicFinalClass(className, classAction);
+            return this;
+        }
+
+        public JavaFile PublicClass(string className, Action<JavaClass> classAction)
+        {
+            Contents.PublicClass(className, classAction);
+            return this;
+        }
+
+        public JavaFile PublicEnum(string enumName, Action<JavaBlock> enumAction)
+        {
+            Contents.PublicEnum(enumName, enumAction);
             return this;
         }
     }

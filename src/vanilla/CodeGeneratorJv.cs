@@ -68,11 +68,7 @@ namespace AutoRest.Java
             }
 
             //Models
-            foreach (CompositeTypeJv modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
-            {
-                var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
-            }
+            await WriteModelJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
 
             //Enums
             await WriteEnumJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
@@ -93,6 +89,11 @@ namespace AutoRest.Java
             {
                 Model = new PackageInfoTemplateModel(cm, "models")
             }, Path.Combine("models", _packageInfoFileName));
+        }
+
+        protected async Task WriteModelJavaFiles(CodeModel codeModel, string relativePath, string packageSuffix)
+        {
+            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings, relativePath, packageSuffix)).ConfigureAwait(false);
         }
 
         protected async Task WriteEnumJavaFiles(CodeModel codeModel, string relativePath, string packageSuffix)

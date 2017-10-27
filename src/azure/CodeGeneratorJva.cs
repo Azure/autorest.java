@@ -64,21 +64,7 @@ namespace AutoRest.Java.Azure
             }
 
             //Models
-            foreach (CompositeTypeJva modelType in cm.ModelTypes.Concat(codeModel.HeaderTypes))
-            {
-                if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
-                {
-                    continue;
-                }
-                if (modelType.IsResource)
-                {
-                    continue;
-                }
-
-                var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
-            }
+            await WriteModelJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
 
             //Enums
             await WriteEnumJavaFiles(codeModel, "models", "models").ConfigureAwait(false);

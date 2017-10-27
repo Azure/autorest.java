@@ -3,58 +3,52 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaBlock
+    public class JavaClass
     {
         private readonly JavaFileContents contents;
 
-        public JavaBlock(JavaFileContents file)
+        public JavaClass(JavaFileContents contents)
         {
-            this.contents = file;
+            this.contents = contents;
         }
 
-        public JavaBlock Line(string text)
+        public JavaClass Line(string text)
         {
             contents.Line(text);
             return this;
         }
 
-        public JavaBlock Line()
+        public JavaClass Line()
         {
             contents.Line();
             return this;
         }
 
-        public JavaBlock Block(string text, Action<JavaBlock> bodyAction)
+        public JavaClass Block(string text, Action<JavaBlock> bodyAction)
         {
             contents.Block(text, bodyAction);
             return this;
         }
 
-        public JavaBlock SingleLineComment(string text)
+        public JavaClass SingleLineComment(string text)
         {
             contents.SingleLineComment(text);
             return this;
         }
 
-        public JavaBlock MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public JavaClass MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
             contents.MultipleLineComment(commentAction);
             return this;
         }
 
-        public JavaBlock Return(string text)
-        {
-            contents.Return(text);
-            return this;
-        }
-
-        public JavaBlock Annotation(params string[] annotations)
+        public JavaClass Annotation(params string[] annotations)
         {
             contents.Annotation(annotations);
             return this;
         }
 
-        public JavaBlock Annotation(IEnumerable<string> annotations)
+        public JavaClass Annotation(IEnumerable<string> annotations)
         {
             contents.Annotation(annotations);
             return this;

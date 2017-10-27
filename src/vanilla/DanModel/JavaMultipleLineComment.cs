@@ -26,5 +26,17 @@
             contents.Line();
             return this;
         }
+
+        public JavaMultipleLineComment Param(string parameterName, string parameterDescription)
+        {
+            contents.Line($"@param {parameterName} {parameterDescription}");
+            return this;
+        }
+
+        public JavaMultipleLineComment Return(string returnValueDescription)
+        {
+            contents.Line($"@return {returnValueDescription}");
+            return this;
+        }
     }
 }
