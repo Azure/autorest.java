@@ -54,8 +54,8 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void WithOneValue()
         {
-            JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum();
-            javaEnum.AddValue("Grapes", "Yummy");
+            JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum(
+                new JavaEnumValue("Grapes", "Yummy"));
 
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
@@ -105,10 +105,10 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void WithMultipleValues()
         {
-            JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum();
-            javaEnum.AddValue("A", "B");
-            javaEnum.AddValue("C", "D");
-            javaEnum.AddValue("E", "F");
+            JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum(
+                new JavaEnumValue("A", "B"),
+                new JavaEnumValue("C", "D"),
+                new JavaEnumValue("E", "F"));
 
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
@@ -161,14 +161,14 @@ namespace AutoRest.Java.DanModel
             JavaFileContentsAssert.AreEqual(expectedContents, actualContents);
         }
 
-        private static JavaExpandableStringEnum GetJavaExpandableStringEnum()
+        private static JavaExpandableStringEnum GetJavaExpandableStringEnum(params JavaEnumValue[] values)
         {
-            return new JavaExpandableStringEnum("MyEnum");
+            return new JavaExpandableStringEnum("MyEnum", values);
         }
 
         private static JavaFile GenerateJavaFile(JavaExpandableStringEnum javaEnum)
         {
-            return javaEnum.GenerateJavaFile("MOCK HEADER COMMENT TEXT", "mock.package", 80);
+            return javaEnum.GenerateJavaFile("models", "MOCK HEADER COMMENT TEXT", "mock.package", 80);
         }
     }
 }

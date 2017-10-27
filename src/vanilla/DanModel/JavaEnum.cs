@@ -1,39 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaEnum
+    public class JavaEnum : JavaFileGenerator
     {
-        public const string RelativePackage = "models";
-
-        private readonly IList<JavaEnumValue> values;
-
-        public JavaEnum(string enumName)
+        public JavaEnum(string enumName, IEnumerable<JavaEnumValue> values)
         {
             EnumName = enumName;
-            values = new List<JavaEnumValue>();
+            Values = values ?? Enumerable.Empty<JavaEnumValue>();
         }
 
-        public JavaEnum AddValue(string valueName, string valueString)
-        {
-            values.Add(new JavaEnumValue(valueName, valueString));
-            return this;
-        }
-
-        protected IEnumerable<JavaEnumValue> Values
-        {
-            get { return values; }
-        }
+        protected IEnumerable<JavaEnumValue> Values { get; }
 
         protected string EnumName { get; }
 
-        protected string GetFilePath()
-        {
-            return Path.Combine(RelativePackage, $"{EnumName}.java");
-        }
+        protected override string FileNameWithoutExtension => EnumName;
 
         protected Action<JavaMultipleLineComment> EnumTypeComment()
         {
@@ -43,10 +26,9 @@ namespace AutoRest.Java.DanModel
             };
         }
 
-        public virtual JavaFile GenerateJavaFile(string headerComment, string package, int maximumMultipleLineCommentWidth)
+        public override JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {
-            string filePath = GetFilePath();
-            return new JavaFile(filePath, headerComment, package, maximumMultipleLineCommentWidth)
+            return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumHeaderCommentWidth)
                 .Import("com.fasterxml.jackson.annotation.JsonCreator",
                         "com.fasterxml.jackson.annotation.JsonValue")
                 .MultipleLineComment(EnumTypeComment())

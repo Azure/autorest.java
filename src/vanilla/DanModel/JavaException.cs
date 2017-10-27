@@ -2,10 +2,8 @@
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaException
+    public class JavaException : JavaFileGenerator
     {
-        public const string RelativePackage = "models";
-
         public JavaException(string exceptionName, string exceptionBodyTypeName)
         {
             ExceptionName = exceptionName;
@@ -16,15 +14,11 @@ namespace AutoRest.Java.DanModel
 
         private string ExceptionBodyTypeName { get; }
 
-        protected string GetFilePath()
-        {
-            return Path.Combine(RelativePackage, $"{ExceptionName}.java");
-        }
+        protected override string FileNameWithoutExtension => ExceptionName;
 
-        public virtual JavaFile GenerateJavaFile(string headerComment, string package, int maximumMultipleLineCommentWidth)
+        public override JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {
-            string filePath = GetFilePath();
-            return new JavaFile(filePath, headerComment, package, maximumMultipleLineCommentWidth)
+            return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumHeaderCommentWidth)
                 .Import("com.microsoft.rest.RestException",
                         "com.microsoft.rest.http.HttpResponse")
                 .MultipleLineComment((comment) =>

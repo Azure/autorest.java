@@ -1,16 +1,17 @@
-﻿namespace AutoRest.Java.DanModel
+﻿using System.Collections.Generic;
+
+namespace AutoRest.Java.DanModel
 {
     public class JavaExpandableStringEnum : JavaEnum
     {
-        public JavaExpandableStringEnum(string enumName)
-            : base(enumName)
+        public JavaExpandableStringEnum(string enumName, IEnumerable<JavaEnumValue> values)
+            : base(enumName, values)
         {   
         }
 
-        public override JavaFile GenerateJavaFile(string headerComment, string package, int maximumMultipleLineCommentWidth)
+        public override JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {
-            string filePath = GetFilePath();
-            return new JavaFile(filePath, headerComment, package, maximumMultipleLineCommentWidth)
+            return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumHeaderCommentWidth)
                 .Import("java.util.Collection",
                         "com.fasterxml.jackson.annotation.JsonCreator",
                         "com.microsoft.rest.ExpandableStringEnum")

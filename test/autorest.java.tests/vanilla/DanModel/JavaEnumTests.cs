@@ -69,8 +69,8 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void WithOneValue()
         {
-            JavaEnum javaEnum = GetJavaEnum();
-            javaEnum.AddValue("Grapes", "Yummy");
+            JavaEnum javaEnum = GetJavaEnum(
+                new JavaEnumValue("Grapes", "Yummy"));
 
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
@@ -135,10 +135,10 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void WithMultipleValues()
         {
-            JavaEnum javaEnum = GetJavaEnum();
-            javaEnum.AddValue("A", "B");
-            javaEnum.AddValue("C", "D");
-            javaEnum.AddValue("E", "F");
+            JavaEnum javaEnum = GetJavaEnum(
+                new JavaEnumValue("A", "B"),
+                new JavaEnumValue("C", "D"),
+                new JavaEnumValue("E", "F"));
 
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
@@ -206,14 +206,14 @@ namespace AutoRest.Java.DanModel
             JavaFileContentsAssert.AreEqual(expectedContents, actualContents);
         }
 
-        private static JavaEnum GetJavaEnum()
+        private static JavaEnum GetJavaEnum(params JavaEnumValue[] values)
         {
-            return new JavaEnum("MyEnum");
+            return new JavaEnum("MyEnum", values);
         }
 
         private static JavaFile GenerateJavaFile(JavaEnum javaEnum)
         {
-            return javaEnum.GenerateJavaFile("MOCK\nHEADER\r\nCOMMENT\nTEXT", "mock.package", 80);
+            return javaEnum.GenerateJavaFile("models", "MOCK\nHEADER\r\nCOMMENT\nTEXT", "mock.package", 80);
         }
     }
 }

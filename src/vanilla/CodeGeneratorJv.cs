@@ -28,6 +28,11 @@ namespace AutoRest.Java
 
         public override string ImplementationFileExtension => ".java";
 
+        protected Settings Settings
+        {
+            get { return Settings.Instance; }
+        }
+
         /// <summary>
         /// Generate Java client code for given ServiceClient.
         /// </summary>
@@ -41,8 +46,6 @@ namespace AutoRest.Java
             {
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
-
-            Settings settings = Settings.Instance;
 
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
@@ -72,10 +75,10 @@ namespace AutoRest.Java
             }
 
             //Enums
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, settings)).ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
 
             // Exceptions
-            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, settings)).ConfigureAwait(false);
+            await WriteExceptionJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
             
             // package-info.java
             await Write(new PackageInfoTemplate
@@ -90,6 +93,16 @@ namespace AutoRest.Java
             {
                 Model = new PackageInfoTemplateModel(cm, "models")
             }, Path.Combine("models", _packageInfoFileName));
+        }
+
+        protected async Task WriteEnumJavaFiles(CodeModel codeModel, string relativePath, string packageSuffix)
+        {
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings, relativePath, packageSuffix)).ConfigureAwait(false);
+        }
+
+        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel, string relativePath, string packageSuffix)
+        {
+            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings, relativePath, packageSuffix)).ConfigureAwait(false);
         }
 
         protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)
