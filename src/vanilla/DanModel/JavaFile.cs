@@ -14,12 +14,6 @@ namespace AutoRest.Java.DanModel
 
         public JavaFileContents Contents { get; }
 
-        public JavaFile MaximumMultipleLineCommentWidth(int? maximumMultipleLineCommentWidth)
-        {
-            Contents.MaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
-            return this;
-        }
-
         public JavaFile Text(string text)
         {
             Contents.Text(text);
@@ -38,14 +32,15 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaFile Package(string package)
-        {
-            return Line($"package {package};");
-        }
-
         public JavaFile Block(string text, Action<JavaBlock> bodyAction)
         {
             Contents.Block(text, bodyAction);
+            return this;
+        }
+
+        public JavaFile Package(string package)
+        {
+            Contents.Package(package);
             return this;
         }
 

@@ -1,50 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaEnum
+    public class JavaEnum : JavaFileGenerator
     {
-        public const string RelativePackage = "models";
-
-        public JavaEnum(string headerCommentText, string package, string enumName, IEnumerable<JavaEnumValue> values)
+        public JavaEnum(string enumName, IEnumerable<JavaEnumValue> values)
         {
-            HeaderCommentText = headerCommentText;
-            Package = package;
             EnumName = enumName;
             Values = values ?? Enumerable.Empty<JavaEnumValue>();
         }
 
-        public JavaEnum WithMaximumMultipleLineCommentWidth(int maximumMultipleLineCommentWidth)
-        {
-            MaximumMultipleLineCommentWidth = maximumMultipleLineCommentWidth;
-            return this;
-        }
-
         protected IEnumerable<JavaEnumValue> Values { get; }
-
-        protected int? MaximumMultipleLineCommentWidth { get; private set; }
-
-        protected string HeaderCommentText { get; }
-
-        protected string Package { get; }
 
         protected string EnumName { get; }
 
-        protected string GetFilePath()
-        {
-            return Path.Combine(RelativePackage, $"{EnumName}.java");
-        }
-
-        protected Action<JavaMultipleLineComment> HeaderComment()
-        {
-            return (JavaMultipleLineComment comment) =>
-            {
-                comment.Line(HeaderCommentText);
-            };
-        }
+        protected override string FileNameWithoutExtension => EnumName;
 
         protected Action<JavaMultipleLineComment> EnumTypeComment()
         {
@@ -54,14 +26,9 @@ namespace AutoRest.Java.DanModel
             };
         }
 
-        public virtual JavaFile GenerateJavaFile()
+        public override JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {
-            return new JavaFile(GetFilePath())
-                .MaximumMultipleLineCommentWidth(MaximumMultipleLineCommentWidth)
-                .MultipleLineComment(HeaderComment())
-                .Line()
-                .Package(Package)
-                .Line()
+            return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumHeaderCommentWidth)
                 .Import("com.fasterxml.jackson.annotation.JsonCreator",
                         "com.fasterxml.jackson.annotation.JsonValue")
                 .MultipleLineComment(EnumTypeComment())

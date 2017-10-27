@@ -1,5 +1,6 @@
 ﻿using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Java.Model;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,51 +8,75 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
-        public static IEnumerable<JavaFile> GetFiles(CodeModel codeModel, Settings settings)
+        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings, string folderPath, string packageSuffix)
         {
-            IList<JavaFile> result = new List<JavaFile>();
-
-            if (codeModel != null)
-            {
-                AddEnumJavaFiles(codeModel, settings, result);
-            }
-
-            return result;
+            List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
+            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles, folderPath, packageSuffix);
+            return exceptionJavaFiles;
         }
 
-        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings)
-        {
-            List<JavaFile> enumJavaFiles = new List<JavaFile>();
-            AddEnumJavaFiles(codeModel, settings, enumJavaFiles);
-            return enumJavaFiles;
-        }
-
-        public static void AddEnumJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles)
+        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles, string folderPath, string packageSuffix)
         {
             string headerCommentText = settings.Header;
 
-            string package = $"{codeModel.Namespace.ToLowerInvariant()}.{JavaEnum.RelativePackage}";
+            string package = GetPackage(codeModel, packageSuffix);
+            int maximumMultipleLineCommentWidth = settings.MaximumCommentColumns;
+
+            foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
+            {
+                string exceptionBodyTypeName = exceptionType.Name;
+                string exceptionName = exceptionType.ExceptionTypeDefinitionName;
+
+                // Skip any exceptions that are named "CloudErrorException" or have a body named
+                // "CloudError" because those types already exist in the runtime.
+                if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
+                {
+                    JavaException javaException = new JavaException(exceptionName, exceptionBodyTypeName);
+                    JavaFile javaFile = javaException.GenerateJavaFile(folderPath, headerCommentText, package, maximumMultipleLineCommentWidth);
+                    javaFiles.Add(javaFile);
+                }
+            }
+        }
+
+        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings, string folderPath, string packageSuffix)
+        {
+            List<JavaFile> enumJavaFiles = new List<JavaFile>();
+            AddEnumJavaFiles(codeModel, settings, enumJavaFiles, folderPath, packageSuffix);
+            return enumJavaFiles;
+        }
+
+        public static void AddEnumJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, string folderPath, string packageSuffix)
+        {
+            string headerCommentText = settings.Header;
+
+            string package = GetPackage(codeModel, packageSuffix);
+
             int maximumMultipleLineCommentWidth = settings.MaximumCommentColumns;
 
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                JavaEnum javaEnum = GetEnum(headerCommentText, package, enumType);
-                javaEnum.WithMaximumMultipleLineCommentWidth(maximumMultipleLineCommentWidth);
-                JavaFile javaFile = javaEnum.GenerateJavaFile();
+                string enumName = enumType.Name;
+
+                IEnumerable<JavaEnumValue> enumValues = enumType.Values
+                    .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
+
+                JavaEnum javaEnum = enumType.ModelAsString ?
+                    new JavaExpandableStringEnum(enumName, enumValues) :
+                    new JavaEnum(enumName, enumValues);
+
+                JavaFile javaFile = javaEnum.GenerateJavaFile(folderPath, headerCommentText, package, maximumMultipleLineCommentWidth);
                 javaFiles.Add(javaFile);
             }
         }
 
-        public static JavaEnum GetEnum(string headerCommentText, string package, EnumType enumType)
+        private static string GetPackage(CodeModel codeModel, string packageSuffix)
         {
-            string enumName = enumType.Name;
-
-            IEnumerable<JavaEnumValue> enumValues = enumType.Values
-                .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
-
-            return enumType.ModelAsString ?
-                new JavaExpandableStringEnum(headerCommentText, package, enumName, enumValues) :
-                new JavaEnum(headerCommentText, package, enumName, enumValues);
+            string package = $"{codeModel.Namespace.ToLowerInvariant()}";
+            if (!string.IsNullOrEmpty(packageSuffix))
+            {
+                package = $"{package}.{packageSuffix}";
+            }
+            return package;
         }
     }
 }

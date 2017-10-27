@@ -81,7 +81,7 @@ namespace AutoRest.Java.Azure
             }
 
             //Enums
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings.Instance)).ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
 
             // Page class
             foreach (var pageClass in codeModel.pageClasses)
@@ -94,16 +94,7 @@ namespace AutoRest.Java.Azure
             }
 
             // Exceptions
-            foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
-            {
-                if (exceptionType.Name == "CloudError")
-                {
-                    continue;
-                }
-
-                var exceptionTemplate = new ExceptionTemplate { Model = exceptionType };
-                await Write(exceptionTemplate, Path.Combine("models", $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
-            }
+            await WriteExceptionJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
 
             // package-info.java
             await Write(new PackageInfoTemplate
