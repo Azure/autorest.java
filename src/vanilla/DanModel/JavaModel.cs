@@ -74,7 +74,7 @@ namespace AutoRest.Java.DanModel
                         {
                             classBlock.Block($"public {ClassName}()", (constructor) =>
                                 {
-                                    foreach (JavaMemberVariable memberVariable in MemberVariables)
+                                    foreach (JavaMemberVariable memberVariable in finalMemberVariables)
                                     {
                                         JavaType type = memberVariable.Type;
                                         if (!type.IsPrimitive)
