@@ -10,8 +10,8 @@
 
 package fixtures.header.models;
 
-import org.joda.time.Period;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.Period;
 
 /**
  * Defines headers for responseDuration operation.
