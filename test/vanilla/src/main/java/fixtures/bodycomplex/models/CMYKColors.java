@@ -12,7 +12,7 @@ package fixtures.bodycomplex.models;
 
 import java.util.Collection;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.microsoft.rest.ExpandableStringEnum;
+import com.microsoft.rest.v2.ExpandableStringEnum;
 
 /**
  * Defines values for CMYKColors.

@@ -10,7 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
-import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.v2.DateTimeRfc1123;
 import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

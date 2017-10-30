@@ -10,10 +10,10 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;

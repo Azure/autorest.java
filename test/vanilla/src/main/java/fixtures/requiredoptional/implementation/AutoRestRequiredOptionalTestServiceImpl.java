@@ -13,10 +13,10 @@ package fixtures.requiredoptional.implementation;
 import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.Explicits;
-import com.microsoft.rest.RestProxy;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.RestClient;
 import rx.Single;
 
 /**

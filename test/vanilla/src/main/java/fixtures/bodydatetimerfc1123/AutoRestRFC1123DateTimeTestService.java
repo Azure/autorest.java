@@ -10,7 +10,7 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestRFC1123DateTimeTestService class.

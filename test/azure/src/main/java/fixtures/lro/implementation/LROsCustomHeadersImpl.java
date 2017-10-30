@@ -10,24 +10,24 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.rest.RestResponse;
+import com.microsoft.rest.v2.RestResponse;
 import fixtures.lro.LROsCustomHeaders;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.CloudException;
-import com.microsoft.azure.OperationStatus;
-import com.microsoft.azure.util.ServiceFutureUtil;
-import com.microsoft.rest.annotations.BodyParam;
-import com.microsoft.rest.annotations.ExpectedResponses;
-import com.microsoft.rest.annotations.HeaderParam;
-import com.microsoft.rest.annotations.Headers;
-import com.microsoft.rest.annotations.Host;
-import com.microsoft.rest.annotations.POST;
-import com.microsoft.rest.annotations.PUT;
-import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.http.HttpClient;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.Validator;
+import com.microsoft.azure.v2.CloudException;
+import com.microsoft.azure.v2.OperationStatus;
+import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.HeaderParam;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
 import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
 import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
@@ -36,7 +36,7 @@ import java.io.IOException;
 import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.azure.AzureProxy;
+import com.microsoft.azure.v2.AzureProxy;
 
 /**
  * An instance of this class provides access to all the operations defined

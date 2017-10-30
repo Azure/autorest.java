@@ -12,10 +12,10 @@ package fixtures.bodydictionary.implementation;
 
 import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import fixtures.bodydictionary.Dictionarys;
-import com.microsoft.rest.RestProxy;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceClient;
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.RestClient;
 import rx.Single;
 
 /**

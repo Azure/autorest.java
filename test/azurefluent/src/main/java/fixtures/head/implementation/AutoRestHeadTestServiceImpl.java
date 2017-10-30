@@ -10,11 +10,11 @@
 
 package fixtures.head.implementation;
 
-import com.microsoft.azure.AzureProxy;
-import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestResponse;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestResponse;
 import rx.Single;
 
 /**

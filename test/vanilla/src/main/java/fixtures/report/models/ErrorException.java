@@ -10,8 +10,8 @@
 
 package fixtures.report.models;
 
-import com.microsoft.rest.RestException;
-import com.microsoft.rest.http.HttpResponse;
+import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.http.HttpResponse;
 
 /**
  * Exception thrown for an invalid response with Error information.

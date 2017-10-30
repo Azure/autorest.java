@@ -10,9 +10,9 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import java.io.IOException;
