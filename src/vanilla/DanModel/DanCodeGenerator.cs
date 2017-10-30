@@ -189,7 +189,18 @@ namespace AutoRest.Java.DanModel
             }
             else
             {
-                comment = $"{property.Summary.EscapeXmlComment().Period()}{property.Documentation.EscapeXmlComment().Period()}";
+                string summary = property.Summary.EscapeXmlComment().Period();
+                string documentation = property.Documentation.EscapeXmlComment().Period();
+
+                comment = summary;
+                if (!string.IsNullOrEmpty(documentation))
+                {
+                    if (!string.IsNullOrEmpty(comment))
+                    {
+                        comment += "\n";
+                    }
+                    comment += documentation;
+                }
             }
 
             string annotation = null;
