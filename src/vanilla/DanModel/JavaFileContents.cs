@@ -159,14 +159,21 @@ namespace AutoRest.Java.DanModel
             return Line($"package {package};");
         }
 
-        public JavaFileContents Block(string text, Action<JavaBlock> bodyAction)
+        public JavaFileContents Block(string text, Action<JavaBlock> bodyAction, Action<JavaFileContents> afterClosingCurlyBracketAction = null)
         {
-            return Line($"{text} {{")
-                  .Indent(() =>
-                  {
-                      bodyAction.Invoke(new JavaBlock(this));
-                  })
-                  .Line("}");
+            Line($"{text} {{")
+                .Indent(() =>
+                {
+                    bodyAction.Invoke(new JavaBlock(this));
+                })
+                .Text("}");
+
+            if (afterClosingCurlyBracketAction != null)
+            {
+                afterClosingCurlyBracketAction.Invoke(this);
+            }
+
+            return Line();
         }
 
         public JavaFileContents Import(params string[] imports)
@@ -283,6 +290,31 @@ namespace AutoRest.Java.DanModel
         {
             Line($"@return {returnValueDescription}");
             return this;
+        }
+
+        public JavaFileContents If(string condition, Action<JavaIfBlock> ifAction)
+        {
+            return Block($"if ({condition})", (block) =>
+                {
+                    ifAction.Invoke(new JavaIfBlock(this));
+                });
+        }
+
+        public JavaFileContents ElseIf(string condition, Action<JavaIfBlock> elseIfAction)
+        {
+            RemoveFromPrefix(singleIndent);
+            Line($"}} else if ({condition}) {{");
+            AddToPrefix(singleIndent);
+            elseIfAction.Invoke(new JavaIfBlock(this));
+            return this;
+        }
+
+        public void Else(Action<JavaBlock> elseAction)
+        {
+            RemoveFromPrefix(singleIndent);
+            Line($"}} else {{");
+            AddToPrefix(singleIndent);
+            elseAction.Invoke(new JavaBlock(this));
         }
     }
 }

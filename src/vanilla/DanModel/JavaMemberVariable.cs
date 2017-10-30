@@ -2,13 +2,14 @@
 {
     public class JavaMemberVariable
     {
-        public JavaMemberVariable(string comment, string annotation, bool isConstant, bool isReadOnly, JavaType type, string name, string defaultValue)
+        public JavaMemberVariable(string comment, string annotation, bool isConstant, bool isReadOnly, JavaType wireType, JavaType clientType, string name, string defaultValue)
         {
             Comment = comment;
             Annotation = annotation;
             IsConstant = isConstant;
             IsReadOnly = isReadOnly;
-            Type = type;
+            WireType = wireType;
+            ClientType = clientType;
             Name = name;
             DefaultValue = defaultValue;
         }
@@ -29,7 +30,15 @@
         /// </summary>
         public bool IsReadOnly { get; }
 
-        public JavaType Type { get; }
+        /// <summary>
+        /// The type of this variable that is transferred over the network.
+        /// </summary>
+        public JavaType WireType { get; }
+
+        /// <summary>
+        /// The type of this variable that is exposed via getter and setter methods.
+        /// </summary>
+        public JavaType ClientType { get; }
 
         public string Name { get; }
 

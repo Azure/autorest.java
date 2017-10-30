@@ -65,7 +65,7 @@ namespace AutoRest.Java.DanModel
                                     comment.Line(memberVariable.Comment);
                                 })
                                 .Annotation(memberVariable.Annotation)
-                                .Line($"private {memberVariable.Type.Name} {memberVariable.Name};")
+                                .Line($"private {memberVariable.WireType.Name} {memberVariable.Name};")
                                 .Line();
                         }
 
@@ -80,7 +80,7 @@ namespace AutoRest.Java.DanModel
                                 {
                                     foreach (JavaMemberVariable memberVariable in constantMemberVariables)
                                     {
-                                        JavaType type = memberVariable.Type;
+                                        JavaType type = memberVariable.WireType;
                                         if (!type.IsPrimitive)
                                         {
                                             classBlock.Line($"{memberVariable.Name} = new {type.Name}();");
@@ -105,8 +105,10 @@ namespace AutoRest.Java.DanModel
         private void GenerateMemberVariableMethods(JavaMemberVariable memberVariable, JavaClass classBlock, int maximumCommentWidth)
         {
             string variableName = memberVariable.Name;
-            JavaType variableType = memberVariable.Type;
-            string variableTypeName = variableType.Name;
+            JavaType clientType = memberVariable.ClientType;
+            JavaType wireType = memberVariable.WireType;
+            string clientTypeName = clientType.Name;
+            bool clientTypeDifferentFromWireType = !clientType.Equals(memberVariable.WireType);
 
             classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                 {
@@ -114,25 +116,51 @@ namespace AutoRest.Java.DanModel
                         .Line()
                         .Return($"the {variableName} value");
                 })
-                .Block($"public {variableTypeName} {variableName}()", (methodBlock) =>
+                .Block($"public {clientTypeName} {variableName}()", (methodBlock) =>
                 {
-                    methodBlock.Return($"this.{variableName}");
+                    if (clientTypeDifferentFromWireType)
+                    {
+                        methodBlock.If($"this.{variableName} == null", (ifBlock) =>
+                        {
+                            ifBlock.Return("null");
+                        });
+                        methodBlock.Return(wireType.ConvertTo(clientType, $"this.{variableName}"));
+                    }
+                    else
+                    {
+                        methodBlock.Return($"this.{variableName}");
+                    }
                 })
                 .Line();
 
             if (!memberVariable.IsReadOnly)
             {
                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
-                {
+                    {
                         comment.Line($"Set the {variableName} value.")
                             .Line()
                             .Param(variableName, $"the {variableName} value to set")
                             .Return($"the {ClassName} object itself.");
                     })
-                    .Block($"public {ClassName} with{variableName.ToPascalCase()}({variableTypeName} {variableName})", (methodBlock) =>
+                    .Block($"public {ClassName} with{variableName.ToPascalCase()}({clientTypeName} {variableName})", (methodBlock) =>
                     {
-                        methodBlock.Line($"this.{variableName} = {variableName};")
-                            .Return("this");
+                        if (clientTypeDifferentFromWireType)
+                        {
+                            methodBlock.If($"{variableName} == null", (ifBlock) =>
+                                {
+                                    ifBlock.Line($"this.{variableName} = null;");
+
+                                    ifBlock.Else((elseBlock) =>
+                                        {
+                                            elseBlock.Line($"this.{variableName} = {clientType.ConvertTo(wireType, variableName)};");
+                                        });
+                                });
+                        }
+                        else
+                        {
+                            methodBlock.Line($"this.{variableName} = {variableName};");
+                        }
+                        methodBlock.Return("this");
                     })
                     .Line();
             }

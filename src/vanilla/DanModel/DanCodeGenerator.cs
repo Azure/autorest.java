@@ -220,7 +220,9 @@ namespace AutoRest.Java.DanModel
             bool isConstant = property.IsConstant;
             bool isReadOnly = property.IsReadOnly;
 
-            JavaType type = new JavaType(property.ModelType.Name, !(property.ModelType is CompositeType));
+            bool isPrimitive = !(property.ModelType is CompositeType);
+            JavaType wireType = new JavaType(property.ModelType.Name, isPrimitive);
+            JavaType clientType = new JavaType(((IModelTypeJv)property.ModelType).ResponseVariant.Name, isPrimitive);
 
             string name = property.Name;
 
@@ -234,7 +236,7 @@ namespace AutoRest.Java.DanModel
                 defaultValue = null;
             }
 
-            return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, type, name, defaultValue);
+            return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, wireType, clientType, name, defaultValue);
         }
 
         private static string GetSubTypeAnnotation(CompositeType subType, bool isLast = false)

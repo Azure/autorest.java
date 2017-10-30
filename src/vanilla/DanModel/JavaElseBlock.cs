@@ -3,70 +3,70 @@ using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaBlock
+    public class JavaElseBlock
     {
         private readonly JavaFileContents contents;
 
-        public JavaBlock(JavaFileContents file)
+        public JavaElseBlock(JavaFileContents file)
         {
             this.contents = file;
         }
 
-        public JavaBlock Line(string text)
+        public JavaElseBlock Line(string text)
         {
             contents.Line(text);
             return this;
         }
 
-        public JavaBlock Line()
+        public JavaElseBlock Line()
         {
             contents.Line();
             return this;
         }
 
-        public JavaBlock Block(string text, Action<JavaBlock> bodyAction)
+        public JavaElseBlock Block(string text, Action<JavaBlock> bodyAction)
         {
             contents.Block(text, bodyAction);
             return this;
         }
 
-        public JavaBlock SingleLineComment(string text)
+        public JavaElseBlock SingleLineComment(string text)
         {
             contents.SingleLineComment(text);
             return this;
         }
 
-        public JavaBlock MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public JavaElseBlock MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
             contents.MultipleLineComment(commentAction);
             return this;
         }
 
-        public JavaBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public JavaElseBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
         {
             contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
             return this;
         }
 
-        public JavaBlock Return(string text)
+        public JavaElseBlock Return(string text)
         {
             contents.Return(text);
             return this;
         }
 
-        public JavaBlock Annotation(params string[] annotations)
+        public JavaElseBlock Annotation(params string[] annotations)
         {
             contents.Annotation(annotations);
             return this;
         }
 
-        public JavaBlock Annotation(IEnumerable<string> annotations)
+        public JavaElseBlock Annotation(IEnumerable<string> annotations)
         {
             contents.Annotation(annotations);
             return this;
         }
 
-        public JavaBlock If(string condition, Action<JavaIfBlock> ifAction)
+        public JavaElseBlock If(string condition, Action<JavaIfBlock> ifAction)
         {
             contents.If(condition, ifAction);
             return this;

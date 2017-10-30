@@ -64,7 +64,7 @@ namespace AutoRest.Java.DanModel
                             function.Line($"{EnumName}[] items = {EnumName}.values();")
                                     .Block($"for ({EnumName} item : items)", (foreachBlock) =>
                                     {
-                                        foreachBlock.Block("if (item.toString().equalsIgnoreCase(value))", (ifBlock) =>
+                                        foreachBlock.If("item.toString().equalsIgnoreCase(value)", (ifBlock) =>
                                         {
                                             ifBlock.Return("item");
                                         });

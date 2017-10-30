@@ -10,9 +10,9 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.DateTimeRfc1123;
 import org.joda.time.DateTime;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseDatetimeRfc1123 operation.
