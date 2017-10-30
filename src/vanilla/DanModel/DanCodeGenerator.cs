@@ -206,7 +206,8 @@ namespace AutoRest.Java.DanModel
                 }
             }
 
-            bool final = property.IsConstant;
+            bool isConstant = property.IsConstant;
+            bool isReadOnly = property.IsReadOnly;
 
             JavaType type = new JavaType(property.ModelType.Name, !(property.ModelType is CompositeType));
 
@@ -222,7 +223,7 @@ namespace AutoRest.Java.DanModel
                 defaultValue = null;
             }
 
-            return new JavaMemberVariable(comment, annotation, final, type, name, defaultValue);
+            return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, type, name, defaultValue);
         }
 
         private static string GetSubTypeAnnotation(CompositeType subType, bool isLast = false)

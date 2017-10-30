@@ -10,8 +10,8 @@
 
 package fixtures.validation.models;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /**
  * The product documentation.

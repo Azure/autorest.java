@@ -69,12 +69,16 @@ namespace AutoRest.Java.DanModel
                                 .Line();
                         }
 
-                        IEnumerable<JavaMemberVariable> finalMemberVariables = MemberVariables.Where((memberVariable) => memberVariable.Final);
-                        if (finalMemberVariables.Any())
+                        IEnumerable<JavaMemberVariable> constantMemberVariables = MemberVariables.Where((memberVariable) => memberVariable.IsConstant);
+                        if (constantMemberVariables.Any())
                         {
-                            classBlock.Block($"public {ClassName}()", (constructor) =>
+                            classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
-                                    foreach (JavaMemberVariable memberVariable in finalMemberVariables)
+                                    comment.Line($"Creates an instance of {ClassName} class.");
+                                })
+                                .Block($"public {ClassName}()", (constructor) =>
+                                {
+                                    foreach (JavaMemberVariable memberVariable in constantMemberVariables)
                                     {
                                         JavaType type = memberVariable.Type;
                                         if (!type.IsPrimitive)
@@ -105,7 +109,7 @@ namespace AutoRest.Java.DanModel
             string variableTypeName = variableType.Name;
 
             classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
-            {
+                {
                     comment.Line($"Get the {variableName} value.")
                         .Line()
                         .Return($"the {variableName} value");
@@ -116,7 +120,7 @@ namespace AutoRest.Java.DanModel
                 })
                 .Line();
 
-            if (!memberVariable.Final)
+            if (!memberVariable.IsReadOnly)
             {
                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                 {

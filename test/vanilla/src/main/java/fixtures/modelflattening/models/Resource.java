@@ -10,8 +10,8 @@
 
 package fixtures.modelflattening.models;
 
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /**
  * The Resource model.
