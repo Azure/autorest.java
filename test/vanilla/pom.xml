@@ -47,7 +47,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.microsoft.rest</groupId>
+      <groupId>com.microsoft.rest.v2</groupId>
       <artifactId>client-runtime</artifactId>
     </dependency>
     <dependency>
