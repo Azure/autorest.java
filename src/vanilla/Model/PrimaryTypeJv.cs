@@ -129,7 +129,7 @@ namespace AutoRest.Java.Model
                 switch (KnownPrimaryType)
                 {
                     case KnownPrimaryType.Base64Url:
-                        yield return "com.microsoft.rest.Base64Url";
+                        yield return "com.microsoft.rest.v2.Base64Url";
                         break;
                     case KnownPrimaryType.Date:
                         yield return "org.joda.time.LocalDate";
@@ -138,7 +138,7 @@ namespace AutoRest.Java.Model
                         yield return "org.joda.time.DateTime";
                         break;
                     case KnownPrimaryType.DateTimeRfc1123:
-                        yield return "com.microsoft.rest.DateTimeRfc1123";
+                        yield return "com.microsoft.rest.v2.DateTimeRfc1123";
                         break;
                     case KnownPrimaryType.Decimal:
                         yield return "java.math.BigDecimal";
@@ -157,14 +157,14 @@ namespace AutoRest.Java.Model
                         yield return "java.util.UUID";
                         break;
                     case KnownPrimaryType.Credentials:
-                        yield return "com.microsoft.rest.ServiceClientCredentials";
+                        yield return "com.microsoft.rest.v2.ServiceClientCredentials";
                         break;
                 }
             }
         }
 
         [JsonIgnore]
-        public IModelTypeJv NonNullableVariant => 
+        public IModelTypeJv NonNullableVariant =>
             new PrimaryTypeJv
             {
                 KnownPrimaryType = KnownPrimaryType,

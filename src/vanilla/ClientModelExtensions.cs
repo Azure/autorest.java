@@ -92,7 +92,7 @@ namespace AutoRest.Java
 
         public static string ImportFrom(this HttpMethod httpMethod)
         {
-            string package = "com.microsoft.rest.annotations.";
+            string package = "com.microsoft.rest.v2.annotations.";
             return package + httpMethod.ToString().ToUpperInvariant();
         }
     }

@@ -82,13 +82,13 @@ namespace AutoRest.Java.Model
                 }
                 if (this.Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
-                    classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
+                    classes.Add("com.microsoft.rest.v2.credentials.ServiceClientCredentials");
                 }
                 classes.AddRange(new[]{
-                        "com.microsoft.rest.RestProxy",
-                        "com.microsoft.rest.RestResponse",
-                        "com.microsoft.rest.ServiceClient",
-                        "com.microsoft.rest.RestClient",
+                        "com.microsoft.rest.v2.RestProxy",
+                        "com.microsoft.rest.v2.RestResponse",
+                        "com.microsoft.rest.v2.ServiceClient",
+                        "com.microsoft.rest.v2.RestClient",
                         "rx.Single"
                     });
 
@@ -106,12 +106,12 @@ namespace AutoRest.Java.Model
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-                
+
                 classes.AddRange(RootMethods
                     .SelectMany(m => m.InterfaceImports)
                     .OrderBy(i => i).Distinct());
 
-                classes.Add("com.microsoft.rest.RestClient");
+                classes.Add("com.microsoft.rest.v2.RestClient");
 
                 return classes.ToList();
             }
