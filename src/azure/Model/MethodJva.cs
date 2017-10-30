@@ -531,7 +531,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                return "com.microsoft.azure";
+                return "com.microsoft.azure.v2";
             }
         }
 
@@ -543,14 +543,14 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.InterfaceImports.ToList();
                 if (this.IsLongRunningOperation)
                 {
-                    imports.Add("com.microsoft.azure.OperationStatus");
+                    imports.Add("com.microsoft.azure.v2.OperationStatus");
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.Add("com.microsoft.azure.Page");
-                    imports.Add("com.microsoft.azure.PagedList");
+                    imports.Remove("com.microsoft.rest.v2.ServiceCallback");
+                    imports.Add("com.microsoft.azure.v2.ListOperationCallback");
+                    imports.Add("com.microsoft.azure.v2.Page");
+                    imports.Add("com.microsoft.azure.v2.PagedList");
                 }
                 
                 return imports;
@@ -574,9 +574,9 @@ namespace AutoRest.Java.Azure.Model
                     var imports = base.ImplImports.ToList();
                     if (this.IsLongRunningOperation)
                     {
-                        imports.Add("com.microsoft.azure.OperationStatus");
-                        imports.Add("com.microsoft.azure.util.ServiceFutureUtil");
-                        imports.Remove("com.microsoft.azure.AzureResponseBuilder");
+                        imports.Add("com.microsoft.azure.v2.OperationStatus");
+                        imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
+                        imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                         this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
                             .SelectMany(t => t.ImportSafe())
                             .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
@@ -595,10 +595,10 @@ namespace AutoRest.Java.Azure.Model
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Remove("java.util.ArrayList");
-                        imports.Remove("com.microsoft.rest.ServiceCallback");
-                        imports.Add("com.microsoft.azure.ListOperationCallback");
-                        imports.Add("com.microsoft.azure.Page");
-                        imports.Add("com.microsoft.azure.PagedList");
+                        imports.Remove("com.microsoft.rest.v2.ServiceCallback");
+                        imports.Add("com.microsoft.azure.v2.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.v2.Page");
+                        imports.Add("com.microsoft.azure.v2.PagedList");
                         imports.AddRange(ctype.ImportSafe());
                     }
                     if (this.IsPagingNonPollingOperation)
