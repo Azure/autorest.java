@@ -59,11 +59,13 @@ namespace AutoRest.Java.DanModel
 
             IEnumerable<string> classAnnotations = ParseModelClassAnnotations(modelType);
 
-            string modelName = modelType.Name;
+            string className = modelType.Name;
+
+            string baseTypeName = modelType.BaseModelType?.Name?.Value;
 
             IEnumerable<JavaMemberVariable> memberVariables = ParseModelMemberVariables(modelType);
 
-            return new JavaModel(imports, classComment, classAnnotations, modelName, memberVariables);
+            return new JavaModel(imports, classComment, classAnnotations, className, baseTypeName, memberVariables);
         }
 
         private static IEnumerable<string> ParseModelImports(CompositeTypeJv modelType)

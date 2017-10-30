@@ -6,12 +6,13 @@ namespace AutoRest.Java.DanModel
 {
     public class JavaModel : JavaFileGenerator
     {
-        public JavaModel(IEnumerable<string> imports, string classComment, IEnumerable<string> classAnnotations, string className, IEnumerable<JavaMemberVariable> memberVariables)
+        public JavaModel(IEnumerable<string> imports, string classComment, IEnumerable<string> classAnnotations, string className, string baseTypeName, IEnumerable<JavaMemberVariable> memberVariables)
         {
             Imports = imports;
             ClassComment = classComment;
             ClassAnnotations = classAnnotations;
             ClassName = className;
+            BaseTypeName = baseTypeName;
             MemberVariables = memberVariables;
         }
 
@@ -23,28 +24,43 @@ namespace AutoRest.Java.DanModel
 
         protected string ClassName { get; }
 
+        protected string BaseTypeName { get; }
+
         protected IEnumerable<JavaMemberVariable> MemberVariables { get; }
 
         protected override string FileNameWithoutExtension => ClassName;
+
+        private string ClassNameWithBaseType
+        {
+            get
+            {
+                string result = ClassName;
+
+                if (!string.IsNullOrEmpty(BaseTypeName))
+                {
+                    result += $" extends {BaseTypeName}";
+                }
+
+                return result;
+            }
+        }
 
         public override JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumCommentWidth)
         {
             return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumCommentWidth)
                 .Import(Imports)
-                .MultipleLineComment((comment) =>
+                .WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                 {
-                    comment.SetWordWrapIndex(maximumCommentWidth)
-                        .Line(ClassComment)
-                        .SetWordWrapIndex(null);
+                    comment.Line(ClassComment);
                 })
                 .Annotation(ClassAnnotations)
-                .PublicClass(ClassName, (classBlock) =>
+                .PublicClass(ClassNameWithBaseType, (classBlock) =>
                 {
                     if (MemberVariables != null && MemberVariables.Any())
                     {
                         foreach (JavaMemberVariable memberVariable in MemberVariables)
                         {
-                            classBlock.MultipleLineComment((comment) =>
+                            classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
                                     comment.Line(memberVariable.Comment);
                                 })
@@ -76,41 +92,46 @@ namespace AutoRest.Java.DanModel
 
                         foreach (JavaMemberVariable memberVariable in MemberVariables)
                         {
-                            string variableName = memberVariable.Name;
-                            JavaType variableType = memberVariable.Type;
-                            string variableTypeName = variableType.Name;
-
-                            classBlock.MultipleLineComment((comment) =>
-                                {
-                                    comment.Line($"Get the {variableName} value.")
-                                        .Line()
-                                        .Return($"the {variableName} value");
-                                })
-                                .Block($"public {variableTypeName} {variableName}()", (methodBlock) =>
-                                {
-                                    methodBlock.Return($"this.{variableName}");
-                                })
-                                .Line();
-
-                            if (!memberVariable.Final)
-                            {
-                                classBlock.MultipleLineComment((comment) =>
-                                    {
-                                        comment.Line($"Set the {variableName} value.")
-                                            .Line()
-                                            .Param(variableName, $"the {variableName} value to set")
-                                            .Return($"the {ClassName} object itself.");
-                                    })
-                                    .Block($"public {ClassName} with{variableName.ToPascalCase()}({variableTypeName} {variableName})", (methodBlock) =>
-                                    {
-                                        methodBlock.Line($"this.{variableName} = {variableName};")
-                                            .Return("this");
-                                    })
-                                    .Line();
-                            }
+                            GenerateMemberVariableMethods(memberVariable, classBlock, maximumCommentWidth);
                         }
                     }
                 });
+        }
+
+        private void GenerateMemberVariableMethods(JavaMemberVariable memberVariable, JavaClass classBlock, int maximumCommentWidth)
+        {
+            string variableName = memberVariable.Name;
+            JavaType variableType = memberVariable.Type;
+            string variableTypeName = variableType.Name;
+
+            classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+            {
+                    comment.Line($"Get the {variableName} value.")
+                        .Line()
+                        .Return($"the {variableName} value");
+                })
+                .Block($"public {variableTypeName} {variableName}()", (methodBlock) =>
+                {
+                    methodBlock.Return($"this.{variableName}");
+                })
+                .Line();
+
+            if (!memberVariable.Final)
+            {
+                classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
+                {
+                        comment.Line($"Set the {variableName} value.")
+                            .Line()
+                            .Param(variableName, $"the {variableName} value to set")
+                            .Return($"the {ClassName} object itself.");
+                    })
+                    .Block($"public {ClassName} with{variableName.ToPascalCase()}({variableTypeName} {variableName})", (methodBlock) =>
+                    {
+                        methodBlock.Line($"this.{variableName} = {variableName};")
+                            .Return("this");
+                    })
+                    .Line();
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace AutoRest.Java.DanModel
             JavaExpandableStringEnum javaEnum = GetJavaExpandableStringEnum();
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
-            string expectedFilePath = "models\\MyEnum.java";
+            string expectedFilePath = "models/MyEnum.java";
             string actualFilePath = javaFile.FilePath;
             Assert.AreEqual(expectedFilePath, actualFilePath);
 
@@ -59,7 +59,7 @@ namespace AutoRest.Java.DanModel
 
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
-            string expectedFilePath = "models\\MyEnum.java";
+            string expectedFilePath = "models/MyEnum.java";
             string actualFilePath = javaFile.FilePath;
             Assert.AreEqual(expectedFilePath, actualFilePath);
 
@@ -112,7 +112,7 @@ namespace AutoRest.Java.DanModel
 
             JavaFile javaFile = GenerateJavaFile(javaEnum);
 
-            string expectedFilePath = "models\\MyEnum.java";
+            string expectedFilePath = "models/MyEnum.java";
             string actualFilePath = javaFile.FilePath;
             Assert.AreEqual(expectedFilePath, actualFilePath);
 

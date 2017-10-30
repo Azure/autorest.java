@@ -25,11 +25,9 @@ namespace AutoRest.Java.DanModel
 
             if (!string.IsNullOrEmpty(headerComment))
             {
-                javaFile.MultipleLineComment((comment) =>
+                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
                     {
-                        comment.SetWordWrapIndex(maximumHeaderCommentWidth)
-                            .Line(headerComment)
-                            .SetWordWrapIndex(null);
+                        comment.Line(headerComment);
                     })
                     .Line();
             }

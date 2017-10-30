@@ -42,6 +42,12 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaClass WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        {
+            contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
+            return this;
+        }
+
         public JavaClass Annotation(params string[] annotations)
         {
             contents.Annotation(annotations);

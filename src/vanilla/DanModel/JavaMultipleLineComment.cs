@@ -1,4 +1,6 @@
-﻿namespace AutoRest.Java.DanModel
+﻿using System;
+
+namespace AutoRest.Java.DanModel
 {
     public class JavaMultipleLineComment
     {
@@ -7,12 +9,6 @@
         public JavaMultipleLineComment(JavaFileContents contents)
         {
             this.contents = contents;
-        }
-
-        public JavaMultipleLineComment SetWordWrapIndex(int? wordWrapIndex)
-        {
-            contents.SetWordWrapIndex(wordWrapIndex);
-            return this;
         }
 
         public JavaMultipleLineComment Line(string text)
@@ -29,13 +25,13 @@
 
         public JavaMultipleLineComment Param(string parameterName, string parameterDescription)
         {
-            contents.Line($"@param {parameterName} {parameterDescription}");
+            contents.CommentParam(parameterName, parameterDescription);
             return this;
         }
 
         public JavaMultipleLineComment Return(string returnValueDescription)
         {
-            contents.Line($"@return {returnValueDescription}");
+            contents.CommentReturn(returnValueDescription);
             return this;
         }
     }

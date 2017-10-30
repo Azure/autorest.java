@@ -13,7 +13,7 @@ namespace AutoRest.Java.DanModel
         private readonly StringBuilder contents = new StringBuilder();
         private readonly StringBuilder linePrefix = new StringBuilder();
 
-        private int? wordWrapIndex;
+        private int? wordWrapWidth;
 
         public override string ToString()
         {
@@ -47,7 +47,16 @@ namespace AutoRest.Java.DanModel
 
         public JavaFileContents SetWordWrapIndex(int? wordWrapIndex)
         {
-            this.wordWrapIndex = wordWrapIndex;
+            this.wordWrapWidth = wordWrapIndex;
+            return this;
+        }
+
+        private JavaFileContents WithWordWrap(int wordWrapIndex, Action action)
+        {
+            SetWordWrapIndex(wordWrapIndex);
+            action.Invoke();
+            SetWordWrapIndex(null);
+
             return this;
         }
 
@@ -63,13 +72,15 @@ namespace AutoRest.Java.DanModel
         {
             List<string> lines = new List<string>();
 
-            if (wordWrapIndex == null)
+            if (wordWrapWidth == null)
             {
                 lines.Add(line);
             }
             else
             {
-                int wordWrapIndexMinusLinePrefixLength = wordWrapIndex.Value - linePrefix.Length;
+                // Subtract an extra column from the word wrap width because columns generally are
+                // 1 -based instead of 0-based.
+                int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.Value - linePrefix.Length - 1;
                 IEnumerable<string> wrappedLines = line.WordWrap(wordWrapIndexMinusLinePrefixLength);
                 foreach (string wrappedLine in wrappedLines.SkipLast(1))
                 {
@@ -189,10 +200,20 @@ namespace AutoRest.Java.DanModel
         {
             Line("/**");
             AddToPrefix(" * ");
-            JavaMultipleLineComment comment = new JavaMultipleLineComment(this);
-            commentAction.Invoke(comment);
+            commentAction.Invoke(new JavaMultipleLineComment(this));
             RemoveFromPrefix(" * ");
             return Line(" */");
+        }
+
+        public JavaFileContents WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        {
+            return MultipleLineComment((comment) =>
+            {
+                WithWordWrap(wordWrapWidth, () =>
+                {
+                    commentAction.Invoke(new JavaWordWrappedMultipleLineComment(this));
+                });
+            });
         }
 
         public JavaFileContents Return(string text)
@@ -249,6 +270,18 @@ namespace AutoRest.Java.DanModel
         public JavaFileContents PublicEnum(string enumName, Action<JavaBlock> enumAction)
         {
             Block($"public enum {enumName}", enumAction);
+            return this;
+        }
+
+        public JavaFileContents CommentParam(string parameterName, string parameterDescription)
+        {
+            Line($"@param {parameterName} {parameterDescription}");
+            return this;
+        }
+
+        public JavaFileContents CommentReturn(string returnValueDescription)
+        {
+            Line($"@return {returnValueDescription}");
             return this;
         }
     }
