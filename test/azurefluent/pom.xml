@@ -51,7 +51,7 @@
       <artifactId>azure-mgmt-resources</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.microsoft.azure</groupId>
+      <groupId>com.microsoft.azure.v2</groupId>
       <artifactId>azure-client-runtime</artifactId>
     </dependency>
     <dependency>
