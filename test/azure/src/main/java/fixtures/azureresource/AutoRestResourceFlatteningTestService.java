@@ -10,11 +10,11 @@
 
 package fixtures.azureresource;
 
-import com.microsoft.azure.Resource;
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.azure.v2.Resource;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;

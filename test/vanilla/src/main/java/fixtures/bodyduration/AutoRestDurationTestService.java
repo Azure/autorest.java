@@ -10,7 +10,7 @@
 
 package fixtures.bodyduration;
 
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestDurationTestService class.

@@ -39,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 var imports = base.InterfaceImports;
-                imports.Add("com.microsoft.azure.AzureClient");
+                imports.Add("com.microsoft.azure.v2.AzureClient");
                 return imports.OrderBy(i => i).ToList();
             }
         }

@@ -10,9 +10,9 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;

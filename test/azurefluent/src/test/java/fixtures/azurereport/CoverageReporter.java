@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.azurereport.implementation.AutoRestReportServiceForAzureImpl;
+import junit.framework.TestListener;
+import org.junit.Test;
+import org.junit.runner.Result;
+import org.junit.runner.notification.RunListener;
 
-public final class CoverageReporter {
-    private static AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+public final class CoverageReporter extends RunListener {
+    private AutoRestReportServiceForAzureImpl client = new AutoRestReportServiceForAzureImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
 
-    private CoverageReporter() { }
-
-    public static void main(String[] args) throws Exception {
+    @Override
+    public void testRunFinished(Result result) throws Exception {
         Map<String, Integer> report = client.getReport();
 
         // Pending URL encoding

@@ -10,15 +10,15 @@
 
 package fixtures.report;
 
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestReportService class.

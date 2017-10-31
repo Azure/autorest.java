@@ -10,9 +10,9 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Headers;
 import fixtures.http.models.HttpRedirectsGet300Headers;

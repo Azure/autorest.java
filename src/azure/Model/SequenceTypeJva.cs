@@ -6,7 +6,7 @@ namespace AutoRest.Java.Azure.Model
 {
     public class SequenceTypeJva : SequenceTypeJv
     {
-        protected string _azureRuntimePackage = "com.microsoft.azure";
+        protected string _azureRuntimePackage = "com.microsoft.azure.v2";
 
         public string PageImplType { get; set; }
     }

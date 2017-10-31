@@ -10,9 +10,9 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;

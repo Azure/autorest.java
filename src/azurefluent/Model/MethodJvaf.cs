@@ -139,16 +139,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var imports = base.InterfaceImports;
                 if (this.IsPagingOperation || this.IsPagingNextOperation || this.SimulateAsPagingOperation)
                 {
-                    imports.Add("com.microsoft.azure.PagedList");
+                    imports.Add("com.microsoft.azure.v2.PagedList");
 
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
-                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.v2.ListOperationCallback");
                     }
 
                     if (!this.SimulateAsPagingOperation)
                     {
-                        imports.Remove("com.microsoft.rest.ServiceCallback");
+                        imports.Remove("com.microsoft.rest.v2.ServiceCallback");
                     }
 
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
@@ -179,7 +179,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     }
                     if (this.IsLongRunningOperation)
                     {
-                        imports.Remove("com.microsoft.azure.AzureResponseBuilder");
+                        imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                         this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
                             .SelectMany(t => t.ImportSafe())
                             .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
@@ -190,20 +190,20 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
                     if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                     {
-                        imports.Add("com.microsoft.azure.PagedList");
+                        imports.Add("com.microsoft.azure.v2.PagedList");
 
                         if (this.IsPagingOperation || this.IsPagingNextOperation)
                         {
-                            imports.Add("com.microsoft.azure.ListOperationCallback");
+                            imports.Add("com.microsoft.azure.v2.ListOperationCallback");
                         }
 
                         if (!this.SimulateAsPagingOperation)
                         {
-                            imports.Remove("com.microsoft.rest.ServiceCallback");
+                            imports.Remove("com.microsoft.rest.v2.ServiceCallback");
                         }
 
                         imports.Remove("java.util.ArrayList");
-                        imports.Add("com.microsoft.azure.Page");
+                        imports.Add("com.microsoft.azure.v2.Page");
                         if (pageType != null)
                         {
                             imports.RemoveWhere(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));

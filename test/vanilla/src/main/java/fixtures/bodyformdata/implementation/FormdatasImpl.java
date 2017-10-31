@@ -10,20 +10,20 @@
 
 package fixtures.bodyformdata.implementation;
 
-import com.microsoft.rest.RestProxy;
-import com.microsoft.rest.RestResponse;
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.RestResponse;
 import fixtures.bodyformdata.Formdatas;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.annotations.BodyParam;
-import com.microsoft.rest.annotations.ExpectedResponses;
-import com.microsoft.rest.annotations.Headers;
-import com.microsoft.rest.annotations.Host;
-import com.microsoft.rest.annotations.POST;
-import com.microsoft.rest.annotations.PUT;
-import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.http.HttpClient;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.annotations.BodyParam;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.POST;
+import com.microsoft.rest.v2.annotations.PUT;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;

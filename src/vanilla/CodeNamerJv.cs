@@ -16,9 +16,9 @@ namespace AutoRest.Java
     public class CodeNamerJv : CodeNamer
     {
         private Dictionary<IModelType, IModelType> _visited = new Dictionary<IModelType, IModelType>();
-        
+
         public static HashSet<string> PrimaryTypes { get; private set; }
-        
+
         #region constructor
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace AutoRest.Java
         /// </summary>
         public CodeNamerJv()
         {
-            // List retrieved from 
+            // List retrieved from
             // http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
             ReservedWords.AddRange(new []
             {
@@ -169,9 +169,9 @@ namespace AutoRest.Java
                 case "IOException":
                     return "java.io.IOException";
                 case "CloudException":
-                    return "com.microsoft.azure.CloudException";
+                    return "com.microsoft.azure.v2.CloudException";
                 case "RestException":
-                    return "com.microsoft.rest.RestException";
+                    return "com.microsoft.rest.v2.RestException";
                 case "IllegalArgumentException":
                     return null;
                 case "InterruptedException":

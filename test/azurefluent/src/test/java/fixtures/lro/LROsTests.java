@@ -1,9 +1,10 @@
 package fixtures.lro;
 
-import com.microsoft.azure.CloudException;
-import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceCallback;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.azure.v2.CloudException;
+import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.ServiceCallback;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import fixtures.lro.implementation.SkuInner;
@@ -29,6 +30,7 @@ public class LROsTests {
             .withBaseUrl("http://localhost:3000")
             .withSerializerAdapter(new AzureJacksonAdapter())
             .build();
+        AzureProxy.setDefaultDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
     }
 
