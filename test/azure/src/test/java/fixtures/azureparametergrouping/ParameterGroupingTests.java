@@ -1,6 +1,6 @@
 package fixtures.azureparametergrouping;
 
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

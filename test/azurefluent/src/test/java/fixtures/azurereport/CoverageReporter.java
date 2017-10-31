@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.azurereport.implementation.AutoRestReportServiceForAzureImpl;
 
 public final class CoverageReporter {

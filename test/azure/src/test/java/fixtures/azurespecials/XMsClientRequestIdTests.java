@@ -1,10 +1,10 @@
 package fixtures.azurespecials;
 
-import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.credentials.TokenCredentials;
-import com.microsoft.rest.http.HttpHeaders;
-import com.microsoft.rest.policy.AddHeadersPolicy;
+import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.credentials.TokenCredentials;
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;

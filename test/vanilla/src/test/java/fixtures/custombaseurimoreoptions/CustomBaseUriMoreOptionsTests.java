@@ -1,7 +1,7 @@
 package fixtures.custombaseurimoreoptions;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.serializer.JacksonAdapter;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.serializer.JacksonAdapter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -1,12 +1,12 @@
 package fixtures.header;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient.Builder;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.http.HttpHeaders;
-import com.microsoft.rest.policy.AddHeadersPolicy;
-import com.microsoft.rest.policy.RequestPolicy;
-import com.microsoft.rest.serializer.JacksonAdapter;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestClient.Builder;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.RequestPolicy;
+import com.microsoft.rest.v2.serializer.JacksonAdapter;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

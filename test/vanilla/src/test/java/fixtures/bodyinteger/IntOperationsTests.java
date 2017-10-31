@@ -1,7 +1,7 @@
 package fixtures.bodyinteger;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.v2.ServiceCallback;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;

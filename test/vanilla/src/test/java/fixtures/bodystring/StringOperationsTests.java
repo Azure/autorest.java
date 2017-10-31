@@ -1,7 +1,7 @@
 package fixtures.bodystring;
 
-import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.ServiceCallback;
 import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
