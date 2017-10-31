@@ -1,86 +1,76 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaIfBlock
+    public class JavaIfBlock<TParentBlock>
     {
+        private readonly TParentBlock parentBlock;
         private readonly JavaFileContents contents;
 
-        public JavaIfBlock(JavaFileContents file)
+        public JavaIfBlock(TParentBlock parentBlock, JavaFileContents contents)
         {
-            this.contents = file;
+            this.parentBlock = parentBlock;
+            this.contents = contents;
         }
 
-        public JavaIfBlock Line(string text)
+        public TParentBlock Line(string text)
         {
             contents.Line(text);
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock Line()
+        public TParentBlock Line()
         {
             contents.Line();
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock Block(string text, Action<JavaBlock> bodyAction)
+        public TParentBlock Block(string text, Action<JavaBlock> bodyAction)
         {
             contents.Block(text, bodyAction);
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock SingleLineComment(string text)
+        public TParentBlock SingleLineComment(string text)
         {
             contents.SingleLineComment(text);
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public TParentBlock MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
             contents.MultipleLineComment(commentAction);
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public TParentBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
         {
             contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock Return(string text)
+        public TParentBlock Return(string text)
         {
             contents.Return(text);
-            return this;
+            return parentBlock;
         }
 
-        public JavaIfBlock Annotation(params string[] annotations)
-        {
-            contents.Annotation(annotations);
-            return this;
-        }
-
-        public JavaIfBlock Annotation(IEnumerable<string> annotations)
-        {
-            contents.Annotation(annotations);
-            return this;
-        }
-
-        public JavaIfBlock If(string condition, Action<JavaIfBlock> ifAction)
+        public JavaIfBlock<TParentBlock> If(string condition, Action<JavaBlock> ifAction)
         {
             contents.If(condition, ifAction);
             return this;
         }
 
-        public JavaIfBlock ElseIf(string condition, Action<JavaIfBlock> ifAction)
+        public JavaIfBlock<TParentBlock> ElseIf(string condition, Action<JavaBlock> ifAction)
         {
             contents.ElseIf(condition, ifAction);
             return this;
         }
 
-        public void Else(Action<JavaBlock> elseAction)
+        public TParentBlock Else(Action<JavaBlock> elseAction)
         {
             contents.Else(elseAction);
+            return parentBlock;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace AutoRest.Java.DanModel
 
         private int? wordWrapWidth;
 
+        private bool previousLineEndingPending;
+
         public override string ToString()
         {
             return contents.ToString();
@@ -25,13 +27,12 @@ namespace AutoRest.Java.DanModel
             get { return ToString().Split("\n"); }
         }
 
-        public JavaFileContents AddToPrefix(string toAdd)
+        public void AddToPrefix(string toAdd)
         {
             linePrefix.Append(toAdd);
-            return this;
         }
 
-        private JavaFileContents RemoveFromPrefix(string toRemove)
+        private void RemoveFromPrefix(string toRemove)
         {
             int toRemoveLength = toRemove.Length;
             if (linePrefix.Length <= toRemoveLength)
@@ -42,33 +43,28 @@ namespace AutoRest.Java.DanModel
             {
                 linePrefix.Remove(linePrefix.Length - toRemoveLength, toRemoveLength);
             }
-            return this;
         }
 
-        public JavaFileContents SetWordWrapIndex(int? wordWrapIndex)
+        public void SetWordWrapWidth(int? wordWrapWidth)
         {
-            this.wordWrapWidth = wordWrapIndex;
-            return this;
+            this.wordWrapWidth = wordWrapWidth;
         }
 
-        private JavaFileContents WithWordWrap(int wordWrapIndex, Action action)
+        private void WithWordWrap(int wordWrapWidth, Action action)
         {
-            SetWordWrapIndex(wordWrapIndex);
+            SetWordWrapWidth(wordWrapWidth);
             action.Invoke();
-            SetWordWrapIndex(null);
-
-            return this;
+            SetWordWrapWidth(null);
         }
 
-        public JavaFileContents Indent(Action action)
+        public void Indent(Action action)
         {
             AddToPrefix(singleIndent);
             action.Invoke();
             RemoveFromPrefix(singleIndent);
-            return this;
         }
 
-        private IEnumerable<string> WordWrap(string line)
+        private IEnumerable<string> WordWrap(string line, bool addPrefix)
         {
             List<string> lines = new List<string>();
 
@@ -80,7 +76,7 @@ namespace AutoRest.Java.DanModel
             {
                 // Subtract an extra column from the word wrap width because columns generally are
                 // 1 -based instead of 0-based.
-                int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.Value - linePrefix.Length - 1;
+                int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.Value - (addPrefix ? linePrefix.Length : 0) - 1;
                 IEnumerable<string> wrappedLines = line.WordWrap(wordWrapIndexMinusLinePrefixLength);
                 foreach (string wrappedLine in wrappedLines.SkipLast(1))
                 {
@@ -97,7 +93,7 @@ namespace AutoRest.Java.DanModel
             return lines;
         }
 
-        public JavaFileContents Text(string text)
+        private void Text(string text, bool addPrefix)
         {
             List<string> lines = new List<string>();
 
@@ -115,7 +111,7 @@ namespace AutoRest.Java.DanModel
                     if (newLineCharacterIndex == -1)
                     {
                         string line = text.Substring(lineStartIndex);
-                        IEnumerable<string> wrappedLines = WordWrap(line);
+                        IEnumerable<string> wrappedLines = WordWrap(line, addPrefix);
                         lines.AddRange(wrappedLines);
                         lineStartIndex = textLength;
                     }
@@ -123,30 +119,53 @@ namespace AutoRest.Java.DanModel
                     {
                         int nextLineStartIndex = newLineCharacterIndex + 1;
                         string line = text.Substring(lineStartIndex, nextLineStartIndex - lineStartIndex);
-                        IEnumerable<string> wrappedLines = WordWrap(line);
+                        IEnumerable<string> wrappedLines = WordWrap(line, addPrefix);
                         lines.AddRange(wrappedLines);
                         lineStartIndex = nextLineStartIndex;
                     }
                 }
             }
 
-            string prefix = linePrefix.ToString();
+            string prefix = addPrefix ? linePrefix.ToString() : null;
             foreach (string line in lines)
             {
-                if (!string.IsNullOrWhiteSpace(prefix) || (!string.IsNullOrEmpty(prefix) && !string.IsNullOrWhiteSpace(line)))
+                if (addPrefix && !string.IsNullOrWhiteSpace(prefix) || (!string.IsNullOrEmpty(prefix) && !string.IsNullOrWhiteSpace(line)))
                 {
                     contents.Append(prefix);
                 }
 
                 contents.Append(line);
             }
+        }
 
-            return this;
+        private void ClosePreviousLineEnding()
+        {
+            if (previousLineEndingPending)
+            {
+                previousLineEndingPending = false;
+
+                Line();
+            }
+        }
+
+        public void Text(string text)
+        {
+            ClosePreviousLineEnding();
+
+            Text(text, addPrefix: true);
+        }
+
+        private void Line(string text, bool addPrefix)
+        {
+            Text($"{text}\n", addPrefix);
         }
 
         public JavaFileContents Line(string text)
         {
-            return Text($"{text}\n");
+            ClosePreviousLineEnding();
+
+            Line(text, addPrefix: true);
+            return this;
         }
 
         public JavaFileContents Line()
@@ -154,34 +173,27 @@ namespace AutoRest.Java.DanModel
             return Line("");
         }
 
-        public JavaFileContents Package(string package)
+        public void Package(string package)
         {
-            return Line($"package {package};");
+            Line($"package {package};");
         }
 
-        public JavaFileContents Block(string text, Action<JavaBlock> bodyAction, Action<JavaFileContents> afterClosingCurlyBracketAction = null)
+        public void Block(string text, Action<JavaBlock> bodyAction)
         {
-            Line($"{text} {{")
-                .Indent(() =>
+            Line($"{text} {{");
+            Indent(() =>
                 {
                     bodyAction.Invoke(new JavaBlock(this));
-                })
-                .Text("}");
-
-            if (afterClosingCurlyBracketAction != null)
-            {
-                afterClosingCurlyBracketAction.Invoke(this);
-            }
-
-            return Line();
+                });
+            Line($"}}");
         }
 
-        public JavaFileContents Import(params string[] imports)
+        public void Import(params string[] imports)
         {
-            return Import((IEnumerable<string>)imports);
+            Import((IEnumerable<string>)imports);
         }
 
-        public JavaFileContents Import(IEnumerable<string> imports)
+        public void Import(IEnumerable<string> imports)
         {
             if (imports != null && imports.Any())
             {
@@ -195,26 +207,25 @@ namespace AutoRest.Java.DanModel
                 }
                 Line();
             }
-            return this;
         }
 
-        public JavaFileContents SingleLineComment(string text)
+        public void SingleLineComment(string text)
         {
-            return Line($"/** {text} */");
+            Line($"/** {text} */");
         }
 
-        public JavaFileContents MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
             Line("/**");
             AddToPrefix(" * ");
             commentAction.Invoke(new JavaMultipleLineComment(this));
             RemoveFromPrefix(" * ");
-            return Line(" */");
+            Line(" */");
         }
 
-        public JavaFileContents WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
         {
-            return MultipleLineComment((comment) =>
+            MultipleLineComment((comment) =>
             {
                 WithWordWrap(wordWrapWidth, () =>
                 {
@@ -223,17 +234,17 @@ namespace AutoRest.Java.DanModel
             });
         }
 
-        public JavaFileContents Return(string text)
+        public void Return(string text)
         {
-            return Line($"return {text};");
+            Line($"return {text};");
         }
 
-        public JavaFileContents Annotation(params string[] annotations)
+        public void Annotation(params string[] annotations)
         {
-            return Annotation((IEnumerable<string>)annotations);
+            Annotation((IEnumerable<string>)annotations);
         }
 
-        public JavaFileContents Annotation(IEnumerable<string> annotations)
+        public void Annotation(IEnumerable<string> annotations)
         {
             if (annotations != null && annotations.Any())
             {
@@ -245,10 +256,9 @@ namespace AutoRest.Java.DanModel
                     }
                 }
             }
-            return this;
         }
 
-        public JavaFileContents PublicFinalClass(string className, Action<JavaClass> classAction)
+        public void PublicFinalClass(string className, Action<JavaClass> classAction)
         {
             Block($"public final class {className}", (blockAction) =>
             {
@@ -258,10 +268,9 @@ namespace AutoRest.Java.DanModel
                     classAction.Invoke(javaClass);
                 }
             });
-            return this;
         }
 
-        public JavaFileContents PublicClass(string className, Action<JavaClass> classAction)
+        public void PublicClass(string className, Action<JavaClass> classAction)
         {
             Block($"public class {className}", (blockAction) =>
             {
@@ -271,50 +280,59 @@ namespace AutoRest.Java.DanModel
                     classAction.Invoke(javaClass);
                 }
             });
-            return this;
         }
 
-        public JavaFileContents PublicEnum(string enumName, Action<JavaBlock> enumAction)
+        public void PublicEnum(string enumName, Action<JavaBlock> enumAction)
         {
             Block($"public enum {enumName}", enumAction);
-            return this;
         }
 
-        public JavaFileContents CommentParam(string parameterName, string parameterDescription)
+        public void CommentParam(string parameterName, string parameterDescription)
         {
             Line($"@param {parameterName} {parameterDescription}");
-            return this;
         }
 
-        public JavaFileContents CommentReturn(string returnValueDescription)
+        public void CommentReturn(string returnValueDescription)
         {
             Line($"@return {returnValueDescription}");
-            return this;
         }
 
-        public JavaFileContents If(string condition, Action<JavaIfBlock> ifAction)
+        public void If(string condition, Action<JavaBlock> ifAction)
         {
-            return Block($"if ({condition})", (block) =>
-                {
-                    ifAction.Invoke(new JavaIfBlock(this));
-                });
+            Line($"if ({condition}) {{");
+            Indent(() =>
+            {
+                ifAction.Invoke(new JavaBlock(this));
+            });
+            Text($"}}");
+
+            previousLineEndingPending = true;
         }
 
-        public JavaFileContents ElseIf(string condition, Action<JavaIfBlock> elseIfAction)
+        public void ElseIf(string condition, Action<JavaBlock> elseIfAction)
         {
-            RemoveFromPrefix(singleIndent);
-            Line($"}} else if ({condition}) {{");
-            AddToPrefix(singleIndent);
-            elseIfAction.Invoke(new JavaIfBlock(this));
-            return this;
+            previousLineEndingPending = false;
+
+            Line($" else if ({condition}) {{", addPrefix: false);
+            Indent(() =>
+            {
+                elseIfAction.Invoke(new JavaBlock(this));
+            });
+            Text($"}}");
+
+            previousLineEndingPending = true;
         }
 
         public void Else(Action<JavaBlock> elseAction)
         {
-            RemoveFromPrefix(singleIndent);
-            Line($"}} else {{");
-            AddToPrefix(singleIndent);
-            elseAction.Invoke(new JavaBlock(this));
+            previousLineEndingPending = false;
+
+            Line($" else {{", addPrefix: false);
+            Indent(() =>
+            {
+                elseAction.Invoke(new JavaBlock(this));
+            });
+            Line($"}}");
         }
     }
 }

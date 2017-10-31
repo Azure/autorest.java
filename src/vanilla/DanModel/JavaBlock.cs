@@ -66,10 +66,10 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaBlock If(string condition, Action<JavaIfBlock> ifAction)
+        public JavaIfBlock<JavaBlock> If(string condition, Action<JavaBlock> ifAction)
         {
             contents.If(condition, ifAction);
-            return this;
+            return new JavaIfBlock<JavaBlock>(this, contents);
         }
     }
 }

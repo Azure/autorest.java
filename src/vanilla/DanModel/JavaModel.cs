@@ -150,11 +150,10 @@ namespace AutoRest.Java.DanModel
                             methodBlock.If($"{variableName} == null", (ifBlock) =>
                                 {
                                     ifBlock.Line($"this.{variableName} = null;");
-
-                                    ifBlock.Else((elseBlock) =>
-                                        {
-                                            elseBlock.Line($"this.{variableName} = {clientType.ConvertTo(wireType, variableName)};");
-                                        });
+                                })
+                                .Else((elseBlock) =>
+                                {
+                                    elseBlock.Line($"this.{variableName} = {clientType.ConvertTo(wireType, variableName)};");
                                 });
                         }
                         else
