@@ -79,6 +79,25 @@ namespace AutoRest.Java.Azure
                 await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
             }
 
+            //XML wrappers
+            if (codeModel.ShouldGenerateXmlSerializationCached)
+            {
+                // Every sequence type used as a parameter to a service method.
+                var parameterSequenceTypes = cm.Operations
+                    .SelectMany(o => o.Methods)
+                    .SelectMany(m => m.Parameters)
+                    .Select(p => p.ModelType)
+                    .OfType<SequenceTypeJv>()
+                    .Distinct(ModelNameComparer.Instance)
+                    .ToArray();
+
+                foreach (SequenceTypeJv st in parameterSequenceTypes)
+                {
+                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
+                    await Write(wrapperTemplate, $"{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                }
+            }
+
             //Enums
             foreach (EnumTypeJva enumType in cm.EnumTypes)
             {
