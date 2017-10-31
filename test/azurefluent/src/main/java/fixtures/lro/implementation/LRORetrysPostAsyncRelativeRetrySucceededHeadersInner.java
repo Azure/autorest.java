@@ -50,7 +50,8 @@ public class LRORetrysPostAsyncRelativeRetrySucceededHeadersInner {
      * Set the azureAsyncOperation value.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set
-     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeadersInner object itself.
+     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeadersInner object
+     * itself.
      */
     public LRORetrysPostAsyncRelativeRetrySucceededHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
@@ -70,7 +71,8 @@ public class LRORetrysPostAsyncRelativeRetrySucceededHeadersInner {
      * Set the location value.
      *
      * @param location the location value to set
-     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeadersInner object itself.
+     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeadersInner object
+     * itself.
      */
     public LRORetrysPostAsyncRelativeRetrySucceededHeadersInner withLocation(String location) {
         this.location = location;
@@ -90,7 +92,8 @@ public class LRORetrysPostAsyncRelativeRetrySucceededHeadersInner {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
-     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeadersInner object itself.
+     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeadersInner object
+     * itself.
      */
     public LRORetrysPostAsyncRelativeRetrySucceededHeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;

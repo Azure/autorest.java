@@ -54,7 +54,10 @@ namespace AutoRest.Java.Azure.Fluent
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            var packagePath = $"src/main/java/{cm.Namespace.ToLower().Replace('.', '/')}";
+            string packagePath = $"src/main/java/{cm.Namespace.ToLower().Replace('.', '/')}";
+
+            Func<string, string> getPathFunction = AddPathPrefixAndSuffix("src/main/java", "implementation");
+            Func<string, string> getPackageFunction = AddPackageSuffix("implementation");
 
             // get Azure Java specific codeModel
             var codeModel = cm as CodeModelJvaf;
@@ -76,7 +79,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             //Models
-            await WriteModelJavaFiles(codeModel, packagePath, null).ConfigureAwait(false);
+            await WriteModelJavaFiles(codeModel, getPathFunction, getPackageFunction).ConfigureAwait(false);
 
             //XML wrappers
             if (codeModel.ShouldGenerateXmlSerializationCached)
@@ -98,7 +101,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             //Enums
-            await WriteEnumJavaFiles(codeModel, packagePath, null).ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel, getPathFunction, getPackageFunction).ConfigureAwait(false);
 
             // Page class
             foreach (var pageClass in codeModel.pageClasses)
@@ -111,7 +114,7 @@ namespace AutoRest.Java.Azure.Fluent
             }
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel, packagePath, null).ConfigureAwait(false);
+            await WriteExceptionJavaFiles(codeModel, AddPathPrefix("src/main/java"), null).ConfigureAwait(false);
 
             // package-info.java
             await Write(new PackageInfoTemplate

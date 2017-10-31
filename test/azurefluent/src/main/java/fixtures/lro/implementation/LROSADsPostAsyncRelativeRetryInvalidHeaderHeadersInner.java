@@ -48,7 +48,8 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner {
      * Set the azureAsyncOperation value.
      *
      * @param azureAsyncOperation the azureAsyncOperation value to set
-     * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner object itself.
+     * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner
+     * object itself.
      */
     public LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner withAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
@@ -68,7 +69,8 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner {
      * Set the location value.
      *
      * @param location the location value to set
-     * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner object itself.
+     * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner
+     * object itself.
      */
     public LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner withLocation(String location) {
         this.location = location;
@@ -88,7 +90,8 @@ public class LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
-     * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner object itself.
+     * @return the LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner
+     * object itself.
      */
     public LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;

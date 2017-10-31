@@ -43,7 +43,8 @@ public class LROsDeleteProvisioning202Deletingcanceled200HeadersInner {
      * Set the location value.
      *
      * @param location the location value to set
-     * @return the LROsDeleteProvisioning202Deletingcanceled200HeadersInner object itself.
+     * @return the LROsDeleteProvisioning202Deletingcanceled200HeadersInner
+     * object itself.
      */
     public LROsDeleteProvisioning202Deletingcanceled200HeadersInner withLocation(String location) {
         this.location = location;
@@ -63,7 +64,8 @@ public class LROsDeleteProvisioning202Deletingcanceled200HeadersInner {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
-     * @return the LROsDeleteProvisioning202Deletingcanceled200HeadersInner object itself.
+     * @return the LROsDeleteProvisioning202Deletingcanceled200HeadersInner
+     * object itself.
      */
     public LROsDeleteProvisioning202Deletingcanceled200HeadersInner withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;

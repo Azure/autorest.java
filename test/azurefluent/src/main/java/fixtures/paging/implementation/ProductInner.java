@@ -10,8 +10,8 @@
 
 package fixtures.paging.implementation;
 
-import fixtures.paging.ProductProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fixtures.paging.ProductProperties;
 
 /**
  * The ProductInner model.
