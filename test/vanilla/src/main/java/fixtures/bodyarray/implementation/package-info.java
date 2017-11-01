@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestSwaggerBATArrayService.
+ * This package contains the implementation classes for
+ * AutoRestSwaggerBATArrayService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodyarray.implementation;

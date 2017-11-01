@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestDateTestService.
+ * This package contains the implementation classes for
+ * AutoRestDateTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodydate.implementation;

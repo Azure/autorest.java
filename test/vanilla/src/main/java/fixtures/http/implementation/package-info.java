@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestHttpInfrastructureTestService.
+ * This package contains the implementation classes for
+ * AutoRestHttpInfrastructureTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.http.implementation;

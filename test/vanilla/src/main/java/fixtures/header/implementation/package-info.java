@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestSwaggerBATHeaderService.
+ * This package contains the implementation classes for
+ * AutoRestSwaggerBATHeaderService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.header.implementation;

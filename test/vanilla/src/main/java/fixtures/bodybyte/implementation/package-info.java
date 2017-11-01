@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestSwaggerBATByteService.
+ * This package contains the implementation classes for
+ * AutoRestSwaggerBATByteService.
  * Test Infrastructure for AutoRest Swagger BAT.
  */
 package fixtures.bodybyte.implementation;

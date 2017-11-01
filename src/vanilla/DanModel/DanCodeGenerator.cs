@@ -16,6 +16,33 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public static IEnumerable<JavaFile> GetPackageInfoJavaFiles(CodeModel codeModel, Settings settings, IEnumerable<string> subPackages)
+        {
+            List<JavaFile> packageInfoJavaFiles = new List<JavaFile>();
+            AddPackageInfoJavaFiles(codeModel, settings, subPackages, packageInfoJavaFiles);
+            return packageInfoJavaFiles;
+        }
+
+        public static void AddPackageInfoJavaFiles(CodeModel codeModel, Settings settings, IEnumerable<string> subPackages, IList<JavaFile> javaFiles)
+        {
+            string headerComment = settings.Header;
+
+            int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
+
+            string title = codeModel.Name;
+            string description = codeModel.Documentation;
+
+            foreach (string subPackage in subPackages)
+            {
+                string package = GetPackage(codeModel, subPackage);
+                string folderPath = GetFolderPath(package);
+
+                JavaPackageInfo packageInfo = new JavaPackageInfo(title, subPackage, description);
+                JavaFile javaFile = packageInfo.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
+                javaFiles.Add(javaFile);
+            }
+        }
+
         public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
@@ -316,7 +343,7 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static string GetPackage(CodeModel codeModel, string packageSuffix)
+        private static string GetPackage(CodeModel codeModel, string packageSuffix = null)
         {
             string package = codeModel.Namespace.ToLowerInvariant();
             if (!string.IsNullOrEmpty(packageSuffix))
@@ -326,7 +353,7 @@ namespace AutoRest.Java.DanModel
             return package;
         }
 
-        private static string GetFolderPath(string package)
+        private static string GetFolderPath(string package, string subPackage = null)
         {
             return Path.Combine("src", "main", "java", package.Replace('.', Path.DirectorySeparatorChar));
         }
