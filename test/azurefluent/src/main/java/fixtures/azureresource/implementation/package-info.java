@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestResourceFlatteningTestService.
+ * This package contains the implementation classes for
+ * AutoRestResourceFlatteningTestService.
  * Resource Flattening for AutoRest.
  */
 package fixtures.azureresource.implementation;

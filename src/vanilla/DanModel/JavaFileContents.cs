@@ -214,7 +214,7 @@ namespace AutoRest.Java.DanModel
             Line($"/** {text} */");
         }
 
-        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void MultipleLineSlashStarComment(Action<JavaMultipleLineComment> commentAction)
         {
             Line("/**");
             AddToPrefix(" * ");
@@ -223,7 +223,19 @@ namespace AutoRest.Java.DanModel
             Line(" */");
         }
 
-        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public void MultipleLineSlashSlashComment(Action<JavaMultipleLineComment> commentAction)
+        {
+            AddToPrefix("// ");
+            commentAction.Invoke(new JavaMultipleLineComment(this));
+            RemoveFromPrefix("// ");
+        }
+
+        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        {
+            MultipleLineSlashStarComment(commentAction);
+        }
+
+        public void WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
         {
             MultipleLineComment((comment) =>
             {
@@ -232,6 +244,22 @@ namespace AutoRest.Java.DanModel
                     commentAction.Invoke(new JavaWordWrappedMultipleLineComment(this));
                 });
             });
+        }
+
+        public void WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        {
+            MultipleLineSlashSlashComment((comment) =>
+            {
+                WithWordWrap(wordWrapWidth, () =>
+                {
+                    commentAction.Invoke(new JavaWordWrappedMultipleLineComment(this));
+                });
+            });
+        }
+
+        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        {
+            WordWrappedMultipleLineSlashStarComment(wordWrapWidth, commentAction);
         }
 
         public void Return(string text)

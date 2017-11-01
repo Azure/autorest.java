@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the classes for AutoRestAzureSpecialParametersTestClient.
+ * This package contains the classes for
+ * AutoRestAzureSpecialParametersTestClient.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.azurespecials;

@@ -90,26 +90,12 @@ namespace AutoRest.Java
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoFiles(cm, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
         protected async Task WritePackageInfoFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
         {
-            foreach (string subPackage in subPackages)
-            {
-                PackageInfoTemplateModel model = new PackageInfoTemplateModel(codeModel, subPackage);
-
-                PackageInfoTemplate template = new PackageInfoTemplate { Model = model };
-
-                string packageInfoFilePath = packageFolderPath;
-                if (!string.IsNullOrEmpty(subPackage))
-                {
-                    packageInfoFilePath = Path.Combine(packageInfoFilePath, subPackage);
-                }
-                packageInfoFilePath = Path.Combine(packageInfoFilePath, _packageInfoFileName);
-
-                await Write(template, packageInfoFilePath).ConfigureAwait(false);
-            }
+            await WriteJavaFiles(DanCodeGenerator.GetPackageInfoJavaFiles(codeModel, Settings, subPackages)).ConfigureAwait(false);
         }
 
         protected async Task WriteModelJavaFiles(CodeModel codeModel)

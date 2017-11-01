@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestBoolTestService.
+ * This package contains the implementation classes for
+ * AutoRestBoolTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodyboolean.implementation;

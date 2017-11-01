@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the models classes for AutoRestParameterizedHostTestClient.
+ * This package contains the models classes for
+ * AutoRestParameterizedHostTestClient.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.custombaseuri.models;

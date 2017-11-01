@@ -7,7 +7,8 @@
 // regenerated.
 
 /**
- * This package contains the implementation classes for AutoRestDurationTestService.
+ * This package contains the implementation classes for
+ * AutoRestDurationTestService.
  * Test Infrastructure for AutoRest.
  */
 package fixtures.bodyduration.implementation;
