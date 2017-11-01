@@ -353,7 +353,7 @@ namespace AutoRest.Java.DanModel
             return package;
         }
 
-        private static string GetFolderPath(string package, string subPackage = null)
+        private static string GetFolderPath(string package)
         {
             return Path.Combine("src", "main", "java", package.Replace('.', Path.DirectorySeparatorChar));
         }
