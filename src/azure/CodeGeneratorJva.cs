@@ -43,24 +43,38 @@ namespace AutoRest.Java.Azure
                 throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
             }
 
+            string package = codeModel.Namespace.ToLowerInvariant();
+            string baseFolderPath = Path.Combine("src", "main", "java");
+            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
+            string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
+            string modelsFolderPath = Path.Combine(packageFolderPath, "models");
+
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{Path.Combine("implementation", codeModel.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
+            string serviceClientFileName = $"{codeModel.Name.ToPascalCase()}Impl.java";
+            string serviceClientFilePath = Path.Combine(implementationFolderPath, serviceClientFileName);
+            await Write(serviceClientTemplate, serviceClientFilePath);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
+            string serviceClientInterfaceFileName = $"{cm.Name.ToPascalCase()}.java";
+            string serviceClientInterfaceFilePath = Path.Combine(packageFolderPath, serviceClientInterfaceFileName);
+            await Write(serviceClientInterfaceTemplate, serviceClientInterfaceFilePath);
 
             // operations
             foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
+                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
+                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
+                await Write(operationsTemplate, operationsFilePath);
                 
                 // Operation interface
                 var operationsInterfaceTemplate = new AzureMethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                string operationsInterfaceFileName = $"{methodGroup.TypeName.ToPascalCase()}.java";
+                string operationsInterfaceFilePath = Path.Combine(packageFolderPath, operationsInterfaceFileName);
+                await Write(operationsInterfaceTemplate, operationsInterfaceFilePath);
             }
 
             //Models
@@ -76,25 +90,18 @@ namespace AutoRest.Java.Azure
                 {
                     Model = new PageJva(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine("models", $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
+                string pageFileName = $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}.java";
+                string pageFilePath = Path.Combine(modelsFolderPath, pageFileName);
+                await Write(pageTemplate, pageFilePath);
             }
 
             // Exceptions
             await WriteExceptionJavaFiles(codeModel, "models").ConfigureAwait(false);
 
             // package-info.java
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm)
-            }, _packageInfoFileName);
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine("implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine("models", _packageInfoFileName));
+            await WritePackageInfoFile(codeModel, packageFolderPath).ConfigureAwait(false);
+            await WritePackageInfoFile(codeModel, packageFolderPath, "implementation").ConfigureAwait(false);
+            await WritePackageInfoFile(codeModel, packageFolderPath, "models").ConfigureAwait(false);
         }
     }
 }

@@ -95,7 +95,7 @@ namespace AutoRest.Java
             await WritePackageInfoFile(cm, packageFolderPath, "models").ConfigureAwait(false);
         }
 
-        private Task WritePackageInfoFile(CodeModel codeModel, string packageFolderPath, string subPackage = null)
+        protected Task WritePackageInfoFile(CodeModel codeModel, string packageFolderPath, string subPackage = null)
         {
             PackageInfoTemplateModel model = new PackageInfoTemplateModel(codeModel, subPackage);
 
@@ -135,16 +135,9 @@ namespace AutoRest.Java
             }
         }
 
-        protected static Func<string, string> ModelsPathFunction => (string value) => "models";
-
         protected static Func<string,string> AddPathPrefixAndSuffix(string prefix, string suffix)
         {
             return (string value) => NormalizePath(Path.Combine(prefix, value, suffix));
-        }
-
-        protected static Func<string, string> AddPathPrefix(string prefix)
-        {
-            return (string value) => NormalizePath(Path.Combine(prefix, value));
         }
 
         private static string NormalizePath(string path)

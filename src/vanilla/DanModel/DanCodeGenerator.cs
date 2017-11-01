@@ -27,8 +27,6 @@ namespace AutoRest.Java.DanModel
         {
             string headerComment = settings.Header;
 
-            string package = GetPackage(codeModel, packageSuffix);
-            string folderPath = GetFolderPath(codeModel, packageSuffix);
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
             foreach (CompositeTypeJv modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
@@ -46,6 +44,9 @@ namespace AutoRest.Java.DanModel
 
                 if (shouldGenerate)
                 {
+                    string package = GetPackage(codeModel, packageSuffix ?? modelType.ModelsPackage);
+                    string folderPath = GetFolderPath(package);
+
                     JavaModel javaModel = ParseModel(modelType);
                     JavaFile javaFile = javaModel.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
                     javaFiles.Add(javaFile);
@@ -262,8 +263,6 @@ namespace AutoRest.Java.DanModel
         {
             string headerComment = settings.Header;
 
-            string package = GetPackage(codeModel, packageSuffix);
-            string folderPath = GetFolderPath(codeModel, packageSuffix);
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
             foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
@@ -275,6 +274,9 @@ namespace AutoRest.Java.DanModel
                 // "CloudError" because those types already exist in the runtime.
                 if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
                 {
+                    string package = GetPackage(codeModel, packageSuffix ?? exceptionType.ModelsPackage);
+                    string folderPath = GetFolderPath(package);
+
                     JavaException javaException = new JavaException(exceptionName, exceptionBodyTypeName);
                     JavaFile javaFile = javaException.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
                     javaFiles.Add(javaFile);
@@ -294,7 +296,7 @@ namespace AutoRest.Java.DanModel
             string headerComment = settings.Header;
 
             string package = GetPackage(codeModel, packageSuffix);
-            string folderPath = GetFolderPath(codeModel, packageSuffix);
+            string folderPath = GetFolderPath(package);
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
@@ -319,23 +321,14 @@ namespace AutoRest.Java.DanModel
             string package = codeModel.Namespace.ToLowerInvariant();
             if (!string.IsNullOrEmpty(packageSuffix))
             {
-                package = $"{package}.{packageSuffix}";
+                package = $"{package}.{packageSuffix.Trim('.')}";
             }
             return package;
         }
 
-        private static string GetFolderPath(CodeModel codeModel, string packageSuffix)
+        private static string GetFolderPath(string package)
         {
-            string package = codeModel.Namespace.ToLowerInvariant();
-            string baseFolderPath = Path.Combine("src", "main", "java");
-            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
-
-            string folderPath = packageFolderPath;
-            if (!string.IsNullOrEmpty(packageSuffix))
-            {
-                folderPath = Path.Combine(folderPath, packageSuffix);
-            }
-            return folderPath;
+            return Path.Combine("src", "main", "java", package.Replace('.', Path.DirectorySeparatorChar));
         }
     }
 }
