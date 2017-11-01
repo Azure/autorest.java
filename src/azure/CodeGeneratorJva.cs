@@ -99,9 +99,7 @@ namespace AutoRest.Java.Azure
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoFile(codeModel, packageFolderPath).ConfigureAwait(false);
-            await WritePackageInfoFile(codeModel, packageFolderPath, "implementation").ConfigureAwait(false);
-            await WritePackageInfoFile(codeModel, packageFolderPath, "models").ConfigureAwait(false);
+            await WritePackageInfoFiles(cm, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
     }
 }

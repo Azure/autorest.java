@@ -81,18 +81,24 @@ namespace AutoRest.Java
             }
 
             //Models
-            await WriteModelJavaFiles(codeModel, "models").ConfigureAwait(false);
+            await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(codeModel, "models").ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel, "models").ConfigureAwait(false);
+            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoFile(cm, packageFolderPath).ConfigureAwait(false);
-            await WritePackageInfoFile(cm, packageFolderPath, "implementation").ConfigureAwait(false);
-            await WritePackageInfoFile(cm, packageFolderPath, "models").ConfigureAwait(false);
+            await WritePackageInfoFiles(cm, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+        }
+
+        protected async Task WritePackageInfoFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
+        {
+            foreach (string subPackage in subPackages)
+            {
+                await WritePackageInfoFile(codeModel, packageFolderPath, subPackage).ConfigureAwait(false);
+            }
         }
 
         protected Task WritePackageInfoFile(CodeModel codeModel, string packageFolderPath, string subPackage = null)
@@ -111,20 +117,20 @@ namespace AutoRest.Java
             return Write(template, packageInfoFilePath);
         }
 
-        protected async Task WriteModelJavaFiles(CodeModel codeModel, string packageSuffix = null)
+        protected async Task WriteModelJavaFiles(CodeModel codeModel)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings, packageSuffix)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings)).ConfigureAwait(false);
         }
 
 
-        protected async Task WriteEnumJavaFiles(CodeModel codeModel, string packageSuffix = null)
+        protected async Task WriteEnumJavaFiles(CodeModelJv codeModel)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings, packageSuffix)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings)).ConfigureAwait(false);
         }
 
         protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel, string packageSuffix = null)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings, packageSuffix)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings)).ConfigureAwait(false);
         }
 
         protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)
@@ -133,16 +139,6 @@ namespace AutoRest.Java
             {
                 await Write(javaFile.Contents.ToString(), javaFile.FilePath).ConfigureAwait(false);
             }
-        }
-
-        protected static Func<string,string> AddPathPrefixAndSuffix(string prefix, string suffix)
-        {
-            return (string value) => NormalizePath(Path.Combine(prefix, value, suffix));
-        }
-
-        private static string NormalizePath(string path)
-        {
-            return path.Replace('\\', '/').Replace("//", "/");
         }
     }
 }

@@ -16,14 +16,14 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
-        public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings, string packageSuffix)
+        public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
-            AddModelJavaFiles(codeModel, settings, exceptionJavaFiles, packageSuffix);
+            AddModelJavaFiles(codeModel, settings, exceptionJavaFiles);
             return exceptionJavaFiles;
         }
 
-        public static void AddModelJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, string packageSuffix)
+        public static void AddModelJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles)
         {
             string headerComment = settings.Header;
 
@@ -44,7 +44,7 @@ namespace AutoRest.Java.DanModel
 
                 if (shouldGenerate)
                 {
-                    string package = GetPackage(codeModel, packageSuffix ?? modelType.ModelsPackage);
+                    string package = GetPackage(codeModel, modelType.ModelsPackage);
                     string folderPath = GetFolderPath(package);
 
                     JavaModel javaModel = ParseModel(modelType);
@@ -252,14 +252,14 @@ namespace AutoRest.Java.DanModel
             return subTypeAnnotation;
         }
 
-        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings, string packageSuffix)
+        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
-            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles, packageSuffix);
+            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles);
             return exceptionJavaFiles;
         }
 
-        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles, string packageSuffix)
+        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles)
         {
             string headerComment = settings.Header;
 
@@ -274,7 +274,7 @@ namespace AutoRest.Java.DanModel
                 // "CloudError" because those types already exist in the runtime.
                 if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
                 {
-                    string package = GetPackage(codeModel, packageSuffix ?? exceptionType.ModelsPackage);
+                    string package = GetPackage(codeModel, exceptionType.ModelsPackage);
                     string folderPath = GetFolderPath(package);
 
                     JavaException javaException = new JavaException(exceptionName, exceptionBodyTypeName);
@@ -284,18 +284,18 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings, string packageSuffix)
+        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModelJv codeModel, Settings settings)
         {
             List<JavaFile> enumJavaFiles = new List<JavaFile>();
-            AddEnumJavaFiles(codeModel, settings, enumJavaFiles, packageSuffix);
+            AddEnumJavaFiles(codeModel, settings, enumJavaFiles);
             return enumJavaFiles;
         }
 
-        public static void AddEnumJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, string packageSuffix)
+        public static void AddEnumJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles)
         {
             string headerComment = settings.Header;
 
-            string package = GetPackage(codeModel, packageSuffix);
+            string package = GetPackage(codeModel, codeModel.ModelsPackage);
             string folderPath = GetFolderPath(package);
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
