@@ -122,7 +122,7 @@ namespace AutoRest.Java
             await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings)).ConfigureAwait(false);
         }
 
-        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel, string packageSuffix = null)
+        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel)
         {
             await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings)).ConfigureAwait(false);
         }
