@@ -78,10 +78,10 @@ namespace AutoRest.Java.Azure
             }
 
             //Models
-            await WriteModelJavaFiles(codeModel, "models").ConfigureAwait(false);
+            await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(codeModel, "models").ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Page class
             foreach (var pageClass in codeModel.pageClasses)
@@ -96,7 +96,7 @@ namespace AutoRest.Java.Azure
             }
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel, "models").ConfigureAwait(false);
+            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
             await WritePackageInfoFile(codeModel, packageFolderPath).ConfigureAwait(false);
