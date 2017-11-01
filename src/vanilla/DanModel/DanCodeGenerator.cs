@@ -8,6 +8,7 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -15,19 +16,19 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
-        public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings, Func<string,string> relativePackagePathToFolderPathFunction, Func<string,string> relativePackageToPackageFunction)
+        public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings, string packageSuffix)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
-            AddModelJavaFiles(codeModel, settings, exceptionJavaFiles, relativePackagePathToFolderPathFunction, relativePackageToPackageFunction);
+            AddModelJavaFiles(codeModel, settings, exceptionJavaFiles, packageSuffix);
             return exceptionJavaFiles;
         }
 
-        public static void AddModelJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, Func<string, string> relativePackagePathToFolderPathFunction, Func<string, string> relativePackageToPackageFunction)
+        public static void AddModelJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, string packageSuffix)
         {
             string headerComment = settings.Header;
 
-            string package = GetPackage(codeModel, relativePackageToPackageFunction);
-            string folderPath = GetFolderPath(codeModel, relativePackagePathToFolderPathFunction);
+            string package = GetPackage(codeModel, packageSuffix);
+            string folderPath = GetFolderPath(codeModel, packageSuffix);
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
             foreach (CompositeTypeJv modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
@@ -250,19 +251,19 @@ namespace AutoRest.Java.DanModel
             return subTypeAnnotation;
         }
 
-        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings, Func<string, string> relativePackagePathToFolderPathFunction, Func<string, string> relativePackageToPackageFunction)
+        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings, string packageSuffix)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
-            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles, relativePackagePathToFolderPathFunction, relativePackageToPackageFunction);
+            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles, packageSuffix);
             return exceptionJavaFiles;
         }
 
-        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles, Func<string, string> relativePackagePathToFolderPathFunction, Func<string, string> relativePackageToPackageFunction)
+        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles, string packageSuffix)
         {
             string headerComment = settings.Header;
 
-            string package = GetPackage(codeModel, relativePackageToPackageFunction);
-            string folderPath = GetFolderPath(codeModel, relativePackagePathToFolderPathFunction);
+            string package = GetPackage(codeModel, packageSuffix);
+            string folderPath = GetFolderPath(codeModel, packageSuffix);
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
             foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
@@ -281,19 +282,19 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings, Func<string, string> relativePackagePathToFolderPathFunction, Func<string, string> relativePackageToPackageFunction)
+        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings, string packageSuffix)
         {
             List<JavaFile> enumJavaFiles = new List<JavaFile>();
-            AddEnumJavaFiles(codeModel, settings, enumJavaFiles, relativePackagePathToFolderPathFunction, relativePackageToPackageFunction);
+            AddEnumJavaFiles(codeModel, settings, enumJavaFiles, packageSuffix);
             return enumJavaFiles;
         }
 
-        public static void AddEnumJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, Func<string,string> relativePackagePathToFolderPathFunction, Func<string,string> relativePackageToPackageFunction)
+        public static void AddEnumJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles, string packageSuffix)
         {
             string headerComment = settings.Header;
 
-            string package = GetPackage(codeModel, relativePackageToPackageFunction);
-            string folderPath = GetFolderPath(codeModel, relativePackagePathToFolderPathFunction);
+            string package = GetPackage(codeModel, packageSuffix);
+            string folderPath = GetFolderPath(codeModel, packageSuffix);
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
@@ -313,22 +314,26 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static string GetPackage(CodeModel codeModel, Func<string,string> relativePackageToPackageFunction)
+        private static string GetPackage(CodeModel codeModel, string packageSuffix)
         {
             string package = codeModel.Namespace.ToLowerInvariant();
-            if (relativePackageToPackageFunction != null)
+            if (!string.IsNullOrEmpty(packageSuffix))
             {
-                package = relativePackageToPackageFunction.Invoke(package);
+                package = $"{package}.{packageSuffix}";
             }
             return package;
         }
 
-        private static string GetFolderPath(CodeModel codeModel, Func<string,string> relativePackagePathToFolderPathFunction)
+        private static string GetFolderPath(CodeModel codeModel, string packageSuffix)
         {
-            string folderPath = codeModel.Namespace.ToLowerInvariant().Replace('.', '/');
-            if (relativePackagePathToFolderPathFunction != null)
+            string package = codeModel.Namespace.ToLowerInvariant();
+            string baseFolderPath = Path.Combine("src", "main", "java");
+            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
+
+            string folderPath = packageFolderPath;
+            if (!string.IsNullOrEmpty(packageSuffix))
             {
-                folderPath = relativePackagePathToFolderPathFunction.Invoke(folderPath);
+                folderPath = Path.Combine(folderPath, packageSuffix);
             }
             return folderPath;
         }

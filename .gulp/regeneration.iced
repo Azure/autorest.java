@@ -4,7 +4,6 @@
 # Instead: have bunch of configuration files sitting in a well-known spot, discover them, feed them to AutoRest, done.
 
 regenExpected = (opts,done) ->
-  outputDir = "#{opts.outputBaseDir}/#{opts.outputDir}"
   keys = Object.getOwnPropertyNames(opts.mappings)
   instances = keys.length
 
@@ -12,13 +11,9 @@ regenExpected = (opts,done) ->
     optsMappingsValue = opts.mappings[kkey]
     key = kkey.trim().toLowerCase()
 
-    # If there's no outputDir provided in options, that generator must be capable of
-    # putting Java files in the correct output dir by itself. Don't append the key to the path.
-    mappingOutputDir = if !!opts.outputDir then outputDir + "/" + key else outputDir
-    
     args = [
       "--java",
-      "--output-folder=#{mappingOutputDir}",
+      "--output-folder=#{opts.outputDir}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--java.namespace=#{['Fixtures', key.replace(/\/|\./, '')].join('.')}",
       "--input-file=#{swaggerDir}/#{optsMappingsValue}"
@@ -29,8 +24,6 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--java.fluent=true")
-    else
-      args.push("--clear-output-folder") # doesn't work for fluent since the output-folder you specify is higher up
 
     autorest args,() =>
       instances--
@@ -80,18 +73,16 @@ swaggerDir = "node_modules/@microsoft.azure/autorest.testserver/swagger"
 
 task 'regenerate-javaazure', '', (done) ->
   regenExpected {
-    'outputBaseDir': 'test/azure',
-    'mappings': defaultAzureMappings,
-    'outputDir': 'src/main/java/fixtures',
+    'outputDir': 'test/azure',
+    'mappings': defaultAzureMappings
     'azureArm': true
   },done
   return null
 
 task 'regenerate-javaazurefluent', '', (done) ->
   regenExpected {
-    'outputBaseDir': 'test/azurefluent',
-    'mappings': defaultAzureMappings,
-    'outputDir': '', # Fluent generator deals with package paths itself now
+    'outputDir': 'test/azurefluent',
+    'mappings': defaultAzureMappings
     'azureArm': true,
     'fluent': true
   },done
@@ -99,9 +90,8 @@ task 'regenerate-javaazurefluent', '', (done) ->
 
 task 'regenerate-java', '', (done) ->
   regenExpected {
-    'outputBaseDir': 'test/vanilla',
-    'mappings': defaultMappings,
-    'outputDir': 'src/main/java/fixtures'
+    'outputDir': 'test/vanilla',
+    'mappings': defaultMappings
   },done
   return null
 

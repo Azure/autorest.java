@@ -47,64 +47,84 @@ namespace AutoRest.Java
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
 
+            string package = codeModel.Namespace.ToLowerInvariant();
+            string baseFolderPath = Path.Combine("src", "main", "java");
+            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
+            string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
+
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{Path.Combine("implementation", cm.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
+            string serviceClientFileName = $"{cm.Name.ToPascalCase()}Impl.java";
+            string serviceClientFilePath = Path.Combine(implementationFolderPath, serviceClientFileName);
+            await Write(serviceClientTemplate, serviceClientFilePath);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
+            string serviceClientInterfaceFileName = $"{cm.Name.ToPascalCase()}.java";
+            string serviceClientInterfaceFilePath = Path.Combine(packageFolderPath, serviceClientInterfaceFileName);
+            await Write(serviceClientInterfaceTemplate, serviceClientInterfaceFilePath);
             
             // operations
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
+                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
+                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
+                await Write(operationsTemplate, operationsFilePath);
 
                 // Operation interface
                 var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                string operationsInterfaceFileName = $"{methodGroup.TypeName.ToPascalCase()}.java";
+                string operationsInterfaceFilePath = Path.Combine(packageFolderPath, operationsInterfaceFileName);
+                await Write(operationsInterfaceTemplate, operationsInterfaceFilePath);
             }
 
             //Models
-            await WriteModelJavaFiles(codeModel, ModelsPathFunction, ModelsSuffixPackageFunction).ConfigureAwait(false);
+            await WriteModelJavaFiles(codeModel, "models").ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(codeModel, ModelsPathFunction, ModelsSuffixPackageFunction).ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel, "models").ConfigureAwait(false);
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel, ModelsPathFunction, ModelsSuffixPackageFunction).ConfigureAwait(false);
-            
+            await WriteExceptionJavaFiles(codeModel, "models").ConfigureAwait(false);
+
             // package-info.java
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm)
-            }, _packageInfoFileName);
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine("implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine("models", _packageInfoFileName));
+            await WritePackageInfoFile(cm, packageFolderPath).ConfigureAwait(false);
+            await WritePackageInfoFile(cm, packageFolderPath, "implementation").ConfigureAwait(false);
+            await WritePackageInfoFile(cm, packageFolderPath, "models").ConfigureAwait(false);
         }
 
-        protected async Task WriteModelJavaFiles(CodeModel codeModel, Func<string,string> relativePackagePathToFolderPathFunction, Func<string,string> relativePackageToPackageFunction)
+        private Task WritePackageInfoFile(CodeModel codeModel, string packageFolderPath, string subPackage = null)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings, relativePackagePathToFolderPathFunction, relativePackageToPackageFunction)).ConfigureAwait(false);
+            PackageInfoTemplateModel model = new PackageInfoTemplateModel(codeModel, subPackage);
+
+            PackageInfoTemplate template = new PackageInfoTemplate { Model = model };
+
+            string packageInfoFilePath = packageFolderPath;
+            if (!string.IsNullOrEmpty(subPackage))
+            {
+                packageInfoFilePath = Path.Combine(packageInfoFilePath, subPackage);
+            }
+            packageInfoFilePath = Path.Combine(packageInfoFilePath, _packageInfoFileName);
+
+            return Write(template, packageInfoFilePath);
+        }
+
+        protected async Task WriteModelJavaFiles(CodeModel codeModel, string packageSuffix = null)
+        {
+            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings, packageSuffix)).ConfigureAwait(false);
         }
 
 
-        protected async Task WriteEnumJavaFiles(CodeModel codeModel, Func<string,string> relativePackagePathToFolderPathFunction, Func<string,string> relativePackageToPackageFunction)
+        protected async Task WriteEnumJavaFiles(CodeModel codeModel, string packageSuffix = null)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings, relativePackagePathToFolderPathFunction, relativePackageToPackageFunction)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings, packageSuffix)).ConfigureAwait(false);
         }
 
-        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel, Func<string,string> relativePackagePathToFolderPathFunction, Func<string,string> relativePackageToPackageFunction)
+        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel, string packageSuffix = null)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings, relativePackagePathToFolderPathFunction, relativePackageToPackageFunction)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings, packageSuffix)).ConfigureAwait(false);
         }
 
         protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)
@@ -117,42 +137,14 @@ namespace AutoRest.Java
 
         protected static Func<string, string> ModelsPathFunction => (string value) => "models";
 
-        protected static Func<string, string> ModelsPackageFunction => (string value) => "models";
-
-        protected static Func<string, string> ModelsPrefixPathFunction => AddPathPrefix("models");
-
-        protected static Func<string, string> ModelsPrefixPackageFunction => AddPackagePrefix("models");
-
-        protected static Func<string, string> ModelsSuffixPackageFunction => AddPackageSuffix("models");
-
         protected static Func<string,string> AddPathPrefixAndSuffix(string prefix, string suffix)
         {
             return (string value) => NormalizePath(Path.Combine(prefix, value, suffix));
         }
 
-        protected static Func<string, string> AddPackagePrefixAndSuffix(string prefix, string suffix)
-        {
-            return (string value) => NormalizePackage($"{prefix}.{value}.{suffix}");
-        }
-
-        protected static Func<string,string> AddPackagePrefix(string prefix)
-        {
-            return (string value) => NormalizePackage($"{prefix}.{value}");
-        }
-
-        protected static Func<string, string> AddPackageSuffix(string suffix)
-        {
-            return (string value) => NormalizePackage($"{value}.{suffix}");
-        }
-
         protected static Func<string, string> AddPathPrefix(string prefix)
         {
             return (string value) => NormalizePath(Path.Combine(prefix, value));
-        }
-
-        private static string NormalizePackage(string package)
-        {
-            return package.Trim('.').Replace("..", ".");
         }
 
         private static string NormalizePath(string path)
