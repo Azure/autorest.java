@@ -35,7 +35,8 @@ public class HeaderCustomNamedRequestIdParamGroupingParameters {
      * Set the fooClientRequestId value.
      *
      * @param fooClientRequestId the fooClientRequestId value to set
-     * @return the HeaderCustomNamedRequestIdParamGroupingParameters object itself.
+     * @return the HeaderCustomNamedRequestIdParamGroupingParameters object
+     * itself.
      */
     public HeaderCustomNamedRequestIdParamGroupingParameters withFooClientRequestId(String fooClientRequestId) {
         this.fooClientRequestId = fooClientRequestId;

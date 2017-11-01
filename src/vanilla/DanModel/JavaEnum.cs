@@ -32,7 +32,7 @@ namespace AutoRest.Java.DanModel
                 .Import("com.fasterxml.jackson.annotation.JsonCreator",
                         "com.fasterxml.jackson.annotation.JsonValue")
                 .MultipleLineComment(EnumTypeComment())
-                .Block($"public enum {EnumName}", (enumBlock) =>
+                .PublicEnum(EnumName, (enumBlock) =>
                 {
                     if (Values.Any())
                     {
@@ -55,16 +55,16 @@ namespace AutoRest.Java.DanModel
                         {
                             comment.Line($"Parses a serialized value to a {EnumName} instance.")
                                     .Line()
-                                    .Line("@param value the serialized value to parse.")
-                                    .Line($"@return the parsed {EnumName} object, or null if unable to parse.");
+                                    .Param("value", "the serialized value to parse.")
+                                    .Return($"the parsed {EnumName} object, or null if unable to parse.");
                         })
-                        .Line("@JsonCreator")
+                        .Annotation("JsonCreator")
                         .Block($"public static {EnumName} fromString(String value)", (function) =>
                         {
                             function.Line($"{EnumName}[] items = {EnumName}.values();")
                                     .Block($"for ({EnumName} item : items)", (foreachBlock) =>
                                     {
-                                        foreachBlock.Block("if (item.toString().equalsIgnoreCase(value))", (ifBlock) =>
+                                        foreachBlock.If("item.toString().equalsIgnoreCase(value)", (ifBlock) =>
                                         {
                                             ifBlock.Return("item");
                                         });
@@ -72,8 +72,8 @@ namespace AutoRest.Java.DanModel
                                     .Return("null");
                         })
                         .Line()
-                        .Line("@JsonValue")
-                        .Line("@Override")
+                        .Annotation("JsonValue",
+                                    "Override")
                         .Block("public String toString()", (function) =>
                         {
                             function.Return("this.value");

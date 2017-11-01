@@ -43,7 +43,8 @@ public class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * Set the location value.
      *
      * @param location the location value to set
-     * @return the LROsDeleteProvisioning202Accepted200SucceededHeaders object itself.
+     * @return the LROsDeleteProvisioning202Accepted200SucceededHeaders object
+     * itself.
      */
     public LROsDeleteProvisioning202Accepted200SucceededHeaders withLocation(String location) {
         this.location = location;
@@ -63,7 +64,8 @@ public class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * Set the retryAfter value.
      *
      * @param retryAfter the retryAfter value to set
-     * @return the LROsDeleteProvisioning202Accepted200SucceededHeaders object itself.
+     * @return the LROsDeleteProvisioning202Accepted200SucceededHeaders object
+     * itself.
      */
     public LROsDeleteProvisioning202Accepted200SucceededHeaders withRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;

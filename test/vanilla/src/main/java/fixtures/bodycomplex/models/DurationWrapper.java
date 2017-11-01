@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex.models;
 
-import org.joda.time.Period;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.Period;
 
 /**
  * The DurationWrapper model.

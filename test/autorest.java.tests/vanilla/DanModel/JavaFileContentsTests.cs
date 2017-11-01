@@ -86,7 +86,7 @@ namespace AutoRest.Java.DanModel
         public void TextWithWordWrapAndLargeTextWithNoWhitespace()
         {
             JavaFileContents contents = new JavaFileContents();
-            contents.SetWordWrapIndex(5);
+            contents.SetWordWrapWidth(5);
 
             contents.Text("12345678901234567890");
 
@@ -97,11 +97,11 @@ namespace AutoRest.Java.DanModel
         public void TextWithWordWrapAndTextWithSpaces()
         {
             JavaFileContents contents = new JavaFileContents();
-            contents.SetWordWrapIndex(5);
+            contents.SetWordWrapWidth(5);
 
             contents.Text("1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0");
 
-            Assert.AreEqual("1 2 3\n4 5 6\n7 8 9\n0 1 2\n3 4 5\n6 7 8\n9 0", contents.ToString());
+            Assert.AreEqual("1 2\n3 4\n5 6\n7 8\n9 0\n1 2\n3 4\n5 6\n7 8\n9 0", contents.ToString());
         }
 
         [TestMethod]
@@ -153,7 +153,7 @@ namespace AutoRest.Java.DanModel
         public void TextWithLicenseTextAndNoPrefixAndWordWrap()
         {
             JavaFileContents contents = new JavaFileContents();
-            contents.SetWordWrapIndex(80);
+            contents.SetWordWrapWidth(80);
 
             const string originalText =
                 "Copyright (c) Microsoft Corporation. All rights reserved.\n" +
@@ -182,7 +182,7 @@ namespace AutoRest.Java.DanModel
         {
             JavaFileContents contents = new JavaFileContents();
             contents.AddToPrefix(" * ");
-            contents.SetWordWrapIndex(80);
+            contents.SetWordWrapWidth(80);
 
             const string originalText =
                 "Copyright (c) Microsoft Corporation. All rights reserved.\n" +

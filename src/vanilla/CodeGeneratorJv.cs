@@ -47,62 +47,84 @@ namespace AutoRest.Java
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
 
+            string package = codeModel.Namespace.ToLowerInvariant();
+            string baseFolderPath = Path.Combine("src", "main", "java");
+            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
+            string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
+
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{Path.Combine("implementation", cm.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
+            string serviceClientFileName = $"{cm.Name.ToPascalCase()}Impl.java";
+            string serviceClientFilePath = Path.Combine(implementationFolderPath, serviceClientFileName);
+            await Write(serviceClientTemplate, serviceClientFilePath);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
+            string serviceClientInterfaceFileName = $"{cm.Name.ToPascalCase()}.java";
+            string serviceClientInterfaceFilePath = Path.Combine(packageFolderPath, serviceClientInterfaceFileName);
+            await Write(serviceClientInterfaceTemplate, serviceClientInterfaceFilePath);
             
             // operations
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
+                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
+                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
+                await Write(operationsTemplate, operationsFilePath);
 
                 // Operation interface
                 var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                string operationsInterfaceFileName = $"{methodGroup.TypeName.ToPascalCase()}.java";
+                string operationsInterfaceFilePath = Path.Combine(packageFolderPath, operationsInterfaceFileName);
+                await Write(operationsInterfaceTemplate, operationsInterfaceFilePath);
             }
 
             //Models
-            foreach (CompositeTypeJv modelType in cm.ModelTypes.Union(codeModel.HeaderTypes))
-            {
-                var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
-            }
+            await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
-            
+            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
+
             // package-info.java
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm)
-            }, _packageInfoFileName);
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine("implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine("models", _packageInfoFileName));
+            await WritePackageInfoFiles(cm, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
-        protected async Task WriteEnumJavaFiles(CodeModel codeModel, string relativePath, string packageSuffix)
+        protected async Task WritePackageInfoFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings, relativePath, packageSuffix)).ConfigureAwait(false);
+            foreach (string subPackage in subPackages)
+            {
+                PackageInfoTemplateModel model = new PackageInfoTemplateModel(codeModel, subPackage);
+
+                PackageInfoTemplate template = new PackageInfoTemplate { Model = model };
+
+                string packageInfoFilePath = packageFolderPath;
+                if (!string.IsNullOrEmpty(subPackage))
+                {
+                    packageInfoFilePath = Path.Combine(packageInfoFilePath, subPackage);
+                }
+                packageInfoFilePath = Path.Combine(packageInfoFilePath, _packageInfoFileName);
+
+                await Write(template, packageInfoFilePath).ConfigureAwait(false);
+            }
         }
 
-        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel, string relativePath, string packageSuffix)
+        protected async Task WriteModelJavaFiles(CodeModel codeModel)
         {
-            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings, relativePath, packageSuffix)).ConfigureAwait(false);
+            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings)).ConfigureAwait(false);
+        }
+
+        protected async Task WriteEnumJavaFiles(CodeModelJv codeModel)
+        {
+            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings)).ConfigureAwait(false);
+        }
+
+        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel)
+        {
+            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings)).ConfigureAwait(false);
         }
 
         protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)

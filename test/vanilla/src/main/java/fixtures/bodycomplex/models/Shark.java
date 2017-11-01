@@ -10,11 +10,11 @@
 
 package fixtures.bodycomplex.models;
 
-import org.joda.time.DateTime;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.joda.time.DateTime;
 
 /**
  * The Shark model.
@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("shark")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
-    @JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
-    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
+@JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
+@JsonSubTypes.Type(name = "goblin", value = Goblinshark.class),
+@JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class)
 })
 public class Shark extends Fish {
     /**

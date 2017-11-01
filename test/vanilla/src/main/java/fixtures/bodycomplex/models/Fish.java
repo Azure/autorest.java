@@ -10,11 +10,11 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.List;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /**
  * The Fish model.
@@ -22,8 +22,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("Fish")
 @JsonSubTypes({
-    @JsonSubTypes.Type(name = "salmon", value = Salmon.class),
-    @JsonSubTypes.Type(name = "shark", value = Shark.class)
+@JsonSubTypes.Type(name = "salmon", value = Salmon.class),
+@JsonSubTypes.Type(name = "shark", value = Shark.class)
 })
 public class Fish {
     /**

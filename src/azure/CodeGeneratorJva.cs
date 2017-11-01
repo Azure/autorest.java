@@ -43,45 +43,45 @@ namespace AutoRest.Java.Azure
                 throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
             }
 
+            string package = codeModel.Namespace.ToLowerInvariant();
+            string baseFolderPath = Path.Combine("src", "main", "java");
+            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
+            string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
+            string modelsFolderPath = Path.Combine(packageFolderPath, "models");
+
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, $"{Path.Combine("implementation", codeModel.Name.ToPascalCase() + "Impl")}{ImplementationFileExtension}");
+            string serviceClientFileName = $"{codeModel.Name.ToPascalCase()}Impl.java";
+            string serviceClientFilePath = Path.Combine(implementationFolderPath, serviceClientFileName);
+            await Write(serviceClientTemplate, serviceClientFilePath);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate { Model = codeModel };
-            await Write(serviceClientInterfaceTemplate, $"{cm.Name.ToPascalCase()}{ImplementationFileExtension}");
+            string serviceClientInterfaceFileName = $"{cm.Name.ToPascalCase()}.java";
+            string serviceClientInterfaceFilePath = Path.Combine(packageFolderPath, serviceClientInterfaceFileName);
+            await Write(serviceClientInterfaceTemplate, serviceClientInterfaceFilePath);
 
             // operations
             foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = methodGroup };
-                await Write(operationsTemplate, $"{Path.Combine("implementation", methodGroup.TypeName.ToPascalCase())}Impl{ImplementationFileExtension}");
+                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
+                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
+                await Write(operationsTemplate, operationsFilePath);
                 
                 // Operation interface
                 var operationsInterfaceTemplate = new AzureMethodGroupInterfaceTemplate { Model = methodGroup };
-                await Write(operationsInterfaceTemplate, $"{methodGroup.TypeName.ToPascalCase()}{ImplementationFileExtension}");
+                string operationsInterfaceFileName = $"{methodGroup.TypeName.ToPascalCase()}.java";
+                string operationsInterfaceFilePath = Path.Combine(packageFolderPath, operationsInterfaceFileName);
+                await Write(operationsInterfaceTemplate, operationsInterfaceFilePath);
             }
 
             //Models
-            foreach (CompositeTypeJva modelType in cm.ModelTypes.Concat(codeModel.HeaderTypes))
-            {
-                if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
-                {
-                    continue;
-                }
-                if (modelType.IsResource)
-                {
-                    continue;
-                }
-
-                var modelTemplate = new ModelTemplate { Model = modelType };
-                await Write(modelTemplate, Path.Combine("models", $"{modelType.Name.ToPascalCase()}{ImplementationFileExtension}"));
-            }
+            await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Page class
             foreach (var pageClass in codeModel.pageClasses)
@@ -90,25 +90,16 @@ namespace AutoRest.Java.Azure
                 {
                     Model = new PageJva(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
-                await Write(pageTemplate, Path.Combine("models", $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}{ImplementationFileExtension}"));
+                string pageFileName = $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}.java";
+                string pageFilePath = Path.Combine(modelsFolderPath, pageFileName);
+                await Write(pageTemplate, pageFilePath);
             }
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel, "models", "models").ConfigureAwait(false);
+            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm)
-            }, _packageInfoFileName);
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "implementation")
-            }, Path.Combine("implementation", _packageInfoFileName));
-            await Write(new PackageInfoTemplate
-            {
-                Model = new PackageInfoTemplateModel(cm, "models")
-            }, Path.Combine("models", _packageInfoFileName));
+            await WritePackageInfoFiles(cm, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
     }
 }

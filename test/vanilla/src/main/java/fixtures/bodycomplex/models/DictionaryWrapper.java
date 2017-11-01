@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex.models;
 
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /**
  * The DictionaryWrapper model.

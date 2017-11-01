@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace AutoRest.Java.DanModel
 {
@@ -16,7 +17,7 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        public abstract JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumMultipleLineCommentWidth);
+        public abstract JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth);
 
         protected JavaFile GenerateJavaFileWithHeaderAndPackage(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {
@@ -25,11 +26,9 @@ namespace AutoRest.Java.DanModel
 
             if (!string.IsNullOrEmpty(headerComment))
             {
-                javaFile.MultipleLineComment((comment) =>
+                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
                     {
-                        comment.SetWordWrapIndex(maximumHeaderCommentWidth)
-                            .Line(headerComment)
-                            .SetWordWrapIndex(null);
+                        comment.Line(headerComment);
                     })
                     .Line();
             }

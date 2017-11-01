@@ -10,8 +10,8 @@
 
 package fixtures.requiredoptional.models;
 
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 /**
  * The ArrayWrapper model.

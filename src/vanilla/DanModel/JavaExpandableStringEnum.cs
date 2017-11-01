@@ -16,7 +16,7 @@ namespace AutoRest.Java.DanModel
                         "com.fasterxml.jackson.annotation.JsonCreator",
                         "com.microsoft.rest.ExpandableStringEnum")
                 .MultipleLineComment(EnumTypeComment())
-                .Block($"public final class {EnumName} extends ExpandableStringEnum<{EnumName}>", (classBlock) =>
+                .PublicFinalClass($"{EnumName} extends ExpandableStringEnum<{EnumName}>", (classBlock) =>
                 {
                     foreach (JavaEnumValue value in Values)
                     {
@@ -28,10 +28,10 @@ namespace AutoRest.Java.DanModel
                     classBlock.MultipleLineComment((comment) =>
                         {
                             comment.Line($"Creates or finds a {EnumName} from its string representation.")
-                                .Line("@param name a name to look for")
-                                .Line($"@return the corresponding {EnumName}");
+                                .Param("name", "a name to look for")
+                                .Return($"the corresponding {EnumName}");
                         })
-                        .Line("@JsonCreator")
+                        .Annotation("JsonCreator")
                         .Block($"public static {EnumName} fromString(String name)", (function) =>
                         {
                             function.Return($"fromString(name, {EnumName}.class)");
@@ -39,7 +39,7 @@ namespace AutoRest.Java.DanModel
                         .Line()
                         .MultipleLineComment((comment) =>
                         {
-                            comment.Line($"@return known {EnumName} values");
+                            comment.Return($"known {EnumName} values");
                         })
                         .Block($"public static Collection<{EnumName}> values()", (function) =>
                         {

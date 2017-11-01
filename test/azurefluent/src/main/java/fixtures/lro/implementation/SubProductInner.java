@@ -11,8 +11,8 @@
 package fixtures.lro.implementation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.serializer.JsonFlatten;
 import com.microsoft.azure.SubResource;
+import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * The SubProductInner model.

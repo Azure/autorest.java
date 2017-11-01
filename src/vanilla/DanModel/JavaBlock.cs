@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
@@ -9,12 +10,6 @@ namespace AutoRest.Java.DanModel
         public JavaBlock(JavaFileContents file)
         {
             this.contents = file;
-        }
-
-        private JavaBlock Indent(Action action)
-        {
-            contents.Indent(action);
-            return this;
         }
 
         public JavaBlock Line(string text)
@@ -47,10 +42,34 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        {
+            contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
+            return this;
+        }
+
         public JavaBlock Return(string text)
         {
             contents.Return(text);
             return this;
+        }
+
+        public JavaBlock Annotation(params string[] annotations)
+        {
+            contents.Annotation(annotations);
+            return this;
+        }
+
+        public JavaBlock Annotation(IEnumerable<string> annotations)
+        {
+            contents.Annotation(annotations);
+            return this;
+        }
+
+        public JavaIfBlock<JavaBlock> If(string condition, Action<JavaBlock> ifAction)
+        {
+            contents.If(condition, ifAction);
+            return new JavaIfBlock<JavaBlock>(this, contents);
         }
     }
 }
