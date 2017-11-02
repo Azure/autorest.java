@@ -35,8 +35,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpRedirects.
+ * An instance of this class provides access to all the operations defined in
+ * HttpRedirects.
  */
 public interface HttpRedirects {
     /**
@@ -64,6 +64,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head300Async();
+
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
@@ -71,7 +72,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300WithRestResponseAsync();
-
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -99,6 +99,7 @@ public interface HttpRedirects {
      * @return the observable to the List&lt;String&gt; object
      */
     Single<List<String>> get300Async();
+
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
@@ -106,7 +107,6 @@ public interface HttpRedirects {
      * @return the observable to the List&lt;String&gt; object
      */
     Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300WithRestResponseAsync();
-
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -133,6 +133,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head301Async();
+
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
@@ -140,7 +141,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301WithRestResponseAsync();
-
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -167,6 +167,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get301Async();
+
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
@@ -174,7 +175,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301WithRestResponseAsync();
-
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -209,6 +209,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync();
+
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
@@ -237,6 +238,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put301Async(Boolean booleanValue);
+
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
@@ -245,7 +247,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -272,6 +273,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head302Async();
+
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
@@ -279,7 +281,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302WithRestResponseAsync();
-
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -306,6 +307,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get302Async();
+
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
@@ -313,7 +315,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302WithRestResponseAsync();
-
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -348,6 +349,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync();
+
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
@@ -376,6 +378,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch302Async(Boolean booleanValue);
+
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
@@ -384,7 +387,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -419,6 +421,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync();
+
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
@@ -447,6 +450,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post303Async(Boolean booleanValue);
+
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
@@ -455,7 +459,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -482,6 +485,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head307Async();
+
     /**
      * Redirect with 307, resulting in a 200 success.
      *
@@ -489,7 +493,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307WithRestResponseAsync();
-
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -516,6 +519,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get307Async();
+
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
@@ -523,7 +527,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307WithRestResponseAsync();
-
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -558,6 +561,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync();
+
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
@@ -586,6 +590,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put307Async(Boolean booleanValue);
+
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
      *
@@ -594,7 +599,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -629,6 +633,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync();
+
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
@@ -657,6 +662,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch307Async(Boolean booleanValue);
+
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
@@ -665,7 +671,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -700,6 +705,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync();
+
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
@@ -728,6 +734,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post307Async(Boolean booleanValue);
+
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
      *
@@ -736,7 +743,6 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -771,6 +777,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync();
+
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
@@ -799,6 +806,7 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete307Async(Boolean booleanValue);
+
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
@@ -807,6 +815,5 @@ public interface HttpRedirects {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync(Boolean booleanValue);
-
 
 }

@@ -23,8 +23,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public interface Paths {
     /**
@@ -52,6 +52,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanTrueAsync();
+
     /**
      * Get true Boolean value on path.
      *
@@ -59,7 +60,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
-
 
     /**
      * Get false Boolean value on path.
@@ -86,6 +86,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanFalseAsync();
+
     /**
      * Get false Boolean value on path.
      *
@@ -93,7 +94,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
-
 
     /**
      * Get '1000000' integer value.
@@ -120,6 +120,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntOneMillionAsync();
+
     /**
      * Get '1000000' integer value.
      *
@@ -127,7 +128,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
-
 
     /**
      * Get '-1000000' integer value.
@@ -154,6 +154,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNegativeOneMillionAsync();
+
     /**
      * Get '-1000000' integer value.
      *
@@ -161,7 +162,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
-
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -188,6 +188,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getTenBillionAsync();
+
     /**
      * Get '10000000000' 64 bit integer value.
      *
@@ -195,7 +196,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
-
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -222,6 +222,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getNegativeTenBillionAsync();
+
     /**
      * Get '-10000000000' 64 bit integer value.
      *
@@ -229,7 +230,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
-
 
     /**
      * Get '1.034E+20' numeric value.
@@ -256,6 +256,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificPositiveAsync();
+
     /**
      * Get '1.034E+20' numeric value.
      *
@@ -263,7 +264,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
-
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -290,6 +290,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificNegativeAsync();
+
     /**
      * Get '-1.034E-20' numeric value.
      *
@@ -297,7 +298,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
-
 
     /**
      * Get '9999999.999' numeric value.
@@ -324,6 +324,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalPositiveAsync();
+
     /**
      * Get '9999999.999' numeric value.
      *
@@ -331,7 +332,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
-
 
     /**
      * Get '-9999999.999' numeric value.
@@ -358,6 +358,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalNegativeAsync();
+
     /**
      * Get '-9999999.999' numeric value.
      *
@@ -365,7 +366,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
-
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -392,6 +392,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUnicodeAsync();
+
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
@@ -399,7 +400,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
-
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -426,6 +426,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUrlEncodedAsync();
+
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
@@ -433,7 +434,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
-
 
     /**
      * Get ''.
@@ -460,6 +460,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringEmptyAsync();
+
     /**
      * Get ''.
      *
@@ -467,7 +468,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
-
 
     /**
      * Get null (should throw).
@@ -497,6 +497,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringNullAsync(String stringPath);
+
     /**
      * Get null (should throw).
      *
@@ -505,7 +506,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringPath);
-
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -535,6 +535,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumValidAsync(UriColor enumPath);
+
     /**
      * Get using uri with 'green color' in path parameter.
      *
@@ -543,7 +544,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumPath);
-
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -573,6 +573,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumNullAsync(UriColor enumPath);
+
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
@@ -581,7 +582,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumPath);
-
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -611,6 +611,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteMultiByteAsync(byte[] bytePath);
+
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -619,7 +620,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] bytePath);
-
 
     /**
      * Get '' as byte array.
@@ -646,6 +646,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteEmptyAsync();
+
     /**
      * Get '' as byte array.
      *
@@ -653,7 +654,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
-
 
     /**
      * Get null as byte array (should throw).
@@ -683,6 +683,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteNullAsync(byte[] bytePath);
+
     /**
      * Get null as byte array (should throw).
      *
@@ -691,7 +692,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] bytePath);
-
 
     /**
      * Get '2012-01-01' as date.
@@ -718,6 +718,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateValidAsync();
+
     /**
      * Get '2012-01-01' as date.
      *
@@ -725,7 +726,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
-
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -755,6 +755,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateNullAsync(LocalDate datePath);
+
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
@@ -763,7 +764,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate datePath);
-
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -790,6 +790,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeValidAsync();
+
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
@@ -797,7 +798,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
-
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -827,6 +827,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeNullAsync(DateTime dateTimePath);
+
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
@@ -835,7 +836,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimePath);
-
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -865,6 +865,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> base64UrlAsync(byte[] base64UrlPath);
+
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
@@ -873,7 +874,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(byte[] base64UrlPath);
-
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -903,6 +903,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayCsvInPathAsync(List<String> arrayPath);
+
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -911,7 +912,6 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(List<String> arrayPath);
-
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
@@ -941,6 +941,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
+
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
@@ -949,6 +950,5 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath);
-
 
 }

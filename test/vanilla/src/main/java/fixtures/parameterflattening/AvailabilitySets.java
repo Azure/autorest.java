@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in AvailabilitySets.
+ * An instance of this class provides access to all the operations defined in
+ * AvailabilitySets.
  */
 public interface AvailabilitySets {
     /**
@@ -58,6 +58,7 @@ public interface AvailabilitySets {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags);
+
     /**
      * Updates the tags for an availability set.
      *
@@ -68,6 +69,5 @@ public interface AvailabilitySets {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> updateWithRestResponseAsync(String resourceGroupName, String avset, Map<String, String> tags);
-
 
 }

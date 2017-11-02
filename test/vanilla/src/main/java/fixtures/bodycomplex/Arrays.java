@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Arrays.
+ * An instance of this class provides access to all the operations defined in
+ * Arrays.
  */
 public interface Arrays {
     /**
@@ -50,6 +50,7 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<ArrayWrapper> getValidAsync();
+
     /**
      * Get complex types with array property.
      *
@@ -57,7 +58,6 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<RestResponse<Void, ArrayWrapper>> getValidWithRestResponseAsync();
-
 
     /**
      * Put complex types with array property.
@@ -87,6 +87,7 @@ public interface Arrays {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(ArrayWrapper complexBody);
+
     /**
      * Put complex types with array property.
      *
@@ -95,7 +96,6 @@ public interface Arrays {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ArrayWrapper complexBody);
-
 
     /**
      * Get complex types with array property which is empty.
@@ -123,6 +123,7 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<ArrayWrapper> getEmptyAsync();
+
     /**
      * Get complex types with array property which is empty.
      *
@@ -130,7 +131,6 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<RestResponse<Void, ArrayWrapper>> getEmptyWithRestResponseAsync();
-
 
     /**
      * Put complex types with array property which is empty.
@@ -160,6 +160,7 @@ public interface Arrays {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(ArrayWrapper complexBody);
+
     /**
      * Put complex types with array property which is empty.
      *
@@ -168,7 +169,6 @@ public interface Arrays {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(ArrayWrapper complexBody);
-
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -196,6 +196,7 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<ArrayWrapper> getNotProvidedAsync();
+
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
@@ -203,6 +204,5 @@ public interface Arrays {
      * @return the observable to the ArrayWrapper object
      */
     Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync();
-
 
 }

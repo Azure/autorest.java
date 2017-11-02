@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpServerFailures.
+ * An instance of this class provides access to all the operations defined in
+ * HttpServerFailures.
  */
 public interface HttpServerFailures {
     /**
@@ -50,6 +50,7 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> head501Async();
+
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
@@ -57,7 +58,6 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> head501WithRestResponseAsync();
-
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -85,6 +85,7 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> get501Async();
+
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
@@ -92,7 +93,6 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get501WithRestResponseAsync();
-
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -128,6 +128,7 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync();
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -157,6 +158,7 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> post505Async(Boolean booleanValue);
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -165,7 +167,6 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -201,6 +202,7 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync();
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -230,6 +232,7 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<Error> delete505Async(Boolean booleanValue);
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -238,6 +241,5 @@ public interface HttpServerFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue);
-
 
 }

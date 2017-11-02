@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Inheritances.
+ * An instance of this class provides access to all the operations defined in
+ * Inheritances.
  */
 public interface Inheritances {
     /**
@@ -50,6 +50,7 @@ public interface Inheritances {
      * @return the observable to the Siamese object
      */
     Single<Siamese> getValidAsync();
+
     /**
      * Get complex types that extend others.
      *
@@ -57,7 +58,6 @@ public interface Inheritances {
      * @return the observable to the Siamese object
      */
     Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
-
 
     /**
      * Put complex types that extend others.
@@ -87,6 +87,7 @@ public interface Inheritances {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(Siamese complexBody);
+
     /**
      * Put complex types that extend others.
      *
@@ -95,6 +96,5 @@ public interface Inheritances {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Siamese complexBody);
-
 
 }

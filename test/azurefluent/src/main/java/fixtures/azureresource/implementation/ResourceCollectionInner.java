@@ -11,8 +11,8 @@
 package fixtures.azureresource.implementation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The ResourceCollectionInner model.

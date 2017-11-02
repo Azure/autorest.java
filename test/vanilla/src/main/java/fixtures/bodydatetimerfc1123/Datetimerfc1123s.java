@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Datetimerfc1123s.
+ * An instance of this class provides access to all the operations defined in
+ * Datetimerfc1123s.
  */
 public interface Datetimerfc1123s {
     /**
@@ -50,6 +50,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getNullAsync();
+
     /**
      * Get null datetime value.
      *
@@ -57,7 +58,6 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid datetime value.
@@ -85,6 +85,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getInvalidAsync();
+
     /**
      * Get invalid datetime value.
      *
@@ -92,7 +93,6 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync();
-
 
     /**
      * Get overflow datetime value.
@@ -120,6 +120,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getOverflowAsync();
+
     /**
      * Get overflow datetime value.
      *
@@ -127,7 +128,6 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync();
-
 
     /**
      * Get underflow datetime value.
@@ -155,6 +155,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUnderflowAsync();
+
     /**
      * Get underflow datetime value.
      *
@@ -162,7 +163,6 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync();
-
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -192,6 +192,7 @@ public interface Datetimerfc1123s {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
@@ -200,7 +201,6 @@ public interface Datetimerfc1123s {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -228,6 +228,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUtcLowercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
@@ -235,7 +236,6 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -263,6 +263,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUtcUppercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
@@ -270,7 +271,6 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -300,6 +300,7 @@ public interface Datetimerfc1123s {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
@@ -308,7 +309,6 @@ public interface Datetimerfc1123s {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -336,6 +336,7 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUtcMinDateTimeAsync();
+
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
@@ -343,6 +344,5 @@ public interface Datetimerfc1123s {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
-
 
 }

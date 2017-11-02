@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpFailures.
+ * An instance of this class provides access to all the operations defined in
+ * HttpFailures.
  */
 public interface HttpFailures {
     /**
@@ -50,6 +50,7 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<Boolean> getEmptyErrorAsync();
+
     /**
      * Get empty error form server.
      *
@@ -57,7 +58,6 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getEmptyErrorWithRestResponseAsync();
-
 
     /**
      * Get empty error form server.
@@ -85,6 +85,7 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<Boolean> getNoModelErrorAsync();
+
     /**
      * Get empty error form server.
      *
@@ -92,7 +93,6 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getNoModelErrorWithRestResponseAsync();
-
 
     /**
      * Get empty response from server.
@@ -120,6 +120,7 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<Boolean> getNoModelEmptyAsync();
+
     /**
      * Get empty response from server.
      *
@@ -127,6 +128,5 @@ public interface HttpFailures {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getNoModelEmptyWithRestResponseAsync();
-
 
 }

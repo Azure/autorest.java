@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Strings.
+ * An instance of this class provides access to all the operations defined in
+ * Strings.
  */
 public interface Strings {
     /**
@@ -49,6 +49,7 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getNullAsync();
+
     /**
      * Get null string value value.
      *
@@ -56,7 +57,6 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<RestResponse<Void, String>> getNullWithRestResponseAsync();
-
 
     /**
      * Set string value null.
@@ -91,6 +91,7 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putNullWithRestResponseAsync();
+
     /**
      * Set string value null.
      *
@@ -119,6 +120,7 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNullAsync(String stringBody);
+
     /**
      * Set string value null.
      *
@@ -127,7 +129,6 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody);
-
 
     /**
      * Get empty string value value ''.
@@ -155,6 +156,7 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getEmptyAsync();
+
     /**
      * Get empty string value value ''.
      *
@@ -162,7 +164,6 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync();
-
 
     /**
      * Set string value empty ''.
@@ -192,6 +193,7 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(String stringBody);
+
     /**
      * Set string value empty ''.
      *
@@ -200,7 +202,6 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(String stringBody);
-
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -228,6 +229,7 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getMbcsAsync();
+
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
@@ -235,7 +237,6 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync();
-
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -265,6 +266,7 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMbcsAsync(String stringBody);
+
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
@@ -273,7 +275,6 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(String stringBody);
-
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -301,6 +302,7 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getWhitespaceAsync();
+
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
@@ -308,7 +310,6 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync();
-
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -338,6 +339,7 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putWhitespaceAsync(String stringBody);
+
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
@@ -346,7 +348,6 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(String stringBody);
-
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -374,6 +375,7 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<String> getNotProvidedAsync();
+
     /**
      * Get String value when no string value is sent in response payload.
      *
@@ -381,7 +383,6 @@ public interface Strings {
      * @return the observable to the String object
      */
     Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync();
-
 
     /**
      * Get value that is base64 encoded.
@@ -409,6 +410,7 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getBase64EncodedAsync();
+
     /**
      * Get value that is base64 encoded.
      *
@@ -416,7 +418,6 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync();
-
 
     /**
      * Get value that is base64url encoded.
@@ -444,6 +445,7 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getBase64UrlEncodedAsync();
+
     /**
      * Get value that is base64url encoded.
      *
@@ -451,7 +453,6 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync();
-
 
     /**
      * Put value that is base64url encoded.
@@ -481,6 +482,7 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBase64UrlEncodedAsync(byte[] stringBody);
+
     /**
      * Put value that is base64url encoded.
      *
@@ -489,7 +491,6 @@ public interface Strings {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(byte[] stringBody);
-
 
     /**
      * Get null value that is expected to be base64url encoded.
@@ -517,6 +518,7 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getNullBase64UrlEncodedAsync();
+
     /**
      * Get null value that is expected to be base64url encoded.
      *
@@ -524,6 +526,5 @@ public interface Strings {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
-
 
 }

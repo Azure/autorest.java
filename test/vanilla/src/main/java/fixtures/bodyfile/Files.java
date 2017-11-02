@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Files.
+ * An instance of this class provides access to all the operations defined in
+ * Files.
  */
 public interface Files {
     /**
@@ -50,6 +50,7 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<InputStream> getFileAsync();
+
     /**
      * Get file.
      *
@@ -57,7 +58,6 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<RestResponse<Void, InputStream>> getFileWithRestResponseAsync();
-
 
     /**
      * Get a large file.
@@ -85,6 +85,7 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<InputStream> getFileLargeAsync();
+
     /**
      * Get a large file.
      *
@@ -92,7 +93,6 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<RestResponse<Void, InputStream>> getFileLargeWithRestResponseAsync();
-
 
     /**
      * Get empty file.
@@ -120,6 +120,7 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<InputStream> getEmptyFileAsync();
+
     /**
      * Get empty file.
      *
@@ -127,6 +128,5 @@ public interface Files {
      * @return the observable to the InputStream object
      */
     Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync();
-
 
 }

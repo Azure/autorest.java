@@ -30,8 +30,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Primitives.
+ * An instance of this class provides access to all the operations defined in
+ * Primitives.
  */
 public interface Primitives {
     /**
@@ -60,6 +60,7 @@ public interface Primitives {
      * @return the observable to the IntWrapper object
      */
     Single<IntWrapper> getIntAsync();
+
     /**
      * Get complex types with integer properties.
      *
@@ -67,7 +68,6 @@ public interface Primitives {
      * @return the observable to the IntWrapper object
      */
     Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync();
-
 
     /**
      * Put complex types with integer properties.
@@ -97,6 +97,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putIntAsync(IntWrapper complexBody);
+
     /**
      * Put complex types with integer properties.
      *
@@ -105,7 +106,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(IntWrapper complexBody);
-
 
     /**
      * Get complex types with long properties.
@@ -133,6 +133,7 @@ public interface Primitives {
      * @return the observable to the LongWrapper object
      */
     Single<LongWrapper> getLongAsync();
+
     /**
      * Get complex types with long properties.
      *
@@ -140,7 +141,6 @@ public interface Primitives {
      * @return the observable to the LongWrapper object
      */
     Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync();
-
 
     /**
      * Put complex types with long properties.
@@ -170,6 +170,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLongAsync(LongWrapper complexBody);
+
     /**
      * Put complex types with long properties.
      *
@@ -178,7 +179,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(LongWrapper complexBody);
-
 
     /**
      * Get complex types with float properties.
@@ -206,6 +206,7 @@ public interface Primitives {
      * @return the observable to the FloatWrapper object
      */
     Single<FloatWrapper> getFloatAsync();
+
     /**
      * Get complex types with float properties.
      *
@@ -213,7 +214,6 @@ public interface Primitives {
      * @return the observable to the FloatWrapper object
      */
     Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync();
-
 
     /**
      * Put complex types with float properties.
@@ -243,6 +243,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putFloatAsync(FloatWrapper complexBody);
+
     /**
      * Put complex types with float properties.
      *
@@ -251,7 +252,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(FloatWrapper complexBody);
-
 
     /**
      * Get complex types with double properties.
@@ -279,6 +279,7 @@ public interface Primitives {
      * @return the observable to the DoubleWrapper object
      */
     Single<DoubleWrapper> getDoubleAsync();
+
     /**
      * Get complex types with double properties.
      *
@@ -286,7 +287,6 @@ public interface Primitives {
      * @return the observable to the DoubleWrapper object
      */
     Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync();
-
 
     /**
      * Put complex types with double properties.
@@ -316,6 +316,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDoubleAsync(DoubleWrapper complexBody);
+
     /**
      * Put complex types with double properties.
      *
@@ -324,7 +325,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(DoubleWrapper complexBody);
-
 
     /**
      * Get complex types with bool properties.
@@ -352,6 +352,7 @@ public interface Primitives {
      * @return the observable to the BooleanWrapper object
      */
     Single<BooleanWrapper> getBoolAsync();
+
     /**
      * Get complex types with bool properties.
      *
@@ -359,7 +360,6 @@ public interface Primitives {
      * @return the observable to the BooleanWrapper object
      */
     Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync();
-
 
     /**
      * Put complex types with bool properties.
@@ -389,6 +389,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBoolAsync(BooleanWrapper complexBody);
+
     /**
      * Put complex types with bool properties.
      *
@@ -397,7 +398,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(BooleanWrapper complexBody);
-
 
     /**
      * Get complex types with string properties.
@@ -425,6 +425,7 @@ public interface Primitives {
      * @return the observable to the StringWrapper object
      */
     Single<StringWrapper> getStringAsync();
+
     /**
      * Get complex types with string properties.
      *
@@ -432,7 +433,6 @@ public interface Primitives {
      * @return the observable to the StringWrapper object
      */
     Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync();
-
 
     /**
      * Put complex types with string properties.
@@ -462,6 +462,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putStringAsync(StringWrapper complexBody);
+
     /**
      * Put complex types with string properties.
      *
@@ -470,7 +471,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(StringWrapper complexBody);
-
 
     /**
      * Get complex types with date properties.
@@ -498,6 +498,7 @@ public interface Primitives {
      * @return the observable to the DateWrapper object
      */
     Single<DateWrapper> getDateAsync();
+
     /**
      * Get complex types with date properties.
      *
@@ -505,7 +506,6 @@ public interface Primitives {
      * @return the observable to the DateWrapper object
      */
     Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync();
-
 
     /**
      * Put complex types with date properties.
@@ -535,6 +535,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateAsync(DateWrapper complexBody);
+
     /**
      * Put complex types with date properties.
      *
@@ -543,7 +544,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(DateWrapper complexBody);
-
 
     /**
      * Get complex types with datetime properties.
@@ -571,6 +571,7 @@ public interface Primitives {
      * @return the observable to the DatetimeWrapper object
      */
     Single<DatetimeWrapper> getDateTimeAsync();
+
     /**
      * Get complex types with datetime properties.
      *
@@ -578,7 +579,6 @@ public interface Primitives {
      * @return the observable to the DatetimeWrapper object
      */
     Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync();
-
 
     /**
      * Put complex types with datetime properties.
@@ -608,6 +608,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateTimeAsync(DatetimeWrapper complexBody);
+
     /**
      * Put complex types with datetime properties.
      *
@@ -616,7 +617,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(DatetimeWrapper complexBody);
-
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -644,6 +644,7 @@ public interface Primitives {
      * @return the observable to the Datetimerfc1123Wrapper object
      */
     Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
+
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
@@ -651,7 +652,6 @@ public interface Primitives {
      * @return the observable to the Datetimerfc1123Wrapper object
      */
     Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
-
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -681,6 +681,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
+
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
@@ -689,7 +690,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(Datetimerfc1123Wrapper complexBody);
-
 
     /**
      * Get complex types with duration properties.
@@ -717,6 +717,7 @@ public interface Primitives {
      * @return the observable to the DurationWrapper object
      */
     Single<DurationWrapper> getDurationAsync();
+
     /**
      * Get complex types with duration properties.
      *
@@ -724,7 +725,6 @@ public interface Primitives {
      * @return the observable to the DurationWrapper object
      */
     Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync();
-
 
     /**
      * Put complex types with duration properties.
@@ -754,6 +754,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDurationAsync(DurationWrapper complexBody);
+
     /**
      * Put complex types with duration properties.
      *
@@ -762,7 +763,6 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(DurationWrapper complexBody);
-
 
     /**
      * Get complex types with byte properties.
@@ -790,6 +790,7 @@ public interface Primitives {
      * @return the observable to the ByteWrapper object
      */
     Single<ByteWrapper> getByteAsync();
+
     /**
      * Get complex types with byte properties.
      *
@@ -797,7 +798,6 @@ public interface Primitives {
      * @return the observable to the ByteWrapper object
      */
     Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync();
-
 
     /**
      * Put complex types with byte properties.
@@ -827,6 +827,7 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putByteAsync(ByteWrapper complexBody);
+
     /**
      * Put complex types with byte properties.
      *
@@ -835,6 +836,5 @@ public interface Primitives {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(ByteWrapper complexBody);
-
 
 }

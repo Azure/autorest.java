@@ -21,8 +21,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Enums.
+ * An instance of this class provides access to all the operations defined in
+ * Enums.
  */
 public interface Enums {
     /**
@@ -51,6 +51,7 @@ public interface Enums {
      * @return the observable to the Colors object
      */
     Single<Colors> getNotExpandableAsync();
+
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -58,7 +59,6 @@ public interface Enums {
      * @return the observable to the Colors object
      */
     Single<RestResponse<Void, Colors>> getNotExpandableWithRestResponseAsync();
-
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -88,6 +88,7 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNotExpandableAsync(Colors stringBody);
+
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -96,7 +97,6 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putNotExpandableWithRestResponseAsync(Colors stringBody);
-
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -124,6 +124,7 @@ public interface Enums {
      * @return the observable to the Colors object
      */
     Single<Colors> getReferencedAsync();
+
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -131,7 +132,6 @@ public interface Enums {
      * @return the observable to the Colors object
      */
     Single<RestResponse<Void, Colors>> getReferencedWithRestResponseAsync();
-
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -161,6 +161,7 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putReferencedAsync(Colors enumStringBody);
+
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -169,7 +170,6 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putReferencedWithRestResponseAsync(Colors enumStringBody);
-
 
     /**
      * Get value 'green-color' from the constant.
@@ -197,6 +197,7 @@ public interface Enums {
      * @return the observable to the RefColorConstant object
      */
     Single<RefColorConstant> getReferencedConstantAsync();
+
     /**
      * Get value 'green-color' from the constant.
      *
@@ -204,7 +205,6 @@ public interface Enums {
      * @return the observable to the RefColorConstant object
      */
     Single<RestResponse<Void, RefColorConstant>> getReferencedConstantWithRestResponseAsync();
-
 
     /**
      * Sends value 'green-color' from a constant.
@@ -234,6 +234,7 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
+
     /**
      * Sends value 'green-color' from a constant.
      *
@@ -242,6 +243,5 @@ public interface Enums {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putReferencedConstantWithRestResponseAsync(RefColorConstant enumStringBody);
-
 
 }

@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Bytes.
+ * An instance of this class provides access to all the operations defined in
+ * Bytes.
  */
 public interface Bytes {
     /**
@@ -49,6 +49,7 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getNullAsync();
+
     /**
      * Get null byte value.
      *
@@ -56,7 +57,6 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getNullWithRestResponseAsync();
-
 
     /**
      * Get empty byte value ''.
@@ -84,6 +84,7 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getEmptyAsync();
+
     /**
      * Get empty byte value ''.
      *
@@ -91,7 +92,6 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getEmptyWithRestResponseAsync();
-
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -119,6 +119,7 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getNonAsciiAsync();
+
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
@@ -126,7 +127,6 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getNonAsciiWithRestResponseAsync();
-
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -156,6 +156,7 @@ public interface Bytes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putNonAsciiAsync(byte[] byteBody);
+
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
@@ -164,7 +165,6 @@ public interface Bytes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putNonAsciiWithRestResponseAsync(byte[] byteBody);
-
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -192,6 +192,7 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<byte[]> getInvalidAsync();
+
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
@@ -199,6 +200,5 @@ public interface Bytes {
      * @return the observable to the byte[] object
      */
     Single<RestResponse<Void, byte[]>> getInvalidWithRestResponseAsync();
-
 
 }

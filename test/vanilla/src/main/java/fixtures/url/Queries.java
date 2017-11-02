@@ -23,8 +23,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Queries.
+ * An instance of this class provides access to all the operations defined in
+ * Queries.
  */
 public interface Queries {
     /**
@@ -52,6 +52,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanTrueAsync();
+
     /**
      * Get true Boolean value on path.
      *
@@ -59,7 +60,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
-
 
     /**
      * Get false Boolean value on path.
@@ -86,6 +86,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanFalseAsync();
+
     /**
      * Get false Boolean value on path.
      *
@@ -93,7 +94,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
-
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -128,6 +128,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync();
+
     /**
      * Get null Boolean value on query (query string should be absent).
      *
@@ -156,6 +157,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getBooleanNullAsync(Boolean boolQuery);
+
     /**
      * Get null Boolean value on query (query string should be absent).
      *
@@ -164,7 +166,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanNullWithRestResponseAsync(Boolean boolQuery);
-
 
     /**
      * Get '1000000' integer value.
@@ -191,6 +192,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntOneMillionAsync();
+
     /**
      * Get '1000000' integer value.
      *
@@ -198,7 +200,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
-
 
     /**
      * Get '-1000000' integer value.
@@ -225,6 +226,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNegativeOneMillionAsync();
+
     /**
      * Get '-1000000' integer value.
      *
@@ -232,7 +234,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
-
 
     /**
      * Get null integer value (no query parameter).
@@ -267,6 +268,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync();
+
     /**
      * Get null integer value (no query parameter).
      *
@@ -295,6 +297,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getIntNullAsync(Integer intQuery);
+
     /**
      * Get null integer value (no query parameter).
      *
@@ -303,7 +306,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNullWithRestResponseAsync(Integer intQuery);
-
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -330,6 +332,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getTenBillionAsync();
+
     /**
      * Get '10000000000' 64 bit integer value.
      *
@@ -337,7 +340,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
-
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -364,6 +366,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getNegativeTenBillionAsync();
+
     /**
      * Get '-10000000000' 64 bit integer value.
      *
@@ -371,7 +374,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
-
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -406,6 +408,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync();
+
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
@@ -434,6 +437,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getLongNullAsync(Long longQuery);
+
     /**
      * Get 'null 64 bit integer value (no query param in uri).
      *
@@ -442,7 +446,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getLongNullWithRestResponseAsync(Long longQuery);
-
 
     /**
      * Get '1.034E+20' numeric value.
@@ -469,6 +472,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificPositiveAsync();
+
     /**
      * Get '1.034E+20' numeric value.
      *
@@ -476,7 +480,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
-
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -503,6 +506,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatScientificNegativeAsync();
+
     /**
      * Get '-1.034E-20' numeric value.
      *
@@ -510,7 +514,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
-
 
     /**
      * Get null numeric value (no query parameter).
@@ -545,6 +548,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync();
+
     /**
      * Get null numeric value (no query parameter).
      *
@@ -573,6 +577,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> floatNullAsync(Double floatQuery);
+
     /**
      * Get null numeric value (no query parameter).
      *
@@ -581,7 +586,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> floatNullWithRestResponseAsync(Double floatQuery);
-
 
     /**
      * Get '9999999.999' numeric value.
@@ -608,6 +612,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalPositiveAsync();
+
     /**
      * Get '9999999.999' numeric value.
      *
@@ -615,7 +620,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
-
 
     /**
      * Get '-9999999.999' numeric value.
@@ -642,6 +646,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleDecimalNegativeAsync();
+
     /**
      * Get '-9999999.999' numeric value.
      *
@@ -649,7 +654,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
-
 
     /**
      * Get null numeric value (no query parameter).
@@ -684,6 +688,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync();
+
     /**
      * Get null numeric value (no query parameter).
      *
@@ -712,6 +717,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> doubleNullAsync(Double doubleQuery);
+
     /**
      * Get null numeric value (no query parameter).
      *
@@ -720,7 +726,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleNullWithRestResponseAsync(Double doubleQuery);
-
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -747,6 +752,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUnicodeAsync();
+
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
@@ -754,7 +760,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
-
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -781,6 +786,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringUrlEncodedAsync();
+
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
@@ -788,7 +794,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
-
 
     /**
      * Get ''.
@@ -815,6 +820,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringEmptyAsync();
+
     /**
      * Get ''.
      *
@@ -822,7 +828,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
-
 
     /**
      * Get null (no query parameter in url).
@@ -857,6 +862,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync();
+
     /**
      * Get null (no query parameter in url).
      *
@@ -885,6 +891,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> stringNullAsync(String stringQuery);
+
     /**
      * Get null (no query parameter in url).
      *
@@ -893,7 +900,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringQuery);
-
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -928,6 +934,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync();
+
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -956,6 +963,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumValidAsync(UriColor enumQuery);
+
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -964,7 +972,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumQuery);
-
 
     /**
      * Get null (no query parameter in url).
@@ -999,6 +1006,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync();
+
     /**
      * Get null (no query parameter in url).
      *
@@ -1027,6 +1035,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> enumNullAsync(UriColor enumQuery);
+
     /**
      * Get null (no query parameter in url).
      *
@@ -1035,7 +1044,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumQuery);
-
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1070,6 +1078,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync();
+
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -1098,6 +1107,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteMultiByteAsync(byte[] byteQuery);
+
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
@@ -1106,7 +1116,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery);
-
 
     /**
      * Get '' as byte array.
@@ -1133,6 +1142,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteEmptyAsync();
+
     /**
      * Get '' as byte array.
      *
@@ -1140,7 +1150,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
-
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1175,6 +1184,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync();
+
     /**
      * Get null as byte array (no query parameters in uri).
      *
@@ -1203,6 +1213,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> byteNullAsync(byte[] byteQuery);
+
     /**
      * Get null as byte array (no query parameters in uri).
      *
@@ -1211,7 +1222,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery);
-
 
     /**
      * Get '2012-01-01' as date.
@@ -1238,6 +1248,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateValidAsync();
+
     /**
      * Get '2012-01-01' as date.
      *
@@ -1245,7 +1256,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
-
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1280,6 +1290,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync();
+
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -1308,6 +1319,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateNullAsync(LocalDate dateQuery);
+
     /**
      * Get null as date - this should result in no query parameters in uri.
      *
@@ -1316,7 +1328,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate dateQuery);
-
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1343,6 +1354,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeValidAsync();
+
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
@@ -1350,7 +1362,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
-
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1385,6 +1396,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync();
+
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
@@ -1413,6 +1425,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> dateTimeNullAsync(DateTime dateTimeQuery);
+
     /**
      * Get null as date-time, should result in no query parameters in uri.
      *
@@ -1421,7 +1434,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimeQuery);
-
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1456,6 +1468,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync();
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -1484,6 +1497,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
@@ -1492,7 +1506,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery);
-
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1527,6 +1540,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync();
+
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -1555,6 +1569,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
+
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -1563,7 +1578,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery);
-
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1598,6 +1612,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync();
+
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -1626,6 +1641,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
+
     /**
      * Get an empty array [] of string using the csv-array format.
      *
@@ -1634,7 +1650,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery);
-
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1669,6 +1684,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync();
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -1697,6 +1713,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -1705,7 +1722,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery);
-
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1740,6 +1756,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync();
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
@@ -1768,6 +1785,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
@@ -1776,7 +1794,6 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery);
-
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1811,6 +1828,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync();
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -1839,6 +1857,7 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
+
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -1847,6 +1866,5 @@ public interface Queries {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery);
-
 
 }

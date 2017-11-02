@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Ints.
+ * An instance of this class provides access to all the operations defined in
+ * Ints.
  */
 public interface Ints {
     /**
@@ -50,6 +50,7 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getNullAsync();
+
     /**
      * Get null Int value.
      *
@@ -57,7 +58,6 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid Int value.
@@ -85,6 +85,7 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getInvalidAsync();
+
     /**
      * Get invalid Int value.
      *
@@ -92,7 +93,6 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync();
-
 
     /**
      * Get overflow Int32 value.
@@ -120,6 +120,7 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getOverflowInt32Async();
+
     /**
      * Get overflow Int32 value.
      *
@@ -127,7 +128,6 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync();
-
 
     /**
      * Get underflow Int32 value.
@@ -155,6 +155,7 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<Integer> getUnderflowInt32Async();
+
     /**
      * Get underflow Int32 value.
      *
@@ -162,7 +163,6 @@ public interface Ints {
      * @return the observable to the int object
      */
     Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync();
-
 
     /**
      * Get overflow Int64 value.
@@ -190,6 +190,7 @@ public interface Ints {
      * @return the observable to the long object
      */
     Single<Long> getOverflowInt64Async();
+
     /**
      * Get overflow Int64 value.
      *
@@ -197,7 +198,6 @@ public interface Ints {
      * @return the observable to the long object
      */
     Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync();
-
 
     /**
      * Get underflow Int64 value.
@@ -225,6 +225,7 @@ public interface Ints {
      * @return the observable to the long object
      */
     Single<Long> getUnderflowInt64Async();
+
     /**
      * Get underflow Int64 value.
      *
@@ -232,7 +233,6 @@ public interface Ints {
      * @return the observable to the long object
      */
     Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync();
-
 
     /**
      * Put max int32 value.
@@ -262,6 +262,7 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMax32Async(int intBody);
+
     /**
      * Put max int32 value.
      *
@@ -270,7 +271,6 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(int intBody);
-
 
     /**
      * Put max int64 value.
@@ -300,6 +300,7 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMax64Async(long intBody);
+
     /**
      * Put max int64 value.
      *
@@ -308,7 +309,6 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(long intBody);
-
 
     /**
      * Put min int32 value.
@@ -338,6 +338,7 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMin32Async(int intBody);
+
     /**
      * Put min int32 value.
      *
@@ -346,7 +347,6 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(int intBody);
-
 
     /**
      * Put min int64 value.
@@ -376,6 +376,7 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMin64Async(long intBody);
+
     /**
      * Put min int64 value.
      *
@@ -384,7 +385,6 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(long intBody);
-
 
     /**
      * Get datetime encoded as Unix time value.
@@ -412,6 +412,7 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUnixTimeAsync();
+
     /**
      * Get datetime encoded as Unix time value.
      *
@@ -419,7 +420,6 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync();
-
 
     /**
      * Put datetime encoded as Unix time.
@@ -449,6 +449,7 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUnixTimeDateAsync(DateTime intBody);
+
     /**
      * Put datetime encoded as Unix time.
      *
@@ -457,7 +458,6 @@ public interface Ints {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(DateTime intBody);
-
 
     /**
      * Get invalid Unix time value.
@@ -485,6 +485,7 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getInvalidUnixTimeAsync();
+
     /**
      * Get invalid Unix time value.
      *
@@ -492,7 +493,6 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync();
-
 
     /**
      * Get null Unix time value.
@@ -520,6 +520,7 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getNullUnixTimeAsync();
+
     /**
      * Get null Unix time value.
      *
@@ -527,6 +528,5 @@ public interface Ints {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync();
-
 
 }

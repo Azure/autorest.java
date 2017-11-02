@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Dictionarys.
+ * An instance of this class provides access to all the operations defined in
+ * Dictionarys.
  */
 public interface Dictionarys {
     /**
@@ -50,6 +50,7 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<DictionaryWrapper> getValidAsync();
+
     /**
      * Get complex types with dictionary property.
      *
@@ -57,7 +58,6 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<RestResponse<Void, DictionaryWrapper>> getValidWithRestResponseAsync();
-
 
     /**
      * Put complex types with dictionary property.
@@ -87,6 +87,7 @@ public interface Dictionarys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(DictionaryWrapper complexBody);
+
     /**
      * Put complex types with dictionary property.
      *
@@ -95,7 +96,6 @@ public interface Dictionarys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(DictionaryWrapper complexBody);
-
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -123,6 +123,7 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<DictionaryWrapper> getEmptyAsync();
+
     /**
      * Get complex types with dictionary property which is empty.
      *
@@ -130,7 +131,6 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<RestResponse<Void, DictionaryWrapper>> getEmptyWithRestResponseAsync();
-
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -160,6 +160,7 @@ public interface Dictionarys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putEmptyAsync(DictionaryWrapper complexBody);
+
     /**
      * Put complex types with dictionary property which is empty.
      *
@@ -168,7 +169,6 @@ public interface Dictionarys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(DictionaryWrapper complexBody);
-
 
     /**
      * Get complex types with dictionary property which is null.
@@ -196,6 +196,7 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<DictionaryWrapper> getNullAsync();
+
     /**
      * Get complex types with dictionary property which is null.
      *
@@ -203,7 +204,6 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNullWithRestResponseAsync();
-
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
@@ -231,6 +231,7 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<DictionaryWrapper> getNotProvidedAsync();
+
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
@@ -238,6 +239,5 @@ public interface Dictionarys {
      * @return the observable to the DictionaryWrapper object
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
-
 
 }

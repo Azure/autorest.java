@@ -315,6 +315,11 @@ namespace AutoRest.Java.DanModel
             Block($"public enum {enumName}", enumAction);
         }
 
+        public void PublicInterface(string interfaceName, Action<JavaBlock> enumAction)
+        {
+            Block($"public interface {interfaceName}", enumAction);
+        }
+
         public void CommentParam(string parameterName, string parameterDescription)
         {
             Line($"@param {parameterName} {parameterDescription}");
@@ -323,6 +328,11 @@ namespace AutoRest.Java.DanModel
         public void CommentReturn(string returnValueDescription)
         {
             Line($"@return {returnValueDescription}");
+        }
+
+        public void CommentThrows(string exceptionTypeName, string description)
+        {
+            Line($"@throws {exceptionTypeName} {description}");
         }
 
         public void If(string condition, Action<JavaBlock> ifAction)

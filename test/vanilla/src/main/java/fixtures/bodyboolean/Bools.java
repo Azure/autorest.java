@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Bools.
+ * An instance of this class provides access to all the operations defined in
+ * Bools.
  */
 public interface Bools {
     /**
@@ -49,6 +49,7 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getTrueAsync();
+
     /**
      * Get true Boolean value.
      *
@@ -56,7 +57,6 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync();
-
 
     /**
      * Set Boolean value true.
@@ -86,6 +86,7 @@ public interface Bools {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putTrueAsync(boolean boolBody);
+
     /**
      * Set Boolean value true.
      *
@@ -94,7 +95,6 @@ public interface Bools {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody);
-
 
     /**
      * Get false Boolean value.
@@ -122,6 +122,7 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getFalseAsync();
+
     /**
      * Get false Boolean value.
      *
@@ -129,7 +130,6 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync();
-
 
     /**
      * Set Boolean value false.
@@ -159,6 +159,7 @@ public interface Bools {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putFalseAsync(boolean boolBody);
+
     /**
      * Set Boolean value false.
      *
@@ -167,7 +168,6 @@ public interface Bools {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody);
-
 
     /**
      * Get null Boolean value.
@@ -195,6 +195,7 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getNullAsync();
+
     /**
      * Get null Boolean value.
      *
@@ -202,7 +203,6 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid Boolean value.
@@ -230,6 +230,7 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<Boolean> getInvalidAsync();
+
     /**
      * Get invalid Boolean value.
      *
@@ -237,6 +238,5 @@ public interface Bools {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync();
-
 
 }

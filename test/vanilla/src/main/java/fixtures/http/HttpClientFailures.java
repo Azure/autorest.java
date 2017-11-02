@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpClientFailures.
+ * An instance of this class provides access to all the operations defined in
+ * HttpClientFailures.
  */
 public interface HttpClientFailures {
     /**
@@ -50,6 +50,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> head400Async();
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -57,7 +58,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> head400WithRestResponseAsync();
-
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -85,6 +85,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> get400Async();
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -92,7 +93,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get400WithRestResponseAsync();
-
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -128,6 +128,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put400WithRestResponseAsync();
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -157,6 +158,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> put400Async(Boolean booleanValue);
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -165,7 +167,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -201,6 +202,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> patch400WithRestResponseAsync();
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -230,6 +232,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> patch400Async(Boolean booleanValue);
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -238,7 +241,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -274,6 +276,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post400WithRestResponseAsync();
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -303,6 +306,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> post400Async(Boolean booleanValue);
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -311,7 +315,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -347,6 +350,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete400WithRestResponseAsync();
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -376,6 +380,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> delete400Async(Boolean booleanValue);
+
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -384,7 +389,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -412,6 +416,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> head401Async();
+
     /**
      * Return 401 status code - should be represented in the client as an error.
      *
@@ -419,7 +424,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> head401WithRestResponseAsync();
-
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -447,6 +451,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> get402Async();
+
     /**
      * Return 402 status code - should be represented in the client as an error.
      *
@@ -454,7 +459,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get402WithRestResponseAsync();
-
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -482,6 +486,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> get403Async();
+
     /**
      * Return 403 status code - should be represented in the client as an error.
      *
@@ -489,7 +494,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get403WithRestResponseAsync();
-
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -525,6 +529,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put404WithRestResponseAsync();
+
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
@@ -554,6 +559,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> put404Async(Boolean booleanValue);
+
     /**
      * Return 404 status code - should be represented in the client as an error.
      *
@@ -562,7 +568,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -598,6 +603,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> patch405WithRestResponseAsync();
+
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
@@ -627,6 +633,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> patch405Async(Boolean booleanValue);
+
     /**
      * Return 405 status code - should be represented in the client as an error.
      *
@@ -635,7 +642,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -671,6 +677,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post406WithRestResponseAsync();
+
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
@@ -700,6 +707,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> post406Async(Boolean booleanValue);
+
     /**
      * Return 406 status code - should be represented in the client as an error.
      *
@@ -708,7 +716,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -744,6 +751,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete407WithRestResponseAsync();
+
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
@@ -773,6 +781,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> delete407Async(Boolean booleanValue);
+
     /**
      * Return 407 status code - should be represented in the client as an error.
      *
@@ -781,7 +790,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -817,6 +825,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put409WithRestResponseAsync();
+
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
@@ -846,6 +855,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> put409Async(Boolean booleanValue);
+
     /**
      * Return 409 status code - should be represented in the client as an error.
      *
@@ -854,7 +864,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -882,6 +891,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> head410Async();
+
     /**
      * Return 410 status code - should be represented in the client as an error.
      *
@@ -889,7 +899,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> head410WithRestResponseAsync();
-
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -917,6 +926,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> get411Async();
+
     /**
      * Return 411 status code - should be represented in the client as an error.
      *
@@ -924,7 +934,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get411WithRestResponseAsync();
-
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -952,6 +961,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> get412Async();
+
     /**
      * Return 412 status code - should be represented in the client as an error.
      *
@@ -959,7 +969,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get412WithRestResponseAsync();
-
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -995,6 +1004,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put413WithRestResponseAsync();
+
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
@@ -1024,6 +1034,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> put413Async(Boolean booleanValue);
+
     /**
      * Return 413 status code - should be represented in the client as an error.
      *
@@ -1032,7 +1043,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1068,6 +1078,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> patch414WithRestResponseAsync();
+
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
@@ -1097,6 +1108,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> patch414Async(Boolean booleanValue);
+
     /**
      * Return 414 status code - should be represented in the client as an error.
      *
@@ -1105,7 +1117,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1141,6 +1152,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post415WithRestResponseAsync();
+
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
@@ -1170,6 +1182,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> post415Async(Boolean booleanValue);
+
     /**
      * Return 415 status code - should be represented in the client as an error.
      *
@@ -1178,7 +1191,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1206,6 +1218,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> get416Async();
+
     /**
      * Return 416 status code - should be represented in the client as an error.
      *
@@ -1213,7 +1226,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> get416WithRestResponseAsync();
-
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1249,6 +1261,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete417WithRestResponseAsync();
+
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
@@ -1278,6 +1291,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> delete417Async(Boolean booleanValue);
+
     /**
      * Return 417 status code - should be represented in the client as an error.
      *
@@ -1286,7 +1300,6 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -1314,6 +1327,7 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<Error> head429Async();
+
     /**
      * Return 429 status code - should be represented in the client as an error.
      *
@@ -1321,6 +1335,5 @@ public interface HttpClientFailures {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> head429WithRestResponseAsync();
-
 
 }

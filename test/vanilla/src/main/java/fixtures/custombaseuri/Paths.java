@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public interface Paths {
     /**
@@ -51,6 +51,7 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getEmptyAsync(String accountName);
+
     /**
      * Get a 200 to test a valid base uri.
      *
@@ -59,6 +60,5 @@ public interface Paths {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName);
-
 
 }

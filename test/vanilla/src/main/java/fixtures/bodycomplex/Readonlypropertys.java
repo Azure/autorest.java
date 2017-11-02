@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Readonlypropertys.
+ * An instance of this class provides access to all the operations defined in
+ * Readonlypropertys.
  */
 public interface Readonlypropertys {
     /**
@@ -50,6 +50,7 @@ public interface Readonlypropertys {
      * @return the observable to the ReadonlyObj object
      */
     Single<ReadonlyObj> getValidAsync();
+
     /**
      * Get complex types that have readonly properties.
      *
@@ -57,7 +58,6 @@ public interface Readonlypropertys {
      * @return the observable to the ReadonlyObj object
      */
     Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
-
 
     /**
      * Put complex types that have readonly properties.
@@ -87,6 +87,7 @@ public interface Readonlypropertys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(ReadonlyObj complexBody);
+
     /**
      * Put complex types that have readonly properties.
      *
@@ -95,6 +96,5 @@ public interface Readonlypropertys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody);
-
 
 }

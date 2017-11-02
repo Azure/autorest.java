@@ -30,8 +30,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Explicits.
+ * An instance of this class provides access to all the operations defined in
+ * Explicits.
  */
 public interface Explicits {
     /**
@@ -63,6 +63,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredIntegerParameterAsync(int bodyParameter);
+
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
@@ -71,7 +72,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredIntegerParameterWithRestResponseAsync(int bodyParameter);
-
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -106,6 +106,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync();
+
     /**
      * Test explicitly optional integer. Please put null.
      *
@@ -134,6 +135,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter);
+
     /**
      * Test explicitly optional integer. Please put null.
      *
@@ -142,7 +144,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerParameterWithRestResponseAsync(Integer bodyParameter);
-
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -173,6 +174,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter);
+
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -181,7 +183,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredIntegerPropertyWithRestResponseAsync(IntWrapper bodyParameter);
-
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -216,6 +217,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync();
+
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
@@ -244,6 +246,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
+
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
@@ -252,7 +255,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync(IntOptionalWrapper bodyParameter);
-
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -283,6 +285,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredIntegerHeaderAsync(int headerParameter);
+
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
@@ -291,7 +294,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredIntegerHeaderWithRestResponseAsync(int headerParameter);
-
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -326,6 +328,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync();
+
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -354,6 +357,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter);
+
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -362,7 +366,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalIntegerHeaderWithRestResponseAsync(Integer headerParameter);
-
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -393,6 +396,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredStringParameterAsync(String bodyParameter);
+
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
@@ -401,7 +405,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredStringParameterWithRestResponseAsync(String bodyParameter);
-
 
     /**
      * Test explicitly optional string. Please put null.
@@ -436,6 +439,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync();
+
     /**
      * Test explicitly optional string. Please put null.
      *
@@ -464,6 +468,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringParameterAsync(String bodyParameter);
+
     /**
      * Test explicitly optional string. Please put null.
      *
@@ -472,7 +477,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringParameterWithRestResponseAsync(String bodyParameter);
-
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -503,6 +507,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter);
+
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -511,7 +516,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredStringPropertyWithRestResponseAsync(StringWrapper bodyParameter);
-
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -546,6 +550,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync();
+
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
@@ -574,6 +579,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
+
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
@@ -582,7 +588,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync(StringOptionalWrapper bodyParameter);
-
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -613,6 +618,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredStringHeaderAsync(String headerParameter);
+
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
@@ -621,7 +627,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredStringHeaderWithRestResponseAsync(String headerParameter);
-
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -656,6 +661,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync();
+
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
@@ -684,6 +690,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalStringHeaderAsync(String bodyParameter);
+
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
@@ -692,7 +699,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalStringHeaderWithRestResponseAsync(String bodyParameter);
-
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -723,6 +729,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredClassParameterAsync(Product bodyParameter);
+
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
@@ -731,7 +738,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredClassParameterWithRestResponseAsync(Product bodyParameter);
-
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -766,6 +772,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync();
+
     /**
      * Test explicitly optional complex object. Please put null.
      *
@@ -794,6 +801,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalClassParameterAsync(Product bodyParameter);
+
     /**
      * Test explicitly optional complex object. Please put null.
      *
@@ -802,7 +810,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync(Product bodyParameter);
-
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -833,6 +840,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter);
+
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -841,7 +849,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredClassPropertyWithRestResponseAsync(ClassWrapper bodyParameter);
-
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -876,6 +883,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync();
+
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
@@ -904,6 +912,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
+
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
@@ -912,7 +921,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync(ClassOptionalWrapper bodyParameter);
-
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -943,6 +951,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredArrayParameterAsync(List<String> bodyParameter);
+
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
@@ -951,7 +960,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredArrayParameterWithRestResponseAsync(List<String> bodyParameter);
-
 
     /**
      * Test explicitly optional array. Please put null.
@@ -986,6 +994,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync();
+
     /**
      * Test explicitly optional array. Please put null.
      *
@@ -1014,6 +1023,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter);
+
     /**
      * Test explicitly optional array. Please put null.
      *
@@ -1022,7 +1032,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync(List<String> bodyParameter);
-
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1053,6 +1062,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter);
+
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -1061,7 +1071,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredArrayPropertyWithRestResponseAsync(ArrayWrapper bodyParameter);
-
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1096,6 +1105,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync();
+
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
@@ -1124,6 +1134,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
+
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
@@ -1132,7 +1143,6 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync(ArrayOptionalWrapper bodyParameter);
-
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -1163,6 +1173,7 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<Error> postRequiredArrayHeaderAsync(List<String> headerParameter);
+
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
@@ -1171,7 +1182,6 @@ public interface Explicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> postRequiredArrayHeaderWithRestResponseAsync(List<String> headerParameter);
-
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1206,6 +1216,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync();
+
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -1234,6 +1245,7 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter);
+
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
@@ -1242,6 +1254,5 @@ public interface Explicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
-
 
 }

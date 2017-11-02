@@ -34,5 +34,11 @@ namespace AutoRest.Java.DanModel
             contents.CommentReturn(returnValueDescription);
             return this;
         }
+
+        public JavaMultipleLineComment Throws(string exceptionTypeName, string description)
+        {
+            contents.CommentThrows(exceptionTypeName, description);
+            return this;
+        }
     }
 }

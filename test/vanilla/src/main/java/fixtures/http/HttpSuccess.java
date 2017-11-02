@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpSuccess.
+ * An instance of this class provides access to all the operations defined in
+ * HttpSuccess.
  */
 public interface HttpSuccess {
     /**
@@ -48,6 +48,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head200Async();
+
     /**
      * Return 200 status code if successful.
      *
@@ -55,7 +56,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> head200WithRestResponseAsync();
-
 
     /**
      * Get 200 success.
@@ -83,6 +83,7 @@ public interface HttpSuccess {
      * @return the observable to the boolean object
      */
     Single<Boolean> get200Async();
+
     /**
      * Get 200 success.
      *
@@ -90,7 +91,6 @@ public interface HttpSuccess {
      * @return the observable to the boolean object
      */
     Single<RestResponse<Void, Boolean>> get200WithRestResponseAsync();
-
 
     /**
      * Put boolean value true returning 200 success.
@@ -125,6 +125,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put200WithRestResponseAsync();
+
     /**
      * Put boolean value true returning 200 success.
      *
@@ -153,6 +154,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put200Async(Boolean booleanValue);
+
     /**
      * Put boolean value true returning 200 success.
      *
@@ -161,7 +163,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put200WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -196,6 +197,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch200WithRestResponseAsync();
+
     /**
      * Patch true Boolean value in request returning 200.
      *
@@ -224,6 +226,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch200Async(Boolean booleanValue);
+
     /**
      * Patch true Boolean value in request returning 200.
      *
@@ -232,7 +235,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch200WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -267,6 +269,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post200WithRestResponseAsync();
+
     /**
      * Post bollean value true in request that returns a 200.
      *
@@ -295,6 +298,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post200Async(Boolean booleanValue);
+
     /**
      * Post bollean value true in request that returns a 200.
      *
@@ -303,7 +307,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post200WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Delete simple boolean value true returns 200.
@@ -338,6 +341,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete200WithRestResponseAsync();
+
     /**
      * Delete simple boolean value true returns 200.
      *
@@ -366,6 +370,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete200Async(Boolean booleanValue);
+
     /**
      * Delete simple boolean value true returns 200.
      *
@@ -374,7 +379,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete200WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Put true Boolean value in request returns 201.
@@ -409,6 +413,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put201WithRestResponseAsync();
+
     /**
      * Put true Boolean value in request returns 201.
      *
@@ -437,6 +442,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put201Async(Boolean booleanValue);
+
     /**
      * Put true Boolean value in request returns 201.
      *
@@ -445,7 +451,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put201WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -480,6 +485,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post201WithRestResponseAsync();
+
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
@@ -508,6 +514,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post201Async(Boolean booleanValue);
+
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
@@ -516,7 +523,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post201WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -551,6 +557,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put202WithRestResponseAsync();
+
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
@@ -579,6 +586,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put202Async(Boolean booleanValue);
+
     /**
      * Put true Boolean value in request returns 202 (Accepted).
      *
@@ -587,7 +595,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put202WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -622,6 +629,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch202WithRestResponseAsync();
+
     /**
      * Patch true Boolean value in request returns 202.
      *
@@ -650,6 +658,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch202Async(Boolean booleanValue);
+
     /**
      * Patch true Boolean value in request returns 202.
      *
@@ -658,7 +667,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch202WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -693,6 +701,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post202WithRestResponseAsync();
+
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
@@ -721,6 +730,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post202Async(Boolean booleanValue);
+
     /**
      * Post true Boolean value in request returns 202 (Accepted).
      *
@@ -729,7 +739,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post202WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -764,6 +773,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete202WithRestResponseAsync();
+
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
@@ -792,6 +802,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete202Async(Boolean booleanValue);
+
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
@@ -800,7 +811,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete202WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 204 status code if successful.
@@ -827,6 +837,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head204Async();
+
     /**
      * Return 204 status code if successful.
      *
@@ -834,7 +845,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> head204WithRestResponseAsync();
-
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -869,6 +879,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put204WithRestResponseAsync();
+
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
@@ -897,6 +908,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put204Async(Boolean booleanValue);
+
     /**
      * Put true Boolean value in request returns 204 (no content).
      *
@@ -905,7 +917,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put204WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -940,6 +951,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch204WithRestResponseAsync();
+
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
@@ -968,6 +980,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch204Async(Boolean booleanValue);
+
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
@@ -976,7 +989,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch204WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1011,6 +1023,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post204WithRestResponseAsync();
+
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
@@ -1039,6 +1052,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post204Async(Boolean booleanValue);
+
     /**
      * Post true Boolean value in request returns 204 (no content).
      *
@@ -1047,7 +1061,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post204WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1082,6 +1095,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete204WithRestResponseAsync();
+
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
@@ -1110,6 +1124,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete204Async(Boolean booleanValue);
+
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
@@ -1118,7 +1133,6 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete204WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 404 status code.
@@ -1145,6 +1159,7 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head404Async();
+
     /**
      * Return 404 status code.
      *
@@ -1152,6 +1167,5 @@ public interface HttpSuccess {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> head404WithRestResponseAsync();
-
 
 }

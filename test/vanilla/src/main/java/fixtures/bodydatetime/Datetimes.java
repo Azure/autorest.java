@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Datetimes.
+ * An instance of this class provides access to all the operations defined in
+ * Datetimes.
  */
 public interface Datetimes {
     /**
@@ -50,6 +50,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getNullAsync();
+
     /**
      * Get null datetime value.
      *
@@ -57,7 +58,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid datetime value.
@@ -85,6 +85,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getInvalidAsync();
+
     /**
      * Get invalid datetime value.
      *
@@ -92,7 +93,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getInvalidWithRestResponseAsync();
-
 
     /**
      * Get overflow datetime value.
@@ -120,6 +120,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getOverflowAsync();
+
     /**
      * Get overflow datetime value.
      *
@@ -127,7 +128,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getOverflowWithRestResponseAsync();
-
 
     /**
      * Get underflow datetime value.
@@ -155,6 +155,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUnderflowAsync();
+
     /**
      * Get underflow datetime value.
      *
@@ -162,7 +163,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUnderflowWithRestResponseAsync();
-
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -192,6 +192,7 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
@@ -200,7 +201,6 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putUtcMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -228,6 +228,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUtcLowercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
@@ -235,7 +236,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUtcLowercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -263,6 +263,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUtcUppercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
@@ -270,7 +271,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUtcUppercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -300,6 +300,7 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
@@ -308,7 +309,6 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -336,6 +336,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
@@ -343,7 +344,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -371,6 +371,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
@@ -378,7 +379,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -408,6 +408,7 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
@@ -416,7 +417,6 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -444,6 +444,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
@@ -451,7 +452,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -479,6 +479,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
+
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
@@ -486,7 +487,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync();
-
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -516,6 +516,7 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
@@ -524,7 +525,6 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putUtcMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -552,6 +552,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getUtcMinDateTimeAsync();
+
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
@@ -559,7 +560,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
-
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -589,6 +589,7 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
@@ -597,7 +598,6 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -625,6 +625,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
+
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
@@ -632,7 +633,6 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getLocalPositiveOffsetMinDateTimeWithRestResponseAsync();
-
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
@@ -662,6 +662,7 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
+
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
@@ -670,7 +671,6 @@ public interface Datetimes {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(DateTime datetimeBody);
-
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
@@ -698,6 +698,7 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<DateTime> getLocalNegativeOffsetMinDateTimeAsync();
+
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
@@ -705,6 +706,5 @@ public interface Datetimes {
      * @return the observable to the DateTime object
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
-
 
 }

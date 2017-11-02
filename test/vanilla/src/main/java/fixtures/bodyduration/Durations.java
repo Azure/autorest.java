@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Durations.
+ * An instance of this class provides access to all the operations defined in
+ * Durations.
  */
 public interface Durations {
     /**
@@ -50,6 +50,7 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<Period> getNullAsync();
+
     /**
      * Get null duration value.
      *
@@ -57,7 +58,6 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
-
 
     /**
      * Put a positive duration value.
@@ -87,6 +87,7 @@ public interface Durations {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putPositiveDurationAsync(Period durationBody);
+
     /**
      * Put a positive duration value.
      *
@@ -95,7 +96,6 @@ public interface Durations {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody);
-
 
     /**
      * Get a positive duration value.
@@ -123,6 +123,7 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<Period> getPositiveDurationAsync();
+
     /**
      * Get a positive duration value.
      *
@@ -130,7 +131,6 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
-
 
     /**
      * Get an invalid duration value.
@@ -158,6 +158,7 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<Period> getInvalidAsync();
+
     /**
      * Get an invalid duration value.
      *
@@ -165,6 +166,5 @@ public interface Durations {
      * @return the observable to the Period object
      */
     Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
-
 
 }

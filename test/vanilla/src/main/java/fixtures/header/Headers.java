@@ -37,8 +37,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Headers.
+ * An instance of this class provides access to all the operations defined in
+ * Headers.
  */
 public interface Headers {
     /**
@@ -69,6 +69,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramExistingKeyAsync(String userAgent);
+
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
@@ -77,7 +78,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramExistingKeyWithRestResponseAsync(String userAgent);
-
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
@@ -104,6 +104,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseExistingKeyAsync();
+
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
@@ -111,7 +112,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseExistingKeyHeaders, Void>> responseExistingKeyWithRestResponseAsync();
-
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
@@ -141,6 +141,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramProtectedKeyAsync(String contentType);
+
     /**
      * Send a post request with header value "Content-Type": "text/html".
      *
@@ -149,7 +150,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramProtectedKeyWithRestResponseAsync(String contentType);
-
 
     /**
      * Get a response with header value "Content-Type": "text/html".
@@ -176,6 +176,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseProtectedKeyAsync();
+
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
@@ -183,7 +184,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseProtectedKeyHeaders, Void>> responseProtectedKeyWithRestResponseAsync();
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
@@ -216,6 +216,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramIntegerAsync(String scenario, int value);
+
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      *
@@ -225,7 +226,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramIntegerWithRestResponseAsync(String scenario, int value);
-
 
     /**
      * Get a response with header value "value": 1 or -2.
@@ -255,6 +255,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseIntegerAsync(String scenario);
+
     /**
      * Get a response with header value "value": 1 or -2.
      *
@@ -263,7 +264,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseIntegerHeaders, Void>> responseIntegerWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
@@ -296,6 +296,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramLongAsync(String scenario, long value);
+
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
      *
@@ -305,7 +306,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramLongWithRestResponseAsync(String scenario, long value);
-
 
     /**
      * Get a response with header value "value": 105 or -2.
@@ -335,6 +335,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseLongAsync(String scenario);
+
     /**
      * Get a response with header value "value": 105 or -2.
      *
@@ -343,7 +344,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseLongHeaders, Void>> responseLongWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
@@ -376,6 +376,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramFloatAsync(String scenario, double value);
+
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
      *
@@ -385,7 +386,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramFloatWithRestResponseAsync(String scenario, double value);
-
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
@@ -415,6 +415,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseFloatAsync(String scenario);
+
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
@@ -423,7 +424,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseFloatHeaders, Void>> responseFloatWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
@@ -456,6 +456,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDoubleAsync(String scenario, double value);
+
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
      *
@@ -465,7 +466,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramDoubleWithRestResponseAsync(String scenario, double value);
-
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
@@ -495,6 +495,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDoubleAsync(String scenario);
+
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
@@ -503,7 +504,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseDoubleHeaders, Void>> responseDoubleWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
@@ -536,6 +536,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramBoolAsync(String scenario, boolean value);
+
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
      *
@@ -545,7 +546,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramBoolWithRestResponseAsync(String scenario, boolean value);
-
 
     /**
      * Get a response with header value "value": true or false.
@@ -575,6 +575,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseBoolAsync(String scenario);
+
     /**
      * Get a response with header value "value": true or false.
      *
@@ -583,7 +584,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseBoolHeaders, Void>> responseBoolWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
@@ -622,6 +622,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(String scenario);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
@@ -653,6 +654,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramStringAsync(String scenario, String value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
@@ -662,7 +664,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramStringWithRestResponseAsync(String scenario, String value);
-
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -692,6 +693,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseStringAsync(String scenario);
+
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
@@ -700,7 +702,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseStringHeaders, Void>> responseStringWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
@@ -733,6 +734,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDateAsync(String scenario, LocalDate value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
      *
@@ -742,7 +744,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramDateWithRestResponseAsync(String scenario, LocalDate value);
-
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
@@ -772,6 +773,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDateAsync(String scenario);
+
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
@@ -780,7 +782,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseDateHeaders, Void>> responseDateWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
@@ -813,6 +814,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDatetimeAsync(String scenario, DateTime value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
      *
@@ -822,7 +824,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramDatetimeWithRestResponseAsync(String scenario, DateTime value);
-
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -852,6 +853,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDatetimeAsync(String scenario);
+
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
@@ -860,7 +862,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseDatetimeHeaders, Void>> responseDatetimeWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -899,6 +900,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(String scenario);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
@@ -930,6 +932,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDatetimeRfc1123Async(String scenario, DateTime value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
@@ -939,7 +942,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramDatetimeRfc1123WithRestResponseAsync(String scenario, DateTime value);
-
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -969,6 +971,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDatetimeRfc1123Async(String scenario);
+
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
@@ -977,7 +980,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>> responseDatetimeRfc1123WithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
@@ -1010,6 +1012,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramDurationAsync(String scenario, Period value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
      *
@@ -1019,7 +1022,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramDurationWithRestResponseAsync(String scenario, Period value);
-
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
@@ -1049,6 +1051,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseDurationAsync(String scenario);
+
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
@@ -1057,7 +1060,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseDurationHeaders, Void>> responseDurationWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
@@ -1090,6 +1092,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramByteAsync(String scenario, byte[] value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
      *
@@ -1099,7 +1102,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramByteWithRestResponseAsync(String scenario, byte[] value);
-
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
@@ -1129,6 +1131,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseByteAsync(String scenario);
+
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
@@ -1137,7 +1140,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseByteHeaders, Void>> responseByteWithRestResponseAsync(String scenario);
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
@@ -1176,6 +1178,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(String scenario);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
@@ -1207,6 +1210,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> paramEnumAsync(String scenario, GreyscaleColors value);
+
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
@@ -1216,7 +1220,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> paramEnumWithRestResponseAsync(String scenario, GreyscaleColors value);
-
 
     /**
      * Get a response with header values "GREY" or null.
@@ -1246,6 +1249,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> responseEnumAsync(String scenario);
+
     /**
      * Get a response with header values "GREY" or null.
      *
@@ -1254,7 +1258,6 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<HeaderResponseEnumHeaders, Void>> responseEnumWithRestResponseAsync(String scenario);
-
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -1281,6 +1284,7 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> customRequestIdAsync();
+
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
@@ -1288,6 +1292,5 @@ public interface Headers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> customRequestIdWithRestResponseAsync();
-
 
 }

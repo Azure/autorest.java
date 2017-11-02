@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpRetrys.
+ * An instance of this class provides access to all the operations defined in
+ * HttpRetrys.
  */
 public interface HttpRetrys {
     /**
@@ -48,6 +48,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> head408Async();
+
     /**
      * Return 408 status code, then 200 after retry.
      *
@@ -55,7 +56,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> head408WithRestResponseAsync();
-
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -90,6 +90,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put500WithRestResponseAsync();
+
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -118,6 +119,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put500Async(Boolean booleanValue);
+
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -126,7 +128,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put500WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -161,6 +162,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch500WithRestResponseAsync();
+
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -189,6 +191,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch500Async(Boolean booleanValue);
+
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -197,7 +200,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch500WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -224,6 +226,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> get502Async();
+
     /**
      * Return 502 status code, then 200 after retry.
      *
@@ -231,7 +234,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> get502WithRestResponseAsync();
-
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -266,6 +268,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post503WithRestResponseAsync();
+
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -294,6 +297,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> post503Async(Boolean booleanValue);
+
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -302,7 +306,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> post503WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -337,6 +340,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete503WithRestResponseAsync();
+
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -365,6 +369,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> delete503Async(Boolean booleanValue);
+
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -373,7 +378,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> delete503WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -408,6 +412,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put504WithRestResponseAsync();
+
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -436,6 +441,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> put504Async(Boolean booleanValue);
+
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -444,7 +450,6 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> put504WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -479,6 +484,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch504WithRestResponseAsync();
+
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -507,6 +513,7 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> patch504Async(Boolean booleanValue);
+
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -515,6 +522,5 @@ public interface HttpRetrys {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> patch504WithRestResponseAsync(Boolean booleanValue);
-
 
 }

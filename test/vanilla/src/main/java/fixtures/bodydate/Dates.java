@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Dates.
+ * An instance of this class provides access to all the operations defined in
+ * Dates.
  */
 public interface Dates {
     /**
@@ -50,6 +50,7 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getNullAsync();
+
     /**
      * Get null date value.
      *
@@ -57,7 +58,6 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid date value.
@@ -85,6 +85,7 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getInvalidDateAsync();
+
     /**
      * Get invalid date value.
      *
@@ -92,7 +93,6 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
-
 
     /**
      * Get overflow date value.
@@ -120,6 +120,7 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getOverflowDateAsync();
+
     /**
      * Get overflow date value.
      *
@@ -127,7 +128,6 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
-
 
     /**
      * Get underflow date value.
@@ -155,6 +155,7 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getUnderflowDateAsync();
+
     /**
      * Get underflow date value.
      *
@@ -162,7 +163,6 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
-
 
     /**
      * Put max date value 9999-12-31.
@@ -192,6 +192,7 @@ public interface Dates {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMaxDateAsync(LocalDate dateBody);
+
     /**
      * Put max date value 9999-12-31.
      *
@@ -200,7 +201,6 @@ public interface Dates {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(LocalDate dateBody);
-
 
     /**
      * Get max date value 9999-12-31.
@@ -228,6 +228,7 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getMaxDateAsync();
+
     /**
      * Get max date value 9999-12-31.
      *
@@ -235,7 +236,6 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
-
 
     /**
      * Put min date value 0000-01-01.
@@ -265,6 +265,7 @@ public interface Dates {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putMinDateAsync(LocalDate dateBody);
+
     /**
      * Put min date value 0000-01-01.
      *
@@ -273,7 +274,6 @@ public interface Dates {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(LocalDate dateBody);
-
 
     /**
      * Get min date value 0000-01-01.
@@ -301,6 +301,7 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<LocalDate> getMinDateAsync();
+
     /**
      * Get min date value 0000-01-01.
      *
@@ -308,6 +309,5 @@ public interface Dates {
      * @return the observable to the LocalDate object
      */
     Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
-
 
 }

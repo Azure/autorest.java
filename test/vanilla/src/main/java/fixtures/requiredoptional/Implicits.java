@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Implicits.
+ * An instance of this class provides access to all the operations defined in
+ * Implicits.
  */
 public interface Implicits {
     /**
@@ -53,6 +53,7 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<Error> getRequiredPathAsync(String pathParameter);
+
     /**
      * Test implicitly required path parameter.
      *
@@ -61,7 +62,6 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> getRequiredPathWithRestResponseAsync(String pathParameter);
-
 
     /**
      * Test implicitly optional query parameter.
@@ -96,6 +96,7 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync();
+
     /**
      * Test implicitly optional query parameter.
      *
@@ -124,6 +125,7 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalQueryAsync(String queryParameter);
+
     /**
      * Test implicitly optional query parameter.
      *
@@ -132,7 +134,6 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalQueryWithRestResponseAsync(String queryParameter);
-
 
     /**
      * Test implicitly optional header parameter.
@@ -167,6 +168,7 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync();
+
     /**
      * Test implicitly optional header parameter.
      *
@@ -195,6 +197,7 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalHeaderAsync(String queryParameter);
+
     /**
      * Test implicitly optional header parameter.
      *
@@ -203,7 +206,6 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalHeaderWithRestResponseAsync(String queryParameter);
-
 
     /**
      * Test implicitly optional body parameter.
@@ -238,6 +240,7 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync();
+
     /**
      * Test implicitly optional body parameter.
      *
@@ -266,6 +269,7 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putOptionalBodyAsync(String bodyParameter);
+
     /**
      * Test implicitly optional body parameter.
      *
@@ -274,7 +278,6 @@ public interface Implicits {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putOptionalBodyWithRestResponseAsync(String bodyParameter);
-
 
     /**
      * Test implicitly required path parameter.
@@ -302,6 +305,7 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<Error> getRequiredGlobalPathAsync();
+
     /**
      * Test implicitly required path parameter.
      *
@@ -309,7 +313,6 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> getRequiredGlobalPathWithRestResponseAsync();
-
 
     /**
      * Test implicitly required query parameter.
@@ -337,6 +340,7 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<Error> getRequiredGlobalQueryAsync();
+
     /**
      * Test implicitly required query parameter.
      *
@@ -344,7 +348,6 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> getRequiredGlobalQueryWithRestResponseAsync();
-
 
     /**
      * Test implicitly optional query parameter.
@@ -372,6 +375,7 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<Error> getOptionalGlobalQueryAsync();
+
     /**
      * Test implicitly optional query parameter.
      *
@@ -379,6 +383,5 @@ public interface Implicits {
      * @return the observable to the Error object
      */
     Single<RestResponse<Void, Error>> getOptionalGlobalQueryWithRestResponseAsync();
-
 
 }

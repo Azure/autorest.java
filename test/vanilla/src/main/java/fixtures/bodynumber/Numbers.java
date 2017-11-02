@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Numbers.
+ * An instance of this class provides access to all the operations defined in
+ * Numbers.
  */
 public interface Numbers {
     /**
@@ -50,6 +50,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getNullAsync();
+
     /**
      * Get null Number value.
      *
@@ -57,7 +58,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid float Number value.
@@ -85,6 +85,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getInvalidFloatAsync();
+
     /**
      * Get invalid float Number value.
      *
@@ -92,7 +93,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getInvalidFloatWithRestResponseAsync();
-
 
     /**
      * Get invalid double Number value.
@@ -120,6 +120,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getInvalidDoubleAsync();
+
     /**
      * Get invalid double Number value.
      *
@@ -127,7 +128,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getInvalidDoubleWithRestResponseAsync();
-
 
     /**
      * Get invalid decimal Number value.
@@ -155,6 +155,7 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getInvalidDecimalAsync();
+
     /**
      * Get invalid decimal Number value.
      *
@@ -162,7 +163,6 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<RestResponse<Void, BigDecimal>> getInvalidDecimalWithRestResponseAsync();
-
 
     /**
      * Put big float value 3.402823e+20.
@@ -192,6 +192,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigFloatAsync(double numberBody);
+
     /**
      * Put big float value 3.402823e+20.
      *
@@ -200,7 +201,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigFloatWithRestResponseAsync(double numberBody);
-
 
     /**
      * Get big float value 3.402823e+20.
@@ -228,6 +228,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigFloatAsync();
+
     /**
      * Get big float value 3.402823e+20.
      *
@@ -235,7 +236,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getBigFloatWithRestResponseAsync();
-
 
     /**
      * Put big double value 2.5976931e+101.
@@ -265,6 +265,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoubleAsync(double numberBody);
+
     /**
      * Put big double value 2.5976931e+101.
      *
@@ -273,7 +274,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigDoubleWithRestResponseAsync(double numberBody);
-
 
     /**
      * Get big double value 2.5976931e+101.
@@ -301,6 +301,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigDoubleAsync();
+
     /**
      * Get big double value 2.5976931e+101.
      *
@@ -308,7 +309,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getBigDoubleWithRestResponseAsync();
-
 
     /**
      * Put big double value 99999999.99.
@@ -338,6 +338,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoublePositiveDecimalAsync(double numberBody);
+
     /**
      * Put big double value 99999999.99.
      *
@@ -346,7 +347,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigDoublePositiveDecimalWithRestResponseAsync(double numberBody);
-
 
     /**
      * Get big double value 99999999.99.
@@ -374,6 +374,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigDoublePositiveDecimalAsync();
+
     /**
      * Get big double value 99999999.99.
      *
@@ -381,7 +382,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getBigDoublePositiveDecimalWithRestResponseAsync();
-
 
     /**
      * Put big double value -99999999.99.
@@ -411,6 +411,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
+
     /**
      * Put big double value -99999999.99.
      *
@@ -419,7 +420,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigDoubleNegativeDecimalWithRestResponseAsync(double numberBody);
-
 
     /**
      * Get big double value -99999999.99.
@@ -447,6 +447,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getBigDoubleNegativeDecimalAsync();
+
     /**
      * Get big double value -99999999.99.
      *
@@ -454,7 +455,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getBigDoubleNegativeDecimalWithRestResponseAsync();
-
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -484,6 +484,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalAsync(BigDecimal numberBody);
+
     /**
      * Put big decimal value 2.5976931e+101.
      *
@@ -492,7 +493,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigDecimalWithRestResponseAsync(BigDecimal numberBody);
-
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -520,6 +520,7 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getBigDecimalAsync();
+
     /**
      * Get big decimal value 2.5976931e+101.
      *
@@ -527,7 +528,6 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<RestResponse<Void, BigDecimal>> getBigDecimalWithRestResponseAsync();
-
 
     /**
      * Put big decimal value 99999999.99.
@@ -557,6 +557,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
+
     /**
      * Put big decimal value 99999999.99.
      *
@@ -565,7 +566,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigDecimalPositiveDecimalWithRestResponseAsync(BigDecimal numberBody);
-
 
     /**
      * Get big decimal value 99999999.99.
@@ -593,6 +593,7 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getBigDecimalPositiveDecimalAsync();
+
     /**
      * Get big decimal value 99999999.99.
      *
@@ -600,7 +601,6 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<RestResponse<Void, BigDecimal>> getBigDecimalPositiveDecimalWithRestResponseAsync();
-
 
     /**
      * Put big decimal value -99999999.99.
@@ -630,6 +630,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
+
     /**
      * Put big decimal value -99999999.99.
      *
@@ -638,7 +639,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putBigDecimalNegativeDecimalWithRestResponseAsync(BigDecimal numberBody);
-
 
     /**
      * Get big decimal value -99999999.99.
@@ -666,6 +666,7 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getBigDecimalNegativeDecimalAsync();
+
     /**
      * Get big decimal value -99999999.99.
      *
@@ -673,7 +674,6 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<RestResponse<Void, BigDecimal>> getBigDecimalNegativeDecimalWithRestResponseAsync();
-
 
     /**
      * Put small float value 3.402823e-20.
@@ -703,6 +703,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallFloatAsync(double numberBody);
+
     /**
      * Put small float value 3.402823e-20.
      *
@@ -711,7 +712,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putSmallFloatWithRestResponseAsync(double numberBody);
-
 
     /**
      * Get big double value 3.402823e-20.
@@ -739,6 +739,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getSmallFloatAsync();
+
     /**
      * Get big double value 3.402823e-20.
      *
@@ -746,7 +747,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getSmallFloatWithRestResponseAsync();
-
 
     /**
      * Put small double value 2.5976931e-101.
@@ -776,6 +776,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallDoubleAsync(double numberBody);
+
     /**
      * Put small double value 2.5976931e-101.
      *
@@ -784,7 +785,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putSmallDoubleWithRestResponseAsync(double numberBody);
-
 
     /**
      * Get big double value 2.5976931e-101.
@@ -812,6 +812,7 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<Double> getSmallDoubleAsync();
+
     /**
      * Get big double value 2.5976931e-101.
      *
@@ -819,7 +820,6 @@ public interface Numbers {
      * @return the observable to the double object
      */
     Single<RestResponse<Void, Double>> getSmallDoubleWithRestResponseAsync();
-
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -849,6 +849,7 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putSmallDecimalAsync(BigDecimal numberBody);
+
     /**
      * Put small decimal value 2.5976931e-101.
      *
@@ -857,7 +858,6 @@ public interface Numbers {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putSmallDecimalWithRestResponseAsync(BigDecimal numberBody);
-
 
     /**
      * Get small decimal value 2.5976931e-101.
@@ -885,6 +885,7 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<BigDecimal> getSmallDecimalAsync();
+
     /**
      * Get small decimal value 2.5976931e-101.
      *
@@ -892,6 +893,5 @@ public interface Numbers {
      * @return the observable to the BigDecimal object
      */
     Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync();
-
 
 }

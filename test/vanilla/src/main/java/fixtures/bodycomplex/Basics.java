@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Basics.
+ * An instance of this class provides access to all the operations defined in
+ * Basics.
  */
 public interface Basics {
     /**
@@ -50,6 +50,7 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getValidAsync();
+
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
@@ -57,7 +58,6 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync();
-
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -87,6 +87,7 @@ public interface Basics {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putValidAsync(Basic complexBody);
+
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
@@ -95,7 +96,6 @@ public interface Basics {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Basic complexBody);
-
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -123,6 +123,7 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getInvalidAsync();
+
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
@@ -130,7 +131,6 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync();
-
 
     /**
      * Get a basic complex type that is empty.
@@ -158,6 +158,7 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getEmptyAsync();
+
     /**
      * Get a basic complex type that is empty.
      *
@@ -165,7 +166,6 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync();
-
 
     /**
      * Get a basic complex type whose properties are null.
@@ -193,6 +193,7 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getNullAsync();
+
     /**
      * Get a basic complex type whose properties are null.
      *
@@ -200,7 +201,6 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync();
-
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
@@ -228,6 +228,7 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<Basic> getNotProvidedAsync();
+
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
@@ -235,6 +236,5 @@ public interface Basics {
      * @return the observable to the Basic object
      */
     Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync();
-
 
 }

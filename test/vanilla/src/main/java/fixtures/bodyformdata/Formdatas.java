@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Formdatas.
+ * An instance of this class provides access to all the operations defined in
+ * Formdatas.
  */
 public interface Formdatas {
     /**
@@ -56,6 +56,7 @@ public interface Formdatas {
      * @return the observable to the InputStream object
      */
     Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+
     /**
      * Upload file.
      *
@@ -65,7 +66,6 @@ public interface Formdatas {
      * @return the observable to the InputStream object
      */
     Single<RestResponse<Void, InputStream>> uploadFileWithRestResponseAsync(byte[] fileContent, String fileName);
-
 
     /**
      * Upload file.
@@ -96,6 +96,7 @@ public interface Formdatas {
      * @return the observable to the InputStream object
      */
     Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+
     /**
      * Upload file.
      *
@@ -104,6 +105,5 @@ public interface Formdatas {
      * @return the observable to the InputStream object
      */
     Single<RestResponse<Void, InputStream>> uploadFileViaBodyWithRestResponseAsync(byte[] fileContent);
-
 
 }
