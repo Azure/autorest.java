@@ -4,6 +4,7 @@ import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -22,7 +23,7 @@ public class LROsCustomHeaderTests {
 
         RestClient config = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
-                .withCredentials(new BasicAuthenticationCredentials(null, null))
+                .withCredentialsPolicy(new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)))
                 .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
 
