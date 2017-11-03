@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Dates.
+ * An instance of this class provides access to all the operations defined in
+ * Dates.
  */
 public interface Dates {
     /**
@@ -39,7 +39,7 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
      */
     ServiceFuture<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -47,17 +47,17 @@ public interface Dates {
      * Get null date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
      */
     Single<LocalDate> getNullAsync();
+
     /**
      * Get null date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getNullWithRestResponseAsync();
-
 
     /**
      * Get invalid date value.
@@ -74,7 +74,7 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
      */
     ServiceFuture<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -82,17 +82,17 @@ public interface Dates {
      * Get invalid date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
      */
     Single<LocalDate> getInvalidDateAsync();
+
     /**
      * Get invalid date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getInvalidDateWithRestResponseAsync();
-
 
     /**
      * Get overflow date value.
@@ -109,7 +109,7 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
      */
     ServiceFuture<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -117,17 +117,17 @@ public interface Dates {
      * Get overflow date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
      */
     Single<LocalDate> getOverflowDateAsync();
+
     /**
      * Get overflow date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getOverflowDateWithRestResponseAsync();
-
 
     /**
      * Get underflow date value.
@@ -144,7 +144,7 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
      */
     ServiceFuture<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -152,17 +152,17 @@ public interface Dates {
      * Get underflow date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
      */
     Single<LocalDate> getUnderflowDateAsync();
+
     /**
      * Get underflow date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getUnderflowDateWithRestResponseAsync();
-
 
     /**
      * Put max date value 9999-12-31.
@@ -180,7 +180,7 @@ public interface Dates {
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
@@ -189,18 +189,18 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMaxDateAsync(LocalDate dateBody);
+
     /**
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMaxDateWithRestResponseAsync(LocalDate dateBody);
-
 
     /**
      * Get max date value 9999-12-31.
@@ -217,7 +217,7 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
      */
     ServiceFuture<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -225,17 +225,17 @@ public interface Dates {
      * Get max date value 9999-12-31.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
      */
     Single<LocalDate> getMaxDateAsync();
+
     /**
      * Get max date value 9999-12-31.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getMaxDateWithRestResponseAsync();
-
 
     /**
      * Put min date value 0000-01-01.
@@ -253,7 +253,7 @@ public interface Dates {
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
@@ -262,18 +262,18 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMinDateAsync(LocalDate dateBody);
+
     /**
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMinDateWithRestResponseAsync(LocalDate dateBody);
-
 
     /**
      * Get min date value 0000-01-01.
@@ -290,7 +290,7 @@ public interface Dates {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LocalDate&gt;} object
      */
     ServiceFuture<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
@@ -298,16 +298,16 @@ public interface Dates {
      * Get min date value 0000-01-01.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
      */
     Single<LocalDate> getMinDateAsync();
+
     /**
      * Get min date value 0000-01-01.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LocalDate object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
-
 
 }

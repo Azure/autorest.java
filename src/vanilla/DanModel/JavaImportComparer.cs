@@ -31,18 +31,16 @@ namespace AutoRest.Java.DanModel
                 int minimumImportPartCount = Math.Min(lhsImportParts.Length, rhsImportParts.Length);
                 for (int i = 0; i < minimumImportPartCount; ++i)
                 {
-                    string lhsImportPart = lhsImportParts[i];
-                    string rhsImportPart = rhsImportParts[i];
+                    string lhsImportPart = lhsImportParts[i].ToLowerInvariant();
+                    string rhsImportPart = rhsImportParts[i].ToLowerInvariant();
 
                     if (!lhsImportPart.Equals(rhsImportPart))
                     {
-                        if (IsLastPart(i, lhsImportParts))
+                        bool isLastLhsPart = IsLastPart(i, lhsImportParts);
+                        bool isLastRhsPart = IsLastPart(i, rhsImportParts);
+                        if (isLastLhsPart != isLastRhsPart)
                         {
-                            result = -1;
-                        }
-                        else if (IsLastPart(i, rhsImportParts))
-                        {
-                            result = 1;
+                            result = isLastLhsPart ? -1 : 1;
                         }
                         else
                         {

@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Readonlypropertys.
+ * An instance of this class provides access to all the operations defined in
+ * Readonlypropertys.
  */
 public interface Readonlypropertys {
     /**
@@ -39,7 +39,7 @@ public interface Readonlypropertys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;ReadonlyObj&gt;} object
      */
     ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
 
@@ -47,17 +47,17 @@ public interface Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ReadonlyObj object
+     * @return the {@link Single&lt;ReadonlyObj&gt;} object if successful.
      */
     Single<ReadonlyObj> getValidAsync();
+
     /**
      * Get complex types that have readonly properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ReadonlyObj object
+     * @return the {@link Single&lt;RestResponse&lt;Void, ReadonlyObj&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ReadonlyObj>> getValidWithRestResponseAsync();
-
 
     /**
      * Put complex types that have readonly properties.
@@ -75,7 +75,7 @@ public interface Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -84,17 +84,17 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putValidAsync(ReadonlyObj complexBody);
+
     /**
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(ReadonlyObj complexBody);
-
 
 }
