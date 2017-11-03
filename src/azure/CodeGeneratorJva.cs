@@ -69,12 +69,9 @@ namespace AutoRest.Java.Azure
                 string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
                 string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
                 await Write(operationsTemplate, operationsFilePath);
-                
+
                 // Operation interface
-                var operationsInterfaceTemplate = new AzureMethodGroupInterfaceTemplate { Model = methodGroup };
-                string operationsInterfaceFileName = $"{methodGroup.TypeName.ToPascalCase()}.java";
-                string operationsInterfaceFilePath = Path.Combine(packageFolderPath, operationsInterfaceFileName);
-                await Write(operationsInterfaceTemplate, operationsInterfaceFilePath);
+                await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
             }
 
             //Models

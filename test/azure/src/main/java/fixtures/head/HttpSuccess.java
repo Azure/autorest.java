@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpSuccess.
+ * An instance of this class provides access to all the operations defined in
+ * HttpSuccess.
  */
 public interface HttpSuccess {
     /**
@@ -38,7 +38,7 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback);
 
@@ -46,7 +46,7 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> head200Async();
 
@@ -54,10 +54,9 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync();
-
 
     /**
      * Return 204 status code if successful.
@@ -74,7 +73,7 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
@@ -82,7 +81,7 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> head204Async();
 
@@ -90,10 +89,9 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync();
-
 
     /**
      * Return 404 status code if successful.
@@ -110,7 +108,7 @@ public interface HttpSuccess {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback);
 
@@ -118,7 +116,7 @@ public interface HttpSuccess {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> head404Async();
 
@@ -126,9 +124,8 @@ public interface HttpSuccess {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync();
-
 
 }

@@ -39,7 +39,7 @@ public interface Polymorphicrecursives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Fish&gt;} object
      */
     ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
@@ -47,7 +47,7 @@ public interface Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Fish object
+     * @return the {@link Single&lt;Fish&gt;} object if successful.
      */
     Single<Fish> getValidAsync();
 
@@ -55,7 +55,7 @@ public interface Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Fish object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync();
 
@@ -179,7 +179,7 @@ public interface Polymorphicrecursives {
      * }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -240,7 +240,7 @@ public interface Polymorphicrecursives {
      *     ]
      * }
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putValidAsync(Fish complexBody);
 
@@ -301,7 +301,7 @@ public interface Polymorphicrecursives {
      *     ]
      * }
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody);
 

@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in ApiVersionDefaults.
+ * An instance of this class provides access to all the operations defined in
+ * ApiVersionDefaults.
  */
 public interface ApiVersionDefaults {
     /**
@@ -37,7 +37,7 @@ public interface ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -45,7 +45,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getMethodGlobalValidAsync();
 
@@ -53,10 +53,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<Void, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getMethodGlobalValidWithRestResponseAsync();
-
 
     /**
      * GET method with api-version modeled in global settings.
@@ -72,7 +71,7 @@ public interface ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -80,7 +79,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getMethodGlobalNotProvidedValidAsync();
 
@@ -88,10 +87,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<Void, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValidWithRestResponseAsync();
-
 
     /**
      * GET method with api-version modeled in global settings.
@@ -107,7 +105,7 @@ public interface ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -115,7 +113,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getPathGlobalValidAsync();
 
@@ -123,10 +121,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<Void, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getPathGlobalValidWithRestResponseAsync();
-
 
     /**
      * GET method with api-version modeled in global settings.
@@ -142,7 +139,7 @@ public interface ApiVersionDefaults {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -150,7 +147,7 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getSwaggerGlobalValidAsync();
 
@@ -158,9 +155,8 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<Void, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getSwaggerGlobalValidWithRestResponseAsync();
-
 
 }

@@ -39,7 +39,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object
      */
     ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback);
 
@@ -47,7 +47,7 @@ public interface Ints {
      * Get null Int value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;Integer&gt;} object if successful.
      */
     Single<Integer> getNullAsync();
 
@@ -55,7 +55,7 @@ public interface Ints {
      * Get null Int value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Integer>> getNullWithRestResponseAsync();
 
@@ -74,7 +74,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object
      */
     ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
 
@@ -82,7 +82,7 @@ public interface Ints {
      * Get invalid Int value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;Integer&gt;} object if successful.
      */
     Single<Integer> getInvalidAsync();
 
@@ -90,7 +90,7 @@ public interface Ints {
      * Get invalid Int value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Integer>> getInvalidWithRestResponseAsync();
 
@@ -109,7 +109,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object
      */
     ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
@@ -117,7 +117,7 @@ public interface Ints {
      * Get overflow Int32 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;Integer&gt;} object if successful.
      */
     Single<Integer> getOverflowInt32Async();
 
@@ -125,7 +125,7 @@ public interface Ints {
      * Get overflow Int32 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Integer>> getOverflowInt32WithRestResponseAsync();
 
@@ -144,7 +144,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Integer&gt;} object
      */
     ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
@@ -152,7 +152,7 @@ public interface Ints {
      * Get underflow Int32 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;Integer&gt;} object if successful.
      */
     Single<Integer> getUnderflowInt32Async();
 
@@ -160,7 +160,7 @@ public interface Ints {
      * Get underflow Int32 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the int object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Integer&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Integer>> getUnderflowInt32WithRestResponseAsync();
 
@@ -179,7 +179,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Long&gt;} object
      */
     ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
@@ -187,7 +187,7 @@ public interface Ints {
      * Get overflow Int64 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the long object
+     * @return the {@link Single&lt;Long&gt;} object if successful.
      */
     Single<Long> getOverflowInt64Async();
 
@@ -195,7 +195,7 @@ public interface Ints {
      * Get overflow Int64 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the long object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Long>> getOverflowInt64WithRestResponseAsync();
 
@@ -214,7 +214,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Long&gt;} object
      */
     ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
@@ -222,7 +222,7 @@ public interface Ints {
      * Get underflow Int64 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the long object
+     * @return the {@link Single&lt;Long&gt;} object if successful.
      */
     Single<Long> getUnderflowInt64Async();
 
@@ -230,7 +230,7 @@ public interface Ints {
      * Get underflow Int64 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the long object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Long&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Long>> getUnderflowInt64WithRestResponseAsync();
 
@@ -250,7 +250,7 @@ public interface Ints {
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
@@ -259,7 +259,7 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMax32Async(int intBody);
 
@@ -268,7 +268,7 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMax32WithRestResponseAsync(int intBody);
 
@@ -288,7 +288,7 @@ public interface Ints {
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
@@ -297,7 +297,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMax64Async(long intBody);
 
@@ -306,7 +306,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMax64WithRestResponseAsync(long intBody);
 
@@ -326,7 +326,7 @@ public interface Ints {
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
@@ -335,7 +335,7 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMin32Async(int intBody);
 
@@ -344,7 +344,7 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMin32WithRestResponseAsync(int intBody);
 
@@ -364,7 +364,7 @@ public interface Ints {
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
@@ -373,7 +373,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMin64Async(long intBody);
 
@@ -382,7 +382,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMin64WithRestResponseAsync(long intBody);
 
@@ -401,7 +401,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object
      */
     ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
@@ -409,7 +409,7 @@ public interface Ints {
      * Get datetime encoded as Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return the {@link Single&lt;DateTime&gt;} object if successful.
      */
     Single<DateTime> getUnixTimeAsync();
 
@@ -417,7 +417,7 @@ public interface Ints {
      * Get datetime encoded as Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUnixTimeWithRestResponseAsync();
 
@@ -437,7 +437,7 @@ public interface Ints {
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback);
 
@@ -446,7 +446,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putUnixTimeDateAsync(DateTime intBody);
 
@@ -455,7 +455,7 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(DateTime intBody);
 
@@ -474,7 +474,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object
      */
     ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
@@ -482,7 +482,7 @@ public interface Ints {
      * Get invalid Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return the {@link Single&lt;DateTime&gt;} object if successful.
      */
     Single<DateTime> getInvalidUnixTimeAsync();
 
@@ -490,7 +490,7 @@ public interface Ints {
      * Get invalid Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getInvalidUnixTimeWithRestResponseAsync();
 
@@ -509,7 +509,7 @@ public interface Ints {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DateTime&gt;} object
      */
     ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
@@ -517,7 +517,7 @@ public interface Ints {
      * Get null Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return the {@link Single&lt;DateTime&gt;} object if successful.
      */
     Single<DateTime> getNullUnixTimeAsync();
 
@@ -525,7 +525,7 @@ public interface Ints {
      * Get null Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateTime object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getNullUnixTimeWithRestResponseAsync();
 

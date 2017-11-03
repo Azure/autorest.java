@@ -41,7 +41,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -49,7 +49,7 @@ public interface Paths {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getBooleanTrueAsync();
 
@@ -57,7 +57,7 @@ public interface Paths {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanTrueWithRestResponseAsync();
 
@@ -75,7 +75,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -83,7 +83,7 @@ public interface Paths {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getBooleanFalseAsync();
 
@@ -91,7 +91,7 @@ public interface Paths {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getBooleanFalseWithRestResponseAsync();
 
@@ -109,7 +109,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -117,7 +117,7 @@ public interface Paths {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getIntOneMillionAsync();
 
@@ -125,7 +125,7 @@ public interface Paths {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntOneMillionWithRestResponseAsync();
 
@@ -143,7 +143,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -151,7 +151,7 @@ public interface Paths {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getIntNegativeOneMillionAsync();
 
@@ -159,7 +159,7 @@ public interface Paths {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getIntNegativeOneMillionWithRestResponseAsync();
 
@@ -177,7 +177,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -185,7 +185,7 @@ public interface Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getTenBillionAsync();
 
@@ -193,7 +193,7 @@ public interface Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getTenBillionWithRestResponseAsync();
 
@@ -211,7 +211,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -219,7 +219,7 @@ public interface Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getNegativeTenBillionAsync();
 
@@ -227,7 +227,7 @@ public interface Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getNegativeTenBillionWithRestResponseAsync();
 
@@ -245,7 +245,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -253,7 +253,7 @@ public interface Paths {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> floatScientificPositiveAsync();
 
@@ -261,7 +261,7 @@ public interface Paths {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificPositiveWithRestResponseAsync();
 
@@ -279,7 +279,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -287,7 +287,7 @@ public interface Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> floatScientificNegativeAsync();
 
@@ -295,7 +295,7 @@ public interface Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> floatScientificNegativeWithRestResponseAsync();
 
@@ -313,7 +313,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -321,7 +321,7 @@ public interface Paths {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> doubleDecimalPositiveAsync();
 
@@ -329,7 +329,7 @@ public interface Paths {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalPositiveWithRestResponseAsync();
 
@@ -347,7 +347,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -355,7 +355,7 @@ public interface Paths {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> doubleDecimalNegativeAsync();
 
@@ -363,7 +363,7 @@ public interface Paths {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> doubleDecimalNegativeWithRestResponseAsync();
 
@@ -381,7 +381,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -389,7 +389,7 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> stringUnicodeAsync();
 
@@ -397,7 +397,7 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUnicodeWithRestResponseAsync();
 
@@ -415,7 +415,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -423,7 +423,7 @@ public interface Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> stringUrlEncodedAsync();
 
@@ -431,7 +431,7 @@ public interface Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringUrlEncodedWithRestResponseAsync();
 
@@ -449,7 +449,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -457,7 +457,7 @@ public interface Paths {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> stringEmptyAsync();
 
@@ -465,7 +465,7 @@ public interface Paths {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringEmptyWithRestResponseAsync();
 
@@ -485,7 +485,7 @@ public interface Paths {
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
 
@@ -494,7 +494,7 @@ public interface Paths {
      *
      * @param stringPath null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> stringNullAsync(String stringPath);
 
@@ -503,7 +503,7 @@ public interface Paths {
      *
      * @param stringPath null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> stringNullWithRestResponseAsync(String stringPath);
 
@@ -523,7 +523,7 @@ public interface Paths {
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
 
@@ -532,7 +532,7 @@ public interface Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> enumValidAsync(UriColor enumPath);
 
@@ -541,7 +541,7 @@ public interface Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> enumValidWithRestResponseAsync(UriColor enumPath);
 
@@ -561,7 +561,7 @@ public interface Paths {
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
 
@@ -570,7 +570,7 @@ public interface Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> enumNullAsync(UriColor enumPath);
 
@@ -579,7 +579,7 @@ public interface Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> enumNullWithRestResponseAsync(UriColor enumPath);
 
@@ -599,7 +599,7 @@ public interface Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
 
@@ -608,7 +608,7 @@ public interface Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> byteMultiByteAsync(byte[] bytePath);
 
@@ -617,7 +617,7 @@ public interface Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] bytePath);
 
@@ -635,7 +635,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -643,7 +643,7 @@ public interface Paths {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> byteEmptyAsync();
 
@@ -651,7 +651,7 @@ public interface Paths {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync();
 
@@ -671,7 +671,7 @@ public interface Paths {
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
 
@@ -680,7 +680,7 @@ public interface Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> byteNullAsync(byte[] bytePath);
 
@@ -689,7 +689,7 @@ public interface Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] bytePath);
 
@@ -707,7 +707,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -715,7 +715,7 @@ public interface Paths {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> dateValidAsync();
 
@@ -723,7 +723,7 @@ public interface Paths {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateValidWithRestResponseAsync();
 
@@ -743,7 +743,7 @@ public interface Paths {
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
 
@@ -752,7 +752,7 @@ public interface Paths {
      *
      * @param datePath null as date (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> dateNullAsync(LocalDate datePath);
 
@@ -761,7 +761,7 @@ public interface Paths {
      *
      * @param datePath null as date (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateNullWithRestResponseAsync(LocalDate datePath);
 
@@ -779,7 +779,7 @@ public interface Paths {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -787,7 +787,7 @@ public interface Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> dateTimeValidAsync();
 
@@ -795,7 +795,7 @@ public interface Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeValidWithRestResponseAsync();
 
@@ -815,7 +815,7 @@ public interface Paths {
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
 
@@ -824,7 +824,7 @@ public interface Paths {
      *
      * @param dateTimePath null as date-time
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> dateTimeNullAsync(DateTime dateTimePath);
 
@@ -833,7 +833,7 @@ public interface Paths {
      *
      * @param dateTimePath null as date-time
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> dateTimeNullWithRestResponseAsync(DateTime dateTimePath);
 
@@ -853,7 +853,7 @@ public interface Paths {
      * @param base64UrlPath base64url encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback);
 
@@ -862,7 +862,7 @@ public interface Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> base64UrlAsync(byte[] base64UrlPath);
 
@@ -871,7 +871,7 @@ public interface Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> base64UrlWithRestResponseAsync(byte[] base64UrlPath);
 
@@ -891,7 +891,7 @@ public interface Paths {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback);
 
@@ -900,7 +900,7 @@ public interface Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> arrayCsvInPathAsync(List<String> arrayPath);
 
@@ -909,7 +909,7 @@ public interface Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> arrayCsvInPathWithRestResponseAsync(List<String> arrayPath);
 
@@ -929,7 +929,7 @@ public interface Paths {
      * @param unixTimeUrlPath Unix time encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback);
 
@@ -938,7 +938,7 @@ public interface Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
 
@@ -947,7 +947,7 @@ public interface Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath);
 

@@ -49,7 +49,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;IntWrapper&gt;} object
      */
     ServiceFuture<IntWrapper> getIntAsync(final ServiceCallback<IntWrapper> serviceCallback);
 
@@ -57,7 +57,7 @@ public interface Primitives {
      * Get complex types with integer properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IntWrapper object
+     * @return the {@link Single&lt;IntWrapper&gt;} object if successful.
      */
     Single<IntWrapper> getIntAsync();
 
@@ -65,7 +65,7 @@ public interface Primitives {
      * Get complex types with integer properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the IntWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, IntWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, IntWrapper>> getIntWithRestResponseAsync();
 
@@ -85,7 +85,7 @@ public interface Primitives {
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -94,7 +94,7 @@ public interface Primitives {
      *
      * @param complexBody Please put -1 and 2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putIntAsync(IntWrapper complexBody);
 
@@ -103,7 +103,7 @@ public interface Primitives {
      *
      * @param complexBody Please put -1 and 2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putIntWithRestResponseAsync(IntWrapper complexBody);
 
@@ -122,7 +122,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;LongWrapper&gt;} object
      */
     ServiceFuture<LongWrapper> getLongAsync(final ServiceCallback<LongWrapper> serviceCallback);
 
@@ -130,7 +130,7 @@ public interface Primitives {
      * Get complex types with long properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LongWrapper object
+     * @return the {@link Single&lt;LongWrapper&gt;} object if successful.
      */
     Single<LongWrapper> getLongAsync();
 
@@ -138,7 +138,7 @@ public interface Primitives {
      * Get complex types with long properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the LongWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, LongWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LongWrapper>> getLongWithRestResponseAsync();
 
@@ -158,7 +158,7 @@ public interface Primitives {
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -167,7 +167,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putLongAsync(LongWrapper complexBody);
 
@@ -176,7 +176,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putLongWithRestResponseAsync(LongWrapper complexBody);
 
@@ -195,7 +195,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;FloatWrapper&gt;} object
      */
     ServiceFuture<FloatWrapper> getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback);
 
@@ -203,7 +203,7 @@ public interface Primitives {
      * Get complex types with float properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the FloatWrapper object
+     * @return the {@link Single&lt;FloatWrapper&gt;} object if successful.
      */
     Single<FloatWrapper> getFloatAsync();
 
@@ -211,7 +211,7 @@ public interface Primitives {
      * Get complex types with float properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the FloatWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, FloatWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, FloatWrapper>> getFloatWithRestResponseAsync();
 
@@ -231,7 +231,7 @@ public interface Primitives {
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -240,7 +240,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putFloatAsync(FloatWrapper complexBody);
 
@@ -249,7 +249,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putFloatWithRestResponseAsync(FloatWrapper complexBody);
 
@@ -268,7 +268,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DoubleWrapper&gt;} object
      */
     ServiceFuture<DoubleWrapper> getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback);
 
@@ -276,7 +276,7 @@ public interface Primitives {
      * Get complex types with double properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DoubleWrapper object
+     * @return the {@link Single&lt;DoubleWrapper&gt;} object if successful.
      */
     Single<DoubleWrapper> getDoubleAsync();
 
@@ -284,7 +284,7 @@ public interface Primitives {
      * Get complex types with double properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DoubleWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DoubleWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DoubleWrapper>> getDoubleWithRestResponseAsync();
 
@@ -304,7 +304,7 @@ public interface Primitives {
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -313,7 +313,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putDoubleAsync(DoubleWrapper complexBody);
 
@@ -322,7 +322,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDoubleWithRestResponseAsync(DoubleWrapper complexBody);
 
@@ -341,7 +341,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;BooleanWrapper&gt;} object
      */
     ServiceFuture<BooleanWrapper> getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback);
 
@@ -349,7 +349,7 @@ public interface Primitives {
      * Get complex types with bool properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BooleanWrapper object
+     * @return the {@link Single&lt;BooleanWrapper&gt;} object if successful.
      */
     Single<BooleanWrapper> getBoolAsync();
 
@@ -357,7 +357,7 @@ public interface Primitives {
      * Get complex types with bool properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the BooleanWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, BooleanWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, BooleanWrapper>> getBoolWithRestResponseAsync();
 
@@ -377,7 +377,7 @@ public interface Primitives {
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -386,7 +386,7 @@ public interface Primitives {
      *
      * @param complexBody Please put true and false
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putBoolAsync(BooleanWrapper complexBody);
 
@@ -395,7 +395,7 @@ public interface Primitives {
      *
      * @param complexBody Please put true and false
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putBoolWithRestResponseAsync(BooleanWrapper complexBody);
 
@@ -414,7 +414,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;StringWrapper&gt;} object
      */
     ServiceFuture<StringWrapper> getStringAsync(final ServiceCallback<StringWrapper> serviceCallback);
 
@@ -422,7 +422,7 @@ public interface Primitives {
      * Get complex types with string properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StringWrapper object
+     * @return the {@link Single&lt;StringWrapper&gt;} object if successful.
      */
     Single<StringWrapper> getStringAsync();
 
@@ -430,7 +430,7 @@ public interface Primitives {
      * Get complex types with string properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the StringWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, StringWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, StringWrapper>> getStringWithRestResponseAsync();
 
@@ -450,7 +450,7 @@ public interface Primitives {
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -459,7 +459,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putStringAsync(StringWrapper complexBody);
 
@@ -468,7 +468,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putStringWithRestResponseAsync(StringWrapper complexBody);
 
@@ -487,7 +487,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DateWrapper&gt;} object
      */
     ServiceFuture<DateWrapper> getDateAsync(final ServiceCallback<DateWrapper> serviceCallback);
 
@@ -495,7 +495,7 @@ public interface Primitives {
      * Get complex types with date properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateWrapper object
+     * @return the {@link Single&lt;DateWrapper&gt;} object if successful.
      */
     Single<DateWrapper> getDateAsync();
 
@@ -503,7 +503,7 @@ public interface Primitives {
      * Get complex types with date properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DateWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DateWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateWrapper>> getDateWithRestResponseAsync();
 
@@ -523,7 +523,7 @@ public interface Primitives {
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -532,7 +532,7 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putDateAsync(DateWrapper complexBody);
 
@@ -541,7 +541,7 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateWithRestResponseAsync(DateWrapper complexBody);
 
@@ -560,7 +560,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DatetimeWrapper&gt;} object
      */
     ServiceFuture<DatetimeWrapper> getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback);
 
@@ -568,7 +568,7 @@ public interface Primitives {
      * Get complex types with datetime properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DatetimeWrapper object
+     * @return the {@link Single&lt;DatetimeWrapper&gt;} object if successful.
      */
     Single<DatetimeWrapper> getDateTimeAsync();
 
@@ -576,7 +576,7 @@ public interface Primitives {
      * Get complex types with datetime properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DatetimeWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DatetimeWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DatetimeWrapper>> getDateTimeWithRestResponseAsync();
 
@@ -596,7 +596,7 @@ public interface Primitives {
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -605,7 +605,7 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putDateTimeAsync(DatetimeWrapper complexBody);
 
@@ -614,7 +614,7 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateTimeWithRestResponseAsync(DatetimeWrapper complexBody);
 
@@ -633,7 +633,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Datetimerfc1123Wrapper&gt;} object
      */
     ServiceFuture<Datetimerfc1123Wrapper> getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback);
 
@@ -641,7 +641,7 @@ public interface Primitives {
      * Get complex types with datetimeRfc1123 properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Datetimerfc1123Wrapper object
+     * @return the {@link Single&lt;Datetimerfc1123Wrapper&gt;} object if successful.
      */
     Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
 
@@ -649,7 +649,7 @@ public interface Primitives {
      * Get complex types with datetimeRfc1123 properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Datetimerfc1123Wrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Datetimerfc1123Wrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Datetimerfc1123Wrapper>> getDateTimeRfc1123WithRestResponseAsync();
 
@@ -669,7 +669,7 @@ public interface Primitives {
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -678,7 +678,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
 
@@ -687,7 +687,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDateTimeRfc1123WithRestResponseAsync(Datetimerfc1123Wrapper complexBody);
 
@@ -706,7 +706,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;DurationWrapper&gt;} object
      */
     ServiceFuture<DurationWrapper> getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback);
 
@@ -714,7 +714,7 @@ public interface Primitives {
      * Get complex types with duration properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DurationWrapper object
+     * @return the {@link Single&lt;DurationWrapper&gt;} object if successful.
      */
     Single<DurationWrapper> getDurationAsync();
 
@@ -722,7 +722,7 @@ public interface Primitives {
      * Get complex types with duration properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the DurationWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, DurationWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DurationWrapper>> getDurationWithRestResponseAsync();
 
@@ -742,7 +742,7 @@ public interface Primitives {
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -751,7 +751,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putDurationAsync(DurationWrapper complexBody);
 
@@ -760,7 +760,7 @@ public interface Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putDurationWithRestResponseAsync(DurationWrapper complexBody);
 
@@ -779,7 +779,7 @@ public interface Primitives {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;ByteWrapper&gt;} object
      */
     ServiceFuture<ByteWrapper> getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback);
 
@@ -787,7 +787,7 @@ public interface Primitives {
      * Get complex types with byte properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ByteWrapper object
+     * @return the {@link Single&lt;ByteWrapper&gt;} object if successful.
      */
     Single<ByteWrapper> getByteAsync();
 
@@ -795,7 +795,7 @@ public interface Primitives {
      * Get complex types with byte properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ByteWrapper object
+     * @return the {@link Single&lt;RestResponse&lt;Void, ByteWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ByteWrapper>> getByteWithRestResponseAsync();
 
@@ -815,7 +815,7 @@ public interface Primitives {
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -824,7 +824,7 @@ public interface Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putByteAsync(ByteWrapper complexBody);
 
@@ -833,7 +833,7 @@ public interface Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putByteWithRestResponseAsync(ByteWrapper complexBody);
 

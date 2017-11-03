@@ -39,7 +39,7 @@ public interface Paths {
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
 
@@ -48,7 +48,7 @@ public interface Paths {
      *
      * @param accountName Account Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getEmptyAsync(String accountName);
 
@@ -57,7 +57,7 @@ public interface Paths {
      *
      * @param accountName Account Name
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String accountName);
 

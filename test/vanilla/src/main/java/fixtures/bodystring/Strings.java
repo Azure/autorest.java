@@ -38,7 +38,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;String&gt;} object
      */
     ServiceFuture<String> getNullAsync(final ServiceCallback<String> serviceCallback);
 
@@ -46,7 +46,7 @@ public interface Strings {
      * Get null string value value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;String&gt;} object if successful.
      */
     Single<String> getNullAsync();
 
@@ -54,7 +54,7 @@ public interface Strings {
      * Get null string value value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getNullWithRestResponseAsync();
 
@@ -72,7 +72,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putNullAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -80,7 +80,7 @@ public interface Strings {
      * Set string value null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putNullAsync();
 
@@ -88,7 +88,7 @@ public interface Strings {
      * Set string value null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putNullWithRestResponseAsync();
 
@@ -108,7 +108,7 @@ public interface Strings {
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -117,7 +117,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putNullAsync(String stringBody);
 
@@ -126,7 +126,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putNullWithRestResponseAsync(String stringBody);
 
@@ -145,7 +145,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;String&gt;} object
      */
     ServiceFuture<String> getEmptyAsync(final ServiceCallback<String> serviceCallback);
 
@@ -153,7 +153,7 @@ public interface Strings {
      * Get empty string value value ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;String&gt;} object if successful.
      */
     Single<String> getEmptyAsync();
 
@@ -161,7 +161,7 @@ public interface Strings {
      * Get empty string value value ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getEmptyWithRestResponseAsync();
 
@@ -181,7 +181,7 @@ public interface Strings {
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -190,7 +190,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putEmptyAsync(String stringBody);
 
@@ -199,7 +199,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putEmptyWithRestResponseAsync(String stringBody);
 
@@ -218,7 +218,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;String&gt;} object
      */
     ServiceFuture<String> getMbcsAsync(final ServiceCallback<String> serviceCallback);
 
@@ -226,7 +226,7 @@ public interface Strings {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;String&gt;} object if successful.
      */
     Single<String> getMbcsAsync();
 
@@ -234,7 +234,7 @@ public interface Strings {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getMbcsWithRestResponseAsync();
 
@@ -254,7 +254,7 @@ public interface Strings {
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -263,7 +263,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putMbcsAsync(String stringBody);
 
@@ -272,7 +272,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putMbcsWithRestResponseAsync(String stringBody);
 
@@ -291,7 +291,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;String&gt;} object
      */
     ServiceFuture<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
 
@@ -299,7 +299,7 @@ public interface Strings {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;String&gt;} object if successful.
      */
     Single<String> getWhitespaceAsync();
 
@@ -307,7 +307,7 @@ public interface Strings {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getWhitespaceWithRestResponseAsync();
 
@@ -327,7 +327,7 @@ public interface Strings {
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -336,7 +336,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putWhitespaceAsync(String stringBody);
 
@@ -345,7 +345,7 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putWhitespaceWithRestResponseAsync(String stringBody);
 
@@ -364,7 +364,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;String&gt;} object
      */
     ServiceFuture<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
 
@@ -372,7 +372,7 @@ public interface Strings {
      * Get String value when no string value is sent in response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;String&gt;} object if successful.
      */
     Single<String> getNotProvidedAsync();
 
@@ -380,7 +380,7 @@ public interface Strings {
      * Get String value when no string value is sent in response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the String object
+     * @return the {@link Single&lt;RestResponse&lt;Void, String&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, String>> getNotProvidedWithRestResponseAsync();
 
@@ -399,7 +399,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
      */
     ServiceFuture<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
@@ -407,7 +407,7 @@ public interface Strings {
      * Get value that is base64 encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return the {@link Single&lt;byte[]&gt;} object if successful.
      */
     Single<byte[]> getBase64EncodedAsync();
 
@@ -415,7 +415,7 @@ public interface Strings {
      * Get value that is base64 encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getBase64EncodedWithRestResponseAsync();
 
@@ -434,7 +434,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
      */
     ServiceFuture<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
@@ -442,7 +442,7 @@ public interface Strings {
      * Get value that is base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return the {@link Single&lt;byte[]&gt;} object if successful.
      */
     Single<byte[]> getBase64UrlEncodedAsync();
 
@@ -450,7 +450,7 @@ public interface Strings {
      * Get value that is base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getBase64UrlEncodedWithRestResponseAsync();
 
@@ -470,7 +470,7 @@ public interface Strings {
      * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback);
 
@@ -479,7 +479,7 @@ public interface Strings {
      *
      * @param stringBody the Base64Url value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putBase64UrlEncodedAsync(byte[] stringBody);
 
@@ -488,7 +488,7 @@ public interface Strings {
      *
      * @param stringBody the Base64Url value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putBase64UrlEncodedWithRestResponseAsync(byte[] stringBody);
 
@@ -507,7 +507,7 @@ public interface Strings {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;byte[]&gt;} object
      */
     ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
@@ -515,7 +515,7 @@ public interface Strings {
      * Get null value that is expected to be base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return the {@link Single&lt;byte[]&gt;} object if successful.
      */
     Single<byte[]> getNullBase64UrlEncodedAsync();
 
@@ -523,7 +523,7 @@ public interface Strings {
      * Get null value that is expected to be base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the byte[] object
+     * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
 

@@ -39,7 +39,7 @@ public interface Inheritances {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Siamese&gt;} object
      */
     ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
 
@@ -47,7 +47,7 @@ public interface Inheritances {
      * Get complex types that extend others.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Siamese object
+     * @return the {@link Single&lt;Siamese&gt;} object if successful.
      */
     Single<Siamese> getValidAsync();
 
@@ -55,7 +55,7 @@ public interface Inheritances {
      * Get complex types that extend others.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Siamese object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync();
 
@@ -75,7 +75,7 @@ public interface Inheritances {
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
 
@@ -84,7 +84,7 @@ public interface Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putValidAsync(Siamese complexBody);
 
@@ -93,7 +93,7 @@ public interface Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Siamese complexBody);
 

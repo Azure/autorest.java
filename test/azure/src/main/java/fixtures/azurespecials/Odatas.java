@@ -19,8 +19,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Odatas.
+ * An instance of this class provides access to all the operations defined in
+ * Odatas.
  */
 public interface Odatas {
     /**
@@ -37,7 +37,7 @@ public interface Odatas {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback);
 
@@ -45,16 +45,18 @@ public interface Odatas {
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getWithFilterAsync();
+
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<Void, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync();
+
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
@@ -75,7 +77,7 @@ public interface Odatas {
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback);
 
@@ -86,7 +88,7 @@ public interface Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> getWithFilterAsync(String filter, Integer top, String orderby);
 
@@ -97,9 +99,8 @@ public interface Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<Void, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby);
-
 
 }

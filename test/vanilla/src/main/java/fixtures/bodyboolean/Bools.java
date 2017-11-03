@@ -38,7 +38,7 @@ public interface Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -46,7 +46,7 @@ public interface Bools {
      * Get true Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> getTrueAsync();
 
@@ -54,7 +54,7 @@ public interface Bools {
      * Get true Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getTrueWithRestResponseAsync();
 
@@ -74,7 +74,7 @@ public interface Bools {
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
@@ -83,7 +83,7 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putTrueAsync(boolean boolBody);
 
@@ -92,7 +92,7 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putTrueWithRestResponseAsync(boolean boolBody);
 
@@ -111,7 +111,7 @@ public interface Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -119,7 +119,7 @@ public interface Bools {
      * Get false Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> getFalseAsync();
 
@@ -127,7 +127,7 @@ public interface Bools {
      * Get false Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getFalseWithRestResponseAsync();
 
@@ -147,7 +147,7 @@ public interface Bools {
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
@@ -156,7 +156,7 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putFalseAsync(boolean boolBody);
 
@@ -165,7 +165,7 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putFalseWithRestResponseAsync(boolean boolBody);
 
@@ -184,7 +184,7 @@ public interface Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -192,7 +192,7 @@ public interface Bools {
      * Get null Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> getNullAsync();
 
@@ -200,7 +200,7 @@ public interface Bools {
      * Get null Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getNullWithRestResponseAsync();
 
@@ -219,7 +219,7 @@ public interface Bools {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 
@@ -227,7 +227,7 @@ public interface Bools {
      * Get invalid Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> getInvalidAsync();
 
@@ -235,7 +235,7 @@ public interface Bools {
      * Get invalid Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> getInvalidWithRestResponseAsync();
 

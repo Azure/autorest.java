@@ -39,7 +39,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> head400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -47,7 +47,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> head400Async();
 
@@ -55,7 +55,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head400WithRestResponseAsync();
 
@@ -74,7 +74,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -82,7 +82,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get400Async();
 
@@ -90,7 +90,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get400WithRestResponseAsync();
 
@@ -109,7 +109,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -117,7 +117,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put400Async();
 
@@ -125,7 +125,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put400WithRestResponseAsync();
 
@@ -146,7 +146,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -155,7 +155,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put400Async(Boolean booleanValue);
 
@@ -164,7 +164,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put400WithRestResponseAsync(Boolean booleanValue);
 
@@ -183,7 +183,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> patch400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -191,7 +191,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> patch400Async();
 
@@ -199,7 +199,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch400WithRestResponseAsync();
 
@@ -220,7 +220,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -229,7 +229,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> patch400Async(Boolean booleanValue);
 
@@ -238,7 +238,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch400WithRestResponseAsync(Boolean booleanValue);
 
@@ -257,7 +257,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -265,7 +265,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post400Async();
 
@@ -273,7 +273,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post400WithRestResponseAsync();
 
@@ -294,7 +294,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -303,7 +303,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post400Async(Boolean booleanValue);
 
@@ -312,7 +312,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post400WithRestResponseAsync(Boolean booleanValue);
 
@@ -331,7 +331,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete400Async(final ServiceCallback<Error> serviceCallback);
 
@@ -339,7 +339,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete400Async();
 
@@ -347,7 +347,7 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete400WithRestResponseAsync();
 
@@ -368,7 +368,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -377,7 +377,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete400Async(Boolean booleanValue);
 
@@ -386,7 +386,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete400WithRestResponseAsync(Boolean booleanValue);
 
@@ -405,7 +405,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> head401Async(final ServiceCallback<Error> serviceCallback);
 
@@ -413,7 +413,7 @@ public interface HttpClientFailures {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> head401Async();
 
@@ -421,7 +421,7 @@ public interface HttpClientFailures {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head401WithRestResponseAsync();
 
@@ -440,7 +440,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get402Async(final ServiceCallback<Error> serviceCallback);
 
@@ -448,7 +448,7 @@ public interface HttpClientFailures {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get402Async();
 
@@ -456,7 +456,7 @@ public interface HttpClientFailures {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get402WithRestResponseAsync();
 
@@ -475,7 +475,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get403Async(final ServiceCallback<Error> serviceCallback);
 
@@ -483,7 +483,7 @@ public interface HttpClientFailures {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get403Async();
 
@@ -491,7 +491,7 @@ public interface HttpClientFailures {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get403WithRestResponseAsync();
 
@@ -510,7 +510,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put404Async(final ServiceCallback<Error> serviceCallback);
 
@@ -518,7 +518,7 @@ public interface HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put404Async();
 
@@ -526,7 +526,7 @@ public interface HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put404WithRestResponseAsync();
 
@@ -547,7 +547,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -556,7 +556,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put404Async(Boolean booleanValue);
 
@@ -565,7 +565,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put404WithRestResponseAsync(Boolean booleanValue);
 
@@ -584,7 +584,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> patch405Async(final ServiceCallback<Error> serviceCallback);
 
@@ -592,7 +592,7 @@ public interface HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> patch405Async();
 
@@ -600,7 +600,7 @@ public interface HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch405WithRestResponseAsync();
 
@@ -621,7 +621,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -630,7 +630,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> patch405Async(Boolean booleanValue);
 
@@ -639,7 +639,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch405WithRestResponseAsync(Boolean booleanValue);
 
@@ -658,7 +658,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post406Async(final ServiceCallback<Error> serviceCallback);
 
@@ -666,7 +666,7 @@ public interface HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post406Async();
 
@@ -674,7 +674,7 @@ public interface HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post406WithRestResponseAsync();
 
@@ -695,7 +695,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -704,7 +704,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post406Async(Boolean booleanValue);
 
@@ -713,7 +713,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post406WithRestResponseAsync(Boolean booleanValue);
 
@@ -732,7 +732,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete407Async(final ServiceCallback<Error> serviceCallback);
 
@@ -740,7 +740,7 @@ public interface HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete407Async();
 
@@ -748,7 +748,7 @@ public interface HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete407WithRestResponseAsync();
 
@@ -769,7 +769,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -778,7 +778,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete407Async(Boolean booleanValue);
 
@@ -787,7 +787,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete407WithRestResponseAsync(Boolean booleanValue);
 
@@ -806,7 +806,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put409Async(final ServiceCallback<Error> serviceCallback);
 
@@ -814,7 +814,7 @@ public interface HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put409Async();
 
@@ -822,7 +822,7 @@ public interface HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put409WithRestResponseAsync();
 
@@ -843,7 +843,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -852,7 +852,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put409Async(Boolean booleanValue);
 
@@ -861,7 +861,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put409WithRestResponseAsync(Boolean booleanValue);
 
@@ -880,7 +880,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> head410Async(final ServiceCallback<Error> serviceCallback);
 
@@ -888,7 +888,7 @@ public interface HttpClientFailures {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> head410Async();
 
@@ -896,7 +896,7 @@ public interface HttpClientFailures {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head410WithRestResponseAsync();
 
@@ -915,7 +915,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get411Async(final ServiceCallback<Error> serviceCallback);
 
@@ -923,7 +923,7 @@ public interface HttpClientFailures {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get411Async();
 
@@ -931,7 +931,7 @@ public interface HttpClientFailures {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get411WithRestResponseAsync();
 
@@ -950,7 +950,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get412Async(final ServiceCallback<Error> serviceCallback);
 
@@ -958,7 +958,7 @@ public interface HttpClientFailures {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get412Async();
 
@@ -966,7 +966,7 @@ public interface HttpClientFailures {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get412WithRestResponseAsync();
 
@@ -985,7 +985,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put413Async(final ServiceCallback<Error> serviceCallback);
 
@@ -993,7 +993,7 @@ public interface HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put413Async();
 
@@ -1001,7 +1001,7 @@ public interface HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put413WithRestResponseAsync();
 
@@ -1022,7 +1022,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -1031,7 +1031,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> put413Async(Boolean booleanValue);
 
@@ -1040,7 +1040,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> put413WithRestResponseAsync(Boolean booleanValue);
 
@@ -1059,7 +1059,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> patch414Async(final ServiceCallback<Error> serviceCallback);
 
@@ -1067,7 +1067,7 @@ public interface HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> patch414Async();
 
@@ -1075,7 +1075,7 @@ public interface HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch414WithRestResponseAsync();
 
@@ -1096,7 +1096,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -1105,7 +1105,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> patch414Async(Boolean booleanValue);
 
@@ -1114,7 +1114,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> patch414WithRestResponseAsync(Boolean booleanValue);
 
@@ -1133,7 +1133,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post415Async(final ServiceCallback<Error> serviceCallback);
 
@@ -1141,7 +1141,7 @@ public interface HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post415Async();
 
@@ -1149,7 +1149,7 @@ public interface HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post415WithRestResponseAsync();
 
@@ -1170,7 +1170,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -1179,7 +1179,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post415Async(Boolean booleanValue);
 
@@ -1188,7 +1188,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post415WithRestResponseAsync(Boolean booleanValue);
 
@@ -1207,7 +1207,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get416Async(final ServiceCallback<Error> serviceCallback);
 
@@ -1215,7 +1215,7 @@ public interface HttpClientFailures {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get416Async();
 
@@ -1223,7 +1223,7 @@ public interface HttpClientFailures {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get416WithRestResponseAsync();
 
@@ -1242,7 +1242,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete417Async(final ServiceCallback<Error> serviceCallback);
 
@@ -1250,7 +1250,7 @@ public interface HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete417Async();
 
@@ -1258,7 +1258,7 @@ public interface HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete417WithRestResponseAsync();
 
@@ -1279,7 +1279,7 @@ public interface HttpClientFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -1288,7 +1288,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete417Async(Boolean booleanValue);
 
@@ -1297,7 +1297,7 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete417WithRestResponseAsync(Boolean booleanValue);
 
@@ -1316,7 +1316,7 @@ public interface HttpClientFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> head429Async(final ServiceCallback<Error> serviceCallback);
 
@@ -1324,7 +1324,7 @@ public interface HttpClientFailures {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> head429Async();
 
@@ -1332,7 +1332,7 @@ public interface HttpClientFailures {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head429WithRestResponseAsync();
 

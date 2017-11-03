@@ -53,6 +53,7 @@ namespace AutoRest.Java.DanModel
             }
 
             MethodJv methodJv = method as MethodJv;
+            MethodJva methodJva = methodJv as MethodJva;
 
             JavaThrow operationExceptionThrow = new JavaThrow(methodJv.OperationExceptionTypeString, "thrown if the request is rejected by server");
             JavaThrow runtimeExceptionThrow = new JavaThrow("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
@@ -60,23 +61,28 @@ namespace AutoRest.Java.DanModel
 
             string syncReturnType = methodJv.ReturnTypeResponseName;
             string xmlEscapedSyncReturnType = syncReturnType.EscapeXmlComment();
-            string asyncReturnType = methodJv.ReturnTypeJv.GenericBodyClientTypeString;
-            string xmlEscapedAsyncReturnType = asyncReturnType.EscapeXmlComment();
+            string asyncInnerReturnType = methodJv.ReturnTypeJv.GenericBodyClientTypeString;
+            string serviceFutureReturnType = $"ServiceFuture<{asyncInnerReturnType}>";
+            string asyncReturnType = methodJva != null ? methodJva.AsyncClientReturnTypeString : $"Single<{asyncInnerReturnType}>";
+            string asyncRestResponseReturnType = $"Single<{methodJv.RestResponseAbstractTypeName}>";
+            
             JavaMethodReturn syncReturn = new JavaMethodReturn(
                 syncReturnType,
                 syncReturnType == "void"
                     ? null
                     : $"the {xmlEscapedSyncReturnType} object if successful.");
+
+            JavaMethodReturn callbackReturn = new JavaMethodReturn(
+                serviceFutureReturnType,
+                $"the {{@link {serviceFutureReturnType.EscapeXmlComment()}}} object");
+
             JavaMethodReturn asyncReturn = new JavaMethodReturn(
-                $"Single<{asyncReturnType}>",
-                syncReturnType != "void"
-                                ? $"the observable to the {xmlEscapedSyncReturnType} object"
-                                : $"the {{@link Single<{xmlEscapedAsyncReturnType}>}} object if successful.");
+                asyncReturnType,
+                $"the {{@link {asyncReturnType.EscapeXmlComment()}}} object if successful.");
+
             JavaMethodReturn asyncRestResponseReturn = new JavaMethodReturn(
-                $"Single<RestResponse<{methodJv.RestResponseHeadersName}, {methodJv.RestResponseAbstractBodyName}>>",
-                syncReturnType != "void"
-                                ? $"the observable to the {xmlEscapedSyncReturnType} object"
-                                : $"the {{@link Single<{xmlEscapedAsyncReturnType}>}} object if successful.");
+                asyncRestResponseReturnType,
+                $"the {{@link {asyncRestResponseReturnType.EscapeXmlComment()}}} object if successful.");
 
             string methodName = method.Name;
             string asyncMethodName = $"{methodName}Async";
@@ -89,10 +95,21 @@ namespace AutoRest.Java.DanModel
 
             JavaMethodParameter callbackParameter = new JavaMethodParameter(
                 "the async ServiceCallback to handle successful and failed responses.",
-                $"ServiceCallback<{asyncReturnType}>",
+                $"ServiceCallback<{asyncInnerReturnType}>",
                 "serviceCallback",
                 final: true);
-            
+
+            bool shouldGenerateCallbackMethod =
+                methodJva == null ||
+                (!methodJva.IsPagingOperation &&
+                 !methodJva.IsPagingNextOperation);
+
+            bool shouldGenerateRestResponseMethod =
+                methodJva == null ||
+                (!methodJva.IsLongRunningOperation &&
+                 !methodJva.IsPagingOperation &&
+                 !methodJva.IsPagingNextOperation);
+
             List<JavaMethod> javaMethods = new List<JavaMethod>();
 
             Action<IEnumerable<JavaMethodParameter>> addMethods = (IEnumerable<JavaMethodParameter> methodParameters) =>
@@ -105,13 +122,16 @@ namespace AutoRest.Java.DanModel
                     methodName,
                     methodParameters));
 
-                // Callback
-                javaMethods.Add(new JavaMethod(
-                    description,
-                    new[] { illegalArgumentExceptionThrow },
-                    new JavaMethodReturn($"ServiceFuture<{asyncReturnType}>", "the {@link ServiceFuture} object"),
-                    asyncMethodName,
-                    methodParameters.Concat(new[] { callbackParameter })));
+                if (shouldGenerateCallbackMethod)
+                {
+                    // Callback
+                    javaMethods.Add(new JavaMethod(
+                        description,
+                        new[] { illegalArgumentExceptionThrow },
+                        callbackReturn,
+                        asyncMethodName,
+                        methodParameters.Concat(new[] { callbackParameter })));
+                }
 
                 // Async
                 javaMethods.Add(new JavaMethod(
@@ -121,13 +141,16 @@ namespace AutoRest.Java.DanModel
                     asyncMethodName,
                     methodParameters));
 
-                // RestResponse Async
-                javaMethods.Add(new JavaMethod(
-                    description,
-                    new[] { illegalArgumentExceptionThrow },
-                    asyncRestResponseReturn,
-                    asyncRestResponseMethodName,
-                    methodParameters));
+                if (shouldGenerateRestResponseMethod)
+                {
+                    // RestResponse Async
+                    javaMethods.Add(new JavaMethod(
+                        description,
+                        new[] { illegalArgumentExceptionThrow },
+                        asyncRestResponseReturn,
+                        asyncRestResponseMethodName,
+                        methodParameters));
+                }
             };
 
             if (nonConstantParameters.Any(p => !p.IsRequired))

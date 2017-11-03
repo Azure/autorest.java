@@ -53,7 +53,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> head300Async(final ServiceCallback<Void> serviceCallback);
 
@@ -61,7 +61,7 @@ public interface HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> head300Async();
 
@@ -69,7 +69,7 @@ public interface HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead300Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300WithRestResponseAsync();
 
@@ -88,7 +88,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;List&lt;String&gt;&gt;} object
      */
     ServiceFuture<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback);
 
@@ -96,7 +96,7 @@ public interface HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;String&gt; object
+     * @return the {@link Single&lt;List&lt;String&gt;&gt;} object if successful.
      */
     Single<List<String>> get300Async();
 
@@ -104,7 +104,7 @@ public interface HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the List&lt;String&gt; object
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet300Headers, List&lt;String&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300WithRestResponseAsync();
 
@@ -122,7 +122,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> head301Async(final ServiceCallback<Void> serviceCallback);
 
@@ -130,7 +130,7 @@ public interface HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> head301Async();
 
@@ -138,7 +138,7 @@ public interface HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead301Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301WithRestResponseAsync();
 
@@ -156,7 +156,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> get301Async(final ServiceCallback<Void> serviceCallback);
 
@@ -164,7 +164,7 @@ public interface HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> get301Async();
 
@@ -172,7 +172,7 @@ public interface HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet301Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301WithRestResponseAsync();
 
@@ -190,7 +190,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put301Async(final ServiceCallback<Void> serviceCallback);
 
@@ -198,7 +198,7 @@ public interface HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put301Async();
 
@@ -206,7 +206,7 @@ public interface HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut301Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync();
 
@@ -226,7 +226,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -235,7 +235,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put301Async(Boolean booleanValue);
 
@@ -244,7 +244,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut301Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301WithRestResponseAsync(Boolean booleanValue);
 
@@ -262,7 +262,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> head302Async(final ServiceCallback<Void> serviceCallback);
 
@@ -270,7 +270,7 @@ public interface HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> head302Async();
 
@@ -278,7 +278,7 @@ public interface HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead302Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302WithRestResponseAsync();
 
@@ -296,7 +296,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> get302Async(final ServiceCallback<Void> serviceCallback);
 
@@ -304,7 +304,7 @@ public interface HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> get302Async();
 
@@ -312,7 +312,7 @@ public interface HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet302Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302WithRestResponseAsync();
 
@@ -330,7 +330,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch302Async(final ServiceCallback<Void> serviceCallback);
 
@@ -338,7 +338,7 @@ public interface HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch302Async();
 
@@ -346,7 +346,7 @@ public interface HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch302Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync();
 
@@ -366,7 +366,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -375,7 +375,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch302Async(Boolean booleanValue);
 
@@ -384,7 +384,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch302Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302WithRestResponseAsync(Boolean booleanValue);
 
@@ -402,7 +402,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> post303Async(final ServiceCallback<Void> serviceCallback);
 
@@ -410,7 +410,7 @@ public interface HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> post303Async();
 
@@ -418,7 +418,7 @@ public interface HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost303Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync();
 
@@ -438,7 +438,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -447,7 +447,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> post303Async(Boolean booleanValue);
 
@@ -456,7 +456,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost303Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303WithRestResponseAsync(Boolean booleanValue);
 
@@ -474,7 +474,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> head307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -482,7 +482,7 @@ public interface HttpRedirects {
      * Redirect with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> head307Async();
 
@@ -490,7 +490,7 @@ public interface HttpRedirects {
      * Redirect with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsHead307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307WithRestResponseAsync();
 
@@ -508,7 +508,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> get307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -516,7 +516,7 @@ public interface HttpRedirects {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> get307Async();
 
@@ -524,7 +524,7 @@ public interface HttpRedirects {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsGet307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307WithRestResponseAsync();
 
@@ -542,7 +542,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -550,7 +550,7 @@ public interface HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put307Async();
 
@@ -558,7 +558,7 @@ public interface HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync();
 
@@ -578,7 +578,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -587,7 +587,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put307Async(Boolean booleanValue);
 
@@ -596,7 +596,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPut307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307WithRestResponseAsync(Boolean booleanValue);
 
@@ -614,7 +614,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -622,7 +622,7 @@ public interface HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch307Async();
 
@@ -630,7 +630,7 @@ public interface HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync();
 
@@ -650,7 +650,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -659,7 +659,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch307Async(Boolean booleanValue);
 
@@ -668,7 +668,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPatch307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307WithRestResponseAsync(Boolean booleanValue);
 
@@ -686,7 +686,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> post307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -694,7 +694,7 @@ public interface HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> post307Async();
 
@@ -702,7 +702,7 @@ public interface HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync();
 
@@ -722,7 +722,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -731,7 +731,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> post307Async(Boolean booleanValue);
 
@@ -740,7 +740,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsPost307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307WithRestResponseAsync(Boolean booleanValue);
 
@@ -758,7 +758,7 @@ public interface HttpRedirects {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> delete307Async(final ServiceCallback<Void> serviceCallback);
 
@@ -766,7 +766,7 @@ public interface HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> delete307Async();
 
@@ -774,7 +774,7 @@ public interface HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsDelete307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync();
 
@@ -794,7 +794,7 @@ public interface HttpRedirects {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -803,7 +803,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> delete307Async(Boolean booleanValue);
 
@@ -812,7 +812,7 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsDelete307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync(Boolean booleanValue);
 

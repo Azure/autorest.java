@@ -37,7 +37,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> head408Async(final ServiceCallback<Void> serviceCallback);
 
@@ -45,7 +45,7 @@ public interface HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> head408Async();
 
@@ -53,7 +53,7 @@ public interface HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> head408WithRestResponseAsync();
 
@@ -71,7 +71,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put500Async(final ServiceCallback<Void> serviceCallback);
 
@@ -79,7 +79,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put500Async();
 
@@ -87,7 +87,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> put500WithRestResponseAsync();
 
@@ -107,7 +107,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -116,7 +116,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put500Async(Boolean booleanValue);
 
@@ -125,7 +125,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> put500WithRestResponseAsync(Boolean booleanValue);
 
@@ -143,7 +143,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch500Async(final ServiceCallback<Void> serviceCallback);
 
@@ -151,7 +151,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch500Async();
 
@@ -159,7 +159,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> patch500WithRestResponseAsync();
 
@@ -179,7 +179,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -188,7 +188,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch500Async(Boolean booleanValue);
 
@@ -197,7 +197,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> patch500WithRestResponseAsync(Boolean booleanValue);
 
@@ -215,7 +215,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> get502Async(final ServiceCallback<Void> serviceCallback);
 
@@ -223,7 +223,7 @@ public interface HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> get502Async();
 
@@ -231,7 +231,7 @@ public interface HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> get502WithRestResponseAsync();
 
@@ -249,7 +249,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> post503Async(final ServiceCallback<Void> serviceCallback);
 
@@ -257,7 +257,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> post503Async();
 
@@ -265,7 +265,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> post503WithRestResponseAsync();
 
@@ -285,7 +285,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -294,7 +294,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> post503Async(Boolean booleanValue);
 
@@ -303,7 +303,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> post503WithRestResponseAsync(Boolean booleanValue);
 
@@ -321,7 +321,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> delete503Async(final ServiceCallback<Void> serviceCallback);
 
@@ -329,7 +329,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> delete503Async();
 
@@ -337,7 +337,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> delete503WithRestResponseAsync();
 
@@ -357,7 +357,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -366,7 +366,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> delete503Async(Boolean booleanValue);
 
@@ -375,7 +375,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> delete503WithRestResponseAsync(Boolean booleanValue);
 
@@ -393,7 +393,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put504Async(final ServiceCallback<Void> serviceCallback);
 
@@ -401,7 +401,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put504Async();
 
@@ -409,7 +409,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> put504WithRestResponseAsync();
 
@@ -429,7 +429,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -438,7 +438,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> put504Async(Boolean booleanValue);
 
@@ -447,7 +447,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> put504WithRestResponseAsync(Boolean booleanValue);
 
@@ -465,7 +465,7 @@ public interface HttpRetrys {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch504Async(final ServiceCallback<Void> serviceCallback);
 
@@ -473,7 +473,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch504Async();
 
@@ -481,7 +481,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> patch504WithRestResponseAsync();
 
@@ -501,7 +501,7 @@ public interface HttpRetrys {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
@@ -510,7 +510,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> patch504Async(Boolean booleanValue);
 
@@ -519,7 +519,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> patch504WithRestResponseAsync(Boolean booleanValue);
 
