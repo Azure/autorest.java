@@ -23,7 +23,7 @@ public class LROsCustomHeaderTests {
         RestClient config = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withCredentials(new BasicAuthenticationCredentials(null, null))
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
 
         client = new AutoRestLongRunningOperationTestServiceImpl(config);

@@ -25,7 +25,7 @@ public class XMsClientRequestIdTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost.:3000")
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .withSerializerAdapter(new JacksonAdapter())
                 .build();
 

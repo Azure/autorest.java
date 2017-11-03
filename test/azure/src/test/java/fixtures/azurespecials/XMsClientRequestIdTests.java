@@ -25,7 +25,7 @@ public class XMsClientRequestIdTests {
                 .withBaseUrl("http://localhost:3000")
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
                 .withSerializerAdapter(new AzureJacksonAdapter())
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
 
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);

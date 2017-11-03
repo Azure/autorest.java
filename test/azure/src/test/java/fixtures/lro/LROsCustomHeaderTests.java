@@ -24,7 +24,7 @@ public class LROsCustomHeaderTests {
                 .withBaseUrl("http://localhost:3000")
                 .withCredentials(new BasicAuthenticationCredentials(null, null))
                 .withSerializerAdapter(new AzureJacksonAdapter())
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
         AzureProxy.setDefaultDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(restClient);

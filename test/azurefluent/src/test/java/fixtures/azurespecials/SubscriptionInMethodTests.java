@@ -24,7 +24,7 @@ public class SubscriptionInMethodTests {
                 .withBaseUrl("http://localhost:3000")
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
-                .addCustomPolicy(new RequestIdPolicy.Factory())
+                .addRequestPolicy(new RequestIdPolicy.Factory())
                 .build();
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);
         client.withSubscriptionId("1234-5678-9012-3456");

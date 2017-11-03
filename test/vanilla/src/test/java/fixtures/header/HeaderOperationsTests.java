@@ -56,7 +56,7 @@ public class HeaderOperationsTests {
                 .withUserAgent("")
                 .withBaseUrl("http://localhost:3000")
                 .withSerializerAdapter(new JacksonAdapter())
-                .addCustomPolicy(addHeadersFactory)
+                .addRequestPolicy(addHeadersFactory)
                 .build();
 
         client = new AutoRestSwaggerBATHeaderServiceImpl(restClient);
