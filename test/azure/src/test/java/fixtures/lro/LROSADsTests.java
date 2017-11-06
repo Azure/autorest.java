@@ -7,6 +7,7 @@ import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class LROSADsTests {
         client = new AutoRestLongRunningOperationTestServiceImpl(
                 new RestClient.Builder()
                     .withBaseUrl("http://localhost:3000")
-                    .withCredentials(new BasicAuthenticationCredentials(null, null))
+                    .withCredentialsPolicy(new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)))
                     .withLogLevel(LogLevel.BODY_AND_HEADERS)
                     .withSerializerAdapter(new AzureJacksonAdapter())
                     .build()

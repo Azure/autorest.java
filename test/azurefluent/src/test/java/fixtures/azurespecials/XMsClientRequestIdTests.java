@@ -6,6 +6,7 @@ import com.microsoft.rest.v2.credentials.TokenCredentials;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy.Factory;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import com.microsoft.rest.v2.serializer.JacksonAdapter;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,8 +25,8 @@ public class XMsClientRequestIdTests {
 
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost.:3000")
-                .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .withCredentialsPolicy(new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .withSerializerAdapter(new JacksonAdapter())
                 .build();
 

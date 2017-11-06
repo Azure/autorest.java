@@ -142,7 +142,7 @@ public class MultipleResponsesTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withSerializerAdapter(new JacksonAdapter())
-                .addCustomPolicy(new RequestPolicy.Factory() {
+                .addRequestPolicy(new RequestPolicy.Factory() {
                     @Override
                     public RequestPolicy create(final RequestPolicy next) {
                         return new RequestPolicy() {
@@ -178,7 +178,7 @@ public class MultipleResponsesTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withSerializerAdapter(new JacksonAdapter())
-                .addCustomPolicy(new RequestPolicy.Factory() {
+                .addRequestPolicy(new RequestPolicy.Factory() {
                     @Override
                     public RequestPolicy create(final RequestPolicy next) {
                         return new RequestPolicy() {

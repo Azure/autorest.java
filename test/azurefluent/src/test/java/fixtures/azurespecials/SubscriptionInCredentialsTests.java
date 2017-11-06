@@ -4,6 +4,7 @@ import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.TokenCredentials;
 
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import com.microsoft.rest.v2.policy.RequestIdPolicy;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,9 +20,9 @@ public class SubscriptionInCredentialsTests {
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
-                .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
+                .withCredentialsPolicy(new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())))
                 .withSerializerAdapter(new AzureJacksonAdapter())
-                .addCustomPolicy(new RequestIdPolicy.Factory())
+                .addRequestPolicy(new RequestIdPolicy.Factory())
                 .build();
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);
         client.withSubscriptionId("1234-5678-9012-3456");
