@@ -19,8 +19,8 @@ namespace AutoRest.Java.DanModel
         public override JavaFile GenerateJavaFile(string folderPath, string headerComment, string package, int maximumHeaderCommentWidth)
         {
             return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumHeaderCommentWidth)
-                .Import("com.microsoft.rest.RestException",
-                        "com.microsoft.rest.http.HttpResponse")
+                .Import("com.microsoft.rest.v2.RestException",
+                        "com.microsoft.rest.v2.http.HttpResponse")
                 .MultipleLineComment((comment) =>
                 {
                     comment.Line($"Exception thrown for an invalid response with {ExceptionBodyTypeName} information.");

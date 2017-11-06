@@ -10,10 +10,10 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.RestException;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import rx.Observable;

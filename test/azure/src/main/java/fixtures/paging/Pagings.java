@@ -10,12 +10,12 @@
 
 package fixtures.paging;
 
-import com.microsoft.azure.CloudException;
-import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.azure.Page;
-import com.microsoft.azure.PagedList;
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.azure.v2.CloudException;
+import com.microsoft.azure.v2.ListOperationCallback;
+import com.microsoft.azure.v2.Page;
+import com.microsoft.azure.v2.PagedList;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;

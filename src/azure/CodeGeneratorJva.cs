@@ -22,7 +22,7 @@ namespace AutoRest.Java.Azure
 {
     public class CodeGeneratorJva : CodeGeneratorJv
     {
-        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:1.0.0-beta6-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
+        private const string ClientRuntimePackage = "com.microsoft.azure.v2:azure-client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
         private const string _packageInfoFileName = "package-info.java";
         
         public override bool IsSingleFileGenerationSupported => true;
@@ -76,6 +76,9 @@ namespace AutoRest.Java.Azure
 
             //Models
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
+
+            //XML wrappers
+            await WriteXmlWrapperFiles(codeModel, codeModel.ImplPackage).ConfigureAwait(false);
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);

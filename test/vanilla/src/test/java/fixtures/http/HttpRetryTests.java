@@ -1,6 +1,6 @@
 package fixtures.http;
 
-import com.microsoft.rest.RestResponse;
+import com.microsoft.rest.v2.RestResponse;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

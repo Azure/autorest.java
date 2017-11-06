@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import fixtures.report.implementation.AutoRestReportServiceImpl;
+import org.junit.runner.Result;
+import org.junit.runner.notification.RunListener;
 
-public final class CoverageReporter {
-    private static AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
+public final class CoverageReporter extends RunListener {
+    private AutoRestReportService client = new AutoRestReportServiceImpl("http://localhost:3000");
 
-    private CoverageReporter() { }
-
-    public static void main(String[] args) throws Exception {
+    @Override
+    public void testRunFinished(Result result) throws Exception {
         Map<String, Integer> report = client.getReport();
 
         // Body cannot be null

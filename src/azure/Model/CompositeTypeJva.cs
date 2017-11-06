@@ -19,7 +19,7 @@ namespace AutoRest.Java.Azure.Model
         {
         }
 
-        protected string _azureRuntimePackage = "com.microsoft.azure";
+        protected string _azureRuntimePackage = "com.microsoft.azure.v2";
 
         [JsonIgnore]
         public override string Package => IsResource
@@ -83,12 +83,12 @@ namespace AutoRest.Java.Azure.Model
                 {
                     if (property.ModelType.IsResource())
                     {
-                        imports.Add("com.microsoft.azure." + property.ModelType.Name);
+                        imports.Add("com.microsoft.azure.v2." + property.ModelType.Name);
                     }
                 }
                 if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))
                 {
-                    imports.Add("com.microsoft.azure." + BaseModelType.Name);
+                    imports.Add("com.microsoft.azure.v2." + BaseModelType.Name);
                 }
                 return imports.Distinct();
             }

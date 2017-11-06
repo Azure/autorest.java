@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -23,30 +22,13 @@ namespace AutoRest.Java.Azure.Fluent
 {
     public class CodeGeneratorJvaf : CodeGeneratorJva
     {
-        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:1.0.0-beta6-SNAPSHOT";
+        private const string ClientRuntimePackage = "com.microsoft.azure.v2:azure-client-runtime:2.0.0-SNAPSHOT";
         private const string _packageInfoFileName = "package-info.java";
 
         public override bool IsSingleFileGenerationSupported => true;
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
-
-
-        class ModelNameComparer : IEqualityComparer<ModelType>
-        {
-            private ModelNameComparer() { }
-            internal static ModelNameComparer Instance { get; } = new ModelNameComparer();
-
-            public bool Equals(ModelType x, ModelType y)
-            {
-                return x.Name.Equals(y.Name) || x.XmlName.Equals(y.XmlName);
-            }
-
-            public int GetHashCode(ModelType obj)
-            {
-                return obj.Name.GetHashCode() ^ obj.XmlName.GetHashCode();
-            }
-        }
-
+        
         /// <summary>
         /// Generates C# code for service client.
         /// </summary>
@@ -86,25 +68,7 @@ namespace AutoRest.Java.Azure.Fluent
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //XML wrappers
-            if (codeModel.ShouldGenerateXmlSerializationCached)
-            {
-                // Every sequence type used as a parameter to a service method.
-                var parameterSequenceTypes = cm.Operations
-                    .SelectMany(o => o.Methods)
-                    .SelectMany(m => m.Parameters)
-                    .Select(p => p.ModelType)
-                    .OfType<SequenceTypeJv>()
-                    .Distinct(ModelNameComparer.Instance)
-                    .ToArray();
-
-                foreach (SequenceTypeJv st in parameterSequenceTypes)
-                {
-                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
-                    string wrapperFileName = $"{st.XmlName.ToPascalCase()}Wrapper.java";
-                    string wrapperFilePath = Path.Combine(packageFolderPath, codeModel.ImplPackage.Trim('.'), wrapperFileName);
-                    await Write(wrapperTemplate, wrapperFilePath);
-                }
-            }
+            await WriteXmlWrapperFiles(codeModel, implementationFolderPath);
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);

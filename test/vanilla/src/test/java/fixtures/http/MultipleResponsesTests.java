@@ -1,11 +1,11 @@
 package fixtures.http;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestException;
-import com.microsoft.rest.http.HttpRequest;
-import com.microsoft.rest.http.HttpResponse;
-import com.microsoft.rest.policy.RequestPolicy;
-import com.microsoft.rest.serializer.JacksonAdapter;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v2.http.HttpResponse;
+import com.microsoft.rest.v2.policy.RequestPolicy;
+import com.microsoft.rest.v2.serializer.JacksonAdapter;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
@@ -142,7 +142,7 @@ public class MultipleResponsesTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withSerializerAdapter(new JacksonAdapter())
-                .addCustomPolicy(new RequestPolicy.Factory() {
+                .addRequestPolicy(new RequestPolicy.Factory() {
                     @Override
                     public RequestPolicy create(final RequestPolicy next) {
                         return new RequestPolicy() {
@@ -178,7 +178,7 @@ public class MultipleResponsesTests {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
                 .withSerializerAdapter(new JacksonAdapter())
-                .addCustomPolicy(new RequestPolicy.Factory() {
+                .addRequestPolicy(new RequestPolicy.Factory() {
                     @Override
                     public RequestPolicy create(final RequestPolicy next) {
                         return new RequestPolicy() {

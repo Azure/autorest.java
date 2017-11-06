@@ -12,7 +12,7 @@ namespace AutoRest.Java.Model
     public class CompositeTypeJv : CompositeType, IModelTypeJv
     {
         public const string ExternalExtension = "x-ms-external";
-        protected string _runtimePackage = "com.microsoft.rest";
+        protected string _runtimePackage = "com.microsoft.rest.v2";
 
         public CompositeTypeJv()
         {
@@ -135,7 +135,7 @@ namespace AutoRest.Java.Model
                 // For flattening
                 if (NeedsFlatten)
                 {
-                    classes.Add("com.microsoft.rest.serializer.JsonFlatten");
+                    classes.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
                 }
                 return classes.AsEnumerable();
             }

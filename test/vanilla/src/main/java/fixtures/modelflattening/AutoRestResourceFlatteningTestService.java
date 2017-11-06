@@ -10,9 +10,9 @@
 
 package fixtures.modelflattening;
 
-import com.microsoft.rest.RestResponse;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.

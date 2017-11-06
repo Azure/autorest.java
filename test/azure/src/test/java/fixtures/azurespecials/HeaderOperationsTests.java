@@ -1,6 +1,6 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;

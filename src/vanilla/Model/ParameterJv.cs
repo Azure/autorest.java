@@ -41,7 +41,7 @@ namespace AutoRest.Java.Model
                 base.ModelType = value;
             }
         }
-        
+
         [JsonIgnore]
         public IModelTypeJv ClientType
         {
@@ -61,9 +61,9 @@ namespace AutoRest.Java.Model
                     // Just pass whatever we give to clients to RestProxy
                     return ClientType;
                 }
-                else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) && 
+                else if (!ModelType.IsPrimaryType(KnownPrimaryType.Base64Url) &&
                     Location != Core.Model.ParameterLocation.Body &&
-                    Location != Core.Model.ParameterLocation.FormData && 
+                    Location != Core.Model.ParameterLocation.FormData &&
                     NeedsSpecialSerialization(ClientType))
                 {
                     return new PrimaryTypeJv(KnownPrimaryType.String);
@@ -83,8 +83,8 @@ namespace AutoRest.Java.Model
 
         public string ConvertToWireType(string source, string clientReference)
         {
-            if (Location != Core.Model.ParameterLocation.Body && 
-                Location != Core.Model.ParameterLocation.FormData && 
+            if (Location != Core.Model.ParameterLocation.Body &&
+                Location != Core.Model.ParameterLocation.FormData &&
                 NeedsSpecialSerialization(ModelType))
             {
                 var primary = ClientType as PrimaryTypeJv;
@@ -111,7 +111,7 @@ namespace AutoRest.Java.Model
                         CollectionFormat.ToString().ToUpperInvariant());
                 }
             }
-            
+
             return convertClientTypeToWireType(WireType, source, WireName, clientReference);
         }
 
@@ -255,7 +255,7 @@ namespace AutoRest.Java.Model
                     }
                     else if (this.ModelType is SequenceType)
                     {
-                        imports.Add("com.microsoft.rest.CollectionFormat");
+                        imports.Add("com.microsoft.rest.v2.CollectionFormat");
                     }
                 }
                 return imports;
@@ -267,7 +267,7 @@ namespace AutoRest.Java.Model
             if (parameterLocation != Core.Model.ParameterLocation.None &&
                 parameterLocation != Core.Model.ParameterLocation.FormData)
             {
-                return "com.microsoft.rest.annotations." + parameterLocation.ToString() + "Param";
+                return "com.microsoft.rest.v2.annotations." + parameterLocation.ToString() + "Param";
             }
             else
             {

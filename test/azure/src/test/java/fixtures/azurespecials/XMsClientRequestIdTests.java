@@ -1,10 +1,11 @@
 package fixtures.azurespecials;
 
-import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.credentials.TokenCredentials;
-import com.microsoft.rest.http.HttpHeaders;
-import com.microsoft.rest.policy.AddHeadersPolicy;
+import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.credentials.TokenCredentials;
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -23,9 +24,9 @@ public class XMsClientRequestIdTests {
 
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
-                .withCredentials(new TokenCredentials(null, UUID.randomUUID().toString()))
+                .withCredentialsPolicy(new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())))
                 .withSerializerAdapter(new AzureJacksonAdapter())
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
 
         client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);

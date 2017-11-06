@@ -282,7 +282,7 @@ namespace AutoRest.Java.DanModel
             // For flattening
             if (modelType.NeedsFlatten)
             {
-                imports.Add("com.microsoft.rest.serializer.JsonFlatten");
+                imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
             }
 
             if (modelType is CompositeTypeJva azureModelType)
@@ -291,13 +291,13 @@ namespace AutoRest.Java.DanModel
                 {
                     if (property.ModelType.IsResource())
                     {
-                        imports.Add($"com.microsoft.azure.{property.ModelType.Name}");
+                        imports.Add($"com.microsoft.azure.v2.{property.ModelType.Name}");
                     }
                 }
 
                 if (azureModelType.BaseModelType != null && (azureModelType.BaseModelType.Name == "Resource" || azureModelType.BaseModelType.Name == "SubResource"))
                 {
-                    imports.Add("com.microsoft.azure." + azureModelType.BaseModelType.Name);
+                    imports.Add("com.microsoft.azure.v2." + azureModelType.BaseModelType.Name);
                 }
 
                 if (azureModelType is CompositeTypeJvaf fluentModelType)
