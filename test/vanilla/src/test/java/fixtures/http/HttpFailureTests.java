@@ -1,6 +1,6 @@
 package fixtures.http;
 
-import com.microsoft.rest.RestException;
+import com.microsoft.rest.v2.RestException;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;

@@ -767,7 +767,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return "com.microsoft.rest";
+                return "com.microsoft.rest.v2";
             }
         }
 
@@ -798,9 +798,9 @@ namespace AutoRest.Java.Model
                 // static imports
                 imports.Add("rx.Observable");
                 imports.Add("rx.Single");
-                imports.Add("com.microsoft.rest.ServiceFuture");
-                imports.Add("com.microsoft.rest.ServiceCallback");
-                imports.Add("com.microsoft.rest.RestResponse");
+                imports.Add("com.microsoft.rest.v2.ServiceFuture");
+                imports.Add("com.microsoft.rest.v2.ServiceCallback");
+                imports.Add("com.microsoft.rest.v2.RestResponse");
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
@@ -830,13 +830,13 @@ namespace AutoRest.Java.Model
                     imports.Add("rx.Observable");
                     imports.Add("rx.Single");
                     imports.Add("rx.functions.Func1");
-                    imports.Add("com.microsoft.rest.annotations.Headers");
-                    imports.Add("com.microsoft.rest.annotations.ExpectedResponses");
-                    imports.Add("com.microsoft.rest.annotations.UnexpectedResponseExceptionType");
-                    imports.Add("com.microsoft.rest.annotations.Host");
-                    imports.Add("com.microsoft.rest.http.HttpClient");
-                    imports.Add("com.microsoft.rest.ServiceFuture");
-                    imports.Add("com.microsoft.rest.ServiceCallback");
+                    imports.Add("com.microsoft.rest.v2.annotations.Headers");
+                    imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
+                    imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+                    imports.Add("com.microsoft.rest.v2.annotations.Host");
+                    imports.Add("com.microsoft.rest.v2.http.HttpClient");
+                    imports.Add("com.microsoft.rest.v2.ServiceFuture");
+                    imports.Add("com.microsoft.rest.v2.ServiceCallback");
                     this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                     // Http verb annotations
                     imports.Add(this.HttpMethod.ImportFrom());
@@ -848,7 +848,7 @@ namespace AutoRest.Java.Model
                     // validation
                     if (!ParametersToValidate.IsNullOrEmpty())
                     {
-                        imports.Add("com.microsoft.rest.Validator");
+                        imports.Add("com.microsoft.rest.v2.Validator");
                     }
                     // parameters
                     this.LocalParameters.Concat(this.LogicalParameters.OfType<ParameterJv>())
@@ -868,7 +868,7 @@ namespace AutoRest.Java.Model
                     // parameterized host
                     if (IsParameterizedHost)
                     {
-                        imports.Add("com.microsoft.rest.annotations.HostParam");
+                        imports.Add("com.microsoft.rest.v2.annotations.HostParam");
                     }
                     cachedImplImports = imports.ToImmutableArray();
                 }

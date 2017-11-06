@@ -47,7 +47,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.microsoft.rest</groupId>
+      <groupId>com.microsoft.rest.v2</groupId>
       <artifactId>client-runtime</artifactId>
     </dependency>
     <dependency>
@@ -131,19 +131,19 @@
               <async>true</async>
             </configuration>
           </execution>
-          <execution>
-            <id>report-coverage</id>
-            <phase>test</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>fixtures.report.CoverageReporter</mainClass>
-              <classpathScope>test</classpathScope>
-              <cleanupDaemonThreads>false</cleanupDaemonThreads>
-            </configuration>
-          </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <properties>
+            <property>
+              <name>listener</name>
+              <value>fixtures.report.CoverageReporter</value>
+            </property>
+          </properties>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -1,6 +1,6 @@
 package fixtures.azurecustombaseuri;
 
-import com.microsoft.rest.credentials.TokenCredentials;
+import com.microsoft.rest.v2.credentials.TokenCredentials;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;

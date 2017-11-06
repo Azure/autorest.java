@@ -22,7 +22,7 @@ namespace AutoRest.Java.Azure
 {
     public class CodeGeneratorJva : CodeGeneratorJv
     {
-        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:1.0.0-beta6-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
+        private const string ClientRuntimePackage = "com.microsoft.azure.v2:azure-client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
         private const string _packageInfoFileName = "package-info.java";
         
         public override bool IsSingleFileGenerationSupported => true;
@@ -79,6 +79,25 @@ namespace AutoRest.Java.Azure
 
             //Models
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
+
+            //XML wrappers
+            if (codeModel.ShouldGenerateXmlSerializationCached)
+            {
+                // Every sequence type used as a parameter to a service method.
+                var parameterSequenceTypes = cm.Operations
+                    .SelectMany(o => o.Methods)
+                    .SelectMany(m => m.Parameters)
+                    .Select(p => p.ModelType)
+                    .OfType<SequenceTypeJv>()
+                    .Distinct(ModelNameComparer.Instance)
+                    .ToArray();
+
+                foreach (SequenceTypeJv st in parameterSequenceTypes)
+                {
+                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
+                    await Write(wrapperTemplate, $"{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                }
+            }
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);

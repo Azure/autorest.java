@@ -19,7 +19,7 @@ namespace AutoRest.Java
 {
     public class CodeGeneratorJv : CodeGenerator
     {
-        private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:1.0.0-beta6-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
+        private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
         private const string _packageInfoFileName = "package-info.java";
 
         public CodeNamerJv Namer { get; private set; }
@@ -63,7 +63,7 @@ namespace AutoRest.Java
             string serviceClientInterfaceFileName = $"{cm.Name.ToPascalCase()}.java";
             string serviceClientInterfaceFilePath = Path.Combine(packageFolderPath, serviceClientInterfaceFileName);
             await Write(serviceClientInterfaceTemplate, serviceClientInterfaceFilePath);
-            
+
             // operations
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
@@ -85,6 +85,25 @@ namespace AutoRest.Java
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
+
+            //XML wrappers
+            if (codeModel.ShouldGenerateXmlSerializationCached)
+            {
+                // Every sequence type used as a parameter to a service method.
+                var parameterSequenceTypes = cm.Operations
+                    .SelectMany(o => o.Methods)
+                    .SelectMany(m => m.Parameters)
+                    .Select(p => p.ModelType)
+                    .OfType<SequenceTypeJv>()
+                    .Distinct(ModelNameComparer.Instance)
+                    .ToArray();
+
+                foreach (SequenceTypeJv st in parameterSequenceTypes)
+                {
+                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
+                    await Write(wrapperTemplate, $"{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                }
+            }
 
             // Exceptions
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);

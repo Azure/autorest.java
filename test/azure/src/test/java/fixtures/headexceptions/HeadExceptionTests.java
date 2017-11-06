@@ -1,7 +1,7 @@
 package fixtures.headexceptions;
 
-import com.microsoft.rest.RestException;
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

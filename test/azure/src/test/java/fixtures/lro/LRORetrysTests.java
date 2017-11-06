@@ -1,9 +1,9 @@
 package fixtures.lro;
 
-import com.microsoft.azure.AzureProxy;
-import com.microsoft.azure.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.LogLevel;
-import com.microsoft.rest.RestClient;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.v2.LogLevel;
+import com.microsoft.rest.v2.RestClient;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import org.junit.Assert;

@@ -1,9 +1,10 @@
 package fixtures.lro;
 
-import com.microsoft.rest.RestClient;
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.http.HttpHeaders;
-import com.microsoft.rest.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -22,8 +23,8 @@ public class LROsCustomHeaderTests {
 
         RestClient config = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
-                .withCredentials(new BasicAuthenticationCredentials(null, null))
-                .addCustomPolicy(new AddHeadersPolicy.Factory(headers))
+                .withCredentialsPolicy(new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)))
+                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .build();
 
         client = new AutoRestLongRunningOperationTestServiceImpl(config);

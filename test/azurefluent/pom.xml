@@ -51,7 +51,7 @@
       <artifactId>azure-mgmt-resources</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.microsoft.azure</groupId>
+      <groupId>com.microsoft.azure.v2</groupId>
       <artifactId>azure-client-runtime</artifactId>
     </dependency>
     <dependency>
@@ -126,19 +126,19 @@
               <async>true</async>
             </configuration>
           </execution>
-          <execution>
-            <id>report-coverage</id>
-            <phase>test</phase>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>fixtures.azurereport.CoverageReporter</mainClass>
-              <classpathScope>test</classpathScope>
-              <cleanupDaemonThreads>false</cleanupDaemonThreads>
-            </configuration>
-          </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <properties>
+            <property>
+              <name>listener</name>
+              <value>fixtures.azurereport.CoverageReporter</value>
+            </property>
+          </properties>
+        </configuration>
       </plugin>
     </plugins>
   </build>

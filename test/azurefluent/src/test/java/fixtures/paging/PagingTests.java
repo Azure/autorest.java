@@ -1,10 +1,10 @@
 package fixtures.paging;
 
-import com.microsoft.azure.CloudException;
-import com.microsoft.azure.ListOperationCallback;
-import com.microsoft.azure.Page;
-import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
-import com.microsoft.rest.http.HttpResponse;
+import com.microsoft.azure.v2.CloudException;
+import com.microsoft.azure.v2.ListOperationCallback;
+import com.microsoft.azure.v2.Page;
+import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpResponse;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.ProductInner;

@@ -14,7 +14,7 @@ namespace AutoRest.Java.DanModel
             return GenerateJavaFileWithHeaderAndPackage(folderPath, headerComment, package, maximumHeaderCommentWidth)
                 .Import("java.util.Collection",
                         "com.fasterxml.jackson.annotation.JsonCreator",
-                        "com.microsoft.rest.ExpandableStringEnum")
+                        "com.microsoft.rest.v2.ExpandableStringEnum")
                 .MultipleLineComment(EnumTypeComment())
                 .PublicFinalClass($"{EnumName} extends ExpandableStringEnum<{EnumName}>", (classBlock) =>
                 {
