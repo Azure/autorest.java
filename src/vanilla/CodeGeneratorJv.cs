@@ -86,11 +86,22 @@ namespace AutoRest.Java
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
-            //XML wrappers
+            // XML wrappers
+            await WriteXmlWrapperFiles(codeModel, codeModel.ImplPackage).ConfigureAwait(false);
+
+            // Exceptions
+            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
+
+            // package-info.java
+            await WritePackageInfoFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+        }
+
+        protected async Task WriteXmlWrapperFiles(CodeModelJv codeModel, string packageFolderPath)
+        {
             if (codeModel.ShouldGenerateXmlSerializationCached)
             {
                 // Every sequence type used as a parameter to a service method.
-                var parameterSequenceTypes = cm.Operations
+                var parameterSequenceTypes = codeModel.Operations
                     .SelectMany(o => o.Methods)
                     .SelectMany(m => m.Parameters)
                     .Select(p => p.ModelType)
@@ -101,15 +112,9 @@ namespace AutoRest.Java
                 foreach (SequenceTypeJv st in parameterSequenceTypes)
                 {
                     var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
-                    await Write(wrapperTemplate, $"{codeModel.ImplPackage.Trim('.')}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
+                    await Write(wrapperTemplate, $"{packageFolderPath}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
                 }
             }
-
-            // Exceptions
-            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
-
-            // package-info.java
-            await WritePackageInfoFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
         protected async Task WritePackageInfoFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
