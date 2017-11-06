@@ -11,8 +11,8 @@
 package fixtures.lro.implementation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.azure.Resource;
-import com.microsoft.rest.serializer.JsonFlatten;
+import com.microsoft.azure.v2.Resource;
+import com.microsoft.rest.v2.serializer.JsonFlatten;
 
 /**
  * The ProductInner model.

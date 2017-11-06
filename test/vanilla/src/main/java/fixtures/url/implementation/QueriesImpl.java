@@ -10,21 +10,21 @@
 
 package fixtures.url.implementation;
 
-import com.microsoft.rest.RestProxy;
-import com.microsoft.rest.RestResponse;
+import com.microsoft.rest.v2.RestProxy;
+import com.microsoft.rest.v2.RestResponse;
 import fixtures.url.Queries;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.annotations.ExpectedResponses;
-import com.microsoft.rest.annotations.GET;
-import com.microsoft.rest.annotations.Headers;
-import com.microsoft.rest.annotations.Host;
-import com.microsoft.rest.annotations.QueryParam;
-import com.microsoft.rest.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.CollectionFormat;
-import com.microsoft.rest.http.HttpClient;
-import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
-import com.microsoft.rest.Validator;
+import com.microsoft.rest.v2.annotations.ExpectedResponses;
+import com.microsoft.rest.v2.annotations.GET;
+import com.microsoft.rest.v2.annotations.Headers;
+import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.QueryParam;
+import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
+import com.microsoft.rest.v2.CollectionFormat;
+import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;

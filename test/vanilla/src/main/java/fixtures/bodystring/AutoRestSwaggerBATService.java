@@ -10,7 +10,7 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestSwaggerBATService class.

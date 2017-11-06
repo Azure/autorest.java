@@ -10,7 +10,7 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.RestClient;
+import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestComplexTestService class.
