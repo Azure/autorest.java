@@ -23,8 +23,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Headers.
+ * An instance of this class provides access to all the operations defined in
+ * Headers.
  */
 public interface Headers {
     /**
@@ -43,7 +43,7 @@ public interface Headers {
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback);
 
@@ -52,7 +52,7 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> customNamedRequestIdAsync(String fooClientRequestId);
 
@@ -61,10 +61,9 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<HeaderCustomNamedRequestIdHeaders, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeaders, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>> customNamedRequestIdWithRestResponseAsync(String fooClientRequestId);
-
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
@@ -82,7 +81,7 @@ public interface Headers {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback);
 
@@ -91,7 +90,7 @@ public interface Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
 
@@ -100,10 +99,9 @@ public interface Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdParamGroupingHeaders, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>> customNamedRequestIdParamGroupingWithRestResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
-
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -122,7 +120,7 @@ public interface Headers {
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Boolean&gt;} object
      */
     ServiceFuture<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback);
 
@@ -131,7 +129,7 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;Boolean&gt;} object if successful.
      */
     Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
 
@@ -140,9 +138,8 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the boolean object
+     * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeadHeaders, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId);
-
 
 }

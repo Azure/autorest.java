@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Durations.
+ * An instance of this class provides access to all the operations defined in
+ * Durations.
  */
 public interface Durations {
     /**
@@ -39,7 +39,7 @@ public interface Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Period&gt;} object
      */
     ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback);
 
@@ -47,17 +47,17 @@ public interface Durations {
      * Get null duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return the {@link Single&lt;Period&gt;} object if successful.
      */
     Single<Period> getNullAsync();
+
     /**
      * Get null duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getNullWithRestResponseAsync();
-
 
     /**
      * Put a positive duration value.
@@ -75,7 +75,7 @@ public interface Durations {
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Void&gt;} object
      */
     ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
 
@@ -84,18 +84,18 @@ public interface Durations {
      *
      * @param durationBody the Period value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;Void&gt;} object if successful.
      */
     Single<Void> putPositiveDurationAsync(Period durationBody);
+
     /**
      * Put a positive duration value.
      *
      * @param durationBody the Period value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> putPositiveDurationWithRestResponseAsync(Period durationBody);
-
 
     /**
      * Get a positive duration value.
@@ -112,7 +112,7 @@ public interface Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Period&gt;} object
      */
     ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
 
@@ -120,17 +120,17 @@ public interface Durations {
      * Get a positive duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return the {@link Single&lt;Period&gt;} object if successful.
      */
     Single<Period> getPositiveDurationAsync();
+
     /**
      * Get a positive duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getPositiveDurationWithRestResponseAsync();
-
 
     /**
      * Get an invalid duration value.
@@ -147,7 +147,7 @@ public interface Durations {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Period&gt;} object
      */
     ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
 
@@ -155,16 +155,16 @@ public interface Durations {
      * Get an invalid duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return the {@link Single&lt;Period&gt;} object if successful.
      */
     Single<Period> getInvalidAsync();
+
     /**
      * Get an invalid duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Period object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
-
 
 }

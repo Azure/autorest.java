@@ -116,5 +116,11 @@ namespace AutoRest.Java.DanModel
             Contents.PublicEnum(enumName, enumAction);
             return this;
         }
+
+        public JavaFile PublicInterface(string interfaceName, Action<JavaBlock> interfaceAction)
+        {
+            Contents.PublicInterface(interfaceName, interfaceAction);
+            return this;
+        }
     }
 }

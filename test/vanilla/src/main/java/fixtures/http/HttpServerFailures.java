@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpServerFailures.
+ * An instance of this class provides access to all the operations defined in
+ * HttpServerFailures.
  */
 public interface HttpServerFailures {
     /**
@@ -39,7 +39,7 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> head501Async(final ServiceCallback<Error> serviceCallback);
 
@@ -47,17 +47,17 @@ public interface HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> head501Async();
+
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head501WithRestResponseAsync();
-
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -74,7 +74,7 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> get501Async(final ServiceCallback<Error> serviceCallback);
 
@@ -82,17 +82,17 @@ public interface HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> get501Async();
+
     /**
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> get501WithRestResponseAsync();
-
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -109,7 +109,7 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post505Async(final ServiceCallback<Error> serviceCallback);
 
@@ -117,7 +117,7 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post505Async();
 
@@ -125,9 +125,10 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync();
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -145,7 +146,7 @@ public interface HttpServerFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -154,18 +155,18 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> post505Async(Boolean booleanValue);
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> post505WithRestResponseAsync(Boolean booleanValue);
-
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -182,7 +183,7 @@ public interface HttpServerFailures {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete505Async(final ServiceCallback<Error> serviceCallback);
 
@@ -190,7 +191,7 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete505Async();
 
@@ -198,9 +199,10 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync();
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
@@ -218,7 +220,7 @@ public interface HttpServerFailures {
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;Error&gt;} object
      */
     ServiceFuture<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
@@ -227,17 +229,17 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;Error&gt;} object if successful.
      */
     Single<Error> delete505Async(Boolean booleanValue);
+
     /**
      * Return 505 status code - should be represented in the client as an error.
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Error object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> delete505WithRestResponseAsync(Boolean booleanValue);
-
 
 }

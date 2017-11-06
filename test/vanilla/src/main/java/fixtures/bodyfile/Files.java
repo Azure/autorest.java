@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Files.
+ * An instance of this class provides access to all the operations defined in
+ * Files.
  */
 public interface Files {
     /**
@@ -39,7 +39,7 @@ public interface Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
     ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
@@ -47,17 +47,17 @@ public interface Files {
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;InputStream&gt;} object if successful.
      */
     Single<InputStream> getFileAsync();
+
     /**
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, InputStream>> getFileWithRestResponseAsync();
-
 
     /**
      * Get a large file.
@@ -74,7 +74,7 @@ public interface Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
     ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
 
@@ -82,17 +82,17 @@ public interface Files {
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;InputStream&gt;} object if successful.
      */
     Single<InputStream> getFileLargeAsync();
+
     /**
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, InputStream>> getFileLargeWithRestResponseAsync();
-
 
     /**
      * Get empty file.
@@ -109,7 +109,7 @@ public interface Files {
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
     ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
@@ -117,16 +117,16 @@ public interface Files {
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;InputStream&gt;} object if successful.
      */
     Single<InputStream> getEmptyFileAsync();
+
     /**
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync();
-
 
 }

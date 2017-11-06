@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Groups.
+ * An instance of this class provides access to all the operations defined in
+ * Groups.
  */
 public interface Groups {
     /**
@@ -41,7 +41,7 @@ public interface Groups {
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;SampleResourceGroup&gt;} object
      */
     ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback);
 
@@ -50,7 +50,7 @@ public interface Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroup object
+     * @return the {@link Single&lt;SampleResourceGroup&gt;} object if successful.
      */
     Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
 
@@ -59,9 +59,8 @@ public interface Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroup object
+     * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroup&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName);
-
 
 }

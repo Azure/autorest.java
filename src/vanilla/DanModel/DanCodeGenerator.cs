@@ -16,6 +16,161 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
+        {
+            string headerComment = settings.Header;
+
+            int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
+
+            string package = GetPackage(codeModel);
+            string folderPath = GetFolderPath(package);
+
+            IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => ((MethodJv)method).InterfaceImports);
+            
+            string interfaceName = methodGroup.TypeName;
+
+            IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
+
+            JavaMethodGroupInterface methodGroupInterface = new JavaMethodGroupInterface(imports, interfaceName, methods);
+            JavaFile javaFile = methodGroupInterface.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
+            return javaFile;
+        }
+
+        private static IEnumerable<JavaMethod> ParseMethod(Method method)
+        {
+            string description = "";
+            if(!string.IsNullOrEmpty(method.Summary))
+            {
+                description += method.Summary.EscapeXmlComment().Period();
+            }
+            if(!string.IsNullOrEmpty(method.Description))
+            {
+                if (!string.IsNullOrEmpty(description))
+                {
+                    description += "\n";
+                }
+                description += method.Description.EscapeXmlComment().Period();
+            }
+
+            MethodJv methodJv = method as MethodJv;
+            MethodJva methodJva = methodJv as MethodJva;
+
+            JavaThrow operationExceptionThrow = new JavaThrow(methodJv.OperationExceptionTypeString, "thrown if the request is rejected by server");
+            JavaThrow runtimeExceptionThrow = new JavaThrow("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+            JavaThrow illegalArgumentExceptionThrow = new JavaThrow("IllegalArgumentException", "thrown if parameters fail the validation");
+
+            string syncReturnType = methodJv.ReturnTypeResponseName;
+            string xmlEscapedSyncReturnType = syncReturnType.EscapeXmlComment();
+            string asyncInnerReturnType = methodJv.ReturnTypeJv.GenericBodyClientTypeString;
+            string serviceFutureReturnType = $"ServiceFuture<{asyncInnerReturnType}>";
+            string asyncReturnType = methodJva != null ? methodJva.AsyncClientReturnTypeString : $"Single<{asyncInnerReturnType}>";
+            string asyncRestResponseReturnType = $"Single<{methodJv.RestResponseAbstractTypeName}>";
+            
+            JavaMethodReturn syncReturn = new JavaMethodReturn(
+                syncReturnType,
+                syncReturnType == "void"
+                    ? null
+                    : $"the {xmlEscapedSyncReturnType} object if successful.");
+
+            JavaMethodReturn callbackReturn = new JavaMethodReturn(
+                serviceFutureReturnType,
+                $"the {{@link {serviceFutureReturnType.EscapeXmlComment()}}} object");
+
+            JavaMethodReturn asyncReturn = new JavaMethodReturn(
+                asyncReturnType,
+                $"the {{@link {asyncReturnType.EscapeXmlComment()}}} object if successful.");
+
+            JavaMethodReturn asyncRestResponseReturn = new JavaMethodReturn(
+                asyncRestResponseReturnType,
+                $"the {{@link {asyncRestResponseReturnType.EscapeXmlComment()}}} object if successful.");
+
+            string methodName = method.Name;
+            string asyncMethodName = $"{methodName}Async";
+            string asyncRestResponseMethodName = $"{methodName}WithRestResponseAsync";
+
+            IEnumerable<ParameterJv> nonConstantParameters = methodJv.LocalParameters.Where(p => !p.IsConstant);
+            IEnumerable<ParameterJv> nonConstantRequiredParameters = nonConstantParameters.Where(p => p.IsRequired);
+            IEnumerable<JavaMethodParameter> parameters = nonConstantParameters.Select(ParseParameter);
+            IEnumerable<JavaMethodParameter> requiredParameters = nonConstantRequiredParameters.Select(ParseParameter);
+
+            JavaMethodParameter callbackParameter = new JavaMethodParameter(
+                "the async ServiceCallback to handle successful and failed responses.",
+                $"ServiceCallback<{asyncInnerReturnType}>",
+                "serviceCallback",
+                final: true);
+
+            bool shouldGenerateCallbackMethod =
+                methodJva == null ||
+                (!methodJva.IsPagingOperation &&
+                 !methodJva.IsPagingNextOperation);
+
+            bool shouldGenerateRestResponseMethod =
+                methodJva == null ||
+                (!methodJva.IsLongRunningOperation &&
+                 !methodJva.IsPagingOperation &&
+                 !methodJva.IsPagingNextOperation);
+
+            List<JavaMethod> javaMethods = new List<JavaMethod>();
+
+            Action<IEnumerable<JavaMethodParameter>> addMethods = (IEnumerable<JavaMethodParameter> methodParameters) =>
+            {
+                // Sync
+                javaMethods.Add(new JavaMethod(
+                    description,
+                    new[] { illegalArgumentExceptionThrow, operationExceptionThrow, runtimeExceptionThrow },
+                    syncReturn,
+                    methodName,
+                    methodParameters));
+
+                if (shouldGenerateCallbackMethod)
+                {
+                    // Callback
+                    javaMethods.Add(new JavaMethod(
+                        description,
+                        new[] { illegalArgumentExceptionThrow },
+                        callbackReturn,
+                        asyncMethodName,
+                        methodParameters.Concat(new[] { callbackParameter })));
+                }
+
+                // Async
+                javaMethods.Add(new JavaMethod(
+                    description,
+                    new[] { illegalArgumentExceptionThrow },
+                    asyncReturn,
+                    asyncMethodName,
+                    methodParameters));
+
+                if (shouldGenerateRestResponseMethod)
+                {
+                    // RestResponse Async
+                    javaMethods.Add(new JavaMethod(
+                        description,
+                        new[] { illegalArgumentExceptionThrow },
+                        asyncRestResponseReturn,
+                        asyncRestResponseMethodName,
+                        methodParameters));
+                }
+            };
+
+            if (nonConstantParameters.Any(p => !p.IsRequired))
+            {
+                addMethods(requiredParameters);
+            }
+
+            addMethods(parameters);
+
+            return javaMethods;
+        }
+
+        private static JavaMethodParameter ParseParameter(ParameterJv parameter)
+        {
+            string description = parameter.Documentation.Else($"the {parameter.ModelType.Name} value").EscapeXmlComment();
+            string type = parameter.ClientType.ParameterVariant.Name;
+            string name = parameter.Name;
+            return new JavaMethodParameter(description, type, name);
+        }
+
         public static IEnumerable<JavaFile> GetPackageInfoJavaFiles(CodeModel codeModel, Settings settings, IEnumerable<string> subPackages)
         {
             List<JavaFile> packageInfoJavaFiles = new List<JavaFile>();

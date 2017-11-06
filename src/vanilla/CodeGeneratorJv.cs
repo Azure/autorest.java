@@ -74,10 +74,7 @@ namespace AutoRest.Java
                 await Write(operationsTemplate, operationsFilePath);
 
                 // Operation interface
-                var operationsInterfaceTemplate = new MethodGroupInterfaceTemplate { Model = methodGroup };
-                string operationsInterfaceFileName = $"{methodGroup.TypeName.ToPascalCase()}.java";
-                string operationsInterfaceFilePath = Path.Combine(packageFolderPath, operationsInterfaceFileName);
-                await Write(operationsInterfaceTemplate, operationsInterfaceFilePath);
+                await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
             }
 
             //Models
@@ -93,7 +90,7 @@ namespace AutoRest.Java
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
         protected async Task WriteXmlWrapperFiles(CodeModelJv codeModel, string packageFolderPath)
@@ -117,32 +114,30 @@ namespace AutoRest.Java
             }
         }
 
-        protected async Task WritePackageInfoFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
-        {
-            await WriteJavaFiles(DanCodeGenerator.GetPackageInfoJavaFiles(codeModel, Settings, subPackages)).ConfigureAwait(false);
-        }
+        protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
+            => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));
 
-        protected async Task WriteModelJavaFiles(CodeModel codeModel)
-        {
-            await WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings)).ConfigureAwait(false);
-        }
+        protected Task WritePackageInfoJavaFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
+            => WriteJavaFiles(DanCodeGenerator.GetPackageInfoJavaFiles(codeModel, Settings, subPackages));
 
-        protected async Task WriteEnumJavaFiles(CodeModelJv codeModel)
-        {
-            await WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings)).ConfigureAwait(false);
-        }
+        protected Task WriteModelJavaFiles(CodeModel codeModel)
+            => WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings));
 
-        protected async Task WriteExceptionJavaFiles(CodeModelJv codeModel)
-        {
-            await WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings)).ConfigureAwait(false);
-        }
+        protected Task WriteEnumJavaFiles(CodeModelJv codeModel)
+            => WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings));
+
+        protected Task WriteExceptionJavaFiles(CodeModelJv codeModel)
+            => WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings));
 
         protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)
         {
             foreach (JavaFile javaFile in javaFiles)
             {
-                await Write(javaFile.Contents.ToString(), javaFile.FilePath).ConfigureAwait(false);
+                await WriteJavaFile(javaFile).ConfigureAwait(false);
             }
         }
+
+        protected Task WriteJavaFile(JavaFile javaFile)
+            => Write(javaFile.Contents.ToString(), javaFile.FilePath);
     }
 }

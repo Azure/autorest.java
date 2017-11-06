@@ -20,8 +20,8 @@ import rx.Observable;
 import rx.Single;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Formdatas.
+ * An instance of this class provides access to all the operations defined in
+ * Formdatas.
  */
 public interface Formdatas {
     /**
@@ -43,7 +43,7 @@ public interface Formdatas {
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
     ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
 
@@ -53,19 +53,19 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;InputStream&gt;} object if successful.
      */
     Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, InputStream>> uploadFileWithRestResponseAsync(byte[] fileContent, String fileName);
-
 
     /**
      * Upload file.
@@ -84,7 +84,7 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
     ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback);
 
@@ -93,17 +93,17 @@ public interface Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;InputStream&gt;} object if successful.
      */
     Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+
     /**
      * Upload file.
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the InputStream object
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, InputStream>> uploadFileViaBodyWithRestResponseAsync(byte[] fileContent);
-
 
 }
