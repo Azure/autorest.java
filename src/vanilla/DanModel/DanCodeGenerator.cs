@@ -295,12 +295,7 @@ namespace AutoRest.Java.DanModel
         public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
-            AddModelJavaFiles(codeModel, settings, exceptionJavaFiles);
-            return exceptionJavaFiles;
-        }
 
-        public static void AddModelJavaFiles(CodeModel codeModel, Settings settings, IList<JavaFile> javaFiles)
-        {
             string headerComment = settings.Header;
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
@@ -323,209 +318,295 @@ namespace AutoRest.Java.DanModel
                     string package = GetPackage(codeModel, modelType.ModelsPackage);
                     string folderPath = GetFolderPath(package);
 
-                    JavaModel javaModel = ParseModel(modelType);
-                    JavaFile javaFile = javaModel.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
-                    javaFiles.Add(javaFile);
-                }
-            }
-        }
+                    List<string> imports = new List<string>();
+                    imports.AddRange(modelType.Properties.SelectMany(pm => (pm as PropertyJv).Imports));
 
-        private static JavaModel ParseModel(CompositeTypeJv modelType)
-        {
-            IEnumerable<string> imports = ParseModelImports(modelType);
-
-            string classComment = ParseModelClassComment(modelType);
-
-            IEnumerable<string> classAnnotations = ParseModelClassAnnotations(modelType);
-
-            string className = modelType.Name;
-
-            string baseTypeName = modelType.BaseModelType?.Name?.Value;
-
-            IEnumerable<JavaMemberVariable> memberVariables = ParseModelMemberVariables(modelType);
-
-            return new JavaModel(imports, classComment, classAnnotations, className, baseTypeName, memberVariables);
-        }
-
-        private static IEnumerable<string> ParseModelImports(CompositeTypeJv modelType)
-        {
-            List<string> imports = new List<string>();
-            imports.AddRange(modelType.Properties.SelectMany(pm => (pm as PropertyJv).Imports));
-
-            if (modelType.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
-            {
-                imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
-            }
-
-            if (modelType.Properties.Any(p => p.XmlIsAttribute))
-            {
-                imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-            }
-
-            // For polymorphism
-            if (modelType.BaseIsPolymorphic)
-            {
-                imports.Add("com.fasterxml.jackson.annotation.JsonTypeInfo");
-                imports.Add("com.fasterxml.jackson.annotation.JsonTypeName");
-                if (modelType.SubTypes.Any())
-                {
-                    imports.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
-                }
-            }
-
-            // For flattening
-            if (modelType.NeedsFlatten)
-            {
-                imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
-            }
-
-            if (modelType is CompositeTypeJva azureModelType)
-            {
-                foreach (Property property in azureModelType.Properties)
-                {
-                    if (property.ModelType.IsResource())
+                    if (modelType.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {
-                        imports.Add($"com.microsoft.azure.v2.{property.ModelType.Name}");
+                        imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
-                }
 
-                if (azureModelType.BaseModelType != null && (azureModelType.BaseModelType.Name == "Resource" || azureModelType.BaseModelType.Name == "SubResource"))
-                {
-                    imports.Add("com.microsoft.azure.v2." + azureModelType.BaseModelType.Name);
-                }
-
-                if (azureModelType is CompositeTypeJvaf fluentModelType)
-                {
-                    if (fluentModelType.BaseModelType != null && fluentModelType.BaseModelType.Name.ToString().EndsWith("Inner", StringComparison.Ordinal) ^ fluentModelType.IsInnerModel)
+                    if (modelType.Properties.Any(p => p.XmlIsAttribute))
                     {
-                        imports.AddRange(fluentModelType.BaseModelType.ImportSafe());
+                        imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                     }
-                }
-            }
 
-            return imports;
-        }
-
-        private static string ParseModelClassComment(CompositeTypeJv modelType)
-        {
-            string classComment;
-            if (string.IsNullOrEmpty(modelType.Summary) && string.IsNullOrEmpty(modelType.Documentation))
-            {
-                classComment = $"The {modelType.Name} model.";
-            }
-            else
-            {
-                classComment = $"{modelType.Summary.EscapeXmlComment().Period()}{modelType.Documentation.EscapeXmlComment().Period()}";
-            }
-            return classComment;
-        }
-
-        private static IEnumerable<string> ParseModelClassAnnotations(CompositeTypeJv modelType)
-        {
-            List<string> classAnnotations = new List<string>();
-            if (modelType.BaseIsPolymorphic)
-            {
-                classAnnotations.Add($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{modelType.BasePolymorphicDiscriminator}\")");
-                classAnnotations.Add($"JsonTypeName(\"{modelType.SerializedName}\")");
-
-                List<CompositeType> types = modelType.SubTypes.ToList();
-                if (types.Any())
-                {
-                    StringBuilder subTypeAnnotationBuilder = new StringBuilder();
-                    subTypeAnnotationBuilder.AppendLine("JsonSubTypes({");
-
-                    foreach (CompositeType subType in types.SkipLast(1))
+                    // For polymorphism
+                    if (modelType.BaseIsPolymorphic)
                     {
-                        subTypeAnnotationBuilder.AppendLine(GetSubTypeAnnotation(subType));
+                        imports.Add("com.fasterxml.jackson.annotation.JsonTypeInfo");
+                        imports.Add("com.fasterxml.jackson.annotation.JsonTypeName");
+                        if (modelType.SubTypes.Any())
+                        {
+                            imports.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
+                        }
                     }
-                    subTypeAnnotationBuilder.AppendLine(GetSubTypeAnnotation(types.Last(), true));
 
-                    subTypeAnnotationBuilder.Append("})");
-
-                    classAnnotations.Add(subTypeAnnotationBuilder.ToString());
-                }
-            }
-
-            if (modelType.NeedsFlatten)
-            {
-                classAnnotations.Add("JsonFlatten");
-            }
-
-            return classAnnotations;
-        }
-
-        private static IEnumerable<JavaMemberVariable> ParseModelMemberVariables(CompositeTypeJv modelType)
-        {
-            return modelType.Properties.Select(ParseModelMemberVariable);
-        }
-
-        private static JavaMemberVariable ParseModelMemberVariable(Property property)
-        {
-            string comment;
-            if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
-            {
-                comment = $"The {property.Name} property.";
-            }
-            else
-            {
-                string summary = property.Summary.EscapeXmlComment().Period();
-                string documentation = property.Documentation.EscapeXmlComment().Period();
-
-                comment = summary;
-                if (!string.IsNullOrEmpty(documentation))
-                {
-                    if (!string.IsNullOrEmpty(comment))
+                    // For flattening
+                    if (modelType.NeedsFlatten)
                     {
-                        comment += "\n";
+                        imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
                     }
-                    comment += documentation;
+
+                    if (modelType is CompositeTypeJva azureModelType)
+                    {
+                        foreach (Property property in azureModelType.Properties)
+                        {
+                            if (property.ModelType.IsResource())
+                            {
+                                imports.Add($"com.microsoft.azure.v2.{property.ModelType.Name}");
+                            }
+                        }
+
+                        if (azureModelType.BaseModelType != null && (azureModelType.BaseModelType.Name == "Resource" || azureModelType.BaseModelType.Name == "SubResource"))
+                        {
+                            imports.Add("com.microsoft.azure.v2." + azureModelType.BaseModelType.Name);
+                        }
+
+                        if (azureModelType is CompositeTypeJvaf fluentModelType)
+                        {
+                            if (fluentModelType.BaseModelType != null && fluentModelType.BaseModelType.Name.ToString().EndsWith("Inner", StringComparison.Ordinal) ^ fluentModelType.IsInnerModel)
+                            {
+                                imports.AddRange(fluentModelType.BaseModelType.ImportSafe());
+                            }
+                        }
+                    }
+
+                    string classComment;
+                    if (string.IsNullOrEmpty(modelType.Summary) && string.IsNullOrEmpty(modelType.Documentation))
+                    {
+                        classComment = $"The {modelType.Name} model.";
+                    }
+                    else
+                    {
+                        classComment = $"{modelType.Summary.EscapeXmlComment().Period()}{modelType.Documentation.EscapeXmlComment().Period()}";
+                    }
+
+                    List<string> classAnnotations = new List<string>();
+                    if (modelType.BaseIsPolymorphic)
+                    {
+                        classAnnotations.Add($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{modelType.BasePolymorphicDiscriminator}\")");
+                        classAnnotations.Add($"JsonTypeName(\"{modelType.SerializedName}\")");
+
+                        List<CompositeType> types = modelType.SubTypes.ToList();
+                        if (types.Any())
+                        {
+                            StringBuilder subTypeAnnotationBuilder = new StringBuilder();
+                            subTypeAnnotationBuilder.AppendLine("JsonSubTypes({");
+
+                            Func<CompositeType, bool, string> getSubTypeAnnotation = (CompositeType subType, bool isLast) =>
+                            {
+                                string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {subType.Name}.class)";
+                                if (!isLast)
+                                {
+                                    subTypeAnnotation += ",";
+                                }
+                                return subTypeAnnotation;
+                            };
+
+                            foreach (CompositeType subType in types.SkipLast(1))
+                            {
+                                subTypeAnnotationBuilder.AppendLine(getSubTypeAnnotation(subType, false));
+                            }
+                            subTypeAnnotationBuilder.AppendLine(getSubTypeAnnotation(types.Last(), true));
+
+                            subTypeAnnotationBuilder.Append("})");
+
+                            classAnnotations.Add(subTypeAnnotationBuilder.ToString());
+                        }
+                    }
+
+                    if (modelType.NeedsFlatten)
+                    {
+                        classAnnotations.Add("JsonFlatten");
+                    }
+
+                    string className = modelType.Name;
+
+                    string baseTypeName = modelType.BaseModelType?.Name?.Value;
+
+                    IEnumerable<JavaMemberVariable> memberVariables = modelType.Properties.Select((Property property) =>
+                    {
+                        string comment;
+                        if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
+                        {
+                            comment = $"The {property.Name} property.";
+                        }
+                        else
+                        {
+                            string summary = property.Summary.EscapeXmlComment().Period();
+                            string documentation = property.Documentation.EscapeXmlComment().Period();
+
+                            comment = summary;
+                            if (!string.IsNullOrEmpty(documentation))
+                            {
+                                if (!string.IsNullOrEmpty(comment))
+                                {
+                                    comment += "\n";
+                                }
+                                comment += documentation;
+                            }
+                        }
+
+                        string annotation = null;
+                        string jsonSetting = property.GetJsonProperty();
+                        if (!string.IsNullOrEmpty(jsonSetting))
+                        {
+                            if (property.XmlIsAttribute)
+                            {
+                                annotation = $"JacksonXmlProperty(localName = \"{property.SerializedName}\", isAttribute = true)";
+                            }
+                            else
+                            {
+                                annotation = $"JsonProperty({jsonSetting})";
+                            }
+                        }
+
+                        bool isConstant = property.IsConstant;
+                        bool isReadOnly = property.IsReadOnly;
+
+                        bool isPrimitive = !(property.ModelType is CompositeType);
+                        JavaType wireType = new JavaType(property.ModelType.Name, isPrimitive);
+                        JavaType clientType = new JavaType(((IModelTypeJv)property.ModelType).ResponseVariant.Name, isPrimitive);
+
+                        string name = property.Name;
+
+                        string defaultValue;
+                        try
+                        {
+                            defaultValue = property.DefaultValue;
+                        }
+                        catch (NotSupportedException)
+                        {
+                            defaultValue = null;
+                        }
+
+                        return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, wireType, clientType, name, defaultValue);
+                    });
+
+                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, className, headerComment, package, maximumHeaderCommentWidth);
+                    javaFile.Import(imports);
+                    javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                    {
+                        comment.Line(classComment);
+                    });
+                    javaFile.Annotation(classAnnotations);
+
+                    string classNameWithBaseType = className;
+                    if (!string.IsNullOrEmpty(baseTypeName))
+                    {
+                        classNameWithBaseType += $" extends {baseTypeName}";
+                    }
+                    javaFile.PublicClass(classNameWithBaseType, (classBlock) =>
+                    {
+                        if (memberVariables != null && memberVariables.Any())
+                        {
+                            foreach (JavaMemberVariable memberVariable in memberVariables)
+                            {
+                                classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                {
+                                    comment.Line(memberVariable.Comment);
+                                });
+                                classBlock.Annotation(memberVariable.Annotation);
+                                classBlock.Line($"private {memberVariable.WireType.Name} {memberVariable.Name};");
+                                classBlock.Line();
+                            }
+
+                            IEnumerable<JavaMemberVariable> constantMemberVariables = memberVariables.Where((memberVariable) => memberVariable.IsConstant);
+                            if (constantMemberVariables.Any())
+                            {
+                                classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                {
+                                    comment.Line($"Creates an instance of {className} class.");
+                                });
+                                classBlock.Block($"public {className}()", (constructor) =>
+                                {
+                                    foreach (JavaMemberVariable memberVariable in constantMemberVariables)
+                                    {
+                                        JavaType type = memberVariable.WireType;
+                                        if (!type.IsPrimitive)
+                                        {
+                                            constructor.Line($"{memberVariable.Name} = new {type.Name}();");
+                                        }
+                                        else
+                                        {
+                                            constructor.Line($"{memberVariable.Name} = {memberVariable.DefaultValue};");
+                                        }
+                                    }
+                                });
+                                classBlock.Line();
+                            }
+
+                            foreach (JavaMemberVariable memberVariable in memberVariables)
+                            {
+                                string variableName = memberVariable.Name;
+                                JavaType clientType = memberVariable.ClientType;
+                                JavaType wireType = memberVariable.WireType;
+                                string clientTypeName = clientType.Name;
+                                bool clientTypeDifferentFromWireType = !clientType.Equals(memberVariable.WireType);
+
+                                classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                {
+                                    comment.Line($"Get the {variableName} value.");
+                                    comment.Line();
+                                    comment.Return($"the {variableName} value");
+                                });
+                                classBlock.Block($"public {clientTypeName} {variableName}()", (methodBlock) =>
+                                {
+                                    if (clientTypeDifferentFromWireType)
+                                    {
+                                        methodBlock.If($"this.{variableName} == null", (ifBlock) =>
+                                        {
+                                            ifBlock.Return("null");
+                                        });
+                                        methodBlock.Return(wireType.ConvertTo(clientType, $"this.{variableName}"));
+                                    }
+                                    else
+                                    {
+                                        methodBlock.Return($"this.{variableName}");
+                                    }
+                                });
+                                classBlock.Line();
+
+                                if (!memberVariable.IsReadOnly)
+                                {
+                                    classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                    {
+                                        comment.Line($"Set the {variableName} value.");
+                                        comment.Line();
+                                        comment.Param(variableName, $"the {variableName} value to set");
+                                        comment.Return($"the {className} object itself.");
+                                    });
+                                    classBlock.Block($"public {className} with{variableName.ToPascalCase()}({clientTypeName} {variableName})", (methodBlock) =>
+                                    {
+                                        if (clientTypeDifferentFromWireType)
+                                        {
+                                            methodBlock.If($"{variableName} == null", (ifBlock) =>
+                                            {
+                                                ifBlock.Line($"this.{variableName} = null;");
+                                            })
+                                            .Else((elseBlock) =>
+                                            {
+                                                elseBlock.Line($"this.{variableName} = {clientType.ConvertTo(wireType, variableName)};");
+                                            });
+                                        }
+                                        else
+                                        {
+                                            methodBlock.Line($"this.{variableName} = {variableName};");
+                                        }
+                                        methodBlock.Return("this");
+                                    });
+                                    classBlock.Line();
+                                }
+                            }
+                        }
+                    });
+                    
+                    exceptionJavaFiles.Add(javaFile);
                 }
             }
 
-            string annotation = null;
-            string jsonSetting = property.GetJsonProperty();
-            if (!string.IsNullOrEmpty(jsonSetting))
-            {
-                if (property.XmlIsAttribute)
-                {
-                    annotation = $"JacksonXmlProperty(localName = \"{property.SerializedName}\", isAttribute = true)";
-                }
-                else
-                {
-                    annotation = $"JsonProperty({jsonSetting})";
-                }
-            }
-
-            bool isConstant = property.IsConstant;
-            bool isReadOnly = property.IsReadOnly;
-
-            bool isPrimitive = !(property.ModelType is CompositeType);
-            JavaType wireType = new JavaType(property.ModelType.Name, isPrimitive);
-            JavaType clientType = new JavaType(((IModelTypeJv)property.ModelType).ResponseVariant.Name, isPrimitive);
-
-            string name = property.Name;
-
-            string defaultValue;
-            try
-            {
-                defaultValue = property.DefaultValue;
-            }
-            catch (NotSupportedException)
-            {
-                defaultValue = null;
-            }
-
-            return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, wireType, clientType, name, defaultValue);
-        }
-
-        private static string GetSubTypeAnnotation(CompositeType subType, bool isLast = false)
-        {
-            string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {subType.Name}.class)";
-            if (!isLast)
-            {
-                subTypeAnnotation += ",";
-            }
-            return subTypeAnnotation;
+            return exceptionJavaFiles;
         }
 
         public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings)
