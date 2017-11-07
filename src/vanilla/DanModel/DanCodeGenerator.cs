@@ -26,8 +26,20 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        private static JavaFile GenerateJavaFileWithHeaderAndPackage(string folderPath, string fileNameWithoutExtension, string headerComment, string package, int maximumHeaderCommentWidth)
+        private static int GetMaximumCommentWidth(Settings settings)
         {
+            return settings.MaximumCommentColumns;
+        }
+
+        private static JavaFile GenerateJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
+        {
+            string package = GetPackage(codeModel, subPackage);
+            string folderPath = GetFolderPath(package);
+
+            string headerComment = settings.Header;
+
+            int maximumHeaderCommentWidth = GetMaximumCommentWidth(settings);
+
             string filePath = GetFilePath(folderPath, fileNameWithoutExtension);
             JavaFile javaFile = new JavaFile(filePath);
 
@@ -51,22 +63,17 @@ namespace AutoRest.Java.DanModel
 
         public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
         {
-            string headerComment = settings.Header;
-
-            int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
-
-            string package = GetPackage(codeModel);
-            string folderPath = GetFolderPath(package);
-
             IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => ((MethodJv)method).InterfaceImports);
             
             string interfaceName = methodGroup.TypeName;
 
             IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, interfaceName, headerComment, package, maximumHeaderCommentWidth);
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
+
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
             javaFile.Import(imports);
-            javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
             {
                 comment.Line($"An instance of this class provides access to all the operations defined in {interfaceName}.");
             });
@@ -263,8 +270,8 @@ namespace AutoRest.Java.DanModel
                     javaFile.WordWrappedMultipleLineSlashSlashComment(maximumHeaderCommentWidth, (comment) =>
                     {
                         comment.Line(headerComment);
-                    })
-                        .Line();
+                    });
+                    javaFile.Line();
                 }
 
                 javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
@@ -296,9 +303,7 @@ namespace AutoRest.Java.DanModel
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
 
-            string headerComment = settings.Header;
-
-            int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
             foreach (CompositeTypeJv modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
@@ -315,9 +320,6 @@ namespace AutoRest.Java.DanModel
 
                 if (shouldGenerate)
                 {
-                    string package = GetPackage(codeModel, modelType.ModelsPackage);
-                    string folderPath = GetFolderPath(package);
-
                     List<string> imports = new List<string>();
                     imports.AddRange(modelType.Properties.SelectMany(pm => (pm as PropertyJv).Imports));
 
@@ -484,9 +486,9 @@ namespace AutoRest.Java.DanModel
                         return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, wireType, clientType, name, defaultValue);
                     });
 
-                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, className, headerComment, package, maximumHeaderCommentWidth);
+                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, modelType.ModelsPackage, settings, className);
                     javaFile.Import(imports);
-                    javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                    javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                     {
                         comment.Line(classComment);
                     });
@@ -503,7 +505,7 @@ namespace AutoRest.Java.DanModel
                         {
                             foreach (JavaMemberVariable memberVariable in memberVariables)
                             {
-                                classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
                                     comment.Line(memberVariable.Comment);
                                 });
@@ -515,7 +517,7 @@ namespace AutoRest.Java.DanModel
                             IEnumerable<JavaMemberVariable> constantMemberVariables = memberVariables.Where((memberVariable) => memberVariable.IsConstant);
                             if (constantMemberVariables.Any())
                             {
-                                classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
                                     comment.Line($"Creates an instance of {className} class.");
                                 });
@@ -545,7 +547,7 @@ namespace AutoRest.Java.DanModel
                                 string clientTypeName = clientType.Name;
                                 bool clientTypeDifferentFromWireType = !clientType.Equals(memberVariable.WireType);
 
-                                classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                 {
                                     comment.Line($"Get the {variableName} value.");
                                     comment.Line();
@@ -570,7 +572,7 @@ namespace AutoRest.Java.DanModel
 
                                 if (!memberVariable.IsReadOnly)
                                 {
-                                    classBlock.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                                    classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                                     {
                                         comment.Line($"Set the {variableName} value.");
                                         comment.Line();
@@ -626,10 +628,7 @@ namespace AutoRest.Java.DanModel
                 // "CloudError" because those types already exist in the runtime.
                 if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
                 {
-                    string package = GetPackage(codeModel, exceptionType.ModelsPackage);
-                    string folderPath = GetFolderPath(package);
-
-                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, exceptionName, headerComment, package, maximumHeaderCommentWidth);
+                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, exceptionType.ModelsPackage, settings, exceptionName);
                     javaFile.Import("com.microsoft.rest.v2.RestException",
                                     "com.microsoft.rest.v2.http.HttpResponse");
                     javaFile.MultipleLineComment((comment) =>
@@ -681,13 +680,6 @@ namespace AutoRest.Java.DanModel
         {
             List<JavaFile> enumJavaFiles = new List<JavaFile>();
 
-            string headerComment = settings.Header;
-
-            string package = GetPackage(codeModel, codeModel.ModelsPackage);
-            string folderPath = GetFolderPath(package);
-
-            int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
-
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
                 string enumName = enumType.Name;
@@ -696,11 +688,9 @@ namespace AutoRest.Java.DanModel
                 IEnumerable<JavaEnumValue> enumValues = enumType.Values
                     .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
 
-                JavaFile javaFile;
-
+                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ModelsPackage, settings, enumName);
                 if (enumType.ModelAsString)
                 {
-                    javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, enumName, headerComment, package, maximumHeaderCommentWidth);
                     javaFile.Import("java.util.Collection",
                                     "com.fasterxml.jackson.annotation.JsonCreator",
                                     "com.microsoft.rest.v2.ExpandableStringEnum");
@@ -741,7 +731,6 @@ namespace AutoRest.Java.DanModel
                 }
                 else
                 {
-                    javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, enumName, headerComment, package, maximumHeaderCommentWidth);
                     javaFile.Import("com.fasterxml.jackson.annotation.JsonCreator",
                                     "com.fasterxml.jackson.annotation.JsonValue");
                     javaFile.MultipleLineComment(comment =>
