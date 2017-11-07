@@ -16,6 +16,38 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        private static string GetFilePath(string folderPath, string fileNameWithoutExtension)
+        {
+            string result = Path.Combine(folderPath, $"{fileNameWithoutExtension}.java");
+
+            result = result.Replace('\\', '/');
+            result = result.Replace("//", "/");
+
+            return result;
+        }
+
+        private static JavaFile GenerateJavaFileWithHeaderAndPackage(string folderPath, string fileNameWithoutExtension, string headerComment, string package, int maximumHeaderCommentWidth)
+        {
+            string filePath = GetFilePath(folderPath, fileNameWithoutExtension);
+            JavaFile javaFile = new JavaFile(filePath);
+
+            if (!string.IsNullOrEmpty(headerComment))
+            {
+                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                {
+                    comment.Line(headerComment);
+                })
+                    .Line();
+            }
+
+            if (!string.IsNullOrEmpty(package))
+            {
+                javaFile.Package(package)
+                    .Line();
+            }
+
+            return javaFile;
+        }
         public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
         {
             string headerComment = settings.Header;
@@ -31,8 +63,43 @@ namespace AutoRest.Java.DanModel
 
             IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
 
-            JavaMethodGroupInterface methodGroupInterface = new JavaMethodGroupInterface(imports, interfaceName, methods);
-            JavaFile javaFile = methodGroupInterface.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, interfaceName, headerComment, package, maximumHeaderCommentWidth);
+            javaFile.Import(imports);
+            javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+            {
+                comment.Line($"An instance of this class provides access to all the operations defined in {interfaceName}.");
+            });
+            javaFile.PublicInterface(interfaceName, (typeBlock) =>
+            {
+                foreach (JavaMethod method in methods)
+                {
+                    typeBlock.MultipleLineComment((comment) =>
+                    {
+                        comment.Line(method.Description);
+                        comment.Line();
+                        if (method.Parameters != null)
+                        {
+                            foreach (JavaMethodParameter parameter in method.Parameters)
+                            {
+                                comment.Param(parameter.Name, parameter.Description);
+                            }
+                        }
+                        if (method.Throws != null)
+                        {
+                            foreach (JavaThrow methodThrow in method.Throws)
+                            {
+                                comment.Throws(methodThrow.ExceptionTypeName, methodThrow.Description);
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(method.Return.Description))
+                        {
+                            comment.Return(method.Return.Description);
+                        }
+                    });
+                    typeBlock.Line($"{method.Return.Type} {method.Name}({string.Join(", ", method.Parameters.Select(parameter => parameter.Declaration))});");
+                    typeBlock.Line();
+                }
+            });
             return javaFile;
         }
 
