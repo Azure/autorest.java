@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -49,9 +50,9 @@ public interface Queries {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getBooleanTrueAsync();
+    Completable getBooleanTrueAsync();
 
     /**
      * Get true Boolean value on path.
@@ -83,9 +84,9 @@ public interface Queries {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getBooleanFalseAsync();
+    Completable getBooleanFalseAsync();
 
     /**
      * Get false Boolean value on path.
@@ -117,9 +118,9 @@ public interface Queries {
      * Get null Boolean value on query (query string should be absent).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getBooleanNullAsync();
+    Completable getBooleanNullAsync();
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -154,9 +155,9 @@ public interface Queries {
      *
      * @param boolQuery null boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getBooleanNullAsync(Boolean boolQuery);
+    Completable getBooleanNullAsync(Boolean boolQuery);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -189,9 +190,9 @@ public interface Queries {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getIntOneMillionAsync();
+    Completable getIntOneMillionAsync();
 
     /**
      * Get '1000000' integer value.
@@ -223,9 +224,9 @@ public interface Queries {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getIntNegativeOneMillionAsync();
+    Completable getIntNegativeOneMillionAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -257,9 +258,9 @@ public interface Queries {
      * Get null integer value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getIntNullAsync();
+    Completable getIntNullAsync();
 
     /**
      * Get null integer value (no query parameter).
@@ -294,9 +295,9 @@ public interface Queries {
      *
      * @param intQuery null integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getIntNullAsync(Integer intQuery);
+    Completable getIntNullAsync(Integer intQuery);
 
     /**
      * Get null integer value (no query parameter).
@@ -329,9 +330,9 @@ public interface Queries {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getTenBillionAsync();
+    Completable getTenBillionAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -363,9 +364,9 @@ public interface Queries {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getNegativeTenBillionAsync();
+    Completable getNegativeTenBillionAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -397,9 +398,9 @@ public interface Queries {
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getLongNullAsync();
+    Completable getLongNullAsync();
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -434,9 +435,9 @@ public interface Queries {
      *
      * @param longQuery null 64 bit integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getLongNullAsync(Long longQuery);
+    Completable getLongNullAsync(Long longQuery);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -469,9 +470,9 @@ public interface Queries {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> floatScientificPositiveAsync();
+    Completable floatScientificPositiveAsync();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -503,9 +504,9 @@ public interface Queries {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> floatScientificNegativeAsync();
+    Completable floatScientificNegativeAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -537,9 +538,9 @@ public interface Queries {
      * Get null numeric value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> floatNullAsync();
+    Completable floatNullAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -574,9 +575,9 @@ public interface Queries {
      *
      * @param floatQuery null numeric value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> floatNullAsync(Double floatQuery);
+    Completable floatNullAsync(Double floatQuery);
 
     /**
      * Get null numeric value (no query parameter).
@@ -609,9 +610,9 @@ public interface Queries {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> doubleDecimalPositiveAsync();
+    Completable doubleDecimalPositiveAsync();
 
     /**
      * Get '9999999.999' numeric value.
@@ -643,9 +644,9 @@ public interface Queries {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> doubleDecimalNegativeAsync();
+    Completable doubleDecimalNegativeAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -677,9 +678,9 @@ public interface Queries {
      * Get null numeric value (no query parameter).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> doubleNullAsync();
+    Completable doubleNullAsync();
 
     /**
      * Get null numeric value (no query parameter).
@@ -714,9 +715,9 @@ public interface Queries {
      *
      * @param doubleQuery null numeric value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> doubleNullAsync(Double doubleQuery);
+    Completable doubleNullAsync(Double doubleQuery);
 
     /**
      * Get null numeric value (no query parameter).
@@ -749,9 +750,9 @@ public interface Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringUnicodeAsync();
+    Completable stringUnicodeAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -783,9 +784,9 @@ public interface Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringUrlEncodedAsync();
+    Completable stringUrlEncodedAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -817,9 +818,9 @@ public interface Queries {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringEmptyAsync();
+    Completable stringEmptyAsync();
 
     /**
      * Get ''.
@@ -851,9 +852,9 @@ public interface Queries {
      * Get null (no query parameter in url).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringNullAsync();
+    Completable stringNullAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -888,9 +889,9 @@ public interface Queries {
      *
      * @param stringQuery null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringNullAsync(String stringQuery);
+    Completable stringNullAsync(String stringQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -923,9 +924,9 @@ public interface Queries {
      * Get using uri with query parameter 'green color'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> enumValidAsync();
+    Completable enumValidAsync();
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -960,9 +961,9 @@ public interface Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> enumValidAsync(UriColor enumQuery);
+    Completable enumValidAsync(UriColor enumQuery);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -995,9 +996,9 @@ public interface Queries {
      * Get null (no query parameter in url).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> enumNullAsync();
+    Completable enumNullAsync();
 
     /**
      * Get null (no query parameter in url).
@@ -1032,9 +1033,9 @@ public interface Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> enumNullAsync(UriColor enumQuery);
+    Completable enumNullAsync(UriColor enumQuery);
 
     /**
      * Get null (no query parameter in url).
@@ -1067,9 +1068,9 @@ public interface Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteMultiByteAsync();
+    Completable byteMultiByteAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1104,9 +1105,9 @@ public interface Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteMultiByteAsync(byte[] byteQuery);
+    Completable byteMultiByteAsync(byte[] byteQuery);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1139,9 +1140,9 @@ public interface Queries {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteEmptyAsync();
+    Completable byteEmptyAsync();
 
     /**
      * Get '' as byte array.
@@ -1173,9 +1174,9 @@ public interface Queries {
      * Get null as byte array (no query parameters in uri).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteNullAsync();
+    Completable byteNullAsync();
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1210,9 +1211,9 @@ public interface Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteNullAsync(byte[] byteQuery);
+    Completable byteNullAsync(byte[] byteQuery);
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1245,9 +1246,9 @@ public interface Queries {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateValidAsync();
+    Completable dateValidAsync();
 
     /**
      * Get '2012-01-01' as date.
@@ -1279,9 +1280,9 @@ public interface Queries {
      * Get null as date - this should result in no query parameters in uri.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateNullAsync();
+    Completable dateNullAsync();
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1316,9 +1317,9 @@ public interface Queries {
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateNullAsync(LocalDate dateQuery);
+    Completable dateNullAsync(LocalDate dateQuery);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -1351,9 +1352,9 @@ public interface Queries {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateTimeValidAsync();
+    Completable dateTimeValidAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -1385,9 +1386,9 @@ public interface Queries {
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateTimeNullAsync();
+    Completable dateTimeNullAsync();
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1422,9 +1423,9 @@ public interface Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateTimeNullAsync(DateTime dateTimeQuery);
+    Completable dateTimeNullAsync(DateTime dateTimeQuery);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -1457,9 +1458,9 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringCsvValidAsync();
+    Completable arrayStringCsvValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1494,9 +1495,9 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery);
+    Completable arrayStringCsvValidAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -1529,9 +1530,9 @@ public interface Queries {
      * Get a null array of string using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringCsvNullAsync();
+    Completable arrayStringCsvNullAsync();
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1566,9 +1567,9 @@ public interface Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery);
+    Completable arrayStringCsvNullAsync(List<String> arrayQuery);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -1601,9 +1602,9 @@ public interface Queries {
      * Get an empty array [] of string using the csv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringCsvEmptyAsync();
+    Completable arrayStringCsvEmptyAsync();
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1638,9 +1639,9 @@ public interface Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery);
+    Completable arrayStringCsvEmptyAsync(List<String> arrayQuery);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -1673,9 +1674,9 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringSsvValidAsync();
+    Completable arrayStringSsvValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1710,9 +1711,9 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery);
+    Completable arrayStringSsvValidAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -1745,9 +1746,9 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringTsvValidAsync();
+    Completable arrayStringTsvValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1782,9 +1783,9 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery);
+    Completable arrayStringTsvValidAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -1817,9 +1818,9 @@ public interface Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringPipesValidAsync();
+    Completable arrayStringPipesValidAsync();
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -1854,9 +1855,9 @@ public interface Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery);
+    Completable arrayStringPipesValidAsync(List<String> arrayQuery);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.

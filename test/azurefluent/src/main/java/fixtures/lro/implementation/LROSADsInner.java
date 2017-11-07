@@ -28,6 +28,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -1101,9 +1102,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteNonRetry400HeadersInner, Void> object
      */
-    public Single<Void> deleteNonRetry400Async() {
+    public Completable deleteNonRetry400Async() {
         return deleteNonRetry400WithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDeleteNonRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDeleteNonRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1178,9 +1179,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDelete202NonRetry400HeadersInner, Void> object
      */
-    public Single<Void> delete202NonRetry400Async() {
+    public Completable delete202NonRetry400Async() {
         return delete202NonRetry400WithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDelete202NonRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDelete202NonRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1255,9 +1256,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetry400Async() {
+    public Completable deleteAsyncRelativeRetry400Async() {
         return deleteAsyncRelativeRetry400WithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDeleteAsyncRelativeRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1368,9 +1369,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostNonRetry400HeadersInner, Void> object
      */
-    public Single<Void> postNonRetry400Async() {
+    public Completable postNonRetry400Async() {
         return postNonRetry400WithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPostNonRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostNonRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1417,9 +1418,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostNonRetry400HeadersInner, Void> object
      */
-    public Single<Void> postNonRetry400Async(ProductInner product) {
+    public Completable postNonRetry400Async(ProductInner product) {
         return postNonRetry400WithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPostNonRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostNonRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1530,9 +1531,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NonRetry400HeadersInner, Void> object
      */
-    public Single<Void> post202NonRetry400Async() {
+    public Completable post202NonRetry400Async() {
         return post202NonRetry400WithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPost202NonRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPost202NonRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1579,9 +1580,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NonRetry400HeadersInner, Void> object
      */
-    public Single<Void> post202NonRetry400Async(ProductInner product) {
+    public Completable post202NonRetry400Async(ProductInner product) {
         return post202NonRetry400WithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPost202NonRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPost202NonRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1692,9 +1693,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetry400Async() {
+    public Completable postAsyncRelativeRetry400Async() {
         return postAsyncRelativeRetry400WithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1741,9 +1742,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetry400Async(ProductInner product) {
+    public Completable postAsyncRelativeRetry400Async(ProductInner product) {
         return postAsyncRelativeRetry400WithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetry400HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2310,9 +2311,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204SucceededAsync() {
+    public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2387,9 +2388,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetryNoStatusAsync() {
+    public Completable deleteAsyncRelativeRetryNoStatusAsync() {
         return deleteAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2500,9 +2501,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NoLocationHeadersInner, Void> object
      */
-    public Single<Void> post202NoLocationAsync() {
+    public Completable post202NoLocationAsync() {
         return post202NoLocationWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPost202NoLocationHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPost202NoLocationHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2549,9 +2550,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NoLocationHeadersInner, Void> object
      */
-    public Single<Void> post202NoLocationAsync(ProductInner product) {
+    public Completable post202NoLocationAsync(ProductInner product) {
         return post202NoLocationWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPost202NoLocationHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPost202NoLocationHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2662,9 +2663,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryNoPayloadAsync() {
+    public Completable postAsyncRelativeRetryNoPayloadAsync() {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2711,9 +2712,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryNoPayloadAsync(ProductInner product) {
+    public Completable postAsyncRelativeRetryNoPayloadAsync(ProductInner product) {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3280,9 +3281,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void> object
      */
-    public Single<Void> delete202RetryInvalidHeaderAsync() {
+    public Completable delete202RetryInvalidHeaderAsync() {
         return delete202RetryInvalidHeaderWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDelete202RetryInvalidHeaderHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3357,9 +3358,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetryInvalidHeaderAsync() {
+    public Completable deleteAsyncRelativeRetryInvalidHeaderAsync() {
         return deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3434,9 +3435,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3547,9 +3548,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void> object
      */
-    public Single<Void> post202RetryInvalidHeaderAsync() {
+    public Completable post202RetryInvalidHeaderAsync() {
         return post202RetryInvalidHeaderWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -3596,9 +3597,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void> object
      */
-    public Single<Void> post202RetryInvalidHeaderAsync(ProductInner product) {
+    public Completable post202RetryInvalidHeaderAsync(ProductInner product) {
         return post202RetryInvalidHeaderWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPost202RetryInvalidHeaderHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3709,9 +3710,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidHeaderAsync() {
+    public Completable postAsyncRelativeRetryInvalidHeaderAsync() {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -3758,9 +3759,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product) {
+    public Completable postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product) {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3871,9 +3872,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Completable postAsyncRelativeRetryInvalidJsonPollingAsync() {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -3920,9 +3921,9 @@ public class LROSADsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product) {
+    public Completable postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product) {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

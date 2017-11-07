@@ -10,12 +10,12 @@
 
 package fixtures.custombaseurimoreoptions.implementation;
 
-import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
-import fixtures.custombaseurimoreoptions.Paths;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
+import fixtures.custombaseurimoreoptions.Paths;
 import io.reactivex.Single;
 
 /**
@@ -41,7 +41,7 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
      */
-    public AutoRestParameterizedCustomHostTestClientImpl withSubscriptionId(String subscriptionId) {
+    public AutoRestParameterizedCustomHostTestClientImpl withsubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
@@ -64,7 +64,7 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
      * @param dnsSuffix the dnsSuffix value.
      * @return the service client itself
      */
-    public AutoRestParameterizedCustomHostTestClientImpl withDnsSuffix(String dnsSuffix) {
+    public AutoRestParameterizedCustomHostTestClientImpl withdnsSuffix(String dnsSuffix) {
         this.dnsSuffix = dnsSuffix;
         return this;
     }
@@ -94,7 +94,6 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
      */
     public AutoRestParameterizedCustomHostTestClientImpl() {
         this("https://{vault}{secret}{dnsSuffix}");

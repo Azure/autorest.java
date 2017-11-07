@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -84,9 +85,9 @@ public interface Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(ArrayWrapper complexBody);
+    Completable putValidAsync(ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
@@ -157,9 +158,9 @@ public interface Arrays {
      *
      * @param complexBody Please put an empty array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putEmptyAsync(ArrayWrapper complexBody);
+    Completable putEmptyAsync(ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.

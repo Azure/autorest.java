@@ -10,12 +10,12 @@
 
 package fixtures.parameterflattening.implementation;
 
-import fixtures.parameterflattening.AutoRestParameterFlattening;
-import fixtures.parameterflattening.AvailabilitySets;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.parameterflattening.AutoRestParameterFlattening;
+import fixtures.parameterflattening.AvailabilitySets;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestParameterFlatteningImpl extends ServiceClient implements Au
 
     /**
      * Initializes an instance of AutoRestParameterFlattening client.
-     *
      */
     public AutoRestParameterFlatteningImpl() {
         this("http://localhost");

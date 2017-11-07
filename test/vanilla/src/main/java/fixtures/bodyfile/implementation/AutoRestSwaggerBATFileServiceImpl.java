@@ -10,12 +10,12 @@
 
 package fixtures.bodyfile.implementation;
 
-import fixtures.bodyfile.AutoRestSwaggerBATFileService;
-import fixtures.bodyfile.Files;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodyfile.AutoRestSwaggerBATFileService;
+import fixtures.bodyfile.Files;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFileService client.
-     *
      */
     public AutoRestSwaggerBATFileServiceImpl() {
         this("http://localhost");

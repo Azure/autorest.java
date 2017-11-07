@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -85,9 +86,9 @@ public interface Enums {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putNotExpandableAsync(Colors stringBody);
+    Completable putNotExpandableAsync(Colors stringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -158,9 +159,9 @@ public interface Enums {
      *
      * @param enumStringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putReferencedAsync(Colors enumStringBody);
+    Completable putReferencedAsync(Colors enumStringBody);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -231,9 +232,9 @@ public interface Enums {
      *
      * @param enumStringBody the RefColorConstant value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
+    Completable putReferencedConstantAsync(RefColorConstant enumStringBody);
 
     /**
      * Sends value 'green-color' from a constant.

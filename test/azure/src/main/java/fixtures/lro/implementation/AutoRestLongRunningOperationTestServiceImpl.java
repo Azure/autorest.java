@@ -12,9 +12,9 @@ package fixtures.lro.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import fixtures.lro.AutoRestLongRunningOperationTestService;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
@@ -23,10 +23,21 @@ import fixtures.lro.LROsCustomHeaders;
 import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
+ * Initializes a new instance of the AutoRestLongRunningOperationTestService class.
  */
-public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
+public class AutoRestLongRunningOperationTestServiceImpl extends ServiceClient implements AutoRestLongRunningOperationTestService {
 
+    /** Credentials needed for the client to connect to Azure. */
+    private ServiceClientCredentials credentials;
+
+    /**
+     * Gets Credentials needed for the client to connect to Azure.
+     *
+     * @return the credentials value.
+     */
+    public ServiceClientCredentials credentials() {
+        return this.credentials;
+    }
 
     /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
@@ -46,7 +57,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestLongRunningOperationTestServiceImpl withAcceptLanguage(String acceptLanguage) {
+    public AutoRestLongRunningOperationTestServiceImpl withacceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
@@ -69,7 +80,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestLongRunningOperationTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestLongRunningOperationTestServiceImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -92,7 +103,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestLongRunningOperationTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestLongRunningOperationTestServiceImpl withgenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -152,34 +163,32 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+    public AutoRestLongRunningOperationTestServiceImpl(String baseUrl) {
+        super(baseUrl);
+        initialize();
     }
 
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
      */
-    public AutoRestLongRunningOperationTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
+    public AutoRestLongRunningOperationTestServiceImpl() {
+        this("http://localhost");
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param restClient the REST client containing pre-configured settings
      */
     public AutoRestLongRunningOperationTestServiceImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    protected void initialize() {
+    private void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
@@ -187,15 +196,5 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         this.lRORetrys = new LRORetrysImpl(this);
         this.lROSADs = new LROSADsImpl(this);
         this.lROsCustomHeaders = new LROsCustomHeadersImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestLongRunningOperationTestService", "1.0.0");
     }
 }

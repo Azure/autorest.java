@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -129,9 +130,9 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
+    public Completable updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

@@ -10,13 +10,13 @@
 
 package fixtures.requiredoptional.implementation;
 
-import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
-import fixtures.requiredoptional.Implicits;
-import fixtures.requiredoptional.Explicits;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
+import fixtures.requiredoptional.Explicits;
+import fixtures.requiredoptional.Implicits;
 import io.reactivex.Single;
 
 /**
@@ -42,7 +42,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * @param requiredGlobalPath the requiredGlobalPath value.
      * @return the service client itself
      */
-    public AutoRestRequiredOptionalTestServiceImpl withRequiredGlobalPath(String requiredGlobalPath) {
+    public AutoRestRequiredOptionalTestServiceImpl withrequiredGlobalPath(String requiredGlobalPath) {
         this.requiredGlobalPath = requiredGlobalPath;
         return this;
     }
@@ -65,7 +65,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      * @return the service client itself
      */
-    public AutoRestRequiredOptionalTestServiceImpl withRequiredGlobalQuery(String requiredGlobalQuery) {
+    public AutoRestRequiredOptionalTestServiceImpl withrequiredGlobalQuery(String requiredGlobalQuery) {
         this.requiredGlobalQuery = requiredGlobalQuery;
         return this;
     }
@@ -88,7 +88,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself
      */
-    public AutoRestRequiredOptionalTestServiceImpl withOptionalGlobalQuery(int optionalGlobalQuery) {
+    public AutoRestRequiredOptionalTestServiceImpl withoptionalGlobalQuery(int optionalGlobalQuery) {
         this.optionalGlobalQuery = optionalGlobalQuery;
         return this;
     }
@@ -131,7 +131,6 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
-     *
      */
     public AutoRestRequiredOptionalTestServiceImpl() {
         this("http://localhost");

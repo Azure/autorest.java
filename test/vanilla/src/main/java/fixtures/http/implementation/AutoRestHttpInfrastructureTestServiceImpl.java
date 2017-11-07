@@ -10,18 +10,18 @@
 
 package fixtures.http.implementation;
 
-import fixtures.http.AutoRestHttpInfrastructureTestService;
-import fixtures.http.HttpFailures;
-import fixtures.http.HttpSuccess;
-import fixtures.http.HttpRedirects;
-import fixtures.http.HttpClientFailures;
-import fixtures.http.HttpServerFailures;
-import fixtures.http.HttpRetrys;
-import fixtures.http.MultipleResponses;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.http.AutoRestHttpInfrastructureTestService;
+import fixtures.http.HttpClientFailures;
+import fixtures.http.HttpFailures;
+import fixtures.http.HttpRedirects;
+import fixtures.http.HttpRetrys;
+import fixtures.http.HttpServerFailures;
+import fixtures.http.HttpSuccess;
+import fixtures.http.MultipleResponses;
 import io.reactivex.Single;
 
 /**
@@ -132,7 +132,6 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
-     *
      */
     public AutoRestHttpInfrastructureTestServiceImpl() {
         this("http://localhost");

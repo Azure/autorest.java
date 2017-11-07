@@ -10,12 +10,12 @@
 
 package fixtures.bodyduration.implementation;
 
-import fixtures.bodyduration.AutoRestDurationTestService;
-import fixtures.bodyduration.Durations;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodyduration.AutoRestDurationTestService;
+import fixtures.bodyduration.Durations;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
 
     /**
      * Initializes an instance of AutoRestDurationTestService client.
-     *
      */
     public AutoRestDurationTestServiceImpl() {
         this("https://localhost");

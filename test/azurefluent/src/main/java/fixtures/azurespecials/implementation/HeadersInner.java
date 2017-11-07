@@ -24,6 +24,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.azurespecials.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -122,9 +123,9 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void> object
      */
-    public Single<Void> customNamedRequestIdAsync(String fooClientRequestId) {
+    public Completable customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -176,9 +177,9 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void> object
      */
-    public Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
+    public Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .map(new Function<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

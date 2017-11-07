@@ -28,6 +28,7 @@ import com.microsoft.rest.v2.Validator;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -188,9 +189,9 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNotExpandableAsync(Colors stringBody) {
+    public Completable putNotExpandableAsync(Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -285,9 +286,9 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putReferencedAsync(Colors enumStringBody) {
+    public Completable putReferencedAsync(Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -383,9 +384,9 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
+    public Completable putReferencedConstantAsync(RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

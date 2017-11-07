@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.UnixTime;
 import fixtures.bodyinteger.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -462,9 +463,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMax32Async(int intBody) {
+    public Completable putMax32Async(int intBody) {
         return putMax32WithRestResponseAsync(intBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -511,9 +512,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMax64Async(long intBody) {
+    public Completable putMax64Async(long intBody) {
         return putMax64WithRestResponseAsync(intBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -560,9 +561,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMin32Async(int intBody) {
+    public Completable putMin32Async(int intBody) {
         return putMin32WithRestResponseAsync(intBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -609,9 +610,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMin64Async(long intBody) {
+    public Completable putMin64Async(long intBody) {
         return putMin64WithRestResponseAsync(intBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -704,9 +705,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUnixTimeDateAsync(DateTime intBody) {
+    public Completable putUnixTimeDateAsync(DateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

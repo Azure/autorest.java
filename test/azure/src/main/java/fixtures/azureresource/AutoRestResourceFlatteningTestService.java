@@ -18,6 +18,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;

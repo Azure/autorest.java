@@ -28,6 +28,7 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -126,9 +127,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdHeaders, Void> object
      */
-    public Single<Void> customNamedRequestIdAsync(String fooClientRequestId) {
+    public Completable customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -180,9 +181,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> object
      */
-    public Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+    public Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .map(new Function<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

@@ -29,6 +29,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -192,9 +193,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalQueryAsync() {
+    public Completable putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -240,9 +241,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalQueryAsync(String queryParameter) {
+    public Completable putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -286,9 +287,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalHeaderAsync() {
+    public Completable putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -334,9 +335,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalHeaderAsync(String queryParameter) {
+    public Completable putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -380,9 +381,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalBodyAsync() {
+    public Completable putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -428,9 +429,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalBodyAsync(String bodyParameter) {
+    public Completable putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

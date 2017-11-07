@@ -17,6 +17,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.A;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -468,9 +469,9 @@ public interface MultipleResponses {
      * Send a 202 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultError202NoneAsync();
+    Completable get202None204NoneDefaultError202NoneAsync();
 
     /**
      * Send a 202 response with no payload.
@@ -502,9 +503,9 @@ public interface MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultError204NoneAsync();
+    Completable get202None204NoneDefaultError204NoneAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -536,9 +537,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultError400ValidAsync();
+    Completable get202None204NoneDefaultError400ValidAsync();
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -570,9 +571,9 @@ public interface MultipleResponses {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultNone202InvalidAsync();
+    Completable get202None204NoneDefaultNone202InvalidAsync();
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -604,9 +605,9 @@ public interface MultipleResponses {
      * Send a 204 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultNone204NoneAsync();
+    Completable get202None204NoneDefaultNone204NoneAsync();
 
     /**
      * Send a 204 response with no payload.
@@ -638,9 +639,9 @@ public interface MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultNone400NoneAsync();
+    Completable get202None204NoneDefaultNone400NoneAsync();
 
     /**
      * Send a 400 response with no payload.
@@ -672,9 +673,9 @@ public interface MultipleResponses {
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get202None204NoneDefaultNone400InvalidAsync();
+    Completable get202None204NoneDefaultNone400InvalidAsync();
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -846,9 +847,9 @@ public interface MultipleResponses {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getDefaultNone200InvalidAsync();
+    Completable getDefaultNone200InvalidAsync();
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
@@ -880,9 +881,9 @@ public interface MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getDefaultNone200NoneAsync();
+    Completable getDefaultNone200NoneAsync();
 
     /**
      * Send a 200 response with no payload.
@@ -914,9 +915,9 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getDefaultNone400InvalidAsync();
+    Completable getDefaultNone400InvalidAsync();
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -948,9 +949,9 @@ public interface MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getDefaultNone400NoneAsync();
+    Completable getDefaultNone400NoneAsync();
 
     /**
      * Send a 400 response with no payload.

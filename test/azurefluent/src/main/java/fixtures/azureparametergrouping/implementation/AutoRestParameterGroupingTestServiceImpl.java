@@ -12,16 +12,27 @@ package fixtures.azureparametergrouping.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
+ * Initializes a new instance of the AutoRestParameterGroupingTestService class.
  */
-public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
+public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient implements AutoRestParameterGroupingTestService {
 
+    /** Credentials needed for the client to connect to Azure. */
+    private ServiceClientCredentials credentials;
+
+    /**
+     * Gets Credentials needed for the client to connect to Azure.
+     *
+     * @return the credentials value.
+     */
+    public ServiceClientCredentials credentials() {
+        return this.credentials;
+    }
 
     /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
@@ -41,7 +52,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestParameterGroupingTestServiceImpl withAcceptLanguage(String acceptLanguage) {
+    public AutoRestParameterGroupingTestServiceImpl withacceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
@@ -64,7 +75,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestParameterGroupingTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestParameterGroupingTestServiceImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -87,68 +98,56 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestParameterGroupingTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestParameterGroupingTestServiceImpl withgenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
 
     /**
-     * The ParameterGroupingsInner object to access its operations.
+     * The ParameterGroupings object to access its operations.
      */
-    private ParameterGroupingsInner parameterGroupings;
+    private ParameterGroupings parameterGroupings;
 
     /**
-     * Gets the ParameterGroupingsInner object to access its operations.
-     * @return the ParameterGroupingsInner object.
+     * Gets the ParameterGroupings object to access its operations.
+     * @return the ParameterGroupings object.
      */
-    public ParameterGroupingsInner parameterGroupings() {
+    public ParameterGroupings parameterGroupings() {
         return this.parameterGroupings;
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
-     * @param credentials the management credentials for Azure
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
-        this("https://localhost", credentials);
+    public AutoRestParameterGroupingTestServiceImpl(String baseUrl) {
+        super(baseUrl);
+        initialize();
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
      */
-    public AutoRestParameterGroupingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
+    public AutoRestParameterGroupingTestServiceImpl() {
+        this("https://localhost");
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param restClient the REST client containing pre-configured settings
      */
     public AutoRestParameterGroupingTestServiceImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    protected void initialize() {
+    private void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.parameterGroupings = new ParameterGroupingsInner(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterGroupingTestService", "1.0.0");
+        this.parameterGroupings = new ParameterGroupingsImpl(this);
     }
 }

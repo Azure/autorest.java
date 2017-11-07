@@ -23,6 +23,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -121,9 +122,9 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalValidAsync() {
+    public Completable getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -167,9 +168,9 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalNullAsync() {
+    public Completable getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -215,9 +216,9 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalNullAsync(String apiVersion) {
+    public Completable getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -261,9 +262,9 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathLocalValidAsync() {
+    public Completable getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -307,9 +308,9 @@ public class ApiVersionLocalsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerLocalValidAsync() {
+    public Completable getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -84,9 +85,9 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(ReadonlyObj complexBody);
+    Completable putValidAsync(ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.

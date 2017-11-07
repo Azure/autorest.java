@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodybyte.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -153,9 +154,9 @@ public interface Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putNonAsciiAsync(byte[] byteBody);
+    Completable putNonAsciiAsync(byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).

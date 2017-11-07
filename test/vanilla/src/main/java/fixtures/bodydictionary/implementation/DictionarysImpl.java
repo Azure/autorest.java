@@ -30,6 +30,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -598,9 +599,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(Map<String, String> arrayBody) {
+    public Completable putEmptyAsync(Map<String, String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -876,9 +877,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
+    public Completable putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1064,9 +1065,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
+    public Completable putIntegerValidAsync(Map<String, Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1252,9 +1253,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLongValidAsync(Map<String, Long> arrayBody) {
+    public Completable putLongValidAsync(Map<String, Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1440,9 +1441,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFloatValidAsync(Map<String, Double> arrayBody) {
+    public Completable putFloatValidAsync(Map<String, Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1628,9 +1629,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
+    public Completable putDoubleValidAsync(Map<String, Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1816,9 +1817,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putStringValidAsync(Map<String, String> arrayBody) {
+    public Completable putStringValidAsync(Map<String, String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2004,9 +2005,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
+    public Completable putDateValidAsync(Map<String, LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2192,9 +2193,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
+    public Completable putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2385,9 +2386,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
+    public Completable putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2483,9 +2484,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDurationValidAsync(Map<String, Period> arrayBody) {
+    public Completable putDurationValidAsync(Map<String, Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2581,9 +2582,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
+    public Completable putByteValidAsync(Map<String, byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2949,9 +2950,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
+    public Completable putComplexValidAsync(Map<String, Widget> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3227,9 +3228,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
+    public Completable putArrayValidAsync(Map<String, List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3505,9 +3506,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
+    public Completable putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

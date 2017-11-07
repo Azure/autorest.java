@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -349,9 +350,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+    public Completable putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -492,9 +493,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+    public Completable putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

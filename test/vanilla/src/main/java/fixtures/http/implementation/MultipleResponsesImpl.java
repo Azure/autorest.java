@@ -29,6 +29,7 @@ import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -822,9 +823,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultError202NoneAsync() {
+    public Completable get202None204NoneDefaultError202NoneAsync() {
         return get202None204NoneDefaultError202NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -867,9 +868,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultError204NoneAsync() {
+    public Completable get202None204NoneDefaultError204NoneAsync() {
         return get202None204NoneDefaultError204NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -912,9 +913,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultError400ValidAsync() {
+    public Completable get202None204NoneDefaultError400ValidAsync() {
         return get202None204NoneDefaultError400ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -957,9 +958,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultNone202InvalidAsync() {
+    public Completable get202None204NoneDefaultNone202InvalidAsync() {
         return get202None204NoneDefaultNone202InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1002,9 +1003,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultNone204NoneAsync() {
+    public Completable get202None204NoneDefaultNone204NoneAsync() {
         return get202None204NoneDefaultNone204NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1047,9 +1048,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultNone400NoneAsync() {
+    public Completable get202None204NoneDefaultNone400NoneAsync() {
         return get202None204NoneDefaultNone400NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1092,9 +1093,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get202None204NoneDefaultNone400InvalidAsync() {
+    public Completable get202None204NoneDefaultNone400InvalidAsync() {
         return get202None204NoneDefaultNone400InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1317,9 +1318,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getDefaultNone200InvalidAsync() {
+    public Completable getDefaultNone200InvalidAsync() {
         return getDefaultNone200InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1362,9 +1363,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getDefaultNone200NoneAsync() {
+    public Completable getDefaultNone200NoneAsync() {
         return getDefaultNone200NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1407,9 +1408,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getDefaultNone400InvalidAsync() {
+    public Completable getDefaultNone400InvalidAsync() {
         return getDefaultNone400InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1452,9 +1453,9 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getDefaultNone400NoneAsync() {
+    public Completable getDefaultNone400NoneAsync() {
         return getDefaultNone400NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

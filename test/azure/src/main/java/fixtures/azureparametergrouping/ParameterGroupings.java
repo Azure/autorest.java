@@ -18,6 +18,7 @@ import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -52,9 +53,9 @@ public interface ParameterGroupings {
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
+    Completable postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -87,9 +88,9 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalAsync();
+    Completable postOptionalAsync();
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -124,9 +125,9 @@ public interface ParameterGroupings {
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
+    Completable postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -159,9 +160,9 @@ public interface ParameterGroupings {
      * Post parameters from multiple different parameter groups.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postMultiParamGroupsAsync();
+    Completable postMultiParamGroupsAsync();
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -199,9 +200,9 @@ public interface ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
+    Completable postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -235,9 +236,9 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postSharedParameterGroupObjectAsync();
+    Completable postSharedParameterGroupObjectAsync();
 
     /**
      * Post parameters with a shared parameter group object.
@@ -272,9 +273,9 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
+    Completable postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
 
     /**
      * Post parameters with a shared parameter group object.

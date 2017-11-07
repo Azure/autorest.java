@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -372,9 +373,9 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Fish complexBody) {
+    public Completable putValidAsync(Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

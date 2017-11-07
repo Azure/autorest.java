@@ -10,12 +10,12 @@
 
 package fixtures.bodydate.implementation;
 
-import fixtures.bodydate.AutoRestDateTestService;
-import fixtures.bodydate.Dates;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodydate.AutoRestDateTestService;
+import fixtures.bodydate.Dates;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
 
     /**
      * Initializes an instance of AutoRestDateTestService client.
-     *
      */
     public AutoRestDateTestServiceImpl() {
         this("https://localhost");

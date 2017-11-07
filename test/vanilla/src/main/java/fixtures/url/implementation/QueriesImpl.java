@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -308,9 +309,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanTrueAsync() {
+    public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -354,9 +355,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanFalseAsync() {
+    public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -400,9 +401,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanNullAsync() {
+    public Completable getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -448,9 +449,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanNullAsync(Boolean boolQuery) {
+    public Completable getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -494,9 +495,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntOneMillionAsync() {
+    public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -540,9 +541,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNegativeOneMillionAsync() {
+    public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -586,9 +587,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNullAsync() {
+    public Completable getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -634,9 +635,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNullAsync(Integer intQuery) {
+    public Completable getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -680,9 +681,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getTenBillionAsync() {
+    public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -726,9 +727,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getNegativeTenBillionAsync() {
+    public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -772,9 +773,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getLongNullAsync() {
+    public Completable getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -820,9 +821,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getLongNullAsync(Long longQuery) {
+    public Completable getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -866,9 +867,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificPositiveAsync() {
+    public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -912,9 +913,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificNegativeAsync() {
+    public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -958,9 +959,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatNullAsync() {
+    public Completable floatNullAsync() {
         return floatNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1006,9 +1007,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatNullAsync(Double floatQuery) {
+    public Completable floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1052,9 +1053,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalPositiveAsync() {
+    public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1098,9 +1099,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalNegativeAsync() {
+    public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1144,9 +1145,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleNullAsync() {
+    public Completable doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1192,9 +1193,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleNullAsync(Double doubleQuery) {
+    public Completable doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1238,9 +1239,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUnicodeAsync() {
+    public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1284,9 +1285,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUrlEncodedAsync() {
+    public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1330,9 +1331,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringEmptyAsync() {
+    public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1376,9 +1377,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringNullAsync() {
+    public Completable stringNullAsync() {
         return stringNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1424,9 +1425,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringNullAsync(String stringQuery) {
+    public Completable stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1470,9 +1471,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumValidAsync() {
+    public Completable enumValidAsync() {
         return enumValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1518,9 +1519,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumValidAsync(UriColor enumQuery) {
+    public Completable enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1564,9 +1565,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumNullAsync() {
+    public Completable enumNullAsync() {
         return enumNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1612,9 +1613,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumNullAsync(UriColor enumQuery) {
+    public Completable enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1659,9 +1660,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteMultiByteAsync() {
+    public Completable byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1708,9 +1709,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteMultiByteAsync(byte[] byteQuery) {
+    public Completable byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1755,9 +1756,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteEmptyAsync() {
+    public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1802,9 +1803,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteNullAsync() {
+    public Completable byteNullAsync() {
         return byteNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1851,9 +1852,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteNullAsync(byte[] byteQuery) {
+    public Completable byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1897,9 +1898,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateValidAsync() {
+    public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1943,9 +1944,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateNullAsync() {
+    public Completable dateNullAsync() {
         return dateNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1991,9 +1992,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateNullAsync(LocalDate dateQuery) {
+    public Completable dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2037,9 +2038,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeValidAsync() {
+    public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2083,9 +2084,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeNullAsync() {
+    public Completable dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2131,9 +2132,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
+    public Completable dateTimeNullAsync(DateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2179,9 +2180,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvValidAsync() {
+    public Completable arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2229,9 +2230,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
+    public Completable arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2277,9 +2278,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvNullAsync() {
+    public Completable arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2327,9 +2328,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
+    public Completable arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2375,9 +2376,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvEmptyAsync() {
+    public Completable arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2425,9 +2426,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
+    public Completable arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2473,9 +2474,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringSsvValidAsync() {
+    public Completable arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2523,9 +2524,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
+    public Completable arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2571,9 +2572,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringTsvValidAsync() {
+    public Completable arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2621,9 +2622,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
+    public Completable arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2669,9 +2670,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringPipesValidAsync() {
+    public Completable arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2719,9 +2720,9 @@ public class QueriesImpl implements Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
+    public Completable arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

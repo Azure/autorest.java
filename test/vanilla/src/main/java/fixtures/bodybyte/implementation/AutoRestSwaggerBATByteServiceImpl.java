@@ -10,12 +10,12 @@
 
 package fixtures.bodybyte.implementation;
 
-import fixtures.bodybyte.AutoRestSwaggerBATByteService;
-import fixtures.bodybyte.Bytes;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodybyte.AutoRestSwaggerBATByteService;
+import fixtures.bodybyte.Bytes;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
-     *
      */
     public AutoRestSwaggerBATByteServiceImpl() {
         this("http://localhost");

@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyinteger.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -259,9 +260,9 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMax32Async(int intBody);
+    Completable putMax32Async(int intBody);
 
     /**
      * Put max int32 value.
@@ -297,9 +298,9 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMax64Async(long intBody);
+    Completable putMax64Async(long intBody);
 
     /**
      * Put max int64 value.
@@ -335,9 +336,9 @@ public interface Ints {
      *
      * @param intBody the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMin32Async(int intBody);
+    Completable putMin32Async(int intBody);
 
     /**
      * Put min int32 value.
@@ -373,9 +374,9 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMin64Async(long intBody);
+    Completable putMin64Async(long intBody);
 
     /**
      * Put min int64 value.
@@ -446,9 +447,9 @@ public interface Ints {
      *
      * @param intBody the long value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUnixTimeDateAsync(DateTime intBody);
+    Completable putUnixTimeDateAsync(DateTime intBody);
 
     /**
      * Put datetime encoded as Unix time.

@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -188,9 +189,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(DictionaryWrapper complexBody) {
+    public Completable putValidAsync(DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -286,9 +287,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(DictionaryWrapper complexBody) {
+    public Completable putEmptyAsync(DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

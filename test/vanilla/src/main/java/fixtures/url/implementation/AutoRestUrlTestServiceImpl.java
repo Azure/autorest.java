@@ -10,14 +10,14 @@
 
 package fixtures.url.implementation;
 
-import fixtures.url.AutoRestUrlTestService;
-import fixtures.url.Paths;
-import fixtures.url.Queries;
-import fixtures.url.PathItems;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.url.AutoRestUrlTestService;
+import fixtures.url.PathItems;
+import fixtures.url.Paths;
+import fixtures.url.Queries;
 import io.reactivex.Single;
 
 /**
@@ -43,7 +43,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * @param globalStringPath the globalStringPath value.
      * @return the service client itself
      */
-    public AutoRestUrlTestServiceImpl withGlobalStringPath(String globalStringPath) {
+    public AutoRestUrlTestServiceImpl withglobalStringPath(String globalStringPath) {
         this.globalStringPath = globalStringPath;
         return this;
     }
@@ -66,7 +66,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      * @param globalStringQuery the globalStringQuery value.
      * @return the service client itself
      */
-    public AutoRestUrlTestServiceImpl withGlobalStringQuery(String globalStringQuery) {
+    public AutoRestUrlTestServiceImpl withglobalStringQuery(String globalStringQuery) {
         this.globalStringQuery = globalStringQuery;
         return this;
     }
@@ -122,7 +122,6 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestUrlTestService client.
-     *
      */
     public AutoRestUrlTestServiceImpl() {
         this("http://localhost");

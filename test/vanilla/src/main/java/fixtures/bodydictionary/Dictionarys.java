@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -124,9 +125,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putEmptyAsync(Map<String, String> arrayBody);
+    Completable putEmptyAsync(Map<String, String> arrayBody);
 
     /**
      * Set dictionary value empty {}.
@@ -337,9 +338,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody);
+    Completable putBooleanTfftAsync(Map<String, Boolean> arrayBody);
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -480,9 +481,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putIntegerValidAsync(Map<String, Integer> arrayBody);
+    Completable putIntegerValidAsync(Map<String, Integer> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -623,9 +624,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLongValidAsync(Map<String, Long> arrayBody);
+    Completable putLongValidAsync(Map<String, Long> arrayBody);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -766,9 +767,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putFloatValidAsync(Map<String, Double> arrayBody);
+    Completable putFloatValidAsync(Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -909,9 +910,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDoubleValidAsync(Map<String, Double> arrayBody);
+    Completable putDoubleValidAsync(Map<String, Double> arrayBody);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -1052,9 +1053,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putStringValidAsync(Map<String, String> arrayBody);
+    Completable putStringValidAsync(Map<String, String> arrayBody);
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -1195,9 +1196,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateValidAsync(Map<String, LocalDate> arrayBody);
+    Completable putDateValidAsync(Map<String, LocalDate> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -1338,9 +1339,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody);
+    Completable putDateTimeValidAsync(Map<String, DateTime> arrayBody);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -1481,9 +1482,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody);
+    Completable putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -1554,9 +1555,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDurationValidAsync(Map<String, Period> arrayBody);
+    Completable putDurationValidAsync(Map<String, Period> arrayBody);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -1627,9 +1628,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putByteValidAsync(Map<String, byte[]> arrayBody);
+    Completable putByteValidAsync(Map<String, byte[]> arrayBody);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -1910,9 +1911,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putComplexValidAsync(Map<String, Widget> arrayBody);
+    Completable putComplexValidAsync(Map<String, Widget> arrayBody);
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -2123,9 +2124,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putArrayValidAsync(Map<String, List<String>> arrayBody);
+    Completable putArrayValidAsync(Map<String, List<String>> arrayBody);
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -2336,9 +2337,9 @@ public interface Dictionarys {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody);
+    Completable putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.

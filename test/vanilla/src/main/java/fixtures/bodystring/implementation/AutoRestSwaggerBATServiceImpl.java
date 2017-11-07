@@ -10,13 +10,13 @@
 
 package fixtures.bodystring.implementation;
 
-import fixtures.bodystring.AutoRestSwaggerBATService;
-import fixtures.bodystring.Strings;
-import fixtures.bodystring.Enums;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodystring.AutoRestSwaggerBATService;
+import fixtures.bodystring.Enums;
+import fixtures.bodystring.Strings;
 import io.reactivex.Single;
 
 /**
@@ -62,7 +62,6 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
-     *
      */
     public AutoRestSwaggerBATServiceImpl() {
         this("http://localhost");

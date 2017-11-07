@@ -10,12 +10,12 @@
 
 package fixtures.bodynumber.implementation;
 
-import fixtures.bodynumber.AutoRestNumberTestService;
-import fixtures.bodynumber.Numbers;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodynumber.AutoRestNumberTestService;
+import fixtures.bodynumber.Numbers;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
 
     /**
      * Initializes an instance of AutoRestNumberTestService client.
-     *
      */
     public AutoRestNumberTestServiceImpl() {
         this("https://localhost");

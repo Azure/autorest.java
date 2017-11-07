@@ -10,12 +10,12 @@
 
 package fixtures.bodyformdata.implementation;
 
-import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
-import fixtures.bodyformdata.Formdatas;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
+import fixtures.bodyformdata.Formdatas;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
-     *
      */
     public AutoRestSwaggerBATFormDataServiceImpl() {
         this("http://localhost");

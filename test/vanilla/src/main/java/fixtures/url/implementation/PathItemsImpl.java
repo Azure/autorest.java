@@ -25,6 +25,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.url.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -140,9 +141,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getAllWithValuesAsync(String localStringPath, String pathItemStringPath) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -209,9 +210,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getAllWithValuesWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -273,9 +274,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -342,9 +343,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -406,9 +407,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -475,9 +476,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getGlobalAndLocalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -539,9 +540,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
+    public Completable getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -608,9 +609,9 @@ public class PathItemsImpl implements PathItems {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
+    public Completable getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

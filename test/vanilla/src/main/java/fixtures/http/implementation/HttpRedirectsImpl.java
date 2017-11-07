@@ -44,6 +44,7 @@ import fixtures.http.models.HttpRedirectsPost303Headers;
 import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -207,9 +208,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsHead300Headers, Void> object
      */
-    public Single<Void> head300Async() {
+    public Completable head300Async() {
         return head300WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsHead300Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead300Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -297,9 +298,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsHead301Headers, Void> object
      */
-    public Single<Void> head301Async() {
+    public Completable head301Async() {
         return head301WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsHead301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead301Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -342,9 +343,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsGet301Headers, Void> object
      */
-    public Single<Void> get301Async() {
+    public Completable get301Async() {
         return get301WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsGet301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsGet301Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -388,9 +389,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPut301Headers, Void> object
      */
-    public Single<Void> put301Async() {
+    public Completable put301Async() {
         return put301WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsPut301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut301Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -436,9 +437,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPut301Headers, Void> object
      */
-    public Single<Void> put301Async(Boolean booleanValue) {
+    public Completable put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsPut301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut301Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -481,9 +482,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsHead302Headers, Void> object
      */
-    public Single<Void> head302Async() {
+    public Completable head302Async() {
         return head302WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsHead302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead302Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -526,9 +527,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsGet302Headers, Void> object
      */
-    public Single<Void> get302Async() {
+    public Completable get302Async() {
         return get302WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsGet302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsGet302Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -572,9 +573,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPatch302Headers, Void> object
      */
-    public Single<Void> patch302Async() {
+    public Completable patch302Async() {
         return patch302WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsPatch302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch302Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -620,9 +621,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPatch302Headers, Void> object
      */
-    public Single<Void> patch302Async(Boolean booleanValue) {
+    public Completable patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsPatch302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch302Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -666,9 +667,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPost303Headers, Void> object
      */
-    public Single<Void> post303Async() {
+    public Completable post303Async() {
         return post303WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsPost303Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost303Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -714,9 +715,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPost303Headers, Void> object
      */
-    public Single<Void> post303Async(Boolean booleanValue) {
+    public Completable post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsPost303Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost303Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -759,9 +760,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsHead307Headers, Void> object
      */
-    public Single<Void> head307Async() {
+    public Completable head307Async() {
         return head307WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsHead307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -804,9 +805,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsGet307Headers, Void> object
      */
-    public Single<Void> get307Async() {
+    public Completable get307Async() {
         return get307WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsGet307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsGet307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -850,9 +851,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPut307Headers, Void> object
      */
-    public Single<Void> put307Async() {
+    public Completable put307Async() {
         return put307WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsPut307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -898,9 +899,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPut307Headers, Void> object
      */
-    public Single<Void> put307Async(Boolean booleanValue) {
+    public Completable put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsPut307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -944,9 +945,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPatch307Headers, Void> object
      */
-    public Single<Void> patch307Async() {
+    public Completable patch307Async() {
         return patch307WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsPatch307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -992,9 +993,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPatch307Headers, Void> object
      */
-    public Single<Void> patch307Async(Boolean booleanValue) {
+    public Completable patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsPatch307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1038,9 +1039,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPost307Headers, Void> object
      */
-    public Single<Void> post307Async() {
+    public Completable post307Async() {
         return post307WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsPost307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1086,9 +1087,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsPost307Headers, Void> object
      */
-    public Single<Void> post307Async(Boolean booleanValue) {
+    public Completable post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsPost307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1132,9 +1133,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsDelete307Headers, Void> object
      */
-    public Single<Void> delete307Async() {
+    public Completable delete307Async() {
         return delete307WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsDelete307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsDelete307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1180,9 +1181,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsDelete307Headers, Void> object
      */
-    public Single<Void> delete307Async(Boolean booleanValue) {
+    public Completable delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<HttpRedirectsDelete307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsDelete307Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

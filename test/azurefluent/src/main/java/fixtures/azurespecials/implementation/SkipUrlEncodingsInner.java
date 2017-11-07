@@ -24,6 +24,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -146,9 +147,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodPathValidAsync(String unencodedPathParam) {
+    public Completable getMethodPathValidAsync(String unencodedPathParam) {
         return getMethodPathValidWithRestResponseAsync(unencodedPathParam)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -198,9 +199,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathPathValidAsync(String unencodedPathParam) {
+    public Completable getPathPathValidAsync(String unencodedPathParam) {
         return getPathPathValidWithRestResponseAsync(unencodedPathParam)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -244,9 +245,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerPathValidAsync() {
+    public Completable getSwaggerPathValidAsync() {
         return getSwaggerPathValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -296,9 +297,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodQueryValidAsync(String q1) {
+    public Completable getMethodQueryValidAsync(String q1) {
         return getMethodQueryValidWithRestResponseAsync(q1)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -342,9 +343,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodQueryNullAsync() {
+    public Completable getMethodQueryNullAsync() {
         return getMethodQueryNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -390,9 +391,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodQueryNullAsync(String q1) {
+    public Completable getMethodQueryNullAsync(String q1) {
         return getMethodQueryNullWithRestResponseAsync(q1)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -442,9 +443,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathQueryValidAsync(String q1) {
+    public Completable getPathQueryValidAsync(String q1) {
         return getPathQueryValidWithRestResponseAsync(q1)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -488,9 +489,9 @@ public class SkipUrlEncodingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerQueryValidAsync() {
+    public Completable getSwaggerQueryValidAsync() {
         return getSwaggerQueryValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

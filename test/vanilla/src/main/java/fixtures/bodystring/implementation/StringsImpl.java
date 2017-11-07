@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodystring.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -226,9 +227,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNullAsync() {
+    public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -274,9 +275,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNullAsync(String stringBody) {
+    public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -371,9 +372,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(String stringBody) {
+    public Completable putEmptyAsync(String stringBody) {
         return putEmptyWithRestResponseAsync(stringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -468,9 +469,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMbcsAsync(String stringBody) {
+    public Completable putMbcsAsync(String stringBody) {
         return putMbcsWithRestResponseAsync(stringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -565,9 +566,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWhitespaceAsync(String stringBody) {
+    public Completable putWhitespaceAsync(String stringBody) {
         return putWhitespaceWithRestResponseAsync(stringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -753,9 +754,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
+    public Completable putBase64UrlEncodedAsync(byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

@@ -10,12 +10,12 @@
 
 package fixtures.bodydictionary.implementation;
 
-import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
-import fixtures.bodydictionary.Dictionarys;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
+import fixtures.bodydictionary.Dictionarys;
 import io.reactivex.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
-     *
      */
     public AutoRestSwaggerBATdictionaryServiceImpl() {
         this("http://localhost");

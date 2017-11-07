@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -84,9 +85,9 @@ public interface Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(Basic complexBody);
+    Completable putValidAsync(Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.

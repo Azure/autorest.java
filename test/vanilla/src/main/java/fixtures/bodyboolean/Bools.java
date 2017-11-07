@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyboolean.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -83,9 +84,9 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putTrueAsync(boolean boolBody);
+    Completable putTrueAsync(boolean boolBody);
 
     /**
      * Set Boolean value true.
@@ -156,9 +157,9 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putFalseAsync(boolean boolBody);
+    Completable putFalseAsync(boolean boolBody);
 
     /**
      * Set Boolean value false.

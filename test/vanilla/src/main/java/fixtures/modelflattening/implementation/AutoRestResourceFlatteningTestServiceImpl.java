@@ -10,13 +10,14 @@
 
 package fixtures.modelflattening.implementation;
 
-import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import io.reactivex.Single;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -27,9 +28,7 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
@@ -38,8 +37,10 @@ import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
-import io.reactivex.functions.Function;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     *
      */
     public AutoRestResourceFlatteningTestServiceImpl() {
         this("http://localhost");
@@ -91,11 +91,12 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be
-     * used by Retrofit to perform actually REST calls.
+     * The interface defining all the services for
+     * AutoRestResourceFlatteningTestService to be used by Retrofit to perform
+     * actually REST calls.
      */
     @Host("http://localhost")
-    interface AutoRestResourceFlatteningTestServiceService {
+    interface AutoRestResourceFlatteningTestService {
         @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putArray" })
         @PUT("model-flatten/array")
         @ExpectedResponses({200})
@@ -196,18 +197,20 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
         Validator.validate(resourceArray);
+
+
+
         return service.putArray(resourceArray);
     }
-
     /**
      * Put External Resource as an Array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync() {
+    public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -244,9 +247,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
+
+
+
         return service.putArray(resourceArray);
     }
-
     /**
      * Put External Resource as an Array.
      *
@@ -254,9 +259,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync(List<Resource> resourceArray) {
+    public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -290,9 +295,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
      */
     public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
+
+
+
         return service.getArray();
     }
-
     /**
      * Get External Resource as an Array.
      *
@@ -337,18 +344,20 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync() {
         final List<WrappedProduct> resourceArray = null;
         Validator.validate(resourceArray);
+
+
+
         return service.putWrappedArray(resourceArray);
     }
-
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWrappedArrayAsync() {
+    public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -385,9 +394,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putWrappedArrayWithRestResponseAsync(List<WrappedProduct> resourceArray) {
         Validator.validate(resourceArray);
+
+
+
         return service.putWrappedArray(resourceArray);
     }
-
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
@@ -395,9 +406,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
+    public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -431,9 +442,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, List<ProductWrapper>> object
      */
     public Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArrayWithRestResponseAsync() {
+
+
+
         return service.getWrappedArray();
     }
-
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
@@ -478,18 +491,20 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         Validator.validate(resourceDictionary);
+
+
+
         return service.putDictionary(resourceDictionary);
     }
-
     /**
      * Put External Resource as a Dictionary.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync() {
+    public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -526,9 +541,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
+
+
+
         return service.putDictionary(resourceDictionary);
     }
-
     /**
      * Put External Resource as a Dictionary.
      *
@@ -536,9 +553,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -572,9 +589,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
      */
     public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
+
+
+
         return service.getDictionary();
     }
-
     /**
      * Get External Resource as a Dictionary.
      *
@@ -619,18 +638,20 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         Validator.validate(resourceComplexObject);
+
+
+
         return service.putResourceCollection(resourceComplexObject);
     }
-
     /**
      * Put External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync() {
+    public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -667,9 +688,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
+
+
+
         return service.putResourceCollection(resourceComplexObject);
     }
-
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -677,9 +700,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+    public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -713,9 +736,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
      */
     public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
+
+
+
         return service.getResourceCollection();
     }
-
     /**
      * Get External Resource as a ResourceCollection.
      *
@@ -760,9 +785,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync() {
         final SimpleProduct simpleBodyProduct = null;
         Validator.validate(simpleBodyProduct);
+
+
+
         return service.putSimpleProduct(simpleBodyProduct);
     }
-
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -808,9 +835,11 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithRestResponseAsync(SimpleProduct simpleBodyProduct) {
         Validator.validate(simpleBodyProduct);
+
+
+
         return service.putSimpleProduct(simpleBodyProduct);
     }
-
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -869,15 +898,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         final String description = null;
         final String genericValue = null;
         final String odatavalue = null;
+
     SimpleProduct simpleBodyProduct = new SimpleProduct();
     simpleBodyProduct.withProductId(productId);
     simpleBodyProduct.withDescription(null);
     simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
     simpleBodyProduct.withGenericValue(null);
     simpleBodyProduct.withOdatavalue(null);
+
+
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
-
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -942,6 +973,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
+
     SimpleProduct simpleBodyProduct = null;
     if (description != null || genericValue != null || odatavalue != null) {
         simpleBodyProduct = new SimpleProduct();
@@ -951,9 +983,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         simpleBodyProduct.withGenericValue(genericValue);
         simpleBodyProduct.withOdatavalue(odatavalue);
     }
+
+
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
-
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -1008,6 +1041,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }
         Validator.validate(flattenParameterGroup);
+
     String name = flattenParameterGroup.name();
     String productId = flattenParameterGroup.productId();
     String description = flattenParameterGroup.description();
@@ -1023,9 +1057,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         simpleBodyProduct.withGenericValue(genericValue);
         simpleBodyProduct.withOdatavalue(odatavalue);
     }
+
+
         return service.putSimpleProductWithGrouping(name, simpleBodyProduct);
     }
-
     /**
      * Put Simple Product with client flattening true on the model.
      *

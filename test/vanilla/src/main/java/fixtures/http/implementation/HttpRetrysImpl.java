@@ -29,6 +29,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -149,9 +150,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head408Async() {
+    public Completable head408Async() {
         return head408WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -195,9 +196,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put500Async() {
+    public Completable put500Async() {
         return put500WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -243,9 +244,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put500Async(Boolean booleanValue) {
+    public Completable put500Async(Boolean booleanValue) {
         return put500WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -289,9 +290,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch500Async() {
+    public Completable patch500Async() {
         return patch500WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -337,9 +338,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch500Async(Boolean booleanValue) {
+    public Completable patch500Async(Boolean booleanValue) {
         return patch500WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -382,9 +383,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> get502Async() {
+    public Completable get502Async() {
         return get502WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -428,9 +429,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post503Async() {
+    public Completable post503Async() {
         return post503WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -476,9 +477,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post503Async(Boolean booleanValue) {
+    public Completable post503Async(Boolean booleanValue) {
         return post503WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -522,9 +523,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete503Async() {
+    public Completable delete503Async() {
         return delete503WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -570,9 +571,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete503Async(Boolean booleanValue) {
+    public Completable delete503Async(Boolean booleanValue) {
         return delete503WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -616,9 +617,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put504Async() {
+    public Completable put504Async() {
         return put504WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -664,9 +665,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put504Async(Boolean booleanValue) {
+    public Completable put504Async(Boolean booleanValue) {
         return put504WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -710,9 +711,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch504Async() {
+    public Completable patch504Async() {
         return patch504WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -758,9 +759,9 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch504Async(Boolean booleanValue) {
+    public Completable patch504Async(Boolean booleanValue) {
         return patch504WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

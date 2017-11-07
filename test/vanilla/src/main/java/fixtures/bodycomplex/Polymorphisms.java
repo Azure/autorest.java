@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -180,9 +181,9 @@ public interface Polymorphisms {
      *         ]
      *       };
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(Fish complexBody);
+    Completable putValidAsync(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic.
@@ -325,9 +326,9 @@ public interface Polymorphisms {
      *     ]
      * }
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidMissingRequiredAsync(Fish complexBody);
+    Completable putValidMissingRequiredAsync(Fish complexBody);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.

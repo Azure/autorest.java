@@ -37,6 +37,7 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -294,9 +295,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putIntAsync(IntWrapper complexBody) {
+    public Completable putIntAsync(IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -392,9 +393,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLongAsync(LongWrapper complexBody) {
+    public Completable putLongAsync(LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -490,9 +491,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFloatAsync(FloatWrapper complexBody) {
+    public Completable putFloatAsync(FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -588,9 +589,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDoubleAsync(DoubleWrapper complexBody) {
+    public Completable putDoubleAsync(DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -686,9 +687,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBoolAsync(BooleanWrapper complexBody) {
+    public Completable putBoolAsync(BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -784,9 +785,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putStringAsync(StringWrapper complexBody) {
+    public Completable putStringAsync(StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -882,9 +883,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateAsync(DateWrapper complexBody) {
+    public Completable putDateAsync(DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -980,9 +981,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
+    public Completable putDateTimeAsync(DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1078,9 +1079,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
+    public Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1176,9 +1177,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDurationAsync(DurationWrapper complexBody) {
+    public Completable putDurationAsync(DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1274,9 +1275,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putByteAsync(ByteWrapper complexBody) {
+    public Completable putByteAsync(ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

@@ -32,6 +32,7 @@ import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
 import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
 import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
 import fixtures.lro.models.Product;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -549,9 +550,9 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -598,9 +599,9 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> object
      */
-    public Single<Void> post202Retry200Async(Product product) {
+    public Completable post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -711,9 +712,9 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> object
      */
-    public Single<Void> postAsyncRetrySucceededAsync() {
+    public Completable postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -760,9 +761,9 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> object
      */
-    public Single<Void> postAsyncRetrySucceededAsync(Product product) {
+    public Completable postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

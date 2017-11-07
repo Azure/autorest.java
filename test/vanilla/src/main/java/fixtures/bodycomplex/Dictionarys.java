@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -84,9 +85,9 @@ public interface Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(DictionaryWrapper complexBody);
+    Completable putValidAsync(DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property.
@@ -157,9 +158,9 @@ public interface Dictionarys {
      *
      * @param complexBody Please put an empty dictionary
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putEmptyAsync(DictionaryWrapper complexBody);
+    Completable putEmptyAsync(DictionaryWrapper complexBody);
 
     /**
      * Put complex types with dictionary property which is empty.

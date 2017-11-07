@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -45,9 +46,9 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head200Async();
+    Completable head200Async();
 
     /**
      * Return 200 status code if successful.
@@ -114,9 +115,9 @@ public interface HttpSuccess {
      * Put boolean value true returning 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put200Async();
+    Completable put200Async();
 
     /**
      * Put boolean value true returning 200 success.
@@ -151,9 +152,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put200Async(Boolean booleanValue);
+    Completable put200Async(Boolean booleanValue);
 
     /**
      * Put boolean value true returning 200 success.
@@ -186,9 +187,9 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returning 200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch200Async();
+    Completable patch200Async();
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -223,9 +224,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch200Async(Boolean booleanValue);
+    Completable patch200Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -258,9 +259,9 @@ public interface HttpSuccess {
      * Post bollean value true in request that returns a 200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post200Async();
+    Completable post200Async();
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -295,9 +296,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post200Async(Boolean booleanValue);
+    Completable post200Async(Boolean booleanValue);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -330,9 +331,9 @@ public interface HttpSuccess {
      * Delete simple boolean value true returns 200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete200Async();
+    Completable delete200Async();
 
     /**
      * Delete simple boolean value true returns 200.
@@ -367,9 +368,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete200Async(Boolean booleanValue);
+    Completable delete200Async(Boolean booleanValue);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -402,9 +403,9 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 201.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put201Async();
+    Completable put201Async();
 
     /**
      * Put true Boolean value in request returns 201.
@@ -439,9 +440,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put201Async(Boolean booleanValue);
+    Completable put201Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -474,9 +475,9 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post201Async();
+    Completable post201Async();
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -511,9 +512,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post201Async(Boolean booleanValue);
+    Completable post201Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -546,9 +547,9 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put202Async();
+    Completable put202Async();
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -583,9 +584,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put202Async(Boolean booleanValue);
+    Completable put202Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -618,9 +619,9 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 202.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch202Async();
+    Completable patch202Async();
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -655,9 +656,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch202Async(Boolean booleanValue);
+    Completable patch202Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -690,9 +691,9 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post202Async();
+    Completable post202Async();
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -727,9 +728,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post202Async(Boolean booleanValue);
+    Completable post202Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -762,9 +763,9 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete202Async();
+    Completable delete202Async();
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -799,9 +800,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete202Async(Boolean booleanValue);
+    Completable delete202Async(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -834,9 +835,9 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head204Async();
+    Completable head204Async();
 
     /**
      * Return 204 status code if successful.
@@ -868,9 +869,9 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put204Async();
+    Completable put204Async();
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -905,9 +906,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put204Async(Boolean booleanValue);
+    Completable put204Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -940,9 +941,9 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch204Async();
+    Completable patch204Async();
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -977,9 +978,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch204Async(Boolean booleanValue);
+    Completable patch204Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -1012,9 +1013,9 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post204Async();
+    Completable post204Async();
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1049,9 +1050,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post204Async(Boolean booleanValue);
+    Completable post204Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1084,9 +1085,9 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete204Async();
+    Completable delete204Async();
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1121,9 +1122,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete204Async(Boolean booleanValue);
+    Completable delete204Async(Boolean booleanValue);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1156,9 +1157,9 @@ public interface HttpSuccess {
      * Return 404 status code.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head404Async();
+    Completable head404Async();
 
     /**
      * Return 404 status code.

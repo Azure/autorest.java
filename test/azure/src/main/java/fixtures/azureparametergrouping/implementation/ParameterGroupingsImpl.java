@@ -31,6 +31,7 @@ import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -140,9 +141,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
+    public Completable postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -189,9 +190,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalAsync() {
+    public Completable postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -246,9 +247,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
+    public Completable postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -299,9 +300,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMultiParamGroupsAsync() {
+    public Completable postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -369,9 +370,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public Completable postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -418,9 +419,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSharedParameterGroupObjectAsync() {
+    public Completable postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -475,9 +476,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
+    public Completable postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

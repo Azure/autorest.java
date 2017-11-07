@@ -21,6 +21,7 @@ import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;

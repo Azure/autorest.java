@@ -10,13 +10,15 @@
 
 package fixtures.validation.implementation;
 
-import fixtures.validation.AutoRestValidationTest;
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import io.reactivex.Single;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -28,14 +30,13 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.validation.AutoRestValidationTest;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
-import io.reactivex.functions.Function;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
@@ -65,7 +66,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
      */
-    public AutoRestValidationTestImpl withSubscriptionId(String subscriptionId) {
+    public AutoRestValidationTestImpl withsubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
@@ -88,7 +89,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param apiVersion the apiVersion value.
      * @return the service client itself
      */
-    public AutoRestValidationTestImpl withApiVersion(String apiVersion) {
+    public AutoRestValidationTestImpl withapiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
     }
@@ -105,7 +106,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestValidationTest client.
-     *
      */
     public AutoRestValidationTestImpl() {
         this("http://localhost");
@@ -135,7 +135,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * used by Retrofit to perform actually REST calls.
      */
     @Host("http://localhost")
-    interface AutoRestValidationTestService {
+    interface AutoRestValidationTest {
         @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest validationOfMethodParameters" })
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
@@ -205,9 +205,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         if (this.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
+
+
+
         return service.validationOfMethodParameters(this.subscriptionId(), resourceGroupName, id, this.apiVersion());
     }
-
     /**
      * Validates input parameters on the method. See swagger for details.
      *
@@ -269,9 +271,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         }
         final Product body = null;
         Validator.validate(body);
+
+
+
         return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
-
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -334,9 +338,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         Validator.validate(body);
+
+
+
         return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
-
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -380,17 +386,19 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync() {
         final String constantParam = "constant";
+
+
+
         return service.getWithConstantInPath(constantParam);
     }
-
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithConstantInPathAsync() {
+    public Completable getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -424,9 +432,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         final String constantParam = "constant";
         final Product body = null;
         Validator.validate(body);
+
+
+
         return service.postWithConstantInBody(constantParam, body);
     }
-
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -469,9 +479,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body) {
         final String constantParam = "constant";
         Validator.validate(body);
+
+
+
         return service.postWithConstantInBody(constantParam, body);
     }
-
     /**
      *
      * @param body the Product value

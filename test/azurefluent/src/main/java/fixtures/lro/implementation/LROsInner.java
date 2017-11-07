@@ -28,6 +28,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -3587,9 +3588,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204SucceededAsync() {
+    public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3820,9 +3821,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> object
      */
-    public Single<Void> deleteNoHeaderInRetryAsync() {
+    public Completable deleteNoHeaderInRetryAsync() {
         return deleteNoHeaderInRetryWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3897,9 +3898,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncNoHeaderInRetryAsync() {
+    public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3974,9 +3975,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRetrySucceededAsync() {
+    public Completable deleteAsyncRetrySucceededAsync() {
         return deleteAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4051,9 +4052,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncNoRetrySucceededAsync() {
+    public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4128,9 +4129,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRetryFailedAsync() {
+    public Completable deleteAsyncRetryFailedAsync() {
         return deleteAsyncRetryFailedWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4205,9 +4206,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRetrycanceledAsync() {
+    public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4396,9 +4397,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPost202Retry200HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -4445,9 +4446,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async(ProductInner product) {
+    public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPost202Retry200HeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -5050,9 +5051,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetryFailedAsync() {
+    public Completable postAsyncRetryFailedAsync() {
         return postAsyncRetryFailedWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -5099,9 +5100,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetryFailedAsync(ProductInner product) {
+    public Completable postAsyncRetryFailedAsync(ProductInner product) {
         return postAsyncRetryFailedWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -5212,9 +5213,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrycanceledAsync() {
+    public Completable postAsyncRetrycanceledAsync() {
         return postAsyncRetrycanceledWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -5261,9 +5262,9 @@ public class LROsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrycanceledAsync(ProductInner product) {
+    public Completable postAsyncRetrycanceledAsync(ProductInner product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>, Void>() { public Void apply(RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

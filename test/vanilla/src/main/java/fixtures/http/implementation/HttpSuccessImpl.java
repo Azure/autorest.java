@@ -29,6 +29,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -209,9 +210,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head200Async() {
+    public Completable head200Async() {
         return head200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -300,9 +301,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put200Async() {
+    public Completable put200Async() {
         return put200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -348,9 +349,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put200Async(Boolean booleanValue) {
+    public Completable put200Async(Boolean booleanValue) {
         return put200WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -394,9 +395,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch200Async() {
+    public Completable patch200Async() {
         return patch200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -442,9 +443,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch200Async(Boolean booleanValue) {
+    public Completable patch200Async(Boolean booleanValue) {
         return patch200WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -488,9 +489,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post200Async() {
+    public Completable post200Async() {
         return post200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -536,9 +537,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post200Async(Boolean booleanValue) {
+    public Completable post200Async(Boolean booleanValue) {
         return post200WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -582,9 +583,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete200Async() {
+    public Completable delete200Async() {
         return delete200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -630,9 +631,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete200Async(Boolean booleanValue) {
+    public Completable delete200Async(Boolean booleanValue) {
         return delete200WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -676,9 +677,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put201Async() {
+    public Completable put201Async() {
         return put201WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -724,9 +725,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put201Async(Boolean booleanValue) {
+    public Completable put201Async(Boolean booleanValue) {
         return put201WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -770,9 +771,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post201Async() {
+    public Completable post201Async() {
         return post201WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -818,9 +819,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post201Async(Boolean booleanValue) {
+    public Completable post201Async(Boolean booleanValue) {
         return post201WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -864,9 +865,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put202Async() {
+    public Completable put202Async() {
         return put202WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -912,9 +913,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put202Async(Boolean booleanValue) {
+    public Completable put202Async(Boolean booleanValue) {
         return put202WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -958,9 +959,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch202Async() {
+    public Completable patch202Async() {
         return patch202WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1006,9 +1007,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch202Async(Boolean booleanValue) {
+    public Completable patch202Async(Boolean booleanValue) {
         return patch202WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1052,9 +1053,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post202Async() {
+    public Completable post202Async() {
         return post202WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1100,9 +1101,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post202Async(Boolean booleanValue) {
+    public Completable post202Async(Boolean booleanValue) {
         return post202WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1146,9 +1147,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete202Async() {
+    public Completable delete202Async() {
         return delete202WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1194,9 +1195,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete202Async(Boolean booleanValue) {
+    public Completable delete202Async(Boolean booleanValue) {
         return delete202WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1239,9 +1240,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head204Async() {
+    public Completable head204Async() {
         return head204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1285,9 +1286,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put204Async() {
+    public Completable put204Async() {
         return put204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1333,9 +1334,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> put204Async(Boolean booleanValue) {
+    public Completable put204Async(Boolean booleanValue) {
         return put204WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1379,9 +1380,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch204Async() {
+    public Completable patch204Async() {
         return patch204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1427,9 +1428,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> patch204Async(Boolean booleanValue) {
+    public Completable patch204Async(Boolean booleanValue) {
         return patch204WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1473,9 +1474,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post204Async() {
+    public Completable post204Async() {
         return post204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1521,9 +1522,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> post204Async(Boolean booleanValue) {
+    public Completable post204Async(Boolean booleanValue) {
         return post204WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1567,9 +1568,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204Async() {
+    public Completable delete204Async() {
         return delete204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1615,9 +1616,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204Async(Boolean booleanValue) {
+    public Completable delete204Async(Boolean booleanValue) {
         return delete204WithRestResponseAsync(booleanValue)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1660,9 +1661,9 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head404Async() {
+    public Completable head404Async() {
         return head404WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

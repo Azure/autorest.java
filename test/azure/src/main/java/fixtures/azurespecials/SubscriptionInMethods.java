@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postMethodLocalValidAsync(String subscriptionId);
+    Completable postMethodLocalValidAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -86,9 +87,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postMethodLocalNullAsync(String subscriptionId);
+    Completable postMethodLocalNullAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
@@ -124,9 +125,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postPathLocalValidAsync(String subscriptionId);
+    Completable postPathLocalValidAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -162,9 +163,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postSwaggerLocalValidAsync(String subscriptionId);
+    Completable postSwaggerLocalValidAsync(String subscriptionId);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.

@@ -12,16 +12,27 @@ package fixtures.subscriptionidapiversion.implementation;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
+ * Initializes a new instance of the MicrosoftAzureTestUrl class.
  */
-public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
+public class MicrosoftAzureTestUrlImpl extends ServiceClient implements MicrosoftAzureTestUrl {
 
+    /** Credentials needed for the client to connect to Azure. */
+    private ServiceClientCredentials credentials;
+
+    /**
+     * Gets Credentials needed for the client to connect to Azure.
+     *
+     * @return the credentials value.
+     */
+    public ServiceClientCredentials credentials() {
+        return this.credentials;
+    }
 
     /** Subscription Id. */
     private String subscriptionId;
@@ -41,7 +52,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
      */
-    public MicrosoftAzureTestUrlImpl withSubscriptionId(String subscriptionId) {
+    public MicrosoftAzureTestUrlImpl withsubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
@@ -76,7 +87,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public MicrosoftAzureTestUrlImpl withAcceptLanguage(String acceptLanguage) {
+    public MicrosoftAzureTestUrlImpl withacceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
@@ -99,7 +110,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public MicrosoftAzureTestUrlImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public MicrosoftAzureTestUrlImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
@@ -122,69 +133,57 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public MicrosoftAzureTestUrlImpl withGenerateClientRequestId(boolean generateClientRequestId) {
+    public MicrosoftAzureTestUrlImpl withgenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
 
     /**
-     * The GroupsInner object to access its operations.
+     * The Groups object to access its operations.
      */
-    private GroupsInner groups;
+    private Groups groups;
 
     /**
-     * Gets the GroupsInner object to access its operations.
-     * @return the GroupsInner object.
+     * Gets the Groups object to access its operations.
+     * @return the Groups object.
      */
-    public GroupsInner groups() {
+    public Groups groups() {
         return this.groups;
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param credentials the management credentials for Azure
+     * @param baseUrl the base URL of the host
      */
-    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
-        this("https://management.azure.com/", credentials);
+    public MicrosoftAzureTestUrlImpl(String baseUrl) {
+        super(baseUrl);
+        initialize();
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
-     *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
      */
-    public MicrosoftAzureTestUrlImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
+    public MicrosoftAzureTestUrlImpl() {
+        this("https://management.azure.com/");
         initialize();
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param restClient the REST client containing pre-configured settings
      */
     public MicrosoftAzureTestUrlImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    protected void initialize() {
+    private void initialize() {
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.groups = new GroupsInner(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "MicrosoftAzureTestUrl", "2014-04-01-preview");
+        this.groups = new GroupsImpl(this);
     }
 }

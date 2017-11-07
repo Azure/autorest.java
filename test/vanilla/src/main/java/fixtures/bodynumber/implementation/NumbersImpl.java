@@ -25,6 +25,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodynumber.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -426,9 +427,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigFloatAsync(double numberBody) {
+    public Completable putBigFloatAsync(double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -520,9 +521,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDoubleAsync(double numberBody) {
+    public Completable putBigDoubleAsync(double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -614,9 +615,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
+    public Completable putBigDoublePositiveDecimalAsync(double numberBody) {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -708,9 +709,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
+    public Completable putBigDoubleNegativeDecimalAsync(double numberBody) {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -805,9 +806,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDecimalAsync(BigDecimal numberBody) {
+    public Completable putBigDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -902,9 +903,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
+    public Completable putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -999,9 +1000,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
+    public Completable putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1093,9 +1094,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putSmallFloatAsync(double numberBody) {
+    public Completable putSmallFloatAsync(double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1187,9 +1188,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putSmallDoubleAsync(double numberBody) {
+    public Completable putSmallDoubleAsync(double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1284,9 +1285,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putSmallDecimalAsync(BigDecimal numberBody) {
+    public Completable putSmallDecimalAsync(BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

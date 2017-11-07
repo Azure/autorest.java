@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetime.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -189,9 +190,9 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putUtcMaxDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -297,9 +298,9 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
@@ -405,9 +406,9 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
@@ -513,9 +514,9 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
+    Completable putUtcMinDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
@@ -586,9 +587,9 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
@@ -659,9 +660,9 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
+    Completable putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.

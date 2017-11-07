@@ -10,24 +10,24 @@
 
 package fixtures.report.implementation;
 
-import fixtures.report.AutoRestReportService;
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import io.reactivex.Single;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.report.AutoRestReportService;
 import fixtures.report.models.ErrorException;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.Map;
 
@@ -52,7 +52,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
 
     /**
      * Initializes an instance of AutoRestReportService client.
-     *
      */
     public AutoRestReportServiceImpl() {
         this("http://localhost");
@@ -82,7 +81,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * used by Retrofit to perform actually REST calls.
      */
     @Host("http://localhost")
-    interface AutoRestReportServiceService {
+    interface AutoRestReportService {
         @Headers({ "x-ms-logging-context: fixtures.report.AutoRestReportService getReport" })
         @GET("report")
         @ExpectedResponses({200})
@@ -121,9 +120,11 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
+
+
+
         return service.getReport();
     }
-
     /**
      * Get test coverage report.
      *

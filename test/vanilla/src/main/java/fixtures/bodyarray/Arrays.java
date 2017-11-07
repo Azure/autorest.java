@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -160,9 +161,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putEmptyAsync(List<String> arrayBody);
+    Completable putEmptyAsync(List<String> arrayBody);
 
     /**
      * Set array value empty [].
@@ -233,9 +234,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
+    Completable putBooleanTfftAsync(List<Boolean> arrayBody);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -376,9 +377,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putIntegerValidAsync(List<Integer> arrayBody);
+    Completable putIntegerValidAsync(List<Integer> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -519,9 +520,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLongValidAsync(List<Long> arrayBody);
+    Completable putLongValidAsync(List<Long> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -662,9 +663,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putFloatValidAsync(List<Double> arrayBody);
+    Completable putFloatValidAsync(List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -805,9 +806,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDoubleValidAsync(List<Double> arrayBody);
+    Completable putDoubleValidAsync(List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -948,9 +949,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putStringValidAsync(List<String> arrayBody);
+    Completable putStringValidAsync(List<String> arrayBody);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -1091,9 +1092,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUuidValidAsync(List<UUID> arrayBody);
+    Completable putUuidValidAsync(List<UUID> arrayBody);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1199,9 +1200,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateValidAsync(List<LocalDate> arrayBody);
+    Completable putDateValidAsync(List<LocalDate> arrayBody);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1342,9 +1343,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
+    Completable putDateTimeValidAsync(List<DateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1485,9 +1486,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
+    Completable putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1558,9 +1559,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDurationValidAsync(List<Period> arrayBody);
+    Completable putDurationValidAsync(List<Period> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1631,9 +1632,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putByteValidAsync(List<byte[]> arrayBody);
+    Completable putByteValidAsync(List<byte[]> arrayBody);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1914,9 +1915,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putComplexValidAsync(List<Product> arrayBody);
+    Completable putComplexValidAsync(List<Product> arrayBody);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -2127,9 +2128,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putArrayValidAsync(List<List<String>> arrayBody);
+    Completable putArrayValidAsync(List<List<String>> arrayBody);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2340,9 +2341,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
+    Completable putDictionaryValidAsync(List<Map<String, String>> arrayBody);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].

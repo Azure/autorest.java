@@ -28,6 +28,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -189,9 +190,9 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Basic complexBody) {
+    public Completable putValidAsync(Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

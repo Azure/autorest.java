@@ -24,6 +24,7 @@ import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -95,9 +96,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalIntegerParameterAsync();
+    Completable postOptionalIntegerParameterAsync();
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -132,9 +133,9 @@ public interface Explicits {
      *
      * @param bodyParameter the Integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter);
+    Completable postOptionalIntegerParameterAsync(Integer bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -206,9 +207,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalIntegerPropertyAsync();
+    Completable postOptionalIntegerPropertyAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -243,9 +244,9 @@ public interface Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
+    Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -317,9 +318,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalIntegerHeaderAsync();
+    Completable postOptionalIntegerHeaderAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -354,9 +355,9 @@ public interface Explicits {
      *
      * @param headerParameter the Integer value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter);
+    Completable postOptionalIntegerHeaderAsync(Integer headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -428,9 +429,9 @@ public interface Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalStringParameterAsync();
+    Completable postOptionalStringParameterAsync();
 
     /**
      * Test explicitly optional string. Please put null.
@@ -465,9 +466,9 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalStringParameterAsync(String bodyParameter);
+    Completable postOptionalStringParameterAsync(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put null.
@@ -539,9 +540,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalStringPropertyAsync();
+    Completable postOptionalStringPropertyAsync();
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -576,9 +577,9 @@ public interface Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
+    Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -650,9 +651,9 @@ public interface Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalStringHeaderAsync();
+    Completable postOptionalStringHeaderAsync();
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -687,9 +688,9 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalStringHeaderAsync(String bodyParameter);
+    Completable postOptionalStringHeaderAsync(String bodyParameter);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -761,9 +762,9 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalClassParameterAsync();
+    Completable postOptionalClassParameterAsync();
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -798,9 +799,9 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalClassParameterAsync(Product bodyParameter);
+    Completable postOptionalClassParameterAsync(Product bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -872,9 +873,9 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalClassPropertyAsync();
+    Completable postOptionalClassPropertyAsync();
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -909,9 +910,9 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
+    Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -983,9 +984,9 @@ public interface Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalArrayParameterAsync();
+    Completable postOptionalArrayParameterAsync();
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1020,9 +1021,9 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter);
+    Completable postOptionalArrayParameterAsync(List<String> bodyParameter);
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1094,9 +1095,9 @@ public interface Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalArrayPropertyAsync();
+    Completable postOptionalArrayPropertyAsync();
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1131,9 +1132,9 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
+    Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1205,9 +1206,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalArrayHeaderAsync();
+    Completable postOptionalArrayHeaderAsync();
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1242,9 +1243,9 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter);
+    Completable postOptionalArrayHeaderAsync(List<String> headerParameter);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.

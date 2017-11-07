@@ -29,6 +29,7 @@ import fixtures.http.models.HttpRedirectsPost303Headers;
 import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -61,9 +62,9 @@ public interface HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head300Async();
+    Completable head300Async();
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -130,9 +131,9 @@ public interface HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head301Async();
+    Completable head301Async();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -164,9 +165,9 @@ public interface HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get301Async();
+    Completable get301Async();
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -198,9 +199,9 @@ public interface HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put301Async();
+    Completable put301Async();
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -235,9 +236,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put301Async(Boolean booleanValue);
+    Completable put301Async(Boolean booleanValue);
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -270,9 +271,9 @@ public interface HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head302Async();
+    Completable head302Async();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -304,9 +305,9 @@ public interface HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get302Async();
+    Completable get302Async();
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -338,9 +339,9 @@ public interface HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch302Async();
+    Completable patch302Async();
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -375,9 +376,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch302Async(Boolean booleanValue);
+    Completable patch302Async(Boolean booleanValue);
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -410,9 +411,9 @@ public interface HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post303Async();
+    Completable post303Async();
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -447,9 +448,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post303Async(Boolean booleanValue);
+    Completable post303Async(Boolean booleanValue);
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -482,9 +483,9 @@ public interface HttpRedirects {
      * Redirect with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head307Async();
+    Completable head307Async();
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -516,9 +517,9 @@ public interface HttpRedirects {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get307Async();
+    Completable get307Async();
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -550,9 +551,9 @@ public interface HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put307Async();
+    Completable put307Async();
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -587,9 +588,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put307Async(Boolean booleanValue);
+    Completable put307Async(Boolean booleanValue);
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -622,9 +623,9 @@ public interface HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch307Async();
+    Completable patch307Async();
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -659,9 +660,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch307Async(Boolean booleanValue);
+    Completable patch307Async(Boolean booleanValue);
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -694,9 +695,9 @@ public interface HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post307Async();
+    Completable post307Async();
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -731,9 +732,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post307Async(Boolean booleanValue);
+    Completable post307Async(Boolean booleanValue);
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -766,9 +767,9 @@ public interface HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete307Async();
+    Completable delete307Async();
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -803,9 +804,9 @@ public interface HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete307Async(Boolean booleanValue);
+    Completable delete307Async(Boolean booleanValue);
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.

@@ -25,6 +25,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetime.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -399,9 +400,9 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
+    public Completable putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -541,9 +542,9 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
+    public Completable putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         return putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -683,9 +684,9 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
+    public Completable putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         return putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -825,9 +826,9 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
+    public Completable putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -922,9 +923,9 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
+    public Completable putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
         return putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1019,9 +1020,9 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
+    public Completable putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
         return putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

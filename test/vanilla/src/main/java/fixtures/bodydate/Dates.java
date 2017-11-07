@@ -14,6 +14,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydate.models.ErrorException;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -189,9 +190,9 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMaxDateAsync(LocalDate dateBody);
+    Completable putMaxDateAsync(LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
@@ -262,9 +263,9 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMinDateAsync(LocalDate dateBody);
+    Completable putMinDateAsync(LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
