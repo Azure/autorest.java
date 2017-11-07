@@ -346,7 +346,11 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (IsLongRunningOperation)
+                if (ReturnType.Body == null)
+                {
+                    return "Completable";
+                }
+                else if (IsLongRunningOperation)
                 {
                     return $"Observable<OperationStatus<{ReturnTypeJv.ServiceResponseGenericParameterString}>>";
                 }
@@ -354,11 +358,7 @@ namespace AutoRest.Java.Azure.Model
                 {
                     return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }
-                else if (ReturnType.Body is PrimaryType pt && pt.KnownPrimaryType == KnownPrimaryType.None)
-                {
-                    return "Completable";
-                }
-                else
+                else 
                 {
                     return $"Single<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }

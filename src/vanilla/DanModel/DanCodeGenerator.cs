@@ -67,7 +67,8 @@ namespace AutoRest.Java.DanModel
             string asyncReturnType;
             if (methodJva == null)
             {
-                if (methodJv.ReturnType.Body is PrimaryType pt && pt.KnownPrimaryType == KnownPrimaryType.None)
+                // TODO: consolidate this conversion
+                if (methodJv.ReturnType.Body == null)
                 {
                     asyncReturnType = "Completable";
                 }
@@ -129,7 +130,7 @@ namespace AutoRest.Java.DanModel
 
             List<JavaMethod> javaMethods = new List<JavaMethod>();
 
-            Action<IEnumerable<JavaMethodParameter>> addMethods = (IEnumerable<JavaMethodParameter> methodParameters) =>
+            void addMethods(IEnumerable<JavaMethodParameter> methodParameters)
             {
                 // Sync
                 javaMethods.Add(new JavaMethod(

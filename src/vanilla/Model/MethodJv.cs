@@ -371,12 +371,31 @@ namespace AutoRest.Java.Model
 
         public string ObservableImpl(IEnumerable<ParameterJv> parameters)
         {
+            string returnType;
+            if (ReturnType.Body == null)
+            {
+                returnType = "Completable";
+            }
+            else
+            {
+                returnType = $"Single<{ReturnTypeJv.ClientResponseTypeString}>";   
+            }
+        
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
+            builder.AppendLine($"public {returnType} {Name}Async({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
             builder.AppendLine($"return {Name}WithRestResponseAsync({Arguments(parameters)})");
             builder.Indent();
-            builder.AppendLine($".map(new Function<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} apply({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
+
+            if (ReturnType.Body == null)
+            {
+                builder.AppendLine($".toCompletable();");
+            }
+            else
+            {
+                builder.AppendLine($".map(new Function<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} apply({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
+            }
+            
             builder.Outdent();
             builder.AppendLine("}");
             return builder.ToString();
@@ -801,6 +820,12 @@ namespace AutoRest.Java.Model
                 imports.Add("com.microsoft.rest.v2.ServiceFuture");
                 imports.Add("com.microsoft.rest.v2.ServiceCallback");
                 imports.Add("com.microsoft.rest.v2.RestResponse");
+
+                if (ReturnType.Body == null)
+                {
+                    imports.Add("io.reactivex.Completable");
+                }
+                
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
@@ -837,6 +862,12 @@ namespace AutoRest.Java.Model
                     imports.Add("com.microsoft.rest.v2.http.HttpClient");
                     imports.Add("com.microsoft.rest.v2.ServiceFuture");
                     imports.Add("com.microsoft.rest.v2.ServiceCallback");
+                    
+                    if (ReturnType.Body == null)
+                    {
+                        imports.Add("io.reactivex.Completable");
+                    }
+                    
                     this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                     // Http verb annotations
                     imports.Add(this.HttpMethod.ImportFrom());
