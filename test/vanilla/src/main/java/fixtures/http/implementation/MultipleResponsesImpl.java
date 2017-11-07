@@ -29,10 +29,10 @@ import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -252,7 +252,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError200Valid() {
-        return get200Model204NoModelDefaultError200ValidAsync().toBlocking().value();
+        return get200Model204NoModelDefaultError200ValidAsync().blockingGet();
     }
 
     /**
@@ -284,7 +284,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -297,7 +297,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError204Valid() {
-        return get200Model204NoModelDefaultError204ValidAsync().toBlocking().value();
+        return get200Model204NoModelDefaultError204ValidAsync().blockingGet();
     }
 
     /**
@@ -329,7 +329,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -342,7 +342,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError201Invalid() {
-        return get200Model204NoModelDefaultError201InvalidAsync().toBlocking().value();
+        return get200Model204NoModelDefaultError201InvalidAsync().blockingGet();
     }
 
     /**
@@ -374,7 +374,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -387,7 +387,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError202None() {
-        return get200Model204NoModelDefaultError202NoneAsync().toBlocking().value();
+        return get200Model204NoModelDefaultError202NoneAsync().blockingGet();
     }
 
     /**
@@ -419,7 +419,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -432,7 +432,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError400Valid() {
-        return get200Model204NoModelDefaultError400ValidAsync().toBlocking().value();
+        return get200Model204NoModelDefaultError400ValidAsync().blockingGet();
     }
 
     /**
@@ -464,7 +464,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -477,7 +477,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError200Valid() {
-        return get200Model201ModelDefaultError200ValidAsync().toBlocking().value();
+        return get200Model201ModelDefaultError200ValidAsync().blockingGet();
     }
 
     /**
@@ -509,7 +509,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -522,7 +522,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError201Valid() {
-        return get200Model201ModelDefaultError201ValidAsync().toBlocking().value();
+        return get200Model201ModelDefaultError201ValidAsync().blockingGet();
     }
 
     /**
@@ -554,7 +554,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -567,7 +567,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError400Valid() {
-        return get200Model201ModelDefaultError400ValidAsync().toBlocking().value();
+        return get200Model201ModelDefaultError400ValidAsync().blockingGet();
     }
 
     /**
@@ -599,7 +599,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -612,7 +612,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync().toBlocking().value();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidAsync().blockingGet();
     }
 
     /**
@@ -644,7 +644,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Object>, Object>() { public Object call(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -657,7 +657,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync().toBlocking().value();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidAsync().blockingGet();
     }
 
     /**
@@ -689,7 +689,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Object>, Object>() { public Object call(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -702,7 +702,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync().toBlocking().value();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidAsync().blockingGet();
     }
 
     /**
@@ -734,7 +734,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Object>, Object>() { public Object call(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -747,7 +747,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync().toBlocking().value();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidAsync().blockingGet();
     }
 
     /**
@@ -779,7 +779,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Object>, Object>() { public Object call(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -792,7 +792,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultError202None() {
-        get202None204NoneDefaultError202NoneAsync().toBlocking().value();
+        get202None204NoneDefaultError202NoneAsync().blockingGet();
     }
 
     /**
@@ -824,7 +824,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultError202NoneAsync() {
         return get202None204NoneDefaultError202NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -837,7 +837,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultError204None() {
-        get202None204NoneDefaultError204NoneAsync().toBlocking().value();
+        get202None204NoneDefaultError204NoneAsync().blockingGet();
     }
 
     /**
@@ -869,7 +869,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultError204NoneAsync() {
         return get202None204NoneDefaultError204NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -882,7 +882,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultError400Valid() {
-        get202None204NoneDefaultError400ValidAsync().toBlocking().value();
+        get202None204NoneDefaultError400ValidAsync().blockingGet();
     }
 
     /**
@@ -914,7 +914,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultError400ValidAsync() {
         return get202None204NoneDefaultError400ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -927,7 +927,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone202Invalid() {
-        get202None204NoneDefaultNone202InvalidAsync().toBlocking().value();
+        get202None204NoneDefaultNone202InvalidAsync().blockingGet();
     }
 
     /**
@@ -959,7 +959,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultNone202InvalidAsync() {
         return get202None204NoneDefaultNone202InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -972,7 +972,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone204None() {
-        get202None204NoneDefaultNone204NoneAsync().toBlocking().value();
+        get202None204NoneDefaultNone204NoneAsync().blockingGet();
     }
 
     /**
@@ -1004,7 +1004,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultNone204NoneAsync() {
         return get202None204NoneDefaultNone204NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1017,7 +1017,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone400None() {
-        get202None204NoneDefaultNone400NoneAsync().toBlocking().value();
+        get202None204NoneDefaultNone400NoneAsync().blockingGet();
     }
 
     /**
@@ -1049,7 +1049,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultNone400NoneAsync() {
         return get202None204NoneDefaultNone400NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1062,7 +1062,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone400Invalid() {
-        get202None204NoneDefaultNone400InvalidAsync().toBlocking().value();
+        get202None204NoneDefaultNone400InvalidAsync().blockingGet();
     }
 
     /**
@@ -1094,7 +1094,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> get202None204NoneDefaultNone400InvalidAsync() {
         return get202None204NoneDefaultNone400InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1107,7 +1107,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200Valid() {
-        return getDefaultModelA200ValidAsync().toBlocking().value();
+        return getDefaultModelA200ValidAsync().blockingGet();
     }
 
     /**
@@ -1139,7 +1139,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1152,7 +1152,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200None() {
-        return getDefaultModelA200NoneAsync().toBlocking().value();
+        return getDefaultModelA200NoneAsync().blockingGet();
     }
 
     /**
@@ -1184,7 +1184,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1197,7 +1197,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400Valid() {
-        return getDefaultModelA400ValidAsync().toBlocking().value();
+        return getDefaultModelA400ValidAsync().blockingGet();
     }
 
     /**
@@ -1229,7 +1229,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1242,7 +1242,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400None() {
-        return getDefaultModelA400NoneAsync().toBlocking().value();
+        return getDefaultModelA400NoneAsync().blockingGet();
     }
 
     /**
@@ -1274,7 +1274,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1287,7 +1287,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone200Invalid() {
-        getDefaultNone200InvalidAsync().toBlocking().value();
+        getDefaultNone200InvalidAsync().blockingGet();
     }
 
     /**
@@ -1319,7 +1319,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> getDefaultNone200InvalidAsync() {
         return getDefaultNone200InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1332,7 +1332,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone200None() {
-        getDefaultNone200NoneAsync().toBlocking().value();
+        getDefaultNone200NoneAsync().blockingGet();
     }
 
     /**
@@ -1364,7 +1364,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> getDefaultNone200NoneAsync() {
         return getDefaultNone200NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1377,7 +1377,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone400Invalid() {
-        getDefaultNone400InvalidAsync().toBlocking().value();
+        getDefaultNone400InvalidAsync().blockingGet();
     }
 
     /**
@@ -1409,7 +1409,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> getDefaultNone400InvalidAsync() {
         return getDefaultNone400InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1422,7 +1422,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone400None() {
-        getDefaultNone400NoneAsync().toBlocking().value();
+        getDefaultNone400NoneAsync().blockingGet();
     }
 
     /**
@@ -1454,7 +1454,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<Void> getDefaultNone400NoneAsync() {
         return getDefaultNone400NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1467,7 +1467,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200None() {
-        return get200ModelA200NoneAsync().toBlocking().value();
+        return get200ModelA200NoneAsync().blockingGet();
     }
 
     /**
@@ -1499,7 +1499,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1512,7 +1512,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Valid() {
-        return get200ModelA200ValidAsync().toBlocking().value();
+        return get200ModelA200ValidAsync().blockingGet();
     }
 
     /**
@@ -1544,7 +1544,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1557,7 +1557,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Invalid() {
-        return get200ModelA200InvalidAsync().toBlocking().value();
+        return get200ModelA200InvalidAsync().blockingGet();
     }
 
     /**
@@ -1589,7 +1589,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1602,7 +1602,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400None() {
-        return get200ModelA400NoneAsync().toBlocking().value();
+        return get200ModelA400NoneAsync().blockingGet();
     }
 
     /**
@@ -1634,7 +1634,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1647,7 +1647,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Valid() {
-        return get200ModelA400ValidAsync().toBlocking().value();
+        return get200ModelA400ValidAsync().blockingGet();
     }
 
     /**
@@ -1679,7 +1679,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1692,7 +1692,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Invalid() {
-        return get200ModelA400InvalidAsync().toBlocking().value();
+        return get200ModelA400InvalidAsync().blockingGet();
     }
 
     /**
@@ -1724,7 +1724,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1737,7 +1737,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA202Valid() {
-        return get200ModelA202ValidAsync().toBlocking().value();
+        return get200ModelA202ValidAsync().blockingGet();
     }
 
     /**
@@ -1769,7 +1769,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     public Single<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, A>, A>() { public A call(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
         }
 
 

@@ -15,10 +15,10 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurereport.models.ErrorException;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.

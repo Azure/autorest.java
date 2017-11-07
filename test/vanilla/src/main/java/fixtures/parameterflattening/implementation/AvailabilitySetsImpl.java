@@ -27,11 +27,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Map;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -78,7 +78,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the void object if successful.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
-        updateAsync(resourceGroupName, avset, tags).toBlocking().value();
+        updateAsync(resourceGroupName, avset, tags).blockingGet();
     }
 
     /**
@@ -131,7 +131,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      */
     public Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

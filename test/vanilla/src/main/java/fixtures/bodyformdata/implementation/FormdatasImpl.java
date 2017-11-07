@@ -25,11 +25,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyformdata.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.InputStream;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -84,7 +84,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) {
-        return uploadFileAsync(fileContent, fileName).toBlocking().value();
+        return uploadFileAsync(fileContent, fileName).blockingGet();
     }
 
     /**
@@ -128,7 +128,7 @@ public class FormdatasImpl implements Formdatas {
      */
     public Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -142,7 +142,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) {
-        return uploadFileViaBodyAsync(fileContent).toBlocking().value();
+        return uploadFileViaBodyAsync(fileContent).blockingGet();
     }
 
     /**
@@ -180,7 +180,7 @@ public class FormdatasImpl implements Formdatas {
      */
     public Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
         }
 
 

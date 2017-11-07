@@ -27,11 +27,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.DateTime;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -131,7 +131,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -163,7 +163,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -176,7 +176,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -208,7 +208,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -221,7 +221,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getOverflow() {
-        return getOverflowAsync().toBlocking().value();
+        return getOverflowAsync().blockingGet();
     }
 
     /**
@@ -253,7 +253,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -266,7 +266,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUnderflow() {
-        return getUnderflowAsync().toBlocking().value();
+        return getUnderflowAsync().blockingGet();
     }
 
     /**
@@ -298,7 +298,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -312,7 +312,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the void object if successful.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).toBlocking().value();
+        putUtcMaxDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -351,7 +351,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -364,7 +364,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeAsync().toBlocking().value();
+        return getUtcLowercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -396,7 +396,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -409,7 +409,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeAsync().toBlocking().value();
+        return getUtcUppercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -441,7 +441,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -455,7 +455,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the void object if successful.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).toBlocking().value();
+        putUtcMinDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -494,7 +494,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -507,7 +507,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeAsync().toBlocking().value();
+        return getUtcMinDateTimeAsync().blockingGet();
     }
 
     /**
@@ -539,7 +539,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      */
     public Single<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 

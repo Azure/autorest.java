@@ -15,7 +15,7 @@ import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import io.reactivex.Single;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -34,9 +34,9 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
@@ -171,7 +171,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
-        return validationOfMethodParametersAsync(resourceGroupName, id).toBlocking().value();
+        return validationOfMethodParametersAsync(resourceGroupName, id).blockingGet();
     }
 
     /**
@@ -218,7 +218,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -233,7 +233,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id) {
-        return validationOfBodyAsync(resourceGroupName, id).toBlocking().value();
+        return validationOfBodyAsync(resourceGroupName, id).blockingGet();
     }
 
     /**
@@ -282,7 +282,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<Product> validationOfBodyAsync(String resourceGroupName, int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -297,7 +297,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
-        return validationOfBodyAsync(resourceGroupName, id, body).toBlocking().value();
+        return validationOfBodyAsync(resourceGroupName, id, body).blockingGet();
     }
 
     /**
@@ -348,7 +348,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -360,7 +360,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the void object if successful.
      */
     public void getWithConstantInPath() {
-        getWithConstantInPathAsync().toBlocking().value();
+        getWithConstantInPathAsync().blockingGet();
     }
 
     /**
@@ -390,7 +390,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<Void> getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -402,7 +402,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody() {
-        return postWithConstantInBodyAsync().toBlocking().value();
+        return postWithConstantInBodyAsync().blockingGet();
     }
 
     /**
@@ -434,7 +434,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<Product> postWithConstantInBodyAsync() {
         return postWithConstantInBodyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -446,7 +446,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyAsync(body).toBlocking().value();
+        return postWithConstantInBodyAsync(body).blockingGet();
     }
 
     /**
@@ -480,7 +480,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public Single<Product> postWithConstantInBodyAsync(Product body) {
         return postWithConstantInBodyWithRestResponseAsync(body)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
 

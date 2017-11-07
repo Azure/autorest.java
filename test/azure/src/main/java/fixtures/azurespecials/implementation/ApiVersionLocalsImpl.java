@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -91,7 +91,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidAsync().toBlocking().value();
+        getMethodLocalValidAsync().blockingGet();
     }
 
     /**
@@ -124,7 +124,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Single<Void> getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -137,7 +137,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullAsync().toBlocking().value();
+        getMethodLocalNullAsync().blockingGet();
     }
 
     /**
@@ -170,7 +170,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Single<Void> getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -183,7 +183,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullAsync(apiVersion).toBlocking().value();
+        getMethodLocalNullAsync(apiVersion).blockingGet();
     }
 
     /**
@@ -218,7 +218,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Single<Void> getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -231,7 +231,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getPathLocalValid() {
-        getPathLocalValidAsync().toBlocking().value();
+        getPathLocalValidAsync().blockingGet();
     }
 
     /**
@@ -264,7 +264,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Single<Void> getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -277,7 +277,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidAsync().toBlocking().value();
+        getSwaggerLocalValidAsync().blockingGet();
     }
 
     /**
@@ -310,7 +310,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     public Single<Void> getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

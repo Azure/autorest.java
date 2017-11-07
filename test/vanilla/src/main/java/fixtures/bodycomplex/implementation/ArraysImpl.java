@@ -27,10 +27,10 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -99,7 +99,7 @@ public class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -131,7 +131,7 @@ public class ArraysImpl implements Arrays {
      */
     public Single<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper apply(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -145,7 +145,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putValid(ArrayWrapper complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingGet();
     }
 
     /**
@@ -184,7 +184,7 @@ public class ArraysImpl implements Arrays {
      */
     public Single<Void> putValidAsync(ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -197,7 +197,7 @@ public class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -229,7 +229,7 @@ public class ArraysImpl implements Arrays {
      */
     public Single<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper apply(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -243,7 +243,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putEmpty(ArrayWrapper complexBody) {
-        putEmptyAsync(complexBody).toBlocking().value();
+        putEmptyAsync(complexBody).blockingGet();
     }
 
     /**
@@ -282,7 +282,7 @@ public class ArraysImpl implements Arrays {
      */
     public Single<Void> putEmptyAsync(ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -295,7 +295,7 @@ public class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -327,7 +327,7 @@ public class ArraysImpl implements Arrays {
      */
     public Single<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper apply(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
         }
 
 

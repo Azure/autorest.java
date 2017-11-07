@@ -16,7 +16,7 @@ import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestDurationTestService class.

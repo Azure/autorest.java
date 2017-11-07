@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -91,7 +91,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidAsync().toBlocking().value();
+        getMethodGlobalValidAsync().blockingGet();
     }
 
     /**
@@ -126,7 +126,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      */
     public Single<Void> getMethodGlobalValidAsync() {
         return getMethodGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -139,7 +139,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidAsync().toBlocking().value();
+        getMethodGlobalNotProvidedValidAsync().blockingGet();
     }
 
     /**
@@ -174,7 +174,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      */
     public Single<Void> getMethodGlobalNotProvidedValidAsync() {
         return getMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -187,7 +187,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidAsync().toBlocking().value();
+        getPathGlobalValidAsync().blockingGet();
     }
 
     /**
@@ -222,7 +222,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      */
     public Single<Void> getPathGlobalValidAsync() {
         return getPathGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -235,7 +235,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidAsync().toBlocking().value();
+        getSwaggerGlobalValidAsync().blockingGet();
     }
 
     /**
@@ -270,7 +270,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      */
     public Single<Void> getSwaggerGlobalValidAsync() {
         return getSwaggerGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

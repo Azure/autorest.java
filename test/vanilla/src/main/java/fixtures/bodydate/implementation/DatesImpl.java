@@ -25,11 +25,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydate.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.LocalDate;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -116,7 +116,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -148,7 +148,7 @@ public class DatesImpl implements Dates {
      */
     public Single<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -161,7 +161,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getInvalidDate() {
-        return getInvalidDateAsync().toBlocking().value();
+        return getInvalidDateAsync().blockingGet();
     }
 
     /**
@@ -193,7 +193,7 @@ public class DatesImpl implements Dates {
      */
     public Single<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -206,7 +206,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getOverflowDate() {
-        return getOverflowDateAsync().toBlocking().value();
+        return getOverflowDateAsync().blockingGet();
     }
 
     /**
@@ -238,7 +238,7 @@ public class DatesImpl implements Dates {
      */
     public Single<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -251,7 +251,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getUnderflowDate() {
-        return getUnderflowDateAsync().toBlocking().value();
+        return getUnderflowDateAsync().blockingGet();
     }
 
     /**
@@ -283,7 +283,7 @@ public class DatesImpl implements Dates {
      */
     public Single<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -297,7 +297,7 @@ public class DatesImpl implements Dates {
      * @return the void object if successful.
      */
     public void putMaxDate(LocalDate dateBody) {
-        putMaxDateAsync(dateBody).toBlocking().value();
+        putMaxDateAsync(dateBody).blockingGet();
     }
 
     /**
@@ -335,7 +335,7 @@ public class DatesImpl implements Dates {
      */
     public Single<Void> putMaxDateAsync(LocalDate dateBody) {
         return putMaxDateWithRestResponseAsync(dateBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -348,7 +348,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMaxDate() {
-        return getMaxDateAsync().toBlocking().value();
+        return getMaxDateAsync().blockingGet();
     }
 
     /**
@@ -380,7 +380,7 @@ public class DatesImpl implements Dates {
      */
     public Single<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -394,7 +394,7 @@ public class DatesImpl implements Dates {
      * @return the void object if successful.
      */
     public void putMinDate(LocalDate dateBody) {
-        putMinDateAsync(dateBody).toBlocking().value();
+        putMinDateAsync(dateBody).blockingGet();
     }
 
     /**
@@ -432,7 +432,7 @@ public class DatesImpl implements Dates {
      */
     public Single<Void> putMinDateAsync(LocalDate dateBody) {
         return putMinDateWithRestResponseAsync(dateBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -445,7 +445,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMinDate() {
-        return getMinDateAsync().toBlocking().value();
+        return getMinDateAsync().blockingGet();
     }
 
     /**
@@ -477,7 +477,7 @@ public class DatesImpl implements Dates {
      */
     public Single<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
         }
 
 

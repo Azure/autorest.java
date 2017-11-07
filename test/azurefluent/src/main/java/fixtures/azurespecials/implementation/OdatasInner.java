@@ -23,10 +23,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -72,7 +72,7 @@ public class OdatasInner {
      * @return the void object if successful.
      */
     public void getWithFilter() {
-        getWithFilterAsync().toBlocking().value();
+        getWithFilterAsync().blockingGet();
     }
 
     /**
@@ -107,7 +107,7 @@ public class OdatasInner {
      */
     public Single<Void> getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -122,7 +122,7 @@ public class OdatasInner {
      * @return the void object if successful.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterAsync(filter, top, orderby).toBlocking().value();
+        getWithFilterAsync(filter, top, orderby).blockingGet();
     }
 
     /**
@@ -163,7 +163,7 @@ public class OdatasInner {
      */
     public Single<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

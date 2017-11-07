@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.azurespecials.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -86,7 +86,7 @@ public class HeadersInner {
      * @return the void object if successful.
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdAsync(fooClientRequestId).toBlocking().value();
+        customNamedRequestIdAsync(fooClientRequestId).blockingGet();
     }
 
     /**
@@ -124,7 +124,7 @@ public class HeadersInner {
      */
     public Single<Void> customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>, Void>() { public Void call(RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -138,7 +138,7 @@ public class HeadersInner {
      * @return the void object if successful.
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().value();
+        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingGet();
     }
 
     /**
@@ -178,7 +178,7 @@ public class HeadersInner {
      */
     public Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>, Void>() { public Void call(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -192,7 +192,7 @@ public class HeadersInner {
      * @return the boolean object if successful.
      */
     public boolean customNamedRequestIdHead(String fooClientRequestId) {
-        return customNamedRequestIdHeadAsync(fooClientRequestId).toBlocking().value();
+        return customNamedRequestIdHeadAsync(fooClientRequestId).blockingGet();
     }
 
     /**
@@ -230,7 +230,7 @@ public class HeadersInner {
      */
     public Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>, Boolean>() { public Boolean call(RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>, Boolean>() { public Boolean apply(RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 

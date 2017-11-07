@@ -28,15 +28,15 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -231,7 +231,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().toBlocking().value();
+        getBooleanTrueAsync().blockingGet();
     }
 
     /**
@@ -264,7 +264,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -277,7 +277,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().toBlocking().value();
+        getBooleanFalseAsync().blockingGet();
     }
 
     /**
@@ -310,7 +310,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -323,7 +323,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().toBlocking().value();
+        getIntOneMillionAsync().blockingGet();
     }
 
     /**
@@ -356,7 +356,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -369,7 +369,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().toBlocking().value();
+        getIntNegativeOneMillionAsync().blockingGet();
     }
 
     /**
@@ -402,7 +402,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -415,7 +415,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getTenBillion() {
-        getTenBillionAsync().toBlocking().value();
+        getTenBillionAsync().blockingGet();
     }
 
     /**
@@ -448,7 +448,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -461,7 +461,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().toBlocking().value();
+        getNegativeTenBillionAsync().blockingGet();
     }
 
     /**
@@ -494,7 +494,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -507,7 +507,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().toBlocking().value();
+        floatScientificPositiveAsync().blockingGet();
     }
 
     /**
@@ -540,7 +540,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -553,7 +553,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().toBlocking().value();
+        floatScientificNegativeAsync().blockingGet();
     }
 
     /**
@@ -586,7 +586,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -599,7 +599,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().toBlocking().value();
+        doubleDecimalPositiveAsync().blockingGet();
     }
 
     /**
@@ -632,7 +632,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -645,7 +645,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().toBlocking().value();
+        doubleDecimalNegativeAsync().blockingGet();
     }
 
     /**
@@ -678,7 +678,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -691,7 +691,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().toBlocking().value();
+        stringUnicodeAsync().blockingGet();
     }
 
     /**
@@ -724,7 +724,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -737,7 +737,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().toBlocking().value();
+        stringUrlEncodedAsync().blockingGet();
     }
 
     /**
@@ -770,7 +770,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -783,7 +783,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringEmpty() {
-        stringEmptyAsync().toBlocking().value();
+        stringEmptyAsync().blockingGet();
     }
 
     /**
@@ -816,7 +816,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -830,7 +830,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringNull(String stringPath) {
-        stringNullAsync(stringPath).toBlocking().value();
+        stringNullAsync(stringPath).blockingGet();
     }
 
     /**
@@ -868,7 +868,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> stringNullAsync(String stringPath) {
         return stringNullWithRestResponseAsync(stringPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -882,7 +882,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void enumValid(UriColor enumPath) {
-        enumValidAsync(enumPath).toBlocking().value();
+        enumValidAsync(enumPath).blockingGet();
     }
 
     /**
@@ -920,7 +920,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> enumValidAsync(UriColor enumPath) {
         return enumValidWithRestResponseAsync(enumPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -934,7 +934,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void enumNull(UriColor enumPath) {
-        enumNullAsync(enumPath).toBlocking().value();
+        enumNullAsync(enumPath).blockingGet();
     }
 
     /**
@@ -972,7 +972,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> enumNullAsync(UriColor enumPath) {
         return enumNullWithRestResponseAsync(enumPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -986,7 +986,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteMultiByte(byte[] bytePath) {
-        byteMultiByteAsync(bytePath).toBlocking().value();
+        byteMultiByteAsync(bytePath).blockingGet();
     }
 
     /**
@@ -1025,7 +1025,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> byteMultiByteAsync(byte[] bytePath) {
         return byteMultiByteWithRestResponseAsync(bytePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1038,7 +1038,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteEmpty() {
-        byteEmptyAsync().toBlocking().value();
+        byteEmptyAsync().blockingGet();
     }
 
     /**
@@ -1072,7 +1072,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1086,7 +1086,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteNull(byte[] bytePath) {
-        byteNullAsync(bytePath).toBlocking().value();
+        byteNullAsync(bytePath).blockingGet();
     }
 
     /**
@@ -1125,7 +1125,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> byteNullAsync(byte[] bytePath) {
         return byteNullWithRestResponseAsync(bytePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1138,7 +1138,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateValid() {
-        dateValidAsync().toBlocking().value();
+        dateValidAsync().blockingGet();
     }
 
     /**
@@ -1171,7 +1171,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1185,7 +1185,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateNull(LocalDate datePath) {
-        dateNullAsync(datePath).toBlocking().value();
+        dateNullAsync(datePath).blockingGet();
     }
 
     /**
@@ -1223,7 +1223,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> dateNullAsync(LocalDate datePath) {
         return dateNullWithRestResponseAsync(datePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1236,7 +1236,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().toBlocking().value();
+        dateTimeValidAsync().blockingGet();
     }
 
     /**
@@ -1269,7 +1269,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1283,7 +1283,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimePath) {
-        dateTimeNullAsync(dateTimePath).toBlocking().value();
+        dateTimeNullAsync(dateTimePath).blockingGet();
     }
 
     /**
@@ -1321,7 +1321,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> dateTimeNullAsync(DateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1335,7 +1335,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void base64Url(byte[] base64UrlPath) {
-        base64UrlAsync(base64UrlPath).toBlocking().value();
+        base64UrlAsync(base64UrlPath).blockingGet();
     }
 
     /**
@@ -1374,7 +1374,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> base64UrlAsync(byte[] base64UrlPath) {
         return base64UrlWithRestResponseAsync(base64UrlPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1388,7 +1388,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void arrayCsvInPath(List<String> arrayPath) {
-        arrayCsvInPathAsync(arrayPath).toBlocking().value();
+        arrayCsvInPathAsync(arrayPath).blockingGet();
     }
 
     /**
@@ -1428,7 +1428,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> arrayCsvInPathAsync(List<String> arrayPath) {
         return arrayCsvInPathWithRestResponseAsync(arrayPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1442,7 +1442,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
-        unixTimeUrlAsync(unixTimeUrlPath).toBlocking().value();
+        unixTimeUrlAsync(unixTimeUrlPath).blockingGet();
     }
 
     /**
@@ -1478,7 +1478,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

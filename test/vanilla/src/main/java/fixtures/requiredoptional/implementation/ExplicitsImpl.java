@@ -37,11 +37,11 @@ import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -202,7 +202,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerParameter(int bodyParameter) {
-        return postRequiredIntegerParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredIntegerParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -237,7 +237,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredIntegerParameterAsync(int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -250,7 +250,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerParameter() {
-        postOptionalIntegerParameterAsync().toBlocking().value();
+        postOptionalIntegerParameterAsync().blockingGet();
     }
 
     /**
@@ -283,7 +283,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalIntegerParameterAsync() {
         return postOptionalIntegerParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -296,7 +296,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalIntegerParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -331,7 +331,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -345,7 +345,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredIntegerPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -384,7 +384,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -397,7 +397,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerProperty() {
-        postOptionalIntegerPropertyAsync().toBlocking().value();
+        postOptionalIntegerPropertyAsync().blockingGet();
     }
 
     /**
@@ -431,7 +431,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalIntegerPropertyAsync() {
         return postOptionalIntegerPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -444,7 +444,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalIntegerPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -480,7 +480,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -494,7 +494,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerHeader(int headerParameter) {
-        return postRequiredIntegerHeaderAsync(headerParameter).toBlocking().value();
+        return postRequiredIntegerHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -529,7 +529,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredIntegerHeaderAsync(int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -542,7 +542,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerHeader() {
-        postOptionalIntegerHeaderAsync().toBlocking().value();
+        postOptionalIntegerHeaderAsync().blockingGet();
     }
 
     /**
@@ -575,7 +575,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalIntegerHeaderAsync() {
         return postOptionalIntegerHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -588,7 +588,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderAsync(headerParameter).toBlocking().value();
+        postOptionalIntegerHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -623,7 +623,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -637,7 +637,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringParameter(String bodyParameter) {
-        return postRequiredStringParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredStringParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -675,7 +675,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredStringParameterAsync(String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -688,7 +688,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringParameter() {
-        postOptionalStringParameterAsync().toBlocking().value();
+        postOptionalStringParameterAsync().blockingGet();
     }
 
     /**
@@ -721,7 +721,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalStringParameterAsync() {
         return postOptionalStringParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -734,7 +734,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalStringParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -769,7 +769,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -783,7 +783,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringProperty(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredStringPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -822,7 +822,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -835,7 +835,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringProperty() {
-        postOptionalStringPropertyAsync().toBlocking().value();
+        postOptionalStringPropertyAsync().blockingGet();
     }
 
     /**
@@ -869,7 +869,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalStringPropertyAsync() {
         return postOptionalStringPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -882,7 +882,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalStringPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -918,7 +918,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -932,7 +932,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringHeader(String headerParameter) {
-        return postRequiredStringHeaderAsync(headerParameter).toBlocking().value();
+        return postRequiredStringHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -970,7 +970,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredStringHeaderAsync(String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -983,7 +983,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringHeader() {
-        postOptionalStringHeaderAsync().toBlocking().value();
+        postOptionalStringHeaderAsync().blockingGet();
     }
 
     /**
@@ -1016,7 +1016,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalStringHeaderAsync() {
         return postOptionalStringHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1029,7 +1029,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderAsync(bodyParameter).toBlocking().value();
+        postOptionalStringHeaderAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1064,7 +1064,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1078,7 +1078,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassParameter(Product bodyParameter) {
-        return postRequiredClassParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredClassParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1117,7 +1117,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredClassParameterAsync(Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1130,7 +1130,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassParameter() {
-        postOptionalClassParameterAsync().toBlocking().value();
+        postOptionalClassParameterAsync().blockingGet();
     }
 
     /**
@@ -1164,7 +1164,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalClassParameterAsync() {
         return postOptionalClassParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1177,7 +1177,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalClassParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1213,7 +1213,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1227,7 +1227,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredClassPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1266,7 +1266,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1279,7 +1279,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassProperty() {
-        postOptionalClassPropertyAsync().toBlocking().value();
+        postOptionalClassPropertyAsync().blockingGet();
     }
 
     /**
@@ -1313,7 +1313,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalClassPropertyAsync() {
         return postOptionalClassPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1326,7 +1326,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalClassPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1362,7 +1362,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1376,7 +1376,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayParameter(List<String> bodyParameter) {
-        return postRequiredArrayParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredArrayParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1415,7 +1415,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredArrayParameterAsync(List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1428,7 +1428,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayParameter() {
-        postOptionalArrayParameterAsync().toBlocking().value();
+        postOptionalArrayParameterAsync().blockingGet();
     }
 
     /**
@@ -1462,7 +1462,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalArrayParameterAsync() {
         return postOptionalArrayParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1475,7 +1475,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalArrayParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1511,7 +1511,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1525,7 +1525,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredArrayPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1564,7 +1564,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1577,7 +1577,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayProperty() {
-        postOptionalArrayPropertyAsync().toBlocking().value();
+        postOptionalArrayPropertyAsync().blockingGet();
     }
 
     /**
@@ -1611,7 +1611,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalArrayPropertyAsync() {
         return postOptionalArrayPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1624,7 +1624,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalArrayPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1660,7 +1660,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1674,7 +1674,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayHeader(List<String> headerParameter) {
-        return postRequiredArrayHeaderAsync(headerParameter).toBlocking().value();
+        return postRequiredArrayHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -1714,7 +1714,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Error> postRequiredArrayHeaderAsync(List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1727,7 +1727,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayHeader() {
-        postOptionalArrayHeaderAsync().toBlocking().value();
+        postOptionalArrayHeaderAsync().blockingGet();
     }
 
     /**
@@ -1762,7 +1762,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalArrayHeaderAsync() {
         return postOptionalArrayHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1775,7 +1775,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderAsync(headerParameter).toBlocking().value();
+        postOptionalArrayHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -1812,7 +1812,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

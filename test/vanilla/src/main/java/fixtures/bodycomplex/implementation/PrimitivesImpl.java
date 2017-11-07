@@ -37,10 +37,10 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -211,7 +211,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the IntWrapper object if successful.
      */
     public IntWrapper getInt() {
-        return getIntAsync().toBlocking().value();
+        return getIntAsync().blockingGet();
     }
 
     /**
@@ -243,7 +243,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, IntWrapper>, IntWrapper>() { public IntWrapper call(RestResponse<Void, IntWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, IntWrapper>, IntWrapper>() { public IntWrapper apply(RestResponse<Void, IntWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -257,7 +257,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putInt(IntWrapper complexBody) {
-        putIntAsync(complexBody).toBlocking().value();
+        putIntAsync(complexBody).blockingGet();
     }
 
     /**
@@ -296,7 +296,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putIntAsync(IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -309,7 +309,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the LongWrapper object if successful.
      */
     public LongWrapper getLong() {
-        return getLongAsync().toBlocking().value();
+        return getLongAsync().blockingGet();
     }
 
     /**
@@ -341,7 +341,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LongWrapper>, LongWrapper>() { public LongWrapper call(RestResponse<Void, LongWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, LongWrapper>, LongWrapper>() { public LongWrapper apply(RestResponse<Void, LongWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -355,7 +355,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putLong(LongWrapper complexBody) {
-        putLongAsync(complexBody).toBlocking().value();
+        putLongAsync(complexBody).blockingGet();
     }
 
     /**
@@ -394,7 +394,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putLongAsync(LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -407,7 +407,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the FloatWrapper object if successful.
      */
     public FloatWrapper getFloat() {
-        return getFloatAsync().toBlocking().value();
+        return getFloatAsync().blockingGet();
     }
 
     /**
@@ -439,7 +439,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, FloatWrapper>, FloatWrapper>() { public FloatWrapper call(RestResponse<Void, FloatWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, FloatWrapper>, FloatWrapper>() { public FloatWrapper apply(RestResponse<Void, FloatWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -453,7 +453,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putFloat(FloatWrapper complexBody) {
-        putFloatAsync(complexBody).toBlocking().value();
+        putFloatAsync(complexBody).blockingGet();
     }
 
     /**
@@ -492,7 +492,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putFloatAsync(FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -505,7 +505,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DoubleWrapper object if successful.
      */
     public DoubleWrapper getDouble() {
-        return getDoubleAsync().toBlocking().value();
+        return getDoubleAsync().blockingGet();
     }
 
     /**
@@ -537,7 +537,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DoubleWrapper>, DoubleWrapper>() { public DoubleWrapper call(RestResponse<Void, DoubleWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DoubleWrapper>, DoubleWrapper>() { public DoubleWrapper apply(RestResponse<Void, DoubleWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -551,7 +551,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDouble(DoubleWrapper complexBody) {
-        putDoubleAsync(complexBody).toBlocking().value();
+        putDoubleAsync(complexBody).blockingGet();
     }
 
     /**
@@ -590,7 +590,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putDoubleAsync(DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -603,7 +603,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the BooleanWrapper object if successful.
      */
     public BooleanWrapper getBool() {
-        return getBoolAsync().toBlocking().value();
+        return getBoolAsync().blockingGet();
     }
 
     /**
@@ -635,7 +635,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BooleanWrapper>, BooleanWrapper>() { public BooleanWrapper call(RestResponse<Void, BooleanWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, BooleanWrapper>, BooleanWrapper>() { public BooleanWrapper apply(RestResponse<Void, BooleanWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -649,7 +649,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putBool(BooleanWrapper complexBody) {
-        putBoolAsync(complexBody).toBlocking().value();
+        putBoolAsync(complexBody).blockingGet();
     }
 
     /**
@@ -688,7 +688,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putBoolAsync(BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -701,7 +701,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the StringWrapper object if successful.
      */
     public StringWrapper getString() {
-        return getStringAsync().toBlocking().value();
+        return getStringAsync().blockingGet();
     }
 
     /**
@@ -733,7 +733,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, StringWrapper>, StringWrapper>() { public StringWrapper call(RestResponse<Void, StringWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, StringWrapper>, StringWrapper>() { public StringWrapper apply(RestResponse<Void, StringWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -747,7 +747,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putString(StringWrapper complexBody) {
-        putStringAsync(complexBody).toBlocking().value();
+        putStringAsync(complexBody).blockingGet();
     }
 
     /**
@@ -786,7 +786,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putStringAsync(StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -799,7 +799,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DateWrapper object if successful.
      */
     public DateWrapper getDate() {
-        return getDateAsync().toBlocking().value();
+        return getDateAsync().blockingGet();
     }
 
     /**
@@ -831,7 +831,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateWrapper>, DateWrapper>() { public DateWrapper call(RestResponse<Void, DateWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateWrapper>, DateWrapper>() { public DateWrapper apply(RestResponse<Void, DateWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -845,7 +845,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDate(DateWrapper complexBody) {
-        putDateAsync(complexBody).toBlocking().value();
+        putDateAsync(complexBody).blockingGet();
     }
 
     /**
@@ -884,7 +884,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putDateAsync(DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -897,7 +897,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DatetimeWrapper object if successful.
      */
     public DatetimeWrapper getDateTime() {
-        return getDateTimeAsync().toBlocking().value();
+        return getDateTimeAsync().blockingGet();
     }
 
     /**
@@ -929,7 +929,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DatetimeWrapper>, DatetimeWrapper>() { public DatetimeWrapper call(RestResponse<Void, DatetimeWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DatetimeWrapper>, DatetimeWrapper>() { public DatetimeWrapper apply(RestResponse<Void, DatetimeWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -943,7 +943,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeAsync(complexBody).toBlocking().value();
+        putDateTimeAsync(complexBody).blockingGet();
     }
 
     /**
@@ -982,7 +982,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -995,7 +995,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the Datetimerfc1123Wrapper object if successful.
      */
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123Async().toBlocking().value();
+        return getDateTimeRfc1123Async().blockingGet();
     }
 
     /**
@@ -1027,7 +1027,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() { public Datetimerfc1123Wrapper call(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() { public Datetimerfc1123Wrapper apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1041,7 +1041,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123Async(complexBody).toBlocking().value();
+        putDateTimeRfc1123Async(complexBody).blockingGet();
     }
 
     /**
@@ -1080,7 +1080,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1093,7 +1093,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DurationWrapper object if successful.
      */
     public DurationWrapper getDuration() {
-        return getDurationAsync().toBlocking().value();
+        return getDurationAsync().blockingGet();
     }
 
     /**
@@ -1125,7 +1125,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DurationWrapper>, DurationWrapper>() { public DurationWrapper call(RestResponse<Void, DurationWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DurationWrapper>, DurationWrapper>() { public DurationWrapper apply(RestResponse<Void, DurationWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1139,7 +1139,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDuration(DurationWrapper complexBody) {
-        putDurationAsync(complexBody).toBlocking().value();
+        putDurationAsync(complexBody).blockingGet();
     }
 
     /**
@@ -1178,7 +1178,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putDurationAsync(DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1191,7 +1191,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the ByteWrapper object if successful.
      */
     public ByteWrapper getByte() {
-        return getByteAsync().toBlocking().value();
+        return getByteAsync().blockingGet();
     }
 
     /**
@@ -1223,7 +1223,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ByteWrapper>, ByteWrapper>() { public ByteWrapper call(RestResponse<Void, ByteWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, ByteWrapper>, ByteWrapper>() { public ByteWrapper apply(RestResponse<Void, ByteWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1237,7 +1237,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putByte(ByteWrapper complexBody) {
-        putByteAsync(complexBody).toBlocking().value();
+        putByteAsync(complexBody).blockingGet();
     }
 
     /**
@@ -1276,7 +1276,7 @@ public class PrimitivesImpl implements Primitives {
      */
     public Single<Void> putByteAsync(ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

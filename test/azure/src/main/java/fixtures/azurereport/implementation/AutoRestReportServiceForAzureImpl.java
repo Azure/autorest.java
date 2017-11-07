@@ -27,11 +27,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Map;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
@@ -184,7 +184,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportAsync().toBlocking().value();
+        return getReportAsync().blockingGet();
     }
 
     /**
@@ -216,7 +216,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      */
     public Single<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> apply(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
         }
 
 

@@ -17,7 +17,7 @@ import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
-import rx.Single;
+import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.

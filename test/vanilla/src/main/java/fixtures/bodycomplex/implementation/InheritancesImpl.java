@@ -27,10 +27,10 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -81,7 +81,7 @@ public class InheritancesImpl implements Inheritances {
      * @return the Siamese object if successful.
      */
     public Siamese getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -113,7 +113,7 @@ public class InheritancesImpl implements Inheritances {
      */
     public Single<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Siamese>, Siamese>() { public Siamese call(RestResponse<Void, Siamese> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Siamese>, Siamese>() { public Siamese apply(RestResponse<Void, Siamese> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -127,7 +127,7 @@ public class InheritancesImpl implements Inheritances {
      * @return the void object if successful.
      */
     public void putValid(Siamese complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingGet();
     }
 
     /**
@@ -166,7 +166,7 @@ public class InheritancesImpl implements Inheritances {
      */
     public Single<Void> putValidAsync(Siamese complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

@@ -44,11 +44,11 @@ import fixtures.http.models.HttpRedirectsPost303Headers;
 import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -177,7 +177,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head300() {
-        head300Async().toBlocking().value();
+        head300Async().blockingGet();
     }
 
     /**
@@ -209,7 +209,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> head300Async() {
         return head300WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsHead300Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsHead300Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsHead300Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead300Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -222,7 +222,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> get300() {
-        return get300Async().toBlocking().value();
+        return get300Async().blockingGet();
     }
 
     /**
@@ -254,7 +254,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<List<String>> get300Async() {
         return get300WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsGet300Headers, List<String>>, List<String>>() { public List<String> call(RestResponse<HttpRedirectsGet300Headers, List<String>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsGet300Headers, List<String>>, List<String>>() { public List<String> apply(RestResponse<HttpRedirectsGet300Headers, List<String>> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -267,7 +267,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head301() {
-        head301Async().toBlocking().value();
+        head301Async().blockingGet();
     }
 
     /**
@@ -299,7 +299,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> head301Async() {
         return head301WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsHead301Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsHead301Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsHead301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead301Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -312,7 +312,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void get301() {
-        get301Async().toBlocking().value();
+        get301Async().blockingGet();
     }
 
     /**
@@ -344,7 +344,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> get301Async() {
         return get301WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsGet301Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsGet301Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsGet301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsGet301Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -357,7 +357,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put301() {
-        put301Async().toBlocking().value();
+        put301Async().blockingGet();
     }
 
     /**
@@ -390,7 +390,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> put301Async() {
         return put301WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsPut301Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPut301Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPut301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut301Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -403,7 +403,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put301(Boolean booleanValue) {
-        put301Async(booleanValue).toBlocking().value();
+        put301Async(booleanValue).blockingGet();
     }
 
     /**
@@ -438,7 +438,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsPut301Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPut301Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPut301Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut301Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -451,7 +451,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head302() {
-        head302Async().toBlocking().value();
+        head302Async().blockingGet();
     }
 
     /**
@@ -483,7 +483,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> head302Async() {
         return head302WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsHead302Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsHead302Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsHead302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead302Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -496,7 +496,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void get302() {
-        get302Async().toBlocking().value();
+        get302Async().blockingGet();
     }
 
     /**
@@ -528,7 +528,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> get302Async() {
         return get302WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsGet302Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsGet302Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsGet302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsGet302Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -541,7 +541,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch302() {
-        patch302Async().toBlocking().value();
+        patch302Async().blockingGet();
     }
 
     /**
@@ -574,7 +574,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> patch302Async() {
         return patch302WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsPatch302Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPatch302Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPatch302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch302Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -587,7 +587,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch302(Boolean booleanValue) {
-        patch302Async(booleanValue).toBlocking().value();
+        patch302Async(booleanValue).blockingGet();
     }
 
     /**
@@ -622,7 +622,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsPatch302Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPatch302Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPatch302Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch302Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -635,7 +635,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post303() {
-        post303Async().toBlocking().value();
+        post303Async().blockingGet();
     }
 
     /**
@@ -668,7 +668,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> post303Async() {
         return post303WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsPost303Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPost303Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPost303Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost303Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -681,7 +681,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post303(Boolean booleanValue) {
-        post303Async(booleanValue).toBlocking().value();
+        post303Async(booleanValue).blockingGet();
     }
 
     /**
@@ -716,7 +716,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsPost303Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPost303Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPost303Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost303Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -729,7 +729,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head307() {
-        head307Async().toBlocking().value();
+        head307Async().blockingGet();
     }
 
     /**
@@ -761,7 +761,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> head307Async() {
         return head307WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsHead307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsHead307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsHead307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsHead307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -774,7 +774,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void get307() {
-        get307Async().toBlocking().value();
+        get307Async().blockingGet();
     }
 
     /**
@@ -806,7 +806,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> get307Async() {
         return get307WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsGet307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsGet307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsGet307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsGet307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -819,7 +819,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put307() {
-        put307Async().toBlocking().value();
+        put307Async().blockingGet();
     }
 
     /**
@@ -852,7 +852,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> put307Async() {
         return put307WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsPut307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPut307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPut307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -865,7 +865,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put307(Boolean booleanValue) {
-        put307Async(booleanValue).toBlocking().value();
+        put307Async(booleanValue).blockingGet();
     }
 
     /**
@@ -900,7 +900,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsPut307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPut307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPut307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPut307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -913,7 +913,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch307() {
-        patch307Async().toBlocking().value();
+        patch307Async().blockingGet();
     }
 
     /**
@@ -946,7 +946,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> patch307Async() {
         return patch307WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsPatch307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPatch307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPatch307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -959,7 +959,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch307(Boolean booleanValue) {
-        patch307Async(booleanValue).toBlocking().value();
+        patch307Async(booleanValue).blockingGet();
     }
 
     /**
@@ -994,7 +994,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsPatch307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPatch307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPatch307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPatch307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1007,7 +1007,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post307() {
-        post307Async().toBlocking().value();
+        post307Async().blockingGet();
     }
 
     /**
@@ -1040,7 +1040,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> post307Async() {
         return post307WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsPost307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPost307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPost307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1053,7 +1053,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post307(Boolean booleanValue) {
-        post307Async(booleanValue).toBlocking().value();
+        post307Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1088,7 +1088,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsPost307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsPost307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsPost307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsPost307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1101,7 +1101,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void delete307() {
-        delete307Async().toBlocking().value();
+        delete307Async().blockingGet();
     }
 
     /**
@@ -1134,7 +1134,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> delete307Async() {
         return delete307WithRestResponseAsync()
-            .map(new Func1<RestResponse<HttpRedirectsDelete307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsDelete307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsDelete307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsDelete307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1147,7 +1147,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void delete307(Boolean booleanValue) {
-        delete307Async(booleanValue).toBlocking().value();
+        delete307Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1182,7 +1182,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     public Single<Void> delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<HttpRedirectsDelete307Headers, Void>, Void>() { public Void call(RestResponse<HttpRedirectsDelete307Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HttpRedirectsDelete307Headers, Void>, Void>() { public Void apply(RestResponse<HttpRedirectsDelete307Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 

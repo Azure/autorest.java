@@ -22,10 +22,10 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -83,7 +83,7 @@ public class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head200() {
-        return head200Async().toBlocking().value();
+        return head200Async().blockingGet();
     }
 
     /**
@@ -115,7 +115,7 @@ public class HttpSuccessInner {
      */
     public Single<Boolean> head200Async() {
         return head200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -128,7 +128,7 @@ public class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head204() {
-        return head204Async().toBlocking().value();
+        return head204Async().blockingGet();
     }
 
     /**
@@ -160,7 +160,7 @@ public class HttpSuccessInner {
      */
     public Single<Boolean> head204Async() {
         return head204WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -173,7 +173,7 @@ public class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head404() {
-        return head404Async().toBlocking().value();
+        return head404Async().blockingGet();
     }
 
     /**
@@ -205,7 +205,7 @@ public class HttpSuccessInner {
      */
     public Single<Boolean> head404Async() {
         return head404WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 

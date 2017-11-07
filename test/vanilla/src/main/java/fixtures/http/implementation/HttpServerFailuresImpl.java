@@ -27,10 +27,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -89,7 +89,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error head501() {
-        return head501Async().toBlocking().value();
+        return head501Async().blockingGet();
     }
 
     /**
@@ -121,7 +121,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Single<Error> head501Async() {
         return head501WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -134,7 +134,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error get501() {
-        return get501Async().toBlocking().value();
+        return get501Async().blockingGet();
     }
 
     /**
@@ -166,7 +166,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Single<Error> get501Async() {
         return get501WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -179,7 +179,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505() {
-        return post505Async().toBlocking().value();
+        return post505Async().blockingGet();
     }
 
     /**
@@ -212,7 +212,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Single<Error> post505Async() {
         return post505WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -225,7 +225,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505(Boolean booleanValue) {
-        return post505Async(booleanValue).toBlocking().value();
+        return post505Async(booleanValue).blockingGet();
     }
 
     /**
@@ -260,7 +260,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Single<Error> post505Async(Boolean booleanValue) {
         return post505WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -273,7 +273,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505() {
-        return delete505Async().toBlocking().value();
+        return delete505Async().blockingGet();
     }
 
     /**
@@ -306,7 +306,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Single<Error> delete505Async() {
         return delete505WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -319,7 +319,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505(Boolean booleanValue) {
-        return delete505Async(booleanValue).toBlocking().value();
+        return delete505Async(booleanValue).blockingGet();
     }
 
     /**
@@ -354,7 +354,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     public Single<Error> delete505Async(Boolean booleanValue) {
         return delete505WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 

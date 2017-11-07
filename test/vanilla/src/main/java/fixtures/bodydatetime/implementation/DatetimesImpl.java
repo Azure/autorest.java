@@ -25,11 +25,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetime.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.DateTime;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -182,7 +182,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -214,7 +214,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -227,7 +227,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -259,7 +259,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -272,7 +272,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getOverflow() {
-        return getOverflowAsync().toBlocking().value();
+        return getOverflowAsync().blockingGet();
     }
 
     /**
@@ -304,7 +304,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -317,7 +317,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUnderflow() {
-        return getUnderflowAsync().toBlocking().value();
+        return getUnderflowAsync().blockingGet();
     }
 
     /**
@@ -349,7 +349,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -363,7 +363,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).toBlocking().value();
+        putUtcMaxDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -401,7 +401,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -414,7 +414,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeAsync().toBlocking().value();
+        return getUtcLowercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -446,7 +446,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -459,7 +459,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeAsync().toBlocking().value();
+        return getUtcUppercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -491,7 +491,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -505,7 +505,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) {
-        putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).toBlocking().value();
+        putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -543,7 +543,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         return putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -556,7 +556,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalPositiveOffsetLowercaseMaxDateTime() {
-        return getLocalPositiveOffsetLowercaseMaxDateTimeAsync().toBlocking().value();
+        return getLocalPositiveOffsetLowercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -588,7 +588,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -601,7 +601,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalPositiveOffsetUppercaseMaxDateTime() {
-        return getLocalPositiveOffsetUppercaseMaxDateTimeAsync().toBlocking().value();
+        return getLocalPositiveOffsetUppercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -633,7 +633,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -647,7 +647,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) {
-        putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).toBlocking().value();
+        putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -685,7 +685,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         return putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -698,7 +698,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalNegativeOffsetUppercaseMaxDateTime() {
-        return getLocalNegativeOffsetUppercaseMaxDateTimeAsync().toBlocking().value();
+        return getLocalNegativeOffsetUppercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -730,7 +730,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -743,7 +743,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalNegativeOffsetLowercaseMaxDateTime() {
-        return getLocalNegativeOffsetLowercaseMaxDateTimeAsync().toBlocking().value();
+        return getLocalNegativeOffsetLowercaseMaxDateTimeAsync().blockingGet();
     }
 
     /**
@@ -775,7 +775,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -789,7 +789,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).toBlocking().value();
+        putUtcMinDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -827,7 +827,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -840,7 +840,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeAsync().toBlocking().value();
+        return getUtcMinDateTimeAsync().blockingGet();
     }
 
     /**
@@ -872,7 +872,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -886,7 +886,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) {
-        putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).toBlocking().value();
+        putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -924,7 +924,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
         return putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -937,7 +937,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalPositiveOffsetMinDateTime() {
-        return getLocalPositiveOffsetMinDateTimeAsync().toBlocking().value();
+        return getLocalPositiveOffsetMinDateTimeAsync().blockingGet();
     }
 
     /**
@@ -969,7 +969,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getLocalPositiveOffsetMinDateTimeAsync() {
         return getLocalPositiveOffsetMinDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -983,7 +983,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) {
-        putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).toBlocking().value();
+        putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).blockingGet();
     }
 
     /**
@@ -1021,7 +1021,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
         return putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1034,7 +1034,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalNegativeOffsetMinDateTime() {
-        return getLocalNegativeOffsetMinDateTimeAsync().toBlocking().value();
+        return getLocalNegativeOffsetMinDateTimeAsync().blockingGet();
     }
 
     /**
@@ -1066,7 +1066,7 @@ public class DatetimesImpl implements Datetimes {
      */
     public Single<DateTime> getLocalNegativeOffsetMinDateTimeAsync() {
         return getLocalNegativeOffsetMinDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 

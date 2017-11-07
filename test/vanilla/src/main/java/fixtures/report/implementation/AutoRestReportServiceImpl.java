@@ -15,7 +15,7 @@ import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import io.reactivex.Single;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -26,10 +26,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.report.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.util.Map;
-import rx.functions.Func1;
-import rx.Observable;
 
 /**
  * Initializes a new instance of the AutoRestReportService class.
@@ -100,7 +100,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportAsync().toBlocking().value();
+        return getReportAsync().blockingGet();
     }
 
     /**
@@ -132,7 +132,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      */
     public Single<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> apply(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
         }
 
 

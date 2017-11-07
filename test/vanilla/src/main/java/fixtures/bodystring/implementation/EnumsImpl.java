@@ -28,10 +28,10 @@ import com.microsoft.rest.v2.Validator;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -106,7 +106,7 @@ public class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getNotExpandable() {
-        return getNotExpandableAsync().toBlocking().value();
+        return getNotExpandableAsync().blockingGet();
     }
 
     /**
@@ -138,7 +138,7 @@ public class EnumsImpl implements Enums {
      */
     public Single<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Colors>, Colors>() { public Colors call(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Colors>, Colors>() { public Colors apply(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -152,7 +152,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putNotExpandable(Colors stringBody) {
-        putNotExpandableAsync(stringBody).toBlocking().value();
+        putNotExpandableAsync(stringBody).blockingGet();
     }
 
     /**
@@ -190,7 +190,7 @@ public class EnumsImpl implements Enums {
      */
     public Single<Void> putNotExpandableAsync(Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -203,7 +203,7 @@ public class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getReferenced() {
-        return getReferencedAsync().toBlocking().value();
+        return getReferencedAsync().blockingGet();
     }
 
     /**
@@ -235,7 +235,7 @@ public class EnumsImpl implements Enums {
      */
     public Single<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Colors>, Colors>() { public Colors call(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Colors>, Colors>() { public Colors apply(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -249,7 +249,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putReferenced(Colors enumStringBody) {
-        putReferencedAsync(enumStringBody).toBlocking().value();
+        putReferencedAsync(enumStringBody).blockingGet();
     }
 
     /**
@@ -287,7 +287,7 @@ public class EnumsImpl implements Enums {
      */
     public Single<Void> putReferencedAsync(Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -300,7 +300,7 @@ public class EnumsImpl implements Enums {
      * @return the RefColorConstant object if successful.
      */
     public RefColorConstant getReferencedConstant() {
-        return getReferencedConstantAsync().toBlocking().value();
+        return getReferencedConstantAsync().blockingGet();
     }
 
     /**
@@ -332,7 +332,7 @@ public class EnumsImpl implements Enums {
      */
     public Single<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, RefColorConstant>, RefColorConstant>() { public RefColorConstant call(RestResponse<Void, RefColorConstant> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, RefColorConstant>, RefColorConstant>() { public RefColorConstant apply(RestResponse<Void, RefColorConstant> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -346,7 +346,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putReferencedConstant(RefColorConstant enumStringBody) {
-        putReferencedConstantAsync(enumStringBody).toBlocking().value();
+        putReferencedConstantAsync(enumStringBody).blockingGet();
     }
 
     /**
@@ -385,7 +385,7 @@ public class EnumsImpl implements Enums {
      */
     public Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

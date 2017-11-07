@@ -32,10 +32,10 @@ import fixtures.lro.models.LROsCustomHeaderPost202Retry200Headers;
 import fixtures.lro.models.LROsCustomHeaderPostAsyncRetrySucceededHeaders;
 import fixtures.lro.models.LROsCustomHeaderPutAsyncRetrySucceededHeaders;
 import fixtures.lro.models.Product;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -123,7 +123,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -155,7 +155,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) {
-        return beginPutAsyncRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -191,7 +191,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededAsync().toBlocking().value();
+        return putAsyncRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -225,7 +225,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -238,7 +238,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded(Product product) {
-        return putAsyncRetrySucceededAsync(product).toBlocking().value();
+        return putAsyncRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -274,7 +274,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -287,7 +287,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -319,7 +319,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -355,7 +355,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().toBlocking().value();
+        return put201CreatingSucceeded200Async().blockingGet();
     }
 
     /**
@@ -389,7 +389,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -402,7 +402,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200Async(product).toBlocking().value();
+        return put201CreatingSucceeded200Async(product).blockingGet();
     }
 
     /**
@@ -438,7 +438,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -450,7 +450,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -481,7 +481,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -517,7 +517,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().toBlocking().value();
+        post202Retry200Async().blockingGet();
     }
 
     /**
@@ -551,7 +551,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Void> post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -564,7 +564,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).toBlocking().value();
+        post202Retry200Async(product).blockingGet();
     }
 
     /**
@@ -600,7 +600,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Void> post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -612,7 +612,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededAsync().toBlocking().last().result();
+        beginPostAsyncRetrySucceededAsync().blockingLast().result();
     }
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -643,7 +643,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded(Product product) {
-        beginPostAsyncRetrySucceededAsync(product).toBlocking().last();
+        beginPostAsyncRetrySucceededAsync(product).blockingLast();
     }
 
     /**
@@ -679,7 +679,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded() {
-        postAsyncRetrySucceededAsync().toBlocking().value();
+        postAsyncRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -713,7 +713,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Void> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -726,7 +726,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded(Product product) {
-        postAsyncRetrySucceededAsync(product).toBlocking().value();
+        postAsyncRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -762,7 +762,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<Void> postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>, Void>() { public Void apply(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 

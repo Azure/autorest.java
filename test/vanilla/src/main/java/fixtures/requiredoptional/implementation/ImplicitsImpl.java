@@ -29,10 +29,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -110,7 +110,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredPath(String pathParameter) {
-        return getRequiredPathAsync(pathParameter).toBlocking().value();
+        return getRequiredPathAsync(pathParameter).blockingGet();
     }
 
     /**
@@ -148,7 +148,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Error> getRequiredPathAsync(String pathParameter) {
         return getRequiredPathWithRestResponseAsync(pathParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -161,7 +161,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalQuery() {
-        putOptionalQueryAsync().toBlocking().value();
+        putOptionalQueryAsync().blockingGet();
     }
 
     /**
@@ -194,7 +194,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Void> putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -207,7 +207,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalQuery(String queryParameter) {
-        putOptionalQueryAsync(queryParameter).toBlocking().value();
+        putOptionalQueryAsync(queryParameter).blockingGet();
     }
 
     /**
@@ -242,7 +242,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Void> putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -255,7 +255,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalHeader() {
-        putOptionalHeaderAsync().toBlocking().value();
+        putOptionalHeaderAsync().blockingGet();
     }
 
     /**
@@ -288,7 +288,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Void> putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -301,7 +301,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalHeader(String queryParameter) {
-        putOptionalHeaderAsync(queryParameter).toBlocking().value();
+        putOptionalHeaderAsync(queryParameter).blockingGet();
     }
 
     /**
@@ -336,7 +336,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Void> putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -349,7 +349,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalBody() {
-        putOptionalBodyAsync().toBlocking().value();
+        putOptionalBodyAsync().blockingGet();
     }
 
     /**
@@ -382,7 +382,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Void> putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -395,7 +395,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalBody(String bodyParameter) {
-        putOptionalBodyAsync(bodyParameter).toBlocking().value();
+        putOptionalBodyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -430,7 +430,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Void> putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -443,7 +443,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalPath() {
-        return getRequiredGlobalPathAsync().toBlocking().value();
+        return getRequiredGlobalPathAsync().blockingGet();
     }
 
     /**
@@ -478,7 +478,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Error> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -491,7 +491,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalQuery() {
-        return getRequiredGlobalQueryAsync().toBlocking().value();
+        return getRequiredGlobalQueryAsync().blockingGet();
     }
 
     /**
@@ -526,7 +526,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Error> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -539,7 +539,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getOptionalGlobalQuery() {
-        return getOptionalGlobalQueryAsync().toBlocking().value();
+        return getOptionalGlobalQueryAsync().blockingGet();
     }
 
     /**
@@ -571,7 +571,7 @@ public class ImplicitsImpl implements Implicits {
      */
     public Single<Error> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 

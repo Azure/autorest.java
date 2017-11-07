@@ -27,10 +27,10 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -81,7 +81,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -113,7 +113,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      */
     public Single<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Fish>, Fish>() { public Fish call(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Fish>, Fish>() { public Fish apply(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -179,7 +179,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingGet();
     }
 
     /**
@@ -374,7 +374,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      */
     public Single<Void> putValidAsync(Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

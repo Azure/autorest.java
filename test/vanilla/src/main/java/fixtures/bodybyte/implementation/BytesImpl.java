@@ -25,10 +25,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodybyte.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -97,7 +97,7 @@ public class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -129,7 +129,7 @@ public class BytesImpl implements Bytes {
      */
     public Single<byte[]> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -142,7 +142,7 @@ public class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -174,7 +174,7 @@ public class BytesImpl implements Bytes {
      */
     public Single<byte[]> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -187,7 +187,7 @@ public class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNonAscii() {
-        return getNonAsciiAsync().toBlocking().value();
+        return getNonAsciiAsync().blockingGet();
     }
 
     /**
@@ -219,7 +219,7 @@ public class BytesImpl implements Bytes {
      */
     public Single<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -233,7 +233,7 @@ public class BytesImpl implements Bytes {
      * @return the void object if successful.
      */
     public void putNonAscii(byte[] byteBody) {
-        putNonAsciiAsync(byteBody).toBlocking().value();
+        putNonAsciiAsync(byteBody).blockingGet();
     }
 
     /**
@@ -271,7 +271,7 @@ public class BytesImpl implements Bytes {
      */
     public Single<Void> putNonAsciiAsync(byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -284,7 +284,7 @@ public class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -316,7 +316,7 @@ public class BytesImpl implements Bytes {
      */
     public Single<byte[]> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
         }
 
 

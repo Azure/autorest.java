@@ -25,10 +25,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.custombaseuri.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -74,7 +74,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getEmpty(String accountName) {
-        getEmptyAsync(accountName).toBlocking().value();
+        getEmptyAsync(accountName).blockingGet();
     }
 
     /**
@@ -115,7 +115,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getEmptyAsync(String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

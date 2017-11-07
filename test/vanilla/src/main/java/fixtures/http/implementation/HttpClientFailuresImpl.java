@@ -29,10 +29,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -186,7 +186,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head400() {
-        return head400Async().toBlocking().value();
+        return head400Async().blockingGet();
     }
 
     /**
@@ -218,7 +218,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> head400Async() {
         return head400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -231,7 +231,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get400() {
-        return get400Async().toBlocking().value();
+        return get400Async().blockingGet();
     }
 
     /**
@@ -263,7 +263,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> get400Async() {
         return get400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -276,7 +276,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put400() {
-        return put400Async().toBlocking().value();
+        return put400Async().blockingGet();
     }
 
     /**
@@ -309,7 +309,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put400Async() {
         return put400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -322,7 +322,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put400(Boolean booleanValue) {
-        return put400Async(booleanValue).toBlocking().value();
+        return put400Async(booleanValue).blockingGet();
     }
 
     /**
@@ -357,7 +357,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put400Async(Boolean booleanValue) {
         return put400WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -370,7 +370,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch400() {
-        return patch400Async().toBlocking().value();
+        return patch400Async().blockingGet();
     }
 
     /**
@@ -403,7 +403,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> patch400Async() {
         return patch400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -416,7 +416,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch400(Boolean booleanValue) {
-        return patch400Async(booleanValue).toBlocking().value();
+        return patch400Async(booleanValue).blockingGet();
     }
 
     /**
@@ -451,7 +451,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> patch400Async(Boolean booleanValue) {
         return patch400WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -464,7 +464,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post400() {
-        return post400Async().toBlocking().value();
+        return post400Async().blockingGet();
     }
 
     /**
@@ -497,7 +497,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> post400Async() {
         return post400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -510,7 +510,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post400(Boolean booleanValue) {
-        return post400Async(booleanValue).toBlocking().value();
+        return post400Async(booleanValue).blockingGet();
     }
 
     /**
@@ -545,7 +545,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> post400Async(Boolean booleanValue) {
         return post400WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -558,7 +558,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete400() {
-        return delete400Async().toBlocking().value();
+        return delete400Async().blockingGet();
     }
 
     /**
@@ -591,7 +591,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> delete400Async() {
         return delete400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -604,7 +604,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete400(Boolean booleanValue) {
-        return delete400Async(booleanValue).toBlocking().value();
+        return delete400Async(booleanValue).blockingGet();
     }
 
     /**
@@ -639,7 +639,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> delete400Async(Boolean booleanValue) {
         return delete400WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -652,7 +652,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head401() {
-        return head401Async().toBlocking().value();
+        return head401Async().blockingGet();
     }
 
     /**
@@ -684,7 +684,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> head401Async() {
         return head401WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -697,7 +697,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get402() {
-        return get402Async().toBlocking().value();
+        return get402Async().blockingGet();
     }
 
     /**
@@ -729,7 +729,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> get402Async() {
         return get402WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -742,7 +742,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get403() {
-        return get403Async().toBlocking().value();
+        return get403Async().blockingGet();
     }
 
     /**
@@ -774,7 +774,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> get403Async() {
         return get403WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -787,7 +787,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put404() {
-        return put404Async().toBlocking().value();
+        return put404Async().blockingGet();
     }
 
     /**
@@ -820,7 +820,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put404Async() {
         return put404WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -833,7 +833,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put404(Boolean booleanValue) {
-        return put404Async(booleanValue).toBlocking().value();
+        return put404Async(booleanValue).blockingGet();
     }
 
     /**
@@ -868,7 +868,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put404Async(Boolean booleanValue) {
         return put404WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -881,7 +881,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch405() {
-        return patch405Async().toBlocking().value();
+        return patch405Async().blockingGet();
     }
 
     /**
@@ -914,7 +914,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> patch405Async() {
         return patch405WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -927,7 +927,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch405(Boolean booleanValue) {
-        return patch405Async(booleanValue).toBlocking().value();
+        return patch405Async(booleanValue).blockingGet();
     }
 
     /**
@@ -962,7 +962,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> patch405Async(Boolean booleanValue) {
         return patch405WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -975,7 +975,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post406() {
-        return post406Async().toBlocking().value();
+        return post406Async().blockingGet();
     }
 
     /**
@@ -1008,7 +1008,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> post406Async() {
         return post406WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1021,7 +1021,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post406(Boolean booleanValue) {
-        return post406Async(booleanValue).toBlocking().value();
+        return post406Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1056,7 +1056,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> post406Async(Boolean booleanValue) {
         return post406WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1069,7 +1069,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete407() {
-        return delete407Async().toBlocking().value();
+        return delete407Async().blockingGet();
     }
 
     /**
@@ -1102,7 +1102,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> delete407Async() {
         return delete407WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1115,7 +1115,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete407(Boolean booleanValue) {
-        return delete407Async(booleanValue).toBlocking().value();
+        return delete407Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1150,7 +1150,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> delete407Async(Boolean booleanValue) {
         return delete407WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1163,7 +1163,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put409() {
-        return put409Async().toBlocking().value();
+        return put409Async().blockingGet();
     }
 
     /**
@@ -1196,7 +1196,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put409Async() {
         return put409WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1209,7 +1209,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put409(Boolean booleanValue) {
-        return put409Async(booleanValue).toBlocking().value();
+        return put409Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1244,7 +1244,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put409Async(Boolean booleanValue) {
         return put409WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1257,7 +1257,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head410() {
-        return head410Async().toBlocking().value();
+        return head410Async().blockingGet();
     }
 
     /**
@@ -1289,7 +1289,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> head410Async() {
         return head410WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1302,7 +1302,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get411() {
-        return get411Async().toBlocking().value();
+        return get411Async().blockingGet();
     }
 
     /**
@@ -1334,7 +1334,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> get411Async() {
         return get411WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1347,7 +1347,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get412() {
-        return get412Async().toBlocking().value();
+        return get412Async().blockingGet();
     }
 
     /**
@@ -1379,7 +1379,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> get412Async() {
         return get412WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1392,7 +1392,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put413() {
-        return put413Async().toBlocking().value();
+        return put413Async().blockingGet();
     }
 
     /**
@@ -1425,7 +1425,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put413Async() {
         return put413WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1438,7 +1438,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error put413(Boolean booleanValue) {
-        return put413Async(booleanValue).toBlocking().value();
+        return put413Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1473,7 +1473,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> put413Async(Boolean booleanValue) {
         return put413WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1486,7 +1486,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch414() {
-        return patch414Async().toBlocking().value();
+        return patch414Async().blockingGet();
     }
 
     /**
@@ -1519,7 +1519,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> patch414Async() {
         return patch414WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1532,7 +1532,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error patch414(Boolean booleanValue) {
-        return patch414Async(booleanValue).toBlocking().value();
+        return patch414Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1567,7 +1567,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> patch414Async(Boolean booleanValue) {
         return patch414WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1580,7 +1580,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post415() {
-        return post415Async().toBlocking().value();
+        return post415Async().blockingGet();
     }
 
     /**
@@ -1613,7 +1613,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> post415Async() {
         return post415WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1626,7 +1626,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error post415(Boolean booleanValue) {
-        return post415Async(booleanValue).toBlocking().value();
+        return post415Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1661,7 +1661,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> post415Async(Boolean booleanValue) {
         return post415WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1674,7 +1674,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error get416() {
-        return get416Async().toBlocking().value();
+        return get416Async().blockingGet();
     }
 
     /**
@@ -1706,7 +1706,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> get416Async() {
         return get416WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1719,7 +1719,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete417() {
-        return delete417Async().toBlocking().value();
+        return delete417Async().blockingGet();
     }
 
     /**
@@ -1752,7 +1752,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> delete417Async() {
         return delete417WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1765,7 +1765,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error delete417(Boolean booleanValue) {
-        return delete417Async(booleanValue).toBlocking().value();
+        return delete417Async(booleanValue).blockingGet();
     }
 
     /**
@@ -1800,7 +1800,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> delete417Async(Boolean booleanValue) {
         return delete417WithRestResponseAsync(booleanValue)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1813,7 +1813,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @return the Error object if successful.
      */
     public Error head429() {
-        return head429Async().toBlocking().value();
+        return head429Async().blockingGet();
     }
 
     /**
@@ -1845,7 +1845,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     public Single<Error> head429Async() {
         return head429WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Error>, Error>() { public Error apply(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
         }
 
 

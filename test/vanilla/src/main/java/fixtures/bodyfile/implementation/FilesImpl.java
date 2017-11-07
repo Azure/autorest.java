@@ -23,11 +23,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyfile.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.InputStream;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -87,7 +87,7 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFile() {
-        return getFileAsync().toBlocking().value();
+        return getFileAsync().blockingGet();
     }
 
     /**
@@ -119,7 +119,7 @@ public class FilesImpl implements Files {
      */
     public Single<InputStream> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -132,7 +132,7 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFileLarge() {
-        return getFileLargeAsync().toBlocking().value();
+        return getFileLargeAsync().blockingGet();
     }
 
     /**
@@ -164,7 +164,7 @@ public class FilesImpl implements Files {
      */
     public Single<InputStream> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -177,7 +177,7 @@ public class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getEmptyFile() {
-        return getEmptyFileAsync().toBlocking().value();
+        return getEmptyFileAsync().blockingGet();
     }
 
     /**
@@ -209,7 +209,7 @@ public class FilesImpl implements Files {
      */
     public Single<InputStream> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
         }
 
 

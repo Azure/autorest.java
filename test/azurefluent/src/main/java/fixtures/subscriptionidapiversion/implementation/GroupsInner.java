@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.subscriptionidapiversion.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -74,7 +74,7 @@ public class GroupsInner {
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupAsync(resourceGroupName).toBlocking().value();
+        return getSampleResourceGroupAsync(resourceGroupName).blockingGet();
     }
 
     /**
@@ -118,7 +118,7 @@ public class GroupsInner {
      */
     public Single<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .map(new Func1<RestResponse<Void, SampleResourceGroupInner>, SampleResourceGroupInner>() { public SampleResourceGroupInner call(RestResponse<Void, SampleResourceGroupInner> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SampleResourceGroupInner>, SampleResourceGroupInner>() { public SampleResourceGroupInner apply(RestResponse<Void, SampleResourceGroupInner> restResponse) { return restResponse.body(); } });
         }
 
 

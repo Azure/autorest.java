@@ -17,9 +17,9 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.A;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in

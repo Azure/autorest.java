@@ -27,14 +27,14 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -277,7 +277,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().toBlocking().value();
+        getBooleanTrueAsync().blockingGet();
     }
 
     /**
@@ -310,7 +310,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -323,7 +323,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().toBlocking().value();
+        getBooleanFalseAsync().blockingGet();
     }
 
     /**
@@ -356,7 +356,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -369,7 +369,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanNull() {
-        getBooleanNullAsync().toBlocking().value();
+        getBooleanNullAsync().blockingGet();
     }
 
     /**
@@ -402,7 +402,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -415,7 +415,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanNull(Boolean boolQuery) {
-        getBooleanNullAsync(boolQuery).toBlocking().value();
+        getBooleanNullAsync(boolQuery).blockingGet();
     }
 
     /**
@@ -450,7 +450,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -463,7 +463,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().toBlocking().value();
+        getIntOneMillionAsync().blockingGet();
     }
 
     /**
@@ -496,7 +496,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -509,7 +509,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().toBlocking().value();
+        getIntNegativeOneMillionAsync().blockingGet();
     }
 
     /**
@@ -542,7 +542,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -555,7 +555,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntNull() {
-        getIntNullAsync().toBlocking().value();
+        getIntNullAsync().blockingGet();
     }
 
     /**
@@ -588,7 +588,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -601,7 +601,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntNull(Integer intQuery) {
-        getIntNullAsync(intQuery).toBlocking().value();
+        getIntNullAsync(intQuery).blockingGet();
     }
 
     /**
@@ -636,7 +636,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -649,7 +649,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getTenBillion() {
-        getTenBillionAsync().toBlocking().value();
+        getTenBillionAsync().blockingGet();
     }
 
     /**
@@ -682,7 +682,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -695,7 +695,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().toBlocking().value();
+        getNegativeTenBillionAsync().blockingGet();
     }
 
     /**
@@ -728,7 +728,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -741,7 +741,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getLongNull() {
-        getLongNullAsync().toBlocking().value();
+        getLongNullAsync().blockingGet();
     }
 
     /**
@@ -774,7 +774,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -787,7 +787,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getLongNull(Long longQuery) {
-        getLongNullAsync(longQuery).toBlocking().value();
+        getLongNullAsync(longQuery).blockingGet();
     }
 
     /**
@@ -822,7 +822,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -835,7 +835,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().toBlocking().value();
+        floatScientificPositiveAsync().blockingGet();
     }
 
     /**
@@ -868,7 +868,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -881,7 +881,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().toBlocking().value();
+        floatScientificNegativeAsync().blockingGet();
     }
 
     /**
@@ -914,7 +914,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -927,7 +927,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatNull() {
-        floatNullAsync().toBlocking().value();
+        floatNullAsync().blockingGet();
     }
 
     /**
@@ -960,7 +960,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> floatNullAsync() {
         return floatNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -973,7 +973,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatNull(Double floatQuery) {
-        floatNullAsync(floatQuery).toBlocking().value();
+        floatNullAsync(floatQuery).blockingGet();
     }
 
     /**
@@ -1008,7 +1008,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1021,7 +1021,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().toBlocking().value();
+        doubleDecimalPositiveAsync().blockingGet();
     }
 
     /**
@@ -1054,7 +1054,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1067,7 +1067,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().toBlocking().value();
+        doubleDecimalNegativeAsync().blockingGet();
     }
 
     /**
@@ -1100,7 +1100,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1113,7 +1113,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleNull() {
-        doubleNullAsync().toBlocking().value();
+        doubleNullAsync().blockingGet();
     }
 
     /**
@@ -1146,7 +1146,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1159,7 +1159,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleNull(Double doubleQuery) {
-        doubleNullAsync(doubleQuery).toBlocking().value();
+        doubleNullAsync(doubleQuery).blockingGet();
     }
 
     /**
@@ -1194,7 +1194,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1207,7 +1207,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().toBlocking().value();
+        stringUnicodeAsync().blockingGet();
     }
 
     /**
@@ -1240,7 +1240,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1253,7 +1253,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().toBlocking().value();
+        stringUrlEncodedAsync().blockingGet();
     }
 
     /**
@@ -1286,7 +1286,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1299,7 +1299,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringEmpty() {
-        stringEmptyAsync().toBlocking().value();
+        stringEmptyAsync().blockingGet();
     }
 
     /**
@@ -1332,7 +1332,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1345,7 +1345,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringNull() {
-        stringNullAsync().toBlocking().value();
+        stringNullAsync().blockingGet();
     }
 
     /**
@@ -1378,7 +1378,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> stringNullAsync() {
         return stringNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1391,7 +1391,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringNull(String stringQuery) {
-        stringNullAsync(stringQuery).toBlocking().value();
+        stringNullAsync(stringQuery).blockingGet();
     }
 
     /**
@@ -1426,7 +1426,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1439,7 +1439,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumValid() {
-        enumValidAsync().toBlocking().value();
+        enumValidAsync().blockingGet();
     }
 
     /**
@@ -1472,7 +1472,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> enumValidAsync() {
         return enumValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1485,7 +1485,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumValid(UriColor enumQuery) {
-        enumValidAsync(enumQuery).toBlocking().value();
+        enumValidAsync(enumQuery).blockingGet();
     }
 
     /**
@@ -1520,7 +1520,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1533,7 +1533,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumNull() {
-        enumNullAsync().toBlocking().value();
+        enumNullAsync().blockingGet();
     }
 
     /**
@@ -1566,7 +1566,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> enumNullAsync() {
         return enumNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1579,7 +1579,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumNull(UriColor enumQuery) {
-        enumNullAsync(enumQuery).toBlocking().value();
+        enumNullAsync(enumQuery).blockingGet();
     }
 
     /**
@@ -1614,7 +1614,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1627,7 +1627,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteMultiByte() {
-        byteMultiByteAsync().toBlocking().value();
+        byteMultiByteAsync().blockingGet();
     }
 
     /**
@@ -1661,7 +1661,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1674,7 +1674,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteMultiByte(byte[] byteQuery) {
-        byteMultiByteAsync(byteQuery).toBlocking().value();
+        byteMultiByteAsync(byteQuery).blockingGet();
     }
 
     /**
@@ -1710,7 +1710,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1723,7 +1723,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteEmpty() {
-        byteEmptyAsync().toBlocking().value();
+        byteEmptyAsync().blockingGet();
     }
 
     /**
@@ -1757,7 +1757,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1770,7 +1770,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteNull() {
-        byteNullAsync().toBlocking().value();
+        byteNullAsync().blockingGet();
     }
 
     /**
@@ -1804,7 +1804,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> byteNullAsync() {
         return byteNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1817,7 +1817,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteNull(byte[] byteQuery) {
-        byteNullAsync(byteQuery).toBlocking().value();
+        byteNullAsync(byteQuery).blockingGet();
     }
 
     /**
@@ -1853,7 +1853,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1866,7 +1866,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateValid() {
-        dateValidAsync().toBlocking().value();
+        dateValidAsync().blockingGet();
     }
 
     /**
@@ -1899,7 +1899,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1912,7 +1912,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateNull() {
-        dateNullAsync().toBlocking().value();
+        dateNullAsync().blockingGet();
     }
 
     /**
@@ -1945,7 +1945,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> dateNullAsync() {
         return dateNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1958,7 +1958,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateNull(LocalDate dateQuery) {
-        dateNullAsync(dateQuery).toBlocking().value();
+        dateNullAsync(dateQuery).blockingGet();
     }
 
     /**
@@ -1993,7 +1993,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2006,7 +2006,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().toBlocking().value();
+        dateTimeValidAsync().blockingGet();
     }
 
     /**
@@ -2039,7 +2039,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2052,7 +2052,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateTimeNull() {
-        dateTimeNullAsync().toBlocking().value();
+        dateTimeNullAsync().blockingGet();
     }
 
     /**
@@ -2085,7 +2085,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2098,7 +2098,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimeQuery) {
-        dateTimeNullAsync(dateTimeQuery).toBlocking().value();
+        dateTimeNullAsync(dateTimeQuery).blockingGet();
     }
 
     /**
@@ -2133,7 +2133,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> dateTimeNullAsync(DateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2146,7 +2146,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvValid() {
-        arrayStringCsvValidAsync().toBlocking().value();
+        arrayStringCsvValidAsync().blockingGet();
     }
 
     /**
@@ -2181,7 +2181,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2194,7 +2194,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvValid(List<String> arrayQuery) {
-        arrayStringCsvValidAsync(arrayQuery).toBlocking().value();
+        arrayStringCsvValidAsync(arrayQuery).blockingGet();
     }
 
     /**
@@ -2231,7 +2231,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2244,7 +2244,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvNull() {
-        arrayStringCsvNullAsync().toBlocking().value();
+        arrayStringCsvNullAsync().blockingGet();
     }
 
     /**
@@ -2279,7 +2279,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2292,7 +2292,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvNull(List<String> arrayQuery) {
-        arrayStringCsvNullAsync(arrayQuery).toBlocking().value();
+        arrayStringCsvNullAsync(arrayQuery).blockingGet();
     }
 
     /**
@@ -2329,7 +2329,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2342,7 +2342,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvEmpty() {
-        arrayStringCsvEmptyAsync().toBlocking().value();
+        arrayStringCsvEmptyAsync().blockingGet();
     }
 
     /**
@@ -2377,7 +2377,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2390,7 +2390,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
-        arrayStringCsvEmptyAsync(arrayQuery).toBlocking().value();
+        arrayStringCsvEmptyAsync(arrayQuery).blockingGet();
     }
 
     /**
@@ -2427,7 +2427,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2440,7 +2440,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringSsvValid() {
-        arrayStringSsvValidAsync().toBlocking().value();
+        arrayStringSsvValidAsync().blockingGet();
     }
 
     /**
@@ -2475,7 +2475,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2488,7 +2488,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringSsvValid(List<String> arrayQuery) {
-        arrayStringSsvValidAsync(arrayQuery).toBlocking().value();
+        arrayStringSsvValidAsync(arrayQuery).blockingGet();
     }
 
     /**
@@ -2525,7 +2525,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2538,7 +2538,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringTsvValid() {
-        arrayStringTsvValidAsync().toBlocking().value();
+        arrayStringTsvValidAsync().blockingGet();
     }
 
     /**
@@ -2573,7 +2573,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2586,7 +2586,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringTsvValid(List<String> arrayQuery) {
-        arrayStringTsvValidAsync(arrayQuery).toBlocking().value();
+        arrayStringTsvValidAsync(arrayQuery).blockingGet();
     }
 
     /**
@@ -2623,7 +2623,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -2636,7 +2636,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringPipesValid() {
-        arrayStringPipesValidAsync().toBlocking().value();
+        arrayStringPipesValidAsync().blockingGet();
     }
 
     /**
@@ -2671,7 +2671,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -2684,7 +2684,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringPipesValid(List<String> arrayQuery) {
-        arrayStringPipesValidAsync(arrayQuery).toBlocking().value();
+        arrayStringPipesValidAsync(arrayQuery).blockingGet();
     }
 
     /**
@@ -2721,7 +2721,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<Void> arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

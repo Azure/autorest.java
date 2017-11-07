@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -82,7 +82,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getEmptyError() {
-        return getEmptyErrorAsync().toBlocking().value();
+        return getEmptyErrorAsync().blockingGet();
     }
 
     /**
@@ -114,7 +114,7 @@ public class HttpFailuresImpl implements HttpFailures {
      */
     public Single<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -127,7 +127,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelError() {
-        return getNoModelErrorAsync().toBlocking().value();
+        return getNoModelErrorAsync().blockingGet();
     }
 
     /**
@@ -159,7 +159,7 @@ public class HttpFailuresImpl implements HttpFailures {
      */
     public Single<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -172,7 +172,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelEmpty() {
-        return getNoModelEmptyAsync().toBlocking().value();
+        return getNoModelEmptyAsync().blockingGet();
     }
 
     /**
@@ -204,7 +204,7 @@ public class HttpFailuresImpl implements HttpFailures {
      */
     public Single<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 

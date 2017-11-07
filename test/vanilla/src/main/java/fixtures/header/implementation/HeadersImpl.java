@@ -39,14 +39,14 @@ import fixtures.header.models.HeaderResponseIntegerHeaders;
 import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -260,7 +260,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramExistingKey(String userAgent) {
-        paramExistingKeyAsync(userAgent).toBlocking().value();
+        paramExistingKeyAsync(userAgent).blockingGet();
     }
 
     /**
@@ -298,7 +298,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramExistingKeyAsync(String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -311,7 +311,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseExistingKey() {
-        responseExistingKeyAsync().toBlocking().value();
+        responseExistingKeyAsync().blockingGet();
     }
 
     /**
@@ -343,7 +343,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseExistingKeyAsync() {
         return responseExistingKeyWithRestResponseAsync()
-            .map(new Func1<RestResponse<HeaderResponseExistingKeyHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseExistingKeyHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseExistingKeyHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseExistingKeyHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -357,7 +357,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramProtectedKey(String contentType) {
-        paramProtectedKeyAsync(contentType).toBlocking().value();
+        paramProtectedKeyAsync(contentType).blockingGet();
     }
 
     /**
@@ -395,7 +395,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramProtectedKeyAsync(String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -408,7 +408,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseProtectedKey() {
-        responseProtectedKeyAsync().toBlocking().value();
+        responseProtectedKeyAsync().blockingGet();
     }
 
     /**
@@ -440,7 +440,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseProtectedKeyAsync() {
         return responseProtectedKeyWithRestResponseAsync()
-            .map(new Func1<RestResponse<HeaderResponseProtectedKeyHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseProtectedKeyHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseProtectedKeyHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseProtectedKeyHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -455,7 +455,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramInteger(String scenario, int value) {
-        paramIntegerAsync(scenario, value).toBlocking().value();
+        paramIntegerAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -496,7 +496,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramIntegerAsync(String scenario, int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -510,7 +510,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseInteger(String scenario) {
-        responseIntegerAsync(scenario).toBlocking().value();
+        responseIntegerAsync(scenario).blockingGet();
     }
 
     /**
@@ -548,7 +548,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseIntegerAsync(String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseIntegerHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseIntegerHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseIntegerHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseIntegerHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -563,7 +563,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramLong(String scenario, long value) {
-        paramLongAsync(scenario, value).toBlocking().value();
+        paramLongAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -604,7 +604,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramLongAsync(String scenario, long value) {
         return paramLongWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -618,7 +618,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseLong(String scenario) {
-        responseLongAsync(scenario).toBlocking().value();
+        responseLongAsync(scenario).blockingGet();
     }
 
     /**
@@ -656,7 +656,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseLongAsync(String scenario) {
         return responseLongWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseLongHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseLongHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseLongHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseLongHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -671,7 +671,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramFloat(String scenario, double value) {
-        paramFloatAsync(scenario, value).toBlocking().value();
+        paramFloatAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -712,7 +712,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramFloatAsync(String scenario, double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -726,7 +726,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseFloat(String scenario) {
-        responseFloatAsync(scenario).toBlocking().value();
+        responseFloatAsync(scenario).blockingGet();
     }
 
     /**
@@ -764,7 +764,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseFloatAsync(String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseFloatHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseFloatHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseFloatHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseFloatHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -779,7 +779,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDouble(String scenario, double value) {
-        paramDoubleAsync(scenario, value).toBlocking().value();
+        paramDoubleAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -820,7 +820,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramDoubleAsync(String scenario, double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -834,7 +834,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDouble(String scenario) {
-        responseDoubleAsync(scenario).toBlocking().value();
+        responseDoubleAsync(scenario).blockingGet();
     }
 
     /**
@@ -872,7 +872,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseDoubleAsync(String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDoubleHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDoubleHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseDoubleHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseDoubleHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -887,7 +887,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramBool(String scenario, boolean value) {
-        paramBoolAsync(scenario, value).toBlocking().value();
+        paramBoolAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -928,7 +928,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramBoolAsync(String scenario, boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -942,7 +942,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseBool(String scenario) {
-        responseBoolAsync(scenario).toBlocking().value();
+        responseBoolAsync(scenario).blockingGet();
     }
 
     /**
@@ -980,7 +980,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseBoolAsync(String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseBoolHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseBoolHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseBoolHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseBoolHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -994,7 +994,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramString(String scenario) {
-        paramStringAsync(scenario).toBlocking().value();
+        paramStringAsync(scenario).blockingGet();
     }
 
     /**
@@ -1033,7 +1033,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramStringAsync(String scenario) {
         return paramStringWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1047,7 +1047,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramString(String scenario, String value) {
-        paramStringAsync(scenario, value).toBlocking().value();
+        paramStringAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -1088,7 +1088,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramStringAsync(String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1102,7 +1102,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseString(String scenario) {
-        responseStringAsync(scenario).toBlocking().value();
+        responseStringAsync(scenario).blockingGet();
     }
 
     /**
@@ -1140,7 +1140,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseStringAsync(String scenario) {
         return responseStringWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseStringHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseStringHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseStringHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseStringHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1155,7 +1155,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDate(String scenario, LocalDate value) {
-        paramDateAsync(scenario, value).toBlocking().value();
+        paramDateAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -1199,7 +1199,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramDateAsync(String scenario, LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1213,7 +1213,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDate(String scenario) {
-        responseDateAsync(scenario).toBlocking().value();
+        responseDateAsync(scenario).blockingGet();
     }
 
     /**
@@ -1251,7 +1251,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseDateAsync(String scenario) {
         return responseDateWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDateHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDateHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseDateHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseDateHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1266,7 +1266,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetime(String scenario, DateTime value) {
-        paramDatetimeAsync(scenario, value).toBlocking().value();
+        paramDatetimeAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -1310,7 +1310,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramDatetimeAsync(String scenario, DateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1324,7 +1324,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDatetime(String scenario) {
-        responseDatetimeAsync(scenario).toBlocking().value();
+        responseDatetimeAsync(scenario).blockingGet();
     }
 
     /**
@@ -1362,7 +1362,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseDatetimeAsync(String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDatetimeHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDatetimeHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseDatetimeHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseDatetimeHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1376,7 +1376,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetimeRfc1123(String scenario) {
-        paramDatetimeRfc1123Async(scenario).toBlocking().value();
+        paramDatetimeRfc1123Async(scenario).blockingGet();
     }
 
     /**
@@ -1419,7 +1419,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramDatetimeRfc1123Async(String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1433,7 +1433,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) {
-        paramDatetimeRfc1123Async(scenario, value).toBlocking().value();
+        paramDatetimeRfc1123Async(scenario, value).blockingGet();
     }
 
     /**
@@ -1478,7 +1478,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramDatetimeRfc1123Async(String scenario, DateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1492,7 +1492,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDatetimeRfc1123(String scenario) {
-        responseDatetimeRfc1123Async(scenario).toBlocking().value();
+        responseDatetimeRfc1123Async(scenario).blockingGet();
     }
 
     /**
@@ -1530,7 +1530,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseDatetimeRfc1123Async(String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>, Void>() { public Void call(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>, Void>() { public Void apply(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1545,7 +1545,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDuration(String scenario, Period value) {
-        paramDurationAsync(scenario, value).toBlocking().value();
+        paramDurationAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -1589,7 +1589,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramDurationAsync(String scenario, Period value) {
         return paramDurationWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1603,7 +1603,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDuration(String scenario) {
-        responseDurationAsync(scenario).toBlocking().value();
+        responseDurationAsync(scenario).blockingGet();
     }
 
     /**
@@ -1641,7 +1641,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseDurationAsync(String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDurationHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDurationHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseDurationHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseDurationHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1656,7 +1656,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramByte(String scenario, byte[] value) {
-        paramByteAsync(scenario, value).toBlocking().value();
+        paramByteAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -1701,7 +1701,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramByteAsync(String scenario, byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1715,7 +1715,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseByte(String scenario) {
-        responseByteAsync(scenario).toBlocking().value();
+        responseByteAsync(scenario).blockingGet();
     }
 
     /**
@@ -1753,7 +1753,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseByteAsync(String scenario) {
         return responseByteWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseByteHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseByteHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseByteHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseByteHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1767,7 +1767,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramEnum(String scenario) {
-        paramEnumAsync(scenario).toBlocking().value();
+        paramEnumAsync(scenario).blockingGet();
     }
 
     /**
@@ -1806,7 +1806,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramEnumAsync(String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -1820,7 +1820,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramEnum(String scenario, GreyscaleColors value) {
-        paramEnumAsync(scenario, value).toBlocking().value();
+        paramEnumAsync(scenario, value).blockingGet();
     }
 
     /**
@@ -1861,7 +1861,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1875,7 +1875,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseEnum(String scenario) {
-        responseEnumAsync(scenario).toBlocking().value();
+        responseEnumAsync(scenario).blockingGet();
     }
 
     /**
@@ -1913,7 +1913,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> responseEnumAsync(String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseEnumHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseEnumHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderResponseEnumHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderResponseEnumHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1926,7 +1926,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void customRequestId() {
-        customRequestIdAsync().toBlocking().value();
+        customRequestIdAsync().blockingGet();
     }
 
     /**
@@ -1958,7 +1958,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      */
     public Single<Void> customRequestIdAsync() {
         return customRequestIdWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

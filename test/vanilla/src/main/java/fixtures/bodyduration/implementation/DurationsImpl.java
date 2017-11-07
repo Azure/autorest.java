@@ -25,11 +25,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyduration.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.Period;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -92,7 +92,7 @@ public class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -124,7 +124,7 @@ public class DurationsImpl implements Durations {
      */
     public Single<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Period>, Period>() { public Period apply(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -138,7 +138,7 @@ public class DurationsImpl implements Durations {
      * @return the void object if successful.
      */
     public void putPositiveDuration(Period durationBody) {
-        putPositiveDurationAsync(durationBody).toBlocking().value();
+        putPositiveDurationAsync(durationBody).blockingGet();
     }
 
     /**
@@ -176,7 +176,7 @@ public class DurationsImpl implements Durations {
      */
     public Single<Void> putPositiveDurationAsync(Period durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -189,7 +189,7 @@ public class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getPositiveDuration() {
-        return getPositiveDurationAsync().toBlocking().value();
+        return getPositiveDurationAsync().blockingGet();
     }
 
     /**
@@ -221,7 +221,7 @@ public class DurationsImpl implements Durations {
      */
     public Single<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Period>, Period>() { public Period apply(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -234,7 +234,7 @@ public class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -266,7 +266,7 @@ public class DurationsImpl implements Durations {
      */
     public Single<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Period>, Period>() { public Period apply(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
         }
 
 

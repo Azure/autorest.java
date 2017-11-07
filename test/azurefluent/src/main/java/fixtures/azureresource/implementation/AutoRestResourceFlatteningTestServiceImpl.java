@@ -30,12 +30,12 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.azureresource.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
@@ -218,7 +218,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putArray() {
-        putArrayAsync().toBlocking().value();
+        putArrayAsync().blockingGet();
     }
 
     /**
@@ -252,7 +252,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Void> putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -265,7 +265,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).toBlocking().value();
+        putArrayAsync(resourceArray).blockingGet();
     }
 
     /**
@@ -301,7 +301,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Void> putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -314,7 +314,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the List&lt;FlattenedProductInner&gt; object if successful.
      */
     public List<FlattenedProductInner> getArray() {
-        return getArrayAsync().toBlocking().value();
+        return getArrayAsync().blockingGet();
     }
 
     /**
@@ -346,7 +346,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<List<FlattenedProductInner>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<FlattenedProductInner>>, List<FlattenedProductInner>>() { public List<FlattenedProductInner> call(RestResponse<Void, List<FlattenedProductInner>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, List<FlattenedProductInner>>, List<FlattenedProductInner>>() { public List<FlattenedProductInner> apply(RestResponse<Void, List<FlattenedProductInner>> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -359,7 +359,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putDictionary() {
-        putDictionaryAsync().toBlocking().value();
+        putDictionaryAsync().blockingGet();
     }
 
     /**
@@ -393,7 +393,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Void> putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -406,7 +406,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putDictionary(Map<String, FlattenedProductInner> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).toBlocking().value();
+        putDictionaryAsync(resourceDictionary).blockingGet();
     }
 
     /**
@@ -442,7 +442,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -455,7 +455,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the Map&lt;String, FlattenedProductInner&gt; object if successful.
      */
     public Map<String, FlattenedProductInner> getDictionary() {
-        return getDictionaryAsync().toBlocking().value();
+        return getDictionaryAsync().blockingGet();
     }
 
     /**
@@ -487,7 +487,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Map<String, FlattenedProductInner>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, FlattenedProductInner>>, Map<String, FlattenedProductInner>>() { public Map<String, FlattenedProductInner> call(RestResponse<Void, Map<String, FlattenedProductInner>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Map<String, FlattenedProductInner>>, Map<String, FlattenedProductInner>>() { public Map<String, FlattenedProductInner> apply(RestResponse<Void, Map<String, FlattenedProductInner>> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -500,7 +500,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putResourceCollection() {
-        putResourceCollectionAsync().toBlocking().value();
+        putResourceCollectionAsync().blockingGet();
     }
 
     /**
@@ -534,7 +534,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Void> putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -547,7 +547,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putResourceCollection(ResourceCollectionInner resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).toBlocking().value();
+        putResourceCollectionAsync(resourceComplexObject).blockingGet();
     }
 
     /**
@@ -583,7 +583,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -596,7 +596,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the ResourceCollectionInner object if successful.
      */
     public ResourceCollectionInner getResourceCollection() {
-        return getResourceCollectionAsync().toBlocking().value();
+        return getResourceCollectionAsync().blockingGet();
     }
 
     /**
@@ -628,7 +628,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<ResourceCollectionInner> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ResourceCollectionInner>, ResourceCollectionInner>() { public ResourceCollectionInner call(RestResponse<Void, ResourceCollectionInner> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, ResourceCollectionInner>, ResourceCollectionInner>() { public ResourceCollectionInner apply(RestResponse<Void, ResourceCollectionInner> restResponse) { return restResponse.body(); } });
         }
 
 

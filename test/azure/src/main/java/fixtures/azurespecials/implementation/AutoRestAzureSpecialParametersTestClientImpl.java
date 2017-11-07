@@ -24,7 +24,7 @@ import fixtures.azurespecials.SkipUrlEncodings;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.XMsClientRequestIds;
-import rx.Single;
+import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.

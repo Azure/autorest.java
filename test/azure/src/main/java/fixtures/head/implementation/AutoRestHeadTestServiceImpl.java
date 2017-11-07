@@ -17,7 +17,7 @@ import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import fixtures.head.AutoRestHeadTestService;
 import fixtures.head.HttpSuccess;
-import rx.Single;
+import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestServiceImpl class.

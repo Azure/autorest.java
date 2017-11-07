@@ -26,10 +26,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -76,7 +76,7 @@ public class GroupsImpl implements Groups {
      * @return the SampleResourceGroup object if successful.
      */
     public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupAsync(resourceGroupName).toBlocking().value();
+        return getSampleResourceGroupAsync(resourceGroupName).blockingGet();
     }
 
     /**
@@ -120,7 +120,7 @@ public class GroupsImpl implements Groups {
      */
     public Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .map(new Func1<RestResponse<Void, SampleResourceGroup>, SampleResourceGroup>() { public SampleResourceGroup call(RestResponse<Void, SampleResourceGroup> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SampleResourceGroup>, SampleResourceGroup>() { public SampleResourceGroup apply(RestResponse<Void, SampleResourceGroup> restResponse) { return restResponse.body(); } });
         }
 
 

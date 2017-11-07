@@ -26,10 +26,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.azureparametergrouping.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -94,7 +94,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
-        postRequiredAsync(parameterGroupingPostRequiredParameters).toBlocking().value();
+        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingGet();
     }
 
     /**
@@ -137,7 +137,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -150,7 +150,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postOptional() {
-        postOptionalAsync().toBlocking().value();
+        postOptionalAsync().blockingGet();
     }
 
     /**
@@ -186,7 +186,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -199,7 +199,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
-        postOptionalAsync(parameterGroupingPostOptionalParameters).toBlocking().value();
+        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingGet();
     }
 
     /**
@@ -243,7 +243,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -256,7 +256,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsAsync().toBlocking().value();
+        postMultiParamGroupsAsync().blockingGet();
     }
 
     /**
@@ -296,7 +296,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -310,7 +310,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().value();
+        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingGet();
     }
 
     /**
@@ -366,7 +366,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -379,7 +379,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectAsync().toBlocking().value();
+        postSharedParameterGroupObjectAsync().blockingGet();
     }
 
     /**
@@ -415,7 +415,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -428,7 +428,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
-        postSharedParameterGroupObjectAsync(firstParameterGroup).toBlocking().value();
+        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingGet();
     }
 
     /**
@@ -472,7 +472,7 @@ public class ParameterGroupingsInner {
      */
     public Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

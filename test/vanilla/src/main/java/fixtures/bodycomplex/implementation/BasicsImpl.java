@@ -28,10 +28,10 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -106,7 +106,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -138,7 +138,7 @@ public class BasicsImpl implements Basics {
      */
     public Single<Basic> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Basic>, Basic>() { public Basic apply(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -152,7 +152,7 @@ public class BasicsImpl implements Basics {
      * @return the void object if successful.
      */
     public void putValid(Basic complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingGet();
     }
 
     /**
@@ -191,7 +191,7 @@ public class BasicsImpl implements Basics {
      */
     public Single<Void> putValidAsync(Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -204,7 +204,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -236,7 +236,7 @@ public class BasicsImpl implements Basics {
      */
     public Single<Basic> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Basic>, Basic>() { public Basic apply(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -249,7 +249,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -281,7 +281,7 @@ public class BasicsImpl implements Basics {
      */
     public Single<Basic> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Basic>, Basic>() { public Basic apply(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -294,7 +294,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -326,7 +326,7 @@ public class BasicsImpl implements Basics {
      */
     public Single<Basic> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Basic>, Basic>() { public Basic apply(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -339,7 +339,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -371,7 +371,7 @@ public class BasicsImpl implements Basics {
      */
     public Single<Basic> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Basic>, Basic>() { public Basic apply(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
         }
 
 

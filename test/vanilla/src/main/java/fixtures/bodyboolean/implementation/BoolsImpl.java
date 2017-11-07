@@ -25,10 +25,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyboolean.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -103,7 +103,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
-        return getTrueAsync().toBlocking().value();
+        return getTrueAsync().blockingGet();
     }
 
     /**
@@ -135,7 +135,7 @@ public class BoolsImpl implements Bools {
      */
     public Single<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -149,7 +149,7 @@ public class BoolsImpl implements Bools {
      * @return the void object if successful.
      */
     public void putTrue(boolean boolBody) {
-        putTrueAsync(boolBody).toBlocking().value();
+        putTrueAsync(boolBody).blockingGet();
     }
 
     /**
@@ -184,7 +184,7 @@ public class BoolsImpl implements Bools {
      */
     public Single<Void> putTrueAsync(boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -197,7 +197,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
-        return getFalseAsync().toBlocking().value();
+        return getFalseAsync().blockingGet();
     }
 
     /**
@@ -229,7 +229,7 @@ public class BoolsImpl implements Bools {
      */
     public Single<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -243,7 +243,7 @@ public class BoolsImpl implements Bools {
      * @return the void object if successful.
      */
     public void putFalse(boolean boolBody) {
-        putFalseAsync(boolBody).toBlocking().value();
+        putFalseAsync(boolBody).blockingGet();
     }
 
     /**
@@ -278,7 +278,7 @@ public class BoolsImpl implements Bools {
      */
     public Single<Void> putFalseAsync(boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -291,7 +291,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -323,7 +323,7 @@ public class BoolsImpl implements Bools {
      */
     public Single<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -336,7 +336,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -368,7 +368,7 @@ public class BoolsImpl implements Bools {
      */
     public Single<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 

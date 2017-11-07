@@ -27,12 +27,12 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.UnixTime;
 import fixtures.bodyinteger.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -158,7 +158,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -190,7 +190,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -203,7 +203,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -235,7 +235,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -248,7 +248,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
-        return getOverflowInt32Async().toBlocking().value();
+        return getOverflowInt32Async().blockingGet();
     }
 
     /**
@@ -280,7 +280,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -293,7 +293,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
-        return getUnderflowInt32Async().toBlocking().value();
+        return getUnderflowInt32Async().blockingGet();
     }
 
     /**
@@ -325,7 +325,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -338,7 +338,7 @@ public class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
-        return getOverflowInt64Async().toBlocking().value();
+        return getOverflowInt64Async().blockingGet();
     }
 
     /**
@@ -370,7 +370,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Long>, Long>() { public Long call(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Long>, Long>() { public Long apply(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -383,7 +383,7 @@ public class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
-        return getUnderflowInt64Async().toBlocking().value();
+        return getUnderflowInt64Async().blockingGet();
     }
 
     /**
@@ -415,7 +415,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Long>, Long>() { public Long call(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Long>, Long>() { public Long apply(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -429,7 +429,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMax32(int intBody) {
-        putMax32Async(intBody).toBlocking().value();
+        putMax32Async(intBody).blockingGet();
     }
 
     /**
@@ -464,7 +464,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Void> putMax32Async(int intBody) {
         return putMax32WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -478,7 +478,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMax64(long intBody) {
-        putMax64Async(intBody).toBlocking().value();
+        putMax64Async(intBody).blockingGet();
     }
 
     /**
@@ -513,7 +513,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Void> putMax64Async(long intBody) {
         return putMax64WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -527,7 +527,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMin32(int intBody) {
-        putMin32Async(intBody).toBlocking().value();
+        putMin32Async(intBody).blockingGet();
     }
 
     /**
@@ -562,7 +562,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Void> putMin32Async(int intBody) {
         return putMin32WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -576,7 +576,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMin64(long intBody) {
-        putMin64Async(intBody).toBlocking().value();
+        putMin64Async(intBody).blockingGet();
     }
 
     /**
@@ -611,7 +611,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Void> putMin64Async(long intBody) {
         return putMin64WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -624,7 +624,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getUnixTime() {
-        return getUnixTimeAsync().toBlocking().value();
+        return getUnixTimeAsync().blockingGet();
     }
 
     /**
@@ -656,7 +656,7 @@ public class IntsImpl implements Ints {
      */
     public Single<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -670,7 +670,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putUnixTimeDate(DateTime intBody) {
-        putUnixTimeDateAsync(intBody).toBlocking().value();
+        putUnixTimeDateAsync(intBody).blockingGet();
     }
 
     /**
@@ -706,7 +706,7 @@ public class IntsImpl implements Ints {
      */
     public Single<Void> putUnixTimeDateAsync(DateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -719,7 +719,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeAsync().toBlocking().value();
+        return getInvalidUnixTimeAsync().blockingGet();
     }
 
     /**
@@ -751,7 +751,7 @@ public class IntsImpl implements Ints {
      */
     public Single<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -764,7 +764,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getNullUnixTime() {
-        return getNullUnixTimeAsync().toBlocking().value();
+        return getNullUnixTimeAsync().blockingGet();
     }
 
     /**
@@ -796,7 +796,7 @@ public class IntsImpl implements Ints {
      */
     public Single<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
         }
 
 

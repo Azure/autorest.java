@@ -27,10 +27,10 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -87,7 +87,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -119,7 +119,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      */
     public Single<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Fish>, Fish>() { public Fish call(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Fish>, Fish>() { public Fish apply(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -165,7 +165,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingGet();
     }
 
     /**
@@ -300,7 +300,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      */
     public Single<Void> putValidAsync(Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -339,7 +339,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putValidMissingRequired(Fish complexBody) {
-        putValidMissingRequiredAsync(complexBody).toBlocking().value();
+        putValidMissingRequiredAsync(complexBody).blockingGet();
     }
 
     /**
@@ -453,7 +453,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      */
     public Single<Void> putValidMissingRequiredAsync(Fish complexBody) {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

@@ -31,10 +31,10 @@ import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -99,7 +99,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        postRequiredAsync(parameterGroupingPostRequiredParameters).toBlocking().value();
+        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingGet();
     }
 
     /**
@@ -142,7 +142,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -155,7 +155,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postOptional() {
-        postOptionalAsync().toBlocking().value();
+        postOptionalAsync().blockingGet();
     }
 
     /**
@@ -191,7 +191,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -204,7 +204,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        postOptionalAsync(parameterGroupingPostOptionalParameters).toBlocking().value();
+        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingGet();
     }
 
     /**
@@ -248,7 +248,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -261,7 +261,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsAsync().toBlocking().value();
+        postMultiParamGroupsAsync().blockingGet();
     }
 
     /**
@@ -301,7 +301,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -315,7 +315,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().value();
+        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingGet();
     }
 
     /**
@@ -371,7 +371,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -384,7 +384,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectAsync().toBlocking().value();
+        postSharedParameterGroupObjectAsync().blockingGet();
     }
 
     /**
@@ -420,7 +420,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -433,7 +433,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
-        postSharedParameterGroupObjectAsync(firstParameterGroup).toBlocking().value();
+        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingGet();
     }
 
     /**
@@ -477,7 +477,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

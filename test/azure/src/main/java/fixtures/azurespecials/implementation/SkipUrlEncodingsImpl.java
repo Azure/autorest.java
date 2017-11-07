@@ -25,10 +25,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -111,7 +111,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodPathValid(String unencodedPathParam) {
-        getMethodPathValidAsync(unencodedPathParam).toBlocking().value();
+        getMethodPathValidAsync(unencodedPathParam).blockingGet();
     }
 
     /**
@@ -149,7 +149,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getMethodPathValidAsync(String unencodedPathParam) {
         return getMethodPathValidWithRestResponseAsync(unencodedPathParam)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -163,7 +163,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getPathPathValid(String unencodedPathParam) {
-        getPathPathValidAsync(unencodedPathParam).toBlocking().value();
+        getPathPathValidAsync(unencodedPathParam).blockingGet();
     }
 
     /**
@@ -201,7 +201,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getPathPathValidAsync(String unencodedPathParam) {
         return getPathPathValidWithRestResponseAsync(unencodedPathParam)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -214,7 +214,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getSwaggerPathValid() {
-        getSwaggerPathValidAsync().toBlocking().value();
+        getSwaggerPathValidAsync().blockingGet();
     }
 
     /**
@@ -247,7 +247,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getSwaggerPathValidAsync() {
         return getSwaggerPathValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -261,7 +261,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodQueryValid(String q1) {
-        getMethodQueryValidAsync(q1).toBlocking().value();
+        getMethodQueryValidAsync(q1).blockingGet();
     }
 
     /**
@@ -299,7 +299,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getMethodQueryValidAsync(String q1) {
         return getMethodQueryValidWithRestResponseAsync(q1)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -312,7 +312,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodQueryNull() {
-        getMethodQueryNullAsync().toBlocking().value();
+        getMethodQueryNullAsync().blockingGet();
     }
 
     /**
@@ -345,7 +345,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getMethodQueryNullAsync() {
         return getMethodQueryNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -358,7 +358,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodQueryNull(String q1) {
-        getMethodQueryNullAsync(q1).toBlocking().value();
+        getMethodQueryNullAsync(q1).blockingGet();
     }
 
     /**
@@ -393,7 +393,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getMethodQueryNullAsync(String q1) {
         return getMethodQueryNullWithRestResponseAsync(q1)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -407,7 +407,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getPathQueryValid(String q1) {
-        getPathQueryValidAsync(q1).toBlocking().value();
+        getPathQueryValidAsync(q1).blockingGet();
     }
 
     /**
@@ -445,7 +445,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getPathQueryValidAsync(String q1) {
         return getPathQueryValidWithRestResponseAsync(q1)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -458,7 +458,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getSwaggerQueryValid() {
-        getSwaggerQueryValidAsync().toBlocking().value();
+        getSwaggerQueryValidAsync().blockingGet();
     }
 
     /**
@@ -491,7 +491,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     public Single<Void> getSwaggerQueryValidAsync() {
         return getSwaggerQueryValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

@@ -27,10 +27,10 @@ import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -105,7 +105,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -137,7 +137,7 @@ public class DictionarysImpl implements Dictionarys {
      */
     public Single<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper apply(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -151,7 +151,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putValid(DictionaryWrapper complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingGet();
     }
 
     /**
@@ -190,7 +190,7 @@ public class DictionarysImpl implements Dictionarys {
      */
     public Single<Void> putValidAsync(DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -203,7 +203,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -235,7 +235,7 @@ public class DictionarysImpl implements Dictionarys {
      */
     public Single<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper apply(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -249,7 +249,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putEmpty(DictionaryWrapper complexBody) {
-        putEmptyAsync(complexBody).toBlocking().value();
+        putEmptyAsync(complexBody).blockingGet();
     }
 
     /**
@@ -288,7 +288,7 @@ public class DictionarysImpl implements Dictionarys {
      */
     public Single<Void> putEmptyAsync(DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -301,7 +301,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -333,7 +333,7 @@ public class DictionarysImpl implements Dictionarys {
      */
     public Single<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper apply(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -346,7 +346,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -378,7 +378,7 @@ public class DictionarysImpl implements Dictionarys {
      */
     public Single<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper apply(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
         }
 
 

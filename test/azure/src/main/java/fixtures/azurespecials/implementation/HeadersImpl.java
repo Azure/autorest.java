@@ -28,10 +28,10 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -90,7 +90,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the void object if successful.
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdAsync(fooClientRequestId).toBlocking().value();
+        customNamedRequestIdAsync(fooClientRequestId).blockingGet();
     }
 
     /**
@@ -128,7 +128,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      */
     public Single<Void> customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>, Void>() { public Void call(RestResponse<HeaderCustomNamedRequestIdHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -142,7 +142,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the void object if successful.
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().value();
+        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingGet();
     }
 
     /**
@@ -182,7 +182,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      */
     public Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>, Void>() { public Void call(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>, Void>() { public Void apply(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -196,7 +196,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the boolean object if successful.
      */
     public boolean customNamedRequestIdHead(String fooClientRequestId) {
-        return customNamedRequestIdHeadAsync(fooClientRequestId).toBlocking().value();
+        return customNamedRequestIdHeadAsync(fooClientRequestId).blockingGet();
     }
 
     /**
@@ -234,7 +234,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      */
     public Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>, Boolean>() { public Boolean call(RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>, Boolean>() { public Boolean apply(RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> restResponse) { return restResponse.body(); } });
         }
 
 

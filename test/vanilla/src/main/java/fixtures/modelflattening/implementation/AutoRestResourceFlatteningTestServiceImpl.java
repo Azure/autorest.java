@@ -15,7 +15,7 @@ import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
 import com.microsoft.rest.v2.RestClient;
-import rx.Single;
+import io.reactivex.Single;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -38,11 +38,11 @@ import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.functions.Func1;
-import rx.Observable;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
@@ -173,7 +173,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putArray() {
-        putArrayAsync().toBlocking().value();
+        putArrayAsync().blockingGet();
     }
 
     /**
@@ -207,7 +207,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -220,7 +220,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).toBlocking().value();
+        putArrayAsync(resourceArray).blockingGet();
     }
 
     /**
@@ -256,7 +256,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -269,7 +269,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayAsync().toBlocking().value();
+        return getArrayAsync().blockingGet();
     }
 
     /**
@@ -301,7 +301,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<FlattenedProduct>>, List<FlattenedProduct>>() { public List<FlattenedProduct> call(RestResponse<Void, List<FlattenedProduct>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, List<FlattenedProduct>>, List<FlattenedProduct>>() { public List<FlattenedProduct> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -314,7 +314,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putWrappedArray() {
-        putWrappedArrayAsync().toBlocking().value();
+        putWrappedArrayAsync().blockingGet();
     }
 
     /**
@@ -348,7 +348,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -361,7 +361,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putWrappedArray(List<WrappedProduct> resourceArray) {
-        putWrappedArrayAsync(resourceArray).toBlocking().value();
+        putWrappedArrayAsync(resourceArray).blockingGet();
     }
 
     /**
@@ -397,7 +397,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -410,7 +410,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the List&lt;ProductWrapper&gt; object if successful.
      */
     public List<ProductWrapper> getWrappedArray() {
-        return getWrappedArrayAsync().toBlocking().value();
+        return getWrappedArrayAsync().blockingGet();
     }
 
     /**
@@ -442,7 +442,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<ProductWrapper>>, List<ProductWrapper>>() { public List<ProductWrapper> call(RestResponse<Void, List<ProductWrapper>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, List<ProductWrapper>>, List<ProductWrapper>>() { public List<ProductWrapper> apply(RestResponse<Void, List<ProductWrapper>> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -455,7 +455,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putDictionary() {
-        putDictionaryAsync().toBlocking().value();
+        putDictionaryAsync().blockingGet();
     }
 
     /**
@@ -489,7 +489,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -502,7 +502,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).toBlocking().value();
+        putDictionaryAsync(resourceDictionary).blockingGet();
     }
 
     /**
@@ -538,7 +538,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -551,7 +551,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryAsync().toBlocking().value();
+        return getDictionaryAsync().blockingGet();
     }
 
     /**
@@ -583,7 +583,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() { public Map<String, FlattenedProduct> call(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() { public Map<String, FlattenedProduct> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -596,7 +596,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putResourceCollection() {
-        putResourceCollectionAsync().toBlocking().value();
+        putResourceCollectionAsync().blockingGet();
     }
 
     /**
@@ -630,7 +630,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -643,7 +643,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).toBlocking().value();
+        putResourceCollectionAsync(resourceComplexObject).blockingGet();
     }
 
     /**
@@ -679,7 +679,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -692,7 +692,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionAsync().toBlocking().value();
+        return getResourceCollectionAsync().blockingGet();
     }
 
     /**
@@ -724,7 +724,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ResourceCollection>, ResourceCollection>() { public ResourceCollection call(RestResponse<Void, ResourceCollection> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, ResourceCollection>, ResourceCollection>() { public ResourceCollection apply(RestResponse<Void, ResourceCollection> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -737,7 +737,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct() {
-        return putSimpleProductAsync().toBlocking().value();
+        return putSimpleProductAsync().blockingGet();
     }
 
     /**
@@ -771,7 +771,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct apply(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -784,7 +784,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductAsync(simpleBodyProduct).toBlocking().value();
+        return putSimpleProductAsync(simpleBodyProduct).blockingGet();
     }
 
     /**
@@ -820,7 +820,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct apply(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -835,7 +835,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) {
-        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName).toBlocking().value();
+        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName).blockingGet();
     }
 
     /**
@@ -888,7 +888,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct apply(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
         }
 
     /**
@@ -905,7 +905,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
-        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().value();
+        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).blockingGet();
     }
 
     /**
@@ -967,7 +967,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct apply(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -981,7 +981,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingAsync(flattenParameterGroup).toBlocking().value();
+        return putSimpleProductWithGroupingAsync(flattenParameterGroup).blockingGet();
     }
 
     /**
@@ -1035,7 +1035,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct apply(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
         }
 
 

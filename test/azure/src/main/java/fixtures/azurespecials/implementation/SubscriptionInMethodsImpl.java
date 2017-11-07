@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -92,7 +92,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postMethodLocalValid(String subscriptionId) {
-        postMethodLocalValidAsync(subscriptionId).toBlocking().value();
+        postMethodLocalValidAsync(subscriptionId).blockingGet();
     }
 
     /**
@@ -130,7 +130,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      */
     public Single<Void> postMethodLocalValidAsync(String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -144,7 +144,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postMethodLocalNull(String subscriptionId) {
-        postMethodLocalNullAsync(subscriptionId).toBlocking().value();
+        postMethodLocalNullAsync(subscriptionId).blockingGet();
     }
 
     /**
@@ -182,7 +182,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      */
     public Single<Void> postMethodLocalNullAsync(String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -196,7 +196,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postPathLocalValid(String subscriptionId) {
-        postPathLocalValidAsync(subscriptionId).toBlocking().value();
+        postPathLocalValidAsync(subscriptionId).blockingGet();
     }
 
     /**
@@ -234,7 +234,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      */
     public Single<Void> postPathLocalValidAsync(String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -248,7 +248,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postSwaggerLocalValid(String subscriptionId) {
-        postSwaggerLocalValidAsync(subscriptionId).toBlocking().value();
+        postSwaggerLocalValidAsync(subscriptionId).blockingGet();
     }
 
     /**
@@ -286,7 +286,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      */
     public Single<Void> postSwaggerLocalValidAsync(String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

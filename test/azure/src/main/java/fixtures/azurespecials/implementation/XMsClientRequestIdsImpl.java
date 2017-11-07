@@ -24,10 +24,10 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 import com.microsoft.azure.v2.AzureProxy;
 
 /**
@@ -79,7 +79,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the void object if successful.
      */
     public void get() {
-        getAsync().toBlocking().value();
+        getAsync().blockingGet();
     }
 
     /**
@@ -111,7 +111,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      */
     public Single<Void> getAsync() {
         return getWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -125,7 +125,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the void object if successful.
      */
     public void paramGet(String xMsClientRequestId) {
-        paramGetAsync(xMsClientRequestId).toBlocking().value();
+        paramGetAsync(xMsClientRequestId).blockingGet();
     }
 
     /**
@@ -163,7 +163,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      */
     public Single<Void> paramGetAsync(String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

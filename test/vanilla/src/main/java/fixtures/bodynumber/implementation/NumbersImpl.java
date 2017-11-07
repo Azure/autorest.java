@@ -25,11 +25,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodynumber.models.ErrorException;
+import io.reactivex.functions.Function;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.math.BigDecimal;
-import rx.functions.Func1;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -212,7 +212,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -244,7 +244,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -257,7 +257,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidFloat() {
-        return getInvalidFloatAsync().toBlocking().value();
+        return getInvalidFloatAsync().blockingGet();
     }
 
     /**
@@ -289,7 +289,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -302,7 +302,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidDouble() {
-        return getInvalidDoubleAsync().toBlocking().value();
+        return getInvalidDoubleAsync().blockingGet();
     }
 
     /**
@@ -334,7 +334,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -347,7 +347,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getInvalidDecimal() {
-        return getInvalidDecimalAsync().toBlocking().value();
+        return getInvalidDecimalAsync().blockingGet();
     }
 
     /**
@@ -379,7 +379,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -393,7 +393,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigFloat(double numberBody) {
-        putBigFloatAsync(numberBody).toBlocking().value();
+        putBigFloatAsync(numberBody).blockingGet();
     }
 
     /**
@@ -428,7 +428,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigFloatAsync(double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -441,7 +441,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigFloat() {
-        return getBigFloatAsync().toBlocking().value();
+        return getBigFloatAsync().blockingGet();
     }
 
     /**
@@ -473,7 +473,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -487,7 +487,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDouble(double numberBody) {
-        putBigDoubleAsync(numberBody).toBlocking().value();
+        putBigDoubleAsync(numberBody).blockingGet();
     }
 
     /**
@@ -522,7 +522,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigDoubleAsync(double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -535,7 +535,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDouble() {
-        return getBigDoubleAsync().toBlocking().value();
+        return getBigDoubleAsync().blockingGet();
     }
 
     /**
@@ -567,7 +567,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -581,7 +581,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDoublePositiveDecimal(double numberBody) {
-        putBigDoublePositiveDecimalAsync(numberBody).toBlocking().value();
+        putBigDoublePositiveDecimalAsync(numberBody).blockingGet();
     }
 
     /**
@@ -616,7 +616,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -629,7 +629,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalAsync().toBlocking().value();
+        return getBigDoublePositiveDecimalAsync().blockingGet();
     }
 
     /**
@@ -661,7 +661,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -675,7 +675,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDoubleNegativeDecimal(double numberBody) {
-        putBigDoubleNegativeDecimalAsync(numberBody).toBlocking().value();
+        putBigDoubleNegativeDecimalAsync(numberBody).blockingGet();
     }
 
     /**
@@ -710,7 +710,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -723,7 +723,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalAsync().toBlocking().value();
+        return getBigDoubleNegativeDecimalAsync().blockingGet();
     }
 
     /**
@@ -755,7 +755,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -769,7 +769,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimal(BigDecimal numberBody) {
-        putBigDecimalAsync(numberBody).toBlocking().value();
+        putBigDecimalAsync(numberBody).blockingGet();
     }
 
     /**
@@ -807,7 +807,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -820,7 +820,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimal() {
-        return getBigDecimalAsync().toBlocking().value();
+        return getBigDecimalAsync().blockingGet();
     }
 
     /**
@@ -852,7 +852,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -866,7 +866,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimalPositiveDecimal(BigDecimal numberBody) {
-        putBigDecimalPositiveDecimalAsync(numberBody).toBlocking().value();
+        putBigDecimalPositiveDecimalAsync(numberBody).blockingGet();
     }
 
     /**
@@ -904,7 +904,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -917,7 +917,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalPositiveDecimal() {
-        return getBigDecimalPositiveDecimalAsync().toBlocking().value();
+        return getBigDecimalPositiveDecimalAsync().blockingGet();
     }
 
     /**
@@ -949,7 +949,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -963,7 +963,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimalNegativeDecimal(BigDecimal numberBody) {
-        putBigDecimalNegativeDecimalAsync(numberBody).toBlocking().value();
+        putBigDecimalNegativeDecimalAsync(numberBody).blockingGet();
     }
 
     /**
@@ -1001,7 +1001,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1014,7 +1014,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalNegativeDecimal() {
-        return getBigDecimalNegativeDecimalAsync().toBlocking().value();
+        return getBigDecimalNegativeDecimalAsync().blockingGet();
     }
 
     /**
@@ -1046,7 +1046,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1060,7 +1060,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallFloat(double numberBody) {
-        putSmallFloatAsync(numberBody).toBlocking().value();
+        putSmallFloatAsync(numberBody).blockingGet();
     }
 
     /**
@@ -1095,7 +1095,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putSmallFloatAsync(double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1108,7 +1108,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallFloat() {
-        return getSmallFloatAsync().toBlocking().value();
+        return getSmallFloatAsync().blockingGet();
     }
 
     /**
@@ -1140,7 +1140,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1154,7 +1154,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallDouble(double numberBody) {
-        putSmallDoubleAsync(numberBody).toBlocking().value();
+        putSmallDoubleAsync(numberBody).blockingGet();
     }
 
     /**
@@ -1189,7 +1189,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putSmallDoubleAsync(double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1202,7 +1202,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallDouble() {
-        return getSmallDoubleAsync().toBlocking().value();
+        return getSmallDoubleAsync().blockingGet();
     }
 
     /**
@@ -1234,7 +1234,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1248,7 +1248,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallDecimal(BigDecimal numberBody) {
-        putSmallDecimalAsync(numberBody).toBlocking().value();
+        putSmallDecimalAsync(numberBody).blockingGet();
     }
 
     /**
@@ -1286,7 +1286,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<Void> putSmallDecimalAsync(BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, Void>, Void>() { public Void apply(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 
@@ -1299,7 +1299,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getSmallDecimal() {
-        return getSmallDecimalAsync().toBlocking().value();
+        return getSmallDecimalAsync().blockingGet();
     }
 
     /**
@@ -1331,7 +1331,7 @@ public class NumbersImpl implements Numbers {
      */
     public Single<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
         }
 
 
