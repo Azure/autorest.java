@@ -680,12 +680,7 @@ namespace AutoRest.Java.DanModel
         public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModelJv codeModel, Settings settings)
         {
             List<JavaFile> enumJavaFiles = new List<JavaFile>();
-            AddEnumJavaFiles(codeModel, settings, enumJavaFiles);
-            return enumJavaFiles;
-        }
 
-        public static void AddEnumJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles)
-        {
             string headerComment = settings.Header;
 
             string package = GetPackage(codeModel, codeModel.ModelsPackage);
@@ -696,17 +691,123 @@ namespace AutoRest.Java.DanModel
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
                 string enumName = enumType.Name;
+                string enumTypeComment = $"Defines values for {enumName}.";
 
                 IEnumerable<JavaEnumValue> enumValues = enumType.Values
                     .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
 
-                JavaEnum javaEnum = enumType.ModelAsString ?
-                    new JavaExpandableStringEnum(enumName, enumValues) :
-                    new JavaEnum(enumName, enumValues);
+                JavaFile javaFile;
 
-                JavaFile javaFile = javaEnum.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
-                javaFiles.Add(javaFile);
+                if (enumType.ModelAsString)
+                {
+                    javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, enumName, headerComment, package, maximumHeaderCommentWidth);
+                    javaFile.Import("java.util.Collection",
+                                    "com.fasterxml.jackson.annotation.JsonCreator",
+                                    "com.microsoft.rest.v2.ExpandableStringEnum");
+                    javaFile.MultipleLineComment(comment =>
+                    {
+                        comment.Line(enumTypeComment);
+                    });
+                    javaFile.PublicFinalClass($"{enumName} extends ExpandableStringEnum<{enumName}>", (classBlock) =>
+                    {
+                        foreach (JavaEnumValue value in enumValues)
+                        {
+                            classBlock.SingleLineComment($"Static value {value.Value} for {enumName}.")
+                                    .Line($"public static final {enumName} {value.Name} = fromString(\"{value.Value}\");")
+                                    .Line();
+                        }
+
+                        classBlock.MultipleLineComment((comment) =>
+                        {
+                            comment.Line($"Creates or finds a {enumName} from its string representation.")
+                                .Param("name", "a name to look for")
+                                .Return($"the corresponding {enumName}");
+                        });
+                        classBlock.Annotation("JsonCreator");
+                        classBlock.Block($"public static {enumName} fromString(String name)", (function) =>
+                        {
+                            function.Return($"fromString(name, {enumName}.class)");
+                        });
+                        classBlock.Line();
+                        classBlock.MultipleLineComment((comment) =>
+                        {
+                            comment.Return($"known {enumName} values");
+                        });
+                        classBlock.Block($"public static Collection<{enumName}> values()", (function) =>
+                        {
+                            function.Return($"values({enumName}.class)");
+                        });
+                    });
+                }
+                else
+                {
+                    javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, enumName, headerComment, package, maximumHeaderCommentWidth);
+                    javaFile.Import("com.fasterxml.jackson.annotation.JsonCreator",
+                                    "com.fasterxml.jackson.annotation.JsonValue");
+                    javaFile.MultipleLineComment(comment =>
+                    {
+                        comment.Line(enumTypeComment);
+                    });
+                    javaFile.PublicEnum(enumName, (enumBlock) =>
+                    {
+                        if (enumValues.Any())
+                        {
+                            Action<JavaEnumValue,bool> enumValue = (JavaEnumValue value, bool isLast) =>
+                            {
+                                enumBlock.SingleLineComment($"Enum value {value.Value}.")
+                                    .Line($"{value.Name}(\"{value.Value}\")" + (isLast ? ";" : ","))
+                                    .Line();
+                            };
+
+                            foreach (JavaEnumValue value in enumValues.SkipLast(1))
+                            {
+                                enumValue(value, false);
+                            }
+                            enumValue(enumValues.Last(), true);
+                        }
+
+                        enumBlock.SingleLineComment($"The actual serialized value for a {enumName} instance.");
+                        enumBlock.Line("private String value;");
+                        enumBlock.Line();
+                        enumBlock.Block($"{enumName}(String value)", (constructor) =>
+                        {
+                            constructor.Line("this.value = value;");
+                        });
+                        enumBlock.Line();
+                        enumBlock.MultipleLineComment((comment) =>
+                        {
+                            comment.Line($"Parses a serialized value to a {enumName} instance.");
+                            comment.Line()
+                                    .Param("value", "the serialized value to parse.")
+                                    .Return($"the parsed {enumName} object, or null if unable to parse.");
+                        });
+                        enumBlock.Annotation("JsonCreator");
+                        enumBlock.Block($"public static {enumName} fromString(String value)", (function) =>
+                        {
+                            function.Line($"{enumName}[] items = {enumName}.values();");
+                            function.Block($"for ({enumName} item : items)", (foreachBlock) =>
+                            {
+                                foreachBlock.If("item.toString().equalsIgnoreCase(value)", (ifBlock) =>
+                                {
+                                    ifBlock.Return("item");
+                                });
+                            });
+                            function.Return("null");
+                        });
+                        enumBlock.Line();
+                        enumBlock.Annotation("JsonValue",
+                                             "Override");
+                        enumBlock.Block("public String toString()", (function) =>
+                        {
+                            function.Return("this.value");
+                        });
+                    });
+                }
+
+                enumJavaFiles.Add(javaFile);
             }
+
+            return enumJavaFiles;
         }
 
         private static string GetPackage(CodeModel codeModel, string packageSuffix = null)
