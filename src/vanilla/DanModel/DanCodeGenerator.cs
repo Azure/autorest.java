@@ -48,6 +48,7 @@ namespace AutoRest.Java.DanModel
 
             return javaFile;
         }
+
         public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
         {
             string headerComment = settings.Header;
@@ -241,12 +242,7 @@ namespace AutoRest.Java.DanModel
         public static IEnumerable<JavaFile> GetPackageInfoJavaFiles(CodeModel codeModel, Settings settings, IEnumerable<string> subPackages)
         {
             List<JavaFile> packageInfoJavaFiles = new List<JavaFile>();
-            AddPackageInfoJavaFiles(codeModel, settings, subPackages, packageInfoJavaFiles);
-            return packageInfoJavaFiles;
-        }
 
-        public static void AddPackageInfoJavaFiles(CodeModel codeModel, Settings settings, IEnumerable<string> subPackages, IList<JavaFile> javaFiles)
-        {
             string headerComment = settings.Header;
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
@@ -259,10 +255,41 @@ namespace AutoRest.Java.DanModel
                 string package = GetPackage(codeModel, subPackage);
                 string folderPath = GetFolderPath(package);
 
-                JavaPackageInfo packageInfo = new JavaPackageInfo(title, subPackage, description);
-                JavaFile javaFile = packageInfo.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
-                javaFiles.Add(javaFile);
+                string filePath = GetFilePath(folderPath, "package-info");
+                JavaFile javaFile = new JavaFile(filePath);
+
+                if (!string.IsNullOrEmpty(headerComment))
+                {
+                    javaFile.WordWrappedMultipleLineSlashSlashComment(maximumHeaderCommentWidth, (comment) =>
+                    {
+                        comment.Line(headerComment);
+                    })
+                        .Line();
+                }
+
+                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                {
+                    if (string.IsNullOrEmpty(subPackage))
+                    {
+                        comment.Line($"This package contains the classes for {title}.");
+                    }
+                    else
+                    {
+                        comment.Line($"This package contains the {subPackage} classes for {title}.");
+                    }
+
+                    if (!string.IsNullOrEmpty(description))
+                    {
+                        comment.Line(description.Period());
+                    }
+                });
+
+                javaFile.Package(package);
+
+                packageInfoJavaFiles.Add(javaFile);
             }
+
+            return packageInfoJavaFiles;
         }
 
         public static IEnumerable<JavaFile> GetModelJavaFiles(CodeModel codeModel, Settings settings)
