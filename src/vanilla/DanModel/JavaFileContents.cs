@@ -209,9 +209,19 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        public void SingleLineComment(string text)
+        public void SingleLineSlashStarComment(string text)
         {
             Line($"/** {text} */");
+        }
+
+        public void SingleLineSlashSlashComment(string text)
+        {
+            Line($"// {text}");
+        }
+
+        public void SingleLineComment(string text)
+        {
+            SingleLineSlashStarComment(text);
         }
 
         public void MultipleLineSlashStarComment(Action<JavaMultipleLineComment> commentAction)

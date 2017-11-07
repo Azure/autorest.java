@@ -50,10 +50,7 @@ namespace AutoRest.Java.Azure
             string modelsFolderPath = Path.Combine(packageFolderPath, "models");
 
             // Service client
-            var serviceClientTemplate = new AzureServiceClientTemplate { Model = codeModel };
-            string serviceClientFileName = $"{codeModel.Name.ToPascalCase()}Impl.java";
-            string serviceClientFilePath = Path.Combine(implementationFolderPath, serviceClientFileName);
-            await Write(serviceClientTemplate, serviceClientFilePath);
+            await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new AzureServiceClientInterfaceTemplate { Model = codeModel };
