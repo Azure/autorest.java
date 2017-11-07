@@ -1,6 +1,7 @@
 ﻿using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure;
 using AutoRest.Java.Azure.Fluent.Model;
@@ -16,47 +17,209 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
-        private static string GetFilePath(string folderPath, string fileNameWithoutExtension)
+        public static JavaFile GetServiceClientJavaFile(CodeModelJv codeModel, Settings settings)
         {
-            string result = Path.Combine(folderPath, $"{fileNameWithoutExtension}.java");
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
-            result = result.Replace('\\', '/');
-            result = result.Replace("//", "/");
+            string interfaceName = codeModel.Name.ToPascalCase();
+            string className = $"{interfaceName}Impl";
 
-            return result;
-        }
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
 
-        private static int GetMaximumCommentWidth(Settings settings)
-        {
-            return settings.MaximumCommentColumns;
-        }
+            javaFile.Import(codeModel.ImplImports);
 
-        private static JavaFile GenerateJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
-        {
-            string package = GetPackage(codeModel, subPackage);
-            string folderPath = GetFolderPath(package);
-
-            string headerComment = settings.Header;
-
-            int maximumHeaderCommentWidth = GetMaximumCommentWidth(settings);
-
-            string filePath = GetFilePath(folderPath, fileNameWithoutExtension);
-            JavaFile javaFile = new JavaFile(filePath);
-
-            if (!string.IsNullOrEmpty(headerComment))
+            javaFile.MultipleLineComment(comment =>
             {
-                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                comment.Line($"Initializes a new instance of the {interfaceName} class.");
+            });
+            javaFile.Block($"public class {className} extends ServiceClient implements {interfaceName}", classBlock =>
+            {
+                bool hasRootMethods = codeModel.RootMethods.Any();
+                string serviceClientType = codeModel.ServiceClientServiceType;
+                string baseUrl = codeModel.BaseUrl;
+
+                if (hasRootMethods)
                 {
-                    comment.Line(headerComment);
-                })
-                    .Line();
-            }
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("The Retrofit service to perform REST calls.");
+                    });
+                    classBlock.Line($"private {serviceClientType} service;");
+                }
 
-            if (!string.IsNullOrEmpty(package))
-            {
-                javaFile.Package(package)
-                    .Line();
-            }
+                foreach (Property property in codeModel.Properties)
+                {
+                    string propertyDescription = property.Documentation.ToString().Period();
+                    string propertyType = property.ModelType.ServiceResponseVariant().Name;
+                    string propertyName = property.Name.ToCamelCase();
+
+                    classBlock.Line();
+                    classBlock.SingleLineComment(propertyDescription);
+                    classBlock.Line($"private {propertyType} {propertyName};");
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"Gets {propertyDescription}");
+                        comment.Line();
+                        comment.Return($"the {propertyName} value.");
+                    });
+                    classBlock.Block($"public {propertyType} {propertyName}()", function =>
+                    {
+                        function.Return($"this.{propertyName}");
+                    });
+
+                    if (!property.IsReadOnly)
+                    {
+                        classBlock.Line();
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Line($"Sets {propertyDescription}");
+                            comment.Line();
+                            comment.Param(propertyName, $"the {propertyName} value.");
+                            comment.Return("the service client itself");
+                        });
+                        classBlock.Block($"public {className} with{propertyName}({propertyType} {propertyName})", function =>
+                        {
+                            function.Line($"this.{propertyName} = {propertyName};");
+                            function.Return("this");
+                        });
+                    }
+                }
+
+                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                {
+                    string operationType = operation.TypeName;
+                    string operationName = operation.Name;
+
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"The {operationType} object to access its operations.");
+                    });
+                    classBlock.Line($"private {operationType} {operationName};");
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"Gets the {operationType} object to access its operations.");
+                        comment.Return($"the {operationType} object.");
+                    });
+                    classBlock.Block($"public {operationType} {operationName}()", function =>
+                    {
+                        function.Return($"this.{operationName}");
+                    });
+                }
+
+                classBlock.Line();
+
+                string constructorDescription = $"Initializes an instance of {interfaceName} client.";
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                    comment.Line();
+                    comment.Param("baseUrl", "the base URL of the host");
+                });
+                string baseUrlConstructorVisibility = codeModel.IsCustomBaseUri ? "private" : "public";
+                classBlock.Block($"{baseUrlConstructorVisibility} {className}(String baseUrl)", constructor =>
+                {
+                    constructor.Line("super(baseUrl);");
+                    constructor.Line("initialize();");
+                });
+
+                classBlock.Line();
+
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                });
+                classBlock.Block($"public {className}()", constructor =>
+                {
+                    constructor.Line($"this(\"{baseUrl}\");");
+                    constructor.Line("initialize();");
+                });
+
+                classBlock.Line();
+
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                    comment.Line();
+                    comment.Param("restClient", "the REST client containing pre-configured settings");
+                });
+                classBlock.Block($"public {className}(RestClient restClient)", constructor =>
+                {
+                    constructor.Line("super(restClient);");
+                    constructor.Line("initialize();");
+                });
+
+                classBlock.Line();
+
+                classBlock.Block("private void initialize()", function =>
+                {
+                    foreach (Property property in codeModel.Properties.Where(p => p.DefaultValue != null))
+                    {
+                        function.Line($"this.{property.Name} = {property.DefaultValue};");
+                    }
+
+                    foreach (MethodGroupJv operation in codeModel.AllOperations)
+                    {
+                        function.Line($"this.{operation.Name} = new {operation.TypeName}Impl(this);");
+                    }
+
+                    if (hasRootMethods)
+                    {
+                        function.Line("initializeService();");
+                    }
+                });
+
+                if (hasRootMethods)
+                {
+                    classBlock.Line();
+                    classBlock.Block("private void initializeService()", function =>
+                    {
+                        function.Line($"service = RestProxy.create({serviceClientType}.class, restClient().baseURL(), httpClient(), serializerAdapter());");
+                    });
+                    classBlock.Line();
+                    classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+                    {
+                        comment.Line($"The interface defining all the services for {interfaceName} to be used by Retrofit to perform actually REST calls.");
+                    });
+                    classBlock.Annotation($"Host(\"{baseUrl}\")");
+                    classBlock.Block($"interface {interfaceName}", interfaceBlock =>
+                    {
+                        foreach (MethodJv method in codeModel.Methods)
+                        {
+                            if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
+                            {
+                                interfaceBlock.SingleLineSlashSlashComment("@Multipart not supported by RestProxy");
+                            }
+                            else
+                            {
+                                interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {codeModel.FullyQualifiedDomainName} {method.Name}\" }})");
+                            }
+                            interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
+                            if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+                            {
+                                interfaceBlock.SingleLineSlashSlashComment("@Streaming not supported by RestProxy");
+                            }
+                            interfaceBlock.Line(method.ExpectedResponsesAnnotation);
+                            if (method.DefaultResponse.Body != null)
+                            {
+                                interfaceBlock.Annotation($"UnexpectedResponseExceptionType({method.OperationExceptionTypeString}.class)");
+                            }
+                            interfaceBlock.Line($"Single<{method.RestResponseConcreteTypeName}> {method.Name}({method.MethodParameterApiDeclaration});");
+                            interfaceBlock.Line();
+                        }
+                    });
+                    classBlock.Line();
+
+                    foreach (MethodJv method in codeModel.RootMethods)
+                    {
+                        GenerateRootMethodFunctions(classBlock, method);
+
+                        classBlock.Line();
+                    }
+                }
+            });
 
             return javaFile;
         }
@@ -812,6 +975,116 @@ namespace AutoRest.Java.DanModel
         private static string GetFolderPath(string package)
         {
             return Path.Combine("src", "main", "java", package.Replace('.', Path.DirectorySeparatorChar));
+        }
+
+        private static string GetFilePath(string folderPath, string fileNameWithoutExtension)
+        {
+            string result = Path.Combine(folderPath, $"{fileNameWithoutExtension}.java");
+
+            result = result.Replace('\\', '/');
+            result = result.Replace("//", "/");
+
+            return result;
+        }
+
+        private static int GetMaximumCommentWidth(Settings settings)
+        {
+            return settings.MaximumCommentColumns;
+        }
+
+        private static JavaFile GenerateJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
+        {
+            string package = GetPackage(codeModel, subPackage);
+            string folderPath = GetFolderPath(package);
+
+            string headerComment = settings.Header;
+
+            int maximumHeaderCommentWidth = GetMaximumCommentWidth(settings);
+
+            string filePath = GetFilePath(folderPath, fileNameWithoutExtension);
+            JavaFile javaFile = new JavaFile(filePath);
+
+            if (!string.IsNullOrEmpty(headerComment))
+            {
+                javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
+                {
+                    comment.Line(headerComment);
+                })
+                    .Line();
+            }
+
+            if (!string.IsNullOrEmpty(package))
+            {
+                javaFile.Package(package)
+                    .Line();
+            }
+
+            return javaFile;
+        }
+
+        private static void GenerateRootMethodFunctions(JavaBlock classBlock, MethodJv method)
+        {
+            ParameterVariants parameterVariants = method.ParameterVariants;
+            ParameterJv callbackParam = method.CallbackParam;
+
+            if (parameterVariants.HasOptionalParameters)
+            {
+                // --------------------------------------
+                // Synchronous, Body, required parameters
+                // --------------------------------------
+                classBlock.Text(method.Javadoc(parameterVariants.RequiredParameters, method.SyncExceptionDocumentation, method.SyncReturnDocumentation));
+                classBlock.Text(method.SyncImpl(parameterVariants.RequiredParameters));
+                classBlock.Line();
+
+                // -----------------------------------
+                // Callback, Body, required parameters
+                // -----------------------------------
+                classBlock.Text(method.Javadoc(parameterVariants.RequiredParameters.ConcatSingleItem(callbackParam), method.AsyncExceptionDocumentation, method.CallbackReturnDocumentation));
+                classBlock.Text(method.CallbackImpl(parameterVariants.RequiredParameters, callbackParam));
+                classBlock.Line();
+
+                // ---------------------------------------------
+                // Observable, RestResponse, required parameters
+                // ---------------------------------------------
+                classBlock.Text(method.Javadoc(parameterVariants.RequiredParameters, method.AsyncExceptionDocumentation, method.ObservableReturnDocumentation));
+                classBlock.Text(method.ObservableRestResponseImpl(parameterVariants.RequiredParameters, takeOnlyRequiredParameters: true));
+                classBlock.Line();
+
+                // -------------------------------------
+                // Observable, Body, required parameters
+                // -------------------------------------
+                classBlock.Text(method.Javadoc(parameterVariants.RequiredParameters, method.AsyncExceptionDocumentation, method.ObservableReturnDocumentation));
+                classBlock.Text(method.ObservableImpl(parameterVariants.RequiredParameters));
+                classBlock.Line();
+            }
+
+            // ---------------------------------
+            // Synchronous, Body, all parameters
+            // ---------------------------------
+            classBlock.Text(method.Javadoc(parameterVariants.AllParameters, method.SyncExceptionDocumentation, method.SyncReturnDocumentation));
+            classBlock.Text(method.SyncImpl(parameterVariants.AllParameters));
+            classBlock.Line();
+
+            // ------------------------------
+            // Callback, Body, all parameters
+            // ------------------------------
+            classBlock.Text(method.Javadoc(parameterVariants.AllParameters.ConcatSingleItem(callbackParam), method.AsyncExceptionDocumentation, method.CallbackReturnDocumentation));
+            classBlock.Text(method.CallbackImpl(parameterVariants.AllParameters, callbackParam));
+            classBlock.Line();
+
+            // ----------------------------------------
+            // Observable, RestResponse, all parameters
+            // ----------------------------------------
+            classBlock.Text(method.Javadoc(parameterVariants.AllParameters, method.AsyncExceptionDocumentation, method.ObservableReturnDocumentation));
+            classBlock.Text(method.ObservableRestResponseImpl(parameterVariants.AllParameters, takeOnlyRequiredParameters: false));
+            classBlock.Line();
+
+            // --------------------------------
+            // Observable, Body, all parameters
+            // --------------------------------
+            classBlock.Text(method.Javadoc(parameterVariants.AllParameters, method.AsyncExceptionDocumentation, method.ObservableReturnDocumentation));
+            classBlock.Text(method.ObservableImpl(parameterVariants.AllParameters));
+            classBlock.Line();
         }
     }
 }

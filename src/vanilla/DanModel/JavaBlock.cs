@@ -12,6 +12,12 @@ namespace AutoRest.Java.DanModel
             this.contents = file;
         }
 
+        public JavaBlock Text(string text)
+        {
+            contents.Text(text);
+            return this;
+        }
+
         public JavaBlock Line(string text)
         {
             contents.Line(text);
@@ -33,6 +39,12 @@ namespace AutoRest.Java.DanModel
         public JavaBlock SingleLineComment(string text)
         {
             contents.SingleLineComment(text);
+            return this;
+        }
+
+        public JavaBlock SingleLineSlashSlashComment(string text)
+        {
+            contents.SingleLineSlashSlashComment(text);
             return this;
         }
 
