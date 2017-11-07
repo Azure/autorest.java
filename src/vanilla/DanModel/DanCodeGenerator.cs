@@ -52,7 +52,7 @@ namespace AutoRest.Java.DanModel
                 description += method.Description.EscapeXmlComment().Period();
             }
 
-            MethodJv methodJv = method as MethodJv;
+            MethodJv methodJv = (MethodJv) method;
             MethodJva methodJva = methodJv as MethodJva;
 
             JavaThrow operationExceptionThrow = new JavaThrow(methodJv.OperationExceptionTypeString, "thrown if the request is rejected by server");
@@ -63,7 +63,24 @@ namespace AutoRest.Java.DanModel
             string xmlEscapedSyncReturnType = syncReturnType.EscapeXmlComment();
             string asyncInnerReturnType = methodJv.ReturnTypeJv.GenericBodyClientTypeString;
             string serviceFutureReturnType = $"ServiceFuture<{asyncInnerReturnType}>";
-            string asyncReturnType = methodJva != null ? methodJva.AsyncClientReturnTypeString : $"Single<{asyncInnerReturnType}>";
+            
+            string asyncReturnType;
+            if (methodJva == null)
+            {
+                if (methodJv.ReturnType.Body is PrimaryType pt && pt.KnownPrimaryType == KnownPrimaryType.None)
+                {
+                    asyncReturnType = "Completable";
+                }
+                else
+                {
+                    asyncReturnType = $"Single<{asyncInnerReturnType}>";
+                }
+            }
+            else
+            {
+                asyncReturnType = methodJva.AsyncClientReturnTypeString;
+            }
+            
             string asyncRestResponseReturnType = $"Single<{methodJv.RestResponseAbstractTypeName}>";
             
             JavaMethodReturn syncReturn = new JavaMethodReturn(

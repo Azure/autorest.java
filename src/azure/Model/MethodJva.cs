@@ -354,6 +354,10 @@ namespace AutoRest.Java.Azure.Model
                 {
                     return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }
+                else if (ReturnType.Body is PrimaryType pt && pt.KnownPrimaryType == KnownPrimaryType.None)
+                {
+                    return "Completable";
+                }
                 else
                 {
                     return $"Single<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
