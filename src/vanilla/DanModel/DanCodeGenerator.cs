@@ -612,12 +612,7 @@ namespace AutoRest.Java.DanModel
         public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
-            AddExceptionJavaFiles(codeModel, settings, exceptionJavaFiles);
-            return exceptionJavaFiles;
-        }
 
-        public static void AddExceptionJavaFiles(CodeModelJv codeModel, Settings settings, IList<JavaFile> javaFiles)
-        {
             string headerComment = settings.Header;
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
@@ -634,11 +629,52 @@ namespace AutoRest.Java.DanModel
                     string package = GetPackage(codeModel, exceptionType.ModelsPackage);
                     string folderPath = GetFolderPath(package);
 
-                    JavaException javaException = new JavaException(exceptionName, exceptionBodyTypeName);
-                    JavaFile javaFile = javaException.GenerateJavaFile(folderPath, headerComment, package, maximumHeaderCommentWidth);
-                    javaFiles.Add(javaFile);
+                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(folderPath, exceptionName, headerComment, package, maximumHeaderCommentWidth);
+                    javaFile.Import("com.microsoft.rest.v2.RestException",
+                                    "com.microsoft.rest.v2.http.HttpResponse");
+                    javaFile.MultipleLineComment((comment) =>
+                    {
+                        comment.Line($"Exception thrown for an invalid response with {exceptionBodyTypeName} information.");
+                    });
+                    javaFile.Block($"public class {exceptionName} extends RestException", (classBlock) =>
+                    {
+                        classBlock.MultipleLineComment((comment) =>
+                        {
+                            comment.Line($"Initializes a new instance of the {exceptionName} class.")
+                                .Line()
+                                .Param("message", "the exception message or the response content if a message is not available")
+                                .Param("response", "the HTTP response");
+                        });
+                        classBlock.Block($"public {exceptionName}(final String message, HttpResponse response)", (constructorBlock) =>
+                        {
+                            constructorBlock.Line("super(message, response);");
+                        });
+                        classBlock.Line();
+                        classBlock.MultipleLineComment((comment) =>
+                        {
+                            comment.Line($"Initializes a new instance of the {exceptionName} class.");
+                            comment.Line();
+                            comment.Param("message", "the exception message or the response content if a message is not available");
+                            comment.Param("response", "the HTTP response");
+                            comment.Param("body", "the deserialized response body");
+                        });
+                        classBlock.Block($"public {exceptionName}(final String message, final HttpResponse response, final {exceptionBodyTypeName} body)", (constructorBlock) =>
+                        {
+                            constructorBlock.Line("super(message, response, body);");
+                        });
+                        classBlock.Line();
+                        classBlock.Annotation("Override");
+                        classBlock.Block($"public {exceptionBodyTypeName} body()", (methodBlock) =>
+                        {
+                            methodBlock.Return($"({exceptionBodyTypeName}) super.body()");
+                        });
+                    });
+
+                    exceptionJavaFiles.Add(javaFile);
                 }
             }
+
+            return exceptionJavaFiles;
         }
 
         public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModelJv codeModel, Settings settings)
