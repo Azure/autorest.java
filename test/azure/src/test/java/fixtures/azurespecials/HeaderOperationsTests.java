@@ -22,7 +22,7 @@ public class HeaderOperationsTests {
 
     @Test
     public void customNamedRequestId() throws Exception {
-        Void response = client.headers().customNamedRequestIdAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").toBlocking().value();
+        Void response = client.headers().customNamedRequestIdAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
 //        Assert.assertEquals(200, response.response().code());
 //        Assert.assertEquals("123", response.headers().fooRequestId());
     }
@@ -31,14 +31,14 @@ public class HeaderOperationsTests {
     public void customNamedRequestIdParamGrouping() throws Exception {
         HeaderCustomNamedRequestIdParamGroupingParameters group = new HeaderCustomNamedRequestIdParamGroupingParameters();
         group.withFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        Void response = client.headers().customNamedRequestIdParamGroupingAsync(group).toBlocking().value();
+        Void response = client.headers().customNamedRequestIdParamGroupingAsync(group).blockingGet();
 //        Assert.assertEquals(200, response.response().code());
 //        Assert.assertEquals("123", response.headers().fooRequestId());
     }
 
     @Test
     public void customNamedRequestIdHead() throws Exception {
-        Boolean response = client.headers().customNamedRequestIdHeadAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").toBlocking().value();
+        Boolean response = client.headers().customNamedRequestIdHeadAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
 //        Assert.assertEquals(200, response.headResponse().code());
 //        Assert.assertTrue(response.body());
 //        Assert.assertEquals("123", response.headers().fooRequestId());

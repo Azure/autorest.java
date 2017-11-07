@@ -34,12 +34,12 @@
 }
  */
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
-    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().value();
+    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).blockingGet();
     return new @(Model.ReturnTypeJva.GenericBodyClientTypeString)(response) {
         @@Override
         public @Model.ReturnTypeJva.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation(filterRequired: true)
-            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation(filterRequired: true)).toBlocking().value();
+            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation(filterRequired: true)).blockingGet();
         }
     };
 }
@@ -76,9 +76,9 @@ else
 public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation)
         .toObservable()
-        .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
+        .concatMap(new Function<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
             @@Override
-            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> apply(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
                 String @Model.PagingNextPageLinkParameterName = page.nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
@@ -148,9 +148,9 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 {
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Function<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
             @@Override
-            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) apply(@(Model.RestResponseConcreteTypeName) response) {
                 return response.body();
             }
         });
@@ -186,12 +186,12 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 }
  */
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
-    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().value();
+    @Model.ReturnTypeJva.ServiceResponseGenericParameterString response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).blockingGet();
     return new @(Model.ReturnTypeJva.GenericBodyClientTypeString)(response) {
         @@Override
         public @Model.ReturnTypeJva.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation()
-            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation()).toBlocking().value();
+            return @(Model.GetPagingNextMethodInvocation(async: true))(@Model.NextMethodParameterInvocation()).blockingGet();
         }
     };
 }
@@ -228,9 +228,9 @@ else
 public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation)
         .toObservable()
-        .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
+        .concatMap(new Function<@Model.ReturnTypeJva.ServiceResponseGenericParameterString, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString>>() {
             @@Override
-            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> apply(@Model.ReturnTypeJva.ServiceResponseGenericParameterString page) {
                 String @Model.PagingNextPageLinkParameterName = page.nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
@@ -295,9 +295,9 @@ public Single<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Mode
 {
 @:    String nextUrl = @(Model.NextUrlConstruction);
 }
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Function<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
             @@Override
-            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) apply(@(Model.RestResponseConcreteTypeName) response) {
                 return response.body();
             }
         });

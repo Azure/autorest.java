@@ -36,14 +36,14 @@ public class XMsClientRequestIdTests {
     @Test
     @Ignore("RestProxy doesn't support reading HTTP response codes yet")
     public void get() throws Exception {
-        Void response = client.xMsClientRequestIds().getAsync().toBlocking().value();
+        Void response = client.xMsClientRequestIds().getAsync().blockingGet();
 //        Assert.assertEquals(200, response.response().code());
     }
 
     @Test
     @Ignore("RestProxy doesn't support reading HTTP response codes yet")
     public void paramGet() throws Exception {
-        Void response = client.xMsClientRequestIds().paramGetAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").toBlocking().value();
+        Void response = client.xMsClientRequestIds().paramGetAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
 //        Assert.assertEquals(200, response.response().code());
     }
 }

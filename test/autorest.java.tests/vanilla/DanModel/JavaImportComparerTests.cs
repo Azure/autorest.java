@@ -8,9 +8,9 @@ namespace AutoRest.Java.DanModel
         [TestMethod]
         public void Compare()
         {
-            CompareTest("rx.Single", "rx.Observable", 1);
-            CompareTest("rx.Observable", "rx.Single", -1);
-            CompareTest("rx.Single", "rx.Single", 0);
+            CompareTest("io.reactivex.Single", "io.reactivex.Observable", 1);
+            CompareTest("io.reactivex.Observable", "io.reactivex.Single", -1);
+            CompareTest("io.reactivex.Single", "io.reactivex.Single", 0);
         }
 
         private static void CompareTest(string lhs, string rhs, int expectedComparison)

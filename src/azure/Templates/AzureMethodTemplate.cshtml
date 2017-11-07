@@ -45,11 +45,11 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
 @if (@Model.ReturnTypeJva.BodyClientType.ResponseVariant.Name == "void")
 {
-@:    @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().last().result();
+@:    @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).blockingLast().result();
 }
 else
 {
-@:    return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).toBlocking().last().result();
+@:    return @(Model.Name)Async(@Model.MethodRequiredParameterInvocation).blockingLast().result();
 }
 }
 
@@ -158,11 +158,11 @@ public Observable<OperationStatus<@Model.ReturnTypeJva.ClientResponseTypeString>
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
 @if (@Model.ReturnTypeResponseName == "void")
 {
-@:    @(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().last();
+@:    @(Model.Name)Async(@Model.MethodParameterInvocation).blockingLast();
 }
 else
 {
-@:    return @(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().last().result();
+@:    return @(Model.Name)Async(@Model.MethodParameterInvocation).blockingLast().result();
 }
 }
 @EmptyLine

@@ -3,6 +3,8 @@ package fixtures.bodyinteger;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.v2.ServiceCallback;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -13,8 +15,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyinteger.implementation.AutoRestIntegerTestServiceImpl;
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
 
 import static org.junit.Assert.fail;
 
@@ -39,10 +40,13 @@ public class IntOperationsTests {
 
     @Test
     public void getNullAsync() throws Exception {
-        Observable.from(client.ints().getNullAsync(null)).subscribe(new Subscriber<Integer>() {
+        Observable.fromFuture(client.ints().getNullAsync(null)).subscribe(new Observer<Integer>() {
             @Override
-            public void onCompleted() {
-                System.out.println("completed");
+            public void onSubscribe(Disposable disposable) {}
+
+            @Override
+            public void onNext(Integer integerServiceResponse) {
+                System.out.println(integerServiceResponse);
             }
 
             @Override
@@ -51,8 +55,8 @@ public class IntOperationsTests {
             }
 
             @Override
-            public void onNext(Integer integerServiceResponse) {
-                System.out.println(integerServiceResponse);
+            public void onComplete() {
+                System.out.println("completed");
             }
         });
         System.out.println("checkpoint");

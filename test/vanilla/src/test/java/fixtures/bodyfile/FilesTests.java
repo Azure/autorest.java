@@ -1,18 +1,15 @@
 package fixtures.bodyfile;
 
+import io.reactivex.functions.Function;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.concurrent.TimeUnit;
 
 import fixtures.bodyfile.implementation.AutoRestSwaggerBATFileServiceImpl;
-import rx.exceptions.Exceptions;
-import rx.functions.Func1;
 
 public class FilesTests {
     private static AutoRestSwaggerBATFileService client;
@@ -27,16 +24,12 @@ public class FilesTests {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream file = classLoader.getResourceAsStream("sample.png")) {
             byte[] actual = client.files().getFileAsync()
-                .map(new Func1<InputStream, byte[]>() {
+                .map(new Function<InputStream, byte[]>() {
                     @Override
-                    public byte[] call(InputStream inputStreamServiceResponse) {
-                        try {
-                            return IOUtils.toByteArray(inputStreamServiceResponse);
-                        } catch (IOException e) {
-                            throw Exceptions.propagate(e);
-                        }
+                    public byte[] apply(InputStream inputStreamServiceResponse) throws Exception {
+                        return IOUtils.toByteArray(inputStreamServiceResponse);
                     }
-                }).toBlocking().value();
+                }).blockingGet();
             byte[] expected = IOUtils.toByteArray(file);
             Assert.assertArrayEquals(expected, actual);
         }
@@ -47,16 +40,12 @@ public class FilesTests {
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;
         long skipped = client.files().getFileLargeAsync()
-            .map(new Func1<InputStream, Long>() {
+            .map(new Function<InputStream, Long>() {
                 @Override
-                public Long call(InputStream inputStreamServiceResponse) {
-                    try {
-                        return inputStreamServiceResponse.skip(streamSize);
-                    } catch (IOException e) {
-                        throw Exceptions.propagate(e);
-                    }
+                public Long apply(InputStream inputStreamServiceResponse) throws Exception {
+                    return inputStreamServiceResponse.skip(streamSize);
                 }
-            }).toBlocking().value();
+            }).blockingGet();
         Assert.assertEquals(streamSize, skipped);
     }
 

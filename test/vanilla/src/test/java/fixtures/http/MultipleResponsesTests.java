@@ -17,8 +17,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import rx.Single;
-import rx.functions.Action1;
+import io.reactivex.Single;
+import io.reactivex.functions.Consumer;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -149,16 +149,16 @@ public class MultipleResponsesTests {
                             @Override
                             public Single<HttpResponse> sendAsync(HttpRequest request) {
                                 return next.sendAsync(request)
-                                        .doOnSuccess(new Action1<HttpResponse>() {
+                                        .doOnSuccess(new Consumer<HttpResponse>() {
                                             @Override
-                                            public void call(HttpResponse httpResponse) {
+                                            public void accept(HttpResponse httpResponse) {
                                                 Assert.assertEquals(202, httpResponse.statusCode());
                                                 lock.countDown();
                                             }
                                         })
-                                        .doOnError(new Action1<Throwable>() {
+                                        .doOnError(new Consumer<Throwable>() {
                                             @Override
-                                            public void call(Throwable throwable) {
+                                            public void accept(Throwable throwable) {
                                                 Assert.fail(throwable.getMessage());
                                             }
                                         });
@@ -185,16 +185,16 @@ public class MultipleResponsesTests {
                             @Override
                             public Single<HttpResponse> sendAsync(HttpRequest request) {
                                 return next.sendAsync(request)
-                                        .doOnSuccess(new Action1<HttpResponse>() {
+                                        .doOnSuccess(new Consumer<HttpResponse>() {
                                             @Override
-                                            public void call(HttpResponse httpResponse) {
+                                            public void accept(HttpResponse httpResponse) {
                                                 Assert.assertEquals(204, httpResponse.statusCode());
                                                 lock.countDown();
                                             }
                                         })
-                                        .doOnError(new Action1<Throwable>() {
+                                        .doOnError(new Consumer<Throwable>() {
                                             @Override
-                                            public void call(Throwable throwable) {
+                                            public void accept(Throwable throwable) {
                                                 Assert.fail(throwable.getMessage());
                                             }
                                         });

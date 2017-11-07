@@ -376,7 +376,7 @@ namespace AutoRest.Java.Model
             builder.Indent();
             builder.AppendLine($"return {Name}WithRestResponseAsync({Arguments(parameters)})");
             builder.Indent();
-            builder.AppendLine($".map(new Func1<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} call({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
+            builder.AppendLine($".map(new Function<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} apply({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
             builder.Outdent();
             builder.AppendLine("}");
             return builder.ToString();
@@ -422,11 +422,11 @@ namespace AutoRest.Java.Model
 
             if (ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
             {
-                builder.AppendLine($"{Name}Async({argsString}).toBlocking().value();");
+                builder.AppendLine($"{Name}Async({argsString}).blockingGet();");
             }
             else
             {
-                builder.AppendLine($"return {Name}Async({argsString}).toBlocking().value();");
+                builder.AppendLine($"return {Name}Async({argsString}).blockingGet();");
             }
 
             builder.Outdent();
@@ -796,8 +796,8 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("rx.Observable");
-                imports.Add("rx.Single");
+                imports.Add("io.reactivex.Observable");
+                imports.Add("io.reactivex.Single");
                 imports.Add("com.microsoft.rest.v2.ServiceFuture");
                 imports.Add("com.microsoft.rest.v2.ServiceCallback");
                 imports.Add("com.microsoft.rest.v2.RestResponse");
@@ -827,9 +827,9 @@ namespace AutoRest.Java.Model
                 {
                     HashSet<string> imports = new HashSet<string>();
                     // static imports
-                    imports.Add("rx.Observable");
-                    imports.Add("rx.Single");
-                    imports.Add("rx.functions.Func1");
+                    imports.Add("io.reactivex.Observable");
+                    imports.Add("io.reactivex.Single");
+                    imports.Add("io.reactivex.functions.Function");
                     imports.Add("com.microsoft.rest.v2.annotations.Headers");
                     imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
                     imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");

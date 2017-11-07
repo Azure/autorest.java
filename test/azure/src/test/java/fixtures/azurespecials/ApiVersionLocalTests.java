@@ -19,25 +19,25 @@ public class ApiVersionLocalTests {
 
     @Test
     public void getMethodLocalValid() throws Exception {
-        Void response = client.apiVersionLocals().getMethodLocalValidAsync().toBlocking().value();
+        Void response = client.apiVersionLocals().getMethodLocalValidAsync().blockingGet();
 //        Assert.assertEquals(200, response.response().code());
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        Void response = client.apiVersionLocals().getMethodLocalNullAsync().toBlocking().value();
+        Void response = client.apiVersionLocals().getMethodLocalNullAsync().blockingGet();
 //        Assert.assertEquals(200, response.response().code());
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        Void response = client.apiVersionLocals().getPathLocalValidAsync().toBlocking().value();
+        Void response = client.apiVersionLocals().getPathLocalValidAsync().blockingGet();
 //        Assert.assertEquals(200, response.response().code());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        Void response = client.apiVersionLocals().getSwaggerLocalValidAsync().toBlocking().value();
+        Void response = client.apiVersionLocals().getSwaggerLocalValidAsync().blockingGet();
 //        Assert.assertEquals(200, response.response().code());
     }
 }

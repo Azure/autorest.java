@@ -96,9 +96,9 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings(true)
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Function<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
             @@Override
-            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) apply(@(Model.RestResponseConcreteTypeName) response) {
                 return response.body();
             }
     }).toObservable();
@@ -132,7 +132,7 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
  */
 public PagedList<@Model.ReturnTypeJv.SequenceElementTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) {
     @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<@Model.ReturnTypeJv.SequenceElementTypeString> page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
-    page.setItems(@(Model.Name)Async(@Model.MethodParameterInvocation).toBlocking().single().items());
+    page.setItems(@(Model.Name)Async(@Model.MethodParameterInvocation).blockingGet().items());
     page.setNextPageLink(null);
     return new PagedList<@Model.ReturnTypeJv.SequenceElementTypeString>(page) {
         @@Override
@@ -190,9 +190,9 @@ public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.N
 }
     @Model.BuildInputMappings()
     @Model.ParameterConversion
-    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Func1<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation).map(new Function<@(Model.RestResponseConcreteTypeName), @(Model.ReturnTypeJva.ServiceResponseGenericParameterString)>() {
             @@Override
-            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) call(@(Model.RestResponseConcreteTypeName) response) {
+            public @(Model.ReturnTypeJva.ServiceResponseGenericParameterString) apply(@(Model.RestResponseConcreteTypeName) response) {
                 return response.body();
             }
     }).toObservable();

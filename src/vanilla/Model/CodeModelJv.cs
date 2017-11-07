@@ -89,7 +89,7 @@ namespace AutoRest.Java.Model
                         "com.microsoft.rest.v2.RestResponse",
                         "com.microsoft.rest.v2.ServiceClient",
                         "com.microsoft.rest.v2.RestClient",
-                        "rx.Single"
+                        "io.reactivex.Single"
                     });
 
                 classes.AddRange(RootMethods
