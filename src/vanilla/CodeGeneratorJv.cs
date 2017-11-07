@@ -53,10 +53,7 @@ namespace AutoRest.Java
             string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
 
             // Service client
-            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            string serviceClientFileName = $"{cm.Name.ToPascalCase()}Impl.java";
-            string serviceClientFilePath = Path.Combine(implementationFolderPath, serviceClientFileName);
-            await Write(serviceClientTemplate, serviceClientFilePath);
+            await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
@@ -113,6 +110,9 @@ namespace AutoRest.Java
                 }
             }
         }
+
+        protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
+            => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
 
         protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));
