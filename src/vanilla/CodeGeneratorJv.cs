@@ -56,10 +56,7 @@ namespace AutoRest.Java
             await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // Service client interface
-            var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate { Model = codeModel };
-            string serviceClientInterfaceFileName = $"{cm.Name.ToPascalCase()}.java";
-            string serviceClientInterfaceFilePath = Path.Combine(packageFolderPath, serviceClientInterfaceFileName);
-            await Write(serviceClientInterfaceTemplate, serviceClientInterfaceFilePath);
+            await WriteServiceClientInterfaceJavaFile(codeModel).ConfigureAwait(false);
 
             // operations
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
@@ -113,6 +110,9 @@ namespace AutoRest.Java
 
         protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
+
+        protected Task WriteServiceClientInterfaceJavaFile(CodeModelJv codeModel)
+            => WriteJavaFile(DanCodeGenerator.GetServiceClientInterfaceJavaFile(codeModel, Settings));
 
         protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));
