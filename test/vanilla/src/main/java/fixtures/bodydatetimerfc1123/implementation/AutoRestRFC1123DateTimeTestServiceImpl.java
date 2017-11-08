@@ -10,12 +10,12 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
-import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
-import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
+import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import rx.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
 
     /**
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
-     *
      */
     public AutoRestRFC1123DateTimeTestServiceImpl() {
         this("https://localhost");

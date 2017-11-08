@@ -10,12 +10,12 @@
 
 package fixtures.header.implementation;
 
-import fixtures.header.AutoRestSwaggerBATHeaderService;
-import fixtures.header.Headers;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.header.AutoRestSwaggerBATHeaderService;
+import fixtures.header.Headers;
 import rx.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
 
     /**
      * Initializes an instance of AutoRestSwaggerBATHeaderService client.
-     *
      */
     public AutoRestSwaggerBATHeaderServiceImpl() {
         this("http://localhost");

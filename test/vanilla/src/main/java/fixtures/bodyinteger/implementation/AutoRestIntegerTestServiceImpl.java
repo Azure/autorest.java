@@ -10,12 +10,12 @@
 
 package fixtures.bodyinteger.implementation;
 
-import fixtures.bodyinteger.AutoRestIntegerTestService;
-import fixtures.bodyinteger.Ints;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodyinteger.AutoRestIntegerTestService;
+import fixtures.bodyinteger.Ints;
 import rx.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Initializes an instance of AutoRestIntegerTestService client.
-     *
      */
     public AutoRestIntegerTestServiceImpl() {
         this("http://localhost");

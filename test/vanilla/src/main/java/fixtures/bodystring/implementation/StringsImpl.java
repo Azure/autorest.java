@@ -742,7 +742,7 @@ public class StringsImpl implements Strings {
         if (stringBody == null) {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
-    Base64Url stringBodyConverted = Base64Url.encode(stringBody);
+        Base64Url stringBodyConverted = Base64Url.encode(stringBody);
         return service.putBase64UrlEncoded(stringBodyConverted);
     }
 

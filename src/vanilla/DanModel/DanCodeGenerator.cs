@@ -51,21 +51,22 @@ namespace AutoRest.Java.DanModel
                 {
                     string propertyDescription = property.Documentation.ToString().Period();
                     string propertyType = property.ModelType.ServiceResponseVariant().Name;
-                    string propertyName = property.Name.ToCamelCase();
+                    string propertyNameCamelCase = property.Name.ToCamelCase();
+                    string propertyNamePascalCase = property.Name.ToPascalCase();
 
                     classBlock.Line();
                     classBlock.SingleLineComment(propertyDescription);
-                    classBlock.Line($"private {propertyType} {propertyName};");
+                    classBlock.Line($"private {propertyType} {propertyNameCamelCase};");
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
                         comment.Line($"Gets {propertyDescription}");
                         comment.Line();
-                        comment.Return($"the {propertyName} value.");
+                        comment.Return($"the {propertyNameCamelCase} value.");
                     });
-                    classBlock.Block($"public {propertyType} {propertyName}()", function =>
+                    classBlock.Block($"public {propertyType} {propertyNameCamelCase}()", function =>
                     {
-                        function.Return($"this.{propertyName}");
+                        function.Return($"this.{propertyNameCamelCase}");
                     });
 
                     if (!property.IsReadOnly)
@@ -75,12 +76,12 @@ namespace AutoRest.Java.DanModel
                         {
                             comment.Line($"Sets {propertyDescription}");
                             comment.Line();
-                            comment.Param(propertyName, $"the {propertyName} value.");
+                            comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
                             comment.Return("the service client itself");
                         });
-                        classBlock.Block($"public {className} with{propertyName}({propertyType} {propertyName})", function =>
+                        classBlock.Block($"public {className} with{propertyNamePascalCase}({propertyType} {propertyNameCamelCase})", function =>
                         {
-                            function.Line($"this.{propertyName} = {propertyName};");
+                            function.Line($"this.{propertyNameCamelCase} = {propertyNameCamelCase};");
                             function.Return("this");
                         });
                     }
@@ -184,7 +185,7 @@ namespace AutoRest.Java.DanModel
                         comment.Line($"The interface defining all the services for {interfaceName} to be used by Retrofit to perform actually REST calls.");
                     });
                     classBlock.Annotation($"Host(\"{baseUrl}\")");
-                    classBlock.Block($"interface {interfaceName}", interfaceBlock =>
+                    classBlock.Block($"interface {serviceClientType}", interfaceBlock =>
                     {
                         foreach (MethodJv method in codeModel.Methods)
                         {
@@ -395,7 +396,6 @@ namespace AutoRest.Java.DanModel
                                 interfaceBlock.MultipleLineComment(comment =>
                                 {
                                     addSummaryAndDescription(comment);
-                                    comment.Line();
                                     addParameters(comment, requiredMethodParameters);
                                     addThrowsIllegalArgumentException(comment);
                                     if (method.ReturnTypeResponseName.Else("void") != "void")

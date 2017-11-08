@@ -338,7 +338,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-    DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return service.putUtcMaxDateTime(datetimeBodyConverted);
     }
 
@@ -481,7 +481,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-    DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return service.putUtcMinDateTime(datetimeBodyConverted);
     }
 

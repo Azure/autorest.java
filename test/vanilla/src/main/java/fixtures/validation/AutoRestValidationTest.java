@@ -10,6 +10,7 @@
 
 package fixtures.validation;
 
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -19,7 +20,6 @@ import fixtures.validation.models.Product;
 import java.io.IOException;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestValidationTest class.
@@ -29,7 +29,7 @@ public interface AutoRestValidationTest {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**
@@ -99,6 +99,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
+
     /**
      * Validates input parameters on the method. See swagger for details.
      *
@@ -187,6 +188,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
+
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -221,6 +223,7 @@ public interface AutoRestValidationTest {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getWithConstantInPathAsync();
+
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -285,6 +288,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> postWithConstantInBodyAsync(Product body);
+
     /**
      *
      * @param body the Product value

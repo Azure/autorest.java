@@ -10,12 +10,12 @@
 
 package fixtures.custombaseurimoreoptions.implementation;
 
-import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
-import fixtures.custombaseurimoreoptions.Paths;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
+import fixtures.custombaseurimoreoptions.Paths;
 import rx.Single;
 
 /**
@@ -94,7 +94,6 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
      */
     public AutoRestParameterizedCustomHostTestClientImpl() {
         this("https://{vault}{secret}{dnsSuffix}");

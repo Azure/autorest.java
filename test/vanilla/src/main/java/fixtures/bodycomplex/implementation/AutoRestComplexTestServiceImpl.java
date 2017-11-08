@@ -10,19 +10,19 @@
 
 package fixtures.bodycomplex.implementation;
 
-import fixtures.bodycomplex.AutoRestComplexTestService;
-import fixtures.bodycomplex.Basics;
-import fixtures.bodycomplex.Primitives;
-import fixtures.bodycomplex.Arrays;
-import fixtures.bodycomplex.Dictionarys;
-import fixtures.bodycomplex.Inheritances;
-import fixtures.bodycomplex.Polymorphisms;
-import fixtures.bodycomplex.Polymorphicrecursives;
-import fixtures.bodycomplex.Readonlypropertys;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodycomplex.Arrays;
+import fixtures.bodycomplex.AutoRestComplexTestService;
+import fixtures.bodycomplex.Basics;
+import fixtures.bodycomplex.Dictionarys;
+import fixtures.bodycomplex.Inheritances;
+import fixtures.bodycomplex.Polymorphicrecursives;
+import fixtures.bodycomplex.Polymorphisms;
+import fixtures.bodycomplex.Primitives;
+import fixtures.bodycomplex.Readonlypropertys;
 import rx.Single;
 
 /**
@@ -169,7 +169,6 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Initializes an instance of AutoRestComplexTestService client.
-     *
      */
     public AutoRestComplexTestServiceImpl() {
         this("http://localhost");

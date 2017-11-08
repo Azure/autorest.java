@@ -10,13 +10,15 @@
 
 package fixtures.validation.implementation;
 
-import fixtures.validation.AutoRestValidationTest;
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -28,15 +30,13 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.validation.AutoRestValidationTest;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
@@ -105,7 +105,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestValidationTest client.
-     *
      */
     public AutoRestValidationTestImpl() {
         this("http://localhost");

@@ -115,8 +115,8 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         Validator.validate(tags);
-    AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
-    tags1.withTags(tags);
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.withTags(tags);
         return service.update(resourceGroupName, avset, tags1);
     }
 

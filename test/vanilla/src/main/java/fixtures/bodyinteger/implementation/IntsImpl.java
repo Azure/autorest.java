@@ -693,7 +693,7 @@ public class IntsImpl implements Ints {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> putUnixTimeDateWithRestResponseAsync(DateTime intBody) {
-    Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Long intBodyConverted = intBody.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.putUnixTimeDate(intBodyConverted);
     }
 

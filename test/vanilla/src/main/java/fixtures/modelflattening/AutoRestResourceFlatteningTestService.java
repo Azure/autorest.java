@@ -10,6 +10,7 @@
 
 package fixtures.modelflattening;
 
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -26,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -36,7 +36,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**
@@ -105,6 +105,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayAsync(List<Resource> resourceArray);
+
     /**
      * Put External Resource as an Array.
      *
@@ -141,6 +142,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
     Single<List<FlattenedProduct>> getArrayAsync();
+
     /**
      * Get External Resource as an Array.
      *
@@ -211,6 +213,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray);
+
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
@@ -247,6 +250,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the List&lt;ProductWrapper&gt; object
      */
     Single<List<ProductWrapper>> getWrappedArrayAsync();
+
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
@@ -317,6 +321,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+
     /**
      * Put External Resource as a Dictionary.
      *
@@ -353,6 +358,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
     Single<Map<String, FlattenedProduct>> getDictionaryAsync();
+
     /**
      * Get External Resource as a Dictionary.
      *
@@ -423,6 +429,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -459,6 +466,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the ResourceCollection object
      */
     Single<ResourceCollection> getResourceCollectionAsync();
+
     /**
      * Get External Resource as a ResourceCollection.
      *
@@ -531,6 +539,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct);
+
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -624,6 +633,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue);
+
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -667,6 +677,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the SimpleProduct object
      */
     Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup);
+
     /**
      * Put Simple Product with client flattening true on the model.
      *

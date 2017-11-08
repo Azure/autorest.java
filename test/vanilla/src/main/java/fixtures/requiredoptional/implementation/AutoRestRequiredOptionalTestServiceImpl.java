@@ -10,13 +10,13 @@
 
 package fixtures.requiredoptional.implementation;
 
-import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
-import fixtures.requiredoptional.Implicits;
-import fixtures.requiredoptional.Explicits;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.requiredoptional.AutoRestRequiredOptionalTestService;
+import fixtures.requiredoptional.Explicits;
+import fixtures.requiredoptional.Implicits;
 import rx.Single;
 
 /**
@@ -131,7 +131,6 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
-     *
      */
     public AutoRestRequiredOptionalTestServiceImpl() {
         this("http://localhost");
