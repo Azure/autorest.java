@@ -228,7 +228,7 @@ namespace AutoRest.Java.DanModel
         {
             string interfaceName = codeModel.Name;
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, interfaceName);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
             javaFile.Import(codeModel.InterfaceImports);
 
@@ -250,7 +250,7 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Line("The default base URL.");
                 });
-                interfaceBlock.Line($"String DEFAULT_BASE_URL = \"{codeModel.BaseUrl}\"");
+                interfaceBlock.Line($"String DEFAULT_BASE_URL = \"{codeModel.BaseUrl}\";");
 
                 foreach (Property property in codeModel.Properties)
                 {
@@ -482,8 +482,6 @@ namespace AutoRest.Java.DanModel
                     }
                 }
             });
-
-            javaFile.Line("// Hello!");
 
             return javaFile;
         }
