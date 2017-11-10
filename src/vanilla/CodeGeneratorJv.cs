@@ -14,6 +14,7 @@ using AutoRest.Core.Model;
 using System;
 using AutoRest.Java.DanModel;
 using System.Collections.Generic;
+using AutoRest.Java.Azure.Model;
 
 namespace AutoRest.Java
 {
@@ -107,6 +108,9 @@ namespace AutoRest.Java
                 }
             }
         }
+
+        protected Task WriteAzureServiceClientJavaFile(CodeModelJva codeModel)
+            => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientJavaFile(codeModel, Settings));
 
         protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));

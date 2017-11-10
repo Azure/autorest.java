@@ -14,6 +14,11 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.azure.v2.Resource;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -24,11 +29,6 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
 import fixtures.azureresource.AutoRestResourceFlatteningTestService;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
@@ -36,9 +36,9 @@ import fixtures.azureresource.models.ResourceCollection;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
@@ -169,8 +169,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     }
 
     /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for
+     * AutoRestResourceFlatteningTestService to be used by RestProxy to perform
+     * REST calls.
      */
     @Host("http://localhost")
     interface AutoRestResourceFlatteningTestServiceService {

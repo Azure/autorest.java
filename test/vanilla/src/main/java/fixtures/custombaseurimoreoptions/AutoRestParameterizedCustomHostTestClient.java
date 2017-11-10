@@ -29,14 +29,14 @@ public interface AutoRestParameterizedCustomHostTestClient {
     String DEFAULT_BASE_URL = "https://{vault}{secret}{dnsSuffix}";
 
     /**
-     * Gets The subscription id with value 'test12'..
+     * Gets The subscription id with value 'test12'.
      *
      * @return the subscriptionId value.
      */
     String subscriptionId();
 
     /**
-     * Sets The subscription id with value 'test12'..
+     * Sets The subscription id with value 'test12'.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
@@ -44,14 +44,14 @@ public interface AutoRestParameterizedCustomHostTestClient {
     AutoRestParameterizedCustomHostTestClient withSubscriptionId(String subscriptionId);
 
     /**
-     * Gets A string value that is used as a global part of the parameterized host. Default value 'host'..
+     * Gets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @return the dnsSuffix value.
      */
     String dnsSuffix();
 
     /**
-     * Sets A string value that is used as a global part of the parameterized host. Default value 'host'..
+     * Sets A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      * @param dnsSuffix the dnsSuffix value.
      * @return the service client itself

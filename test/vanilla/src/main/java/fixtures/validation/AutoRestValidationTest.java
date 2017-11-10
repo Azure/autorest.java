@@ -38,14 +38,14 @@ public interface AutoRestValidationTest {
     String DEFAULT_BASE_URL = "http://localhost";
 
     /**
-     * Gets Subscription ID..
+     * Gets Subscription ID.
      *
      * @return the subscriptionId value.
      */
     String subscriptionId();
 
     /**
-     * Sets Subscription ID..
+     * Sets Subscription ID.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
@@ -53,14 +53,14 @@ public interface AutoRestValidationTest {
     AutoRestValidationTest withSubscriptionId(String subscriptionId);
 
     /**
-     * Gets Required string following pattern \d{2}-\d{2}-\d{4}.
+     * Gets Required string following pattern \d{2}-\d{2}-\d{4}
      *
      * @return the apiVersion value.
      */
     String apiVersion();
 
     /**
-     * Sets Required string following pattern \d{2}-\d{2}-\d{4}.
+     * Sets Required string following pattern \d{2}-\d{2}-\d{4}
      *
      * @param apiVersion the apiVersion value.
      * @return the service client itself

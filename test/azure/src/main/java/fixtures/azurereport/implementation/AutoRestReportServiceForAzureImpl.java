@@ -13,6 +13,10 @@ package fixtures.azurereport.implementation;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -21,17 +25,13 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
@@ -162,8 +162,9 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
     }
 
     /**
-     * The interface defining all the services for AutoRestReportServiceForAzure to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for
+     * AutoRestReportServiceForAzure to be used by RestProxy to perform REST
+     * calls.
      */
     @Host("http://localhost")
     interface AutoRestReportServiceForAzureService {

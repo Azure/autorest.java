@@ -17,6 +17,695 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public static JavaFile GetAzureServiceClientJavaFile(CodeModelJva codeModel, Settings settings)
+        {
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
+
+            string className = $"{codeModel.Name.ToPascalCase()}Impl";
+
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            
+            javaFile.Import(codeModel.ImplImports);
+
+            javaFile.MultipleLineComment(comment =>
+            {
+                comment.Line($"Initializes a new instance of the {className} class.");
+            });
+            javaFile.Block($"public class {className}{codeModel.ParentDeclaration}", classBlock =>
+            {
+                string serviceClientType = codeModel.ServiceClientServiceType;
+                IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
+                bool hasRootMethods = rootMethods.Any();
+
+                if (hasRootMethods)
+                {
+                    classBlock.SingleLineComment("The RestProxy service to perform REST calls.");
+                    classBlock.Line($"private {serviceClientType} service;");
+                }
+                classBlock.Line();
+
+                AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.PropertiesEx, className);
+
+                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                {
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"The {operation.MethodGroupDeclarationType} object to access its operations.");
+                    });
+                    classBlock.Line($"private {operation.MethodGroupDeclarationType} {operation.Name};");
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"Gets the {operation.MethodGroupDeclarationType} object to access its operations.");
+                        comment.Return($"the {operation.MethodGroupDeclarationType} object.");
+                    });
+                    classBlock.Block($"public {operation.MethodGroupDeclarationType} {operation.Name}()", function =>
+                    {
+                        function.Return($"this.{operation.Name}");
+                    });
+                }
+                classBlock.Line();
+
+                Action<JavaMultipleLineComment> addConstructorDescription = (JavaMultipleLineComment comment) =>
+                {
+                    comment.Line($"Initializes an instance of {codeModel.Name} client.");
+                };
+                if (settings.AddCredentials)
+                {
+                    string constructorDescription = $"Initializes an instance of {codeModel.Name} client.";
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        addConstructorDescription(comment);
+                        comment.Line();
+                        comment.Param("credentials", "the management credentials for Azure");
+                    });
+                    classBlock.Block($"public {className}(ServiceClientCredentials credentials)", constructor =>
+                    {
+                        constructor.Line($"this(\"{codeModel.BaseUrl}\", credentials);");
+                    });
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        addConstructorDescription(comment);
+                        comment.Line();
+                        comment.Param("baseUrl", "the base URL of the host");
+                        comment.Param("credentials", "the management credentials for Azure");
+                    });
+
+                    string constructorVisibility = codeModel.IsCustomBaseUri ? "private" : "public";
+                    classBlock.Block($"{constructorVisibility} {className}(String baseUrl, ServiceClientCredentials credentials)", constructor =>
+                    {
+                        constructor.Line("super(baseUrl, credentials);");
+                        constructor.Line("initialize();");
+                    });
+                    classBlock.Line();
+
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        addConstructorDescription(comment);
+                        comment.Line();
+                        comment.Param("restClient", "the REST client to connect to Azure.");
+                    });
+                    classBlock.Block($"public {className}(RestClient restClient)", constructor =>
+                    {
+                        constructor.Line("super(restClient);");
+                        constructor.Line("initialize();");
+                    });
+                    classBlock.Line();
+                }
+                else
+                {
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        addConstructorDescription(comment);
+                    });
+                    classBlock.Block($"public {className}()", constructor =>
+                    {
+                        constructor.Line($"this(\"{codeModel.BaseUrl}\");");
+                    });
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        addConstructorDescription(comment);
+                        comment.Line();
+                        comment.Param("baseUrl", "the base URL of the host");
+                    });
+                    classBlock.Block($"{(codeModel.IsCustomBaseUri ? "private" : "public")} {className}(String baseUrl)", constructor =>
+                    {
+                        constructor.Line("this(baseUrl, null);");
+                    });
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        addConstructorDescription(comment);
+                        comment.Line();
+                        comment.Param("restClient", "the REST client to connect to Azure");
+                    });
+                    classBlock.Block($"public {className}(RestClient restClient)", constructor =>
+                    {
+                        constructor.Line("super(restClient);");
+                        constructor.Line($"restClient.baseUrl(\"{codeModel.BaseUrl}\");");
+                        constructor.Line("initialize();");
+                    });
+                    classBlock.Line();
+                }
+
+                classBlock.Block("protected void initialize()", function =>
+                {
+                    foreach (Property property in codeModel.PropertiesEx.Where(p => p.DefaultValue != null))
+                    {
+                        function.Line($"this.{property.Name} = {property.DefaultValue};");
+                    }
+
+                    foreach (MethodGroupJva operation in codeModel.AllOperations)
+                    {
+                        function.Line($"this.{operation.Name} = new {operation.MethodGroupImplType}(this);");
+                    }
+
+                    string defaultHeaders = codeModel.SetDefaultHeaders;
+                    if (!string.IsNullOrWhiteSpace(defaultHeaders))
+                    {
+                        function.Line(codeModel.SetDefaultHeaders);
+                    }
+
+                    if (hasRootMethods)
+                    {
+                        function.Line("initializeService();");
+                    }
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line("Gets the User-Agent header for the client.");
+                    comment.Line();
+                    comment.Return("the user agent string.");
+                });
+                classBlock.Annotation("Override");
+                classBlock.Block("public String userAgent()", function =>
+                {
+                    if (codeModel.ApiVersion == null)
+                    {
+                        function.Return($"String.format(\"%s (%s)\", super.userAgent(), \"{codeModel.Name}\")");
+                    }
+                    else
+                    {
+                        function.Return($"String.format(\"%s (%s, %s)\", super.userAgent(), \"{codeModel.Name}\", \"{codeModel.ApiVersion}\")");
+                    }
+                });
+
+                if (hasRootMethods)
+                {
+                    classBlock.Line();
+                    classBlock.Block("private void initializeService()", function =>
+                    {
+                        function.Line($"service = AzureProxy.create({serviceClientType}.class, restClient().baseURL(), httpClient(), serializerAdapter());");
+                    });
+
+                    classBlock.Line();
+
+                    IMethodGroupJva methodGroup = codeModel;
+
+                    classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+                    {
+                        comment.Line($"The interface defining all the services for {methodGroup.Name} to be used by RestProxy to perform REST calls.");
+                    });
+                    classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
+                    classBlock.Block($"interface {methodGroup.ServiceType}", interfaceBlock =>
+                    {
+                        foreach (MethodJva method in methodGroup.Methods)
+                        {
+                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroup.LoggingContext} {method.Name}\" }})");
+                            if (method.IsPagingNextOperation)
+                            {
+                                interfaceBlock.Annotation("GET(\"{{nextUrl}}\")");
+                            }
+                            else
+                            {
+                                interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
+                            }
+                            interfaceBlock.Line(method.ExpectedResponsesAnnotation);
+                            if (method.DefaultResponse.Body != null)
+                            {
+                                interfaceBlock.Annotation($"UnexpectedResponseExceptionType({method.OperationExceptionTypeString}.class)");
+                            }
+
+                            if (method.IsLongRunningOperation)
+                            {
+                                interfaceBlock.Line($"Observable<OperationStatus<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>> {method.Name}({method.MethodParameterApiDeclaration});");
+                            }
+                            else
+                            {
+                                interfaceBlock.Line($"Single<{method.RestResponseConcreteTypeName}> {method.Name}({method.MethodParameterApiDeclaration});");
+                            }
+
+                            interfaceBlock.Line();
+                        }
+                    });
+
+                    classBlock.Line();
+                }
+
+                foreach (MethodJva method in rootMethods)
+                {
+                    IEnumerable<ParameterJv> nonConstantLocalParameters = method.LocalParameters.Where(p => !p.IsConstant);
+                    IEnumerable<ParameterJv> nonConstantOptionalLocalParameters = nonConstantLocalParameters.Where(p => !p.IsRequired);
+                    IEnumerable<ParameterJv> nonConstantRequiredLocalParameters = nonConstantLocalParameters.Where(p => p.IsRequired);
+
+                    if (method.IsPagingOperation || method.IsPagingNextOperation)
+                    {
+                        if (nonConstantOptionalLocalParameters.Any())
+                        {
+                            // -----------------------------------------------
+                            // All pages. Synchronous with required parameters
+                            // -----------------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, nonConstantRequiredLocalParameters);
+                                ThrowsIllegalArgumentException(comment);
+                                ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                ThrowsRuntimeException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation}).toBlocking().value();");
+                                function.Block($"return new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
+                                {
+                                    anonymousClass.Annotation("Override");
+                                    anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} nextPage(String {method.PagingNextPageLinkParameterName})", subFunction =>
+                                    {
+                                        subFunction.Line(method.PagingGroupedParameterTransformation(filterRequired: true));
+                                        subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation(filterRequired: true)}).toBlocking().value()");
+                                    });
+                                });
+                            });
+                            classBlock.Line();
+
+                            // -----------------------------------------------
+                            // All pages. Observable with required parameters.
+                            // -----------------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, nonConstantRequiredLocalParameters);
+                                ThrowsIllegalArgumentException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the observable to the {method.ReturnTypeResponseName.EscapeXmlComment()} object");
+                                }
+                                else
+                                {
+                                    comment.Return($"the {{@link Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                function.Line($"return {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation})");
+                                function.Indent(() =>
+                                {
+                                    function.Line(".toObservable()");
+                                    function.Block($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>()", anonymousClass =>
+                                    {
+                                        anonymousClass.Annotation("Override");
+                                        anonymousClass.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                        {
+                                            subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
+                                            subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
+                                            {
+                                                ifBlock.Return("Observable.just(page)");
+                                            });
+                                            subFunction.Line(method.PagingGroupedParameterTransformation(filterRequired: true));
+                                            subFunction.Return($"return Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation(filterRequired: true)});");
+                                        });
+                                    });
+                                });
+                            });
+                            classBlock.Line();
+
+                            // -------------------------------------------------
+                            // Single page. Observable with required parameters.
+                            // -------------------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, nonConstantRequiredLocalParameters);
+                                ThrowsIllegalArgumentException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the {method.ReturnTypeResponseName} object if successful.");
+                                }
+                                else
+                                {
+                                    comment.Return($"the {{@link Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}SinglePageAsync({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                foreach (ParameterJv param in method.RequiredNullableParameters)
+                                {
+                                    function.If($"{param.Name} == null)", ifBlock =>
+                                    {
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                    });
+                                }
+
+                                foreach (ParameterJv param in method.ParametersToValidate.Where(p => p.IsRequired))
+                                {
+                                    function.Line($"Validator.validate({param.Name});");
+                                }
+
+                                foreach (ParameterJv parameter in method.LocalParameters)
+                                {
+                                    if (!parameter.IsRequired)
+                                    {
+                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"});");
+                                    }
+                                    if (parameter.IsConstant)
+                                    {
+                                        function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"});");
+                                    }
+                                }
+
+                                function.Line(method.BuildInputMappings(true));
+                                function.Line(method.ParameterConversion);
+                                if (method.IsPagingNextOperation)
+                                {
+                                    function.Line($"String nextUrl = {method.NextUrlConstruction};");
+                                }
+                                function.Block($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>()", anonymousClass =>
+                                {
+                                    anonymousClass.Annotation("Override");
+                                    anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                    {
+                                        subFunction.Return("response.body()");
+                                    });
+                                });
+                            });
+
+                            classBlock.Line();
+                        }
+
+                        // -------------------------------------------
+                        // All pages. Synchronous with all parameters.
+                        // -------------------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, nonConstantLocalParameters);
+                            ThrowsIllegalArgumentException(comment);
+                            ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                            ThrowsRuntimeException(comment);
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration})", function =>
+                        {
+                            function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodParameterInvocation}).toBlocking().value();");
+                            function.Block($"return new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
+                            {
+                                anonymousClass.Annotation("Override");
+                                anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} nextPage(String {method.PagingNextPageLinkParameterName})", subFunction =>
+                                {
+                                    subFunction.Line(method.PagingGroupedParameterTransformation());
+                                    subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation()}).toBlocking().value()");
+                                });
+                            });
+                        });
+
+                        classBlock.Line();
+
+                        // ------------------------------------------
+                        // All pages. Observable with all parameters.
+                        // ------------------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, nonConstantLocalParameters);
+                            ThrowsIllegalArgumentException(comment);
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the observable to the {method.ReturnTypeResponseName} object");
+                            }
+                            else
+                            {
+                                comment.Return($"the {{@link Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration})", function =>
+                        {
+                            function.Line($"return {method.Name}SinglePageAsync({method.MethodParameterInvocation})");
+                            function.Indent(() =>
+                            {
+                                function.Line(".toObservable()");
+                                function.Block($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>()", anonymousClass =>
+                                {
+                                    anonymousClass.Annotation("Override");
+                                    anonymousClass.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                    {
+                                        subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
+                                        subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
+                                        {
+                                            ifBlock.Return("Observable.just(page)");
+                                        });
+                                        subFunction.Line(method.PagingGroupedParameterTransformation());
+                                        subFunction.Return($"Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation()});");
+                                    });
+                                });
+                            });
+                        });
+                        classBlock.Line();
+
+                        // --------------------------------------------
+                        // Single page. Observable with all parameters.
+                        // --------------------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, nonConstantLocalParameters);
+                            ThrowsIllegalArgumentException(comment);
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the {method.ReturnTypeResponseName} object if successful.");
+                            }
+                            else
+                            {
+                                comment.Return($"the {{@link Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}SinglePageAsync({method.MethodParameterDeclaration})", function =>
+                        {
+                            foreach (ParameterJv param in method.RequiredNullableParameters)
+                            {
+                                function.If($"{param.Name} == null", ifBlock =>
+                                {
+                                    function.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                });
+                            }
+
+                            foreach (ParameterJv param in method.ParametersToValidate)
+                            {
+                                function.Line($"Validator.validate({param.Name});");
+                            }
+
+                            foreach (ParameterJv parameter in method.LocalParameters)
+                            {
+                                if (parameter.IsConstant)
+                                {
+                                    function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                }
+                            }
+
+                            function.Line(method.BuildInputMappings());
+                            function.Line(method.ParameterConversion);
+                            if (method.IsPagingNextOperation)
+                            {
+                                function.Line($"String nextUrl = {method.NextUrlConstruction};");
+                            }
+                            function.Block($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>()", anonymousClass =>
+                            {
+                                anonymousClass.Annotation("Override");
+                                anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                {
+                                    subFunction.Return("response.body()");
+                                });
+                            });
+                        });
+                        classBlock.Line();
+                    }
+                    else
+                    {
+                        if (!method.IsLongRunningOperation)
+                        {
+                            GenerateRootMethodFunctions(classBlock, method);
+                        }
+                        else
+                        {
+                            if (nonConstantOptionalLocalParameters.Any())
+                            {
+                                // -----------------------------------------
+                                // Synchronous with only required parameters
+                                // -----------------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, nonConstantRequiredLocalParameters);
+                                    ThrowsIllegalArgumentException(comment);
+                                    ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                    ThrowsRuntimeException(comment);
+                                    if (method.ReturnType.Body != null)
+                                    {
+                                        comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                                    }
+                                });
+                                classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
+                                {
+                                    if (method.ReturnTypeJva.BodyClientType.ResponseVariant.Name == "void")
+                                    {
+                                        function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result();");
+                                    }
+                                    else
+                                    {
+                                        function.Return($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result()");
+                                    }
+                                });
+
+                                // --------------------------------------
+                                // Callback with only required parameters
+                                // --------------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, nonConstantRequiredLocalParameters);
+                                    ParamServiceCallback(comment);
+                                    ThrowsIllegalArgumentException(comment);
+                                    comment.Return("the {@link ServiceFuture} object");
+                                });
+                                classBlock.Block($"public ServiceFuture<{method.ReturnTypeJva.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclarationWithCallback})", function =>
+                                {
+                                    function.Return($"ServiceFutureUtil.fromLRO({method.Name}Async({method.MethodRequiredParameterInvocation}, serviceCallback)");
+                                });
+
+                                // ----------------------------------------
+                                // Observable with only required parameters
+                                // ----------------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, nonConstantRequiredLocalParameters);
+                                    ThrowsIllegalArgumentException(comment);
+                                    comment.Return("the observable for the request");
+                                });
+                                classBlock.Block($"public Observable<OperationStatus<{method.ReturnTypeJva.ClientResponseTypeString}>> {method.Name}Async({method.MethodRequiredParameterDeclaration})", function =>
+                                {
+                                    foreach (ParameterJv param in method.RequiredNullableParameters)
+                                    {
+                                        function.If($"{param.Name} == null", ifBlock =>
+                                        {
+                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                        });
+                                    }
+
+                                    foreach (ParameterJv param in method.ParametersToValidate.Where(p => p.IsRequired))
+                                    {
+                                        function.Line($"Validator.validate({param.Name});");
+                                    }
+
+                                    foreach (ParameterJv parameter in method.LocalParameters)
+                                    {
+                                        if (!parameter.IsRequired)
+                                        {
+                                            function.Line($"final {parameter.WireType.Name} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
+                                        }
+                                        if (parameter.IsConstant)
+                                        {
+                                            function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        }
+                                    }
+
+                                    function.Line(method.BuildInputMappings(true));
+                                    function.Line(method.RequiredParameterConversion);
+                                    function.Return($"service.{method.Name}({method.MethodParameterApiInvocation})");
+                                });
+
+                                // -------------------------------
+                                // Synchronous with all parameters
+                                // -------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, nonConstantLocalParameters);
+                                    ThrowsIllegalArgumentException(comment);
+                                    ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                    ThrowsRuntimeException(comment);
+                                    if (method.ReturnType.Body != null)
+                                    {
+                                        comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                                    }
+                                });
+                                classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration})", function =>
+                                {
+                                    if (method.ReturnTypeResponseName == "void")
+                                    {
+                                        function.Line($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last();");
+                                    }
+                                    else
+                                    {
+                                        function.Return($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last().result()");
+                                    }
+                                });
+                                classBlock.Line();
+
+                                // ----------------------------
+                                // Callback with all parameters
+                                // ----------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, nonConstantLocalParameters);
+                                    ParamServiceCallback(comment);
+                                    ThrowsIllegalArgumentException(comment);
+                                    comment.Return("the {{@link ServiceFuture}} object");
+                                });
+                                classBlock.Block($"public ServiceFuture<{method.ReturnTypeJva.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodParameterDeclarationWithCallback})", function =>
+                                {
+                                    function.Return($"ServiceFutureUtil.fromLRO({method.Name}Async({method.MethodParameterInvocation}, serviceCallback)");
+                                });
+                                classBlock.Line();
+
+                                // ------------------------------
+                                // Observable with all parameters
+                                // ------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, nonConstantLocalParameters);
+                                    ThrowsIllegalArgumentException(comment);
+                                    comment.Return("the observable for the request");
+                                });
+                                classBlock.Block($"public Observable<OperationStatus<{method.ReturnTypeJva.ClientResponseTypeString}>> {method.Name}Async({method.MethodParameterDeclaration})", function =>
+                                {
+                                    foreach (ParameterJv param in method.RequiredNullableParameters)
+                                    {
+                                        function.If($"{param.Name} == null", ifBlock =>
+                                        {
+                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                        });
+                                    }
+
+                                    foreach (ParameterJv param in method.ParametersToValidate)
+                                    {
+                                        function.Line($"Validator.validate({param.Name});");
+                                    }
+
+                                    foreach (ParameterJv parameter in method.LocalParameters)
+                                    {
+                                        if (parameter.IsConstant)
+                                        {
+                                            function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        }
+                                    }
+
+                                    function.Line(method.BuildInputMappings());
+                                    function.Line(method.ParameterConversion);
+                                    function.Return($"service.{method.Name}({method.MethodParameterApiInvocation})");
+                                });
+                            }
+                        }
+                    }
+                    classBlock.Line();
+                }
+            });
+
+            return javaFile;
+        }
+
         public static JavaFile GetServiceClientJavaFile(CodeModelJv codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
@@ -34,7 +723,8 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.Block($"public class {className} extends ServiceClient implements {interfaceName}", classBlock =>
             {
-                bool hasRootMethods = codeModel.RootMethods.Any();
+                IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
+                bool hasRootMethods = rootMethods.Any();
                 string serviceClientType = codeModel.ServiceClientServiceType;
                 string baseUrl = codeModel.BaseUrl;
 
@@ -47,45 +737,7 @@ namespace AutoRest.Java.DanModel
                     classBlock.Line($"private {serviceClientType} service;");
                 }
 
-                foreach (Property property in codeModel.Properties)
-                {
-                    string propertyDescription = property.Documentation.ToString().Period();
-                    string propertyType = property.ModelType.ServiceResponseVariant().Name;
-                    string propertyNameCamelCase = property.Name.ToCamelCase();
-                    string propertyNamePascalCase = property.Name.ToPascalCase();
-
-                    classBlock.Line();
-                    classBlock.SingleLineComment(propertyDescription);
-                    classBlock.Line($"private {propertyType} {propertyNameCamelCase};");
-                    classBlock.Line();
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Line($"Gets {propertyDescription}");
-                        comment.Line();
-                        comment.Return($"the {propertyNameCamelCase} value.");
-                    });
-                    classBlock.Block($"public {propertyType} {propertyNameCamelCase}()", function =>
-                    {
-                        function.Return($"this.{propertyNameCamelCase}");
-                    });
-
-                    if (!property.IsReadOnly)
-                    {
-                        classBlock.Line();
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            comment.Line($"Sets {propertyDescription}");
-                            comment.Line();
-                            comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
-                            comment.Return("the service client itself");
-                        });
-                        classBlock.Block($"public {className} with{propertyNamePascalCase}({propertyType} {propertyNameCamelCase})", function =>
-                        {
-                            function.Line($"this.{propertyNameCamelCase} = {propertyNameCamelCase};");
-                            function.Return("this");
-                        });
-                    }
-                }
+                AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.Properties, className);
 
                 foreach (MethodGroupJv operation in codeModel.AllOperations)
                 {
@@ -213,7 +865,7 @@ namespace AutoRest.Java.DanModel
                     });
                     classBlock.Line();
 
-                    foreach (MethodJv method in codeModel.RootMethods)
+                    foreach (MethodJv method in rootMethods)
                     {
                         GenerateRootMethodFunctions(classBlock, method);
 
@@ -261,24 +913,13 @@ namespace AutoRest.Java.DanModel
                     string propertyNameCamelCase = propertyName.ToCamelCase();
 
                     interfaceBlock.Line();
-                    interfaceBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Line($"Gets {propertyDescription}.");
-                        comment.Line();
-                        comment.Return($"the {propertyNameCamelCase} value.");
-                    });
+                    AddPropertyGetterComment(interfaceBlock, propertyDescription, propertyNameCamelCase);
                     interfaceBlock.Line($"{propertyType} {propertyNameCamelCase}();");
 
                     if (!property.IsReadOnly)
                     {
                         interfaceBlock.Line();
-                        interfaceBlock.MultipleLineComment(comment =>
-                        {
-                            comment.Line($"Sets {propertyDescription}.");
-                            comment.Line();
-                            comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
-                            comment.Return("the service client itself");
-                        });
+                        AddPropertySetterComment(interfaceBlock, propertyDescription, propertyNameCamelCase);
                         interfaceBlock.Line($"{interfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase});");
                     }
                 }
@@ -300,45 +941,15 @@ namespace AutoRest.Java.DanModel
 
                 interfaceBlock.Line();
 
-                if (codeModel.RootMethods.Any())
+                IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
+                if (rootMethods.Any())
                 {
-                    foreach (MethodJv method in codeModel.RootMethods)
+                    foreach (MethodJv method in rootMethods)
                     {
                         string methodSummary = method.Summary;
                         string methodSummaryXmlEscaped = methodSummary?.EscapeXmlComment().Period();
                         string methodDescription = method.Description;
                         string methodDescriptionXmlEscaped = methodDescription?.EscapeXmlComment().Period();
-
-                        Action<JavaMultipleLineComment> addSummaryAndDescription = (JavaMultipleLineComment comment) =>
-                        {
-                            if (!string.IsNullOrEmpty(methodSummary))
-                            {
-                                comment.Line(methodSummaryXmlEscaped);
-                            }
-                            if (!string.IsNullOrEmpty(methodDescription))
-                            {
-                                comment.Line(methodDescriptionXmlEscaped);
-                            }
-                            comment.Line();
-                        };
-
-                        Action<JavaMultipleLineComment, IEnumerable<ParameterJv>> addParameters = (JavaMultipleLineComment comment, IEnumerable<ParameterJv> parameters) =>
-                        {
-                            foreach (ParameterJv param in parameters)
-                            {
-                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment());
-                            }
-                        };
-
-                        Action<JavaMultipleLineComment> addCallbackParameter = (JavaMultipleLineComment comment) =>
-                        {
-                            comment.Param("serviceCallback", "the async ServiceCallback to handle successful and failed responses.");
-                        };
-
-                        Action<JavaMultipleLineComment> addThrowsIllegalArgumentException = (JavaMultipleLineComment comment) =>
-                        {
-                            comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
-                        };
 
                         IEnumerable<ParameterJv> methodParameters = method.LocalParameters.Where(p => !p.IsConstant);
                         if (methodParameters.Any(p => !p.IsRequired))
@@ -347,11 +958,11 @@ namespace AutoRest.Java.DanModel
 
                             interfaceBlock.MultipleLineComment(comment =>
                             {
-                                addSummaryAndDescription(comment);
-                                addParameters(comment, requiredMethodParameters);
-                                addThrowsIllegalArgumentException(comment);
-                                comment.Throws(method.OperationExceptionTypeString, "thrown if the request is rejected by server");
-                                comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, requiredMethodParameters);
+                                ThrowsIllegalArgumentException(comment);
+                                ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                ThrowsRuntimeException(comment);
                                 if (method.ReturnTypeResponseName.Else("void") != "void")
                                 {
                                     comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
@@ -363,10 +974,10 @@ namespace AutoRest.Java.DanModel
 
                             interfaceBlock.MultipleLineComment(comment =>
                             {
-                                addSummaryAndDescription(comment);
-                                addParameters(comment, requiredMethodParameters);
-                                addCallbackParameter(comment);
-                                addThrowsIllegalArgumentException(comment);
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, requiredMethodParameters);
+                                ParamServiceCallback(comment);
+                                ThrowsIllegalArgumentException(comment);
                                 comment.Return("the {@link ServiceFuture} object");
                             });
                             interfaceBlock.Line($"ServiceFuture<{method.ReturnTypeJv.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclarationWithCallback});");
@@ -375,9 +986,9 @@ namespace AutoRest.Java.DanModel
 
                             interfaceBlock.MultipleLineComment(comment =>
                             {
-                                addSummaryAndDescription(comment);
-                                addParameters(comment, requiredMethodParameters);
-                                addThrowsIllegalArgumentException(comment);
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, requiredMethodParameters);
+                                ThrowsIllegalArgumentException(comment);
                                 if (method.ReturnTypeResponseName.Else("void") != "void")
                                 {
                                     comment.Return($"the observable to the {method.ReturnTypeResponseName} object");
@@ -395,9 +1006,9 @@ namespace AutoRest.Java.DanModel
 
                                 interfaceBlock.MultipleLineComment(comment =>
                                 {
-                                    addSummaryAndDescription(comment);
-                                    addParameters(comment, requiredMethodParameters);
-                                    addThrowsIllegalArgumentException(comment);
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    AddParameters(comment, requiredMethodParameters);
+                                    ThrowsIllegalArgumentException(comment);
                                     if (method.ReturnTypeResponseName.Else("void") != "void")
                                     {
                                         comment.Return($"the observable to the {method.ReturnTypeResponseName} object");
@@ -413,11 +1024,11 @@ namespace AutoRest.Java.DanModel
 
                         interfaceBlock.MultipleLineComment(comment =>
                         {
-                            addSummaryAndDescription(comment);
-                            addParameters(comment, methodParameters);
-                            addThrowsIllegalArgumentException(comment);
-                            comment.Throws(method.OperationExceptionTypeString, "thrown if the request is rejected by server");
-                            comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, methodParameters);
+                            ThrowsIllegalArgumentException(comment);
+                            ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                            ThrowsRuntimeException(comment);
                             if (method.ReturnTypeResponseName.Else("void") != "void")
                             {
                                 comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
@@ -429,10 +1040,10 @@ namespace AutoRest.Java.DanModel
 
                         interfaceBlock.MultipleLineComment(comment =>
                         {
-                            addSummaryAndDescription(comment);
-                            addParameters(comment, methodParameters);
-                            addCallbackParameter(comment);
-                            addThrowsIllegalArgumentException(comment);
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, methodParameters);
+                            ParamServiceCallback(comment);
+                            ThrowsIllegalArgumentException(comment);
                             comment.Return("the {@link ServiceFuture} object");
                         });
                         interfaceBlock.Line($"ServiceFuture<{method.ReturnTypeJv.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodParameterDeclarationWithCallback});");
@@ -441,9 +1052,9 @@ namespace AutoRest.Java.DanModel
 
                         interfaceBlock.MultipleLineComment(comment =>
                         {
-                            addSummaryAndDescription(comment);
-                            addParameters(comment, methodParameters);
-                            addThrowsIllegalArgumentException(comment);
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, methodParameters);
+                            ThrowsIllegalArgumentException(comment);
                             if (method.ReturnTypeResponseName.Else("void") != "void")
                             {
                                 comment.Return($"the observable to the {method.ReturnTypeResponseName.EscapeXmlComment()} object");
@@ -461,9 +1072,9 @@ namespace AutoRest.Java.DanModel
                         {
                             interfaceBlock.MultipleLineComment(comment =>
                             {
-                                addSummaryAndDescription(comment);
-                                addParameters(comment, methodParameters);
-                                addThrowsIllegalArgumentException(comment);
+                                AddMethodSummaryAndDescription(comment, method);
+                                AddParameters(comment, methodParameters);
+                                ThrowsIllegalArgumentException(comment);
                                 if (method.ReturnTypeResponseName.Else("void") != "void")
                                 {
                                     comment.Return($"the observable to the {method.ReturnTypeResponseName.EscapeXmlComment()} object");
@@ -484,6 +1095,100 @@ namespace AutoRest.Java.DanModel
             });
 
             return javaFile;
+        }
+
+        private static void AddMemberVariablesWithGettersAndSettings(JavaBlock classBlock, IEnumerable<Property> properties, string className)
+        {
+            foreach (Property property in properties)
+            {
+                string propertyDocumentation = property.Documentation.ToString().Period();
+                string propertyType = property.ModelType.ServiceResponseVariant().Name;
+                string propertyName = property.Name;
+                string propertyNameCamelCase = propertyName.ToCamelCase();
+
+                classBlock.Line();
+                classBlock.SingleLineComment(propertyDocumentation);
+                classBlock.Line($"private {propertyType} {propertyNameCamelCase};");
+                classBlock.Line();
+                AddPropertyGetterComment(classBlock, propertyDocumentation, propertyNameCamelCase);
+                classBlock.Block($"public {propertyType} {propertyNameCamelCase}()", function =>
+                {
+                    function.Return($"this.{propertyNameCamelCase}");
+                });
+
+                if (!property.IsReadOnly)
+                {
+                    classBlock.Line();
+                    AddPropertySetterComment(classBlock, propertyDocumentation, propertyNameCamelCase);
+                    classBlock.Block($"public {className} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase})", function =>
+                    {
+                        function.Line($"this.{propertyNameCamelCase} = {propertyNameCamelCase};");
+                        function.Return("this");
+                    });
+                }
+            }
+        }
+
+        private static void AddPropertyGetterComment(JavaBlock typeBlock, string propertyDocumentation, string propertyNameCamelCase)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                comment.Line($"Gets {propertyDocumentation}");
+                comment.Line();
+                comment.Return($"the {propertyNameCamelCase} value.");
+            });
+        }
+
+        private static void AddPropertySetterComment(JavaBlock typeBlock, string propertyDocumentation, string propertyNameCamelCase)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                comment.Line($"Sets {propertyDocumentation}");
+                comment.Line();
+                comment.Param(propertyNameCamelCase, $"the {propertyNameCamelCase} value.");
+                comment.Return("the service client itself");
+            });
+        }
+
+        private static void AddMethodSummaryAndDescription(JavaMultipleLineComment comment, MethodJv method)
+        {
+            if (!string.IsNullOrEmpty(method.Summary))
+            {
+                comment.Line(method.Summary.EscapeXmlComment().Period());
+            }
+            if (!string.IsNullOrEmpty(method.Description))
+            {
+                comment.Line(method.Description.EscapeXmlComment().Period());
+            }
+            comment.Line();
+        }
+
+        private static void AddParameters(JavaMultipleLineComment comment, IEnumerable<ParameterJv> parameters)
+        {
+            foreach (ParameterJv param in parameters)
+            {
+                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment());
+            }
+        }
+
+        private static void ParamServiceCallback(JavaMultipleLineComment comment)
+        {
+            comment.Param("serviceCallback", "the async ServiceCallback to handle successful and failed responses.");
+        }
+
+        private static void ThrowsIllegalArgumentException(JavaMultipleLineComment comment)
+        {
+            comment.Throws("IllegalArgumentException", "thrown if parameters fail the validation");
+        }
+
+        private static void ThrowsOperationException(JavaMultipleLineComment comment, string operationExceptionType)
+        {
+            comment.Throws(operationExceptionType, "thrown if the request is rejected by server");
+        }
+
+        private static void ThrowsRuntimeException(JavaMultipleLineComment comment)
+        {
+            comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         }
 
         public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
@@ -689,7 +1394,7 @@ namespace AutoRest.Java.DanModel
 
                 string filePath = GetFilePath(folderPath, "package-info");
                 JavaFile javaFile = new JavaFile(filePath);
-
+                
                 if (!string.IsNullOrEmpty(headerComment))
                 {
                     javaFile.WordWrappedMultipleLineSlashSlashComment(maximumHeaderCommentWidth, (comment) =>
