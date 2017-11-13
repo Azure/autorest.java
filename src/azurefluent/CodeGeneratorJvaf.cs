@@ -65,7 +65,7 @@ namespace AutoRest.Java.Azure.Fluent
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //XML wrappers
-            await WriteXmlWrapperFiles(codeModel, implementationFolderPath);
+            await WriteXmlWrapperFiles(codeModel).ConfigureAwait(false);
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);

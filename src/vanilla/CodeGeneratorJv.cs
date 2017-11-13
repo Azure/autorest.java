@@ -79,7 +79,7 @@ namespace AutoRest.Java
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // XML wrappers
-            await WriteXmlWrapperFiles(codeModel, codeModel.ImplPackage).ConfigureAwait(false);
+            await WriteXmlWrapperFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
@@ -88,26 +88,8 @@ namespace AutoRest.Java
             await WritePackageInfoJavaFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
-        protected async Task WriteXmlWrapperFiles(CodeModelJv codeModel, string packageFolderPath)
-        {
-            if (codeModel.ShouldGenerateXmlSerializationCached)
-            {
-                // Every sequence type used as a parameter to a service method.
-                var parameterSequenceTypes = codeModel.Operations
-                    .SelectMany(o => o.Methods)
-                    .SelectMany(m => m.Parameters)
-                    .Select(p => p.ModelType)
-                    .OfType<SequenceTypeJv>()
-                    .Distinct(ModelNameComparer.Instance)
-                    .ToArray();
-
-                foreach (SequenceTypeJv st in parameterSequenceTypes)
-                {
-                    var wrapperTemplate = new XmlListWrapperTemplate { Model = st };
-                    await Write(wrapperTemplate, $"{packageFolderPath}/{st.XmlName.ToPascalCase()}Wrapper{ImplementationFileExtension}");
-                }
-            }
-        }
+        protected Task WriteXmlWrapperFiles(CodeModelJv codeModel)
+            => WriteJavaFiles(DanCodeGenerator.GetXmlWrapperJavaFiles(codeModel, Settings));
 
         protected Task WriteAzureServiceClientJavaFile(CodeModelJva codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientJavaFile(codeModel, Settings));

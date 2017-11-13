@@ -17,6 +17,75 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public static IEnumerable<JavaFile> GetXmlWrapperJavaFiles(CodeModelJv codeModel, Settings settings)
+        {
+            IEnumerable<JavaFile> result;
+            if (!codeModel.ShouldGenerateXmlSerializationCached)
+            {
+                result = Enumerable.Empty<JavaFile>();
+            }
+            else
+            {
+                Dictionary<SequenceTypeJv, JavaFile> javaFileMap = new Dictionary<SequenceTypeJv, JavaFile>();
+
+                // Every sequence type used as a parameter to a service method.
+                foreach (MethodGroup methodGroup in codeModel.Operations)
+                {
+                    foreach (Method method in methodGroup.Methods)
+                    {
+                        foreach (Parameter parameter in method.Parameters)
+                        {
+                            IModelType parameterType = parameter.ModelType;
+                            if (parameterType is SequenceTypeJv sequenceType && !javaFileMap.Keys.Contains(sequenceType, ModelNameComparer.Instance))
+                            {
+                                string sequenceTypeName = sequenceType.Name;
+                                string xmlName = sequenceType.XmlName;
+                                string xmlNameCamelCase = xmlName.ToCamelCase();
+                                string className = $"{xmlName.ToPascalCase()}Wrapper";
+
+                                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+                                javaFile.Import(sequenceType.Imports.Concat(new string[]
+                                {
+                                    "com.fasterxml.jackson.annotation.JsonCreator",
+                                    "com.fasterxml.jackson.annotation.JsonProperty",
+                                    "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
+                                    "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement"
+                                }));
+                                javaFile.Annotation($"JacksonXmlRootElement(localName = \"{xmlName}\")");
+                                javaFile.PublicClass(className, classBlock =>
+                                {
+                                    classBlock.Line();
+                                    classBlock.Annotation($"JacksonXmlProperty(localName = \"{sequenceType.ElementXmlName}\")");
+                                    classBlock.Line($"private final {sequenceTypeName} {xmlNameCamelCase};");
+                                    classBlock.Line();
+                                    classBlock.Annotation("JsonCreator");
+                                    classBlock.Block($"public {className}(@JsonProperty(\"{xmlNameCamelCase}\") {sequenceTypeName} {xmlNameCamelCase})", constructor =>
+                                    {
+                                        constructor.Line($"this.{xmlNameCamelCase} = {xmlNameCamelCase};");
+                                    });
+                                    classBlock.Line();
+                                    classBlock.MultipleLineComment(comment =>
+                                    {
+                                        comment.Line($"Get the {xmlName} value.");
+                                        comment.Line();
+                                        comment.Return($"the {xmlName} value");
+                                    });
+                                    classBlock.Block($"public {sequenceTypeName} {xmlNameCamelCase}()", function =>
+                                    {
+                                        function.Return(xmlNameCamelCase);
+                                    });
+                                });
+
+                                javaFileMap.Add(sequenceType, javaFile);
+                            }
+                        }
+                    }
+                }
+                result = javaFileMap.Values;
+            }
+            return result;
+        }
+
         public static JavaFile GetAzureServiceClientJavaFile(CodeModelJva codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
