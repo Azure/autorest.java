@@ -20,7 +20,7 @@ public interface AutoRestParameterFlattening {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**

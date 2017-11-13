@@ -10,6 +10,7 @@
 
 package fixtures.report;
 
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.util.Map;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestReportService class.
@@ -28,7 +28,7 @@ public interface AutoRestReportService {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**
@@ -62,6 +62,7 @@ public interface AutoRestReportService {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<Map<String, Integer>> getReportAsync();
+
     /**
      * Get test coverage report.
      *

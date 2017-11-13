@@ -10,12 +10,12 @@
 
 package fixtures.bodyarray.implementation;
 
-import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
-import fixtures.bodyarray.Arrays;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodyarray.Arrays;
+import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
 import rx.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
 
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
-     *
      */
     public AutoRestSwaggerBATArrayServiceImpl() {
         this("http://localhost");

@@ -10,13 +10,14 @@
 
 package fixtures.modelflattening.implementation;
 
-import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -27,9 +28,7 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
@@ -41,8 +40,9 @@ import fixtures.modelflattening.models.WrappedProduct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
@@ -65,7 +65,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     *
      */
     public AutoRestResourceFlatteningTestServiceImpl() {
         this("http://localhost");
@@ -91,8 +90,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be
-     * used by Retrofit to perform actually REST calls.
+     * The interface defining all the services for
+     * AutoRestResourceFlatteningTestService to be used by Retrofit to perform
+     * actually REST calls.
      */
     @Host("http://localhost")
     interface AutoRestResourceFlatteningTestServiceService {
@@ -869,12 +869,12 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         final String description = null;
         final String genericValue = null;
         final String odatavalue = null;
-    SimpleProduct simpleBodyProduct = new SimpleProduct();
-    simpleBodyProduct.withProductId(productId);
-    simpleBodyProduct.withDescription(null);
-    simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-    simpleBodyProduct.withGenericValue(null);
-    simpleBodyProduct.withOdatavalue(null);
+        SimpleProduct simpleBodyProduct = new SimpleProduct();
+        simpleBodyProduct.withProductId(productId);
+        simpleBodyProduct.withDescription(null);
+        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+        simpleBodyProduct.withGenericValue(null);
+        simpleBodyProduct.withOdatavalue(null);
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
 
@@ -942,15 +942,15 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         if (maxProductDisplayName == null) {
             throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
         }
-    SimpleProduct simpleBodyProduct = null;
-    if (description != null || genericValue != null || odatavalue != null) {
-        simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.withProductId(productId);
-        simpleBodyProduct.withDescription(description);
-        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.withGenericValue(genericValue);
-        simpleBodyProduct.withOdatavalue(odatavalue);
-    }
+        SimpleProduct simpleBodyProduct = null;
+        if (description != null || genericValue != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(description);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(genericValue);
+            simpleBodyProduct.withOdatavalue(odatavalue);
+        }
         return service.postFlattenedSimpleProduct(simpleBodyProduct);
     }
 
@@ -1008,21 +1008,21 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
             throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
         }
         Validator.validate(flattenParameterGroup);
-    String name = flattenParameterGroup.name();
-    String productId = flattenParameterGroup.productId();
-    String description = flattenParameterGroup.description();
-    String maxProductDisplayName = flattenParameterGroup.maxProductDisplayName();
-    String genericValue = flattenParameterGroup.genericValue();
-    String odatavalue = flattenParameterGroup.odatavalue();
-    SimpleProduct simpleBodyProduct = null;
-    if (description != null || genericValue != null || odatavalue != null) {
-        simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.withProductId(productId);
-        simpleBodyProduct.withDescription(description);
-        simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
-        simpleBodyProduct.withGenericValue(genericValue);
-        simpleBodyProduct.withOdatavalue(odatavalue);
-    }
+        String name = flattenParameterGroup.name();
+        String productId = flattenParameterGroup.productId();
+        String description = flattenParameterGroup.description();
+        String maxProductDisplayName = flattenParameterGroup.maxProductDisplayName();
+        String genericValue = flattenParameterGroup.genericValue();
+        String odatavalue = flattenParameterGroup.odatavalue();
+        SimpleProduct simpleBodyProduct = null;
+        if (description != null || genericValue != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.withProductId(productId);
+            simpleBodyProduct.withDescription(description);
+            simpleBodyProduct.withMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.withGenericValue(genericValue);
+            simpleBodyProduct.withOdatavalue(odatavalue);
+        }
         return service.putSimpleProductWithGrouping(name, simpleBodyProduct);
     }
 

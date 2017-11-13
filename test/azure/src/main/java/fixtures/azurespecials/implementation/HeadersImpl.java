@@ -169,7 +169,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
         Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
-    String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
+        String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
         return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent());
     }
 

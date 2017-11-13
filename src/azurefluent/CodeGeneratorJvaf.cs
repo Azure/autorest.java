@@ -49,7 +49,7 @@ namespace AutoRest.Java.Azure.Fluent
             string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
 
             // Service client
-            await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
+            await WriteAzureServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // operations
             foreach (MethodGroupJvaf methodGroup in codeModel.AllOperations)

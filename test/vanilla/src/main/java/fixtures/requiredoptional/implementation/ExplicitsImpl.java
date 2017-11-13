@@ -1701,7 +1701,7 @@ public class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-    String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postRequiredArrayHeader(headerParameterConverted);
     }
 
@@ -1750,7 +1750,7 @@ public class ExplicitsImpl implements Explicits {
     public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync() {
         final List<String> headerParameter = null;
         Validator.validate(headerParameter);
-    String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
     }
 
@@ -1799,7 +1799,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
-    String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
     }
 

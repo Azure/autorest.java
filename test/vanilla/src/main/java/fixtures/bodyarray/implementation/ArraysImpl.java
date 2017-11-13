@@ -2379,11 +2379,11 @@ public class ArraysImpl implements Arrays {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-    List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
-    for (DateTime item : arrayBody) {
-        DateTimeRfc1123 value = new DateTimeRfc1123(item);
-        arrayBodyConverted.add(value);
-    }
+        List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
+        for (DateTime item : arrayBody) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(item);
+            arrayBodyConverted.add(value);
+        }
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 

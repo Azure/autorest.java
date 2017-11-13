@@ -1012,7 +1012,7 @@ public class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-    String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteMultiByte(bytePathConverted);
     }
 
@@ -1060,7 +1060,7 @@ public class PathsImpl implements Paths {
      */
     public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
         final byte[] bytePath = "".getBytes();
-    String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteEmpty(bytePathConverted);
     }
 
@@ -1112,7 +1112,7 @@ public class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-    String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteNull(bytePathConverted);
     }
 
@@ -1361,7 +1361,7 @@ public class PathsImpl implements Paths {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
-    Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
         return service.base64Url(base64UrlPathConverted);
     }
 
@@ -1415,7 +1415,7 @@ public class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
-    String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return service.arrayCsvInPath(arrayPathConverted);
     }
 
@@ -1465,7 +1465,7 @@ public class PathsImpl implements Paths {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath) {
-    Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 

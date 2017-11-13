@@ -10,12 +10,12 @@
 
 package fixtures.bodyboolean.implementation;
 
-import fixtures.bodyboolean.AutoRestBoolTestService;
-import fixtures.bodyboolean.Bools;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.bodyboolean.AutoRestBoolTestService;
+import fixtures.bodyboolean.Bools;
 import rx.Single;
 
 /**
@@ -48,7 +48,6 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
 
     /**
      * Initializes an instance of AutoRestBoolTestService client.
-     *
      */
     public AutoRestBoolTestServiceImpl() {
         this("http://localhost");

@@ -10,14 +10,14 @@
 
 package fixtures.url.implementation;
 
-import fixtures.url.AutoRestUrlTestService;
-import fixtures.url.Paths;
-import fixtures.url.Queries;
-import fixtures.url.PathItems;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.url.AutoRestUrlTestService;
+import fixtures.url.PathItems;
+import fixtures.url.Paths;
+import fixtures.url.Queries;
 import rx.Single;
 
 /**
@@ -122,7 +122,6 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestUrlTestService client.
-     *
      */
     public AutoRestUrlTestServiceImpl() {
         this("http://localhost");

@@ -10,12 +10,12 @@
 
 package fixtures.custombaseuri.implementation;
 
-import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
-import fixtures.custombaseuri.Paths;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
+import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
+import fixtures.custombaseuri.Paths;
 import rx.Single;
 
 /**
@@ -71,7 +71,6 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     *
      */
     public AutoRestParameterizedHostTestClientImpl() {
         this("http://{accountName}{host}");

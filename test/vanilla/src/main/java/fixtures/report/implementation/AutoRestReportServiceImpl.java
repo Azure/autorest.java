@@ -10,26 +10,26 @@
 
 package fixtures.report.implementation;
 
-import fixtures.report.AutoRestReportService;
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import rx.Single;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.report.AutoRestReportService;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import rx.functions.Func1;
 import rx.Observable;
+import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestReportService class.
@@ -52,7 +52,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
 
     /**
      * Initializes an instance of AutoRestReportService client.
-     *
      */
     public AutoRestReportServiceImpl() {
         this("http://localhost");
