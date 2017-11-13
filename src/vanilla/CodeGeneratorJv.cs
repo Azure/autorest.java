@@ -48,11 +48,6 @@ namespace AutoRest.Java
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
 
-            string package = codeModel.Namespace.ToLowerInvariant();
-            string baseFolderPath = Path.Combine("src", "main", "java");
-            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
-            string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
-
             // Service client
             await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
@@ -63,10 +58,7 @@ namespace AutoRest.Java
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
                 // Operation
-                var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
-                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
-                await Write(operationsTemplate, operationsFilePath);
+                await WriteMethodGroupJavaFile(codeModel, methodGroup).ConfigureAwait(false);
 
                 // Operation interface
                 await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
@@ -85,6 +77,9 @@ namespace AutoRest.Java
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
+            string package = codeModel.Namespace.ToLowerInvariant();
+            string baseFolderPath = Path.Combine("src", "main", "java");
+            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
             await WritePackageInfoJavaFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
@@ -120,6 +115,9 @@ namespace AutoRest.Java
 
         protected Task WriteServiceClientInterfaceJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientInterfaceJavaFile(codeModel, Settings));
+
+        protected Task WriteMethodGroupJavaFile(CodeModelJv codeModel, MethodGroupJv methodGroup)
+            => WriteJavaFile(DanCodeGenerator.GetMethodGroupJavaFile(codeModel, Settings, methodGroup));
 
         protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));

@@ -1273,24 +1273,32 @@ namespace AutoRest.Java.DanModel
             comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         }
 
+        public static JavaFile GetMethodGroupJavaFile(CodeModelJv codeModel, Settings settings, MethodGroupJv methodGroup)
+        {
+            string className = $"{methodGroup.TypeName.ToPascalCase()}Impl";
+
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+
+            return javaFile;
+        }
+
         public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
         {
-            IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => ((MethodJv)method).InterfaceImports);
-            
             string interfaceName = methodGroup.TypeName;
 
-            IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
+
+            IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => ((MethodJv)method).InterfaceImports);
+            javaFile.Import(imports);
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
-
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
-            javaFile.Import(imports);
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
             {
                 comment.Line($"An instance of this class provides access to all the operations defined in {interfaceName}.");
             });
             javaFile.PublicInterface(interfaceName, (typeBlock) =>
             {
+                IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
                 foreach (JavaMethod method in methods)
                 {
                     typeBlock.MultipleLineComment((comment) =>
