@@ -28,7 +28,7 @@ public interface AutoRestReportServiceForAzure {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**
@@ -109,6 +109,7 @@ public interface AutoRestReportServiceForAzure {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<Map<String, Integer>> getReportAsync();
+
     /**
      * Get test coverage report.
      *

@@ -20,7 +20,7 @@ public interface AutoRestHeadExceptionTestService {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**

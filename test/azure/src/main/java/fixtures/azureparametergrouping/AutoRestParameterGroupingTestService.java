@@ -20,7 +20,7 @@ public interface AutoRestParameterGroupingTestService {
      * Gets the REST client.
      *
      * @return the {@link RestClient} object.
-    */
+     */
     RestClient restClient();
 
     /**

@@ -112,6 +112,9 @@ namespace AutoRest.Java
         protected Task WriteAzureServiceClientJavaFile(CodeModelJva codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientJavaFile(codeModel, Settings));
 
+        protected Task WriteAzureServiceClientInterfaceJavaFile(CodeModelJva codeModel)
+            => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientInterfaceJavaFile(codeModel, Settings));
+
         protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
 

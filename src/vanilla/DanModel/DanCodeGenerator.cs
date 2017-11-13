@@ -706,6 +706,79 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
+        public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModelJva codeModel, Settings settings)
+        {
+            string interfaceName = codeModel.Name;
+
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
+
+            javaFile.Import(codeModel.InterfaceImports);
+
+            javaFile.MultipleLineComment(comment =>
+            {
+                comment.Line($"The interface for {interfaceName} class.");
+            });
+            javaFile.PublicInterface(interfaceName, interfaceBlock =>
+            {
+                AddRestClientGetterSignature(interfaceBlock);
+                interfaceBlock.Line();
+                interfaceBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line("Gets the User-Agent header for the client.");
+                    comment.Line();
+                    comment.Return("the user agent string.");
+                });
+                interfaceBlock.Line("String userAgent();");
+
+                foreach (Property property in codeModel.PropertiesEx)
+                {
+                    string propertyDescription = property.Documentation;
+                    string propertyName = property.Name;
+                    string propertyNameCamelCase = propertyName.ToCamelCase();
+                    string propertyType = property.ModelType.ServiceResponseVariant().Name;
+
+                    interfaceBlock.Line();
+                    interfaceBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"Gets {propertyDescription}.");
+                        comment.Line();
+                        comment.Return($"the {propertyName} value.");
+                    });
+                    interfaceBlock.Line($"{propertyType} {propertyNameCamelCase}();");
+                    if (!property.IsReadOnly)
+                    {
+                        interfaceBlock.Line();
+                        interfaceBlock.MultipleLineComment(comment =>
+                        {
+                            comment.Line($"Sets {propertyDescription}.");
+                            comment.Line();
+                            comment.Param(propertyNameCamelCase, $"the {propertyName} value.");
+                            comment.Return("the service client itself");
+                        });
+                        interfaceBlock.Line($"{interfaceName} with{propertyName.ToPascalCase()}({propertyType} {propertyNameCamelCase});");
+                    }
+                }
+
+                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                {
+                    string operationType = operation.TypeName;
+
+                    interfaceBlock.Line();
+                    interfaceBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"Gets the {operationType} object to access its operations.");
+                        comment.Return($"the {operationType} object.");
+                    });
+                    interfaceBlock.Line($"{operationType} {operation.Name.ToCamelCase()}();");
+                }
+
+                interfaceBlock.Line();
+                AddInterfaceMethodSignatures(interfaceBlock, codeModel);
+            });
+
+            return javaFile;
+        }
+
         public static JavaFile GetServiceClientJavaFile(CodeModelJv codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
@@ -891,13 +964,7 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                interfaceBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("Gets the REST client.");
-                    comment.Line();
-                    comment.Return($"the {{@link RestClient}} object.");
-                });
-                interfaceBlock.Line("RestClient restClient();");
+                AddRestClientGetterSignature(interfaceBlock);
                 interfaceBlock.Line();
                 interfaceBlock.MultipleLineComment(comment =>
                 {
@@ -941,47 +1008,85 @@ namespace AutoRest.Java.DanModel
 
                 interfaceBlock.Line();
 
-                IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
-                if (rootMethods.Any())
+                AddInterfaceMethodSignatures(interfaceBlock, codeModel);
+            });
+
+            return javaFile;
+        }
+
+        private static void AddRestClientGetterSignature(JavaBlock interfaceBlock)
+        {
+            interfaceBlock.MultipleLineComment(comment =>
+            {
+                comment.Line("Gets the REST client.");
+                comment.Line();
+                comment.Return("the {@link RestClient} object.");
+            });
+            interfaceBlock.Line("RestClient restClient();");
+        }
+
+        private static void AddInterfaceMethodSignatures(JavaBlock interfaceBlock, CodeModelJv codeModel)
+        {
+            if (codeModel.RootMethods.Any())
+            {
+                foreach (MethodJv method in codeModel.RootMethods)
                 {
-                    foreach (MethodJv method in rootMethods)
+                    string methodSummary = method.Summary;
+                    string methodSummaryXmlEscaped = methodSummary?.EscapeXmlComment().Period();
+                    string methodDescription = method.Description;
+                    string methodDescriptionXmlEscaped = methodDescription?.EscapeXmlComment().Period();
+
+                    IEnumerable<ParameterJv> methodParameters = method.LocalParameters.Where(p => !p.IsConstant);
+                    if (methodParameters.Any(p => !p.IsRequired))
                     {
-                        string methodSummary = method.Summary;
-                        string methodSummaryXmlEscaped = methodSummary?.EscapeXmlComment().Period();
-                        string methodDescription = method.Description;
-                        string methodDescriptionXmlEscaped = methodDescription?.EscapeXmlComment().Period();
+                        IEnumerable<ParameterJv> requiredMethodParameters = methodParameters.Where(p => p.IsRequired);
 
-                        IEnumerable<ParameterJv> methodParameters = method.LocalParameters.Where(p => !p.IsConstant);
-                        if (methodParameters.Any(p => !p.IsRequired))
+                        interfaceBlock.MultipleLineComment(comment =>
                         {
-                            IEnumerable<ParameterJv> requiredMethodParameters = methodParameters.Where(p => p.IsRequired);
-
-                            interfaceBlock.MultipleLineComment(comment =>
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, requiredMethodParameters);
+                            ThrowsIllegalArgumentException(comment);
+                            ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                            ThrowsRuntimeException(comment);
+                            if (method.ReturnTypeResponseName.Else("void") != "void")
                             {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, requiredMethodParameters);
-                                ThrowsIllegalArgumentException(comment);
-                                ThrowsOperationException(comment, method.OperationExceptionTypeString);
-                                ThrowsRuntimeException(comment);
-                                if (method.ReturnTypeResponseName.Else("void") != "void")
-                                {
-                                    comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
-                                }
-                            });
-                            interfaceBlock.Line($"{method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration});");
+                                comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                            }
+                        });
+                        interfaceBlock.Line($"{method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration});");
 
-                            interfaceBlock.Line();
+                        interfaceBlock.Line();
 
-                            interfaceBlock.MultipleLineComment(comment =>
+                        interfaceBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, requiredMethodParameters);
+                            ParamServiceCallback(comment);
+                            ThrowsIllegalArgumentException(comment);
+                            comment.Return("the {@link ServiceFuture} object");
+                        });
+                        interfaceBlock.Line($"ServiceFuture<{method.ReturnTypeJv.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclarationWithCallback});");
+
+                        interfaceBlock.Line();
+
+                        interfaceBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            AddParameters(comment, requiredMethodParameters);
+                            ThrowsIllegalArgumentException(comment);
+                            if (method.ReturnTypeResponseName.Else("void") != "void")
                             {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, requiredMethodParameters);
-                                ParamServiceCallback(comment);
-                                ThrowsIllegalArgumentException(comment);
-                                comment.Return("the {@link ServiceFuture} object");
-                            });
-                            interfaceBlock.Line($"ServiceFuture<{method.ReturnTypeJv.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclarationWithCallback});");
+                                comment.Return($"the observable to the {method.ReturnTypeResponseName} object");
+                            }
+                            else
+                            {
+                                comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
+                            }
+                        });
+                        interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
 
+                        if (method.ShouldGenerateBeginRestResponseMethod())
+                        {
                             interfaceBlock.Line();
 
                             interfaceBlock.MultipleLineComment(comment =>
@@ -998,58 +1103,58 @@ namespace AutoRest.Java.DanModel
                                     comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                                 }
                             });
-                            interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
-
-                            if (method.ShouldGenerateBeginRestResponseMethod())
-                            {
-                                interfaceBlock.Line();
-
-                                interfaceBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, requiredMethodParameters);
-                                    ThrowsIllegalArgumentException(comment);
-                                    if (method.ReturnTypeResponseName.Else("void") != "void")
-                                    {
-                                        comment.Return($"the observable to the {method.ReturnTypeResponseName} object");
-                                    }
-                                    else
-                                    {
-                                        comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
-                                    }
-                                });
-                                interfaceBlock.Line($"Single<{method.RestResponseAbstractTypeName}> {method.Name}WithRestResponseAsync({method.MethodRequiredParameterDeclaration});");
-                            }
+                            interfaceBlock.Line($"Single<{method.RestResponseAbstractTypeName}> {method.Name}WithRestResponseAsync({method.MethodRequiredParameterDeclaration});");
                         }
+                    }
 
-                        interfaceBlock.MultipleLineComment(comment =>
+                    interfaceBlock.MultipleLineComment(comment =>
+                    {
+                        AddMethodSummaryAndDescription(comment, method);
+                        AddParameters(comment, methodParameters);
+                        ThrowsIllegalArgumentException(comment);
+                        ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                        ThrowsRuntimeException(comment);
+                        if (method.ReturnTypeResponseName.Else("void") != "void")
                         {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, methodParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            ThrowsOperationException(comment, method.OperationExceptionTypeString);
-                            ThrowsRuntimeException(comment);
-                            if (method.ReturnTypeResponseName.Else("void") != "void")
-                            {
-                                comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
-                            }
-                        });
-                        interfaceBlock.Line($"{method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration});");
+                            comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                        }
+                    });
+                    interfaceBlock.Line($"{method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration});");
 
-                        interfaceBlock.Line();
+                    interfaceBlock.Line();
 
-                        interfaceBlock.MultipleLineComment(comment =>
+                    interfaceBlock.MultipleLineComment(comment =>
+                    {
+                        AddMethodSummaryAndDescription(comment, method);
+                        AddParameters(comment, methodParameters);
+                        ParamServiceCallback(comment);
+                        ThrowsIllegalArgumentException(comment);
+                        comment.Return("the {@link ServiceFuture} object");
+                    });
+                    interfaceBlock.Line($"ServiceFuture<{method.ReturnTypeJv.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodParameterDeclarationWithCallback});");
+
+                    interfaceBlock.Line();
+
+                    interfaceBlock.MultipleLineComment(comment =>
+                    {
+                        AddMethodSummaryAndDescription(comment, method);
+                        AddParameters(comment, methodParameters);
+                        ThrowsIllegalArgumentException(comment);
+                        if (method.ReturnTypeResponseName.Else("void") != "void")
                         {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, methodParameters);
-                            ParamServiceCallback(comment);
-                            ThrowsIllegalArgumentException(comment);
-                            comment.Return("the {@link ServiceFuture} object");
-                        });
-                        interfaceBlock.Line($"ServiceFuture<{method.ReturnTypeJv.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodParameterDeclarationWithCallback});");
+                            comment.Return($"the observable to the {method.ReturnTypeResponseName.EscapeXmlComment()} object");
+                        }
+                        else
+                        {
+                            comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
+                        }
+                    });
+                    interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
 
-                        interfaceBlock.Line();
+                    interfaceBlock.Line();
 
+                    if (method.ShouldGenerateBeginRestResponseMethod())
+                    {
                         interfaceBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
@@ -1064,37 +1169,14 @@ namespace AutoRest.Java.DanModel
                                 comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                             }
                         });
-                        interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
-
-                        interfaceBlock.Line();
-
-                        if (method.ShouldGenerateBeginRestResponseMethod())
-                        {
-                            interfaceBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, methodParameters);
-                                ThrowsIllegalArgumentException(comment);
-                                if (method.ReturnTypeResponseName.Else("void") != "void")
-                                {
-                                    comment.Return($"the observable to the {method.ReturnTypeResponseName.EscapeXmlComment()} object");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
-                                }
-                            });
-                        }
-                        interfaceBlock.Line($"Single<{method.RestResponseAbstractTypeName}> {method.Name}WithRestResponseAsync({method.MethodParameterDeclaration});");
-
-                        interfaceBlock.Line();
-
-                        interfaceBlock.Line();
                     }
-                }
-            });
+                    interfaceBlock.Line($"Single<{method.RestResponseAbstractTypeName}> {method.Name}WithRestResponseAsync({method.MethodParameterDeclaration});");
 
-            return javaFile;
+                    interfaceBlock.Line();
+
+                    interfaceBlock.Line();
+                }
+            }
         }
 
         private static void AddMemberVariablesWithGettersAndSettings(JavaBlock classBlock, IEnumerable<Property> properties, string className)
@@ -1976,14 +2058,14 @@ namespace AutoRest.Java.DanModel
                 javaFile.WordWrappedMultipleLineComment(maximumHeaderCommentWidth, (comment) =>
                 {
                     comment.Line(headerComment);
-                })
-                    .Line();
+                });
+                javaFile.Line();
             }
 
             if (!string.IsNullOrEmpty(package))
             {
-                javaFile.Package(package)
-                    .Line();
+                javaFile.Package(package);
+                javaFile.Line();
             }
 
             return javaFile;
