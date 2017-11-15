@@ -10,8 +10,11 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -21,18 +24,15 @@ import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.azure.v2.AzureProxy;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Groups.
+ * An instance of this class provides access to all the operations defined in
+ * Groups.
  */
 public class GroupsInner {
     /** The RestProxy service to perform REST calls. */
@@ -51,8 +51,8 @@ public class GroupsInner {
     }
 
     /**
-     * The interface defining all the services for Groups to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for Groups to be used by
+     * RestProxy to perform REST calls.
      */
     @Host("https://management.azure.com/")
     interface GroupsService {

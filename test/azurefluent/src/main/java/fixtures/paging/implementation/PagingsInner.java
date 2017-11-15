@@ -10,12 +10,15 @@
 
 package fixtures.paging.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.ListOperationCallback;
 import com.microsoft.azure.v2.Page;
 import com.microsoft.azure.v2.PagedList;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -25,18 +28,15 @@ import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
 import java.io.IOException;
 import java.util.List;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
-import com.microsoft.azure.v2.AzureProxy;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Pagings.
+ * An instance of this class provides access to all the operations defined in
+ * Pagings.
  */
 public class PagingsInner {
     /** The RestProxy service to perform REST calls. */
@@ -55,8 +55,8 @@ public class PagingsInner {
     }
 
     /**
-     * The interface defining all the services for Pagings to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for Pagings to be used by
+     * RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface PagingsService {
@@ -241,11 +241,11 @@ public class PagingsInner {
      */
     public Single<Page<ProductInner>> getSinglePagesSinglePageAsync() {
         return service.getSinglePages(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -299,12 +299,13 @@ public class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
+
         return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
@@ -353,8 +354,8 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-    PageImpl<ProductInner> * @param clientRequestId the String value
-    PageImpl<ProductInner> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -369,11 +370,11 @@ public class PagingsInner {
             timeout = pagingGetMultiplePagesOptions.timeout();
         }
         return service.getMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -427,12 +428,13 @@ public class PagingsInner {
         final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
+
         return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
@@ -481,8 +483,8 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-    PageImpl1<ProductInner> * @param clientRequestId the String value
-    PageImpl1<ProductInner> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -497,11 +499,11 @@ public class PagingsInner {
             timeout = pagingGetOdataMultiplePagesOptions.timeout();
         }
         return service.getOdataMultiplePages(clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -522,6 +524,7 @@ public class PagingsInner {
                 PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().value();
             }
         };
@@ -547,6 +550,7 @@ public class PagingsInner {
                     PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
                     pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                     pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+
                     return Observable.just(page).concatWith(getMultiplePagesWithOffsetNextAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions));
                 }
             });
@@ -568,12 +572,13 @@ public class PagingsInner {
         Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.maxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
+
         return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
@@ -594,6 +599,7 @@ public class PagingsInner {
                 PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).toBlocking().value();
             }
         };
@@ -620,6 +626,7 @@ public class PagingsInner {
                     PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
                     pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                     pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
+
                     return Observable.just(page).concatWith(getMultiplePagesWithOffsetNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions));
                 }
             });
@@ -628,8 +635,8 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-    PageImpl<ProductInner> * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
-    PageImpl<ProductInner> * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
+     * @param clientRequestId the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -642,11 +649,11 @@ public class PagingsInner {
         int offset = pagingGetMultiplePagesWithOffsetOptions.offset();
         Integer timeout = pagingGetMultiplePagesWithOffsetOptions.timeout();
         return service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -697,11 +704,11 @@ public class PagingsInner {
      */
     public Single<Page<ProductInner>> getMultiplePagesRetryFirstSinglePageAsync() {
         return service.getMultiplePagesRetryFirst(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -752,11 +759,11 @@ public class PagingsInner {
      */
     public Single<Page<ProductInner>> getMultiplePagesRetrySecondSinglePageAsync() {
         return service.getMultiplePagesRetrySecond(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -807,11 +814,11 @@ public class PagingsInner {
      */
     public Single<Page<ProductInner>> getSinglePagesFailureSinglePageAsync() {
         return service.getSinglePagesFailure(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -862,11 +869,11 @@ public class PagingsInner {
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureSinglePageAsync() {
         return service.getMultiplePagesFailure(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -917,11 +924,11 @@ public class PagingsInner {
      */
     public Single<Page<ProductInner>> getMultiplePagesFailureUriSinglePageAsync() {
         return service.getMultiplePagesFailureUri(this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -971,8 +978,8 @@ public class PagingsInner {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-    PageImpl1<ProductInner> * @param tenant Sets the tenant to use.
-    PageImpl1<ProductInner> * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -984,11 +991,11 @@ public class PagingsInner {
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         return service.getMultiplePagesFragmentNextLink(tenant, apiVersion, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1036,7 +1043,7 @@ public class PagingsInner {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
-    PageImpl1<ProductInner> * @param customParameterGroup Additional parameters for the operation
+     * @param customParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1048,11 +1055,11 @@ public class PagingsInner {
         String apiVersion = customParameterGroup.apiVersion();
         String tenant = customParameterGroup.tenant();
         return service.getMultiplePagesFragmentWithGroupingNextLink(tenant, this.client.acceptLanguage(), apiVersion, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1104,9 +1111,9 @@ public class PagingsInner {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-    PageImpl1<ProductInner> * @param tenant Sets the tenant to use.
-    PageImpl1<ProductInner> * @param nextLink Next link for list operation.
-    PageImpl1<ProductInner> * @param apiVersion Sets the api version to use.
+     * @param tenant Sets the tenant to use.
+     * @param nextLink Next link for list operation.
+     * @param apiVersion Sets the api version to use.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1122,11 +1129,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("paging/multiple/fragment/%s/%s", tenant, nextLink);
         return service.nextFragment(nextUrl, apiVersion, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1176,8 +1183,8 @@ public class PagingsInner {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
-    PageImpl1<ProductInner> * @param nextLink Next link for list operation.
-    PageImpl1<ProductInner> * @param customParameterGroup Additional parameters for the operation
+     * @param nextLink Next link for list operation.
+     * @param customParameterGroup Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1193,11 +1200,11 @@ public class PagingsInner {
         String tenant = customParameterGroup.tenant();
         String nextUrl = String.format("paging/multiple/fragmentwithgrouping/%s/%s", tenant, nextLink);
         return service.nextFragmentWithGrouping(nextUrl, this.client.acceptLanguage(), apiVersion, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1245,7 +1252,7 @@ public class PagingsInner {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1255,11 +1262,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getSinglePagesNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1319,13 +1326,14 @@ public class PagingsInner {
         final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
+
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
@@ -1376,9 +1384,9 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
-    PageImpl<ProductInner> * @param clientRequestId the String value
-    PageImpl<ProductInner> * @param pagingGetMultiplePagesOptions Additional parameters for the operation
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1397,11 +1405,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1461,13 +1469,14 @@ public class PagingsInner {
         final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
+
         String nextUrl = String.format("%s", nextPageLink);
         return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
@@ -1518,9 +1527,9 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
-    PageImpl1<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
-    PageImpl1<ProductInner> * @param clientRequestId the String value
-    PageImpl1<ProductInner> * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1539,11 +1548,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getOdataMultiplePagesNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl1<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl1<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1603,13 +1612,14 @@ public class PagingsInner {
         final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = null;
         Integer maxresults = null;
         Integer timeout = null;
+
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
     /**
@@ -1660,9 +1670,9 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
-    PageImpl<ProductInner> * @param clientRequestId the String value
-    PageImpl<ProductInner> * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1681,11 +1691,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesWithOffsetNext(nextUrl, clientRequestId, this.client.acceptLanguage(), maxresults, timeout, this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1733,7 +1743,7 @@ public class PagingsInner {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1743,11 +1753,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesRetryFirstNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1795,7 +1805,7 @@ public class PagingsInner {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1805,11 +1815,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesRetrySecondNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1857,7 +1867,7 @@ public class PagingsInner {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1867,11 +1877,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getSinglePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1919,7 +1929,7 @@ public class PagingsInner {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1929,11 +1939,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesFailureNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
@@ -1981,7 +1991,7 @@ public class PagingsInner {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-    PageImpl<ProductInner> * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the PagedList<ProductInner> object if successful.
      */
@@ -1991,11 +2001,11 @@ public class PagingsInner {
         }
         String nextUrl = String.format("%s", nextPageLink);
         return service.getMultiplePagesFailureUriNext(nextUrl, this.client.acceptLanguage(), this.client.userAgent()).map(new Func1<RestResponse<Void, PageImpl<ProductInner>>, Page<ProductInner>>() {
-                @Override
-                public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
-                    return response.body();
-                }
-            });
+            @Override
+            public Page<ProductInner> call(RestResponse<Void, PageImpl<ProductInner>> response) {
+                return response.body();
+            }
+        });
     }
 
 
