@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodycomplex.Polymorphisms;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,19 +24,17 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Polymorphisms.
+ * An instance of this class provides access to all the operations defined in
+ * Polymorphisms.
  */
 public class PolymorphismsImpl implements Polymorphisms {
     /** The RestProxy service to perform REST calls. */
@@ -53,9 +53,9 @@ public class PolymorphismsImpl implements Polymorphisms {
     }
 
     /**
-     * The interface defining all the services for Polymorphisms to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Polymorphisms to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface PolymorphismsService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValid" })

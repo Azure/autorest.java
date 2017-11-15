@@ -10,10 +10,11 @@
 
 package fixtures.http.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.http.HttpRedirects;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -26,8 +27,7 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.http.HttpRedirects;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Headers;
 import fixtures.http.models.HttpRedirectsGet300Headers;
@@ -46,13 +46,13 @@ import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
 import java.io.IOException;
 import java.util.List;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpRedirects.
+ * An instance of this class provides access to all the operations defined in
+ * HttpRedirects.
  */
 public class HttpRedirectsImpl implements HttpRedirects {
     /** The RestProxy service to perform REST calls. */
@@ -71,9 +71,9 @@ public class HttpRedirectsImpl implements HttpRedirects {
     }
 
     /**
-     * The interface defining all the services for HttpRedirects to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for HttpRedirects to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HttpRedirectsService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects head300" })

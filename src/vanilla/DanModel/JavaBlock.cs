@@ -42,6 +42,12 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaBlock BlockStatement(string text, Action<JavaBlock> bodyAction)
+        {
+            contents.BlockStatement(text, bodyAction);
+            return this;
+        }
+
         public JavaBlock SingleLineComment(string text)
         {
             contents.SingleLineComment(text);
@@ -69,6 +75,12 @@ namespace AutoRest.Java.DanModel
         public JavaBlock Return(string text)
         {
             contents.Return(text);
+            return this;
+        }
+
+        public JavaBlock ReturnBlock(string text, Action<JavaBlock> block)
+        {
+            contents.ReturnBlock(text, block);
             return this;
         }
 

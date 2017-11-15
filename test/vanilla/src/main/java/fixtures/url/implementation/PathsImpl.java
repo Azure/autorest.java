@@ -10,22 +10,22 @@
 
 package fixtures.url.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.Base64Url;
+import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.url.Paths;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.url.Paths;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
@@ -34,13 +34,13 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public class PathsImpl implements Paths {
     /** The RestProxy service to perform REST calls. */
@@ -59,9 +59,9 @@ public class PathsImpl implements Paths {
     }
 
     /**
-     * The interface defining all the services for Paths to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Paths to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface PathsService {
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getBooleanTrue" })

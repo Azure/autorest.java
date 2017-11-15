@@ -10,19 +10,19 @@
 
 package fixtures.header.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
@@ -44,13 +44,13 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Headers.
+ * An instance of this class provides access to all the operations defined in
+ * Headers.
  */
 public class HeadersImpl implements fixtures.header.Headers {
     /** The RestProxy service to perform REST calls. */
@@ -69,9 +69,9 @@ public class HeadersImpl implements fixtures.header.Headers {
     }
 
     /**
-     * The interface defining all the services for Headers to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Headers to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HeadersService {
         @Headers({ "x-ms-logging-context: fixtures.header.Headers paramExistingKey" })

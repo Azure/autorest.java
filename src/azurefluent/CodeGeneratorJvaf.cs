@@ -86,7 +86,7 @@ namespace AutoRest.Java.Azure.Fluent
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(cm, packageFolderPath, new[] { "", "implementation" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(cm, new[] { "", "implementation" }).ConfigureAwait(false);
 
             if (true == Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {

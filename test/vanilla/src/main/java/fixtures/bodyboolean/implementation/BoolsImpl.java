@@ -10,10 +10,11 @@
 
 package fixtures.bodyboolean.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyboolean.Bools;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,17 +23,16 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyboolean.Bools;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Bools.
+ * An instance of this class provides access to all the operations defined in
+ * Bools.
  */
 public class BoolsImpl implements Bools {
     /** The RestProxy service to perform REST calls. */
@@ -51,9 +51,9 @@ public class BoolsImpl implements Bools {
     }
 
     /**
-     * The interface defining all the services for Bools to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Bools to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface BoolsService {
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })

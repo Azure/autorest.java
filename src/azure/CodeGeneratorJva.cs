@@ -59,10 +59,7 @@ namespace AutoRest.Java.Azure
             foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
             {
                 // Operation
-                var operationsTemplate = new AzureMethodGroupTemplate { Model = methodGroup };
-                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
-                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
-                await Write(operationsTemplate, operationsFilePath);
+                await WriteAzureMethodGroupJavaFile(codeModel, methodGroup).ConfigureAwait(false);
 
                 // Operation interface
                 await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
@@ -93,7 +90,7 @@ namespace AutoRest.Java.Azure
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(cm, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(cm, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
     }
 }

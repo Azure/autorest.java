@@ -10,10 +10,11 @@
 
 package fixtures.custombaseurimoreoptions.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.custombaseurimoreoptions.Paths;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -23,17 +24,16 @@ import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.custombaseurimoreoptions.Paths;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public class PathsImpl implements Paths {
     /** The RestProxy service to perform REST calls. */
@@ -52,9 +52,9 @@ public class PathsImpl implements Paths {
     }
 
     /**
-     * The interface defining all the services for Paths to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Paths to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("https://{vault}{secret}{dnsSuffix}")
     interface PathsService {
         @Headers({ "x-ms-logging-context: fixtures.custombaseurimoreoptions.Paths getEmpty" })

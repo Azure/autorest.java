@@ -10,21 +10,21 @@
 
 package fixtures.url.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.url.Queries;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.url.Queries;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
@@ -32,13 +32,13 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Queries.
+ * An instance of this class provides access to all the operations defined in
+ * Queries.
  */
 public class QueriesImpl implements Queries {
     /** The RestProxy service to perform REST calls. */
@@ -57,9 +57,9 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * The interface defining all the services for Queries to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Queries to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface QueriesService {
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })

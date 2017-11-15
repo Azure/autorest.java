@@ -188,6 +188,16 @@ namespace AutoRest.Java.DanModel
             Line($"}}");
         }
 
+        public void BlockStatement(string text, Action<JavaBlock> bodyAction)
+        {
+            Line($"{text} {{");
+            Indent(() =>
+            {
+                bodyAction.Invoke(new JavaBlock(this));
+            });
+            Line($"}};");
+        }
+
         public void Import(params string[] imports)
         {
             Import((IEnumerable<string>)imports);
@@ -275,6 +285,16 @@ namespace AutoRest.Java.DanModel
         public void Return(string text)
         {
             Line($"return {text};");
+        }
+
+        public void ReturnBlock(string text, Action<JavaBlock> bodyAction)
+        {
+            Line($"return {text} {{");
+            Indent(() =>
+            {
+                bodyAction.Invoke(new JavaBlock(this));
+            });
+            Line($"}};");
         }
 
         public void Annotation(params string[] annotations)

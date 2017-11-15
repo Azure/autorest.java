@@ -77,10 +77,7 @@ namespace AutoRest.Java
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            string package = codeModel.Namespace.ToLowerInvariant();
-            string baseFolderPath = Path.Combine("src", "main", "java");
-            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
-            await WritePackageInfoJavaFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
         protected Task WriteXmlWrapperFiles(CodeModelJv codeModel)
@@ -91,6 +88,9 @@ namespace AutoRest.Java
 
         protected Task WriteAzureServiceClientInterfaceJavaFile(CodeModelJva codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientInterfaceJavaFile(codeModel, Settings));
+
+        protected Task WriteAzureMethodGroupJavaFile(CodeModelJva codeModel, MethodGroupJva methodGroup)
+            => WriteJavaFile(DanCodeGenerator.GetAzureMethodGroupJavaFile(codeModel, Settings, methodGroup));
 
         protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
@@ -104,7 +104,7 @@ namespace AutoRest.Java
         protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));
 
-        protected Task WritePackageInfoJavaFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
+        protected Task WritePackageInfoJavaFiles(CodeModel codeModel, string[] subPackages)
             => WriteJavaFiles(DanCodeGenerator.GetPackageInfoJavaFiles(codeModel, Settings, subPackages));
 
         protected Task WriteModelJavaFiles(CodeModel codeModel)
