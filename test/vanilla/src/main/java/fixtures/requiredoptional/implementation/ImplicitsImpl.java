@@ -10,10 +10,11 @@
 
 package fixtures.requiredoptional.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.requiredoptional.Implicits;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -25,18 +26,17 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Implicits.
+ * An instance of this class provides access to all the operations defined in
+ * Implicits.
  */
 public class ImplicitsImpl implements Implicits {
     /** The RestProxy service to perform REST calls. */
@@ -55,9 +55,9 @@ public class ImplicitsImpl implements Implicits {
     }
 
     /**
-     * The interface defining all the services for Implicits to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Implicits to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface ImplicitsService {
         @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })

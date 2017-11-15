@@ -10,10 +10,11 @@
 
 package fixtures.http.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.http.HttpSuccess;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -26,17 +27,16 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.http.HttpSuccess;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpSuccess.
+ * An instance of this class provides access to all the operations defined in
+ * HttpSuccess.
  */
 public class HttpSuccessImpl implements HttpSuccess {
     /** The RestProxy service to perform REST calls. */
@@ -55,9 +55,9 @@ public class HttpSuccessImpl implements HttpSuccess {
     }
 
     /**
-     * The interface defining all the services for HttpSuccess to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for HttpSuccess to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HttpSuccessService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess head200" })

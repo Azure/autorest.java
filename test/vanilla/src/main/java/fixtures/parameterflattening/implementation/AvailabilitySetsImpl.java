@@ -10,10 +10,13 @@
 
 package fixtures.parameterflattening.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.parameterflattening.AvailabilitySets;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -22,20 +25,17 @@ import com.microsoft.rest.v2.annotations.PATCH;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
 import java.util.Map;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in AvailabilitySets.
+ * An instance of this class provides access to all the operations defined in
+ * AvailabilitySets.
  */
 public class AvailabilitySetsImpl implements AvailabilitySets {
     /** The RestProxy service to perform REST calls. */
@@ -54,9 +54,9 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
     }
 
     /**
-     * The interface defining all the services for AvailabilitySets to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for AvailabilitySets to be used
+     * by RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface AvailabilitySetsService {
         @Headers({ "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })

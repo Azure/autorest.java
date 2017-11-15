@@ -12,7 +12,8 @@ package fixtures.http.implementation;
 
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.http.HttpClientFailures;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -25,18 +26,17 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.http.HttpClientFailures;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpClientFailures.
+ * An instance of this class provides access to all the operations defined in
+ * HttpClientFailures.
  */
 public class HttpClientFailuresImpl implements HttpClientFailures {
     /** The RestProxy service to perform REST calls. */
@@ -57,7 +57,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
     /**
      * The interface defining all the services for HttpClientFailures to be
      * used by RestProxy to perform REST calls.
-    */
+     */
     @Host("http://localhost")
     interface HttpClientFailuresService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures head400" })

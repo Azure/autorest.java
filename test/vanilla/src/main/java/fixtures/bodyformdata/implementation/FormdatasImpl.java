@@ -10,10 +10,11 @@
 
 package fixtures.bodyformdata.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyformdata.Formdatas;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -22,18 +23,17 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Formdatas.
+ * An instance of this class provides access to all the operations defined in
+ * Formdatas.
  */
 public class FormdatasImpl implements Formdatas {
     /** The RestProxy service to perform REST calls. */
@@ -52,9 +52,9 @@ public class FormdatasImpl implements Formdatas {
     }
 
     /**
-     * The interface defining all the services for Formdatas to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Formdatas to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface FormdatasService {
         // @Multipart not supported by RestProxy

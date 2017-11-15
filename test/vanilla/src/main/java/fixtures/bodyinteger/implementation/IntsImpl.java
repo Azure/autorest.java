@@ -10,10 +10,12 @@
 
 package fixtures.bodyinteger.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyinteger.Ints;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.UnixTime;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -23,20 +25,18 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ReturnValueWireType;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.UnixTime;
+import fixtures.bodyinteger.Ints;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Ints.
+ * An instance of this class provides access to all the operations defined in
+ * Ints.
  */
 public class IntsImpl implements Ints {
     /** The RestProxy service to perform REST calls. */
@@ -55,9 +55,9 @@ public class IntsImpl implements Ints {
     }
 
     /**
-     * The interface defining all the services for Ints to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Ints to be used by RestProxy
+     * to perform REST calls.
+     */
     @Host("http://localhost")
     interface IntsService {
         @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getNull" })

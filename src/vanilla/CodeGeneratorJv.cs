@@ -1,20 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoRest.Core;
-using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
-using AutoRest.Java.vanilla.Templates;
-using AutoRest.Java.Model;
 using AutoRest.Core.Model;
-using System;
-using AutoRest.Java.DanModel;
-using System.Collections.Generic;
 using AutoRest.Java.Azure.Model;
+using AutoRest.Java.DanModel;
+using AutoRest.Java.Model;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AutoRest.Java
 {
@@ -48,11 +42,6 @@ namespace AutoRest.Java
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
 
-            string package = codeModel.Namespace.ToLowerInvariant();
-            string baseFolderPath = Path.Combine("src", "main", "java");
-            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
-            string implementationFolderPath = Path.Combine(packageFolderPath, "implementation");
-
             // Service client
             await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
@@ -63,10 +52,7 @@ namespace AutoRest.Java
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
                 // Operation
-                var operationsTemplate = new MethodGroupTemplate { Model = methodGroup };
-                string operationsFileName = $"{methodGroup.TypeName.ToPascalCase()}Impl.java";
-                string operationsFilePath = Path.Combine(implementationFolderPath, operationsFileName);
-                await Write(operationsTemplate, operationsFilePath);
+                await WriteMethodGroupJavaFile(codeModel, methodGroup).ConfigureAwait(false);
 
                 // Operation interface
                 await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
@@ -85,7 +71,7 @@ namespace AutoRest.Java
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(codeModel, packageFolderPath, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
         protected Task WriteXmlWrapperFiles(CodeModelJv codeModel)
@@ -97,16 +83,22 @@ namespace AutoRest.Java
         protected Task WriteAzureServiceClientInterfaceJavaFile(CodeModelJva codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientInterfaceJavaFile(codeModel, Settings));
 
+        protected Task WriteAzureMethodGroupJavaFile(CodeModelJva codeModel, MethodGroupJva methodGroup)
+            => WriteJavaFile(DanCodeGenerator.GetAzureMethodGroupJavaFile(codeModel, Settings, methodGroup));
+
         protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
 
         protected Task WriteServiceClientInterfaceJavaFile(CodeModelJv codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientInterfaceJavaFile(codeModel, Settings));
 
+        protected Task WriteMethodGroupJavaFile(CodeModelJv codeModel, MethodGroupJv methodGroup)
+            => WriteJavaFile(DanCodeGenerator.GetMethodGroupJavaFile(codeModel, Settings, methodGroup));
+
         protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));
 
-        protected Task WritePackageInfoJavaFiles(CodeModel codeModel, string packageFolderPath, string[] subPackages)
+        protected Task WritePackageInfoJavaFiles(CodeModel codeModel, string[] subPackages)
             => WriteJavaFiles(DanCodeGenerator.GetPackageInfoJavaFiles(codeModel, Settings, subPackages));
 
         protected Task WriteModelJavaFiles(CodeModel codeModel)

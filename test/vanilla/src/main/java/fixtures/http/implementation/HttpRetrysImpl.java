@@ -10,10 +10,11 @@
 
 package fixtures.http.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.http.HttpRetrys;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -26,17 +27,16 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.http.HttpRetrys;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import rx.functions.Func1;
 import rx.Observable;
 import rx.Single;
+import rx.functions.Func1;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpRetrys.
+ * An instance of this class provides access to all the operations defined in
+ * HttpRetrys.
  */
 public class HttpRetrysImpl implements HttpRetrys {
     /** The RestProxy service to perform REST calls. */
@@ -55,9 +55,9 @@ public class HttpRetrysImpl implements HttpRetrys {
     }
 
     /**
-     * The interface defining all the services for HttpRetrys to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for HttpRetrys to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HttpRetrysService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys head408" })

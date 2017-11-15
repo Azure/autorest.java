@@ -378,10 +378,11 @@ namespace AutoRest.Java.DanModel
                                 function.Indent(() =>
                                 {
                                     function.Line(".toObservable()");
-                                    function.Block($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>()", anonymousClass =>
+                                    function.Line($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
+                                    function.Indent(() =>
                                     {
-                                        anonymousClass.Annotation("Override");
-                                        anonymousClass.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                        function.Annotation("Override");
+                                        function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
                                         {
                                             subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
                                             subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
@@ -389,9 +390,10 @@ namespace AutoRest.Java.DanModel
                                                 ifBlock.Return("Observable.just(page)");
                                             });
                                             subFunction.Line(method.PagingGroupedParameterTransformation(filterRequired: true));
-                                            subFunction.Return($"return Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation(filterRequired: true)});");
+                                            subFunction.Return($"Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation(filterRequired: true)}))");
                                         });
                                     });
+                                    function.Line("});");
                                 });
                             });
                             classBlock.Line();
@@ -455,7 +457,6 @@ namespace AutoRest.Java.DanModel
                                     });
                                 });
                             });
-
                             classBlock.Line();
                         }
 
@@ -513,10 +514,11 @@ namespace AutoRest.Java.DanModel
                             function.Indent(() =>
                             {
                                 function.Line(".toObservable()");
-                                function.Block($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>()", anonymousClass =>
+                                function.Line($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
+                                function.Indent(() =>
                                 {
-                                    anonymousClass.Annotation("Override");
-                                    anonymousClass.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                    function.Annotation("Override");
+                                    function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
                                     {
                                         subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
                                         subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
@@ -524,9 +526,10 @@ namespace AutoRest.Java.DanModel
                                             ifBlock.Return("Observable.just(page)");
                                         });
                                         subFunction.Line(method.PagingGroupedParameterTransformation());
-                                        subFunction.Return($"Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation()});");
+                                        subFunction.Return($"Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation()}))");
                                     });
                                 });
+                                function.Line("});");
                             });
                         });
                         classBlock.Line();
@@ -843,6 +846,853 @@ namespace AutoRest.Java.DanModel
 
                 interfaceBlock.Line();
                 AddInterfaceMethodSignatures(interfaceBlock, codeModel);
+            });
+
+            return javaFile;
+        }
+
+        public static JavaFile GetAzureMethodGroupJavaFile(CodeModelJva codeModel, Settings settings, MethodGroupJva methodGroup)
+        {
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
+
+            string className = methodGroup.MethodGroupImplType;
+
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            javaFile.Import(methodGroup.ImplImports);
+            
+            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+            {
+                comment.Line($"An instance of this class provides access to all the operations defined in {methodGroup.TypeName}.");
+            });
+            javaFile.Block($"public class {className}{methodGroup.ParentDeclaration}", classBlock =>
+            {
+                string methodGroupServiceType = methodGroup.MethodGroupServiceType;
+                string serviceClientType = methodGroup.ServiceClientType;
+
+                classBlock.SingleLineComment($"The RestProxy service to perform REST calls.");
+                classBlock.Line($"private {methodGroupServiceType} service;");
+                classBlock.SingleLineComment($"The service client containing this operation class.");
+                classBlock.Line($"private {serviceClientType} client;");
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line($"Initializes an instance of {className}.");
+                    comment.Line();
+                    comment.Param("client", "the instance of the service client containing this operation class.");
+                });
+                classBlock.Block($"public {className}({serviceClientType} client)", constructor =>
+                {
+                    constructor.Line($"this.service = AzureProxy.create({methodGroupServiceType}.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());");
+                    constructor.Line("this.client = client;");
+                });
+                classBlock.Line();
+
+                IMethodGroupJva methodGroupJva = (IMethodGroupJva)methodGroup;
+                classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+                {
+                    comment.Line($"The interface defining all the services for {methodGroupJva.Name} to be used by RestProxy to perform REST calls.");
+                });
+                classBlock.Annotation($"Host(\"{methodGroupJva.CodeModel.BaseUrl}\")");
+                classBlock.Block($"interface {methodGroupJva.ServiceType}", interfaceBlock =>
+                {
+                    foreach (MethodJva method in methodGroupJva.Methods)
+                    {
+                        string methodName = method.Name;
+
+                        interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroupJva.LoggingContext} {methodName}\" }})");
+                        if (method.IsPagingNextOperation)
+                        {
+                            interfaceBlock.Annotation("GET(\"{nextUrl}\")");
+                        }
+                        else
+                        {
+                            interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
+                        }
+
+                        string expectedResponsesAnnotation = method.ExpectedResponsesAnnotation;
+                        if (!string.IsNullOrWhiteSpace(expectedResponsesAnnotation))
+                        {
+                            interfaceBlock.Line(expectedResponsesAnnotation);
+                        }
+
+                        if (method.DefaultResponse.Body != null)
+                        {
+                            interfaceBlock.Annotation($"UnexpectedResponseExceptionType({method.OperationExceptionTypeString}.class)");
+                        }
+
+                        string methodParameterApiDeclaration = method.MethodParameterApiDeclaration;
+                        if (method.IsLongRunningOperation)
+                        {
+                            interfaceBlock.Line($"Observable<OperationStatus<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>> {methodName}({methodParameterApiDeclaration});");
+                        }
+                        else
+                        {
+                            interfaceBlock.Line($"Single<{method.RestResponseConcreteTypeName}> {methodName}({methodParameterApiDeclaration});");
+                        }
+
+                        interfaceBlock.Line();
+                    }
+                });
+
+                classBlock.Line();
+
+                foreach (MethodJva method in methodGroup.Methods)
+                {
+                    if (method.IsPagingOperation || method.IsPagingNextOperation)
+                    {
+                        if (method.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
+                        {
+                            // -----------------------------------------------
+                            // All pages. Synchronous with required parameters
+                            // -----------------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                ThrowsIllegalArgumentException(comment);
+                                ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                ThrowsRuntimeException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation}).toBlocking().value();");
+                                function.ReturnBlock($"new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
+                                {
+                                    anonymousClass.Annotation("Override");
+                                    anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} nextPage(String {method.PagingNextPageLinkParameterName})", subFunction =>
+                                    {
+                                        string transformation = method.PagingGroupedParameterTransformation(filterRequired: true);
+                                        if (!string.IsNullOrWhiteSpace(transformation))
+                                        {
+                                            subFunction.Line(transformation);
+                                        }
+                                        subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation(filterRequired: true)}).toBlocking().value()");
+                                    });
+                                });
+                            });
+                            classBlock.Line();
+
+                            // -----------------------------------------------
+                            // All pages. Observable with required parameters.
+                            // -----------------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                ThrowsIllegalArgumentException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the observable to the {method.ReturnTypeResponseName.EscapeXmlComment()} object");
+                                }
+                                else
+                                {
+                                    comment.Return($"the {{@link Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                function.Line($"return {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation})");
+                                function.Indent(() =>
+                                {
+                                    function.Line(".toObservable()");
+                                    string serviceResponseGenericParameterString = method.ReturnTypeJva.ServiceResponseGenericParameterString;
+                                    function.Line($".concatMap(new Func1<{serviceResponseGenericParameterString}, Observable<{serviceResponseGenericParameterString}>>() {{");
+                                    function.Indent(() =>
+                                    {
+                                        function.Annotation("Override");
+                                        function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                        {
+                                            subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
+                                            subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
+                                            {
+                                                ifBlock.Return("Observable.just(page)");
+                                            });
+                                            string transformation = method.PagingGroupedParameterTransformation(filterRequired: true);
+                                            if (!string.IsNullOrWhiteSpace(transformation))
+                                            {
+                                                subFunction.Line(transformation);
+                                            }
+                                            subFunction.Return($"Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation(filterRequired: true)}))");
+                                        });
+                                    });
+                                    function.Line("});");
+                                });
+                            });
+                            classBlock.Line();
+
+                            // -------------------------------------------------
+                            // Single page. Observable with required parameters.
+                            // -------------------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                ThrowsIllegalArgumentException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the {method.ReturnTypeResponseName} object if successful.");
+                                }
+                                else
+                                {
+                                    comment.Return($"the {{@link Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}SinglePageAsync({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                foreach(ParameterJv param in method.RequiredNullableParameters)
+                                {
+                                    string paramName = param.Name;
+                                    function.If($"{paramName} == null", ifBlock =>
+                                    {
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {paramName} is required and cannot be null.\");");
+                                    });
+                                }
+
+                                foreach (ParameterJv param in method.ParametersToValidate.Where(p => p.IsRequired))
+                                {
+                                    function.Line($"Validator.validate({param.Name});");
+                                }
+
+                                foreach (ParameterJv parameter in method.LocalParameters)
+                                {
+                                    if (!parameter.IsRequired)
+                                    {
+                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
+                                    }
+
+                                    if (parameter.IsConstant)
+                                    {
+                                        function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    }
+                                }
+
+                                string inputMappings = method.BuildInputMappings(true);
+                                if (!string.IsNullOrWhiteSpace(inputMappings))
+                                {
+                                    function.Line(inputMappings);
+                                }
+
+                                string parameterConversion = method.ParameterConversion;
+                                if (!string.IsNullOrWhiteSpace(parameterConversion))
+                                {
+                                    function.Line(parameterConversion);
+                                }
+
+                                if (method.IsPagingNextOperation)
+                                {
+                                    function.Line($"String nextUrl = {method.NextUrlConstruction};");
+                                }
+
+                                function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                                function.Indent(() =>
+                                {
+                                    function.Annotation("Override");
+                                    function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                    {
+                                        subFunction.Return("response.body()");
+                                    });
+                                });
+                                function.Line("});");
+                            });
+                            classBlock.Line();
+                        }
+
+                        // -------------------------------------------
+                        // All pages. Synchronous with all parameters.
+                        // -------------------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                            {
+                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                            }
+                            ThrowsIllegalArgumentException(comment);
+                            ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                            ThrowsRuntimeException(comment);
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration})", function =>
+                        {
+                            function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodParameterInvocation}).toBlocking().value();");
+                            function.ReturnBlock($"new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
+                            {
+                                anonymousClass.Annotation("Override");
+                                anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} nextPage(String {method.PagingNextPageLinkParameterName})", subFunction =>
+                                {
+                                    string transformation = method.PagingGroupedParameterTransformation();
+                                    if (!string.IsNullOrWhiteSpace(transformation))
+                                    {
+                                        subFunction.Line(transformation);
+                                    }
+                                    subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation()}).toBlocking().value()");
+                                });
+                            });
+                        });
+                        classBlock.Line();
+
+                        // ------------------------------------------
+                        // All pages. Observable with all parameters.
+                        // ------------------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                            {
+                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                            }
+                            ThrowsIllegalArgumentException(comment);
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the observable to the {method.ReturnTypeResponseName} object");
+                            }
+                            else
+                            {
+                                comment.Return($"the {{@link Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration})", function =>
+                        {
+                            function.Line($"return {method.Name}SinglePageAsync({method.MethodParameterInvocation})");
+                            function.Indent(() =>
+                            {
+                                function.Line(".toObservable()");
+                                function.Line($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
+                                function.Indent(() =>
+                                {
+                                    function.Annotation("Override");
+                                    function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                    {
+                                        string nextPageLinkVariableName = method.PagingNextPageLinkParameterName;
+                                        subFunction.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
+                                        subFunction.If($"{nextPageLinkVariableName} == null", ifBlock =>
+                                        {
+                                            ifBlock.Return("Observable.just(page)");
+                                        });
+
+                                        string transformation = method.PagingGroupedParameterTransformation();
+                                        if (!string.IsNullOrWhiteSpace(transformation))
+                                        {
+                                            subFunction.Line(transformation);
+                                        }
+                                        subFunction.Return($"Observable.just(page).concatWith({method.GetPagingNextMethodInvocation(async: true, singlePage: false)}({method.NextMethodParameterInvocation()}))");
+                                    });
+                                });
+                                function.Line("});");
+                            });
+                        });
+                        classBlock.Line();
+
+                        // --------------------------------------------
+                        // Single page. Observable with all parameters.
+                        // --------------------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                            {
+                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                            }
+                            ThrowsIllegalArgumentException(comment);
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the {method.ReturnTypeResponseName} object if successful.");
+                            }
+                            else
+                            {
+                                comment.Return($"the {{@link Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>}} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public Single<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> {method.Name}SinglePageAsync({method.MethodParameterDeclaration})", function =>
+                        {
+                            foreach (ParameterJv param in method.RequiredNullableParameters)
+                            {
+                                function.If($"{param.Name} == null", ifBlock =>
+                                {
+                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                });
+                            }
+
+                            foreach (ParameterJv param in method.ParametersToValidate)
+                            {
+                                function.Line($"Validator.validate({param.Name});");
+                            }
+
+                            foreach (ParameterJv parameter in method.LocalParameters)
+                            {
+                                if (parameter.IsConstant)
+                                {
+                                    function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                }
+                            }
+
+                            string inputMappings = method.BuildInputMappings().Trim();
+                            if (!string.IsNullOrEmpty(inputMappings))
+                            {
+                                function.Line(inputMappings);
+                            }
+
+                            string parameterConversion = method.ParameterConversion.Trim();
+                            if (!string.IsNullOrEmpty(parameterConversion))
+                            {
+                                function.Line(parameterConversion);
+                            }
+
+                            if (method.IsPagingNextOperation)
+                            {
+                                function.Line($"String nextUrl = {method.NextUrlConstruction};");
+                            }
+
+                            function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                            function.Indent(() =>
+                            {
+                                function.Annotation("Override");
+                                function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                {
+                                    subFunction.Return("response.body()");
+                                });
+                            });
+                            function.Line("});");
+                        });
+                        classBlock.Line();
+                    }
+                    else if (method.SimulateAsPagingOperation)
+                    {
+                        if (method.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
+                        {
+                            // -----------------------------------------
+                            // Synchronous with only required parameters
+                            // -----------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the PagedList<{method.ReturnTypeJv.SequenceElementTypeString}> object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public PagedList<{method.ReturnTypeJv.SequenceElementTypeString}> {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                function.Line($"{(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<{method.ReturnTypeJv.SequenceElementTypeString}> page = new {(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<>();");
+                                function.Line($"page.setItems({method.Name}Async({method.MethodRequiredParameterInvocation}).single().items());");
+                                function.Line("page.setNextPageLink(null);");
+                                function.ReturnBlock($"new PagedList<{method.ReturnTypeJv.SequenceElementTypeString}>(page)", anonymousClass =>
+                                {
+                                    anonymousClass.Annotation("Override");
+                                    anonymousClass.Block($"public Page<{method.ReturnTypeJv.SequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
+                                    {
+                                        subFunction.Return("null");
+                                    });
+                                });
+                            });
+                            classBlock.Line();
+
+                            // ----------------------------------------
+                            // Observable with only required parameters
+                            // ----------------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the observable to the {method.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment()} object");
+                                }
+                                else
+                                {
+                                    comment.Return($"the {{@link Observable<Page<{method.ReturnTypeJv.SequenceElementTypeString}>>}} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public Observable<Page<{method.ReturnTypeJv.SequenceElementTypeString}>> {method.Name}Async({method.MethodRequiredParameterDeclaration})", function =>
+                            {
+                                foreach (ParameterJv param in method.RequiredNullableParameters)
+                                {
+                                    function.If($"{param.Name} == null", ifBlock =>
+                                    {
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                    });
+                                }
+                                foreach (ParameterJv param in method.ParametersToValidate.Where(p => p.IsRequired))
+                                {
+                                    function.Line($"Validator.validate({param.Name});");
+                                }
+                                foreach (ParameterJv parameter in method.LocalParameters)
+                                {
+                                    if (!parameter.IsRequired)
+                                    {
+                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
+                                    }
+                                    if (parameter.IsConstant)
+                                    {
+                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    }
+                                }
+
+                                string inputMappings = method.BuildInputMappings(true);
+                                if (!string.IsNullOrWhiteSpace(inputMappings))
+                                {
+                                    function.Line(inputMappings);
+                                }
+
+                                string parameterConversion = method.ParameterConversion;
+                                if (!string.IsNullOrWhiteSpace(parameterConversion))
+                                {
+                                    function.Line(parameterConversion);
+                                }
+
+                                function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                                function.Indent(() =>
+                                {
+                                    function.Annotation("Override");
+                                    function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                    {
+                                        subFunction.Return("response.body()");
+                                    });
+                                });
+                                function.Line("}).toObservable();");
+                            });
+                            classBlock.Line();
+                        }
+
+                        // -------------------------------
+                        // Synchronous with all parameters
+                        // -------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                            {
+                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                            }
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the PagedList<{method.ReturnTypeJv.SequenceElementTypeString}> object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public PagedList<{method.ReturnTypeJv.SequenceElementTypeString}> {method.Name}({method.MethodParameterDeclaration})", function =>
+                        {
+                            function.Line($"{(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<{method.ReturnTypeJv.SequenceElementTypeString}> page = new {(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<>();");
+                            function.Line($"page.setItems({method.Name}Async({method.MethodParameterInvocation}).toBlocking().single().items());");
+                            function.Line($"page.setNextPageLink(null);");
+                            function.ReturnBlock($"new PagedList<{method.ReturnTypeJv.SequenceElementTypeString}>(page)", anonymousClass =>
+                            {
+                                anonymousClass.Annotation("Override");
+                                anonymousClass.Block($"public Page<{method.ReturnTypeJv.SequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
+                                {
+                                    subFunction.Return("null");
+                                });
+                            });
+                        });
+                        classBlock.Line();
+
+                        // ------------------------------
+                        // Observable with all parameters
+                        // ------------------------------
+                        classBlock.MultipleLineComment(comment =>
+                        {
+                            AddMethodSummaryAndDescription(comment, method);
+                            foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                            {
+                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                            }
+                            if (method.ReturnType.Body != null)
+                            {
+                                comment.Return($"the observable to the {method.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment()} object");
+                            }
+                            else
+                            {
+                                comment.Return($"the {{@link Observable<Page<{method.ReturnTypeJv.SequenceElementTypeString}>>}} object if successful.");
+                            }
+                        });
+                        classBlock.Block($"public Observable<Page<{method.ReturnTypeJv.SequenceElementTypeString}>> {method.Name}Async({method.MethodParameterDeclaration})", function =>
+                        {
+                            foreach (ParameterJv param in method.RequiredNullableParameters)
+                            {
+                                function.If($"{param.Name} == null", ifBlock =>
+                                {
+                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                });
+                            }
+                            foreach (ParameterJv param in method.ParametersToValidate)
+                            {
+                                function.Line($"Validator.validate({param.Name});");
+                            }
+                            foreach (ParameterJv parameter in method.LocalParameters)
+                            {
+                                if (parameter.IsConstant)
+                                {
+                                    function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                }
+                            }
+
+                            string inputMappings = method.BuildInputMappings(true);
+                            if (!string.IsNullOrWhiteSpace(inputMappings))
+                            {
+                                function.Line(inputMappings);
+                            }
+
+                            string parameterConversion = method.ParameterConversion;
+                            if (!string.IsNullOrWhiteSpace(parameterConversion))
+                            {
+                                function.Line(parameterConversion);
+                            }
+
+                            function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                            function.Indent(() =>
+                            {
+                                function.Annotation("Override");
+                                function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                {
+                                    subFunction.Return("response.body()");
+                                });
+                            });
+                            function.Line("}).toObservable();");
+                        });
+                        classBlock.Line();
+                    }
+                    else
+                    {
+                        if (!method.IsLongRunningOperation)
+                        {
+                            GenerateRootMethodFunctions(classBlock, method);
+                        }
+                        else
+                        {
+                            if (method.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
+                            {
+                                // -----------------------------------------
+                                // Synchronous with only required parameters
+                                // -----------------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                    {
+                                        comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    }
+                                    ThrowsIllegalArgumentException(comment);
+                                    ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                    ThrowsRuntimeException(comment);
+                                    if (method.ReturnType.Body != null)
+                                    {
+                                        comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                                    }
+                                });
+                                classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
+                                {
+                                    if (method.ReturnTypeJva.BodyClientType.ResponseVariant.Name == "void")
+                                    {
+                                        function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result();");
+                                    }
+                                    else
+                                    {
+                                        function.Return($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result()");
+                                    }
+                                });
+                                classBlock.Line();
+
+                                // --------------------------------------
+                                // Callback with only required parameters
+                                // --------------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                    {
+                                        comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    }
+                                    ParamServiceCallback(comment);
+                                    ThrowsIllegalArgumentException(comment);
+                                    comment.Return("the {@link ServiceFuture} object");
+                                });
+                                classBlock.Block($"public ServiceFuture<{method.ReturnTypeJva.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclarationWithCallback})", function =>
+                                {
+                                    function.Return($"ServiceFutureUtil.fromLRO({method.Name}Async({method.MethodRequiredParameterInvocation}), serviceCallback)");
+                                });
+                                classBlock.Line();
+
+                                // ----------------------------------------
+                                // Observable with only required parameters
+                                // ----------------------------------------
+                                classBlock.MultipleLineComment(comment =>
+                                {
+                                    AddMethodSummaryAndDescription(comment, method);
+                                    foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+                                    {
+                                        comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    }
+                                    ThrowsIllegalArgumentException(comment);
+                                    comment.Return("the observable for the request");
+                                });
+                                classBlock.Block($"public Observable<OperationStatus<{method.ReturnTypeJva.ClientResponseTypeString}>> {method.Name}Async({method.MethodRequiredParameterDeclaration})", function =>
+                                {
+                                    foreach (ParameterJv param in method.RequiredNullableParameters)
+                                    {
+                                        function.If($"{param.Name} == null", ifBlock =>
+                                        {
+                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                        });
+                                    }
+                                    foreach (ParameterJv param in method.ParametersToValidate.Where(p => p.IsRequired))
+                                    {
+                                        function.Line($"Validator.validate({param.Name});");
+                                    }
+                                    foreach (ParameterJv parameter in method.LocalParameters)
+                                    {
+                                        if (!parameter.IsRequired)
+                                        {
+                                            function.Line($"final {parameter.WireType.Name} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
+                                        }
+                                        if (parameter.IsConstant)
+                                        {
+                                            function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        }
+                                    }
+
+                                    string inputMappings = method.BuildInputMappings(true);
+                                    if (!string.IsNullOrWhiteSpace(inputMappings))
+                                    {
+                                        function.Line(inputMappings);
+                                    }
+
+                                    string parameterConversion = method.RequiredParameterConversion;
+                                    if (!string.IsNullOrWhiteSpace(parameterConversion))
+                                    {
+                                        function.Line(parameterConversion);
+                                    }
+
+                                    function.Return($"service.{method.Name}({method.MethodParameterApiInvocation})");
+                                });
+                                classBlock.Line();
+                            }
+
+                            // -------------------------------
+                            // Synchronous with all parameters
+                            // -------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                ThrowsIllegalArgumentException(comment);
+                                ThrowsOperationException(comment, method.OperationExceptionTypeString);
+                                ThrowsRuntimeException(comment);
+                                if (method.ReturnType.Body != null)
+                                {
+                                    comment.Return($"the {method.ReturnTypeResponseName.EscapeXmlComment()} object if successful.");
+                                }
+                            });
+                            classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration})", function =>
+                            {
+                                if (method.ReturnTypeResponseName == "void")
+                                {
+                                    function.Line($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last();");
+                                }
+                                else
+                                {
+                                    function.Return($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last().result()");
+                                }
+                            });
+                            classBlock.Line();
+
+                            // ----------------------------
+                            // Callback with all parameters
+                            // ----------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                ParamServiceCallback(comment);
+                                ThrowsIllegalArgumentException(comment);
+                                comment.Return("the {@link ServiceFuture} object");
+                            });
+                            classBlock.Block($"public ServiceFuture<{method.ReturnTypeJva.ServiceFutureGenericParameterString}> {method.Name}Async({method.MethodParameterDeclarationWithCallback})", function =>
+                            {
+                                function.Return($"ServiceFutureUtil.fromLRO({method.Name}Async({method.MethodParameterInvocation}), serviceCallback)");
+                            });
+                            classBlock.Line();
+
+                            // ------------------------------
+                            // Observable with all parameters
+                            // ------------------------------
+                            classBlock.MultipleLineComment(comment =>
+                            {
+                                AddMethodSummaryAndDescription(comment, method);
+                                foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
+                                {
+                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                }
+                                ThrowsIllegalArgumentException(comment);
+                                comment.Return("the observable for the request");
+                            });
+                            classBlock.Block($"public Observable<OperationStatus<{method.ReturnTypeJva.ClientResponseTypeString}>> {method.Name}Async({method.MethodParameterDeclaration})", function =>
+                            {
+                                foreach (ParameterJv param in method.RequiredNullableParameters)
+                                {
+                                    function.If($"{param.Name} == null", ifBlock =>
+                                    {
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                    });
+                                }
+                                foreach (ParameterJv param in method.ParametersToValidate)
+                                {
+                                    function.Line($"Validator.validate({param.Name});");
+                                }
+                                foreach (ParameterJv parameter in method.LocalParameters)
+                                {
+                                    if (parameter.IsConstant)
+                                    {
+                                        function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    }
+                                }
+
+                                string inputMapping = method.BuildInputMappings();
+                                if (!string.IsNullOrWhiteSpace(inputMapping))
+                                {
+                                    function.Line(inputMapping);
+                                }
+
+                                string parameterConversion = method.ParameterConversion;
+                                if (!string.IsNullOrWhiteSpace(parameterConversion))
+                                {
+                                    function.Line(parameterConversion);
+                                }
+
+                                function.Return($"service.{method.Name}({method.MethodParameterApiInvocation})");
+                            });
+                        }
+                    }
+
+                    classBlock.Line();
+                }
             });
 
             return javaFile;
@@ -1342,24 +2192,117 @@ namespace AutoRest.Java.DanModel
             comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         }
 
-        public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
+        public static JavaFile GetMethodGroupJavaFile(CodeModelJv codeModel, Settings settings, MethodGroupJv methodGroup)
         {
-            IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => ((MethodJv)method).InterfaceImports);
-            
-            string interfaceName = methodGroup.TypeName;
+            string methodGroupTypeName = methodGroup.TypeName;
+            string className = $"{methodGroupTypeName.ToPascalCase()}Impl";
 
-            IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+
+            javaFile.Import(methodGroup.ImplImports);
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
+            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+            {
+                comment.Line($"An instance of this class provides access to all the operations defined in {methodGroupTypeName}.");
+            });
+            javaFile.PublicClass($"{className}{methodGroup.ParentDeclaration}", classBlock =>
+            {
+                classBlock.SingleLineComment("The RestProxy service to perform REST calls.");
+                string serviceType = methodGroup.MethodGroupServiceType;
+                classBlock.Line($"private {serviceType} service;");
+
+                string serviceClientType = methodGroup.ServiceClientType;
+                classBlock.SingleLineComment("The service client containing this operation class.");
+                classBlock.Line($"private {serviceClientType} client;");
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line($"Initializes an instance of {methodGroupTypeName}.");
+                    comment.Line();
+                    comment.Param("client", "the instance of the service client containing this operation class.");
+                });
+                classBlock.Block($"public {className}({serviceClientType} client)", constructor =>
+                {
+                    constructor.Line($"this.service = RestProxy.create({serviceType}.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());");
+                    constructor.Line("this.client = client;");
+                });
+                classBlock.Line();
+
+                classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+                {
+                    comment.Line($"The interface defining all the services for {methodGroupTypeName} to be used by RestProxy to perform REST calls.");
+                });
+
+                classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
+                classBlock.Block($"interface {methodGroup.MethodGroupServiceType}", interfaceBlock =>
+                {
+                    foreach (MethodJv method in methodGroup.Methods)
+                    {
+                        string methodName = method.Name;
+                        string methodRequestContentType = method.RequestContentType;
+                        if (methodRequestContentType == "multipart/form-data" || methodRequestContentType == "application/x-www-form-urlencoded")
+                        {
+                            interfaceBlock.SingleLineSlashSlashComment("@Multipart not supported by RestProxy");
+                        }
+                        else
+                        {
+                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroup.MethodGroupFullType} {methodName}\" }})");
+                        }
+                        interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
+                        if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
+                        {
+                            interfaceBlock.SingleLineSlashSlashComment("@Streaming not supported by RestProxy");
+                        }
+                        string expectedResponsesAnnotation = method.ExpectedResponsesAnnotation;
+                        if (!string.IsNullOrWhiteSpace(expectedResponsesAnnotation))
+                        {
+                            interfaceBlock.Line(method.ExpectedResponsesAnnotation);
+                        }
+                        string methodReturnValueWireType = method.ReturnTypeJv.ReturnValueWireType;
+                        if (methodReturnValueWireType != null)
+                        {
+                            interfaceBlock.Annotation($"ReturnValueWireType({methodReturnValueWireType}.class)");
+                        }
+                        if (method.DefaultResponse.Body != null)
+                        {
+                            interfaceBlock.Annotation($"UnexpectedResponseExceptionType({method.OperationExceptionTypeString}.class)");
+                        }
+                        interfaceBlock.Line($"Single<{method.RestResponseConcreteTypeName}> {methodName}({method.MethodParameterApiDeclaration});");
+                        interfaceBlock.Line();
+                    }
+                });
+
+                classBlock.Line();
+
+                foreach (MethodJv method in methodGroup.Methods)
+                {
+                    GenerateRootMethodFunctions(classBlock, method);
+
+                    classBlock.Line();
+                }
+            });
+
+            return javaFile;
+        }
+
+        public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
+        {
+            string interfaceName = methodGroup.TypeName;
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
+
+            IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => ((MethodJv)method).InterfaceImports);
             javaFile.Import(imports);
+
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
             {
                 comment.Line($"An instance of this class provides access to all the operations defined in {interfaceName}.");
             });
             javaFile.PublicInterface(interfaceName, (typeBlock) =>
             {
+                IEnumerable<JavaMethod> methods = methodGroup.Methods.SelectMany(ParseMethod);
                 foreach (JavaMethod method in methods)
                 {
                     typeBlock.MultipleLineComment((comment) =>
