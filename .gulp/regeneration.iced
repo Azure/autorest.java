@@ -16,7 +16,7 @@ regenExpected = (opts,done) ->
       "--output-folder=#{opts.outputDir}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
       "--java.namespace=#{['Fixtures', key.replace(/\/|\./, '')].join('.')}",
-      "--input-file=#{swaggerDir}/#{optsMappingsValue}"
+      "--input-file=#{swaggerDir}/#{optsMappingsValue}",
     ]
 
     if (opts.azureArm)
@@ -24,6 +24,7 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--java.fluent=true")
+      args.push("--regenerate-manager")
 
     autorest args,() =>
       instances--

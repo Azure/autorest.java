@@ -17,6 +17,81 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public static JavaFile GetAzureServiceManagerJavaFile(CodeModelJva codeModel, Settings settings)
+        {
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
+
+            string serviceName = codeModel.ServiceName;
+            string className = $"{serviceName}Manager";
+
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+
+            javaFile.Import(
+                "com.microsoft.azure.management.apigeneration.Beta",
+                "com.microsoft.azure.management.apigeneration.Beta.SinceVersion",
+                "com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable",
+                "com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
+                "com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager",
+                "com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor",
+                "com.microsoft.azure.v2.AzureEnvironment",
+                "com.microsoft.azure.v2.AzureResponseBuilder",
+                "com.microsoft.azure.v2.credentials.AzureTokenCredentials",
+                "com.microsoft.azure.v2.serializer.AzureJacksonAdapter",
+                "com.microsoft.rest.v2.RestClient");
+
+            javaFile.MultipleLineComment(comment =>
+            {
+                comment.Line($"Entry point to Azure {serviceName} resource management.");
+            });
+            javaFile.Annotation($"Beta(SinceVersion.{codeModel.BetaSinceVersion})");
+            javaFile.Block($"public final class {className} extends Manager<{className}, {codeModel.Name + "Impl"}>", classBlock =>
+            {
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line($"Get a Configurable instance that can be used to create {className} with optional configuration.");
+                    comment.Line();
+                    comment.Return("the instance allowing configurations");
+                });
+                classBlock.Block("public static Configurable configure()", function =>
+                {
+                    function.Return($"new {className}.ConfigurableImpl()");
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
+                    comment.Line();
+                    comment.Param("credentials", "the credentials to use");
+                    comment.Param("subscriptionId", "the subscription UUID");
+                    comment.Return($"the {className}");
+                });
+                classBlock.Block($"public static {className} authenticate(AzureTokenCredentials credentials, String subscriptionId)", function =>
+                {
+                    function.Line($"return new {className}(new RestClient.Builder()");
+                    function.Indent(() =>
+                    {
+                        function.Line(".withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)");
+                        function.Line(".withCredentials(credentials)");
+                        function.Line(".withSerializerAdapter(new AzureJacksonAdapter())");
+                        function.Line(".withResponseBuilderFactory(new AzureResponseBuilder.Factory())");
+                        function.Line(".withInterceptor(new ProviderRegistrationInterceptor(credentials))");
+                        function.Line(".build(), subscriptionId);");
+                    });
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
+                    comment.Line();
+                    comment.Param("restClient", "the RestClient to be used for API calls.");
+                    comment.Param("subscriptionId", "the subscription UUID");
+                    comment.Return($"the {className}");
+                });
+            });
+
+            return javaFile;
+        }
+
         public static IEnumerable<JavaFile> GetPageJavaFiles(CodeModelJva codeModel, Settings settings)
         {
             List<JavaFile> result = new List<JavaFile>();

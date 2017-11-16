@@ -15,8 +15,7 @@ namespace AutoRest.Java
     public class CodeGeneratorJv : CodeGenerator
     {
         private const string ClientRuntimePackage = "com.microsoft.rest.v2:client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
-        private const string _packageInfoFileName = "package-info.java";
-
+        
         public CodeNamerJv Namer { get; private set; }
 
         public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
@@ -73,6 +72,9 @@ namespace AutoRest.Java
             // package-info.java
             await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
+
+        protected Task WriteAzureServiceManagerJavaFile(CodeModelJva codeModel)
+            => WriteJavaFile(DanCodeGenerator.GetAzureServiceManagerJavaFile(codeModel, Settings));
 
         protected Task WritePageJavaFiles(CodeModelJva codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetPageJavaFiles(codeModel, Settings));

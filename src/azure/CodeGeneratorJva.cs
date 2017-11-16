@@ -2,24 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
-using AutoRest.Java.azure.Templates;
 using AutoRest.Java.Azure.Model;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace AutoRest.Java.Azure
 {
     public class CodeGeneratorJva : CodeGeneratorJv
     {
-        private const string ClientRuntimePackage = "com.microsoft.azure.v2:azure-client-runtime:2.0.0-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
-        private const string _packageInfoFileName = "package-info.java";
-        
-        public override bool IsSingleFileGenerationSupported => true;
-
-        public override string UsageInstructions => $"The {ClientRuntimePackage} maven dependency is required to execute the generated code.";
-
         /// <summary>
         /// Generates Azure Java code for service client.
         /// </summary>
