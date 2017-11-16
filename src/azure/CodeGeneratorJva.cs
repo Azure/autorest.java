@@ -34,11 +34,6 @@ namespace AutoRest.Java.Azure
                 throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
             }
 
-            string package = codeModel.Namespace.ToLowerInvariant();
-            string baseFolderPath = Path.Combine("src", "main", "java");
-            string packageFolderPath = Path.Combine(baseFolderPath, package.Replace('.', Path.DirectorySeparatorChar));
-            string modelsFolderPath = Path.Combine(packageFolderPath, "models");
-
             // Service client
             await WriteAzureServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
@@ -59,22 +54,13 @@ namespace AutoRest.Java.Azure
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //XML wrappers
-            await WriteXmlWrapperFiles(codeModel).ConfigureAwait(false);
+            await WriteXmlWrapperJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Page class
-            foreach (var pageClass in codeModel.pageClasses)
-            {
-                var pageTemplate = new PageTemplate
-                {
-                    Model = new PageJva(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
-                };
-                string pageFileName = $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}.java";
-                string pageFilePath = Path.Combine(modelsFolderPath, pageFileName);
-                await Write(pageTemplate, pageFilePath);
-            }
+            await WritePageJavaFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);

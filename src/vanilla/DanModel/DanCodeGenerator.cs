@@ -17,6 +17,104 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public static IEnumerable<JavaFile> GetPageJavaFiles(CodeModelJva codeModel, Settings settings)
+        {
+            List<JavaFile> result = new List<JavaFile>();
+
+            int maximumCommentWidth = GetMaximumCommentWidth(settings);
+            
+            foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in codeModel.pageClasses)
+            {
+                string nextLinkName = pageClass.Key.Key;
+                string itemName = pageClass.Key.Value;
+
+                string className = pageClass.Value.ToPascalCase();
+
+                string subPackage = (codeModel is CodeModelJvaf ? codeModel.ImplPackage : codeModel.ModelsPackage);
+                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
+                javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
+                                "com.microsoft.azure.v2.Page",
+                                "java.util.List");
+
+                javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
+                {
+                    comment.Line("An instance of this class defines a page of Azure resources and a link to get the next page of resources, if any.");
+                    comment.Line();
+                    comment.Param("<T>", "type of Azure resource");
+                });
+                javaFile.Block($"public class {className}<T> implements Page<T>", classBlock =>
+                {
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("The link to the next page.");
+                    });
+                    classBlock.Annotation($"JsonProperty(\"{nextLinkName}\")");
+                    classBlock.Line("private String nextPageLink;");
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("The list of items.");
+                    });
+                    classBlock.Annotation($"JsonProperty(\"{itemName}\")");
+                    classBlock.Line("private List<T> items;");
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("Gets the link to the next page.");
+                        comment.Line();
+                        comment.Return("the link to the next page.");
+                    });
+                    classBlock.Annotation("Override");
+                    classBlock.Block("public String nextPageLink()", function =>
+                    {
+                        function.Return("this.nextPageLink");
+                    });
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("Gets the list of items.");
+                        comment.Line();
+                        comment.Return("the list of items in {@link List}.");
+                    });
+                    classBlock.Annotation("Override");
+                    classBlock.Block("public List<T> items()", function =>
+                    {
+                        function.Return("items");
+                    });
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("Sets the link to the next page.");
+                        comment.Line();
+                        comment.Param("nextPageLink", "the link to the next page.");
+                        comment.Return("this Page object itself.");
+                    });
+                    classBlock.Block($"public {className}<T> setNextPageLink(String nextPageLink)", function =>
+                    {
+                        function.Line("this.nextPageLink = nextPageLink;");
+                        function.Return("this");
+                    });
+                    classBlock.Line();
+                    classBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line("Sets the list of items.");
+                        comment.Line();
+                        comment.Param("items", "the list of items in {@link List}.");
+                        comment.Return("this Page object itself.");
+                    });
+                    classBlock.Block($"public {className}<T> setItems(List<T> items)", function =>
+                    {
+                        function.Line("this.items = items;");
+                        function.Return("this");
+                    });
+                });
+
+                result.Add(javaFile);
+            }
+
+            return result;
+        }
+
         public static IEnumerable<JavaFile> GetXmlWrapperJavaFiles(CodeModelJv codeModel, Settings settings)
         {
             IEnumerable<JavaFile> result;

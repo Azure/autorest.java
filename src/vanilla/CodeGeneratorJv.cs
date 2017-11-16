@@ -65,7 +65,7 @@ namespace AutoRest.Java
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // XML wrappers
-            await WriteXmlWrapperFiles(codeModel).ConfigureAwait(false);
+            await WriteXmlWrapperJavaFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
@@ -74,7 +74,10 @@ namespace AutoRest.Java
             await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
-        protected Task WriteXmlWrapperFiles(CodeModelJv codeModel)
+        protected Task WritePageJavaFiles(CodeModelJva codeModel)
+            => WriteJavaFiles(DanCodeGenerator.GetPageJavaFiles(codeModel, Settings));
+
+        protected Task WriteXmlWrapperJavaFiles(CodeModelJv codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetXmlWrapperJavaFiles(codeModel, Settings));
 
         protected Task WriteAzureServiceClientJavaFile(CodeModelJva codeModel)
