@@ -54,22 +54,13 @@ namespace AutoRest.Java.Azure.Fluent
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //XML wrappers
-            await WriteXmlWrapperFiles(codeModel).ConfigureAwait(false);
+            await WriteXmlWrapperJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
             await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Page class
-            foreach (var pageClass in codeModel.pageClasses)
-            {
-                var pageTemplate = new PageTemplate
-                {
-                    Model = new PageJvaf(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
-                };
-                string pageFileName = $"{pageTemplate.Model.TypeDefinitionName.ToPascalCase()}.java";
-                string pageFilePath = Path.Combine(implementationFolderPath, pageFileName);
-                await Write(pageTemplate, pageFilePath);
-            }
+            await WritePageJavaFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
