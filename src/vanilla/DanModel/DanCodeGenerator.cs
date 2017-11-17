@@ -87,6 +87,50 @@ namespace AutoRest.Java.DanModel
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
+                classBlock.Block($"public static {className} authenticate(RestClient restClient, String subscriptionId)", function =>
+                {
+                    function.Return($"new {className}(restClient, subscriptionId)");
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line("The interface allowing configurations to be set.");
+                });
+                classBlock.Block("public interface Configurable extends AzureConfigurable<Configurable>", interfaceBlock =>
+                {
+                    interfaceBlock.MultipleLineComment(comment =>
+                    {
+                        comment.Line($"Creates an instance of {className} that exposes {serviceName} management API entry points.");
+                        comment.Line();
+                        comment.Param("credentials", "the credentials to use");
+                        comment.Param("subscriptionId", "the subscription UUID");
+                        comment.Return($"the interface exposing {serviceName} management API entry points that work across subscriptions");
+                    });
+                    interfaceBlock.Line($"{className} authenticate(AzureTokenCredentials credentials, String subscriptionId);");
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line("The implementation for Configurable interface.");
+                });
+                classBlock.Block("private static final class ConfigurableImpl extends AzureConfigurableImpl<Configurable> implements Configurable", innerClass =>
+                {
+                    innerClass.Block($"public {className} authenticate(AzureTokenCredentials credentials, String subscriptionId)", function =>
+                    {
+                        function.Return($"{className}.authenticate(buildRestClient(credentials), subscriptionId)");
+                    });
+                });
+                classBlock.Line();
+                classBlock.Block($"private {className}(RestClient restClient, String subscriptionId)", constructor =>
+                {
+                    constructor.Line("super(");
+                    constructor.Indent(() =>
+                    {
+                        constructor.Line("restClient,");
+                        constructor.Line("subscriptionId,");
+                        constructor.Line($"new {codeModel.Name}Impl(restClient).withSubscriptionId(subscriptionId));");
+                    });
+                });
             });
 
             return javaFile;
