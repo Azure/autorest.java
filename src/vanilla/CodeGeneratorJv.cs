@@ -41,12 +41,6 @@ namespace AutoRest.Java
                 throw new InvalidCastException("CodeModel is not a Java CodeModel");
             }
 
-            // Service client
-            await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
-
-            // Service client interface
-            await WriteServiceClientInterfaceJavaFile(codeModel).ConfigureAwait(false);
-
             // operations
             foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
             {
@@ -90,12 +84,6 @@ namespace AutoRest.Java
 
         protected Task WriteAzureMethodGroupJavaFile(CodeModelJva codeModel, MethodGroupJva methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetAzureMethodGroupJavaFile(codeModel, Settings, methodGroup));
-
-        protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
-            => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
-
-        protected Task WriteServiceClientInterfaceJavaFile(CodeModelJv codeModel)
-            => WriteJavaFile(DanCodeGenerator.GetServiceClientInterfaceJavaFile(codeModel, Settings));
 
         protected Task WriteMethodGroupJavaFile(CodeModelJv codeModel, MethodGroupJv methodGroup)
             => WriteJavaFile(DanCodeGenerator.GetMethodGroupJavaFile(codeModel, Settings, methodGroup));

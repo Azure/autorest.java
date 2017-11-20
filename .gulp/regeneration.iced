@@ -31,10 +31,12 @@ regenExpected = (opts,done) ->
       args.push("--java.fluent=true")
       args.push("--regenerate-manager")
 
-    rimraf "#{outputDir}/#{namespace}", () ->
-      autorest args,() ->
-        instances--
-        return done() if instances is 0
+    baseFolderPath = "#{outputDir}/src/main/java/fixtures/#{namespace}"
+    rimraf.sync baseFolderPath
+
+    autorest args, () ->
+      instances--
+      return done() if instances is 0
 
 defaultMappings = {
   'ParameterFlattening': 'parameter-flattening.json',
