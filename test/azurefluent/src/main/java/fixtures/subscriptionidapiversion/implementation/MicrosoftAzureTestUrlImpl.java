@@ -153,7 +153,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
-        this("https://management.azure.com/", credentials);
+        this("https://management.azure.com", credentials);
     }
 
     /**

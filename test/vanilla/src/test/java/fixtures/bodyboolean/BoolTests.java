@@ -53,11 +53,11 @@ public class BoolTests {
 
     @Test
     public void putTrue() throws Exception {
-        client.bools().putTrue(true);
+        client.bools().putTrue();
     }
 
     @Test
     public void putFalse() throws Exception {
-        client.bools().putFalse(false);
+        client.bools().putFalse();
     }
 }
