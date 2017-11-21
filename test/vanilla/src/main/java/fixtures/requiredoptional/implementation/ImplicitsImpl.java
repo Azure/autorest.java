@@ -39,9 +39,14 @@ import rx.functions.Func1;
  * Implicits.
  */
 public class ImplicitsImpl implements Implicits {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private ImplicitsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestRequiredOptionalTestServiceImpl client;
 
     /**
@@ -50,7 +55,7 @@ public class ImplicitsImpl implements Implicits {
      * @param client the instance of the service client containing this operation class.
      */
     public ImplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
-        this.service = RestProxy.create(ImplicitsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(ImplicitsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

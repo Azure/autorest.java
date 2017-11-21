@@ -1,12 +1,11 @@
 package fixtures.header;
 
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestClient.Builder;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import com.microsoft.rest.v2.policy.RequestPolicy;
-import com.microsoft.rest.v2.serializer.JacksonAdapter;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -14,7 +13,6 @@ import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
@@ -50,16 +48,14 @@ public class HeaderOperationsTests {
     public static void setup() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        RequestPolicy.Factory addHeadersFactory = new AddHeadersPolicy.Factory(headers);
 
-        RestClient restClient = new RestClient.Builder()
+        HttpPipeline httpPipeline = new HttpPipeline.Builder()
                 .withUserAgent("")
-                .withBaseUrl("http://localhost:3000")
-                .withSerializerAdapter(new JacksonAdapter())
-                .addRequestPolicy(addHeadersFactory)
+                .withRequestPolicy(new AddHeadersPolicy.Factory(headers))
+                .withRequestPolicy(new PortPolicy.Factory(3000))
                 .build();
 
-        client = new AutoRestSwaggerBATHeaderServiceImpl(restClient);
+        client = new AutoRestSwaggerBATHeaderServiceImpl(httpPipeline);
     }
 
     @Test

@@ -1,5 +1,7 @@
 package fixtures.url;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,7 +12,7 @@ public class PathItemsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestUrlTestServiceImpl("http://localhost:3000");
+        client = new AutoRestUrlTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

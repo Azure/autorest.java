@@ -33,7 +33,7 @@ public class HttpRedirectsTests {
 
 //    @BeforeClass
 //    public static void setup() {
-//        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
+//        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
 //    }
 //
 //    @Test

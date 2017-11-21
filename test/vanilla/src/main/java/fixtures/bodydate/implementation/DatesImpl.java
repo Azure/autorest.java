@@ -36,9 +36,14 @@ import rx.functions.Func1;
  * Dates.
  */
 public class DatesImpl implements Dates {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private DatesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestDateTestServiceImpl client;
 
     /**
@@ -47,7 +52,7 @@ public class DatesImpl implements Dates {
      * @param client the instance of the service client containing this operation class.
      */
     public DatesImpl(AutoRestDateTestServiceImpl client) {
-        this.service = RestProxy.create(DatesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DatesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

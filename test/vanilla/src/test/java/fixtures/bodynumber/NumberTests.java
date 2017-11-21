@@ -1,6 +1,8 @@
 package fixtures.bodynumber;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,7 +16,7 @@ public class NumberTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestNumberTestServiceImpl("http://localhost:3000");
+        client = new AutoRestNumberTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

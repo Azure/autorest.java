@@ -10,17 +10,13 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import fixtures.lro.AutoRestLongRunningOperationTestService;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
 import fixtures.lro.LROSADs;
 import fixtures.lro.LROsCustomHeaders;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
@@ -28,7 +24,9 @@ import rx.Single;
 public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient implements AutoRestLongRunningOperationTestService {
 
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -51,7 +49,9 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -74,7 +74,9 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**

@@ -1,6 +1,8 @@
 package fixtures.http;
 
 import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;
@@ -14,7 +16,7 @@ public class HttpFailureTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
+        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

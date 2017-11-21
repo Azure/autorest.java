@@ -39,9 +39,14 @@ import rx.functions.Func1;
  * HttpClientFailures.
  */
 public class HttpClientFailuresImpl implements HttpClientFailures {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private HttpClientFailuresService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
@@ -50,7 +55,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpClientFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = RestProxy.create(HttpClientFailuresService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(HttpClientFailuresService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

@@ -10,13 +10,11 @@
 
 package fixtures.bodyboolean.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.Bools;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestBoolTestService class.
@@ -24,12 +22,13 @@ import rx.Single;
 public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRestBoolTestService {
 
     /**
-     * The Bools object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private Bools bools;
 
     /**
      * Gets the Bools object to access its operations.
+     *
      * @return the Bools object.
      */
     public Bools bools() {
@@ -38,33 +37,19 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
 
     /**
      * Initializes an instance of AutoRestBoolTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestBoolTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestBoolTestService client.
      */
     public AutoRestBoolTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestBoolTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline the HTTP pipeline that requests will be sent through
      */
-    public AutoRestBoolTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestBoolTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.bools = new BoolsImpl(this);
     }
 }

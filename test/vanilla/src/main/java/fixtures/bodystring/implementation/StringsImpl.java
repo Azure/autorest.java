@@ -37,9 +37,14 @@ import rx.functions.Func1;
  * Strings.
  */
 public class StringsImpl implements Strings {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private StringsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestSwaggerBATServiceImpl client;
 
     /**
@@ -48,7 +53,7 @@ public class StringsImpl implements Strings {
      * @param client the instance of the service client containing this operation class.
      */
     public StringsImpl(AutoRestSwaggerBATServiceImpl client) {
-        this.service = RestProxy.create(StringsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(StringsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

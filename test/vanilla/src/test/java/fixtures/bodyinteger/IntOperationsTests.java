@@ -3,6 +3,8 @@ package fixtures.bodyinteger;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.v2.ServiceCallback;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
@@ -24,7 +26,7 @@ public class IntOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestIntegerTestServiceImpl("http://localhost:3000");
+        client = new AutoRestIntegerTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

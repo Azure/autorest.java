@@ -10,19 +10,10 @@
 
 package fixtures.paging;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestPagingTestService class.
  */
 public interface AutoRestPagingTestService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
     /**
      * Gets the User-Agent header for the client.
      *

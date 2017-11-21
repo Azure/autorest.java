@@ -39,6 +39,12 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaFile PublicClass(string classDeclaration, Action<JavaClass> classAction)
+        {
+            Contents.PublicClass(classDeclaration, classAction);
+            return this;
+        }
+
         public JavaFile Package(string package)
         {
             Contents.Package(package);
@@ -102,12 +108,6 @@ namespace AutoRest.Java.DanModel
         public JavaFile PublicFinalClass(string className, Action<JavaClass> classAction)
         {
             Contents.PublicFinalClass(className, classAction);
-            return this;
-        }
-
-        public JavaFile PublicClass(string className, Action<JavaClass> classAction)
-        {
-            Contents.PublicClass(className, classAction);
             return this;
         }
 

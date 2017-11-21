@@ -84,13 +84,6 @@ namespace AutoRest.Java.Model
                 {
                     classes.Add("com.microsoft.rest.v2.credentials.ServiceClientCredentials");
                 }
-                classes.AddRange(new[]{
-                        "com.microsoft.rest.v2.RestProxy",
-                        "com.microsoft.rest.v2.RestResponse",
-                        "com.microsoft.rest.v2.ServiceClient",
-                        "com.microsoft.rest.v2.RestClient",
-                        "rx.Single"
-                    });
 
                 classes.AddRange(RootMethods
                     .SelectMany(m => m.ImplImports)
@@ -110,8 +103,6 @@ namespace AutoRest.Java.Model
                 classes.AddRange(RootMethods
                     .SelectMany(m => m.InterfaceImports)
                     .OrderBy(i => i).Distinct());
-
-                classes.Add("com.microsoft.rest.v2.RestClient");
 
                 return classes.ToList();
             }

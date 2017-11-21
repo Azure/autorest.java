@@ -10,19 +10,10 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestAzureSpecialParametersTestClient class.
  */
 public interface AutoRestAzureSpecialParametersTestClient {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
     /**
      * Gets the User-Agent header for the client.
      *

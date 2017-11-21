@@ -47,9 +47,14 @@ import rx.functions.Func1;
  * Primitives.
  */
 public class PrimitivesImpl implements Primitives {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private PrimitivesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestComplexTestServiceImpl client;
 
     /**
@@ -58,7 +63,7 @@ public class PrimitivesImpl implements Primitives {
      * @param client the instance of the service client containing this operation class.
      */
     public PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(PrimitivesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PrimitivesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

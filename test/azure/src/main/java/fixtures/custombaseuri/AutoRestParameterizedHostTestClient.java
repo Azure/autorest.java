@@ -10,19 +10,10 @@
 
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestParameterizedHostTestClient class.
  */
 public interface AutoRestParameterizedHostTestClient {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
     /**
      * Gets the User-Agent header for the client.
      *

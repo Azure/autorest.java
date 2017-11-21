@@ -10,12 +10,8 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import rx.Single;
 
 /**
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
@@ -23,7 +19,9 @@ import rx.Single;
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
 
 
-    /** Subscription Id. */
+    /**
+     * Subscription Id.
+     */
     private String subscriptionId;
 
     /**
@@ -46,7 +44,9 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
         return this;
     }
 
-    /** API Version with value '2014-04-01-preview'. */
+    /**
+     * API Version with value '2014-04-01-preview'.
+     */
     private String apiVersion;
 
     /**
@@ -58,7 +58,9 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
         return this.apiVersion;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -81,7 +83,9 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -104,7 +108,9 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**

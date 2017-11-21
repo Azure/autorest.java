@@ -37,9 +37,14 @@ import rx.functions.Func1;
  * Arrays.
  */
 public class ArraysImpl implements Arrays {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private ArraysService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestComplexTestServiceImpl client;
 
     /**
@@ -48,7 +53,7 @@ public class ArraysImpl implements Arrays {
      * @param client the instance of the service client containing this operation class.
      */
     public ArraysImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(ArraysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(ArraysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

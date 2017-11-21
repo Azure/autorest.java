@@ -35,9 +35,14 @@ import rx.functions.Func1;
  * Bytes.
  */
 public class BytesImpl implements Bytes {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private BytesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestSwaggerBATByteServiceImpl client;
 
     /**
@@ -46,7 +51,7 @@ public class BytesImpl implements Bytes {
      * @param client the instance of the service client containing this operation class.
      */
     public BytesImpl(AutoRestSwaggerBATByteServiceImpl client) {
-        this.service = RestProxy.create(BytesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(BytesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

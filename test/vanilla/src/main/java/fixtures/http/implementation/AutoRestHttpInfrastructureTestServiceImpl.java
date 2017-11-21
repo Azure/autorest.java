@@ -10,10 +10,9 @@
 
 package fixtures.http.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.http.AutoRestHttpInfrastructureTestService;
 import fixtures.http.HttpClientFailures;
 import fixtures.http.HttpFailures;
@@ -22,7 +21,6 @@ import fixtures.http.HttpRetrys;
 import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpSuccess;
 import fixtures.http.MultipleResponses;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
@@ -30,12 +28,13 @@ import rx.Single;
 public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
 
     /**
-     * The HttpFailures object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private HttpFailures httpFailures;
 
     /**
      * Gets the HttpFailures object to access its operations.
+     *
      * @return the HttpFailures object.
      */
     public HttpFailures httpFailures() {
@@ -43,12 +42,13 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HttpSuccess object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private HttpSuccess httpSuccess;
 
     /**
      * Gets the HttpSuccess object to access its operations.
+     *
      * @return the HttpSuccess object.
      */
     public HttpSuccess httpSuccess() {
@@ -56,12 +56,13 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HttpRedirects object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private HttpRedirects httpRedirects;
 
     /**
      * Gets the HttpRedirects object to access its operations.
+     *
      * @return the HttpRedirects object.
      */
     public HttpRedirects httpRedirects() {
@@ -69,12 +70,13 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HttpClientFailures object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private HttpClientFailures httpClientFailures;
 
     /**
      * Gets the HttpClientFailures object to access its operations.
+     *
      * @return the HttpClientFailures object.
      */
     public HttpClientFailures httpClientFailures() {
@@ -82,12 +84,13 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HttpServerFailures object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private HttpServerFailures httpServerFailures;
 
     /**
      * Gets the HttpServerFailures object to access its operations.
+     *
      * @return the HttpServerFailures object.
      */
     public HttpServerFailures httpServerFailures() {
@@ -95,12 +98,13 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HttpRetrys object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private HttpRetrys httpRetrys;
 
     /**
      * Gets the HttpRetrys object to access its operations.
+     *
      * @return the HttpRetrys object.
      */
     public HttpRetrys httpRetrys() {
@@ -108,12 +112,13 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The MultipleResponses object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private MultipleResponses multipleResponses;
 
     /**
      * Gets the MultipleResponses object to access its operations.
+     *
      * @return the MultipleResponses object.
      */
     public MultipleResponses multipleResponses() {
@@ -122,33 +127,19 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      */
     public AutoRestHttpInfrastructureTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline the HTTP pipeline that requests will be sent through
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.httpFailures = new HttpFailuresImpl(this);
         this.httpSuccess = new HttpSuccessImpl(this);
         this.httpRedirects = new HttpRedirectsImpl(this);

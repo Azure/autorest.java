@@ -10,12 +10,8 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
@@ -23,7 +19,9 @@ import rx.Single;
 public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
 
 
-    /** The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'. */
+    /**
+     * The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
+     */
     private String subscriptionId;
 
     /**
@@ -46,7 +44,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this;
     }
 
-    /** The api version, which appears in the query, the value is always '2015-07-01-preview'. */
+    /**
+     * The api version, which appears in the query, the value is always '2015-07-01-preview'.
+     */
     private String apiVersion;
 
     /**
@@ -58,7 +58,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this.apiVersion;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -81,7 +83,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -104,7 +108,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**

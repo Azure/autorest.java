@@ -39,9 +39,14 @@ import rx.functions.Func1;
  * MultipleResponses.
  */
 public class MultipleResponsesImpl implements MultipleResponses {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private MultipleResponsesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
@@ -50,7 +55,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @param client the instance of the service client containing this operation class.
      */
     public MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = RestProxy.create(MultipleResponsesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(MultipleResponsesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

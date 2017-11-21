@@ -10,14 +10,10 @@
 
 package fixtures.head.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import fixtures.head.AutoRestHeadTestService;
 import fixtures.head.HttpSuccess;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestHeadTestServiceImpl class.
@@ -25,7 +21,9 @@ import rx.Single;
 public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
 
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -48,7 +46,9 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -71,7 +71,9 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**

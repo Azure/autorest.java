@@ -38,9 +38,14 @@ import rx.functions.Func1;
  * Enums.
  */
 public class EnumsImpl implements Enums {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private EnumsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestSwaggerBATServiceImpl client;
 
     /**
@@ -49,7 +54,7 @@ public class EnumsImpl implements Enums {
      * @param client the instance of the service client containing this operation class.
      */
     public EnumsImpl(AutoRestSwaggerBATServiceImpl client) {
-        this.service = RestProxy.create(EnumsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(EnumsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

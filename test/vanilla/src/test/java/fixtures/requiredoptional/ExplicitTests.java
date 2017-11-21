@@ -1,5 +1,7 @@
 package fixtures.requiredoptional;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import fixtures.requiredoptional.implementation.AutoRestRequiredOptionalTestServiceImpl;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
@@ -19,7 +21,7 @@ public class ExplicitTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceImpl("http://localhost:3000");
+        client = new AutoRestRequiredOptionalTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

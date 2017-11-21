@@ -38,9 +38,14 @@ import rx.functions.Func1;
  * Basics.
  */
 public class BasicsImpl implements Basics {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private BasicsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestComplexTestServiceImpl client;
 
     /**
@@ -49,7 +54,7 @@ public class BasicsImpl implements Basics {
      * @param client the instance of the service client containing this operation class.
      */
     public BasicsImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(BasicsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(BasicsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

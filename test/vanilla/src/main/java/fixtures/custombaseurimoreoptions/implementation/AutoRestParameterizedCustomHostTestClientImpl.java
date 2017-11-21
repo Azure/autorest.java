@@ -10,20 +10,20 @@
 
 package fixtures.custombaseurimoreoptions.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClient;
 import fixtures.custombaseurimoreoptions.Paths;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
  */
 public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
 
-    /** The subscription id with value 'test12'. */
+    /**
+     * The subscription id with value 'test12'.
+     */
     private String subscriptionId;
 
     /**
@@ -46,7 +46,9 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
         return this;
     }
 
-    /** A string value that is used as a global part of the parameterized host. Default value 'host'. */
+    /**
+     * A string value that is used as a global part of the parameterized host. Default value 'host'.
+     */
     private String dnsSuffix;
 
     /**
@@ -70,12 +72,13 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
     }
 
     /**
-     * The Paths object to access its operations.
+     * The HTTP pipeline to send requests through.
      */
     private Paths paths;
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     public Paths paths() {
@@ -84,33 +87,19 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    private AutoRestParameterizedCustomHostTestClientImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      */
     public AutoRestParameterizedCustomHostTestClientImpl() {
-        this("https://{vault}{secret}{dnsSuffix}");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline the HTTP pipeline that requests will be sent through
      */
-    public AutoRestParameterizedCustomHostTestClientImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestParameterizedCustomHostTestClientImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.dnsSuffix = "host";
         this.paths = new PathsImpl(this);
     }

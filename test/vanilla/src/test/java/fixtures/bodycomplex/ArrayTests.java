@@ -1,5 +1,7 @@
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import org.junit.Assert;
@@ -14,7 +16,7 @@ public class ArrayTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestComplexTestServiceImpl("http://localhost:3000");
+        client = new AutoRestComplexTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

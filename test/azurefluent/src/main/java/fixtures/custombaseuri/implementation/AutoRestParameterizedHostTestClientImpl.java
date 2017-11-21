@@ -10,12 +10,8 @@
 
 package fixtures.custombaseuri.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
@@ -23,7 +19,9 @@ import rx.Single;
 public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient {
 
 
-    /** A string value that is used as a global part of the parameterized host. */
+    /**
+     * A string value that is used as a global part of the parameterized host.
+     */
     private String host;
 
     /**
@@ -46,7 +44,9 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
         return this;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -69,7 +69,9 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -92,7 +94,9 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**

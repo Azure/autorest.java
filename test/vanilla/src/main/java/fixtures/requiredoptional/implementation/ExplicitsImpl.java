@@ -48,9 +48,14 @@ import rx.functions.Func1;
  * Explicits.
  */
 public class ExplicitsImpl implements Explicits {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private ExplicitsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestRequiredOptionalTestServiceImpl client;
 
     /**
@@ -59,7 +64,7 @@ public class ExplicitsImpl implements Explicits {
      * @param client the instance of the service client containing this operation class.
      */
     public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
-        this.service = RestProxy.create(ExplicitsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(ExplicitsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

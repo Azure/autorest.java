@@ -38,9 +38,14 @@ import rx.functions.Func1;
  * Datetimerfc1123s.
  */
 public class Datetimerfc1123sImpl implements Datetimerfc1123s {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private Datetimerfc1123sService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestRFC1123DateTimeTestServiceImpl client;
 
     /**
@@ -49,7 +54,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param client the instance of the service client containing this operation class.
      */
     public Datetimerfc1123sImpl(AutoRestRFC1123DateTimeTestServiceImpl client) {
-        this.service = RestProxy.create(Datetimerfc1123sService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(Datetimerfc1123sService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

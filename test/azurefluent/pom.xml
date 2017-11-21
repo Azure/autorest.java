@@ -44,7 +44,7 @@
     </developers>
     <dependencies>
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
+            <groupId>com.microsoft.azure.v2</groupId>
             <artifactId>azure-client-runtime</artifactId>
         </dependency>
         <dependency>
@@ -58,7 +58,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
+            <groupId>com.microsoft.azure.v2</groupId>
             <artifactId>azure-client-authentication</artifactId>
             <scope>test</scope>
         </dependency>

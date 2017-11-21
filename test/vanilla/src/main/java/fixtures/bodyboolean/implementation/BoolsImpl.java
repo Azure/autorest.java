@@ -35,9 +35,14 @@ import rx.functions.Func1;
  * Bools.
  */
 public class BoolsImpl implements Bools {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private BoolsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestBoolTestServiceImpl client;
 
     /**
@@ -46,7 +51,7 @@ public class BoolsImpl implements Bools {
      * @param client the instance of the service client containing this operation class.
      */
     public BoolsImpl(AutoRestBoolTestServiceImpl client) {
-        this.service = RestProxy.create(BoolsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(BoolsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

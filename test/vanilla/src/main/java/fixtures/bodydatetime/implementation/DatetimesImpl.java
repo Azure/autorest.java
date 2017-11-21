@@ -36,9 +36,14 @@ import rx.functions.Func1;
  * Datetimes.
  */
 public class DatetimesImpl implements Datetimes {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private DatetimesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The HTTP pipeline to send requests through.
+     */
     private AutoRestDateTimeTestServiceImpl client;
 
     /**
@@ -47,7 +52,7 @@ public class DatetimesImpl implements Datetimes {
      * @param client the instance of the service client containing this operation class.
      */
     public DatetimesImpl(AutoRestDateTimeTestServiceImpl client) {
-        this.service = RestProxy.create(DatetimesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DatetimesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
