@@ -60,40 +60,36 @@ public interface Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void putTrue(boolean boolBody);
+    void putTrue();
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putTrueAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putTrueAsync(boolean boolBody);
+    Observable<Void> putTrueAsync();
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync(boolean boolBody);
+    Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync();
 
     /**
      * Get false Boolean value.
@@ -133,40 +129,36 @@ public interface Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    void putFalse(boolean boolBody);
+    void putFalse();
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFalseAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<Void> putFalseAsync(boolean boolBody);
+    Observable<Void> putFalseAsync();
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync(boolean boolBody);
+    Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync();
 
     /**
      * Get null Boolean value.

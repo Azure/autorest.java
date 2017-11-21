@@ -586,36 +586,33 @@ public class NumbersImpl implements Numbers {
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putBigDoublePositiveDecimal(double numberBody) {
-        putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+    public void putBigDoublePositiveDecimal() {
+        putBigDoublePositiveDecimalWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+    public ServiceFuture<Void> putBigDoublePositiveDecimalAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putBigDoublePositiveDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
-        return putBigDoublePositiveDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putBigDoublePositiveDecimalAsync() {
+        return putBigDoublePositiveDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -626,11 +623,11 @@ public class NumbersImpl implements Numbers {
     /**
      * Put big double value 99999999.99.
      *
-     * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putBigDoublePositiveDecimalWithServiceResponseAsync(double numberBody) {
+    public Observable<ServiceResponse<Void>> putBigDoublePositiveDecimalWithServiceResponseAsync() {
+        final double numberBody = 99999999.99;
         return service.putBigDoublePositiveDecimal(numberBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -721,36 +718,33 @@ public class NumbersImpl implements Numbers {
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putBigDoubleNegativeDecimal(double numberBody) {
-        putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody).toBlocking().single().body();
+    public void putBigDoubleNegativeDecimal() {
+        putBigDoubleNegativeDecimalWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody), serviceCallback);
+    public ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putBigDoubleNegativeDecimalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
-        return putBigDoubleNegativeDecimalWithServiceResponseAsync(numberBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putBigDoubleNegativeDecimalAsync() {
+        return putBigDoubleNegativeDecimalWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -761,11 +755,11 @@ public class NumbersImpl implements Numbers {
     /**
      * Put big double value -99999999.99.
      *
-     * @param numberBody the double value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putBigDoubleNegativeDecimalWithServiceResponseAsync(double numberBody) {
+    public Observable<ServiceResponse<Void>> putBigDoubleNegativeDecimalWithServiceResponseAsync() {
+        final double numberBody = -99999999.99;
         return service.putBigDoubleNegativeDecimal(numberBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override

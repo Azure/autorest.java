@@ -84,7 +84,7 @@ public class NumberTests {
 
     @Test
     public void putBigDoubleNegativeDecimal() throws Exception {
-        client.numbers().putBigDoubleNegativeDecimal(-99999999.99);
+        client.numbers().putBigDoubleNegativeDecimal();
     }
 
     @Test
