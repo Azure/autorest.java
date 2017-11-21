@@ -19,7 +19,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.Salmon;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
@@ -63,14 +62,6 @@ public class PolymorphismsImpl implements Polymorphisms {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getComplicated" })
-        @GET("complex/polymorphism/complicated")
-        Observable<Response<ResponseBody>> getComplicated();
-
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putComplicated" })
-        @PUT("complex/polymorphism/complicated")
-        Observable<Response<ResponseBody>> putComplicated(@Body Salmon complexBody);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
@@ -339,145 +330,6 @@ public class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
-
-    /**
-     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the Salmon object if successful.
-     */
-    public Salmon getComplicated() {
-        return getComplicatedWithServiceResponseAsync().toBlocking().single().body();
-    }
-
-    /**
-     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Salmon> getComplicatedAsync(final ServiceCallback<Salmon> serviceCallback) {
-        return ServiceFuture.fromResponse(getComplicatedWithServiceResponseAsync(), serviceCallback);
-    }
-
-    /**
-     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Salmon object
-     */
-    public Observable<Salmon> getComplicatedAsync() {
-        return getComplicatedWithServiceResponseAsync().map(new Func1<ServiceResponse<Salmon>, Salmon>() {
-            @Override
-            public Salmon call(ServiceResponse<Salmon> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Salmon object
-     */
-    public Observable<ServiceResponse<Salmon>> getComplicatedWithServiceResponseAsync() {
-        return service.getComplicated()
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Salmon>>>() {
-                @Override
-                public Observable<ServiceResponse<Salmon>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Salmon> clientResponse = getComplicatedDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Salmon> getComplicatedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.client.restClient().responseBuilderFactory().<Salmon, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<Salmon>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response);
-    }
-
-    /**
-     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws ErrorException thrown if the request is rejected by server
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     */
-    public void putComplicated(Salmon complexBody) {
-        putComplicatedWithServiceResponseAsync(complexBody).toBlocking().single().body();
-    }
-
-    /**
-     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @param complexBody the Salmon value
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture} object
-     */
-    public ServiceFuture<Void> putComplicatedAsync(Salmon complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putComplicatedWithServiceResponseAsync(complexBody), serviceCallback);
-    }
-
-    /**
-     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<Void> putComplicatedAsync(Salmon complexBody) {
-        return putComplicatedWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
-            @Override
-            public Void call(ServiceResponse<Void> response) {
-                return response.body();
-            }
-        });
-    }
-
-    /**
-     * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
-     *
-     * @param complexBody the Salmon value
-     * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public Observable<ServiceResponse<Void>> putComplicatedWithServiceResponseAsync(Salmon complexBody) {
-        if (complexBody == null) {
-            throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
-        }
-        Validator.validate(complexBody);
-        return service.putComplicated(complexBody)
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
-                @Override
-                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
-                    try {
-                        ServiceResponse<Void> clientResponse = putComplicatedDelegate(response);
-                        return Observable.just(clientResponse);
-                    } catch (Throwable t) {
-                        return Observable.error(t);
-                    }
-                }
-            });
-    }
-
-    private ServiceResponse<Void> putComplicatedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

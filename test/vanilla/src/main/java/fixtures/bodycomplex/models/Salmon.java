@@ -13,16 +13,12 @@ package fixtures.bodycomplex.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 /**
  * The Salmon model.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("salmon")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class)
-})
 public class Salmon extends Fish {
     /**
      * The location property.
