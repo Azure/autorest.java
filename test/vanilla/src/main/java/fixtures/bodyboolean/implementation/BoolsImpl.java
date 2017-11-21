@@ -148,36 +148,33 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putTrue(boolean boolBody) {
-        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().body();
+    public void putTrue() {
+        putTrueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
+    public ServiceFuture<Void> putTrueAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putTrueAsync(boolean boolBody) {
-        return putTrueWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putTrueAsync() {
+        return putTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -188,11 +185,11 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value true.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync(boolean boolBody) {
+    public Observable<ServiceResponse<Void>> putTrueWithServiceResponseAsync() {
+        final boolean boolBody = true;
         return service.putTrue(boolBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -283,36 +280,33 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putFalse(boolean boolBody) {
-        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().body();
+    public void putFalse() {
+        putFalseWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
+    public ServiceFuture<Void> putFalseAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putFalseAsync(boolean boolBody) {
-        return putFalseWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putFalseAsync() {
+        return putFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -323,11 +317,11 @@ public class BoolsImpl implements Bools {
     /**
      * Set Boolean value false.
      *
-     * @param boolBody the boolean value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync(boolean boolBody) {
+    public Observable<ServiceResponse<Void>> putFalseWithServiceResponseAsync() {
+        final boolean boolBody = false;
         return service.putFalse(boolBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
