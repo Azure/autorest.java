@@ -371,36 +371,33 @@ public class StringsImpl implements Strings {
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putEmpty(String stringBody) {
-        putEmptyWithServiceResponseAsync(stringBody).toBlocking().single().body();
+    public void putEmpty() {
+        putEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putEmptyWithServiceResponseAsync(stringBody), serviceCallback);
+    public ServiceFuture<Void> putEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putEmptyAsync(String stringBody) {
-        return putEmptyWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putEmptyAsync() {
+        return putEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -411,14 +408,11 @@ public class StringsImpl implements Strings {
     /**
      * Set string value empty ''.
      *
-     * @param stringBody Possible values include: ''
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(String stringBody) {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
+    public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync() {
+        final String stringBody = "";
         return service.putEmpty(stringBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -433,7 +427,7 @@ public class StringsImpl implements Strings {
             });
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -441,7 +435,7 @@ public class StringsImpl implements Strings {
     }
 
     /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -453,7 +447,7 @@ public class StringsImpl implements Strings {
     }
 
     /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -464,7 +458,7 @@ public class StringsImpl implements Strings {
     }
 
     /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
@@ -479,7 +473,7 @@ public class StringsImpl implements Strings {
     }
 
     /**
-     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
@@ -507,38 +501,35 @@ public class StringsImpl implements Strings {
     }
 
     /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putMbcs(String stringBody) {
-        putMbcsWithServiceResponseAsync(stringBody).toBlocking().single().body();
+    public void putMbcs() {
+        putMbcsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putMbcsWithServiceResponseAsync(stringBody), serviceCallback);
+    public ServiceFuture<Void> putMbcsAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMbcsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putMbcsAsync(String stringBody) {
-        return putMbcsWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putMbcsAsync() {
+        return putMbcsWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -547,16 +538,13 @@ public class StringsImpl implements Strings {
     }
 
     /**
-     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
+     * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
-     * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putMbcsWithServiceResponseAsync(String stringBody) {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
+    public Observable<ServiceResponse<Void>> putMbcsWithServiceResponseAsync() {
+        final String stringBody = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
         return service.putMbcs(stringBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -571,7 +559,7 @@ public class StringsImpl implements Strings {
             });
     }
 
-    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -647,36 +635,33 @@ public class StringsImpl implements Strings {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putWhitespace(String stringBody) {
-        putWhitespaceWithServiceResponseAsync(stringBody).toBlocking().single().body();
+    public void putWhitespace() {
+        putWhitespaceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(putWhitespaceWithServiceResponseAsync(stringBody), serviceCallback);
+    public ServiceFuture<Void> putWhitespaceAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putWhitespaceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putWhitespaceAsync(String stringBody) {
-        return putWhitespaceWithServiceResponseAsync(stringBody).map(new Func1<ServiceResponse<Void>, Void>() {
+    public Observable<Void> putWhitespaceAsync() {
+        return putWhitespaceWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
                 return response.body();
@@ -687,14 +672,11 @@ public class StringsImpl implements Strings {
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync(String stringBody) {
-        if (stringBody == null) {
-            throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
-        }
+    public Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync() {
+        final String stringBody = "    Now is the time for all good men to come to the aid of their country    ";
         return service.putWhitespace(stringBody)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -709,7 +691,7 @@ public class StringsImpl implements Strings {
             });
     }
 
-    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
