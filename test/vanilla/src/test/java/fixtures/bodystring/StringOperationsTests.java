@@ -42,7 +42,7 @@ public class StringOperationsTests {
 
     @Test
     public void putEmpty() throws Exception {
-        client.strings().putEmptyAsync("", new ServiceCallback<Void>() {
+        client.strings().putEmptyAsync(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
             }
@@ -64,8 +64,7 @@ public class StringOperationsTests {
 
     @Test
     public void putMbcs() throws Exception {
-        String content = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
-        client.strings().putMbcs(content);
+        client.strings().putMbcs();
     }
 
     @Test
@@ -76,7 +75,7 @@ public class StringOperationsTests {
 
     @Test
     public void putWhitespace() throws Exception {
-        client.strings().putWhitespace("    Now is the time for all good men to come to the aid of their country    ");
+        client.strings().putWhitespace();
     }
 
     @Test
