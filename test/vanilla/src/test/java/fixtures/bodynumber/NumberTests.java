@@ -73,7 +73,7 @@ public class NumberTests {
 
     @Test
     public void putBigDoublePositiveDecimal() throws Exception {
-        client.numbers().putBigDoublePositiveDecimal();
+        client.numbers().putBigDoublePositiveDecimal(99999999.99);
     }
 
     @Test
