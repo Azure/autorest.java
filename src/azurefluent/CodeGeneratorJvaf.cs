@@ -58,7 +58,10 @@ namespace AutoRest.Java.Azure.Fluent
             {
                 // Manager
                 await WriteAzureServiceManagerJavaFile(codeModel).ConfigureAwait(false);
+            }
 
+            if (true == Settings.Instance.Host?.GetValue<bool?>("regenerate-pom").Result)
+            { 
                 // POM
                 await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
             }
