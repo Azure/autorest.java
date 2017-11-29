@@ -10,33 +10,38 @@
 
 package fixtures.bodyfile.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyfile.Files;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyfile.Files;
 import fixtures.bodyfile.models.ErrorException;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.InputStream;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Files.
+ * An instance of this class provides access to all the operations defined in
+ * Files.
  */
 public class FilesImpl implements Files {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private FilesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATFileServiceImpl client;
 
     /**
@@ -45,14 +50,14 @@ public class FilesImpl implements Files {
      * @param client the instance of the service client containing this operation class.
      */
     public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
-        this.service = RestProxy.create(FilesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(FilesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Files to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Files to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface FilesService {
         @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getFile" })

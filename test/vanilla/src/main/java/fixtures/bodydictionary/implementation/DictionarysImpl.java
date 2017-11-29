@@ -10,10 +10,14 @@
 
 package fixtures.bodydictionary.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.Base64Url;
+import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodydictionary.Dictionarys;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,18 +26,14 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ReturnValueWireType;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.bodydictionary.Dictionarys;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -43,13 +43,18 @@ import org.joda.time.LocalDate;
 import org.joda.time.Period;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Dictionarys.
+ * An instance of this class provides access to all the operations defined in
+ * Dictionarys.
  */
 public class DictionarysImpl implements Dictionarys {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private DictionarysService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATdictionaryServiceImpl client;
 
     /**
@@ -58,14 +63,14 @@ public class DictionarysImpl implements Dictionarys {
      * @param client the instance of the service client containing this operation class.
      */
     public DictionarysImpl(AutoRestSwaggerBATdictionaryServiceImpl client) {
-        this.service = RestProxy.create(DictionarysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DictionarysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Dictionarys to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Dictionarys to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface DictionarysService {
         @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNull" })
@@ -2371,11 +2376,12 @@ public class DictionarysImpl implements Dictionarys {
             throw new IllegalArgumentException("Parameter arrayBody is required and cannot be null.");
         }
         Validator.validate(arrayBody);
-    Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
-    for (Map.Entry<String, DateTime> entry : arrayBody.entrySet()) {
-        DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
-        arrayBodyConverted.put(entry.getKey(), value);
-    }
+        Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
+        for (Map.Entry<String, DateTime> entry : arrayBody.entrySet()) {
+            DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
+
+            arrayBodyConverted.put(entry.getKey(), value);
+        }
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
     }
 

@@ -1,10 +1,11 @@
 package fixtures.custombaseuri;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +18,9 @@ public class CustomBaseUriTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestParameterizedHostTestClientImpl();
+        client = new AutoRestParameterizedHostTestClientImpl(HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000)));
     }
 
     // Positive test case

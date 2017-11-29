@@ -10,10 +10,13 @@
 
 package fixtures.requiredoptional.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.requiredoptional.Explicits;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -21,11 +24,8 @@ import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.requiredoptional.Explicits;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -38,20 +38,25 @@ import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Explicits.
+ * An instance of this class provides access to all the operations defined in
+ * Explicits.
  */
 public class ExplicitsImpl implements Explicits {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private ExplicitsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestRequiredOptionalTestServiceImpl client;
 
     /**
@@ -60,14 +65,14 @@ public class ExplicitsImpl implements Explicits {
      * @param client the instance of the service client containing this operation class.
      */
     public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
-        this.service = RestProxy.create(ExplicitsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(ExplicitsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Explicits to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Explicits to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface ExplicitsService {
         @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
@@ -1702,7 +1707,7 @@ public class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-    String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postRequiredArrayHeader(headerParameterConverted);
     }
 
@@ -1751,7 +1756,7 @@ public class ExplicitsImpl implements Explicits {
     public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync() {
         final List<String> headerParameter = null;
         Validator.validate(headerParameter);
-    String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
     }
 
@@ -1800,7 +1805,7 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
-    String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
     }
 

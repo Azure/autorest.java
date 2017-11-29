@@ -10,11 +10,15 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -24,19 +28,15 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in LROsCustomHeaders.
+ * An instance of this class provides access to all the operations defined in
+ * LROsCustomHeaders.
  */
 public class LROsCustomHeadersInner {
     /** The RestProxy service to perform REST calls. */
@@ -55,8 +55,8 @@ public class LROsCustomHeadersInner {
     }
 
     /**
-     * The interface defining all the services for LROsCustomHeaders to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for LROsCustomHeaders to be used
+     * by RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface LROsCustomHeadersService {
@@ -119,8 +119,9 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -131,6 +132,7 @@ public class LROsCustomHeadersInner {
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -141,6 +143,7 @@ public class LROsCustomHeadersInner {
         final ProductInner product = null;
         return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -151,7 +154,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -283,8 +286,9 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -295,6 +299,7 @@ public class LROsCustomHeadersInner {
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -305,6 +310,7 @@ public class LROsCustomHeadersInner {
         final ProductInner product = null;
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -315,7 +321,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
     }
 
     /**
@@ -446,8 +452,9 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast().result();
+        beginPost202Retry200Async().toBlocking().last().result();
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -458,6 +465,7 @@ public class LROsCustomHeadersInner {
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -468,6 +476,7 @@ public class LROsCustomHeadersInner {
         final ProductInner product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -477,7 +486,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -608,8 +617,9 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededAsync().blockingLast().result();
+        beginPostAsyncRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -620,6 +630,7 @@ public class LROsCustomHeadersInner {
     public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -630,6 +641,7 @@ public class LROsCustomHeadersInner {
         final ProductInner product = null;
         return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -639,7 +651,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded(ProductInner product) {
-        beginPostAsyncRetrySucceededAsync(product).blockingLast();
+        beginPostAsyncRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**

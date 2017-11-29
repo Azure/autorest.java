@@ -10,19 +10,19 @@
 
 package fixtures.header.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
@@ -40,9 +40,9 @@ import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -50,13 +50,18 @@ import org.joda.time.LocalDate;
 import org.joda.time.Period;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Headers.
+ * An instance of this class provides access to all the operations defined in
+ * Headers.
  */
 public class HeadersImpl implements fixtures.header.Headers {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HeadersService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATHeaderServiceImpl client;
 
     /**
@@ -65,14 +70,14 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param client the instance of the service client containing this operation class.
      */
     public HeadersImpl(AutoRestSwaggerBATHeaderServiceImpl client) {
-        this.service = RestProxy.create(HeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(HeadersService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Headers to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Headers to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HeadersService {
         @Headers({ "x-ms-logging-context: fixtures.header.Headers paramExistingKey" })
@@ -1404,10 +1409,10 @@ public class HeadersImpl implements fixtures.header.Headers {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         final DateTime value = null;
-    DateTimeRfc1123 valueConverted = null;
-    if (value != null) {
-        valueConverted = new DateTimeRfc1123(value);
-    }
+        DateTimeRfc1123 valueConverted = null;
+        if (value != null) {
+            valueConverted = new DateTimeRfc1123(value);
+        }
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1462,10 +1467,10 @@ public class HeadersImpl implements fixtures.header.Headers {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-    DateTimeRfc1123 valueConverted = null;
-    if (value != null) {
-        valueConverted = new DateTimeRfc1123(value);
-    }
+        DateTimeRfc1123 valueConverted = null;
+        if (value != null) {
+            valueConverted = new DateTimeRfc1123(value);
+        }
         return service.paramDatetimeRfc1123(scenario, valueConverted);
     }
 
@@ -1688,7 +1693,7 @@ public class HeadersImpl implements fixtures.header.Headers {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-    String valueConverted = Base64.encodeBase64String(value);
+        String valueConverted = Base64.encodeBase64String(value);
         return service.paramByte(scenario, valueConverted);
     }
 

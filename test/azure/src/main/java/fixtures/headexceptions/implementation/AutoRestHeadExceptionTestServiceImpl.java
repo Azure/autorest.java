@@ -10,33 +10,20 @@
 
 package fixtures.headexceptions.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import fixtures.headexceptions.AutoRestHeadExceptionTestService;
 import fixtures.headexceptions.HeadExceptions;
-import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestHeadExceptionTestService class.
+ * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl class.
  */
-public class AutoRestHeadExceptionTestServiceImpl extends ServiceClient implements AutoRestHeadExceptionTestService {
+public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient implements AutoRestHeadExceptionTestService {
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * Gets or sets the preferred language for the response.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -54,12 +41,14 @@ public class AutoRestHeadExceptionTestServiceImpl extends ServiceClient implemen
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestHeadExceptionTestServiceImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestHeadExceptionTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -77,12 +66,14 @@ public class AutoRestHeadExceptionTestServiceImpl extends ServiceClient implemen
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestHeadExceptionTestServiceImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestHeadExceptionTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -100,7 +91,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends ServiceClient implemen
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestHeadExceptionTestServiceImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestHeadExceptionTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -121,35 +112,47 @@ public class AutoRestHeadExceptionTestServiceImpl extends ServiceClient implemen
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestHeadExceptionTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestHeadExceptionTestServiceImpl() {
-        this("http://localhost");
+    public AutoRestHeadExceptionTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestHeadExceptionTestServiceImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.headExceptions = new HeadExceptionsImpl(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestHeadExceptionTestService", "1.0.0");
     }
 }

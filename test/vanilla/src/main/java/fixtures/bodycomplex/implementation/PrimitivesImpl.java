@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodycomplex.Primitives;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,9 +24,7 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -38,19 +38,24 @@ import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Primitives.
+ * An instance of this class provides access to all the operations defined in
+ * Primitives.
  */
 public class PrimitivesImpl implements Primitives {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PrimitivesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestComplexTestServiceImpl client;
 
     /**
@@ -59,14 +64,14 @@ public class PrimitivesImpl implements Primitives {
      * @param client the instance of the service client containing this operation class.
      */
     public PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(PrimitivesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PrimitivesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Primitives to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Primitives to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface PrimitivesService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getInt" })

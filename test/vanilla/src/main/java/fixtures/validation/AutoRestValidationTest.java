@@ -20,33 +20,25 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
-import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestValidationTest class.
  */
 public interface AutoRestValidationTest {
     /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
-    /**
      * The default base URL.
      */
     String DEFAULT_BASE_URL = "http://localhost";
 
     /**
-     * Gets Subscription ID..
+     * Gets Subscription ID.
      *
      * @return the subscriptionId value.
      */
     String subscriptionId();
 
     /**
-     * Sets Subscription ID..
+     * Sets Subscription ID.
      *
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
@@ -54,14 +46,14 @@ public interface AutoRestValidationTest {
     AutoRestValidationTest withSubscriptionId(String subscriptionId);
 
     /**
-     * Gets Required string following pattern \d{2}-\d{2}-\d{4}.
+     * Gets Required string following pattern \d{2}-\d{2}-\d{4}
      *
      * @return the apiVersion value.
      */
     String apiVersion();
 
     /**
-     * Sets Required string following pattern \d{2}-\d{2}-\d{4}.
+     * Sets Required string following pattern \d{2}-\d{2}-\d{4}
      *
      * @param apiVersion the apiVersion value.
      * @return the service client itself
@@ -100,6 +92,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
+
     /**
      * Validates input parameters on the method. See swagger for details.
      *
@@ -188,6 +181,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
+
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -222,6 +216,7 @@ public interface AutoRestValidationTest {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> getWithConstantInPathAsync();
+
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -286,6 +281,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<Product> postWithConstantInBodyAsync(Product body);
+
     /**
      *
      * @param body the Product value

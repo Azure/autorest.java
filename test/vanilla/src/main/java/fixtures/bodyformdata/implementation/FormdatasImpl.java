@@ -10,10 +10,11 @@
 
 package fixtures.bodyformdata.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodyformdata.Formdatas;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -22,23 +23,27 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.InputStream;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Formdatas.
+ * An instance of this class provides access to all the operations defined in
+ * Formdatas.
  */
 public class FormdatasImpl implements Formdatas {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private FormdatasService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATFormDataServiceImpl client;
 
     /**
@@ -47,14 +52,14 @@ public class FormdatasImpl implements Formdatas {
      * @param client the instance of the service client containing this operation class.
      */
     public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
-        this.service = RestProxy.create(FormdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(FormdatasService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Formdatas to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Formdatas to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface FormdatasService {
         // @Multipart not supported by RestProxy

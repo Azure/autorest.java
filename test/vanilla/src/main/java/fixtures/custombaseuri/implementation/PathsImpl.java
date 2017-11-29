@@ -10,10 +10,11 @@
 
 package fixtures.custombaseuri.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.custombaseuri.Paths;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -22,23 +23,27 @@ import com.microsoft.rest.v2.annotations.HostParam;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.custombaseuri.Paths;
 import fixtures.custombaseuri.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public class PathsImpl implements Paths {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PathsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterizedHostTestClientImpl client;
 
     /**
@@ -47,14 +52,14 @@ public class PathsImpl implements Paths {
      * @param client the instance of the service client containing this operation class.
      */
     public PathsImpl(AutoRestParameterizedHostTestClientImpl client) {
-        this.service = RestProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Paths to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Paths to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://{accountName}{host}")
     interface PathsService {
         @Headers({ "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })

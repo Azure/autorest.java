@@ -1,5 +1,7 @@
 package fixtures.bodydictionary;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -23,7 +25,7 @@ public class DictionaryTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATdictionaryServiceImpl("http://localhost:3000");
+        client = new AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

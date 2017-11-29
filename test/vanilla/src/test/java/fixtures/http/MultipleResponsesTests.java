@@ -1,11 +1,11 @@
 package fixtures.http;
 
-import com.microsoft.rest.v2.RestClient;
+import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.RestException;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpRequest;
 import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.policy.RequestPolicy;
-import com.microsoft.rest.v2.serializer.JacksonAdapter;
+import com.microsoft.rest.v2.policy.*;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
@@ -31,7 +31,9 @@ public class MultipleResponsesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl("http://localhost:3000");
+        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000)));
     }
 
     @Test
@@ -50,7 +52,7 @@ public class MultipleResponsesTests {
     @Test
     public void get200Model204NoModelDefaultError201Invalid() throws Exception {
         try {
-            client.multipleResponses().get200Model204NoModelDefaultError201Invalid();
+            A result = client.multipleResponses().get200Model204NoModelDefaultError201Invalid();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(201, ex.response().statusCode());
@@ -60,7 +62,7 @@ public class MultipleResponsesTests {
     @Test
     public void get200Model204NoModelDefaultError202None() throws Exception {
         try {
-            A result = client.multipleResponses().get200Model204NoModelDefaultError202None();
+            client.multipleResponses().get200Model204NoModelDefaultError202None();
         } catch (ErrorException ex) {
             Assert.assertEquals(202, ex.response().statusCode());
         }
@@ -139,72 +141,70 @@ public class MultipleResponsesTests {
 
     @Test
     public void get202None204NoneDefaultError202None() throws Exception {
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withSerializerAdapter(new JacksonAdapter())
-                .addRequestPolicy(new RequestPolicy.Factory() {
-                    @Override
-                    public RequestPolicy create(final RequestPolicy next) {
-                        return new RequestPolicy() {
-                            @Override
-                            public Single<HttpResponse> sendAsync(HttpRequest request) {
-                                return next.sendAsync(request)
-                                        .doOnSuccess(new Consumer<HttpResponse>() {
-                                            @Override
-                                            public void accept(HttpResponse httpResponse) {
-                                                Assert.assertEquals(202, httpResponse.statusCode());
-                                                lock.countDown();
-                                            }
-                                        })
-                                        .doOnError(new Consumer<Throwable>() {
-                                            @Override
-                                            public void accept(Throwable throwable) {
-                                                Assert.fail(throwable.getMessage());
-                                            }
-                                        });
-                            }
-                        };
-                    }
-                })
-                .build();
+        HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RequestPolicy.Factory() {
+                @Override
+                public RequestPolicy create(final RequestPolicy next, RequestPolicy.Options options) {
+                    return new RequestPolicy() {
+                        @Override
+                        public Single<HttpResponse> sendAsync(HttpRequest request) {
+                            return next.sendAsync(request)
+                                    .doOnSuccess(new Consumer<HttpResponse>() {
+                                        @Override
+                                        public void accept(HttpResponse httpResponse) {
+                                            Assert.assertEquals(202, httpResponse.statusCode());
+                                            lock.countDown();
+                                        }
+                                    })
+                                    .doOnError(new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) {
+                                            Assert.fail(throwable.getMessage());
+                                        }
+                                    });
+                        }
+                    };
+                }
+            });
 
-        AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(restClient);
+        AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(httpPipeline);
         localClient.multipleResponses().get202None204NoneDefaultError202NoneAsync().subscribe();
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void get202None204NoneDefaultError204None() throws Exception {
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withSerializerAdapter(new JacksonAdapter())
-                .addRequestPolicy(new RequestPolicy.Factory() {
-                    @Override
-                    public RequestPolicy create(final RequestPolicy next) {
-                        return new RequestPolicy() {
-                            @Override
-                            public Single<HttpResponse> sendAsync(HttpRequest request) {
-                                return next.sendAsync(request)
-                                        .doOnSuccess(new Consumer<HttpResponse>() {
-                                            @Override
-                                            public void accept(HttpResponse httpResponse) {
-                                                Assert.assertEquals(204, httpResponse.statusCode());
-                                                lock.countDown();
-                                            }
-                                        })
-                                        .doOnError(new Consumer<Throwable>() {
-                                            @Override
-                                            public void accept(Throwable throwable) {
-                                                Assert.fail(throwable.getMessage());
-                                            }
-                                        });
-                            }
-                        };
-                    }
-                })
-                .build();
+        HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RequestPolicy.Factory() {
+                @Override
+                public RequestPolicy create(final RequestPolicy next, RequestPolicy.Options options) {
+                    return new RequestPolicy() {
+                        @Override
+                        public Single<HttpResponse> sendAsync(HttpRequest request) {
+                            return next.sendAsync(request)
+                                    .doOnSuccess(new Consumer<HttpResponse>() {
+                                        @Override
+                                        public void accept(HttpResponse httpResponse) {
+                                            Assert.assertEquals(204, httpResponse.statusCode());
+                                            lock.countDown();
+                                        }
+                                    })
+                                    .doOnError(new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) {
+                                            Assert.fail(throwable.getMessage());
+                                        }
+                                    });
+                        }
+                    };
+                }
+            });
 
-        AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(restClient);
+        AutoRestHttpInfrastructureTestServiceImpl localClient = new AutoRestHttpInfrastructureTestServiceImpl(httpPipeline);
         localClient.multipleResponses().get202None204NoneDefaultError204NoneAsync().subscribe();
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
     }

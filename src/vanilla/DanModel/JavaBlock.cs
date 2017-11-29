@@ -12,6 +12,12 @@ namespace AutoRest.Java.DanModel
             this.contents = file;
         }
 
+        public JavaBlock Indent(Action indentAction)
+        {
+            contents.Indent(indentAction);
+            return this;
+        }
+
         public JavaBlock Text(string text)
         {
             contents.Text(text);
@@ -33,6 +39,12 @@ namespace AutoRest.Java.DanModel
         public JavaBlock Block(string text, Action<JavaBlock> bodyAction)
         {
             contents.Block(text, bodyAction);
+            return this;
+        }
+
+        public JavaBlock BlockStatement(string text, Action<JavaBlock> bodyAction)
+        {
+            contents.BlockStatement(text, bodyAction);
             return this;
         }
 
@@ -63,6 +75,12 @@ namespace AutoRest.Java.DanModel
         public JavaBlock Return(string text)
         {
             contents.Return(text);
+            return this;
+        }
+
+        public JavaBlock ReturnBlock(string text, Action<JavaBlock> block)
+        {
+            contents.ReturnBlock(text, block);
             return this;
         }
 

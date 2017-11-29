@@ -11,11 +11,8 @@
 package fixtures.azureresource.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.azure.v2.Resource;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
@@ -42,27 +39,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+ * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
  */
-public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
-    /**
-     * The Retrofit service to perform REST calls.
-     */
+public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
+    /** The RestProxy service to perform REST calls. */
     private AutoRestResourceFlatteningTestServiceService service;
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * Gets or sets the preferred language for the response.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -80,12 +66,14 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestResourceFlatteningTestServiceImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestResourceFlatteningTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -103,12 +91,14 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestResourceFlatteningTestServiceImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestResourceFlatteningTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -126,7 +116,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestResourceFlatteningTestServiceImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestResourceFlatteningTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -134,49 +124,61 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestResourceFlatteningTestServiceImpl() {
-        this("http://localhost");
+    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         initializeService();
     }
 
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestResourceFlatteningTestService", "1.0.0");
+    }
+
     private void initializeService() {
-        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestResourceFlatteningTestServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestResourceFlatteningTestService to be used by Retrofit to perform
-     * actually REST calls.
+     * AutoRestResourceFlatteningTestService to be used by RestProxy to perform
+     * REST calls.
      */
     @Host("http://localhost")
-    interface AutoRestResourceFlatteningTestService {
+    interface AutoRestResourceFlatteningTestServiceService {
         @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putArray" })
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
@@ -247,11 +249,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
         Validator.validate(resourceArray);
-
-
-
         return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Put External Resource as an Array.
      *
@@ -297,11 +297,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
-
-
-
         return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Put External Resource as an Array.
      *
@@ -345,11 +343,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
      */
     public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
-
-
-
         return service.getArray(this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Get External Resource as an Array.
      *
@@ -394,11 +390,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         Validator.validate(resourceDictionary);
-
-
-
         return service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Put External Resource as a Dictionary.
      *
@@ -444,11 +438,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
-
-
-
         return service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Put External Resource as a Dictionary.
      *
@@ -492,11 +484,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
      */
     public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
-
-
-
         return service.getDictionary(this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Get External Resource as a Dictionary.
      *
@@ -541,11 +531,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         Validator.validate(resourceComplexObject);
-
-
-
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -591,11 +579,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
-
-
-
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -639,11 +625,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
      */
     public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
-
-
-
         return service.getResourceCollection(this.acceptLanguage(), this.userAgent());
     }
+
     /**
      * Get External Resource as a ResourceCollection.
      *

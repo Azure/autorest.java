@@ -10,8 +10,11 @@
 
 package fixtures.custombaseuri.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -21,19 +24,16 @@ import com.microsoft.rest.v2.annotations.HostParam;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.custombaseuri.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public class PathsInner {
     /** The RestProxy service to perform REST calls. */
@@ -52,8 +52,8 @@ public class PathsInner {
     }
 
     /**
-     * The interface defining all the services for Paths to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for Paths to be used by
+     * RestProxy to perform REST calls.
      */
     @Host("http://{accountName}{host}")
     interface PathsService {

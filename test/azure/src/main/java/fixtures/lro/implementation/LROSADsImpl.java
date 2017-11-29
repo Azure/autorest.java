@@ -10,12 +10,15 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.LROSADs;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -26,9 +29,7 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.lro.LROSADs;
 import fixtures.lro.models.LROSADsDelete202NonRetry400Headers;
 import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderHeaders;
 import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Headers;
@@ -51,15 +52,14 @@ import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
 import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
 import fixtures.lro.models.Product;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in LROSADs.
+ * An instance of this class provides access to all the operations defined in
+ * LROSADs.
  */
 public class LROSADsImpl implements LROSADs {
     /** The RestProxy service to perform REST calls. */
@@ -78,8 +78,8 @@ public class LROSADsImpl implements LROSADs {
     }
 
     /**
-     * The interface defining all the services for LROSADs to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for LROSADs to be used by
+     * RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface LROSADsService {
@@ -406,8 +406,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400() {
-        return beginPutNonRetry400Async().blockingLast().result();
+        return beginPutNonRetry400Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -418,6 +419,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutNonRetry400Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry400Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -428,6 +430,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 400 to the initial request.
      *
@@ -438,7 +441,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400(Product product) {
-        return beginPutNonRetry400Async(product).blockingLast().result();
+        return beginPutNonRetry400Async(product).toBlocking().last().result();
     }
 
     /**
@@ -570,8 +573,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400() {
-        return beginPutNonRetry201Creating400Async().blockingLast().result();
+        return beginPutNonRetry201Creating400Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -582,6 +586,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutNonRetry201Creating400Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry201Creating400Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -592,6 +597,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -602,7 +608,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400(Product product) {
-        return beginPutNonRetry201Creating400Async(product).blockingLast().result();
+        return beginPutNonRetry201Creating400Async(product).toBlocking().last().result();
     }
 
     /**
@@ -734,8 +740,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson() {
-        return beginPutNonRetry201Creating400InvalidJsonAsync().blockingLast().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -746,6 +753,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonRetry201Creating400InvalidJsonAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -756,6 +764,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
@@ -766,7 +775,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson(Product product) {
-        return beginPutNonRetry201Creating400InvalidJsonAsync(product).blockingLast().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -898,8 +907,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400() {
-        return beginPutAsyncRelativeRetry400Async().blockingLast().result();
+        return beginPutAsyncRelativeRetry400Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -910,6 +920,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutAsyncRelativeRetry400Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetry400Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -920,6 +931,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -930,7 +942,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400(Product product) {
-        return beginPutAsyncRelativeRetry400Async(product).blockingLast().result();
+        return beginPutAsyncRelativeRetry400Async(product).toBlocking().last().result();
     }
 
     /**
@@ -1061,7 +1073,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteNonRetry400() {
-        beginDeleteNonRetry400Async().blockingLast();
+        beginDeleteNonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1138,7 +1150,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202NonRetry400() {
-        beginDelete202NonRetry400Async().blockingLast();
+        beginDelete202NonRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1215,7 +1227,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetry400() {
-        beginDeleteAsyncRelativeRetry400Async().blockingLast();
+        beginDeleteAsyncRelativeRetry400Async().toBlocking().last();
     }
 
     /**
@@ -1292,8 +1304,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostNonRetry400() {
-        beginPostNonRetry400Async().blockingLast().result();
+        beginPostNonRetry400Async().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -1304,6 +1317,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostNonRetry400Async(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -1314,6 +1328,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 400 with no error body.
      *
@@ -1323,7 +1338,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostNonRetry400(Product product) {
-        beginPostNonRetry400Async(product).blockingLast();
+        beginPostNonRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -1454,8 +1469,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NonRetry400() {
-        beginPost202NonRetry400Async().blockingLast().result();
+        beginPost202NonRetry400Async().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -1466,6 +1482,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NonRetry400Async(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -1476,6 +1493,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 with a location header.
      *
@@ -1485,7 +1503,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NonRetry400(Product product) {
-        beginPost202NonRetry400Async(product).blockingLast();
+        beginPost202NonRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -1616,8 +1634,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetry400() {
-        beginPostAsyncRelativeRetry400Async().blockingLast().result();
+        beginPostAsyncRelativeRetry400Async().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1628,6 +1647,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetry400Async(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1638,6 +1658,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1647,7 +1668,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetry400(Product product) {
-        beginPostAsyncRelativeRetry400Async(product).blockingLast();
+        beginPostAsyncRelativeRetry400Async(product).toBlocking().last();
     }
 
     /**
@@ -1779,8 +1800,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload() {
-        return beginPutError201NoProvisioningStatePayloadAsync().blockingLast().result();
+        return beginPutError201NoProvisioningStatePayloadAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -1791,6 +1813,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutError201NoProvisioningStatePayloadAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -1801,6 +1824,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
@@ -1811,7 +1835,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload(Product product) {
-        return beginPutError201NoProvisioningStatePayloadAsync(product).blockingLast().result();
+        return beginPutError201NoProvisioningStatePayloadAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -1943,8 +1967,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus() {
-        return beginPutAsyncRelativeRetryNoStatusAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1955,6 +1980,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryNoStatusAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1965,6 +1991,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1975,7 +2002,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2107,8 +2134,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload() {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2119,6 +2147,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryNoStatusPayloadAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2129,6 +2158,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2139,7 +2169,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2270,7 +2300,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().blockingLast();
+        beginDelete204SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -2347,7 +2377,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetryNoStatus() {
-        beginDeleteAsyncRelativeRetryNoStatusAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryNoStatusAsync().toBlocking().last();
     }
 
     /**
@@ -2424,8 +2454,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NoLocation() {
-        beginPost202NoLocationAsync().blockingLast().result();
+        beginPost202NoLocationAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -2436,6 +2467,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoLocationAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -2446,6 +2478,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
@@ -2455,7 +2488,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NoLocation(Product product) {
-        beginPost202NoLocationAsync(product).blockingLast();
+        beginPost202NoLocationAsync(product).toBlocking().last();
     }
 
     /**
@@ -2586,8 +2619,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryNoPayload() {
-        beginPostAsyncRelativeRetryNoPayloadAsync().blockingLast().result();
+        beginPostAsyncRelativeRetryNoPayloadAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2598,6 +2632,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryNoPayloadAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2608,6 +2643,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2617,7 +2653,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryNoPayload(Product product) {
-        beginPostAsyncRelativeRetryNoPayloadAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryNoPayloadAsync(product).toBlocking().last();
     }
 
     /**
@@ -2749,8 +2785,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson() {
-        return beginPut200InvalidJsonAsync().blockingLast().result();
+        return beginPut200InvalidJsonAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -2761,6 +2798,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPut200InvalidJsonAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200InvalidJsonAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -2771,6 +2809,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
@@ -2781,7 +2820,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson(Product product) {
-        return beginPut200InvalidJsonAsync(product).blockingLast().result();
+        return beginPut200InvalidJsonAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2913,8 +2952,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader() {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -2925,6 +2965,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -2935,6 +2976,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -2945,7 +2987,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -3077,8 +3119,9 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling() {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3089,6 +3132,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3099,6 +3143,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3109,7 +3154,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -3240,7 +3285,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202RetryInvalidHeader() {
-        beginDelete202RetryInvalidHeaderAsync().blockingLast();
+        beginDelete202RetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3317,7 +3362,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetryInvalidHeader() {
-        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last();
     }
 
     /**
@@ -3394,7 +3439,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
-        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast();
+        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last();
     }
 
     /**
@@ -3471,8 +3516,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202RetryInvalidHeader() {
-        beginPost202RetryInvalidHeaderAsync().blockingLast().result();
+        beginPost202RetryInvalidHeaderAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -3483,6 +3529,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202RetryInvalidHeaderAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -3493,6 +3540,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
@@ -3502,7 +3550,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202RetryInvalidHeader(Product product) {
-        beginPost202RetryInvalidHeaderAsync(product).blockingLast();
+        beginPost202RetryInvalidHeaderAsync(product).toBlocking().last();
     }
 
     /**
@@ -3633,8 +3681,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidHeader() {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync().blockingLast().result();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -3645,6 +3694,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryInvalidHeaderAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -3655,6 +3705,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
@@ -3664,7 +3715,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(Product product) {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().last();
     }
 
     /**
@@ -3795,8 +3846,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling() {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast().result();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3807,6 +3859,7 @@ public class LROSADsImpl implements LROSADs {
     public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetryInvalidJsonPollingAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3817,6 +3870,7 @@ public class LROSADsImpl implements LROSADs {
         final Product product = null;
         return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -3826,7 +3880,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().last();
     }
 
     /**

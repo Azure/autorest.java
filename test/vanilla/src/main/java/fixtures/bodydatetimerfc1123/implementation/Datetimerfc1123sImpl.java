@@ -10,10 +10,12 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,26 +24,29 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.ReturnValueWireType;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.DateTimeRfc1123;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.joda.time.DateTime;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Datetimerfc1123s.
+ * An instance of this class provides access to all the operations defined in
+ * Datetimerfc1123s.
  */
 public class Datetimerfc1123sImpl implements Datetimerfc1123s {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private Datetimerfc1123sService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestRFC1123DateTimeTestServiceImpl client;
 
     /**
@@ -50,14 +55,14 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param client the instance of the service client containing this operation class.
      */
     public Datetimerfc1123sImpl(AutoRestRFC1123DateTimeTestServiceImpl client) {
-        this.service = RestProxy.create(Datetimerfc1123sService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(Datetimerfc1123sService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Datetimerfc1123s to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Datetimerfc1123s to be used
+     * by RestProxy to perform REST calls.
+     */
     @Host("https://localhost")
     interface Datetimerfc1123sService {
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getNull" })
@@ -339,7 +344,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-    DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return service.putUtcMaxDateTime(datetimeBodyConverted);
     }
 
@@ -482,7 +487,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         if (datetimeBody == null) {
             throw new IllegalArgumentException("Parameter datetimeBody is required and cannot be null.");
         }
-    DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
+        DateTimeRfc1123 datetimeBodyConverted = new DateTimeRfc1123(datetimeBody);
         return service.putUtcMinDateTime(datetimeBodyConverted);
     }
 

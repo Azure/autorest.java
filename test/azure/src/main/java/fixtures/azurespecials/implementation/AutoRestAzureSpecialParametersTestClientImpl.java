@@ -10,10 +10,7 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import fixtures.azurespecials.ApiVersionDefaults;
 import fixtures.azurespecials.ApiVersionLocals;
@@ -24,26 +21,16 @@ import fixtures.azurespecials.SkipUrlEncodings;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.XMsClientRequestIds;
-import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
+ * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
  */
-public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient implements AutoRestAzureSpecialParametersTestClient {
+public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient implements AutoRestAzureSpecialParametersTestClient {
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'. */
     private String subscriptionId;
 
     /**
@@ -61,12 +48,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withsubscriptionId(String subscriptionId) {
+    public AutoRestAzureSpecialParametersTestClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
 
-    /** The api version, which appears in the query, the value is always '2015-07-01-preview'. */
+    /**
+     * The api version, which appears in the query, the value is always '2015-07-01-preview'.
+     */
     private String apiVersion;
 
     /**
@@ -78,7 +67,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         return this.apiVersion;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -96,12 +87,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestAzureSpecialParametersTestClientImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -119,12 +112,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestAzureSpecialParametersTestClientImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -142,7 +137,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestAzureSpecialParametersTestClientImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -254,32 +249,34 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestAzureSpecialParametersTestClientImpl() {
-        this("http://localhost");
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestAzureSpecialParametersTestClientImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
@@ -292,5 +289,15 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         this.skipUrlEncodings = new SkipUrlEncodingsImpl(this);
         this.odatas = new OdatasImpl(this);
         this.headers = new HeadersImpl(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestAzureSpecialParametersTestClient", "2015-07-01-preview");
     }
 }

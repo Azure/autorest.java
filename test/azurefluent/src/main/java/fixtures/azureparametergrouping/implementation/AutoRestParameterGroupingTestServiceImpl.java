@@ -10,31 +10,18 @@
 
 package fixtures.azureparametergrouping.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestParameterGroupingTestService class.
+ * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
  */
-public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient implements AutoRestParameterGroupingTestService {
+public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * Gets or sets the preferred language for the response.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -52,12 +39,14 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestParameterGroupingTestServiceImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestParameterGroupingTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -75,12 +64,14 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestParameterGroupingTestServiceImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestParameterGroupingTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -98,56 +89,68 @@ public class AutoRestParameterGroupingTestServiceImpl extends ServiceClient impl
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestParameterGroupingTestServiceImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestParameterGroupingTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
 
     /**
-     * The ParameterGroupings object to access its operations.
+     * The ParameterGroupingsInner object to access its operations.
      */
-    private ParameterGroupings parameterGroupings;
+    private ParameterGroupingsInner parameterGroupings;
 
     /**
-     * Gets the ParameterGroupings object to access its operations.
-     * @return the ParameterGroupings object.
+     * Gets the ParameterGroupingsInner object to access its operations.
+     * @return the ParameterGroupingsInner object.
      */
-    public ParameterGroupings parameterGroupings() {
+    public ParameterGroupingsInner parameterGroupings() {
         return this.parameterGroupings;
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestParameterGroupingTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
+        this("https://localhost", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestParameterGroupingTestServiceImpl() {
-        this("https://localhost");
+    public AutoRestParameterGroupingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestParameterGroupingTestServiceImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.parameterGroupings = new ParameterGroupingsImpl(this);
+        this.parameterGroupings = new ParameterGroupingsInner(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterGroupingTestService", "1.0.0");
     }
 }

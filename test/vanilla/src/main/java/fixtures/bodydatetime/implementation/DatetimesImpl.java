@@ -10,10 +10,11 @@
 
 package fixtures.bodydatetime.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodydatetime.Datetimes;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,24 +23,28 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.bodydatetime.Datetimes;
 import fixtures.bodydatetime.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.joda.time.DateTime;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Datetimes.
+ * An instance of this class provides access to all the operations defined in
+ * Datetimes.
  */
 public class DatetimesImpl implements Datetimes {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private DatetimesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestDateTimeTestServiceImpl client;
 
     /**
@@ -48,14 +53,14 @@ public class DatetimesImpl implements Datetimes {
      * @param client the instance of the service client containing this operation class.
      */
     public DatetimesImpl(AutoRestDateTimeTestServiceImpl client) {
-        this.service = RestProxy.create(DatetimesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DatetimesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Datetimes to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Datetimes to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("https://localhost")
     interface DatetimesService {
         @Headers({ "x-ms-logging-context: fixtures.bodydatetime.Datetimes getNull" })

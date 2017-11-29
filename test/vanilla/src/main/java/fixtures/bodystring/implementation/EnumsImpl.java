@@ -10,10 +10,12 @@
 
 package fixtures.bodystring.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.bodystring.Enums;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
@@ -22,26 +24,29 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.bodystring.Enums;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Enums.
+ * An instance of this class provides access to all the operations defined in
+ * Enums.
  */
 public class EnumsImpl implements Enums {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private EnumsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATServiceImpl client;
 
     /**
@@ -50,14 +55,14 @@ public class EnumsImpl implements Enums {
      * @param client the instance of the service client containing this operation class.
      */
     public EnumsImpl(AutoRestSwaggerBATServiceImpl client) {
-        this.service = RestProxy.create(EnumsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(EnumsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Enums to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Enums to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface EnumsService {
         @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getNotExpandable" })

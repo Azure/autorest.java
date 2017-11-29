@@ -10,13 +10,11 @@
 
 package fixtures.bodydictionary.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import fixtures.bodydictionary.Dictionarys;
-import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
@@ -30,6 +28,7 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
 
     /**
      * Gets the Dictionarys object to access its operations.
+     *
      * @return the Dictionarys object.
      */
     public Dictionarys dictionarys() {
@@ -38,33 +37,19 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
 
     /**
      * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATdictionaryServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
      */
     public AutoRestSwaggerBATdictionaryServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATdictionaryServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.dictionarys = new DictionarysImpl(this);
     }
 }

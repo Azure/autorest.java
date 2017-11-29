@@ -188,6 +188,16 @@ namespace AutoRest.Java.DanModel
             Line($"}}");
         }
 
+        public void BlockStatement(string text, Action<JavaBlock> bodyAction)
+        {
+            Line($"{text} {{");
+            Indent(() =>
+            {
+                bodyAction.Invoke(new JavaBlock(this));
+            });
+            Line($"}};");
+        }
+
         public void Import(params string[] imports)
         {
             Import((IEnumerable<string>)imports);
@@ -277,6 +287,16 @@ namespace AutoRest.Java.DanModel
             Line($"return {text};");
         }
 
+        public void ReturnBlock(string text, Action<JavaBlock> bodyAction)
+        {
+            Line($"return {text} {{");
+            Indent(() =>
+            {
+                bodyAction.Invoke(new JavaBlock(this));
+            });
+            Line($"}};");
+        }
+
         public void Annotation(params string[] annotations)
         {
             Annotation((IEnumerable<string>)annotations);
@@ -308,9 +328,9 @@ namespace AutoRest.Java.DanModel
             });
         }
 
-        public void PublicClass(string className, Action<JavaClass> classAction)
+        public void PublicClass(string classDeclaration, Action<JavaClass> classAction)
         {
-            Block($"public class {className}", (blockAction) =>
+            Block($"public class {classDeclaration}", (blockAction) =>
             {
                 if (classAction != null)
                 {

@@ -1,6 +1,8 @@
 package fixtures.bodyformdata;
 
 import io.reactivex.functions.Function;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -16,7 +18,7 @@ public class FormdataTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFormDataServiceImpl("http://localhost:3000");
+        client = new AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Ignore("Multipart form data not currently supported")

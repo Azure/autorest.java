@@ -10,8 +10,12 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HEAD;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -20,20 +24,16 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
 import fixtures.azurespecials.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Headers.
+ * An instance of this class provides access to all the operations defined in
+ * Headers.
  */
 public class HeadersInner {
     /** The RestProxy service to perform REST calls. */
@@ -52,8 +52,8 @@ public class HeadersInner {
     }
 
     /**
-     * The interface defining all the services for Headers to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for Headers to be used by
+     * RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface HeadersService {
@@ -166,7 +166,7 @@ public class HeadersInner {
             throw new IllegalArgumentException("Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null.");
         }
         Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
-    String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
+        String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
         return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent());
     }
 

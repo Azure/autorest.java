@@ -10,12 +10,15 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
-import fixtures.lro.LRORetrys;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -26,9 +29,7 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.lro.LRORetrys;
 import fixtures.lro.models.LRORetrysDelete202Retry200Headers;
 import fixtures.lro.models.LRORetrysDeleteAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.LRORetrysDeleteProvisioning202Accepted200SucceededHeaders;
@@ -37,15 +38,14 @@ import fixtures.lro.models.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.LRORetrysPutAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.Product;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in LRORetrys.
+ * An instance of this class provides access to all the operations defined in
+ * LRORetrys.
  */
 public class LRORetrysImpl implements LRORetrys {
     /** The RestProxy service to perform REST calls. */
@@ -64,8 +64,8 @@ public class LRORetrysImpl implements LRORetrys {
     }
 
     /**
-     * The interface defining all the services for LRORetrys to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for LRORetrys to be used by
+     * RestProxy to perform REST calls.
      */
     @Host("http://localhost")
     interface LRORetrysService {
@@ -164,8 +164,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -176,6 +177,7 @@ public class LRORetrysImpl implements LRORetrys {
     public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -186,6 +188,7 @@ public class LRORetrysImpl implements LRORetrys {
         final Product product = null;
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -196,7 +199,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
     }
 
     /**
@@ -328,8 +331,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -340,6 +344,7 @@ public class LRORetrysImpl implements LRORetrys {
     public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -350,6 +355,7 @@ public class LRORetrysImpl implements LRORetrys {
         final Product product = null;
         return service.beginPutAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -360,7 +366,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -492,7 +498,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().last().result();
     }
 
     /**
@@ -569,7 +575,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200Async().blockingLast();
+        beginDelete202Retry200Async().toBlocking().last();
     }
 
     /**
@@ -646,7 +652,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -723,8 +729,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast().result();
+        beginPost202Retry200Async().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -735,6 +742,7 @@ public class LRORetrysImpl implements LRORetrys {
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -745,6 +753,7 @@ public class LRORetrysImpl implements LRORetrys {
         final Product product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -754,7 +763,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -885,8 +894,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().blockingLast().result();
+        beginPostAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -897,6 +907,7 @@ public class LRORetrysImpl implements LRORetrys {
     public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRelativeRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -907,6 +918,7 @@ public class LRORetrysImpl implements LRORetrys {
         final Product product = null;
         return service.beginPostAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -916,7 +928,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded(Product product) {
-        beginPostAsyncRelativeRetrySucceededAsync(product).blockingLast();
+        beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
     }
 
     /**

@@ -10,28 +10,28 @@
 
 package fixtures.url.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.Base64Url;
+import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.url.Paths;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.Base64Url;
-import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.url.Paths;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
@@ -40,13 +40,18 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Paths.
+ * An instance of this class provides access to all the operations defined in
+ * Paths.
  */
 public class PathsImpl implements Paths {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PathsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestUrlTestServiceImpl client;
 
     /**
@@ -55,14 +60,14 @@ public class PathsImpl implements Paths {
      * @param client the instance of the service client containing this operation class.
      */
     public PathsImpl(AutoRestUrlTestServiceImpl client) {
-        this.service = RestProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Paths to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Paths to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface PathsService {
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getBooleanTrue" })
@@ -1013,7 +1018,7 @@ public class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-    String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteMultiByte(bytePathConverted);
     }
 
@@ -1061,7 +1066,7 @@ public class PathsImpl implements Paths {
      */
     public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
         final byte[] bytePath = "".getBytes();
-    String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteEmpty(bytePathConverted);
     }
 
@@ -1113,7 +1118,7 @@ public class PathsImpl implements Paths {
         if (bytePath == null) {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
-    String bytePathConverted = Base64.encodeBase64String(bytePath);
+        String bytePathConverted = Base64.encodeBase64String(bytePath);
         return service.byteNull(bytePathConverted);
     }
 
@@ -1362,7 +1367,7 @@ public class PathsImpl implements Paths {
         if (base64UrlPath == null) {
             throw new IllegalArgumentException("Parameter base64UrlPath is required and cannot be null.");
         }
-    Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
+        Base64Url base64UrlPathConverted = Base64Url.encode(base64UrlPath);
         return service.base64Url(base64UrlPathConverted);
     }
 
@@ -1416,7 +1421,7 @@ public class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
-    String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return service.arrayCsvInPath(arrayPathConverted);
     }
 
@@ -1466,7 +1471,7 @@ public class PathsImpl implements Paths {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> unixTimeUrlWithRestResponseAsync(DateTime unixTimeUrlPath) {
-    Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
+        Long unixTimeUrlPathConverted = unixTimeUrlPath.toDateTime(DateTimeZone.UTC).getMillis() / 1000;
         return service.unixTimeUrl(unixTimeUrlPathConverted);
     }
 

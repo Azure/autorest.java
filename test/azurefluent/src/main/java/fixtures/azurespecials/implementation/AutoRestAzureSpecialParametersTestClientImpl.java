@@ -10,31 +10,18 @@
 
 package fixtures.azurespecials.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
+ * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
  */
-public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient implements AutoRestAzureSpecialParametersTestClient {
+public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'. */
     private String subscriptionId;
 
     /**
@@ -52,12 +39,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param subscriptionId the subscriptionId value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withsubscriptionId(String subscriptionId) {
+    public AutoRestAzureSpecialParametersTestClientImpl withSubscriptionId(String subscriptionId) {
         this.subscriptionId = subscriptionId;
         return this;
     }
 
-    /** The api version, which appears in the query, the value is always '2015-07-01-preview'. */
+    /**
+     * The api version, which appears in the query, the value is always '2015-07-01-preview'.
+     */
     private String apiVersion;
 
     /**
@@ -69,7 +58,9 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
         return this.apiVersion;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -87,12 +78,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestAzureSpecialParametersTestClientImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -110,12 +103,14 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestAzureSpecialParametersTestClientImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -133,155 +128,167 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends ServiceClient 
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestAzureSpecialParametersTestClientImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestAzureSpecialParametersTestClientImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
 
     /**
-     * The XMsClientRequestIds object to access its operations.
+     * The XMsClientRequestIdsInner object to access its operations.
      */
-    private XMsClientRequestIds xMsClientRequestIds;
+    private XMsClientRequestIdsInner xMsClientRequestIds;
 
     /**
-     * Gets the XMsClientRequestIds object to access its operations.
-     * @return the XMsClientRequestIds object.
+     * Gets the XMsClientRequestIdsInner object to access its operations.
+     * @return the XMsClientRequestIdsInner object.
      */
-    public XMsClientRequestIds xMsClientRequestIds() {
+    public XMsClientRequestIdsInner xMsClientRequestIds() {
         return this.xMsClientRequestIds;
     }
 
     /**
-     * The SubscriptionInCredentials object to access its operations.
+     * The SubscriptionInCredentialsInner object to access its operations.
      */
-    private SubscriptionInCredentials subscriptionInCredentials;
+    private SubscriptionInCredentialsInner subscriptionInCredentials;
 
     /**
-     * Gets the SubscriptionInCredentials object to access its operations.
-     * @return the SubscriptionInCredentials object.
+     * Gets the SubscriptionInCredentialsInner object to access its operations.
+     * @return the SubscriptionInCredentialsInner object.
      */
-    public SubscriptionInCredentials subscriptionInCredentials() {
+    public SubscriptionInCredentialsInner subscriptionInCredentials() {
         return this.subscriptionInCredentials;
     }
 
     /**
-     * The SubscriptionInMethods object to access its operations.
+     * The SubscriptionInMethodsInner object to access its operations.
      */
-    private SubscriptionInMethods subscriptionInMethods;
+    private SubscriptionInMethodsInner subscriptionInMethods;
 
     /**
-     * Gets the SubscriptionInMethods object to access its operations.
-     * @return the SubscriptionInMethods object.
+     * Gets the SubscriptionInMethodsInner object to access its operations.
+     * @return the SubscriptionInMethodsInner object.
      */
-    public SubscriptionInMethods subscriptionInMethods() {
+    public SubscriptionInMethodsInner subscriptionInMethods() {
         return this.subscriptionInMethods;
     }
 
     /**
-     * The ApiVersionDefaults object to access its operations.
+     * The ApiVersionDefaultsInner object to access its operations.
      */
-    private ApiVersionDefaults apiVersionDefaults;
+    private ApiVersionDefaultsInner apiVersionDefaults;
 
     /**
-     * Gets the ApiVersionDefaults object to access its operations.
-     * @return the ApiVersionDefaults object.
+     * Gets the ApiVersionDefaultsInner object to access its operations.
+     * @return the ApiVersionDefaultsInner object.
      */
-    public ApiVersionDefaults apiVersionDefaults() {
+    public ApiVersionDefaultsInner apiVersionDefaults() {
         return this.apiVersionDefaults;
     }
 
     /**
-     * The ApiVersionLocals object to access its operations.
+     * The ApiVersionLocalsInner object to access its operations.
      */
-    private ApiVersionLocals apiVersionLocals;
+    private ApiVersionLocalsInner apiVersionLocals;
 
     /**
-     * Gets the ApiVersionLocals object to access its operations.
-     * @return the ApiVersionLocals object.
+     * Gets the ApiVersionLocalsInner object to access its operations.
+     * @return the ApiVersionLocalsInner object.
      */
-    public ApiVersionLocals apiVersionLocals() {
+    public ApiVersionLocalsInner apiVersionLocals() {
         return this.apiVersionLocals;
     }
 
     /**
-     * The SkipUrlEncodings object to access its operations.
+     * The SkipUrlEncodingsInner object to access its operations.
      */
-    private SkipUrlEncodings skipUrlEncodings;
+    private SkipUrlEncodingsInner skipUrlEncodings;
 
     /**
-     * Gets the SkipUrlEncodings object to access its operations.
-     * @return the SkipUrlEncodings object.
+     * Gets the SkipUrlEncodingsInner object to access its operations.
+     * @return the SkipUrlEncodingsInner object.
      */
-    public SkipUrlEncodings skipUrlEncodings() {
+    public SkipUrlEncodingsInner skipUrlEncodings() {
         return this.skipUrlEncodings;
     }
 
     /**
-     * The Odatas object to access its operations.
+     * The OdatasInner object to access its operations.
      */
-    private Odatas odatas;
+    private OdatasInner odatas;
 
     /**
-     * Gets the Odatas object to access its operations.
-     * @return the Odatas object.
+     * Gets the OdatasInner object to access its operations.
+     * @return the OdatasInner object.
      */
-    public Odatas odatas() {
+    public OdatasInner odatas() {
         return this.odatas;
     }
 
     /**
-     * The Headers object to access its operations.
+     * The HeadersInner object to access its operations.
      */
-    private Headers headers;
+    private HeadersInner headers;
 
     /**
-     * Gets the Headers object to access its operations.
-     * @return the Headers object.
+     * Gets the HeadersInner object to access its operations.
+     * @return the HeadersInner object.
      */
-    public Headers headers() {
+    public HeadersInner headers() {
         return this.headers;
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestAzureSpecialParametersTestClientImpl() {
-        this("http://localhost");
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestAzureSpecialParametersTestClientImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.xMsClientRequestIds = new XMsClientRequestIdsImpl(this);
-        this.subscriptionInCredentials = new SubscriptionInCredentialsImpl(this);
-        this.subscriptionInMethods = new SubscriptionInMethodsImpl(this);
-        this.apiVersionDefaults = new ApiVersionDefaultsImpl(this);
-        this.apiVersionLocals = new ApiVersionLocalsImpl(this);
-        this.skipUrlEncodings = new SkipUrlEncodingsImpl(this);
-        this.odatas = new OdatasImpl(this);
-        this.headers = new HeadersImpl(this);
+        this.xMsClientRequestIds = new XMsClientRequestIdsInner(this);
+        this.subscriptionInCredentials = new SubscriptionInCredentialsInner(this);
+        this.subscriptionInMethods = new SubscriptionInMethodsInner(this);
+        this.apiVersionDefaults = new ApiVersionDefaultsInner(this);
+        this.apiVersionLocals = new ApiVersionLocalsInner(this);
+        this.skipUrlEncodings = new SkipUrlEncodingsInner(this);
+        this.odatas = new OdatasInner(this);
+        this.headers = new HeadersInner(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestAzureSpecialParametersTestClient", "2015-07-01-preview");
     }
 }

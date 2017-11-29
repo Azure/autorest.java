@@ -360,12 +360,23 @@ namespace AutoRest.Java.Model
                 builder.AppendLine($"Validator.validate({param.Name});");
             }
 
-            var beginning = builder.ToString();
-            var mappings = BuildInputMappings(takeOnlyRequiredParameters);
-            var parameterConversion = ParameterConversion;
-            var epilogue = $"    return service.{Name}({MethodParameterApiInvocation});\n}}";
+            string mappings = BuildInputMappings(takeOnlyRequiredParameters);
+            if (!string.IsNullOrWhiteSpace(mappings))
+            {
+                builder.AppendLine(mappings.Trim());
+            }
 
-            return string.Join("\n", beginning, mappings, parameterConversion, epilogue);
+            string parameterConversion = ParameterConversion;
+            if (!string.IsNullOrWhiteSpace(parameterConversion))
+            {
+                builder.AppendLine(parameterConversion.Trim());
+            }
+
+            builder.AppendLine($"return service.{Name}({MethodParameterApiInvocation});");
+            builder.Outdent();
+            builder.AppendLine("}");
+
+            return builder.ToString();
         }
         public string ObservableBodyDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()} object";
 

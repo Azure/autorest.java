@@ -10,10 +10,11 @@
 
 package fixtures.http.implementation;
 
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.http.HttpRetrys;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -26,23 +27,27 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.http.HttpRetrys;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpRetrys.
+ * An instance of this class provides access to all the operations defined in
+ * HttpRetrys.
  */
 public class HttpRetrysImpl implements HttpRetrys {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HttpRetrysService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
@@ -51,14 +56,14 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpRetrysImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = RestProxy.create(HttpRetrysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(HttpRetrysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for HttpRetrys to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for HttpRetrys to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HttpRetrysService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys head408" })

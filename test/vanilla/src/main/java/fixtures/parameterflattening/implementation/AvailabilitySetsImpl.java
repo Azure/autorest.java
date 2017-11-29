@@ -10,10 +10,13 @@
 
 package fixtures.parameterflattening.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.parameterflattening.AvailabilitySets;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.Headers;
@@ -22,26 +25,28 @@ import com.microsoft.rest.v2.annotations.PATCH;
 import com.microsoft.rest.v2.annotations.PathParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.Map;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in AvailabilitySets.
+ * An instance of this class provides access to all the operations defined in
+ * AvailabilitySets.
  */
 public class AvailabilitySetsImpl implements AvailabilitySets {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private AvailabilitySetsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterFlatteningImpl client;
 
     /**
@@ -50,14 +55,14 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param client the instance of the service client containing this operation class.
      */
     public AvailabilitySetsImpl(AutoRestParameterFlatteningImpl client) {
-        this.service = RestProxy.create(AvailabilitySetsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(AvailabilitySetsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for AvailabilitySets to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for AvailabilitySets to be used
+     * by RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface AvailabilitySetsService {
         @Headers({ "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
@@ -116,8 +121,8 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         Validator.validate(tags);
-    AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
-    tags1.withTags(tags);
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.withTags(tags);
         return service.update(resourceGroupName, avset, tags1);
     }
 

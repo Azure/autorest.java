@@ -10,11 +10,15 @@
 
 package fixtures.lro.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.OperationStatus;
 import com.microsoft.azure.v2.util.ServiceFutureUtil;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.DELETE;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
@@ -25,19 +29,15 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in LROs.
+ * An instance of this class provides access to all the operations defined in
+ * LROs.
  */
 public class LROsInner {
     /** The RestProxy service to perform REST calls. */
@@ -56,8 +56,8 @@ public class LROsInner {
     }
 
     /**
-     * The interface defining all the services for LROs to be
-     * used by RestProxy to perform REST calls.
+     * The interface defining all the services for LROs to be used by RestProxy
+     * to perform REST calls.
      */
     @Host("http://localhost")
     interface LROsService {
@@ -504,8 +504,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded() {
-        return beginPut200SucceededAsync().blockingLast().result();
+        return beginPut200SucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -516,6 +517,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -526,6 +528,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
@@ -536,7 +539,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded(ProductInner product) {
-        return beginPut200SucceededAsync(product).blockingLast().result();
+        return beginPut200SucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -668,8 +671,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateAsync().blockingLast().result();
+        return beginPut200SucceededNoStateAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -680,6 +684,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200SucceededNoStateAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -690,6 +695,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
@@ -700,7 +706,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState(ProductInner product) {
-        return beginPut200SucceededNoStateAsync(product).blockingLast().result();
+        return beginPut200SucceededNoStateAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -832,8 +838,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200() {
-        return beginPut202Retry200Async().blockingLast().result();
+        return beginPut202Retry200Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -844,6 +851,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut202Retry200Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -854,6 +862,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
@@ -864,7 +873,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200(ProductInner product) {
-        return beginPut202Retry200Async(product).blockingLast().result();
+        return beginPut202Retry200Async(product).toBlocking().last().result();
     }
 
     /**
@@ -996,8 +1005,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().blockingLast().result();
+        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -1008,6 +1018,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingSucceeded200Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -1018,6 +1029,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -1028,7 +1040,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
+        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
     }
 
     /**
@@ -1160,8 +1172,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204Async().blockingLast().result();
+        return beginPut200UpdatingSucceeded204Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -1172,6 +1185,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200UpdatingSucceeded204Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -1182,6 +1196,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -1192,7 +1207,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204(ProductInner product) {
-        return beginPut200UpdatingSucceeded204Async(product).blockingLast().result();
+        return beginPut200UpdatingSucceeded204Async(product).toBlocking().last().result();
     }
 
     /**
@@ -1324,8 +1339,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200Async().blockingLast().result();
+        return beginPut201CreatingFailed200Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -1336,6 +1352,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut201CreatingFailed200Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -1346,6 +1363,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
@@ -1356,7 +1374,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200(ProductInner product) {
-        return beginPut201CreatingFailed200Async(product).blockingLast().result();
+        return beginPut201CreatingFailed200Async(product).toBlocking().last().result();
     }
 
     /**
@@ -1488,8 +1506,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200Async().blockingLast().result();
+        return beginPut200Acceptedcanceled200Async().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -1500,6 +1519,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPut200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPut200Acceptedcanceled200Async(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -1510,6 +1530,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
@@ -1520,7 +1541,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200(ProductInner product) {
-        return beginPut200Acceptedcanceled200Async(product).blockingLast().result();
+        return beginPut200Acceptedcanceled200Async(product).toBlocking().last().result();
     }
 
     /**
@@ -1652,8 +1673,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryAsync().blockingLast().result();
+        return beginPutNoHeaderInRetryAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -1664,6 +1686,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPutNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNoHeaderInRetryAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -1674,6 +1697,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
@@ -1684,7 +1708,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry(ProductInner product) {
-        return beginPutNoHeaderInRetryAsync(product).blockingLast().result();
+        return beginPutNoHeaderInRetryAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -1816,8 +1840,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1828,6 +1853,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1838,6 +1864,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1848,7 +1875,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncRetrySucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -1980,8 +2007,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededAsync().blockingLast().result();
+        return beginPutAsyncNoRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -1992,6 +2020,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2002,6 +2031,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2012,7 +2042,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPutAsyncNoRetrySucceededAsync(product).blockingLast().result();
+        return beginPutAsyncNoRetrySucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2144,8 +2174,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedAsync().blockingLast().result();
+        return beginPutAsyncRetryFailedAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2156,6 +2187,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPutAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncRetryFailedAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2166,6 +2198,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2176,7 +2209,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed(ProductInner product) {
-        return beginPutAsyncRetryFailedAsync(product).blockingLast().result();
+        return beginPutAsyncRetryFailedAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2308,8 +2341,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledAsync().blockingLast().result();
+        return beginPutAsyncNoRetrycanceledAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2320,6 +2354,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoRetrycanceledAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2330,6 +2365,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -2340,7 +2376,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled(ProductInner product) {
-        return beginPutAsyncNoRetrycanceledAsync(product).blockingLast().result();
+        return beginPutAsyncNoRetrycanceledAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2472,8 +2508,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryAsync().blockingLast().result();
+        return beginPutAsyncNoHeaderInRetryAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -2484,6 +2521,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNoHeaderInRetryAsync(), serviceCallback);
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -2494,6 +2532,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
@@ -2504,7 +2543,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry(ProductInner product) {
-        return beginPutAsyncNoHeaderInRetryAsync(product).blockingLast().result();
+        return beginPutAsyncNoHeaderInRetryAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -2636,8 +2675,9 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource() {
-        return beginPutNonResourceAsync().blockingLast().result();
+        return beginPutNonResourceAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request with non resource.
      *
@@ -2648,6 +2688,7 @@ public class LROsInner {
     public ServiceFuture<SkuInner> beginPutNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutNonResourceAsync(), serviceCallback);
     }
+
     /**
      * Long running put request with non resource.
      *
@@ -2658,6 +2699,7 @@ public class LROsInner {
         final SkuInner sku = null;
         return service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request with non resource.
      *
@@ -2668,7 +2710,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource(SkuInner sku) {
-        return beginPutNonResourceAsync(sku).blockingLast().result();
+        return beginPutNonResourceAsync(sku).toBlocking().last().result();
     }
 
     /**
@@ -2800,8 +2842,9 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceAsync().blockingLast().result();
+        return beginPutAsyncNonResourceAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request with non resource.
      *
@@ -2812,6 +2855,7 @@ public class LROsInner {
     public ServiceFuture<SkuInner> beginPutAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncNonResourceAsync(), serviceCallback);
     }
+
     /**
      * Long running put request with non resource.
      *
@@ -2822,6 +2866,7 @@ public class LROsInner {
         final SkuInner sku = null;
         return service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request with non resource.
      *
@@ -2832,7 +2877,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource(SkuInner sku) {
-        return beginPutAsyncNonResourceAsync(sku).blockingLast().result();
+        return beginPutAsyncNonResourceAsync(sku).toBlocking().last().result();
     }
 
     /**
@@ -2964,8 +3009,9 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource() {
-        return beginPutSubResourceAsync().blockingLast().result();
+        return beginPutSubResourceAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request with sub resource.
      *
@@ -2976,6 +3022,7 @@ public class LROsInner {
     public ServiceFuture<SubProductInner> beginPutSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutSubResourceAsync(), serviceCallback);
     }
+
     /**
      * Long running put request with sub resource.
      *
@@ -2986,6 +3033,7 @@ public class LROsInner {
         final SubProductInner product = null;
         return service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request with sub resource.
      *
@@ -2996,7 +3044,7 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource(SubProductInner product) {
-        return beginPutSubResourceAsync(product).blockingLast().result();
+        return beginPutSubResourceAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -3128,8 +3176,9 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceAsync().blockingLast().result();
+        return beginPutAsyncSubResourceAsync().toBlocking().last().result();
     }
+
     /**
      * Long running put request with sub resource.
      *
@@ -3140,6 +3189,7 @@ public class LROsInner {
     public ServiceFuture<SubProductInner> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPutAsyncSubResourceAsync(), serviceCallback);
     }
+
     /**
      * Long running put request with sub resource.
      *
@@ -3150,6 +3200,7 @@ public class LROsInner {
         final SubProductInner product = null;
         return service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running put request with sub resource.
      *
@@ -3160,7 +3211,7 @@ public class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource(SubProductInner product) {
-        return beginPutAsyncSubResourceAsync(product).blockingLast().result();
+        return beginPutAsyncSubResourceAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -3292,7 +3343,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().last().result();
     }
 
     /**
@@ -3370,7 +3421,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200Async().blockingLast().result();
+        return beginDeleteProvisioning202DeletingFailed200Async().toBlocking().last().result();
     }
 
     /**
@@ -3448,7 +3499,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200Async().blockingLast().result();
+        return beginDeleteProvisioning202Deletingcanceled200Async().toBlocking().last().result();
     }
 
     /**
@@ -3525,7 +3576,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().blockingLast();
+        beginDelete204SucceededAsync().toBlocking().last();
     }
 
     /**
@@ -3603,7 +3654,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202Retry200() {
-        return beginDelete202Retry200Async().blockingLast().result();
+        return beginDelete202Retry200Async().toBlocking().last().result();
     }
 
     /**
@@ -3681,7 +3732,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204Async().blockingLast().result();
+        return beginDelete202NoRetry204Async().toBlocking().last().result();
     }
 
     /**
@@ -3758,7 +3809,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryAsync().blockingLast();
+        beginDeleteNoHeaderInRetryAsync().toBlocking().last();
     }
 
     /**
@@ -3835,7 +3886,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryAsync().blockingLast();
+        beginDeleteAsyncNoHeaderInRetryAsync().toBlocking().last();
     }
 
     /**
@@ -3912,7 +3963,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -3989,7 +4040,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededAsync().blockingLast();
+        beginDeleteAsyncNoRetrySucceededAsync().toBlocking().last();
     }
 
     /**
@@ -4066,7 +4117,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedAsync().blockingLast();
+        beginDeleteAsyncRetryFailedAsync().toBlocking().last();
     }
 
     /**
@@ -4143,7 +4194,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledAsync().blockingLast();
+        beginDeleteAsyncRetrycanceledAsync().toBlocking().last();
     }
 
     /**
@@ -4221,7 +4272,7 @@ public class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPost200WithPayload() {
-        return beginPost200WithPayloadAsync().blockingLast().result();
+        return beginPost200WithPayloadAsync().toBlocking().last().result();
     }
 
     /**
@@ -4298,8 +4349,9 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast().result();
+        beginPost202Retry200Async().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -4310,6 +4362,7 @@ public class LROsInner {
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202Retry200Async(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -4320,6 +4373,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -4329,7 +4383,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).blockingLast();
+        beginPost202Retry200Async(product).toBlocking().last();
     }
 
     /**
@@ -4461,8 +4515,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204() {
-        return beginPost202NoRetry204Async().blockingLast().result();
+        return beginPost202NoRetry204Async().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -4473,6 +4528,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPost202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPost202NoRetry204Async(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -4483,6 +4539,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
@@ -4493,7 +4550,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204(ProductInner product) {
-        return beginPost202NoRetry204Async(product).blockingLast().result();
+        return beginPost202NoRetry204Async(product).toBlocking().last().result();
     }
 
     /**
@@ -4625,8 +4682,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededAsync().blockingLast().result();
+        return beginPostAsyncRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4637,6 +4695,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPostAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4647,6 +4706,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4657,7 +4717,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded(ProductInner product) {
-        return beginPostAsyncRetrySucceededAsync(product).blockingLast().result();
+        return beginPostAsyncRetrySucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -4789,8 +4849,9 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededAsync().blockingLast().result();
+        return beginPostAsyncNoRetrySucceededAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4801,6 +4862,7 @@ public class LROsInner {
     public ServiceFuture<ProductInner> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncNoRetrySucceededAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4811,6 +4873,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4821,7 +4884,7 @@ public class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPostAsyncNoRetrySucceededAsync(product).blockingLast().result();
+        return beginPostAsyncNoRetrySucceededAsync(product).toBlocking().last().result();
     }
 
     /**
@@ -4952,8 +5015,9 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedAsync().blockingLast().result();
+        beginPostAsyncRetryFailedAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4964,6 +5028,7 @@ public class LROsInner {
     public ServiceFuture<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetryFailedAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4974,6 +5039,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -4983,7 +5049,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetryFailed(ProductInner product) {
-        beginPostAsyncRetryFailedAsync(product).blockingLast();
+        beginPostAsyncRetryFailedAsync(product).toBlocking().last();
     }
 
     /**
@@ -5114,8 +5180,9 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledAsync().blockingLast().result();
+        beginPostAsyncRetrycanceledAsync().toBlocking().last().result();
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -5126,6 +5193,7 @@ public class LROsInner {
     public ServiceFuture<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFutureUtil.fromLRO(beginPostAsyncRetrycanceledAsync(), serviceCallback);
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -5136,6 +5204,7 @@ public class LROsInner {
         final ProductInner product = null;
         return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
     }
+
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -5145,7 +5214,7 @@ public class LROsInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrycanceled(ProductInner product) {
-        beginPostAsyncRetrycanceledAsync(product).blockingLast();
+        beginPostAsyncRetrycanceledAsync(product).toBlocking().last();
     }
 
     /**

@@ -18,19 +18,11 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Map;
-import com.microsoft.rest.v2.RestClient;
 
 /**
  * The interface for AutoRestReportService class.
  */
 public interface AutoRestReportService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
     /**
      * The default base URL.
      */
@@ -62,6 +54,7 @@ public interface AutoRestReportService {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<Map<String, Integer>> getReportAsync();
+
     /**
      * Get test coverage report.
      *

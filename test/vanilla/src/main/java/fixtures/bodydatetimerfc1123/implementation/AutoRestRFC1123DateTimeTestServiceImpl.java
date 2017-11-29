@@ -10,13 +10,11 @@
 
 package fixtures.bodydatetimerfc1123.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
-import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestRFC1123DateTimeTestService class.
@@ -30,6 +28,7 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
 
     /**
      * Gets the Datetimerfc1123s object to access its operations.
+     *
      * @return the Datetimerfc1123s object.
      */
     public Datetimerfc1123s datetimerfc1123s() {
@@ -38,33 +37,19 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
 
     /**
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestRFC1123DateTimeTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      */
     public AutoRestRFC1123DateTimeTestServiceImpl() {
-        this("https://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestRFC1123DateTimeTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestRFC1123DateTimeTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.datetimerfc1123s = new Datetimerfc1123sImpl(this);
     }
 }

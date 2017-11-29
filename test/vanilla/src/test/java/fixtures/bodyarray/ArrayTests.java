@@ -1,5 +1,11 @@
 package fixtures.bodyarray;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.http.HttpRequest;
+import com.microsoft.rest.v2.http.HttpResponse;
+import com.microsoft.rest.v2.http.UrlBuilder;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.RequestPolicy;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -8,6 +14,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,13 +26,14 @@ import java.util.UUID;
 import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
+import rx.Single;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
 
     @BeforeClass
     public static void setup() throws Exception {
-        client = new AutoRestSwaggerBATArrayServiceImpl("http://localhost:3000");
+        client = new AutoRestSwaggerBATArrayServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

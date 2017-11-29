@@ -10,33 +10,20 @@
 
 package fixtures.custombaseuri.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
-import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
+ * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
  */
-public class AutoRestParameterizedHostTestClientImpl extends ServiceClient implements AutoRestParameterizedHostTestClient {
+public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient implements AutoRestParameterizedHostTestClient {
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * A string value that is used as a global part of the parameterized host.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** A string value that is used as a global part of the parameterized host. */
     private String host;
 
     /**
@@ -54,12 +41,14 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
      * @param host the host value.
      * @return the service client itself
      */
-    public AutoRestParameterizedHostTestClientImpl withhost(String host) {
+    public AutoRestParameterizedHostTestClientImpl withHost(String host) {
         this.host = host;
         return this;
     }
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -77,12 +66,14 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestParameterizedHostTestClientImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestParameterizedHostTestClientImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -100,12 +91,14 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestParameterizedHostTestClientImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestParameterizedHostTestClientImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -123,7 +116,7 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestParameterizedHostTestClientImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestParameterizedHostTestClientImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
@@ -144,36 +137,48 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    private AutoRestParameterizedHostTestClientImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials) {
+        this("http://{accountName}{host}", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestParameterizedHostTestClientImpl() {
-        this("http://{accountName}{host}");
+    private AutoRestParameterizedHostTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.host = "host";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.paths = new PathsImpl(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterizedHostTestClient", "1.0.0");
     }
 }

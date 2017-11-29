@@ -10,13 +10,11 @@
 
 package fixtures.bodyinteger.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyinteger.AutoRestIntegerTestService;
 import fixtures.bodyinteger.Ints;
-import io.reactivex.Single;
 
 /**
  * Initializes a new instance of the AutoRestIntegerTestService class.
@@ -30,6 +28,7 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Gets the Ints object to access its operations.
+     *
      * @return the Ints object.
      */
     public Ints ints() {
@@ -38,33 +37,19 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
 
     /**
      * Initializes an instance of AutoRestIntegerTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestIntegerTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestIntegerTestService client.
      */
     public AutoRestIntegerTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestIntegerTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestIntegerTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestIntegerTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.ints = new IntsImpl(this);
     }
 }

@@ -1,62 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaClass
+    public class JavaClass : JavaBlock
     {
-        private readonly JavaFileContents contents;
-
         public JavaClass(JavaFileContents contents)
+            : base(contents)
         {
-            this.contents = contents;
         }
 
-        public JavaClass Line(string text)
+        public JavaClass PrivateMemberVariable(string description, string variableType, string variableName)
         {
-            contents.Line(text);
+            MultipleLineComment(comment =>
+            {
+                comment.Line(description);
+            });
+            Line($"private {variableType} {variableName};");
             return this;
         }
 
-        public JavaClass Line()
+        public JavaClass PublicGetter(string variableType, string variableName)
         {
-            contents.Line();
+            MultipleLineComment(comment =>
+            {
+                comment.Line($"Gets the {variableType} object to access its operations.");
+                comment.Line();
+                comment.Return($"the {variableType} object.");
+            });
+            Block($"public {variableType} {variableName}()", function =>
+            {
+                function.Return($"this.{variableName}");
+            });
             return this;
         }
 
-        public JavaClass Block(string text, Action<JavaBlock> bodyAction)
+        public JavaClass PublicConstructor(string description, string className, Action<JavaBlock> constructor)
         {
-            contents.Block(text, bodyAction);
-            return this;
-        }
-
-        public JavaClass SingleLineComment(string text)
-        {
-            contents.SingleLineComment(text);
-            return this;
-        }
-
-        public JavaClass MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
-        {
-            contents.MultipleLineComment(commentAction);
-            return this;
-        }
-
-        public JavaClass WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
-        {
-            contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
-            return this;
-        }
-
-        public JavaClass Annotation(params string[] annotations)
-        {
-            contents.Annotation(annotations);
-            return this;
-        }
-
-        public JavaClass Annotation(IEnumerable<string> annotations)
-        {
-            contents.Annotation(annotations);
+            MultipleLineComment(comment =>
+            {
+                comment.Line(description);
+            });
+            Block($"public {className}()", constructor);
             return this;
         }
     }

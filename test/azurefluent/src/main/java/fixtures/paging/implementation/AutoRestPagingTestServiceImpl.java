@@ -10,31 +10,18 @@
 
 package fixtures.paging.implementation;
 
-import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import io.reactivex.Single;
 
 /**
- * Initializes a new instance of the AutoRestPagingTestService class.
+ * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
  */
-public class AutoRestPagingTestServiceImpl extends ServiceClient implements AutoRestPagingTestService {
+public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
 
-    /** Credentials needed for the client to connect to Azure. */
-    private ServiceClientCredentials credentials;
 
     /**
-     * Gets Credentials needed for the client to connect to Azure.
-     *
-     * @return the credentials value.
+     * Gets or sets the preferred language for the response.
      */
-    public ServiceClientCredentials credentials() {
-        return this.credentials;
-    }
-
-    /** Gets or sets the preferred language for the response. */
     private String acceptLanguage;
 
     /**
@@ -52,12 +39,14 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
      * @param acceptLanguage the acceptLanguage value.
      * @return the service client itself
      */
-    public AutoRestPagingTestServiceImpl withacceptLanguage(String acceptLanguage) {
+    public AutoRestPagingTestServiceImpl withAcceptLanguage(String acceptLanguage) {
         this.acceptLanguage = acceptLanguage;
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -75,12 +64,14 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      * @return the service client itself
      */
-    public AutoRestPagingTestServiceImpl withlongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
+    public AutoRestPagingTestServiceImpl withLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -98,56 +89,68 @@ public class AutoRestPagingTestServiceImpl extends ServiceClient implements Auto
      * @param generateClientRequestId the generateClientRequestId value.
      * @return the service client itself
      */
-    public AutoRestPagingTestServiceImpl withgenerateClientRequestId(boolean generateClientRequestId) {
+    public AutoRestPagingTestServiceImpl withGenerateClientRequestId(boolean generateClientRequestId) {
         this.generateClientRequestId = generateClientRequestId;
         return this;
     }
 
     /**
-     * The Pagings object to access its operations.
+     * The PagingsInner object to access its operations.
      */
-    private Pagings pagings;
+    private PagingsInner pagings;
 
     /**
-     * Gets the Pagings object to access its operations.
-     * @return the Pagings object.
+     * Gets the PagingsInner object to access its operations.
+     * @return the PagingsInner object.
      */
-    public Pagings pagings() {
+    public PagingsInner pagings() {
         return this.pagings;
     }
 
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestPagingTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
+    public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
+        this("http://localhost", credentials);
     }
 
     /**
      * Initializes an instance of AutoRestPagingTestService client.
+     *
+     * @param baseUrl the base URL of the host
+     * @param credentials the management credentials for Azure
      */
-    public AutoRestPagingTestServiceImpl() {
-        this("http://localhost");
+    public AutoRestPagingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
+        super(baseUrl, credentials);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param restClient the REST client to connect to Azure.
      */
     public AutoRestPagingTestServiceImpl(RestClient restClient) {
         super(restClient);
         initialize();
     }
 
-    private void initialize() {
+    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.pagings = new PagingsImpl(this);
+        this.pagings = new PagingsInner(this);
+    }
+
+    /**
+     * Gets the User-Agent header for the client.
+     *
+     * @return the user agent string.
+     */
+    @Override
+    public String userAgent() {
+        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestPagingTestService", "1.0.0");
     }
 }

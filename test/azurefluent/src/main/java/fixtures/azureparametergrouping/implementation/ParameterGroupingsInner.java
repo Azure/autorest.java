@@ -10,8 +10,12 @@
 
 package fixtures.azureparametergrouping.implementation;
 
-import com.microsoft.rest.v2.RestResponse;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureProxy;
+import com.microsoft.rest.v2.RestResponse;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.BodyParam;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.HeaderParam;
@@ -22,20 +26,16 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
 import fixtures.azureparametergrouping.ErrorException;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import com.microsoft.azure.v2.AzureProxy;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in ParameterGroupings.
+ * An instance of this class provides access to all the operations defined in
+ * ParameterGroupings.
  */
 public class ParameterGroupingsInner {
     /** The RestProxy service to perform REST calls. */
@@ -122,10 +122,10 @@ public class ParameterGroupingsInner {
             throw new IllegalArgumentException("Parameter parameterGroupingPostRequiredParameters is required and cannot be null.");
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
-    int body = parameterGroupingPostRequiredParameters.body();
-    String customHeader = parameterGroupingPostRequiredParameters.customHeader();
-    Integer query = parameterGroupingPostRequiredParameters.query();
-    String path = parameterGroupingPostRequiredParameters.path();
+        int body = parameterGroupingPostRequiredParameters.body();
+        String customHeader = parameterGroupingPostRequiredParameters.customHeader();
+        Integer query = parameterGroupingPostRequiredParameters.query();
+        String path = parameterGroupingPostRequiredParameters.path();
         return service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent());
     }
 
@@ -174,8 +174,8 @@ public class ParameterGroupingsInner {
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync() {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
         Validator.validate(parameterGroupingPostOptionalParameters);
-    String customHeader = null;
-    Integer query = null;
+        String customHeader = null;
+        Integer query = null;
         return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
     }
 
@@ -224,14 +224,14 @@ public class ParameterGroupingsInner {
      */
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         Validator.validate(parameterGroupingPostOptionalParameters);
-    String customHeader = null;
-    if (parameterGroupingPostOptionalParameters != null) {
-        customHeader = parameterGroupingPostOptionalParameters.customHeader();
-    }
-    Integer query = null;
-    if (parameterGroupingPostOptionalParameters != null) {
-        query = parameterGroupingPostOptionalParameters.query();
-    }
+        String customHeader = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            customHeader = parameterGroupingPostOptionalParameters.customHeader();
+        }
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            query = parameterGroupingPostOptionalParameters.query();
+        }
         return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
     }
 
@@ -282,10 +282,10 @@ public class ParameterGroupingsInner {
         final ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
-    String headerOne = null;
-    Integer queryOne = null;
-    String headerTwo = null;
-    Integer queryTwo = null;
+        String headerOne = null;
+        Integer queryOne = null;
+        String headerTwo = null;
+        Integer queryTwo = null;
         return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
     }
 
@@ -338,22 +338,22 @@ public class ParameterGroupingsInner {
     public Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
-    String headerOne = null;
-    if (firstParameterGroup != null) {
-        headerOne = firstParameterGroup.headerOne();
-    }
-    Integer queryOne = null;
-    if (firstParameterGroup != null) {
-        queryOne = firstParameterGroup.queryOne();
-    }
-    String headerTwo = null;
-    if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-        headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo();
-    }
-    Integer queryTwo = null;
-    if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-        queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
-    }
+        String headerOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.headerOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            queryOne = firstParameterGroup.queryOne();
+        }
+        String headerTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo();
+        }
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
+        }
         return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
     }
 
@@ -403,8 +403,8 @@ public class ParameterGroupingsInner {
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync() {
         final FirstParameterGroupInner firstParameterGroup = null;
         Validator.validate(firstParameterGroup);
-    String headerOne = null;
-    Integer queryOne = null;
+        String headerOne = null;
+        Integer queryOne = null;
         return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
     }
 
@@ -453,14 +453,14 @@ public class ParameterGroupingsInner {
      */
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync(FirstParameterGroupInner firstParameterGroup) {
         Validator.validate(firstParameterGroup);
-    String headerOne = null;
-    if (firstParameterGroup != null) {
-        headerOne = firstParameterGroup.headerOne();
-    }
-    Integer queryOne = null;
-    if (firstParameterGroup != null) {
-        queryOne = firstParameterGroup.queryOne();
-    }
+        String headerOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.headerOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            queryOne = firstParameterGroup.queryOne();
+        }
         return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
     }
 

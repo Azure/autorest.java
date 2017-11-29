@@ -10,33 +10,38 @@
 
 package fixtures.http.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.http.HttpFailures;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.RestException;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
+import fixtures.http.HttpFailures;
 import fixtures.http.models.ErrorException;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in HttpFailures.
+ * An instance of this class provides access to all the operations defined in
+ * HttpFailures.
  */
 public class HttpFailuresImpl implements HttpFailures {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HttpFailuresService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
@@ -45,14 +50,14 @@ public class HttpFailuresImpl implements HttpFailures {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = RestProxy.create(HttpFailuresService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(HttpFailuresService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for HttpFailures to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for HttpFailures to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface HttpFailuresService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getEmptyError" })

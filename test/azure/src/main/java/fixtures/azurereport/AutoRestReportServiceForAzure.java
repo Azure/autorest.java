@@ -10,7 +10,6 @@
 
 package fixtures.azurereport;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -24,13 +23,6 @@ import java.util.Map;
  * The interface for AutoRestReportServiceForAzure class.
  */
 public interface AutoRestReportServiceForAzure {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
     /**
      * Gets the User-Agent header for the client.
      *
@@ -109,6 +101,7 @@ public interface AutoRestReportServiceForAzure {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<Map<String, Integer>> getReportAsync();
+
     /**
      * Get test coverage report.
      *

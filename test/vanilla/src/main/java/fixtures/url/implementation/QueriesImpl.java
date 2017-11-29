@@ -10,27 +10,27 @@
 
 package fixtures.url.implementation;
 
+import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
-import fixtures.url.Queries;
-import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.v2.ServiceCallback;
+import com.microsoft.rest.v2.ServiceFuture;
+import com.microsoft.rest.v2.Validator;
 import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
-import com.microsoft.rest.v2.CollectionFormat;
 import com.microsoft.rest.v2.http.HttpClient;
-import com.microsoft.rest.v2.ServiceCallback;
-import com.microsoft.rest.v2.ServiceFuture;
-import com.microsoft.rest.v2.Validator;
+import fixtures.url.Queries;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import io.reactivex.Completable;
-import io.reactivex.functions.Function;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
@@ -38,13 +38,18 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
- * An instance of this class provides access to all the operations defined
- * in Queries.
+ * An instance of this class provides access to all the operations defined in
+ * Queries.
  */
 public class QueriesImpl implements Queries {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private QueriesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestUrlTestServiceImpl client;
 
     /**
@@ -53,14 +58,14 @@ public class QueriesImpl implements Queries {
      * @param client the instance of the service client containing this operation class.
      */
     public QueriesImpl(AutoRestUrlTestServiceImpl client) {
-        this.service = RestProxy.create(QueriesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(QueriesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for Queries to be
-     * used by RestProxy to perform REST calls.
-    */
+     * The interface defining all the services for Queries to be used by
+     * RestProxy to perform REST calls.
+     */
     @Host("http://localhost")
     interface QueriesService {
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })
@@ -1650,7 +1655,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
-    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
 
@@ -1698,7 +1703,7 @@ public class QueriesImpl implements Queries {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> byteMultiByteWithRestResponseAsync(byte[] byteQuery) {
-    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteMultiByte(byteQueryConverted);
     }
 
@@ -1746,7 +1751,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> byteEmptyWithRestResponseAsync() {
         final byte[] byteQuery = "".getBytes();
-    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteEmpty(byteQueryConverted);
     }
 
@@ -1793,7 +1798,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync() {
         final byte[] byteQuery = new byte[0];
-    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
 
@@ -1841,7 +1846,7 @@ public class QueriesImpl implements Queries {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> byteNullWithRestResponseAsync(byte[] byteQuery) {
-    String byteQueryConverted = Base64.encodeBase64String(byteQuery);
+        String byteQueryConverted = Base64.encodeBase64String(byteQuery);
         return service.byteNull(byteQueryConverted);
     }
 
@@ -2170,7 +2175,7 @@ public class QueriesImpl implements Queries {
     public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
     }
 
@@ -2219,7 +2224,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> arrayStringCsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvValid(arrayQueryConverted);
     }
 
@@ -2268,7 +2273,7 @@ public class QueriesImpl implements Queries {
     public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
     }
 
@@ -2317,7 +2322,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> arrayStringCsvNullWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvNull(arrayQueryConverted);
     }
 
@@ -2366,7 +2371,7 @@ public class QueriesImpl implements Queries {
     public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
     }
 
@@ -2415,7 +2420,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> arrayStringCsvEmptyWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.CSV);
         return service.arrayStringCsvEmpty(arrayQueryConverted);
     }
 
@@ -2464,7 +2469,7 @@ public class QueriesImpl implements Queries {
     public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
     }
 
@@ -2513,7 +2518,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> arrayStringSsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.SSV);
         return service.arrayStringSsvValid(arrayQueryConverted);
     }
 
@@ -2562,7 +2567,7 @@ public class QueriesImpl implements Queries {
     public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
     }
 
@@ -2611,7 +2616,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> arrayStringTsvValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.TSV);
         return service.arrayStringTsvValid(arrayQueryConverted);
     }
 
@@ -2660,7 +2665,7 @@ public class QueriesImpl implements Queries {
     public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync() {
         final List<String> arrayQuery = null;
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
     }
 
@@ -2709,7 +2714,7 @@ public class QueriesImpl implements Queries {
      */
     public Single<RestResponse<Void, Void>> arrayStringPipesValidWithRestResponseAsync(List<String> arrayQuery) {
         Validator.validate(arrayQuery);
-    String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
+        String arrayQueryConverted = this.client.serializerAdapter().serializeList(arrayQuery, CollectionFormat.PIPES);
         return service.arrayStringPipesValid(arrayQueryConverted);
     }
 

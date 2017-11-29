@@ -10,33 +10,24 @@
 
 package fixtures.url;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
     /**
      * The default base URL.
      */
     String DEFAULT_BASE_URL = "http://localhost";
 
     /**
-     * Gets A string value 'globalItemStringPath' that appears in the path.
+     * Gets A string value 'globalItemStringPath' that appears in the path
      *
      * @return the globalStringPath value.
      */
     String globalStringPath();
 
     /**
-     * Sets A string value 'globalItemStringPath' that appears in the path.
+     * Sets A string value 'globalItemStringPath' that appears in the path
      *
      * @param globalStringPath the globalStringPath value.
      * @return the service client itself
@@ -44,14 +35,14 @@ public interface AutoRestUrlTestService {
     AutoRestUrlTestService withGlobalStringPath(String globalStringPath);
 
     /**
-     * Gets should contain value null.
+     * Gets should contain value null
      *
      * @return the globalStringQuery value.
      */
     String globalStringQuery();
 
     /**
-     * Sets should contain value null.
+     * Sets should contain value null
      *
      * @param globalStringQuery the globalStringQuery value.
      * @return the service client itself

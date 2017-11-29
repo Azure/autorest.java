@@ -11,7 +11,6 @@
 package fixtures.azureresource;
 
 import com.microsoft.azure.v2.Resource;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -29,13 +28,6 @@ import java.util.Map;
  * The interface for AutoRestResourceFlatteningTestService class.
  */
 public interface AutoRestResourceFlatteningTestService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-    */
-    RestClient restClient();
-
     /**
      * Gets the User-Agent header for the client.
      *
@@ -149,6 +141,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putArrayAsync(List<Resource> resourceArray);
+
     /**
      * Put External Resource as an Array.
      *
@@ -185,6 +178,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
     Single<List<FlattenedProduct>> getArrayAsync();
+
     /**
      * Get External Resource as an Array.
      *
@@ -255,6 +249,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+
     /**
      * Put External Resource as a Dictionary.
      *
@@ -291,6 +286,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
     Single<Map<String, FlattenedProduct>> getDictionaryAsync();
+
     /**
      * Get External Resource as a Dictionary.
      *
@@ -361,6 +357,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -397,6 +394,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the ResourceCollection object
      */
     Single<ResourceCollection> getResourceCollectionAsync();
+
     /**
      * Get External Resource as a ResourceCollection.
      *

@@ -1,22 +1,27 @@
-
 ###############################################
 # LEGACY 
 # Instead: have bunch of configuration files sitting in a well-known spot, discover them, feed them to AutoRest, done.
+
+rimraf = require "rimraf"
 
 regenExpected = (opts,done) ->
   keys = Object.getOwnPropertyNames(opts.mappings)
   instances = keys.length
 
+  outputDir = opts.outputDir
+  
   for kkey in keys
     optsMappingsValue = opts.mappings[kkey]
     key = kkey.trim().toLowerCase()
 
+    namespace = key.replace(/\/|\./, '')
+    
     args = [
       "--java",
-      "--output-folder=#{opts.outputDir}",
+      "--output-folder=#{outputDir}",
       "--license-header=#{if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION'}",
-      "--java.namespace=#{['Fixtures', key.replace(/\/|\./, '')].join('.')}",
-      "--input-file=#{swaggerDir}/#{optsMappingsValue}"
+      "--java.namespace=#{['Fixtures', namespace].join('.')}",
+      "--input-file=#{swaggerDir}/#{optsMappingsValue}",
     ]
 
     if (opts.azureArm)
@@ -24,10 +29,14 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--java.fluent=true")
+      args.push("--regenerate-manager")
 
-    autorest args,() =>
+    baseFolderPath = "#{outputDir}/src/main/java/fixtures/#{namespace}"
+    rimraf.sync baseFolderPath
+
+    autorest args, () ->
       instances--
-      return done() if instances is 0 
+      return done() if instances is 0
 
 defaultMappings = {
   'ParameterFlattening': 'parameter-flattening.json',
