@@ -58,7 +58,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ImplPackage => "implementation";
+        public string ImplPackage => "implementation";
 
         [JsonIgnore]
         public string ModelsPackage => ".models";

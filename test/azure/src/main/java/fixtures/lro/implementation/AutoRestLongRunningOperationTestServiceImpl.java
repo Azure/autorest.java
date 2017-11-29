@@ -157,27 +157,16 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param credentials the management credentials for Azure
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestLongRunningOperationTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestLongRunningOperationTestService client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestLongRunningOperationTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 

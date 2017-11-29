@@ -157,7 +157,7 @@ namespace AutoRest.Java.DanModel
 
         private void Line(string text, bool addPrefix)
         {
-            Text($"{text}\n", addPrefix);
+            Text($"{text}{Environment.NewLine}", addPrefix);
         }
 
         public JavaFileContents Line(string text)

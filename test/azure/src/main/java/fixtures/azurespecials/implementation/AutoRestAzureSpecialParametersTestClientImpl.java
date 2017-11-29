@@ -252,27 +252,16 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      * @param credentials the management credentials for Azure
      */
     public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestAzureSpecialParametersTestClientImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestAzureSpecialParametersTestClientImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 

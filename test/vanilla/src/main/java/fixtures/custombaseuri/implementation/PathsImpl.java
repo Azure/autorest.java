@@ -120,9 +120,7 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getEmptyAsync(String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) {
-                return restResponse.body();
-            } });
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
         }
 
 

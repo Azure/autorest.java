@@ -126,27 +126,16 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @param credentials the management credentials for Azure
      */
     public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 
