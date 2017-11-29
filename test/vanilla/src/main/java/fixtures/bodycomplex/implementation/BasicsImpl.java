@@ -39,12 +39,12 @@ import rx.functions.Func1;
  */
 public class BasicsImpl implements Basics {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private BasicsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestComplexTestServiceImpl client;
 

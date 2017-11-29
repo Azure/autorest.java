@@ -36,12 +36,12 @@ import rx.functions.Func1;
  */
 public class BoolsImpl implements Bools {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private BoolsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestBoolTestServiceImpl client;
 

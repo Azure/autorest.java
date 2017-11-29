@@ -36,12 +36,12 @@ import rx.functions.Func1;
  */
 public class BytesImpl implements Bytes {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private BytesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestSwaggerBATByteServiceImpl client;
 

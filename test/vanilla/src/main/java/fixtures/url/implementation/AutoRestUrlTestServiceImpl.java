@@ -74,7 +74,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Paths object to access its operations.
      */
     private Paths paths;
 
@@ -88,7 +88,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Queries object to access its operations.
      */
     private Queries queries;
 
@@ -102,7 +102,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The PathItems object to access its operations.
      */
     private PathItems pathItems;
 
@@ -125,7 +125,7 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
     /**
      * Initializes an instance of AutoRestUrlTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestUrlTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

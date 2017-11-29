@@ -22,7 +22,7 @@ import fixtures.header.Headers;
 public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implements AutoRestSwaggerBATHeaderService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Headers object to access its operations.
      */
     private Headers headers;
 
@@ -45,7 +45,7 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
     /**
      * Initializes an instance of AutoRestSwaggerBATHeaderService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATHeaderServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

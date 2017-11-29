@@ -47,7 +47,7 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Paths object to access its operations.
      */
     private Paths paths;
 
@@ -70,7 +70,7 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

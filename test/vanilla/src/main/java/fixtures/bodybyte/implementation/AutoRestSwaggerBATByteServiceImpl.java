@@ -22,7 +22,7 @@ import fixtures.bodybyte.Bytes;
 public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements AutoRestSwaggerBATByteService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Bytes object to access its operations.
      */
     private Bytes bytes;
 
@@ -45,7 +45,7 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
     /**
      * Initializes an instance of AutoRestSwaggerBATByteService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATByteServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

@@ -42,12 +42,12 @@ import rx.functions.Func1;
  */
 public class QueriesImpl implements Queries {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private QueriesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestUrlTestServiceImpl client;
 

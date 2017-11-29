@@ -40,12 +40,12 @@ import rx.functions.Func1;
  */
 public class HttpSuccessImpl implements HttpSuccess {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private HttpSuccessService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 

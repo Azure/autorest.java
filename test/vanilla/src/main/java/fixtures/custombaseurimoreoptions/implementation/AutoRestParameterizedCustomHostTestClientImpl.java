@@ -72,7 +72,7 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Paths object to access its operations.
      */
     private Paths paths;
 
@@ -95,7 +95,7 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
     /**
      * Initializes an instance of AutoRestParameterizedCustomHostTestClient client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestParameterizedCustomHostTestClientImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

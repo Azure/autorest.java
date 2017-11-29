@@ -35,12 +35,12 @@ import rx.functions.Func1;
  */
 public class FilesImpl implements Files {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private FilesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestSwaggerBATFileServiceImpl client;
 

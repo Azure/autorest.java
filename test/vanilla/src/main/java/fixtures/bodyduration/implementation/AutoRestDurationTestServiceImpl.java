@@ -22,7 +22,7 @@ import fixtures.bodyduration.Durations;
 public class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Durations object to access its operations.
      */
     private Durations durations;
 
@@ -45,7 +45,7 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
     /**
      * Initializes an instance of AutoRestDurationTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestDurationTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

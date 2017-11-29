@@ -22,7 +22,7 @@ import fixtures.bodydictionary.Dictionarys;
 public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient implements AutoRestSwaggerBATdictionaryService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Dictionarys object to access its operations.
      */
     private Dictionarys dictionarys;
 
@@ -45,7 +45,7 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

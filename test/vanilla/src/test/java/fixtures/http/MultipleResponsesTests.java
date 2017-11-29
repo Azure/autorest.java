@@ -1,11 +1,11 @@
 package fixtures.http;
 
+import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpRequest;
 import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.policy.PortPolicy;
-import com.microsoft.rest.v2.policy.RequestPolicy;
+import com.microsoft.rest.v2.policy.*;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
 import fixtures.http.models.C;
@@ -31,7 +31,9 @@ public class MultipleResponsesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000)));
     }
 
     @Test
@@ -50,7 +52,7 @@ public class MultipleResponsesTests {
     @Test
     public void get200Model204NoModelDefaultError201Invalid() throws Exception {
         try {
-            client.multipleResponses().get200Model204NoModelDefaultError201Invalid();
+            A result = client.multipleResponses().get200Model204NoModelDefaultError201Invalid();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(201, ex.response().statusCode());
@@ -140,7 +142,9 @@ public class MultipleResponsesTests {
     @Test
     public void get202None204NoneDefaultError202None() throws Exception {
         HttpPipeline httpPipeline = HttpPipeline.build(
-            new RequestPolicy.Factory() {
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RequestPolicy.Factory() {
                 @Override
                 public RequestPolicy create(final RequestPolicy next, RequestPolicy.Options options) {
                     return new RequestPolicy() {
@@ -173,7 +177,9 @@ public class MultipleResponsesTests {
     @Test
     public void get202None204NoneDefaultError204None() throws Exception {
         HttpPipeline httpPipeline = HttpPipeline.build(
-            new RequestPolicy.Factory() {
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new RequestPolicy.Factory() {
                 @Override
                 public RequestPolicy create(final RequestPolicy next, RequestPolicy.Options options) {
                     return new RequestPolicy() {

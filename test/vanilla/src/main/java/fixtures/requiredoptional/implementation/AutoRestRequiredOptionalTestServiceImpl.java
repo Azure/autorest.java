@@ -98,7 +98,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Implicits object to access its operations.
      */
     private Implicits implicits;
 
@@ -112,7 +112,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Explicits object to access its operations.
      */
     private Explicits explicits;
 
@@ -135,7 +135,7 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
     /**
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestRequiredOptionalTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

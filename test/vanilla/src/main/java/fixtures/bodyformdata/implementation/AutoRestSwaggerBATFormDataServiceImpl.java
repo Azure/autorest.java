@@ -22,7 +22,7 @@ import fixtures.bodyformdata.Formdatas;
 public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Formdatas object to access its operations.
      */
     private Formdatas formdatas;
 
@@ -45,7 +45,7 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
     /**
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

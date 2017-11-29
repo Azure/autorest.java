@@ -38,12 +38,12 @@ import rx.functions.Func1;
  */
 public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private PolymorphicrecursivesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestComplexTestServiceImpl client;
 

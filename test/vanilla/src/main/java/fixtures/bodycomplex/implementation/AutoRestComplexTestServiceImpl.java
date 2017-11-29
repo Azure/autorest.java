@@ -54,7 +54,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Basics object to access its operations.
      */
     private Basics basics;
 
@@ -68,7 +68,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Primitives object to access its operations.
      */
     private Primitives primitives;
 
@@ -82,7 +82,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Arrays object to access its operations.
      */
     private Arrays arrays;
 
@@ -96,7 +96,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Dictionarys object to access its operations.
      */
     private Dictionarys dictionarys;
 
@@ -110,7 +110,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Inheritances object to access its operations.
      */
     private Inheritances inheritances;
 
@@ -124,7 +124,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Polymorphisms object to access its operations.
      */
     private Polymorphisms polymorphisms;
 
@@ -138,7 +138,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Polymorphicrecursives object to access its operations.
      */
     private Polymorphicrecursives polymorphicrecursives;
 
@@ -152,7 +152,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Readonlypropertys object to access its operations.
      */
     private Readonlypropertys readonlypropertys;
 
@@ -175,7 +175,7 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

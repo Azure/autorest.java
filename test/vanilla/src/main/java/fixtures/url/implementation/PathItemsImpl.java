@@ -36,12 +36,12 @@ import rx.functions.Func1;
  */
 public class PathItemsImpl implements PathItems {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private PathItemsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestUrlTestServiceImpl client;
 

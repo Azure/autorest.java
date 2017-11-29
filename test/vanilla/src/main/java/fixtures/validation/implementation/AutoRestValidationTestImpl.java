@@ -43,7 +43,7 @@ import rx.functions.Func1;
  */
 public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
-     * The HTTP pipeline to send requests through.
+     * The proxy service to use to perform REST calls.
      */
     private AutoRestValidationTestService service;
 
@@ -107,13 +107,13 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      * Initializes an instance of AutoRestValidationTest client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestValidationTestImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
 
 
-        service = RestProxy.create(AutoRestValidationTestService.class);
+        service = RestProxy.create(AutoRestValidationTestService.class, httpPipeline);
     }
 
     /**

@@ -22,7 +22,7 @@ import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implements AutoRestRFC1123DateTimeTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Datetimerfc1123s object to access its operations.
      */
     private Datetimerfc1123s datetimerfc1123s;
 
@@ -45,7 +45,7 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
     /**
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestRFC1123DateTimeTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

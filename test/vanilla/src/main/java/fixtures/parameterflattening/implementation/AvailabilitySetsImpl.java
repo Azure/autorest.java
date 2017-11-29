@@ -39,12 +39,12 @@ import rx.functions.Func1;
  */
 public class AvailabilitySetsImpl implements AvailabilitySets {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private AvailabilitySetsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestParameterFlatteningImpl client;
 

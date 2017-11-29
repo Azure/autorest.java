@@ -48,12 +48,12 @@ import rx.functions.Func1;
  */
 public class PrimitivesImpl implements Primitives {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private PrimitivesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestComplexTestServiceImpl client;
 

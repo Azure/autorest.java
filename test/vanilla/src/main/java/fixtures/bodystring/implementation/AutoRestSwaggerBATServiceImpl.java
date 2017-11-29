@@ -23,7 +23,7 @@ import fixtures.bodystring.Strings;
 public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Strings object to access its operations.
      */
     private Strings strings;
 
@@ -37,7 +37,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Enums object to access its operations.
      */
     private Enums enums;
 
@@ -60,7 +60,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

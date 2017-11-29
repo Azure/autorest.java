@@ -5,6 +5,7 @@ import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy;
 import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import com.microsoft.rest.v2.policy.RequestPolicy;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -52,6 +53,7 @@ public class HeaderOperationsTests {
         HttpPipeline httpPipeline = new HttpPipeline.Builder()
                 .withUserAgent("")
                 .withRequestPolicy(new AddHeadersPolicy.Factory(headers))
+                .withRequestPolicy(new ProtocolPolicy.Factory("http"))
                 .withRequestPolicy(new PortPolicy.Factory(3000))
                 .build();
 
@@ -141,7 +143,7 @@ public class HeaderOperationsTests {
                     fail();
                 }
             });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseIntegerWithRestResponseAsync("negative")
             .subscribe(new Action1<RestResponse<HeaderResponseIntegerHeaders, Void>>() {
@@ -159,7 +161,7 @@ public class HeaderOperationsTests {
                     fail();
                 }
             });
-        Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
     }
 
     @Test

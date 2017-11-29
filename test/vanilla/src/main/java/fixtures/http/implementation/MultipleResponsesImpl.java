@@ -40,12 +40,12 @@ import rx.functions.Func1;
  */
 public class MultipleResponsesImpl implements MultipleResponses {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private MultipleResponsesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 

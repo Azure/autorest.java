@@ -32,6 +32,10 @@ namespace AutoRest.Java.DanModel
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
             string serviceName = codeModel.ServiceName;
+            if (string.IsNullOrEmpty(serviceName))
+            {
+                serviceName = "MissingService";
+            }
             string className = $"{serviceName}Manager";
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
@@ -42,12 +46,9 @@ namespace AutoRest.Java.DanModel
                 "com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager",
-                "com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor",
                 "com.microsoft.azure.v2.AzureEnvironment",
-                "com.microsoft.azure.v2.AzureResponseBuilder",
                 "com.microsoft.azure.v2.credentials.AzureTokenCredentials",
-                "com.microsoft.azure.v2.serializer.AzureJacksonAdapter",
-                "com.microsoft.rest.v2.RestClient");
+                "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
 
             javaFile.MultipleLineComment(comment =>
             {
@@ -1993,7 +1994,7 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Line($"Initializes an instance of {interfaceName} client.");
                     comment.Line();
-                    comment.Param("httpPipeline", "the HTTP pipeline that requests will be sent through");
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
                 });
                 classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
                 {
@@ -2012,7 +2013,7 @@ namespace AutoRest.Java.DanModel
                     if (hasRootMethods)
                     {
                         constructor.Line();
-                        constructor.Line($"service = {restProxyType}.create({serviceClientType}.class);");
+                        constructor.Line($"service = {restProxyType}.create({serviceClientType}.class, {httpPipelineVariableName});");
                     }
                 });
 

@@ -36,12 +36,12 @@ import rx.functions.Func1;
  */
 public class PathsImpl implements Paths {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private PathsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestParameterizedHostTestClientImpl client;
 
@@ -120,7 +120,9 @@ public class PathsImpl implements Paths {
      */
     public Single<Void> getEmptyAsync(String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) {
+                return restResponse.body();
+            } });
         }
 
 

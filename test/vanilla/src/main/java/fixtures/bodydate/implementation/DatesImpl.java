@@ -37,12 +37,12 @@ import rx.functions.Func1;
  */
 public class DatesImpl implements Dates {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private DatesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestDateTestServiceImpl client;
 

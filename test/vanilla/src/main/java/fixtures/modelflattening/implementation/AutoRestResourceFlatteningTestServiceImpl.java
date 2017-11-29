@@ -49,7 +49,7 @@ import rx.functions.Func1;
  */
 public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     /**
-     * The HTTP pipeline to send requests through.
+     * The proxy service to use to perform REST calls.
      */
     private AutoRestResourceFlatteningTestServiceService service;
 
@@ -63,13 +63,13 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
 
 
-        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class);
+        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpPipeline);
     }
 
     /**

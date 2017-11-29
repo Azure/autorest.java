@@ -6,12 +6,15 @@ import java.util.Map;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import fixtures.report.implementation.AutoRestReportServiceImpl;
 import org.junit.runner.Result;
 import org.junit.runner.notification.RunListener;
 
 public final class CoverageReporter extends RunListener {
-    private AutoRestReportService client = new AutoRestReportServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+    private AutoRestReportService client = new AutoRestReportServiceImpl(HttpPipeline.build(
+            new ProtocolPolicy.Factory("http"),
+            new PortPolicy.Factory(3000)));
 
     @Override
     public void testRunFinished(Result result) throws Exception {

@@ -2,6 +2,7 @@ package fixtures.bodyduration;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -15,7 +16,9 @@ public class DurationOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestDurationTestServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
+        client = new AutoRestDurationTestServiceImpl(HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000)));
     }
 
     @Test

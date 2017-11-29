@@ -38,12 +38,12 @@ import rx.functions.Func1;
  */
 public class InheritancesImpl implements Inheritances {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private InheritancesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestComplexTestServiceImpl client;
 

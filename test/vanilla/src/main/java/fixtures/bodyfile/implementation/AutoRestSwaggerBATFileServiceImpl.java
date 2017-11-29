@@ -22,7 +22,7 @@ import fixtures.bodyfile.Files;
 public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements AutoRestSwaggerBATFileService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Files object to access its operations.
      */
     private Files files;
 
@@ -45,7 +45,7 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
     /**
      * Initializes an instance of AutoRestSwaggerBATFileService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATFileServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

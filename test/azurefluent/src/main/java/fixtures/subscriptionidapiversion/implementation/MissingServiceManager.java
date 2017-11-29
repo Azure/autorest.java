@@ -8,42 +8,39 @@
  * regenerated.
  */
 
-package fixtures.custombaseuri.implementation;
+package fixtures.subscriptionidapiversion.implementation;
 
 import com.microsoft.azure.management.apigeneration.Beta;
 import com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable;
 import com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl;
 import com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager;
-import com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor;
 import com.microsoft.azure.v2.AzureEnvironment;
-import com.microsoft.azure.v2.AzureResponseBuilder;
 import com.microsoft.azure.v2.credentials.AzureTokenCredentials;
 import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.v2.RestClient;
 
 /**
- * Entry point to Azure  resource management.
+ * Entry point to Azure MissingService resource management.
  */
 @Beta(SinceVersion.V1_2_0)
-public final class Manager extends Manager<Manager, AutoRestParameterizedHostTestClientImpl> {
+public final class MissingServiceManager extends Manager<MissingServiceManager, MicrosoftAzureTestUrlImpl> {
     /**
-     * Get a Configurable instance that can be used to create Manager with optional configuration.
+     * Get a Configurable instance that can be used to create MissingServiceManager with optional configuration.
      *
      * @return the instance allowing configurations
      */
     public static Configurable configure() {
-        return new Manager.ConfigurableImpl();
+        return new MissingServiceManager.ConfigurableImpl();
     }
 
     /**
-     * Creates an instance of Manager that exposes  resource management API entry points.
+     * Creates an instance of MissingServiceManager that exposes MissingService resource management API entry points.
      *
      * @param credentials the credentials to use
      * @param subscriptionId the subscription UUID
-     * @return the Manager
+     * @return the MissingServiceManager
      */
-    public static Manager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
-        return new Manager(new RestClient.Builder()
+    public static MissingServiceManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
+        return new MissingServiceManager(new RestClient.Builder()
             .withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)
             .withCredentials(credentials)
             .withSerializerAdapter(new AzureJacksonAdapter())
@@ -53,14 +50,14 @@ public final class Manager extends Manager<Manager, AutoRestParameterizedHostTes
     }
 
     /**
-     * Creates an instance of Manager that exposes  resource management API entry points.
+     * Creates an instance of MissingServiceManager that exposes MissingService resource management API entry points.
      *
      * @param restClient the RestClient to be used for API calls.
      * @param subscriptionId the subscription UUID
-     * @return the Manager
+     * @return the MissingServiceManager
      */
-    public static Manager authenticate(RestClient restClient, String subscriptionId) {
-        return new Manager(restClient, subscriptionId);
+    public static MissingServiceManager authenticate(RestClient restClient, String subscriptionId) {
+        return new MissingServiceManager(restClient, subscriptionId);
     }
 
     /**
@@ -68,28 +65,28 @@ public final class Manager extends Manager<Manager, AutoRestParameterizedHostTes
      */
     public interface Configurable extends AzureConfigurable<Configurable> {
         /**
-         * Creates an instance of Manager that exposes  management API entry points.
+         * Creates an instance of MissingServiceManager that exposes MissingService management API entry points.
          *
          * @param credentials the credentials to use
          * @param subscriptionId the subscription UUID
-         * @return the interface exposing  management API entry points that work across subscriptions
+         * @return the interface exposing MissingService management API entry points that work across subscriptions
          */
-        Manager authenticate(AzureTokenCredentials credentials, String subscriptionId);
+        MissingServiceManager authenticate(AzureTokenCredentials credentials, String subscriptionId);
     }
 
     /**
      * The implementation for Configurable interface.
      */
     private static final class ConfigurableImpl extends AzureConfigurableImpl<Configurable> implements Configurable {
-        public Manager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
-            return Manager.authenticate(buildRestClient(credentials), subscriptionId);
+        public MissingServiceManager authenticate(AzureTokenCredentials credentials, String subscriptionId) {
+            return MissingServiceManager.authenticate(buildRestClient(credentials), subscriptionId);
         }
     }
 
-    private Manager(RestClient restClient, String subscriptionId) {
+    private MissingServiceManager(RestClient restClient, String subscriptionId) {
         super(
             restClient,
             subscriptionId,
-            new AutoRestParameterizedHostTestClientImpl(restClient).withSubscriptionId(subscriptionId));
+            new MicrosoftAzureTestUrlImpl(restClient).withSubscriptionId(subscriptionId));
     }
 }

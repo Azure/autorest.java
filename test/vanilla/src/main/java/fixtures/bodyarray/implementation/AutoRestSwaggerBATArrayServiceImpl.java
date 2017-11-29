@@ -22,7 +22,7 @@ import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
 public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements AutoRestSwaggerBATArrayService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Arrays object to access its operations.
      */
     private Arrays arrays;
 
@@ -45,7 +45,7 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
     /**
      * Initializes an instance of AutoRestSwaggerBATArrayService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestSwaggerBATArrayServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

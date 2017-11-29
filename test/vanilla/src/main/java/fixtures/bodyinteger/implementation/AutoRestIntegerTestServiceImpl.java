@@ -22,7 +22,7 @@ import fixtures.bodyinteger.Ints;
 public class AutoRestIntegerTestServiceImpl extends ServiceClient implements AutoRestIntegerTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Ints object to access its operations.
      */
     private Ints ints;
 
@@ -45,7 +45,7 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
     /**
      * Initializes an instance of AutoRestIntegerTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestIntegerTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

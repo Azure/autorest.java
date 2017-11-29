@@ -22,7 +22,7 @@ import fixtures.bodynumber.Numbers;
 public class AutoRestNumberTestServiceImpl extends ServiceClient implements AutoRestNumberTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Numbers object to access its operations.
      */
     private Numbers numbers;
 
@@ -45,7 +45,7 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
     /**
      * Initializes an instance of AutoRestNumberTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestNumberTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

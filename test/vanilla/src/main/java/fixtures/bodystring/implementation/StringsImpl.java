@@ -38,12 +38,12 @@ import rx.functions.Func1;
  */
 public class StringsImpl implements Strings {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private StringsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestSwaggerBATServiceImpl client;
 

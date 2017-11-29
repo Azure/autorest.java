@@ -56,12 +56,12 @@ import rx.functions.Func1;
  */
 public class HttpRedirectsImpl implements HttpRedirects {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private HttpRedirectsService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 

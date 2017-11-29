@@ -22,7 +22,7 @@ import fixtures.bodydatetime.Datetimes;
 public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements AutoRestDateTimeTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Datetimes object to access its operations.
      */
     private Datetimes datetimes;
 
@@ -45,7 +45,7 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
     /**
      * Initializes an instance of AutoRestDateTimeTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestDateTimeTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

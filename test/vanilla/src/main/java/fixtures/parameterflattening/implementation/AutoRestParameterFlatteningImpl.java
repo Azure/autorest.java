@@ -22,7 +22,7 @@ import fixtures.parameterflattening.AvailabilitySets;
 public class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The AvailabilitySets object to access its operations.
      */
     private AvailabilitySets availabilitySets;
 
@@ -45,7 +45,7 @@ public class AutoRestParameterFlatteningImpl extends ServiceClient implements Au
     /**
      * Initializes an instance of AutoRestParameterFlattening client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestParameterFlatteningImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

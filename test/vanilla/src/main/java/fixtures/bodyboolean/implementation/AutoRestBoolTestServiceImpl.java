@@ -22,7 +22,7 @@ import fixtures.bodyboolean.Bools;
 public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRestBoolTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The Bools object to access its operations.
      */
     private Bools bools;
 
@@ -45,7 +45,7 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
     /**
      * Initializes an instance of AutoRestBoolTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestBoolTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);

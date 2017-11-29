@@ -37,12 +37,12 @@ import rx.functions.Func1;
  */
 public class DatetimesImpl implements Datetimes {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private DatetimesService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestDateTimeTestServiceImpl client;
 

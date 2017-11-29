@@ -36,7 +36,7 @@ import rx.functions.Func1;
  */
 public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
     /**
-     * The HTTP pipeline to send requests through.
+     * The proxy service to use to perform REST calls.
      */
     private AutoRestReportServiceService service;
 
@@ -50,13 +50,13 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Initializes an instance of AutoRestReportService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestReportServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
 
 
-        service = RestProxy.create(AutoRestReportServiceService.class);
+        service = RestProxy.create(AutoRestReportServiceService.class, httpPipeline);
     }
 
     /**

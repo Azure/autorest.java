@@ -47,12 +47,12 @@ import rx.functions.Func1;
  */
 public class DictionarysImpl implements Dictionarys {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private DictionarysService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestSwaggerBATdictionaryServiceImpl client;
 

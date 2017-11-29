@@ -13,7 +13,7 @@ namespace AutoRest.Java.DanModel
         {
             MultipleLineComment(comment =>
             {
-                comment.Line("The HTTP pipeline to send requests through.");
+                comment.Line(description);
             });
             Line($"private {variableType} {variableName};");
             return this;

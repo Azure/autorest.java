@@ -39,12 +39,12 @@ import rx.functions.Func1;
  */
 public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
-     * The HTTP pipeline to send requests through.
+     * The RestProxy service to perform REST calls.
      */
     private Datetimerfc1123sService service;
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The service client containing this operation class.
      */
     private AutoRestRFC1123DateTimeTestServiceImpl client;
 

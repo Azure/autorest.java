@@ -28,7 +28,7 @@ import fixtures.http.MultipleResponses;
 public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The HttpFailures object to access its operations.
      */
     private HttpFailures httpFailures;
 
@@ -42,7 +42,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The HttpSuccess object to access its operations.
      */
     private HttpSuccess httpSuccess;
 
@@ -56,7 +56,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The HttpRedirects object to access its operations.
      */
     private HttpRedirects httpRedirects;
 
@@ -70,7 +70,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The HttpClientFailures object to access its operations.
      */
     private HttpClientFailures httpClientFailures;
 
@@ -84,7 +84,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The HttpServerFailures object to access its operations.
      */
     private HttpServerFailures httpServerFailures;
 
@@ -98,7 +98,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The HttpRetrys object to access its operations.
      */
     private HttpRetrys httpRetrys;
 
@@ -112,7 +112,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * The HTTP pipeline to send requests through.
+     * The MultipleResponses object to access its operations.
      */
     private MultipleResponses multipleResponses;
 
@@ -135,7 +135,7 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
     /**
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
-     * @param httpPipeline the HTTP pipeline that requests will be sent through
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
