@@ -452,7 +452,7 @@ namespace AutoRest.Java.Model
 
             if (ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
             {
-                builder.AppendLine($"{Name}Async({argsString}).blockingGet();");
+                builder.AppendLine($"{Name}Async({argsString}).blockingAwait();");
             }
             else
             {

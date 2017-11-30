@@ -2192,7 +2192,15 @@ namespace AutoRest.Java.DanModel
                                 comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                             }
                         });
-                        interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+
+                        if (method.ReturnTypeResponseName.Else("void") != "void")
+                        {
+                            interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+                        }
+                        else
+                        {
+                            interfaceBlock.Line($"Completable {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+                        }
 
                         if (method.ShouldGenerateBeginRestResponseMethod())
                         {
@@ -2258,7 +2266,15 @@ namespace AutoRest.Java.DanModel
                             comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                         }
                     });
-                    interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
+
+                    if (method.ReturnTypeResponseName.Else("void") != "void")
+                    {
+                        interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
+                    }
+                    else
+                    {
+                        interfaceBlock.Line($"Completable {method.Name}Async({method.MethodParameterDeclaration});");
+                    }
 
                     interfaceBlock.Line();
 
