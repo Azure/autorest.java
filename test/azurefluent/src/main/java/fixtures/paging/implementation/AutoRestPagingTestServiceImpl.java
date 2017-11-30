@@ -113,27 +113,16 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestPagingTestServiceImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestPagingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestPagingTestService client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestPagingTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 

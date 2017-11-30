@@ -118,27 +118,16 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportServiceForAzure client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestReportServiceForAzureImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 

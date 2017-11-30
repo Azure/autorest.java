@@ -115,27 +115,16 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param credentials the management credentials for Azure
      */
     public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
-        this("https://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestParameterGroupingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterGroupingTestService client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestParameterGroupingTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 

@@ -1,19 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core;
+using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
+using AutoRest.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Text;
-using AutoRest.Core;
-using AutoRest.Core.Utilities;
-using AutoRest.Extensions;
-using AutoRest.Core.Model;
-using Newtonsoft.Json;
-using AutoRest.Core.Utilities.Collections;
-using System.Collections.Immutable;
 
 namespace AutoRest.Java.Model
 {
@@ -378,8 +377,7 @@ namespace AutoRest.Java.Model
 
             return builder.ToString();
         }
-        public string ObservableBodyDocumentation => string.IsNullOrEmpty(ReturnTypeResponseName) ? "" : $"a {{@link Single}} emitting the {ReturnTypeJv.ServiceResponseGenericParameterString.EscapeXmlComment()} object";
-
+        
         public string ObservableImpl(IEnumerable<ParameterJv> parameters)
         {
             string returnType;
@@ -464,10 +462,6 @@ namespace AutoRest.Java.Model
 
             return builder.ToString();
         }
-
-        [JsonIgnore]
-        [Obsolete("Use MethodParameterApiInvocation")]
-        public string MethodRequiredParameterApiInvocation => MethodParameterApiInvocation;
 
         [JsonIgnore]
         public virtual bool IsParameterizedHost => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
@@ -640,18 +634,6 @@ namespace AutoRest.Java.Model
             }
         }
 
-        /// <summary>
-        /// Gets the expression for response body initialization
-        /// </summary>
-        [JsonIgnore]
-        public virtual string InitializeResponseBody
-        {
-            get
-            {
-                return string.Empty;
-            }
-        }
-
         [JsonIgnore]
         public virtual string MethodParameterDeclarationWithCallback
         {
@@ -809,15 +791,6 @@ namespace AutoRest.Java.Model
 
         [JsonIgnore]
         public virtual string ServiceFutureFactoryMethod => "fromBody";
-
-        [JsonIgnore]
-        public virtual string CallbackDocumentation
-        {
-            get
-            {
-                return " * @param serviceCallback the async ServiceCallback to handle successful and failed responses.";
-            }
-        }
 
         [JsonIgnore]
         public virtual List<string> InterfaceImports

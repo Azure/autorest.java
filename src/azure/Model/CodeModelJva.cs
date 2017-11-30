@@ -23,15 +23,6 @@ namespace AutoRest.Java.Azure.Model
         public IEnumerable<Property> PropertiesEx => Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials");
 
         [JsonIgnore]
-        public virtual string ParentDeclaration
-        {
-            get
-            {
-                return " extends AzureServiceClient implements " + Name;
-            }
-        }
-
-        [JsonIgnore]
         public string SetDefaultHeaders
         {
             get

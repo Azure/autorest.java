@@ -29,7 +29,6 @@ regenExpected = (opts,done) ->
 
     if (opts.fluent)
       args.push("--java.fluent=true")
-      args.push("--regenerate-manager")
 
     baseFolderPath = "#{outputDir}/src/main/java/fixtures/#{namespace}"
     rimraf.sync baseFolderPath

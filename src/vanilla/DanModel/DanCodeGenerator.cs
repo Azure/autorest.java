@@ -34,7 +34,7 @@ namespace AutoRest.Java.DanModel
             string serviceName = codeModel.ServiceName;
             if (string.IsNullOrEmpty(serviceName))
             {
-                serviceName = "MissingService";
+                serviceName = "MissingServiceName";
             }
             string className = $"{serviceName}Manager";
 
@@ -78,29 +78,21 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.Block($"public static {className} authenticate(AzureTokenCredentials credentials, String subscriptionId)", function =>
                 {
-                    function.Line($"return new {className}(new RestClient.Builder()");
-                    function.Indent(() =>
-                    {
-                        function.Line(".withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)");
-                        function.Line(".withCredentials(credentials)");
-                        function.Line(".withSerializerAdapter(new AzureJacksonAdapter())");
-                        function.Line(".withResponseBuilderFactory(new AzureResponseBuilder.Factory())");
-                        function.Line(".withInterceptor(new ProviderRegistrationInterceptor(credentials))");
-                        function.Line(".build(), subscriptionId);");
-                    });
+                    function.Line($"final {httpPipelineType} {httpPipelineVariableName} = AzureProxy.defaultPipeline({className}.class, credentials);");
+                    function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
                 });
                 classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
                 {
                     comment.Line($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
                     comment.Line();
-                    comment.Param("restClient", "the RestClient to be used for API calls.");
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.Block($"public static {className} authenticate(RestClient restClient, String subscriptionId)", function =>
+                classBlock.Block($"public static {className} authenticate({httpPipelineType} {httpPipelineVariableName}, String subscriptionId)", function =>
                 {
-                    function.Return($"new {className}(restClient, subscriptionId)");
+                    function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
                 });
                 classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
@@ -128,18 +120,18 @@ namespace AutoRest.Java.DanModel
                 {
                     innerClass.Block($"public {className} authenticate(AzureTokenCredentials credentials, String subscriptionId)", function =>
                     {
-                        function.Return($"{className}.authenticate(buildRestClient(credentials), subscriptionId)");
+                        function.Return($"{className}.authenticate(build{httpPipelineType}(credentials), subscriptionId)");
                     });
                 });
                 classBlock.Line();
-                classBlock.Block($"private {className}(RestClient restClient, String subscriptionId)", constructor =>
+                classBlock.Block($"private {className}({httpPipelineType} {httpPipelineVariableName}, String subscriptionId)", constructor =>
                 {
                     constructor.Line("super(");
                     constructor.Indent(() =>
                     {
-                        constructor.Line("restClient,");
+                        constructor.Line($"{httpPipelineVariableName},");
                         constructor.Line("subscriptionId,");
-                        constructor.Line($"new {codeModel.Name}Impl(restClient).withSubscriptionId(subscriptionId));");
+                        constructor.Line($"new {codeModel.Name}Impl({httpPipelineVariableName}).withSubscriptionId(subscriptionId));");
                     });
                 });
             });
@@ -160,7 +152,7 @@ namespace AutoRest.Java.DanModel
 
                 string className = pageClass.Value.ToPascalCase();
 
-                string subPackage = (codeModel is CodeModelJvaf ? codeModel.ImplPackage : codeModel.ModelsPackage);
+                string subPackage = (IsFluent(codeModel) ? codeModel.ImplPackage : codeModel.ModelsPackage);
                 JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
                 javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                                 "com.microsoft.azure.v2.Page",
@@ -321,17 +313,25 @@ namespace AutoRest.Java.DanModel
             string className = $"{codeModel.Name.ToPascalCase()}Impl";
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
-            
-            javaFile.Import(codeModel.ImplImports.Concat(new[]
-            {
-                "com.microsoft.azure.v2.AzureServiceClient"
-            }));
 
+            bool fluent = IsFluent(codeModel);
+
+            IEnumerable<string> imports = codeModel.ImplImports;
+            if (fluent)
+            {
+                imports = imports.Where(import =>
+                    !import.StartsWith($"{codeModel.Namespace}.{codeModel.ImplPackage}", StringComparison.OrdinalIgnoreCase) &&
+                    !codeModel.Operations.Any(operation => import.EndsWith(operation.TypeName, StringComparison.OrdinalIgnoreCase)) &&
+                    !import.EndsWith(codeModel.Name, StringComparison.OrdinalIgnoreCase));
+            }
+            javaFile.Import(imports.Concat(new[] { "com.microsoft.azure.v2.AzureServiceClient" }));
+
+            string implements = (fluent ? "" : $" implements {codeModel.Name}");
             javaFile.MultipleLineComment(comment =>
             {
                 comment.Line($"Initializes a new instance of the {className} class.");
             });
-            javaFile.Block($"public class {className}{codeModel.ParentDeclaration}", classBlock =>
+            javaFile.Block($"public class {className} extends AzureServiceClient{implements}", classBlock =>
             {
                 string serviceClientType = codeModel.ServiceClientServiceType;
                 IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
@@ -367,49 +367,29 @@ namespace AutoRest.Java.DanModel
                 }
                 classBlock.Line();
 
-                Action<JavaMultipleLineComment> addConstructorDescription = (JavaMultipleLineComment comment) =>
-                {
-                    comment.Line($"Initializes an instance of {codeModel.Name} client.");
-                };
+                string constructorDescription = $"Initializes an instance of {codeModel.Name} client.";
                 if (settings.AddCredentials)
                 {
-                    string constructorDescription = $"Initializes an instance of {codeModel.Name} client.";
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                         comment.Line();
                         comment.Param("credentials", "the management credentials for Azure");
                     });
                     classBlock.Block($"public {className}(ServiceClientCredentials credentials)", constructor =>
                     {
-                        constructor.Line($"this(\"{codeModel.BaseUrl}\", credentials);");
+                        constructor.Line($"this(AzureProxy.defaultPipeline({className}.class, credentials));");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                         comment.Line();
-                        comment.Param("baseUrl", "the base URL of the host");
-                        comment.Param("credentials", "the management credentials for Azure");
+                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     });
-
-                    string constructorVisibility = codeModel.IsCustomBaseUri ? "private" : "public";
-                    classBlock.Block($"{constructorVisibility} {className}(String baseUrl, ServiceClientCredentials credentials)", constructor =>
+                    classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
                     {
-                        constructor.Line("super(baseUrl, credentials);");
-                        constructor.Line("initialize();");
-                    });
-                    classBlock.Line();
-
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        addConstructorDescription(comment);
-                        comment.Line();
-                        comment.Param("restClient", "the REST client to connect to Azure.");
-                    });
-                    classBlock.Block($"public {className}(RestClient restClient)", constructor =>
-                    {
-                        constructor.Line("super(restClient);");
+                        constructor.Line($"super({httpPipelineVariableName});");
                         constructor.Line("initialize();");
                     });
                     classBlock.Line();
@@ -418,34 +398,22 @@ namespace AutoRest.Java.DanModel
                 {
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                     });
                     classBlock.Block($"public {className}()", constructor =>
                     {
-                        constructor.Line($"this(\"{codeModel.BaseUrl}\");");
+                        constructor.Line($"this(null);");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                         comment.Line();
-                        comment.Param("baseUrl", "the base URL of the host");
+                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     });
-                    classBlock.Block($"{(codeModel.IsCustomBaseUri ? "private" : "public")} {className}(String baseUrl)", constructor =>
+                    classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
                     {
-                        constructor.Line("this(baseUrl, null);");
-                    });
-                    classBlock.Line();
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        addConstructorDescription(comment);
-                        comment.Line();
-                        comment.Param("restClient", "the REST client to connect to Azure");
-                    });
-                    classBlock.Block($"public {className}(RestClient restClient)", constructor =>
-                    {
-                        constructor.Line("super(restClient);");
-                        constructor.Line($"restClient.baseUrl(\"{codeModel.BaseUrl}\");");
+                        constructor.Line($"super({httpPipelineVariableName});");
                         constructor.Line("initialize();");
                     });
                     classBlock.Line();
@@ -1015,7 +983,12 @@ namespace AutoRest.Java.DanModel
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
-            javaFile.Import(codeModel.InterfaceImports);
+            List<string> imports = codeModel.InterfaceImports;
+            if (IsFluent(codeModel))
+            {
+                imports.Add("com.microsoft.azure.v2.AzureClient");
+            }
+            javaFile.Import(imports);
 
             javaFile.MultipleLineComment(comment =>
             {
@@ -3373,5 +3346,8 @@ namespace AutoRest.Java.DanModel
             classBlock.Text(method.ObservableImpl(parameterVariants.AllParameters));
             classBlock.Line();
         }
+
+        private static bool IsFluent(CodeModel codeModel)
+            => codeModel is CodeModelJvaf;
     }
 }

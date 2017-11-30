@@ -152,27 +152,16 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
-        this("https://management.azure.com/", credentials);
+        this(AzureProxy.defaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public MicrosoftAzureTestUrlImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of MicrosoftAzureTestUrl client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public MicrosoftAzureTestUrlImpl(RestClient restClient) {
-        super(restClient);
+    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 

@@ -140,27 +140,16 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * @param credentials the management credentials for Azure
      */
     public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials) {
-        this("http://{accountName}{host}", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestParameterizedHostTestClientImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param baseUrl the base URL of the host
-     * @param credentials the management credentials for Azure
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    private AutoRestParameterizedHostTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     *
-     * @param restClient the REST client to connect to Azure.
-     */
-    public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
         initialize();
     }
 
