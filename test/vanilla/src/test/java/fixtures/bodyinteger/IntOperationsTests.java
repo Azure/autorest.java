@@ -33,7 +33,7 @@ public class IntOperationsTests {
     @Test
     public void getNull() throws Exception {
         try {
-            client.ints().getNull();
+            int i = client.ints().getNullWithRestResponseAsync().blockingGet().body();
             fail();
         } catch (NullPointerException e) {
             // expected
@@ -197,7 +197,7 @@ public class IntOperationsTests {
 
     @Test
     public void getNullUnixTime() throws Exception {
-        DateTime result = client.ints().getNullUnixTime();
+        DateTime result = client.ints().getNullUnixTimeWithRestResponseAsync().blockingGet().body();
         Assert.assertNull(result);
     }
 }

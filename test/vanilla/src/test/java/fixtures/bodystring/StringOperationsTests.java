@@ -27,7 +27,7 @@ public class StringOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.strings().getNull());
+        Assert.assertNull(client.strings().getNullWithRestResponseAsync().blockingGet().body());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class StringOperationsTests {
     @Test
     public void getNotProvided() throws Exception {
         try {
-            client.strings().getNotProvided();
+            client.strings().getNotProvidedWithRestResponseAsync().blockingGet().body();
         } catch (Exception ex) {
             Assert.assertEquals(RestException.class, ex.getClass());
             assertTrue(ex.getMessage().contains("JsonMappingException"));

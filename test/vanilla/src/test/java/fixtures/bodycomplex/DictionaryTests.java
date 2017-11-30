@@ -56,7 +56,7 @@ public class DictionaryTests {
 
     @Test
     public void getNull() throws Exception {
-        DictionaryWrapper result = client.dictionarys().getNull();
+        DictionaryWrapper result = client.dictionarys().getNullWithRestResponseAsync().blockingGet().body();
         Assert.assertNull(result.defaultProgram());
     }
 

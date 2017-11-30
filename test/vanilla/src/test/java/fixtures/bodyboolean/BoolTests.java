@@ -23,7 +23,7 @@ public class BoolTests {
     @Test
     public void getNull() throws Exception {
         try {
-            client.bools().getNull();
+            boolean b = client.bools().getNullWithRestResponseAsync().blockingGet().body();
             fail();
         } catch (NullPointerException e) {
             // expected

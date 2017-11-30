@@ -25,7 +25,7 @@ public class DateTimeRfc1123OperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.datetimerfc1123s().getNull());
+        Assert.assertNull(client.datetimerfc1123s().getNullWithRestResponseAsync().blockingGet().body());
     }
 
     @Test

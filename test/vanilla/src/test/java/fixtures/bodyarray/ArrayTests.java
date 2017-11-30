@@ -26,7 +26,6 @@ import java.util.UUID;
 import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
-import rx.Single;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;
@@ -38,7 +37,7 @@ public class ArrayTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.arrays().getNull());
+        Assert.assertNull(client.arrays().getNullWithRestResponseAsync().blockingGet().body());
     }
 
     @Test
@@ -439,7 +438,7 @@ public class ArrayTests {
     @Test
     public void getComplexNull() throws Exception {
         try {
-            List<Product> result = client.arrays().getComplexNull();
+            List<Product> result = client.arrays().getComplexNullWithRestResponseAsync().blockingGet().body();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -495,7 +494,7 @@ public class ArrayTests {
     @Test
     public void getArrayNull() throws Exception {
         try {
-            List<List<String>> result = client.arrays().getArrayNull();
+            List<List<String>> result = client.arrays().getArrayNullWithRestResponseAsync().blockingGet().body();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -542,7 +541,7 @@ public class ArrayTests {
     @Test
     public void getDictionaryNull() throws Exception {
         try {
-            List<Map<String, String>> result = client.arrays().getDictionaryNull();
+            List<Map<String, String>> result = client.arrays().getDictionaryNullWithRestResponseAsync().blockingGet().body();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));

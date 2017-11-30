@@ -58,12 +58,12 @@ public class BasicOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Basic result = client.basics().getNull();
+        Basic result = client.basics().getNullWithRestResponseAsync().blockingGet().body();
         Assert.assertNull(result.name());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assert.assertNull(client.basics().getNotProvided());
+        Assert.assertNull(client.basics().getNotProvidedWithRestResponseAsync().blockingGet().body());
     }
 }

@@ -45,7 +45,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200Model204NoModelDefaultError204Valid() throws Exception {
-        A result = client.multipleResponses().get200Model204NoModelDefaultError204Valid();
+        A result = client.multipleResponses().get200Model204NoModelDefaultError204ValidWithRestResponseAsync().blockingGet().body();
         Assert.assertNull(result);
     }
 
@@ -260,7 +260,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void getDefaultModelA200None() throws Exception {
-        A result = client.multipleResponses().getDefaultModelA200None();
+        A result = client.multipleResponses().getDefaultModelA200NoneWithRestResponseAsync().blockingGet().body();
         Assert.assertNull(result);
     }
 
@@ -317,7 +317,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200ModelA200None() throws Exception {
-        A result = client.multipleResponses().get200ModelA200None();
+        A result = client.multipleResponses().get200ModelA200NoneWithRestResponseAsync().blockingGet().body();
         Assert.assertNull(result);
     }
 

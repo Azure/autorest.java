@@ -23,7 +23,7 @@ public class DurationOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.durations().getNull());
+        Assert.assertNull(client.durations().getNullWithRestResponseAsync().blockingGet().body());
     }
 
     @Test

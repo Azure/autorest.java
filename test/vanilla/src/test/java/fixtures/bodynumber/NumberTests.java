@@ -25,7 +25,7 @@ public class NumberTests {
     @Test
     public void getNull() throws Exception {
         try {
-            client.numbers().getNull();
+            double d = client.numbers().getNullWithRestResponseAsync().blockingGet().body();
             fail();
         } catch (NullPointerException e) {
             // expected
