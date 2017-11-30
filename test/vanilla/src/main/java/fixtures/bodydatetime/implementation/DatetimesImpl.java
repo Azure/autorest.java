@@ -369,7 +369,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).blockingGet();
+        putUtcMaxDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
@@ -511,7 +511,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) {
-        putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).blockingGet();
+        putLocalPositiveOffsetMaxDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
@@ -653,7 +653,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) {
-        putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).blockingGet();
+        putLocalNegativeOffsetMaxDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
@@ -795,7 +795,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).blockingGet();
+        putUtcMinDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
@@ -892,7 +892,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) {
-        putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).blockingGet();
+        putLocalPositiveOffsetMinDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
@@ -989,7 +989,7 @@ public class DatetimesImpl implements Datetimes {
      * @return the void object if successful.
      */
     public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) {
-        putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).blockingGet();
+        putLocalNegativeOffsetMinDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**

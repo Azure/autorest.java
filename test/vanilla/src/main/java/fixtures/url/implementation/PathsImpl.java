@@ -237,7 +237,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().blockingGet();
+        getBooleanTrueAsync().blockingAwait();
     }
 
     /**
@@ -283,7 +283,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().blockingGet();
+        getBooleanFalseAsync().blockingAwait();
     }
 
     /**
@@ -329,7 +329,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().blockingGet();
+        getIntOneMillionAsync().blockingAwait();
     }
 
     /**
@@ -375,7 +375,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().blockingGet();
+        getIntNegativeOneMillionAsync().blockingAwait();
     }
 
     /**
@@ -421,7 +421,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getTenBillion() {
-        getTenBillionAsync().blockingGet();
+        getTenBillionAsync().blockingAwait();
     }
 
     /**
@@ -467,7 +467,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().blockingGet();
+        getNegativeTenBillionAsync().blockingAwait();
     }
 
     /**
@@ -513,7 +513,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().blockingGet();
+        floatScientificPositiveAsync().blockingAwait();
     }
 
     /**
@@ -559,7 +559,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().blockingGet();
+        floatScientificNegativeAsync().blockingAwait();
     }
 
     /**
@@ -605,7 +605,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().blockingGet();
+        doubleDecimalPositiveAsync().blockingAwait();
     }
 
     /**
@@ -651,7 +651,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().blockingGet();
+        doubleDecimalNegativeAsync().blockingAwait();
     }
 
     /**
@@ -697,7 +697,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().blockingGet();
+        stringUnicodeAsync().blockingAwait();
     }
 
     /**
@@ -743,7 +743,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().blockingGet();
+        stringUrlEncodedAsync().blockingAwait();
     }
 
     /**
@@ -789,7 +789,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringEmpty() {
-        stringEmptyAsync().blockingGet();
+        stringEmptyAsync().blockingAwait();
     }
 
     /**
@@ -836,7 +836,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringNull(String stringPath) {
-        stringNullAsync(stringPath).blockingGet();
+        stringNullAsync(stringPath).blockingAwait();
     }
 
     /**
@@ -888,7 +888,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void enumValid(UriColor enumPath) {
-        enumValidAsync(enumPath).blockingGet();
+        enumValidAsync(enumPath).blockingAwait();
     }
 
     /**
@@ -940,7 +940,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void enumNull(UriColor enumPath) {
-        enumNullAsync(enumPath).blockingGet();
+        enumNullAsync(enumPath).blockingAwait();
     }
 
     /**
@@ -992,7 +992,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteMultiByte(byte[] bytePath) {
-        byteMultiByteAsync(bytePath).blockingGet();
+        byteMultiByteAsync(bytePath).blockingAwait();
     }
 
     /**
@@ -1044,7 +1044,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteEmpty() {
-        byteEmptyAsync().blockingGet();
+        byteEmptyAsync().blockingAwait();
     }
 
     /**
@@ -1092,7 +1092,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteNull(byte[] bytePath) {
-        byteNullAsync(bytePath).blockingGet();
+        byteNullAsync(bytePath).blockingAwait();
     }
 
     /**
@@ -1144,7 +1144,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateValid() {
-        dateValidAsync().blockingGet();
+        dateValidAsync().blockingAwait();
     }
 
     /**
@@ -1191,7 +1191,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateNull(LocalDate datePath) {
-        dateNullAsync(datePath).blockingGet();
+        dateNullAsync(datePath).blockingAwait();
     }
 
     /**
@@ -1242,7 +1242,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().blockingGet();
+        dateTimeValidAsync().blockingAwait();
     }
 
     /**
@@ -1289,7 +1289,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimePath) {
-        dateTimeNullAsync(dateTimePath).blockingGet();
+        dateTimeNullAsync(dateTimePath).blockingAwait();
     }
 
     /**
@@ -1341,7 +1341,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void base64Url(byte[] base64UrlPath) {
-        base64UrlAsync(base64UrlPath).blockingGet();
+        base64UrlAsync(base64UrlPath).blockingAwait();
     }
 
     /**
@@ -1394,7 +1394,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void arrayCsvInPath(List<String> arrayPath) {
-        arrayCsvInPathAsync(arrayPath).blockingGet();
+        arrayCsvInPathAsync(arrayPath).blockingAwait();
     }
 
     /**
@@ -1448,7 +1448,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
-        unixTimeUrlAsync(unixTimeUrlPath).blockingGet();
+        unixTimeUrlAsync(unixTimeUrlPath).blockingAwait();
     }
 
     /**

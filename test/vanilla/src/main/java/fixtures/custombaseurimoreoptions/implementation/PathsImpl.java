@@ -83,7 +83,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName) {
-        getEmptyAsync(vault, secret, keyName).blockingGet();
+        getEmptyAsync(vault, secret, keyName).blockingAwait();
     }
 
     /**
@@ -156,7 +156,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
-        getEmptyAsync(vault, secret, keyName, keyVersion).blockingGet();
+        getEmptyAsync(vault, secret, keyName, keyVersion).blockingAwait();
     }
 
     /**

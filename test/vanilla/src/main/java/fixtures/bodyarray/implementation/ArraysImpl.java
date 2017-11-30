@@ -613,7 +613,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putEmpty(List<String> arrayBody) {
-        putEmptyAsync(arrayBody).blockingGet();
+        putEmptyAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -711,7 +711,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putBooleanTfft(List<Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).blockingGet();
+        putBooleanTfftAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -899,7 +899,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putIntegerValid(List<Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).blockingGet();
+        putIntegerValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1087,7 +1087,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putLongValid(List<Long> arrayBody) {
-        putLongValidAsync(arrayBody).blockingGet();
+        putLongValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1275,7 +1275,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putFloatValid(List<Double> arrayBody) {
-        putFloatValidAsync(arrayBody).blockingGet();
+        putFloatValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1463,7 +1463,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDoubleValid(List<Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).blockingGet();
+        putDoubleValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1651,7 +1651,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putStringValid(List<String> arrayBody) {
-        putStringValidAsync(arrayBody).blockingGet();
+        putStringValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1839,7 +1839,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putUuidValid(List<UUID> arrayBody) {
-        putUuidValidAsync(arrayBody).blockingGet();
+        putUuidValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1982,7 +1982,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDateValid(List<LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).blockingGet();
+        putDateValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2170,7 +2170,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDateTimeValid(List<DateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).blockingGet();
+        putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2358,7 +2358,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).blockingGet();
+        putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2462,7 +2462,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDurationValid(List<Period> arrayBody) {
-        putDurationValidAsync(arrayBody).blockingGet();
+        putDurationValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2560,7 +2560,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putByteValid(List<byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).blockingGet();
+        putByteValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2928,7 +2928,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putComplexValid(List<Product> arrayBody) {
-        putComplexValidAsync(arrayBody).blockingGet();
+        putComplexValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3206,7 +3206,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putArrayValid(List<List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).blockingGet();
+        putArrayValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3484,7 +3484,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).blockingGet();
+        putDictionaryValidAsync(arrayBody).blockingAwait();
     }
 
     /**

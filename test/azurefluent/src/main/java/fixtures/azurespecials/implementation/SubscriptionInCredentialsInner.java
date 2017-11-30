@@ -98,7 +98,7 @@ public class SubscriptionInCredentialsInner {
      * @return the void object if successful.
      */
     public void postMethodGlobalValid() {
-        postMethodGlobalValidAsync().blockingGet();
+        postMethodGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -146,7 +146,7 @@ public class SubscriptionInCredentialsInner {
      * @return the void object if successful.
      */
     public void postMethodGlobalNull() {
-        postMethodGlobalNullAsync().blockingGet();
+        postMethodGlobalNullAsync().blockingAwait();
     }
 
     /**
@@ -194,7 +194,7 @@ public class SubscriptionInCredentialsInner {
      * @return the void object if successful.
      */
     public void postMethodGlobalNotProvidedValid() {
-        postMethodGlobalNotProvidedValidAsync().blockingGet();
+        postMethodGlobalNotProvidedValidAsync().blockingAwait();
     }
 
     /**
@@ -245,7 +245,7 @@ public class SubscriptionInCredentialsInner {
      * @return the void object if successful.
      */
     public void postPathGlobalValid() {
-        postPathGlobalValidAsync().blockingGet();
+        postPathGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -293,7 +293,7 @@ public class SubscriptionInCredentialsInner {
      * @return the void object if successful.
      */
     public void postSwaggerGlobalValid() {
-        postSwaggerGlobalValidAsync().blockingGet();
+        postSwaggerGlobalValidAsync().blockingAwait();
     }
 
     /**

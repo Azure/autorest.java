@@ -798,7 +798,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultError202None() {
-        get202None204NoneDefaultError202NoneAsync().blockingGet();
+        get202None204NoneDefaultError202NoneAsync().blockingAwait();
     }
 
     /**
@@ -843,7 +843,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultError204None() {
-        get202None204NoneDefaultError204NoneAsync().blockingGet();
+        get202None204NoneDefaultError204NoneAsync().blockingAwait();
     }
 
     /**
@@ -888,7 +888,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultError400Valid() {
-        get202None204NoneDefaultError400ValidAsync().blockingGet();
+        get202None204NoneDefaultError400ValidAsync().blockingAwait();
     }
 
     /**
@@ -933,7 +933,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone202Invalid() {
-        get202None204NoneDefaultNone202InvalidAsync().blockingGet();
+        get202None204NoneDefaultNone202InvalidAsync().blockingAwait();
     }
 
     /**
@@ -978,7 +978,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone204None() {
-        get202None204NoneDefaultNone204NoneAsync().blockingGet();
+        get202None204NoneDefaultNone204NoneAsync().blockingAwait();
     }
 
     /**
@@ -1023,7 +1023,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone400None() {
-        get202None204NoneDefaultNone400NoneAsync().blockingGet();
+        get202None204NoneDefaultNone400NoneAsync().blockingAwait();
     }
 
     /**
@@ -1068,7 +1068,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void get202None204NoneDefaultNone400Invalid() {
-        get202None204NoneDefaultNone400InvalidAsync().blockingGet();
+        get202None204NoneDefaultNone400InvalidAsync().blockingAwait();
     }
 
     /**
@@ -1293,7 +1293,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone200Invalid() {
-        getDefaultNone200InvalidAsync().blockingGet();
+        getDefaultNone200InvalidAsync().blockingAwait();
     }
 
     /**
@@ -1338,7 +1338,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone200None() {
-        getDefaultNone200NoneAsync().blockingGet();
+        getDefaultNone200NoneAsync().blockingAwait();
     }
 
     /**
@@ -1383,7 +1383,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone400Invalid() {
-        getDefaultNone400InvalidAsync().blockingGet();
+        getDefaultNone400InvalidAsync().blockingAwait();
     }
 
     /**
@@ -1428,7 +1428,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @return the void object if successful.
      */
     public void getDefaultNone400None() {
-        getDefaultNone400NoneAsync().blockingGet();
+        getDefaultNone400NoneAsync().blockingAwait();
     }
 
     /**

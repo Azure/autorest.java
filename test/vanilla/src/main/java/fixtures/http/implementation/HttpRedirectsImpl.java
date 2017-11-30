@@ -183,7 +183,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head300() {
-        head300Async().blockingGet();
+        head300Async().blockingAwait();
     }
 
     /**
@@ -273,7 +273,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head301() {
-        head301Async().blockingGet();
+        head301Async().blockingAwait();
     }
 
     /**
@@ -318,7 +318,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void get301() {
-        get301Async().blockingGet();
+        get301Async().blockingAwait();
     }
 
     /**
@@ -363,7 +363,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put301() {
-        put301Async().blockingGet();
+        put301Async().blockingAwait();
     }
 
     /**
@@ -409,7 +409,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put301(Boolean booleanValue) {
-        put301Async(booleanValue).blockingGet();
+        put301Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -457,7 +457,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head302() {
-        head302Async().blockingGet();
+        head302Async().blockingAwait();
     }
 
     /**
@@ -502,7 +502,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void get302() {
-        get302Async().blockingGet();
+        get302Async().blockingAwait();
     }
 
     /**
@@ -547,7 +547,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch302() {
-        patch302Async().blockingGet();
+        patch302Async().blockingAwait();
     }
 
     /**
@@ -593,7 +593,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch302(Boolean booleanValue) {
-        patch302Async(booleanValue).blockingGet();
+        patch302Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -641,7 +641,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post303() {
-        post303Async().blockingGet();
+        post303Async().blockingAwait();
     }
 
     /**
@@ -687,7 +687,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post303(Boolean booleanValue) {
-        post303Async(booleanValue).blockingGet();
+        post303Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -735,7 +735,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void head307() {
-        head307Async().blockingGet();
+        head307Async().blockingAwait();
     }
 
     /**
@@ -780,7 +780,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void get307() {
-        get307Async().blockingGet();
+        get307Async().blockingAwait();
     }
 
     /**
@@ -825,7 +825,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put307() {
-        put307Async().blockingGet();
+        put307Async().blockingAwait();
     }
 
     /**
@@ -871,7 +871,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void put307(Boolean booleanValue) {
-        put307Async(booleanValue).blockingGet();
+        put307Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -919,7 +919,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch307() {
-        patch307Async().blockingGet();
+        patch307Async().blockingAwait();
     }
 
     /**
@@ -965,7 +965,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void patch307(Boolean booleanValue) {
-        patch307Async(booleanValue).blockingGet();
+        patch307Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1013,7 +1013,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post307() {
-        post307Async().blockingGet();
+        post307Async().blockingAwait();
     }
 
     /**
@@ -1059,7 +1059,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void post307(Boolean booleanValue) {
-        post307Async(booleanValue).blockingGet();
+        post307Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1107,7 +1107,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void delete307() {
-        delete307Async().blockingGet();
+        delete307Async().blockingAwait();
     }
 
     /**
@@ -1153,7 +1153,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @return the void object if successful.
      */
     public void delete307(Boolean booleanValue) {
-        delete307Async(booleanValue).blockingGet();
+        delete307Async(booleanValue).blockingAwait();
     }
 
     /**

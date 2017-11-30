@@ -85,7 +85,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @return the void object if successful.
      */
     public void head200() {
-        head200Async().blockingGet();
+        head200Async().blockingAwait();
     }
 
     /**
@@ -130,7 +130,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @return the void object if successful.
      */
     public void head204() {
-        head204Async().blockingGet();
+        head204Async().blockingAwait();
     }
 
     /**
@@ -175,7 +175,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @return the void object if successful.
      */
     public void head404() {
-        head404Async().blockingGet();
+        head404Async().blockingAwait();
     }
 
     /**

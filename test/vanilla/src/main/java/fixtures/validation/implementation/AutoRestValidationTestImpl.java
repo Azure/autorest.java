@@ -346,7 +346,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the void object if successful.
      */
     public void getWithConstantInPath() {
-        getWithConstantInPathAsync().blockingGet();
+        getWithConstantInPathAsync().blockingAwait();
     }
 
     /**

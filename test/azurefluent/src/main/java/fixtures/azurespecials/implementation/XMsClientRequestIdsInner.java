@@ -79,7 +79,7 @@ public class XMsClientRequestIdsInner {
      * @return the void object if successful.
      */
     public void get() {
-        getAsync().blockingGet();
+        getAsync().blockingAwait();
     }
 
     /**
@@ -125,7 +125,7 @@ public class XMsClientRequestIdsInner {
      * @return the void object if successful.
      */
     public void paramGet(String xMsClientRequestId) {
-        paramGetAsync(xMsClientRequestId).blockingGet();
+        paramGetAsync(xMsClientRequestId).blockingAwait();
     }
 
     /**

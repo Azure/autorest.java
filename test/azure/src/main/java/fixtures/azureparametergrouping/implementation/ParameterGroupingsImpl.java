@@ -100,7 +100,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingGet();
+        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingAwait();
     }
 
     /**
@@ -156,7 +156,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postOptional() {
-        postOptionalAsync().blockingGet();
+        postOptionalAsync().blockingAwait();
     }
 
     /**
@@ -205,7 +205,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingGet();
+        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingAwait();
     }
 
     /**
@@ -262,7 +262,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsAsync().blockingGet();
+        postMultiParamGroupsAsync().blockingAwait();
     }
 
     /**
@@ -316,7 +316,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingGet();
+        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingAwait();
     }
 
     /**
@@ -385,7 +385,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectAsync().blockingGet();
+        postSharedParameterGroupObjectAsync().blockingAwait();
     }
 
     /**
@@ -434,7 +434,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
-        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingGet();
+        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingAwait();
     }
 
     /**

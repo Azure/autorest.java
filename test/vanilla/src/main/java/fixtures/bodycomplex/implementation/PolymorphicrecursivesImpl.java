@@ -185,7 +185,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**

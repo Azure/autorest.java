@@ -95,7 +95,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
-        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingGet();
+        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingAwait();
     }
 
     /**
@@ -151,7 +151,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postOptional() {
-        postOptionalAsync().blockingGet();
+        postOptionalAsync().blockingAwait();
     }
 
     /**
@@ -200,7 +200,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
-        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingGet();
+        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingAwait();
     }
 
     /**
@@ -257,7 +257,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsAsync().blockingGet();
+        postMultiParamGroupsAsync().blockingAwait();
     }
 
     /**
@@ -311,7 +311,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingGet();
+        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingAwait();
     }
 
     /**
@@ -380,7 +380,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectAsync().blockingGet();
+        postSharedParameterGroupObjectAsync().blockingAwait();
     }
 
     /**
@@ -429,7 +429,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
-        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingGet();
+        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingAwait();
     }
 
     /**

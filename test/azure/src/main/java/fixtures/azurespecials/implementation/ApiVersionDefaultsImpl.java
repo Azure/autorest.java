@@ -92,7 +92,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidAsync().blockingGet();
+        getMethodGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -140,7 +140,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidAsync().blockingGet();
+        getMethodGlobalNotProvidedValidAsync().blockingAwait();
     }
 
     /**
@@ -188,7 +188,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidAsync().blockingGet();
+        getPathGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -236,7 +236,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the void object if successful.
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidAsync().blockingGet();
+        getSwaggerGlobalValidAsync().blockingAwait();
     }
 
     /**

@@ -133,7 +133,7 @@ public class InheritancesImpl implements Inheritances {
      * @return the void object if successful.
      */
     public void putValid(Siamese complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**

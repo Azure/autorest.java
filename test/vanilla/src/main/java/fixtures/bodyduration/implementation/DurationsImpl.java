@@ -144,7 +144,7 @@ public class DurationsImpl implements Durations {
      * @return the void object if successful.
      */
     public void putPositiveDuration(Period durationBody) {
-        putPositiveDurationAsync(durationBody).blockingGet();
+        putPositiveDurationAsync(durationBody).blockingAwait();
     }
 
     /**

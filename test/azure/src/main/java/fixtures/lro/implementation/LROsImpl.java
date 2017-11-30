@@ -3636,7 +3636,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void delete204Succeeded() {
-        delete204SucceededAsync().blockingGet();
+        delete204SucceededAsync().blockingAwait();
     }
 
     /**
@@ -3869,7 +3869,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteNoHeaderInRetry() {
-        deleteNoHeaderInRetryAsync().blockingGet();
+        deleteNoHeaderInRetryAsync().blockingAwait();
     }
 
     /**
@@ -3946,7 +3946,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncNoHeaderInRetry() {
-        deleteAsyncNoHeaderInRetryAsync().blockingGet();
+        deleteAsyncNoHeaderInRetryAsync().blockingAwait();
     }
 
     /**
@@ -4023,7 +4023,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncRetrySucceeded() {
-        deleteAsyncRetrySucceededAsync().blockingGet();
+        deleteAsyncRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -4100,7 +4100,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncNoRetrySucceeded() {
-        deleteAsyncNoRetrySucceededAsync().blockingGet();
+        deleteAsyncNoRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -4177,7 +4177,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncRetryFailed() {
-        deleteAsyncRetryFailedAsync().blockingGet();
+        deleteAsyncRetryFailedAsync().blockingAwait();
     }
 
     /**
@@ -4254,7 +4254,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncRetrycanceled() {
-        deleteAsyncRetrycanceledAsync().blockingGet();
+        deleteAsyncRetrycanceledAsync().blockingAwait();
     }
 
     /**
@@ -4446,7 +4446,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().blockingGet();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -4493,7 +4493,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).blockingGet();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -5112,7 +5112,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetryFailed() {
-        postAsyncRetryFailedAsync().blockingGet();
+        postAsyncRetryFailedAsync().blockingAwait();
     }
 
     /**
@@ -5159,7 +5159,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetryFailed(Product product) {
-        postAsyncRetryFailedAsync(product).blockingGet();
+        postAsyncRetryFailedAsync(product).blockingAwait();
     }
 
     /**
@@ -5277,7 +5277,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetrycanceled() {
-        postAsyncRetrycanceledAsync().blockingGet();
+        postAsyncRetrycanceledAsync().blockingAwait();
     }
 
     /**
@@ -5324,7 +5324,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetrycanceled(Product product) {
-        postAsyncRetrycanceledAsync(product).blockingGet();
+        postAsyncRetrycanceledAsync(product).blockingAwait();
     }
 
     /**

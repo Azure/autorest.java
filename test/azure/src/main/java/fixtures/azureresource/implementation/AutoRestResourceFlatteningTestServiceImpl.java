@@ -226,7 +226,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putArray() {
-        putArrayAsync().blockingGet();
+        putArrayAsync().blockingAwait();
     }
 
     /**
@@ -273,7 +273,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).blockingGet();
+        putArrayAsync(resourceArray).blockingAwait();
     }
 
     /**
@@ -367,7 +367,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putDictionary() {
-        putDictionaryAsync().blockingGet();
+        putDictionaryAsync().blockingAwait();
     }
 
     /**
@@ -414,7 +414,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).blockingGet();
+        putDictionaryAsync(resourceDictionary).blockingAwait();
     }
 
     /**
@@ -508,7 +508,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putResourceCollection() {
-        putResourceCollectionAsync().blockingGet();
+        putResourceCollectionAsync().blockingAwait();
     }
 
     /**
@@ -555,7 +555,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).blockingGet();
+        putResourceCollectionAsync(resourceComplexObject).blockingAwait();
     }
 
     /**

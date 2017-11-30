@@ -318,7 +318,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the void object if successful.
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
-        putUtcMaxDateTimeAsync(datetimeBody).blockingGet();
+        putUtcMaxDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**
@@ -461,7 +461,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the void object if successful.
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
-        putUtcMinDateTimeAsync(datetimeBody).blockingGet();
+        putUtcMinDateTimeAsync(datetimeBody).blockingAwait();
     }
 
     /**

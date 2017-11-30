@@ -185,7 +185,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void head200() {
-        head200Async().blockingGet();
+        head200Async().blockingAwait();
     }
 
     /**
@@ -275,7 +275,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put200() {
-        put200Async().blockingGet();
+        put200Async().blockingAwait();
     }
 
     /**
@@ -321,7 +321,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put200(Boolean booleanValue) {
-        put200Async(booleanValue).blockingGet();
+        put200Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -369,7 +369,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void patch200() {
-        patch200Async().blockingGet();
+        patch200Async().blockingAwait();
     }
 
     /**
@@ -415,7 +415,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void patch200(Boolean booleanValue) {
-        patch200Async(booleanValue).blockingGet();
+        patch200Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -463,7 +463,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post200() {
-        post200Async().blockingGet();
+        post200Async().blockingAwait();
     }
 
     /**
@@ -509,7 +509,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post200(Boolean booleanValue) {
-        post200Async(booleanValue).blockingGet();
+        post200Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -557,7 +557,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void delete200() {
-        delete200Async().blockingGet();
+        delete200Async().blockingAwait();
     }
 
     /**
@@ -603,7 +603,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void delete200(Boolean booleanValue) {
-        delete200Async(booleanValue).blockingGet();
+        delete200Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -651,7 +651,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put201() {
-        put201Async().blockingGet();
+        put201Async().blockingAwait();
     }
 
     /**
@@ -697,7 +697,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put201(Boolean booleanValue) {
-        put201Async(booleanValue).blockingGet();
+        put201Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -745,7 +745,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post201() {
-        post201Async().blockingGet();
+        post201Async().blockingAwait();
     }
 
     /**
@@ -791,7 +791,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post201(Boolean booleanValue) {
-        post201Async(booleanValue).blockingGet();
+        post201Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -839,7 +839,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put202() {
-        put202Async().blockingGet();
+        put202Async().blockingAwait();
     }
 
     /**
@@ -885,7 +885,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put202(Boolean booleanValue) {
-        put202Async(booleanValue).blockingGet();
+        put202Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -933,7 +933,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void patch202() {
-        patch202Async().blockingGet();
+        patch202Async().blockingAwait();
     }
 
     /**
@@ -979,7 +979,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void patch202(Boolean booleanValue) {
-        patch202Async(booleanValue).blockingGet();
+        patch202Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1027,7 +1027,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post202() {
-        post202Async().blockingGet();
+        post202Async().blockingAwait();
     }
 
     /**
@@ -1073,7 +1073,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post202(Boolean booleanValue) {
-        post202Async(booleanValue).blockingGet();
+        post202Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1121,7 +1121,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void delete202() {
-        delete202Async().blockingGet();
+        delete202Async().blockingAwait();
     }
 
     /**
@@ -1167,7 +1167,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void delete202(Boolean booleanValue) {
-        delete202Async(booleanValue).blockingGet();
+        delete202Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1215,7 +1215,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void head204() {
-        head204Async().blockingGet();
+        head204Async().blockingAwait();
     }
 
     /**
@@ -1260,7 +1260,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put204() {
-        put204Async().blockingGet();
+        put204Async().blockingAwait();
     }
 
     /**
@@ -1306,7 +1306,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void put204(Boolean booleanValue) {
-        put204Async(booleanValue).blockingGet();
+        put204Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1354,7 +1354,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void patch204() {
-        patch204Async().blockingGet();
+        patch204Async().blockingAwait();
     }
 
     /**
@@ -1400,7 +1400,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void patch204(Boolean booleanValue) {
-        patch204Async(booleanValue).blockingGet();
+        patch204Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1448,7 +1448,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post204() {
-        post204Async().blockingGet();
+        post204Async().blockingAwait();
     }
 
     /**
@@ -1494,7 +1494,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void post204(Boolean booleanValue) {
-        post204Async(booleanValue).blockingGet();
+        post204Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1542,7 +1542,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void delete204() {
-        delete204Async().blockingGet();
+        delete204Async().blockingAwait();
     }
 
     /**
@@ -1588,7 +1588,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void delete204(Boolean booleanValue) {
-        delete204Async(booleanValue).blockingGet();
+        delete204Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -1636,7 +1636,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @return the void object if successful.
      */
     public void head404() {
-        head404Async().blockingGet();
+        head404Async().blockingAwait();
     }
 
     /**

@@ -266,7 +266,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramExistingKey(String userAgent) {
-        paramExistingKeyAsync(userAgent).blockingGet();
+        paramExistingKeyAsync(userAgent).blockingAwait();
     }
 
     /**
@@ -317,7 +317,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseExistingKey() {
-        responseExistingKeyAsync().blockingGet();
+        responseExistingKeyAsync().blockingAwait();
     }
 
     /**
@@ -363,7 +363,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramProtectedKey(String contentType) {
-        paramProtectedKeyAsync(contentType).blockingGet();
+        paramProtectedKeyAsync(contentType).blockingAwait();
     }
 
     /**
@@ -414,7 +414,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseProtectedKey() {
-        responseProtectedKeyAsync().blockingGet();
+        responseProtectedKeyAsync().blockingAwait();
     }
 
     /**
@@ -461,7 +461,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramInteger(String scenario, int value) {
-        paramIntegerAsync(scenario, value).blockingGet();
+        paramIntegerAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -516,7 +516,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseInteger(String scenario) {
-        responseIntegerAsync(scenario).blockingGet();
+        responseIntegerAsync(scenario).blockingAwait();
     }
 
     /**
@@ -569,7 +569,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramLong(String scenario, long value) {
-        paramLongAsync(scenario, value).blockingGet();
+        paramLongAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -624,7 +624,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseLong(String scenario) {
-        responseLongAsync(scenario).blockingGet();
+        responseLongAsync(scenario).blockingAwait();
     }
 
     /**
@@ -677,7 +677,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramFloat(String scenario, double value) {
-        paramFloatAsync(scenario, value).blockingGet();
+        paramFloatAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -732,7 +732,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseFloat(String scenario) {
-        responseFloatAsync(scenario).blockingGet();
+        responseFloatAsync(scenario).blockingAwait();
     }
 
     /**
@@ -785,7 +785,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDouble(String scenario, double value) {
-        paramDoubleAsync(scenario, value).blockingGet();
+        paramDoubleAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -840,7 +840,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDouble(String scenario) {
-        responseDoubleAsync(scenario).blockingGet();
+        responseDoubleAsync(scenario).blockingAwait();
     }
 
     /**
@@ -893,7 +893,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramBool(String scenario, boolean value) {
-        paramBoolAsync(scenario, value).blockingGet();
+        paramBoolAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -948,7 +948,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseBool(String scenario) {
-        responseBoolAsync(scenario).blockingGet();
+        responseBoolAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1000,7 +1000,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramString(String scenario) {
-        paramStringAsync(scenario).blockingGet();
+        paramStringAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1053,7 +1053,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramString(String scenario, String value) {
-        paramStringAsync(scenario, value).blockingGet();
+        paramStringAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1108,7 +1108,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseString(String scenario) {
-        responseStringAsync(scenario).blockingGet();
+        responseStringAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1161,7 +1161,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDate(String scenario, LocalDate value) {
-        paramDateAsync(scenario, value).blockingGet();
+        paramDateAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1219,7 +1219,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDate(String scenario) {
-        responseDateAsync(scenario).blockingGet();
+        responseDateAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1272,7 +1272,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetime(String scenario, DateTime value) {
-        paramDatetimeAsync(scenario, value).blockingGet();
+        paramDatetimeAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1330,7 +1330,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDatetime(String scenario) {
-        responseDatetimeAsync(scenario).blockingGet();
+        responseDatetimeAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1382,7 +1382,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetimeRfc1123(String scenario) {
-        paramDatetimeRfc1123Async(scenario).blockingGet();
+        paramDatetimeRfc1123Async(scenario).blockingAwait();
     }
 
     /**
@@ -1439,7 +1439,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) {
-        paramDatetimeRfc1123Async(scenario, value).blockingGet();
+        paramDatetimeRfc1123Async(scenario, value).blockingAwait();
     }
 
     /**
@@ -1498,7 +1498,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDatetimeRfc1123(String scenario) {
-        responseDatetimeRfc1123Async(scenario).blockingGet();
+        responseDatetimeRfc1123Async(scenario).blockingAwait();
     }
 
     /**
@@ -1551,7 +1551,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDuration(String scenario, Period value) {
-        paramDurationAsync(scenario, value).blockingGet();
+        paramDurationAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1609,7 +1609,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDuration(String scenario) {
-        responseDurationAsync(scenario).blockingGet();
+        responseDurationAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1662,7 +1662,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramByte(String scenario, byte[] value) {
-        paramByteAsync(scenario, value).blockingGet();
+        paramByteAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1721,7 +1721,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseByte(String scenario) {
-        responseByteAsync(scenario).blockingGet();
+        responseByteAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1773,7 +1773,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramEnum(String scenario) {
-        paramEnumAsync(scenario).blockingGet();
+        paramEnumAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1826,7 +1826,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramEnum(String scenario, GreyscaleColors value) {
-        paramEnumAsync(scenario, value).blockingGet();
+        paramEnumAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1881,7 +1881,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseEnum(String scenario) {
-        responseEnumAsync(scenario).blockingGet();
+        responseEnumAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1932,7 +1932,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void customRequestId() {
-        customRequestIdAsync().blockingGet();
+        customRequestIdAsync().blockingAwait();
     }
 
     /**

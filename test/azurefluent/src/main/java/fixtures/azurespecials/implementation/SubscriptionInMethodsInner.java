@@ -92,7 +92,7 @@ public class SubscriptionInMethodsInner {
      * @return the void object if successful.
      */
     public void postMethodLocalValid(String subscriptionId) {
-        postMethodLocalValidAsync(subscriptionId).blockingGet();
+        postMethodLocalValidAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -144,7 +144,7 @@ public class SubscriptionInMethodsInner {
      * @return the void object if successful.
      */
     public void postMethodLocalNull(String subscriptionId) {
-        postMethodLocalNullAsync(subscriptionId).blockingGet();
+        postMethodLocalNullAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -196,7 +196,7 @@ public class SubscriptionInMethodsInner {
      * @return the void object if successful.
      */
     public void postPathLocalValid(String subscriptionId) {
-        postPathLocalValidAsync(subscriptionId).blockingGet();
+        postPathLocalValidAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -248,7 +248,7 @@ public class SubscriptionInMethodsInner {
      * @return the void object if successful.
      */
     public void postSwaggerLocalValid(String subscriptionId) {
-        postSwaggerLocalValidAsync(subscriptionId).blockingGet();
+        postSwaggerLocalValidAsync(subscriptionId).blockingAwait();
     }
 
     /**

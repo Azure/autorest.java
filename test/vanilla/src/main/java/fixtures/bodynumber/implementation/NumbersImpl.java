@@ -399,7 +399,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigFloat(double numberBody) {
-        putBigFloatAsync(numberBody).blockingGet();
+        putBigFloatAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -493,7 +493,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDouble(double numberBody) {
-        putBigDoubleAsync(numberBody).blockingGet();
+        putBigDoubleAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -587,7 +587,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDoublePositiveDecimal(double numberBody) {
-        putBigDoublePositiveDecimalAsync(numberBody).blockingGet();
+        putBigDoublePositiveDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -681,7 +681,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDoubleNegativeDecimal(double numberBody) {
-        putBigDoubleNegativeDecimalAsync(numberBody).blockingGet();
+        putBigDoubleNegativeDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -775,7 +775,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimal(BigDecimal numberBody) {
-        putBigDecimalAsync(numberBody).blockingGet();
+        putBigDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -872,7 +872,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimalPositiveDecimal(BigDecimal numberBody) {
-        putBigDecimalPositiveDecimalAsync(numberBody).blockingGet();
+        putBigDecimalPositiveDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -969,7 +969,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimalNegativeDecimal(BigDecimal numberBody) {
-        putBigDecimalNegativeDecimalAsync(numberBody).blockingGet();
+        putBigDecimalNegativeDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1066,7 +1066,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallFloat(double numberBody) {
-        putSmallFloatAsync(numberBody).blockingGet();
+        putSmallFloatAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1160,7 +1160,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallDouble(double numberBody) {
-        putSmallDoubleAsync(numberBody).blockingGet();
+        putSmallDoubleAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1254,7 +1254,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallDecimal(BigDecimal numberBody) {
-        putSmallDecimalAsync(numberBody).blockingGet();
+        putSmallDecimalAsync(numberBody).blockingAwait();
     }
 
     /**

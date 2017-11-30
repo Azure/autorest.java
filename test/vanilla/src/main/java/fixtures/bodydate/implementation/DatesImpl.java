@@ -303,7 +303,7 @@ public class DatesImpl implements Dates {
      * @return the void object if successful.
      */
     public void putMaxDate(LocalDate dateBody) {
-        putMaxDateAsync(dateBody).blockingGet();
+        putMaxDateAsync(dateBody).blockingAwait();
     }
 
     /**
@@ -400,7 +400,7 @@ public class DatesImpl implements Dates {
      * @return the void object if successful.
      */
     public void putMinDate(LocalDate dateBody) {
-        putMinDateAsync(dateBody).blockingGet();
+        putMinDateAsync(dateBody).blockingAwait();
     }
 
     /**

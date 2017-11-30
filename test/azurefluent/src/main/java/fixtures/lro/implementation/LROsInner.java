@@ -3609,7 +3609,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void delete204Succeeded() {
-        delete204SucceededAsync().blockingGet();
+        delete204SucceededAsync().blockingAwait();
     }
 
     /**
@@ -3842,7 +3842,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void deleteNoHeaderInRetry() {
-        deleteNoHeaderInRetryAsync().blockingGet();
+        deleteNoHeaderInRetryAsync().blockingAwait();
     }
 
     /**
@@ -3919,7 +3919,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncNoHeaderInRetry() {
-        deleteAsyncNoHeaderInRetryAsync().blockingGet();
+        deleteAsyncNoHeaderInRetryAsync().blockingAwait();
     }
 
     /**
@@ -3996,7 +3996,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRetrySucceeded() {
-        deleteAsyncRetrySucceededAsync().blockingGet();
+        deleteAsyncRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -4073,7 +4073,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncNoRetrySucceeded() {
-        deleteAsyncNoRetrySucceededAsync().blockingGet();
+        deleteAsyncNoRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -4150,7 +4150,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRetryFailed() {
-        deleteAsyncRetryFailedAsync().blockingGet();
+        deleteAsyncRetryFailedAsync().blockingAwait();
     }
 
     /**
@@ -4227,7 +4227,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRetrycanceled() {
-        deleteAsyncRetrycanceledAsync().blockingGet();
+        deleteAsyncRetrycanceledAsync().blockingAwait();
     }
 
     /**
@@ -4419,7 +4419,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().blockingGet();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -4466,7 +4466,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200Async(product).blockingGet();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -5085,7 +5085,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void postAsyncRetryFailed() {
-        postAsyncRetryFailedAsync().blockingGet();
+        postAsyncRetryFailedAsync().blockingAwait();
     }
 
     /**
@@ -5132,7 +5132,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void postAsyncRetryFailed(ProductInner product) {
-        postAsyncRetryFailedAsync(product).blockingGet();
+        postAsyncRetryFailedAsync(product).blockingAwait();
     }
 
     /**
@@ -5250,7 +5250,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void postAsyncRetrycanceled() {
-        postAsyncRetrycanceledAsync().blockingGet();
+        postAsyncRetrycanceledAsync().blockingAwait();
     }
 
     /**
@@ -5297,7 +5297,7 @@ public class LROsInner {
      * @return the void object if successful.
      */
     public void postAsyncRetrycanceled(ProductInner product) {
-        postAsyncRetrycanceledAsync(product).blockingGet();
+        postAsyncRetrycanceledAsync(product).blockingAwait();
     }
 
     /**

@@ -201,7 +201,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putNull() {
-        putNullAsync().blockingGet();
+        putNullAsync().blockingAwait();
     }
 
     /**
@@ -247,7 +247,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putNull(String stringBody) {
-        putNullAsync(stringBody).blockingGet();
+        putNullAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -341,7 +341,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putEmpty(String stringBody) {
-        putEmptyAsync(stringBody).blockingGet();
+        putEmptyAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -438,7 +438,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putMbcs(String stringBody) {
-        putMbcsAsync(stringBody).blockingGet();
+        putMbcsAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -535,7 +535,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putWhitespace(String stringBody) {
-        putWhitespaceAsync(stringBody).blockingGet();
+        putWhitespaceAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -722,7 +722,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putBase64UrlEncoded(byte[] stringBody) {
-        putBase64UrlEncodedAsync(stringBody).blockingGet();
+        putBase64UrlEncodedAsync(stringBody).blockingAwait();
     }
 
     /**

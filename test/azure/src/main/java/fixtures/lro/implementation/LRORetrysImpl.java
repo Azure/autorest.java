@@ -608,7 +608,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void delete202Retry200() {
-        delete202Retry200Async().blockingGet();
+        delete202Retry200Async().blockingAwait();
     }
 
     /**
@@ -685,7 +685,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededAsync().blockingGet();
+        deleteAsyncRelativeRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -799,7 +799,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().blockingGet();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -846,7 +846,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).blockingGet();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -964,7 +964,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetrySucceeded() {
-        postAsyncRelativeRetrySucceededAsync().blockingGet();
+        postAsyncRelativeRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -1011,7 +1011,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetrySucceeded(Product product) {
-        postAsyncRelativeRetrySucceededAsync(product).blockingGet();
+        postAsyncRelativeRetrySucceededAsync(product).blockingAwait();
     }
 
     /**

@@ -567,7 +567,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putEmpty(Map<String, String> arrayBody) {
-        putEmptyAsync(arrayBody).blockingGet();
+        putEmptyAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -845,7 +845,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).blockingGet();
+        putBooleanTfftAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1033,7 +1033,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putIntegerValid(Map<String, Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).blockingGet();
+        putIntegerValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1221,7 +1221,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putLongValid(Map<String, Long> arrayBody) {
-        putLongValidAsync(arrayBody).blockingGet();
+        putLongValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1409,7 +1409,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putFloatValid(Map<String, Double> arrayBody) {
-        putFloatValidAsync(arrayBody).blockingGet();
+        putFloatValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1597,7 +1597,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDoubleValid(Map<String, Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).blockingGet();
+        putDoubleValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1785,7 +1785,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putStringValid(Map<String, String> arrayBody) {
-        putStringValidAsync(arrayBody).blockingGet();
+        putStringValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1973,7 +1973,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDateValid(Map<String, LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).blockingGet();
+        putDateValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2161,7 +2161,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDateTimeValid(Map<String, DateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).blockingGet();
+        putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2349,7 +2349,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).blockingGet();
+        putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2453,7 +2453,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDurationValid(Map<String, Period> arrayBody) {
-        putDurationValidAsync(arrayBody).blockingGet();
+        putDurationValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2551,7 +2551,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putByteValid(Map<String, byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).blockingGet();
+        putByteValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2919,7 +2919,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putComplexValid(Map<String, Widget> arrayBody) {
-        putComplexValidAsync(arrayBody).blockingGet();
+        putComplexValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3197,7 +3197,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putArrayValid(Map<String, List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).blockingGet();
+        putArrayValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3475,7 +3475,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).blockingGet();
+        putDictionaryValidAsync(arrayBody).blockingAwait();
     }
 
     /**

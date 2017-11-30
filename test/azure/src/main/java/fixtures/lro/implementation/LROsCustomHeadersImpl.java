@@ -527,7 +527,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().blockingGet();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -574,7 +574,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).blockingGet();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -692,7 +692,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded() {
-        postAsyncRetrySucceededAsync().blockingGet();
+        postAsyncRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -739,7 +739,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded(Product product) {
-        postAsyncRetrySucceededAsync(product).blockingGet();
+        postAsyncRetrySucceededAsync(product).blockingAwait();
     }
 
     /**

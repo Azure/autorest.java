@@ -92,7 +92,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidAsync().blockingGet();
+        getMethodLocalValidAsync().blockingAwait();
     }
 
     /**
@@ -138,7 +138,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullAsync().blockingGet();
+        getMethodLocalNullAsync().blockingAwait();
     }
 
     /**
@@ -184,7 +184,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullAsync(apiVersion).blockingGet();
+        getMethodLocalNullAsync(apiVersion).blockingAwait();
     }
 
     /**
@@ -232,7 +232,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getPathLocalValid() {
-        getPathLocalValidAsync().blockingGet();
+        getPathLocalValidAsync().blockingAwait();
     }
 
     /**
@@ -278,7 +278,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidAsync().blockingGet();
+        getSwaggerLocalValidAsync().blockingAwait();
     }
 
     /**

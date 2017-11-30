@@ -87,7 +87,7 @@ public class HeadersInner {
      * @return the void object if successful.
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdAsync(fooClientRequestId).blockingGet();
+        customNamedRequestIdAsync(fooClientRequestId).blockingAwait();
     }
 
     /**
@@ -139,7 +139,7 @@ public class HeadersInner {
      * @return the void object if successful.
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingGet();
+        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingAwait();
     }
 
     /**

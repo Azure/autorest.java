@@ -157,7 +157,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putValid(DictionaryWrapper complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -255,7 +255,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putEmpty(DictionaryWrapper complexBody) {
-        putEmptyAsync(complexBody).blockingGet();
+        putEmptyAsync(complexBody).blockingAwait();
     }
 
     /**

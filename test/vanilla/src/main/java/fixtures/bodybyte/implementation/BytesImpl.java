@@ -239,7 +239,7 @@ public class BytesImpl implements Bytes {
      * @return the void object if successful.
      */
     public void putNonAscii(byte[] byteBody) {
-        putNonAsciiAsync(byteBody).blockingGet();
+        putNonAsciiAsync(byteBody).blockingAwait();
     }
 
     /**

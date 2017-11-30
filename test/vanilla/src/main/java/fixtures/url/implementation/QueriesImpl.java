@@ -283,7 +283,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().blockingGet();
+        getBooleanTrueAsync().blockingAwait();
     }
 
     /**
@@ -329,7 +329,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().blockingGet();
+        getBooleanFalseAsync().blockingAwait();
     }
 
     /**
@@ -375,7 +375,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanNull() {
-        getBooleanNullAsync().blockingGet();
+        getBooleanNullAsync().blockingAwait();
     }
 
     /**
@@ -421,7 +421,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getBooleanNull(Boolean boolQuery) {
-        getBooleanNullAsync(boolQuery).blockingGet();
+        getBooleanNullAsync(boolQuery).blockingAwait();
     }
 
     /**
@@ -469,7 +469,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().blockingGet();
+        getIntOneMillionAsync().blockingAwait();
     }
 
     /**
@@ -515,7 +515,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().blockingGet();
+        getIntNegativeOneMillionAsync().blockingAwait();
     }
 
     /**
@@ -561,7 +561,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntNull() {
-        getIntNullAsync().blockingGet();
+        getIntNullAsync().blockingAwait();
     }
 
     /**
@@ -607,7 +607,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getIntNull(Integer intQuery) {
-        getIntNullAsync(intQuery).blockingGet();
+        getIntNullAsync(intQuery).blockingAwait();
     }
 
     /**
@@ -655,7 +655,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getTenBillion() {
-        getTenBillionAsync().blockingGet();
+        getTenBillionAsync().blockingAwait();
     }
 
     /**
@@ -701,7 +701,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().blockingGet();
+        getNegativeTenBillionAsync().blockingAwait();
     }
 
     /**
@@ -747,7 +747,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getLongNull() {
-        getLongNullAsync().blockingGet();
+        getLongNullAsync().blockingAwait();
     }
 
     /**
@@ -793,7 +793,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void getLongNull(Long longQuery) {
-        getLongNullAsync(longQuery).blockingGet();
+        getLongNullAsync(longQuery).blockingAwait();
     }
 
     /**
@@ -841,7 +841,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().blockingGet();
+        floatScientificPositiveAsync().blockingAwait();
     }
 
     /**
@@ -887,7 +887,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().blockingGet();
+        floatScientificNegativeAsync().blockingAwait();
     }
 
     /**
@@ -933,7 +933,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatNull() {
-        floatNullAsync().blockingGet();
+        floatNullAsync().blockingAwait();
     }
 
     /**
@@ -979,7 +979,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void floatNull(Double floatQuery) {
-        floatNullAsync(floatQuery).blockingGet();
+        floatNullAsync(floatQuery).blockingAwait();
     }
 
     /**
@@ -1027,7 +1027,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().blockingGet();
+        doubleDecimalPositiveAsync().blockingAwait();
     }
 
     /**
@@ -1073,7 +1073,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().blockingGet();
+        doubleDecimalNegativeAsync().blockingAwait();
     }
 
     /**
@@ -1119,7 +1119,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleNull() {
-        doubleNullAsync().blockingGet();
+        doubleNullAsync().blockingAwait();
     }
 
     /**
@@ -1165,7 +1165,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void doubleNull(Double doubleQuery) {
-        doubleNullAsync(doubleQuery).blockingGet();
+        doubleNullAsync(doubleQuery).blockingAwait();
     }
 
     /**
@@ -1213,7 +1213,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().blockingGet();
+        stringUnicodeAsync().blockingAwait();
     }
 
     /**
@@ -1259,7 +1259,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().blockingGet();
+        stringUrlEncodedAsync().blockingAwait();
     }
 
     /**
@@ -1305,7 +1305,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringEmpty() {
-        stringEmptyAsync().blockingGet();
+        stringEmptyAsync().blockingAwait();
     }
 
     /**
@@ -1351,7 +1351,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringNull() {
-        stringNullAsync().blockingGet();
+        stringNullAsync().blockingAwait();
     }
 
     /**
@@ -1397,7 +1397,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void stringNull(String stringQuery) {
-        stringNullAsync(stringQuery).blockingGet();
+        stringNullAsync(stringQuery).blockingAwait();
     }
 
     /**
@@ -1445,7 +1445,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumValid() {
-        enumValidAsync().blockingGet();
+        enumValidAsync().blockingAwait();
     }
 
     /**
@@ -1491,7 +1491,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumValid(UriColor enumQuery) {
-        enumValidAsync(enumQuery).blockingGet();
+        enumValidAsync(enumQuery).blockingAwait();
     }
 
     /**
@@ -1539,7 +1539,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumNull() {
-        enumNullAsync().blockingGet();
+        enumNullAsync().blockingAwait();
     }
 
     /**
@@ -1585,7 +1585,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void enumNull(UriColor enumQuery) {
-        enumNullAsync(enumQuery).blockingGet();
+        enumNullAsync(enumQuery).blockingAwait();
     }
 
     /**
@@ -1633,7 +1633,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteMultiByte() {
-        byteMultiByteAsync().blockingGet();
+        byteMultiByteAsync().blockingAwait();
     }
 
     /**
@@ -1680,7 +1680,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteMultiByte(byte[] byteQuery) {
-        byteMultiByteAsync(byteQuery).blockingGet();
+        byteMultiByteAsync(byteQuery).blockingAwait();
     }
 
     /**
@@ -1729,7 +1729,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteEmpty() {
-        byteEmptyAsync().blockingGet();
+        byteEmptyAsync().blockingAwait();
     }
 
     /**
@@ -1776,7 +1776,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteNull() {
-        byteNullAsync().blockingGet();
+        byteNullAsync().blockingAwait();
     }
 
     /**
@@ -1823,7 +1823,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void byteNull(byte[] byteQuery) {
-        byteNullAsync(byteQuery).blockingGet();
+        byteNullAsync(byteQuery).blockingAwait();
     }
 
     /**
@@ -1872,7 +1872,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateValid() {
-        dateValidAsync().blockingGet();
+        dateValidAsync().blockingAwait();
     }
 
     /**
@@ -1918,7 +1918,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateNull() {
-        dateNullAsync().blockingGet();
+        dateNullAsync().blockingAwait();
     }
 
     /**
@@ -1964,7 +1964,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateNull(LocalDate dateQuery) {
-        dateNullAsync(dateQuery).blockingGet();
+        dateNullAsync(dateQuery).blockingAwait();
     }
 
     /**
@@ -2012,7 +2012,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().blockingGet();
+        dateTimeValidAsync().blockingAwait();
     }
 
     /**
@@ -2058,7 +2058,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateTimeNull() {
-        dateTimeNullAsync().blockingGet();
+        dateTimeNullAsync().blockingAwait();
     }
 
     /**
@@ -2104,7 +2104,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimeQuery) {
-        dateTimeNullAsync(dateTimeQuery).blockingGet();
+        dateTimeNullAsync(dateTimeQuery).blockingAwait();
     }
 
     /**
@@ -2152,7 +2152,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvValid() {
-        arrayStringCsvValidAsync().blockingGet();
+        arrayStringCsvValidAsync().blockingAwait();
     }
 
     /**
@@ -2200,7 +2200,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvValid(List<String> arrayQuery) {
-        arrayStringCsvValidAsync(arrayQuery).blockingGet();
+        arrayStringCsvValidAsync(arrayQuery).blockingAwait();
     }
 
     /**
@@ -2250,7 +2250,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvNull() {
-        arrayStringCsvNullAsync().blockingGet();
+        arrayStringCsvNullAsync().blockingAwait();
     }
 
     /**
@@ -2298,7 +2298,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvNull(List<String> arrayQuery) {
-        arrayStringCsvNullAsync(arrayQuery).blockingGet();
+        arrayStringCsvNullAsync(arrayQuery).blockingAwait();
     }
 
     /**
@@ -2348,7 +2348,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvEmpty() {
-        arrayStringCsvEmptyAsync().blockingGet();
+        arrayStringCsvEmptyAsync().blockingAwait();
     }
 
     /**
@@ -2396,7 +2396,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringCsvEmpty(List<String> arrayQuery) {
-        arrayStringCsvEmptyAsync(arrayQuery).blockingGet();
+        arrayStringCsvEmptyAsync(arrayQuery).blockingAwait();
     }
 
     /**
@@ -2446,7 +2446,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringSsvValid() {
-        arrayStringSsvValidAsync().blockingGet();
+        arrayStringSsvValidAsync().blockingAwait();
     }
 
     /**
@@ -2494,7 +2494,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringSsvValid(List<String> arrayQuery) {
-        arrayStringSsvValidAsync(arrayQuery).blockingGet();
+        arrayStringSsvValidAsync(arrayQuery).blockingAwait();
     }
 
     /**
@@ -2544,7 +2544,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringTsvValid() {
-        arrayStringTsvValidAsync().blockingGet();
+        arrayStringTsvValidAsync().blockingAwait();
     }
 
     /**
@@ -2592,7 +2592,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringTsvValid(List<String> arrayQuery) {
-        arrayStringTsvValidAsync(arrayQuery).blockingGet();
+        arrayStringTsvValidAsync(arrayQuery).blockingAwait();
     }
 
     /**
@@ -2642,7 +2642,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringPipesValid() {
-        arrayStringPipesValidAsync().blockingGet();
+        arrayStringPipesValidAsync().blockingAwait();
     }
 
     /**
@@ -2690,7 +2690,7 @@ public class QueriesImpl implements Queries {
      * @return the void object if successful.
      */
     public void arrayStringPipesValid(List<String> arrayQuery) {
-        arrayStringPipesValidAsync(arrayQuery).blockingGet();
+        arrayStringPipesValidAsync(arrayQuery).blockingAwait();
     }
 
     /**

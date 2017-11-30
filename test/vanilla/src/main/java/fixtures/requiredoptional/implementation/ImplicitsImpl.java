@@ -167,7 +167,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalQuery() {
-        putOptionalQueryAsync().blockingGet();
+        putOptionalQueryAsync().blockingAwait();
     }
 
     /**
@@ -213,7 +213,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalQuery(String queryParameter) {
-        putOptionalQueryAsync(queryParameter).blockingGet();
+        putOptionalQueryAsync(queryParameter).blockingAwait();
     }
 
     /**
@@ -261,7 +261,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalHeader() {
-        putOptionalHeaderAsync().blockingGet();
+        putOptionalHeaderAsync().blockingAwait();
     }
 
     /**
@@ -307,7 +307,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalHeader(String queryParameter) {
-        putOptionalHeaderAsync(queryParameter).blockingGet();
+        putOptionalHeaderAsync(queryParameter).blockingAwait();
     }
 
     /**
@@ -355,7 +355,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalBody() {
-        putOptionalBodyAsync().blockingGet();
+        putOptionalBodyAsync().blockingAwait();
     }
 
     /**
@@ -401,7 +401,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalBody(String bodyParameter) {
-        putOptionalBodyAsync(bodyParameter).blockingGet();
+        putOptionalBodyAsync(bodyParameter).blockingAwait();
     }
 
     /**

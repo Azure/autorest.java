@@ -1084,7 +1084,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void deleteNonRetry400() {
-        deleteNonRetry400Async().blockingGet();
+        deleteNonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1161,7 +1161,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void delete202NonRetry400() {
-        delete202NonRetry400Async().blockingGet();
+        delete202NonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1238,7 +1238,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetry400() {
-        deleteAsyncRelativeRetry400Async().blockingGet();
+        deleteAsyncRelativeRetry400Async().blockingAwait();
     }
 
     /**
@@ -1352,7 +1352,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postNonRetry400() {
-        postNonRetry400Async().blockingGet();
+        postNonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1399,7 +1399,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postNonRetry400(ProductInner product) {
-        postNonRetry400Async(product).blockingGet();
+        postNonRetry400Async(product).blockingAwait();
     }
 
     /**
@@ -1517,7 +1517,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void post202NonRetry400() {
-        post202NonRetry400Async().blockingGet();
+        post202NonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1564,7 +1564,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void post202NonRetry400(ProductInner product) {
-        post202NonRetry400Async(product).blockingGet();
+        post202NonRetry400Async(product).blockingAwait();
     }
 
     /**
@@ -1682,7 +1682,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetry400() {
-        postAsyncRelativeRetry400Async().blockingGet();
+        postAsyncRelativeRetry400Async().blockingAwait();
     }
 
     /**
@@ -1729,7 +1729,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetry400(ProductInner product) {
-        postAsyncRelativeRetry400Async(product).blockingGet();
+        postAsyncRelativeRetry400Async(product).blockingAwait();
     }
 
     /**
@@ -2311,7 +2311,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void delete204Succeeded() {
-        delete204SucceededAsync().blockingGet();
+        delete204SucceededAsync().blockingAwait();
     }
 
     /**
@@ -2388,7 +2388,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetryNoStatus() {
-        deleteAsyncRelativeRetryNoStatusAsync().blockingGet();
+        deleteAsyncRelativeRetryNoStatusAsync().blockingAwait();
     }
 
     /**
@@ -2502,7 +2502,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void post202NoLocation() {
-        post202NoLocationAsync().blockingGet();
+        post202NoLocationAsync().blockingAwait();
     }
 
     /**
@@ -2549,7 +2549,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void post202NoLocation(ProductInner product) {
-        post202NoLocationAsync(product).blockingGet();
+        post202NoLocationAsync(product).blockingAwait();
     }
 
     /**
@@ -2667,7 +2667,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryNoPayload() {
-        postAsyncRelativeRetryNoPayloadAsync().blockingGet();
+        postAsyncRelativeRetryNoPayloadAsync().blockingAwait();
     }
 
     /**
@@ -2714,7 +2714,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryNoPayload(ProductInner product) {
-        postAsyncRelativeRetryNoPayloadAsync(product).blockingGet();
+        postAsyncRelativeRetryNoPayloadAsync(product).blockingAwait();
     }
 
     /**
@@ -3296,7 +3296,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void delete202RetryInvalidHeader() {
-        delete202RetryInvalidHeaderAsync().blockingGet();
+        delete202RetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3373,7 +3373,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetryInvalidHeader() {
-        deleteAsyncRelativeRetryInvalidHeaderAsync().blockingGet();
+        deleteAsyncRelativeRetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3450,7 +3450,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetryInvalidJsonPolling() {
-        deleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingGet();
+        deleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingAwait();
     }
 
     /**
@@ -3564,7 +3564,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void post202RetryInvalidHeader() {
-        post202RetryInvalidHeaderAsync().blockingGet();
+        post202RetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3611,7 +3611,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void post202RetryInvalidHeader(ProductInner product) {
-        post202RetryInvalidHeaderAsync(product).blockingGet();
+        post202RetryInvalidHeaderAsync(product).blockingAwait();
     }
 
     /**
@@ -3729,7 +3729,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidHeader() {
-        postAsyncRelativeRetryInvalidHeaderAsync().blockingGet();
+        postAsyncRelativeRetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3776,7 +3776,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidHeader(ProductInner product) {
-        postAsyncRelativeRetryInvalidHeaderAsync(product).blockingGet();
+        postAsyncRelativeRetryInvalidHeaderAsync(product).blockingAwait();
     }
 
     /**
@@ -3894,7 +3894,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidJsonPolling() {
-        postAsyncRelativeRetryInvalidJsonPollingAsync().blockingGet();
+        postAsyncRelativeRetryInvalidJsonPollingAsync().blockingAwait();
     }
 
     /**
@@ -3941,7 +3941,7 @@ public class LROSADsInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidJsonPolling(ProductInner product) {
-        postAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingGet();
+        postAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingAwait();
     }
 
     /**

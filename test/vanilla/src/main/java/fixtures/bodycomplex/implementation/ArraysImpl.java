@@ -151,7 +151,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putValid(ArrayWrapper complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -249,7 +249,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putEmpty(ArrayWrapper complexBody) {
-        putEmptyAsync(complexBody).blockingGet();
+        putEmptyAsync(complexBody).blockingAwait();
     }
 
     /**

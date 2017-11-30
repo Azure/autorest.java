@@ -263,7 +263,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putInt(IntWrapper complexBody) {
-        putIntAsync(complexBody).blockingGet();
+        putIntAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -361,7 +361,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putLong(LongWrapper complexBody) {
-        putLongAsync(complexBody).blockingGet();
+        putLongAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -459,7 +459,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putFloat(FloatWrapper complexBody) {
-        putFloatAsync(complexBody).blockingGet();
+        putFloatAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -557,7 +557,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDouble(DoubleWrapper complexBody) {
-        putDoubleAsync(complexBody).blockingGet();
+        putDoubleAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -655,7 +655,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putBool(BooleanWrapper complexBody) {
-        putBoolAsync(complexBody).blockingGet();
+        putBoolAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -753,7 +753,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putString(StringWrapper complexBody) {
-        putStringAsync(complexBody).blockingGet();
+        putStringAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -851,7 +851,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDate(DateWrapper complexBody) {
-        putDateAsync(complexBody).blockingGet();
+        putDateAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -949,7 +949,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeAsync(complexBody).blockingGet();
+        putDateTimeAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -1047,7 +1047,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123Async(complexBody).blockingGet();
+        putDateTimeRfc1123Async(complexBody).blockingAwait();
     }
 
     /**
@@ -1145,7 +1145,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDuration(DurationWrapper complexBody) {
-        putDurationAsync(complexBody).blockingGet();
+        putDurationAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -1243,7 +1243,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putByte(ByteWrapper complexBody) {
-        putByteAsync(complexBody).blockingGet();
+        putByteAsync(complexBody).blockingAwait();
     }
 
     /**

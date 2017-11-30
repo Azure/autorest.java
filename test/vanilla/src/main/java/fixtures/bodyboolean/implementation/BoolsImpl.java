@@ -155,7 +155,7 @@ public class BoolsImpl implements Bools {
      * @return the void object if successful.
      */
     public void putTrue(boolean boolBody) {
-        putTrueAsync(boolBody).blockingGet();
+        putTrueAsync(boolBody).blockingAwait();
     }
 
     /**
@@ -249,7 +249,7 @@ public class BoolsImpl implements Bools {
      * @return the void object if successful.
      */
     public void putFalse(boolean boolBody) {
-        putFalseAsync(boolBody).blockingGet();
+        putFalseAsync(boolBody).blockingAwait();
     }
 
     /**

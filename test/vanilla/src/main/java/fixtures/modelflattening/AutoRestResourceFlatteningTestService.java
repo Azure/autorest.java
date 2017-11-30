@@ -61,7 +61,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putArrayAsync();
+    Completable putArrayAsync();
 
     /**
      * Put External Resource as an Array.
@@ -97,7 +97,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putArrayAsync(List<Resource> resourceArray);
+    Completable putArrayAsync(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -169,7 +169,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putWrappedArrayAsync();
+    Completable putWrappedArrayAsync();
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -205,7 +205,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray);
+    Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray);
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -277,7 +277,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putDictionaryAsync();
+    Completable putDictionaryAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -313,7 +313,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -385,7 +385,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putResourceCollectionAsync();
+    Completable putResourceCollectionAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -421,7 +421,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.

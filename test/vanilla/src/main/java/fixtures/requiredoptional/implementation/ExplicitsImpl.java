@@ -256,7 +256,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerParameter() {
-        postOptionalIntegerParameterAsync().blockingGet();
+        postOptionalIntegerParameterAsync().blockingAwait();
     }
 
     /**
@@ -302,7 +302,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterAsync(bodyParameter).blockingGet();
+        postOptionalIntegerParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -403,7 +403,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerProperty() {
-        postOptionalIntegerPropertyAsync().blockingGet();
+        postOptionalIntegerPropertyAsync().blockingAwait();
     }
 
     /**
@@ -450,7 +450,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyAsync(bodyParameter).blockingGet();
+        postOptionalIntegerPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -548,7 +548,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerHeader() {
-        postOptionalIntegerHeaderAsync().blockingGet();
+        postOptionalIntegerHeaderAsync().blockingAwait();
     }
 
     /**
@@ -594,7 +594,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderAsync(headerParameter).blockingGet();
+        postOptionalIntegerHeaderAsync(headerParameter).blockingAwait();
     }
 
     /**
@@ -694,7 +694,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringParameter() {
-        postOptionalStringParameterAsync().blockingGet();
+        postOptionalStringParameterAsync().blockingAwait();
     }
 
     /**
@@ -740,7 +740,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterAsync(bodyParameter).blockingGet();
+        postOptionalStringParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -841,7 +841,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringProperty() {
-        postOptionalStringPropertyAsync().blockingGet();
+        postOptionalStringPropertyAsync().blockingAwait();
     }
 
     /**
@@ -888,7 +888,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyAsync(bodyParameter).blockingGet();
+        postOptionalStringPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -989,7 +989,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringHeader() {
-        postOptionalStringHeaderAsync().blockingGet();
+        postOptionalStringHeaderAsync().blockingAwait();
     }
 
     /**
@@ -1035,7 +1035,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderAsync(bodyParameter).blockingGet();
+        postOptionalStringHeaderAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1136,7 +1136,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassParameter() {
-        postOptionalClassParameterAsync().blockingGet();
+        postOptionalClassParameterAsync().blockingAwait();
     }
 
     /**
@@ -1183,7 +1183,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterAsync(bodyParameter).blockingGet();
+        postOptionalClassParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1285,7 +1285,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassProperty() {
-        postOptionalClassPropertyAsync().blockingGet();
+        postOptionalClassPropertyAsync().blockingAwait();
     }
 
     /**
@@ -1332,7 +1332,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyAsync(bodyParameter).blockingGet();
+        postOptionalClassPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1434,7 +1434,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayParameter() {
-        postOptionalArrayParameterAsync().blockingGet();
+        postOptionalArrayParameterAsync().blockingAwait();
     }
 
     /**
@@ -1481,7 +1481,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterAsync(bodyParameter).blockingGet();
+        postOptionalArrayParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1583,7 +1583,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayProperty() {
-        postOptionalArrayPropertyAsync().blockingGet();
+        postOptionalArrayPropertyAsync().blockingAwait();
     }
 
     /**
@@ -1630,7 +1630,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyAsync(bodyParameter).blockingGet();
+        postOptionalArrayPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1733,7 +1733,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayHeader() {
-        postOptionalArrayHeaderAsync().blockingGet();
+        postOptionalArrayHeaderAsync().blockingAwait();
     }
 
     /**
@@ -1781,7 +1781,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderAsync(headerParameter).blockingGet();
+        postOptionalArrayHeaderAsync(headerParameter).blockingAwait();
     }
 
     /**

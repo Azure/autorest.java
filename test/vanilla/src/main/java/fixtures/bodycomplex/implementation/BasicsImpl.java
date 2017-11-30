@@ -158,7 +158,7 @@ public class BasicsImpl implements Basics {
      * @return the void object if successful.
      */
     public void putValid(Basic complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**

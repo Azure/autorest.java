@@ -158,7 +158,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putNotExpandable(Colors stringBody) {
-        putNotExpandableAsync(stringBody).blockingGet();
+        putNotExpandableAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -255,7 +255,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putReferenced(Colors enumStringBody) {
-        putReferencedAsync(enumStringBody).blockingGet();
+        putReferencedAsync(enumStringBody).blockingAwait();
     }
 
     /**
@@ -352,7 +352,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putReferencedConstant(RefColorConstant enumStringBody) {
-        putReferencedConstantAsync(enumStringBody).blockingGet();
+        putReferencedConstantAsync(enumStringBody).blockingAwait();
     }
 
     /**

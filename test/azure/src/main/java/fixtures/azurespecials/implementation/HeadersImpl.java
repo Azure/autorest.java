@@ -91,7 +91,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the void object if successful.
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdAsync(fooClientRequestId).blockingGet();
+        customNamedRequestIdAsync(fooClientRequestId).blockingAwait();
     }
 
     /**
@@ -143,7 +143,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the void object if successful.
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingGet();
+        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingAwait();
     }
 
     /**

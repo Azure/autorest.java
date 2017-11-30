@@ -84,7 +84,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the void object if successful.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
-        updateAsync(resourceGroupName, avset, tags).blockingGet();
+        updateAsync(resourceGroupName, avset, tags).blockingAwait();
     }
 
     /**

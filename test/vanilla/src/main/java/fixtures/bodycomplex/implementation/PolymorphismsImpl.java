@@ -171,7 +171,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -345,7 +345,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putValidMissingRequired(Fish complexBody) {
-        putValidMissingRequiredAsync(complexBody).blockingGet();
+        putValidMissingRequiredAsync(complexBody).blockingAwait();
     }
 
     /**

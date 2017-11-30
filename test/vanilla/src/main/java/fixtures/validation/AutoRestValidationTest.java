@@ -215,7 +215,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link Single<Void>} object if successful.
      */
-    Single<Void> getWithConstantInPathAsync();
+    Completable getWithConstantInPathAsync();
 
     /**
      *

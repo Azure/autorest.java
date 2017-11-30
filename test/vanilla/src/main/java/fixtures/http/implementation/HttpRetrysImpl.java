@@ -125,7 +125,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void head408() {
-        head408Async().blockingGet();
+        head408Async().blockingAwait();
     }
 
     /**
@@ -170,7 +170,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void put500() {
-        put500Async().blockingGet();
+        put500Async().blockingAwait();
     }
 
     /**
@@ -216,7 +216,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void put500(Boolean booleanValue) {
-        put500Async(booleanValue).blockingGet();
+        put500Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -264,7 +264,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void patch500() {
-        patch500Async().blockingGet();
+        patch500Async().blockingAwait();
     }
 
     /**
@@ -310,7 +310,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void patch500(Boolean booleanValue) {
-        patch500Async(booleanValue).blockingGet();
+        patch500Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -358,7 +358,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void get502() {
-        get502Async().blockingGet();
+        get502Async().blockingAwait();
     }
 
     /**
@@ -403,7 +403,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void post503() {
-        post503Async().blockingGet();
+        post503Async().blockingAwait();
     }
 
     /**
@@ -449,7 +449,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void post503(Boolean booleanValue) {
-        post503Async(booleanValue).blockingGet();
+        post503Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -497,7 +497,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void delete503() {
-        delete503Async().blockingGet();
+        delete503Async().blockingAwait();
     }
 
     /**
@@ -543,7 +543,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void delete503(Boolean booleanValue) {
-        delete503Async(booleanValue).blockingGet();
+        delete503Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -591,7 +591,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void put504() {
-        put504Async().blockingGet();
+        put504Async().blockingAwait();
     }
 
     /**
@@ -637,7 +637,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void put504(Boolean booleanValue) {
-        put504Async(booleanValue).blockingGet();
+        put504Async(booleanValue).blockingAwait();
     }
 
     /**
@@ -685,7 +685,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void patch504() {
-        patch504Async().blockingGet();
+        patch504Async().blockingAwait();
     }
 
     /**
@@ -731,7 +731,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * @return the void object if successful.
      */
     public void patch504(Boolean booleanValue) {
-        patch504Async(booleanValue).blockingGet();
+        patch504Async(booleanValue).blockingAwait();
     }
 
     /**

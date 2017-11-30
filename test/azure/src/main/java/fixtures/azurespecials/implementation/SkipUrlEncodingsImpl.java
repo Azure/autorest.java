@@ -112,7 +112,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodPathValid(String unencodedPathParam) {
-        getMethodPathValidAsync(unencodedPathParam).blockingGet();
+        getMethodPathValidAsync(unencodedPathParam).blockingAwait();
     }
 
     /**
@@ -164,7 +164,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getPathPathValid(String unencodedPathParam) {
-        getPathPathValidAsync(unencodedPathParam).blockingGet();
+        getPathPathValidAsync(unencodedPathParam).blockingAwait();
     }
 
     /**
@@ -215,7 +215,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getSwaggerPathValid() {
-        getSwaggerPathValidAsync().blockingGet();
+        getSwaggerPathValidAsync().blockingAwait();
     }
 
     /**
@@ -262,7 +262,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodQueryValid(String q1) {
-        getMethodQueryValidAsync(q1).blockingGet();
+        getMethodQueryValidAsync(q1).blockingAwait();
     }
 
     /**
@@ -313,7 +313,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodQueryNull() {
-        getMethodQueryNullAsync().blockingGet();
+        getMethodQueryNullAsync().blockingAwait();
     }
 
     /**
@@ -359,7 +359,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getMethodQueryNull(String q1) {
-        getMethodQueryNullAsync(q1).blockingGet();
+        getMethodQueryNullAsync(q1).blockingAwait();
     }
 
     /**
@@ -408,7 +408,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getPathQueryValid(String q1) {
-        getPathQueryValidAsync(q1).blockingGet();
+        getPathQueryValidAsync(q1).blockingAwait();
     }
 
     /**
@@ -459,7 +459,7 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the void object if successful.
      */
     public void getSwaggerQueryValid() {
-        getSwaggerQueryValidAsync().blockingGet();
+        getSwaggerQueryValidAsync().blockingAwait();
     }
 
     /**

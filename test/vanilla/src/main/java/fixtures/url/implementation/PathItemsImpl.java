@@ -99,7 +99,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getAllWithValues(String localStringPath, String pathItemStringPath) {
-        getAllWithValuesAsync(localStringPath, pathItemStringPath).blockingGet();
+        getAllWithValuesAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
     /**
@@ -164,7 +164,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingGet();
+        getAllWithValuesAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
     /**
@@ -232,7 +232,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath) {
-        getGlobalQueryNullAsync(localStringPath, pathItemStringPath).blockingGet();
+        getGlobalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
     /**
@@ -297,7 +297,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingGet();
+        getGlobalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
     /**
@@ -365,7 +365,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) {
-        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).blockingGet();
+        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
     /**
@@ -430,7 +430,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingGet();
+        getGlobalAndLocalQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
     /**
@@ -498,7 +498,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) {
-        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).blockingGet();
+        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath).blockingAwait();
     }
 
     /**
@@ -563,7 +563,7 @@ public class PathItemsImpl implements PathItems {
      * @return the void object if successful.
      */
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingGet();
+        getLocalPathItemQueryNullAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).blockingAwait();
     }
 
     /**

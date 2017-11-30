@@ -73,7 +73,7 @@ public class OdatasInner {
      * @return the void object if successful.
      */
     public void getWithFilter() {
-        getWithFilterAsync().blockingGet();
+        getWithFilterAsync().blockingAwait();
     }
 
     /**
@@ -123,7 +123,7 @@ public class OdatasInner {
      * @return the void object if successful.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterAsync(filter, top, orderby).blockingGet();
+        getWithFilterAsync(filter, top, orderby).blockingAwait();
     }
 
     /**

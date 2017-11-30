@@ -133,7 +133,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the void object if successful.
      */
     public void putValid(ReadonlyObj complexBody) {
-        putValidAsync(complexBody).blockingGet();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**

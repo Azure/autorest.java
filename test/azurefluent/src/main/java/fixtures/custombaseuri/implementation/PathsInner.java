@@ -75,7 +75,7 @@ public class PathsInner {
      * @return the void object if successful.
      */
     public void getEmpty(String accountName) {
-        getEmptyAsync(accountName).blockingGet();
+        getEmptyAsync(accountName).blockingAwait();
     }
 
     /**

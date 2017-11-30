@@ -435,7 +435,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMax32(int intBody) {
-        putMax32Async(intBody).blockingGet();
+        putMax32Async(intBody).blockingAwait();
     }
 
     /**
@@ -484,7 +484,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMax64(long intBody) {
-        putMax64Async(intBody).blockingGet();
+        putMax64Async(intBody).blockingAwait();
     }
 
     /**
@@ -533,7 +533,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMin32(int intBody) {
-        putMin32Async(intBody).blockingGet();
+        putMin32Async(intBody).blockingAwait();
     }
 
     /**
@@ -582,7 +582,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMin64(long intBody) {
-        putMin64Async(intBody).blockingGet();
+        putMin64Async(intBody).blockingAwait();
     }
 
     /**
@@ -676,7 +676,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putUnixTimeDate(DateTime intBody) {
-        putUnixTimeDateAsync(intBody).blockingGet();
+        putUnixTimeDateAsync(intBody).blockingAwait();
     }
 
     /**
