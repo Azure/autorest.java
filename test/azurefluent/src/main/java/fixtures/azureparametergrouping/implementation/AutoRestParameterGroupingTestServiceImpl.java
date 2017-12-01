@@ -10,8 +10,10 @@
 
 package fixtures.azureparametergrouping.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 
@@ -113,18 +115,20 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials));
+    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that this AutoRestParameterGroupingTestServiceImpl targets
      */
-    public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+    public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -133,15 +137,5 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.parameterGroupings = new ParameterGroupingsInner(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterGroupingTestService", "1.0.0");
     }
 }

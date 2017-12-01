@@ -22,10 +22,18 @@ namespace AutoRest.Java.DanModel
         private const string httpPipelineType = "HttpPipeline";
         private const string httpPipelineVariableName = "httpPipeline";
 
-        private const string restProxyImport = "com.microsoft.rest.v2.RestProxy";
+        private const string restProxyImport = "com.microsoft.rest.v2." + restProxyType;
         private const string restProxyType = "RestProxy";
 
         private const string serializerImport = "com.microsoft.rest.v2.protocol.SerializerAdapter";
+
+        private const string azureEnvironmentImport = "com.microsoft.azure.v2." + azureEnvironmentType;
+        private const string azureEnvironmentType = "AzureEnvironment";
+        private const string azureEnvironemntVariableName = "azureEnvironment";
+        private const string azureEnvironmentDescription = "The environment that requests will target.";
+
+        private const string azureProxyImport = "com.microsoft.azure.v2." + azureProxyType;
+        private const string azureProxyType = "AzureProxy";
 
         public static JavaFile GetAzureServiceManagerJavaFile(CodeModelJva codeModel, Settings settings)
         {
@@ -324,7 +332,14 @@ namespace AutoRest.Java.DanModel
                     !codeModel.Operations.Any(operation => import.EndsWith(operation.TypeName, StringComparison.OrdinalIgnoreCase)) &&
                     !import.EndsWith(codeModel.Name, StringComparison.OrdinalIgnoreCase));
             }
-            javaFile.Import(imports.Concat(new[] { "com.microsoft.azure.v2.AzureServiceClient" }));
+            javaFile.Import(imports.Concat(new[]
+            {
+                azureProxyImport,
+                azureEnvironmentImport,
+                "com.microsoft.azure.v2.AzureServiceClient",
+                httpPipelineImport,
+                "com.microsoft.rest.v2.RestResponse"
+            }));
 
             string implements = (fluent ? "" : $" implements {codeModel.Name}");
             javaFile.MultipleLineComment(comment =>
@@ -375,10 +390,11 @@ namespace AutoRest.Java.DanModel
                         comment.Line(constructorDescription);
                         comment.Line();
                         comment.Param("credentials", "the management credentials for Azure");
+                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"public {className}(ServiceClientCredentials credentials)", constructor =>
+                    classBlock.Block($"public {className}(ServiceClientCredentials credentials, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
                     {
-                        constructor.Line($"this(AzureProxy.defaultPipeline({className}.class, credentials));");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
@@ -386,10 +402,11 @@ namespace AutoRest.Java.DanModel
                         comment.Line(constructorDescription);
                         comment.Line();
                         comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                        comment.Param("azureEnvironment", $"The environment that this {className} targets");
                     });
-                    classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                    classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName}, AzureEnvironment azureEnvironment)", constructor =>
                     {
-                        constructor.Line($"super({httpPipelineVariableName});");
+                        constructor.Line($"super({httpPipelineVariableName}, azureEnvironment);");
                         constructor.Line("initialize();");
                     });
                     classBlock.Line();
@@ -442,32 +459,13 @@ namespace AutoRest.Java.DanModel
                         function.Line("initializeService();");
                     }
                 });
-                classBlock.Line();
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("Gets the User-Agent header for the client.");
-                    comment.Line();
-                    comment.Return("the user agent string.");
-                });
-                classBlock.Annotation("Override");
-                classBlock.Block("public String userAgent()", function =>
-                {
-                    if (codeModel.ApiVersion == null)
-                    {
-                        function.Return($"String.format(\"%s (%s)\", super.userAgent(), \"{codeModel.Name}\")");
-                    }
-                    else
-                    {
-                        function.Return($"String.format(\"%s (%s, %s)\", super.userAgent(), \"{codeModel.Name}\", \"{codeModel.ApiVersion}\")");
-                    }
-                });
 
                 if (hasRootMethods)
                 {
                     classBlock.Line();
                     classBlock.Block("private void initializeService()", function =>
                     {
-                        function.Line($"service = AzureProxy.create({serviceClientType}.class, restClient().baseURL(), httpClient(), serializerAdapter());");
+                        function.Line($"service = {azureProxyType}.create({serviceClientType}.class, this);");
                     });
 
                     classBlock.Line();
@@ -996,14 +994,7 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                interfaceBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("Gets the User-Agent header for the client.");
-                    comment.Line();
-                    comment.Return("the user agent string.");
-                });
-                interfaceBlock.Line("String userAgent();");
-
+                bool isFirstMethod = true;
                 foreach (Property property in codeModel.PropertiesEx)
                 {
                     string propertyDescription = property.Documentation;
@@ -1011,7 +1002,14 @@ namespace AutoRest.Java.DanModel
                     string propertyNameCamelCase = propertyName.ToCamelCase();
                     string propertyType = property.ModelType.ServiceResponseVariant().Name;
 
-                    interfaceBlock.Line();
+                    if (isFirstMethod)
+                    {
+                        isFirstMethod = false;
+                    }
+                    else
+                    {
+                        interfaceBlock.Line();
+                    }
                     interfaceBlock.MultipleLineComment(comment =>
                     {
                         comment.Line($"Gets {propertyDescription}.");
@@ -1084,7 +1082,7 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.Block($"public {className}({serviceClientType} client)", constructor =>
                 {
-                    constructor.Line($"this.service = AzureProxy.create({methodGroupServiceType}.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());");
+                    constructor.Line($"this.service = {azureProxyType}.create({methodGroupServiceType}.class, client);");
                     constructor.Line("this.client = client;");
                 });
                 classBlock.Line();

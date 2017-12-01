@@ -54,7 +54,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @param client the instance of the service client containing this operation class.
      */
     public LROsCustomHeadersImpl(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LROsCustomHeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LROsCustomHeadersService.class, client);
         this.client = client;
     }
 
@@ -68,49 +68,49 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders putAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPut201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders put201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Product>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPost202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders post202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPostAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROsCustomHeaders postAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -145,7 +145,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRetrySucceededAsync() {
         final Product product = null;
-        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -182,7 +182,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -217,7 +217,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -265,7 +265,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -312,7 +312,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200Async() {
         final Product product = null;
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -349,7 +349,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Product>> beginPut201CreatingSucceeded200Async(Product product) {
         Validator.validate(product);
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -384,7 +384,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -432,7 +432,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -478,7 +478,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async() {
         final Product product = null;
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -514,7 +514,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async(Product product) {
         Validator.validate(product);
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -549,7 +549,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -597,7 +597,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -643,7 +643,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync() {
         final Product product = null;
-        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -679,7 +679,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrySucceededAsync(Product product) {
         Validator.validate(product);
-        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -714,7 +714,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -762,7 +762,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**

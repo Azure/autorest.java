@@ -4,7 +4,6 @@ import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;

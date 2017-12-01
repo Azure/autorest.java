@@ -15,13 +15,6 @@ package fixtures.custombaseuri;
  */
 public interface AutoRestParameterizedHostTestClient {
     /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    String userAgent();
-
-    /**
      * Gets A string value that is used as a global part of the parameterized host.
      *
      * @return the host value.

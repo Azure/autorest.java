@@ -10,8 +10,12 @@
 
 package fixtures.custombaseuri.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
@@ -136,18 +140,20 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestParameterizedHostTestClientImpl.class, credentials));
+    public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestParameterizedHostTestClientImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that this AutoRestParameterizedHostTestClientImpl targets
      */
-    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -157,15 +163,5 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.paths = new PathsInner(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestParameterizedHostTestClient", "1.0.0");
     }
 }

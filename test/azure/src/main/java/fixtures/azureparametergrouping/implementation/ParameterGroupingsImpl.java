@@ -53,7 +53,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @param client the instance of the service client containing this operation class.
      */
     public ParameterGroupingsImpl(AutoRestParameterGroupingTestServiceImpl client) {
-        this.service = AzureProxy.create(ParameterGroupingsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ParameterGroupingsService.class, client);
         this.client = client;
     }
 
@@ -67,25 +67,25 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         @POST("parameterGrouping/postRequired/{path}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postRequired(@PathParam("path") String path, @HeaderParam("accept-language") String acceptLanguage, @BodyParam("application/json; charset=utf-8") int body, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postRequired(@PathParam("path") String path, @HeaderParam("accept-language") String acceptLanguage, @BodyParam("application/json; charset=utf-8") int body, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query);
 
         @Headers({ "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postOptional" })
         @POST("parameterGrouping/postOptional")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postOptional(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postOptional(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("customHeader") String customHeader, @QueryParam("query") Integer query);
 
         @Headers({ "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postMultiParamGroups" })
         @POST("parameterGrouping/postMultipleParameterGroups")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postMultiParamGroups(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("header-two") String headerTwo, @QueryParam("query-two") Integer queryTwo, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postMultiParamGroups(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("header-two") String headerTwo, @QueryParam("query-two") Integer queryTwo);
 
         @Headers({ "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postSharedParameterGroupObject" })
         @POST("parameterGrouping/sharedParameterGroupObject")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postSharedParameterGroupObject(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postSharedParameterGroupObject(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne);
 
     }
 
@@ -130,7 +130,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         String customHeader = parameterGroupingPostRequiredParameters.customHeader();
         Integer query = parameterGroupingPostRequiredParameters.query();
         String path = parameterGroupingPostRequiredParameters.path();
-        return service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query, this.client.userAgent());
+        return service.postRequired(path, this.client.acceptLanguage(), body, customHeader, query);
     }
 
     /**
@@ -180,7 +180,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         Integer query = null;
-        return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
+        return service.postOptional(this.client.acceptLanguage(), customHeader, query);
     }
 
     /**
@@ -236,7 +236,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.query();
         }
-        return service.postOptional(this.client.acceptLanguage(), customHeader, query, this.client.userAgent());
+        return service.postOptional(this.client.acceptLanguage(), customHeader, query);
     }
 
     /**
@@ -290,7 +290,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         Integer queryOne = null;
         String headerTwo = null;
         Integer queryTwo = null;
-        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
+        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
     }
 
     /**
@@ -358,7 +358,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo();
         }
-        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo, this.client.userAgent());
+        return service.postMultiParamGroups(this.client.acceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
     }
 
     /**
@@ -409,7 +409,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
         Integer queryOne = null;
-        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
+        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
     }
 
     /**
@@ -465,7 +465,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.queryOne();
         }
-        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne, this.client.userAgent());
+        return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
     }
 
     /**

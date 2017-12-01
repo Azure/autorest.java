@@ -44,7 +44,7 @@ public class HeadExceptionsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public HeadExceptionsInner(AutoRestHeadExceptionTestServiceImpl client) {
-        this.service = AzureProxy.create(HeadExceptionsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HeadExceptionsService.class, client);
         this.client = client;
     }
 
@@ -58,19 +58,19 @@ public class HeadExceptionsInner {
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> head200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> head200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> head204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> head204(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> head404(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> head404(@HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -104,7 +104,7 @@ public class HeadExceptionsInner {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
-        return service.head200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.head200(this.client.acceptLanguage());
     }
 
     /**
@@ -149,7 +149,7 @@ public class HeadExceptionsInner {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
-        return service.head204(this.client.acceptLanguage(), this.client.userAgent());
+        return service.head204(this.client.acceptLanguage());
     }
 
     /**
@@ -194,7 +194,7 @@ public class HeadExceptionsInner {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
-        return service.head404(this.client.acceptLanguage(), this.client.userAgent());
+        return service.head404(this.client.acceptLanguage());
     }
 
     /**

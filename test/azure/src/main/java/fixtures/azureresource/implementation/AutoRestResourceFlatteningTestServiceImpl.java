@@ -11,8 +11,11 @@
 package fixtures.azureresource.implementation;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
 import com.microsoft.azure.v2.Resource;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import com.microsoft.rest.v2.Validator;
@@ -26,6 +29,7 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azureresource.AutoRestResourceFlatteningTestService;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
@@ -124,18 +128,20 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials));
+    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that this AutoRestResourceFlatteningTestServiceImpl targets
      */
-    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -146,18 +152,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         initializeService();
     }
 
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestResourceFlatteningTestService", "1.0.0");
-    }
-
     private void initializeService() {
-        service = AzureProxy.create(AutoRestResourceFlatteningTestServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestResourceFlatteningTestServiceService.class, this);
     }
 
     /**
@@ -171,37 +167,37 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getArray" })
         @GET("azure/resource-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, List<FlattenedProduct>>> getArray(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, List<FlattenedProduct>>> getArray(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getDictionary" })
         @GET("azure/resource-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionary(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionary(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("azure/resource-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, ResourceCollection>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ResourceCollection>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -237,7 +233,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
         Validator.validate(resourceArray);
-        return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
+        return service.putArray(resourceArray, this.acceptLanguage());
     }
 
     /**
@@ -285,7 +281,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray) {
         Validator.validate(resourceArray);
-        return service.putArray(resourceArray, this.acceptLanguage(), this.userAgent());
+        return service.putArray(resourceArray, this.acceptLanguage());
     }
 
     /**
@@ -331,7 +327,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
      */
     public Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync() {
-        return service.getArray(this.acceptLanguage(), this.userAgent());
+        return service.getArray(this.acceptLanguage());
     }
 
     /**
@@ -378,7 +374,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProduct> resourceDictionary = null;
         Validator.validate(resourceDictionary);
-        return service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
+        return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
 
     /**
@@ -426,7 +422,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
         Validator.validate(resourceDictionary);
-        return service.putDictionary(resourceDictionary, this.acceptLanguage(), this.userAgent());
+        return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
 
     /**
@@ -472,7 +468,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
      */
     public Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync() {
-        return service.getDictionary(this.acceptLanguage(), this.userAgent());
+        return service.getDictionary(this.acceptLanguage());
     }
 
     /**
@@ -519,7 +515,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollection resourceComplexObject = null;
         Validator.validate(resourceComplexObject);
-        return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
+        return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
 
     /**
@@ -567,7 +563,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
-        return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent());
+        return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
 
     /**
@@ -613,7 +609,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
      */
     public Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync() {
-        return service.getResourceCollection(this.acceptLanguage(), this.userAgent());
+        return service.getResourceCollection(this.acceptLanguage());
     }
 
     /**

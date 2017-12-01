@@ -10,8 +10,12 @@
 
 package fixtures.lro.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.lro.AutoRestLongRunningOperationTestService;
 import fixtures.lro.LRORetrys;
 import fixtures.lro.LROs;
@@ -155,18 +159,20 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
+    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that this AutoRestLongRunningOperationTestServiceImpl targets
      */
-    public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+    public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -178,15 +184,5 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
         this.lRORetrys = new LRORetrysImpl(this);
         this.lROSADs = new LROSADsImpl(this);
         this.lROsCustomHeaders = new LROsCustomHeadersImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestLongRunningOperationTestService", "1.0.0");
     }
 }

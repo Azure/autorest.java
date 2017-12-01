@@ -10,8 +10,12 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
 
@@ -152,18 +156,20 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
+    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that this MicrosoftAzureTestUrlImpl targets
      */
-    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -173,15 +179,5 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.groups = new GroupsImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "MicrosoftAzureTestUrl", "2014-04-01-preview");
     }
 }

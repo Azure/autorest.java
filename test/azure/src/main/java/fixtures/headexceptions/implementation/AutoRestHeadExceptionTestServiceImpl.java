@@ -10,8 +10,12 @@
 
 package fixtures.headexceptions.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.headexceptions.AutoRestHeadExceptionTestService;
 import fixtures.headexceptions.HeadExceptions;
 
@@ -113,18 +117,20 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
+    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that this AutoRestHeadExceptionTestServiceImpl targets
      */
-    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -133,15 +139,5 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.headExceptions = new HeadExceptionsImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestHeadExceptionTestService", "1.0.0");
     }
 }
