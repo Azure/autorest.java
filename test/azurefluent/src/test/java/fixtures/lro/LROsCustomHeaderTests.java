@@ -1,11 +1,12 @@
 package fixtures.lro;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpHeaders;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
-import org.junit.AfterClass;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -20,14 +21,12 @@ public class LROsCustomHeaderTests {
     public static void setup() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-
-        RestClient config = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withCredentialsPolicy(new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)))
-                .addRequestPolicy(new AddHeadersPolicy.Factory(headers))
-                .build();
-
-        client = new AutoRestLongRunningOperationTestServiceImpl(config);
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)),
+                new AddHeadersPolicy.Factory(headers));
+        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 
     @Ignore("Pending headermap")

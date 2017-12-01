@@ -117,6 +117,15 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -127,7 +136,16 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * Initializes an instance of AutoRestParameterGroupingTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestParameterGroupingTestServiceImpl targets
+     */
+    public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterGroupingTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

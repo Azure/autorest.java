@@ -1,10 +1,11 @@
 package fixtures.azurespecials;
 
-import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.TokenCredentials;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import com.microsoft.rest.v2.policy.RequestIdPolicy;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,13 +19,12 @@ public class SubscriptionInCredentialsTests {
 
     @BeforeClass
     public static void setup() {
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withSerializerAdapter(new AzureJacksonAdapter())
-                .withCredentialsPolicy(new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())))
-                .addRequestPolicy(new RequestIdPolicy.Factory())
-                .build();
-        client = new AutoRestAzureSpecialParametersTestClientImpl(restClient);
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new TokenCredentials(null, UUID.randomUUID().toString())),
+                new RequestIdPolicy.Factory());
+        client = new AutoRestAzureSpecialParametersTestClientImpl(httpPipeline);
         client.withSubscriptionId("1234-5678-9012-3456");
     }
 

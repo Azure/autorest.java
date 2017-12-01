@@ -140,6 +140,15 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestParameterizedHostTestClientImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterizedHostTestClient client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestParameterizedHostTestClientImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -150,7 +159,16 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestParameterizedHostTestClientImpl targets
+     */
+    public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterizedHostTestClient client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

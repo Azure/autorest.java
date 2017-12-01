@@ -120,6 +120,15 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -130,7 +139,16 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestReportServiceForAzureImpl targets
+     */
+    public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

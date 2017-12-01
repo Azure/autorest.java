@@ -159,6 +159,15 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestLongRunningOperationTestService client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -169,7 +178,16 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestLongRunningOperationTestServiceImpl targets
+     */
+    public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestLongRunningOperationTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestLongRunningOperationTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

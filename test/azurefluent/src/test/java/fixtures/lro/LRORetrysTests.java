@@ -2,6 +2,8 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.*;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,8 +17,13 @@ public class LRORetrysTests {
 
     @BeforeClass
     public static void setup() {
-        AzureProxy.setDefaultDelayInMilliseconds(0);
-        client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        AzureProxy.setDefaultPollingDelayInMilliseconds(0);
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+            new ProtocolPolicy.Factory("http"),
+            new PortPolicy.Factory(3000),
+            new RetryPolicy.Factory(),
+            new AddCookiesPolicy.Factory());
+        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 
     @Test

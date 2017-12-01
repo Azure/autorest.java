@@ -117,6 +117,15 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -127,7 +136,16 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestHeadExceptionTestServiceImpl targets
+     */
+    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

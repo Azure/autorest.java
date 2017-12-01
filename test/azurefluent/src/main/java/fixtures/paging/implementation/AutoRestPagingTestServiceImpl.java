@@ -115,6 +115,15 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
      * Initializes an instance of AutoRestPagingTestService client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestPagingTestServiceImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestPagingTestService client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -125,7 +134,16 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
      * Initializes an instance of AutoRestPagingTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestPagingTestServiceImpl targets
+     */
+    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestPagingTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

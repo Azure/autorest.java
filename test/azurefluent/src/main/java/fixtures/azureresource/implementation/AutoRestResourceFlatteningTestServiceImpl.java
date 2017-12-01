@@ -125,6 +125,15 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -135,7 +144,16 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this AutoRestResourceFlatteningTestServiceImpl targets
+     */
+    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

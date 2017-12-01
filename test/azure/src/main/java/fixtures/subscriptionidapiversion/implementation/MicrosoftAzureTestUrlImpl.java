@@ -156,6 +156,15 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
      * @param credentials the management credentials for Azure
+     */
+    public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
+        this(AzureProxy.defaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
+    }
+
+    /**
+     * Initializes an instance of MicrosoftAzureTestUrl client.
+     *
+     * @param credentials the management credentials for Azure
      * @param azureEnvironment The environment that requests will target.
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
@@ -166,7 +175,16 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      * Initializes an instance of MicrosoftAzureTestUrl client.
      *
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param azureEnvironment The environment that this MicrosoftAzureTestUrlImpl targets
+     */
+    public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of MicrosoftAzureTestUrl client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
      */
     public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);

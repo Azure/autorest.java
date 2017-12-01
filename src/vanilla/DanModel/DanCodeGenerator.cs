@@ -390,26 +390,23 @@ namespace AutoRest.Java.DanModel
                         comment.Line(constructorDescription);
                         comment.Line();
                         comment.Param("credentials", "the management credentials for Azure");
-                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"public {className}(ServiceClientCredentials credentials, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
+                    classBlock.Block($"public {className}(ServiceClientCredentials credentials)", constructor =>
                     {
-                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials));");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
                         comment.Line(constructorDescription);
                         comment.Line();
-                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                        comment.Param("azureEnvironment", $"The environment that this {className} targets");
+                        comment.Param("credentials", "the management credentials for Azure");
+                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName}, AzureEnvironment azureEnvironment)", constructor =>
+                    classBlock.Block($"public {className}(ServiceClientCredentials credentials, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
                     {
-                        constructor.Line($"super({httpPipelineVariableName}, azureEnvironment);");
-                        constructor.Line("initialize();");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
                     });
-                    classBlock.Line();
                 }
                 else
                 {
@@ -419,23 +416,47 @@ namespace AutoRest.Java.DanModel
                     });
                     classBlock.Block($"public {className}()", constructor =>
                     {
-                        constructor.Line($"this(null);");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials));");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
                         comment.Line(constructorDescription);
                         comment.Line();
-                        comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                    classBlock.Block($"public {className}({azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
                     {
-                        constructor.Line($"super({httpPipelineVariableName});");
-                        constructor.Line("initialize();");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
                     });
-                    classBlock.Line();
                 }
 
+
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                    comment.Line();
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                });
+                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                {
+                    constructor.Line($"this({httpPipelineVariableName}, null);");
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                    comment.Line();
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                    comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
+                });
+                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
+                {
+                    constructor.Line($"super({httpPipelineVariableName}, {azureEnvironemntVariableName});");
+                    constructor.Line("initialize();");
+                });
+                classBlock.Line();
                 classBlock.Block("protected void initialize()", function =>
                 {
                     foreach (Property property in codeModel.PropertiesEx.Where(p => p.DefaultValue != null))
