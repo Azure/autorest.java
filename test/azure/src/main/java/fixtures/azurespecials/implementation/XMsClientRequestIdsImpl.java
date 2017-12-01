@@ -46,7 +46,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @param client the instance of the service client containing this operation class.
      */
     public XMsClientRequestIdsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(XMsClientRequestIdsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(XMsClientRequestIdsService.class, client);
         this.client = client;
     }
 
@@ -60,13 +60,13 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> get(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> get(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds paramGet" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -100,7 +100,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> getWithRestResponseAsync() {
-        return service.get(this.client.acceptLanguage(), this.client.userAgent());
+        return service.get(this.client.acceptLanguage());
     }
 
     /**
@@ -151,7 +151,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
-        return service.paramGet(xMsClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.paramGet(xMsClientRequestId, this.client.acceptLanguage());
     }
 
     /**

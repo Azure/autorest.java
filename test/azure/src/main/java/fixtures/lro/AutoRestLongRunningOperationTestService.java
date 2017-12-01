@@ -10,26 +10,10 @@
 
 package fixtures.lro;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestLongRunningOperationTestService class.
  */
 public interface AutoRestLongRunningOperationTestService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    String userAgent();
-
     /**
      * Gets Gets or sets the preferred language for the response..
      *

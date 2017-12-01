@@ -39,9 +39,14 @@ import rx.functions.Func1;
  * HttpSuccess.
  */
 public class HttpSuccessImpl implements HttpSuccess {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HttpSuccessService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
@@ -50,7 +55,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = RestProxy.create(HttpSuccessService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(HttpSuccessService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

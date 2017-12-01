@@ -39,9 +39,14 @@ import rx.functions.Func1;
  * Ints.
  */
 public class IntsImpl implements Ints {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private IntsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestIntegerTestServiceImpl client;
 
     /**
@@ -50,7 +55,7 @@ public class IntsImpl implements Ints {
      * @param client the instance of the service client containing this operation class.
      */
     public IntsImpl(AutoRestIntegerTestServiceImpl client) {
-        this.service = RestProxy.create(IntsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(IntsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

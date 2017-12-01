@@ -157,7 +157,7 @@ namespace AutoRest.Java.DanModel
 
         private void Line(string text, bool addPrefix)
         {
-            Text($"{text}\n", addPrefix);
+            Text($"{text}{Environment.NewLine}", addPrefix);
         }
 
         public JavaFileContents Line(string text)
@@ -328,9 +328,9 @@ namespace AutoRest.Java.DanModel
             });
         }
 
-        public void PublicClass(string className, Action<JavaClass> classAction)
+        public void PublicClass(string classDeclaration, Action<JavaClass> classAction)
         {
-            Block($"public class {className}", (blockAction) =>
+            Block($"public class {classDeclaration}", (blockAction) =>
             {
                 if (classAction != null)
                 {

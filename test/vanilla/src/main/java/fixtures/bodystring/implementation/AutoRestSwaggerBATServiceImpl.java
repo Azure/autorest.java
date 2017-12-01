@@ -10,14 +10,12 @@
 
 package fixtures.bodystring.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodystring.AutoRestSwaggerBATService;
 import fixtures.bodystring.Enums;
 import fixtures.bodystring.Strings;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService class.
@@ -31,6 +29,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Gets the Strings object to access its operations.
+     *
      * @return the Strings object.
      */
     public Strings strings() {
@@ -44,6 +43,7 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Gets the Enums object to access its operations.
+     *
      * @return the Enums object.
      */
     public Enums enums() {
@@ -52,33 +52,19 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
 
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATService client.
      */
     public AutoRestSwaggerBATServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestSwaggerBATServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.strings = new StringsImpl(this);
         this.enums = new EnumsImpl(this);
     }

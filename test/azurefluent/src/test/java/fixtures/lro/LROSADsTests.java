@@ -2,11 +2,13 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.serializer.AzureJacksonAdapter;
 import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.implementation.ProductInner;
 import org.junit.Assert;
@@ -20,15 +22,13 @@ public class LROSADsTests {
 
     @BeforeClass
     public static void setup() {
-        AzureProxy.setDefaultDelayInMilliseconds(0);
-        RestClient restClient = new RestClient.Builder()
-                .withBaseUrl("http://localhost:3000")
-                .withCredentialsPolicy(new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)))
-                .withSerializerAdapter(new AzureJacksonAdapter())
-                .withLogLevel(LogLevel.BODY_AND_HEADERS)
-                .build();
-
-        client = new AutoRestLongRunningOperationTestServiceImpl(restClient);
+        AzureProxy.setDefaultPollingDelayInMilliseconds(0);
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)),
+                new LoggingPolicy.Factory(LogLevel.BODY_AND_HEADERS));
+        client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 
     @Test

@@ -77,22 +77,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             base.Disambiguate();
         }
 
-        [JsonIgnore]
-        public override IEnumerable<ParameterJv> RetrofitParameters
-        {
-            get
-            {
-                List<ParameterJv> parameters = base.RetrofitParameters.ToList();
-
-                parameters.First(p => p.SerializedName == "User-Agent")
-                    .ClientProperty = new PropertyJvaf
-                    {
-                        Name = "userAgent"
-                    };
-                return parameters;
-            }
-        }
-
         protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, MethodJva nextMethod, bool filterRequired = false)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())

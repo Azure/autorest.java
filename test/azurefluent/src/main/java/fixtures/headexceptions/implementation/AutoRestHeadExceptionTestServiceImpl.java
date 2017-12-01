@@ -10,12 +10,12 @@
 
 package fixtures.headexceptions.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
-import rx.Single;
+import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl class.
@@ -23,7 +23,9 @@ import rx.Single;
 public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
 
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -46,7 +48,9 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -69,7 +73,9 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -111,27 +117,36 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
-     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestHeadExceptionTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
+    public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestHeadExceptionTestService client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestHeadExceptionTestServiceImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestHeadExceptionTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -140,15 +155,5 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.headExceptions = new HeadExceptionsInner(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestHeadExceptionTestService", "1.0.0");
     }
 }

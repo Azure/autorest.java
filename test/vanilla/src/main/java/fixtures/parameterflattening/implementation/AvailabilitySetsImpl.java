@@ -38,9 +38,14 @@ import rx.functions.Func1;
  * AvailabilitySets.
  */
 public class AvailabilitySetsImpl implements AvailabilitySets {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private AvailabilitySetsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterFlatteningImpl client;
 
     /**
@@ -49,7 +54,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param client the instance of the service client containing this operation class.
      */
     public AvailabilitySetsImpl(AutoRestParameterFlatteningImpl client) {
-        this.service = RestProxy.create(AvailabilitySetsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(AvailabilitySetsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

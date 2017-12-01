@@ -11,9 +11,9 @@
 package fixtures.azurereport.implementation;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
@@ -25,6 +25,7 @@ import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
@@ -41,7 +42,9 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
     private AutoRestReportServiceForAzureService service;
 
 
-    /** Gets or sets the preferred language for the response. */
+    /**
+     * Gets or sets the preferred language for the response.
+     */
     private String acceptLanguage;
 
     /**
@@ -64,7 +67,9 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         return this;
     }
 
-    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
+    /**
+     * Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     */
     private int longRunningOperationRetryTimeout;
 
     /**
@@ -87,7 +92,9 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         return this;
     }
 
-    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    /**
+     * When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     */
     private boolean generateClientRequestId;
 
     /**
@@ -116,27 +123,36 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @param credentials the management credentials for Azure
      */
     public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
-        this("http://localhost", credentials);
+        this(AzureProxy.defaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials));
     }
 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
      */
-    public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials) {
-        super(baseUrl, credentials);
-        initialize();
+    public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials), azureEnvironment);
     }
 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param restClient the REST client to connect to Azure.
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestReportServiceForAzureImpl(RestClient restClient) {
-        super(restClient);
+    public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline) {
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestReportServiceForAzure client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestReportServiceForAzureImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -147,18 +163,8 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         initializeService();
     }
 
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestReportServiceForAzure", "1.0.0");
-    }
-
     private void initializeService() {
-        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = AzureProxy.create(AutoRestReportServiceForAzureService.class, this);
     }
 
     /**
@@ -172,7 +178,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getReport(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Map<String, Integer>>> getReport(@HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -206,7 +212,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
-        return service.getReport(this.acceptLanguage(), this.userAgent());
+        return service.getReport(this.acceptLanguage());
     }
 
     /**

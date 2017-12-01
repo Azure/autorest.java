@@ -35,9 +35,14 @@ import rx.functions.Func1;
  * Paths.
  */
 public class PathsImpl implements Paths {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PathsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterizedHostTestClientImpl client;
 
     /**
@@ -46,7 +51,7 @@ public class PathsImpl implements Paths {
      * @param client the instance of the service client containing this operation class.
      */
     public PathsImpl(AutoRestParameterizedHostTestClientImpl client) {
-        this.service = RestProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

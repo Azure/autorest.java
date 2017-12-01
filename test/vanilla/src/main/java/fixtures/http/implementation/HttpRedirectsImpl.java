@@ -55,9 +55,14 @@ import rx.functions.Func1;
  * HttpRedirects.
  */
 public class HttpRedirectsImpl implements HttpRedirects {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HttpRedirectsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestHttpInfrastructureTestServiceImpl client;
 
     /**
@@ -66,7 +71,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @param client the instance of the service client containing this operation class.
      */
     public HttpRedirectsImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
-        this.service = RestProxy.create(HttpRedirectsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(HttpRedirectsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

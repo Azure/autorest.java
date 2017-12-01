@@ -36,9 +36,14 @@ import rx.functions.Func1;
  * Durations.
  */
 public class DurationsImpl implements Durations {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private DurationsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestDurationTestServiceImpl client;
 
     /**
@@ -47,7 +52,7 @@ public class DurationsImpl implements Durations {
      * @param client the instance of the service client containing this operation class.
      */
     public DurationsImpl(AutoRestDurationTestServiceImpl client) {
-        this.service = RestProxy.create(DurationsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DurationsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

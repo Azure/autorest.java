@@ -1,5 +1,7 @@
 package fixtures.bodyfile;
 
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.PortPolicy;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,7 +21,7 @@ public class FilesTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestSwaggerBATFileServiceImpl("http://localhost:3000");
+        client = new AutoRestSwaggerBATFileServiceImpl(HttpPipeline.build(new PortPolicy.Factory(3000)));
     }
 
     @Test

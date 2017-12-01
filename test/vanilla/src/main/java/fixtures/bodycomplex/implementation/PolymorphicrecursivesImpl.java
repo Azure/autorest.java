@@ -37,9 +37,14 @@ import rx.functions.Func1;
  * Polymorphicrecursives.
  */
 public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PolymorphicrecursivesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestComplexTestServiceImpl client;
 
     /**
@@ -48,7 +53,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @param client the instance of the service client containing this operation class.
      */
     public PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(PolymorphicrecursivesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PolymorphicrecursivesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

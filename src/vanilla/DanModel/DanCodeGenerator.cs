@@ -17,11 +17,33 @@ namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        private const string httpPipelineImport = "com.microsoft.rest.v2.http." + httpPipelineType;
+        private const string httpPipelineDescription = "The HTTP pipeline to send requests through.";
+        private const string httpPipelineType = "HttpPipeline";
+        private const string httpPipelineVariableName = "httpPipeline";
+
+        private const string restProxyImport = "com.microsoft.rest.v2." + restProxyType;
+        private const string restProxyType = "RestProxy";
+
+        private const string serializerImport = "com.microsoft.rest.v2.protocol.SerializerAdapter";
+
+        private const string azureEnvironmentImport = "com.microsoft.azure.v2." + azureEnvironmentType;
+        private const string azureEnvironmentType = "AzureEnvironment";
+        private const string azureEnvironemntVariableName = "azureEnvironment";
+        private const string azureEnvironmentDescription = "The environment that requests will target.";
+
+        private const string azureProxyImport = "com.microsoft.azure.v2." + azureProxyType;
+        private const string azureProxyType = "AzureProxy";
+
         public static JavaFile GetAzureServiceManagerJavaFile(CodeModelJva codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
             string serviceName = codeModel.ServiceName;
+            if (string.IsNullOrEmpty(serviceName))
+            {
+                serviceName = "MissingServiceName";
+            }
             string className = $"{serviceName}Manager";
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
@@ -32,12 +54,9 @@ namespace AutoRest.Java.DanModel
                 "com.microsoft.azure.management.resources.fluentcore.arm.AzureConfigurable",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.AzureConfigurableImpl",
                 "com.microsoft.azure.management.resources.fluentcore.arm.implementation.Manager",
-                "com.microsoft.azure.management.resources.fluentcore.utils.ProviderRegistrationInterceptor",
                 "com.microsoft.azure.v2.AzureEnvironment",
-                "com.microsoft.azure.v2.AzureResponseBuilder",
                 "com.microsoft.azure.v2.credentials.AzureTokenCredentials",
-                "com.microsoft.azure.v2.serializer.AzureJacksonAdapter",
-                "com.microsoft.rest.v2.RestClient");
+                "com.microsoft.azure.v2.serializer.AzureJacksonAdapter");
 
             javaFile.MultipleLineComment(comment =>
             {
@@ -67,29 +86,21 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.Block($"public static {className} authenticate(AzureTokenCredentials credentials, String subscriptionId)", function =>
                 {
-                    function.Line($"return new {className}(new RestClient.Builder()");
-                    function.Indent(() =>
-                    {
-                        function.Line(".withBaseUrl(credentials.environment(), AzureEnvironment.Endpoint.RESOURCE_MANAGER)");
-                        function.Line(".withCredentials(credentials)");
-                        function.Line(".withSerializerAdapter(new AzureJacksonAdapter())");
-                        function.Line(".withResponseBuilderFactory(new AzureResponseBuilder.Factory())");
-                        function.Line(".withInterceptor(new ProviderRegistrationInterceptor(credentials))");
-                        function.Line(".build(), subscriptionId);");
-                    });
+                    function.Line($"final {httpPipelineType} {httpPipelineVariableName} = AzureProxy.defaultPipeline({className}.class, credentials);");
+                    function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
                 });
                 classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
                 {
                     comment.Line($"Creates an instance of {className} that exposes {serviceName} resource management API entry points.");
                     comment.Line();
-                    comment.Param("restClient", "the RestClient to be used for API calls.");
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
                     comment.Param("subscriptionId", "the subscription UUID");
                     comment.Return($"the {className}");
                 });
-                classBlock.Block($"public static {className} authenticate(RestClient restClient, String subscriptionId)", function =>
+                classBlock.Block($"public static {className} authenticate({httpPipelineType} {httpPipelineVariableName}, String subscriptionId)", function =>
                 {
-                    function.Return($"new {className}(restClient, subscriptionId)");
+                    function.Return($"new {className}({httpPipelineVariableName}, subscriptionId)");
                 });
                 classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
@@ -117,18 +128,18 @@ namespace AutoRest.Java.DanModel
                 {
                     innerClass.Block($"public {className} authenticate(AzureTokenCredentials credentials, String subscriptionId)", function =>
                     {
-                        function.Return($"{className}.authenticate(buildRestClient(credentials), subscriptionId)");
+                        function.Return($"{className}.authenticate(build{httpPipelineType}(credentials), subscriptionId)");
                     });
                 });
                 classBlock.Line();
-                classBlock.Block($"private {className}(RestClient restClient, String subscriptionId)", constructor =>
+                classBlock.Block($"private {className}({httpPipelineType} {httpPipelineVariableName}, String subscriptionId)", constructor =>
                 {
                     constructor.Line("super(");
                     constructor.Indent(() =>
                     {
-                        constructor.Line("restClient,");
+                        constructor.Line($"{httpPipelineVariableName},");
                         constructor.Line("subscriptionId,");
-                        constructor.Line($"new {codeModel.Name}Impl(restClient).withSubscriptionId(subscriptionId));");
+                        constructor.Line($"new {codeModel.Name}Impl({httpPipelineVariableName}).withSubscriptionId(subscriptionId));");
                     });
                 });
             });
@@ -149,7 +160,7 @@ namespace AutoRest.Java.DanModel
 
                 string className = pageClass.Value.ToPascalCase();
 
-                string subPackage = (codeModel is CodeModelJvaf ? codeModel.ImplPackage : codeModel.ModelsPackage);
+                string subPackage = (IsFluent(codeModel) ? codeModel.ImplPackage : codeModel.ModelsPackage);
                 JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
                 javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                                 "com.microsoft.azure.v2.Page",
@@ -310,14 +321,32 @@ namespace AutoRest.Java.DanModel
             string className = $"{codeModel.Name.ToPascalCase()}Impl";
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
-            
-            javaFile.Import(codeModel.ImplImports);
 
+            bool fluent = IsFluent(codeModel);
+
+            IEnumerable<string> imports = codeModel.ImplImports;
+            if (fluent)
+            {
+                imports = imports.Where(import =>
+                    !import.StartsWith($"{codeModel.Namespace}.{codeModel.ImplPackage}", StringComparison.OrdinalIgnoreCase) &&
+                    !codeModel.Operations.Any(operation => import.EndsWith(operation.TypeName, StringComparison.OrdinalIgnoreCase)) &&
+                    !import.EndsWith(codeModel.Name, StringComparison.OrdinalIgnoreCase));
+            }
+            javaFile.Import(imports.Concat(new[]
+            {
+                azureProxyImport,
+                azureEnvironmentImport,
+                "com.microsoft.azure.v2.AzureServiceClient",
+                httpPipelineImport,
+                "com.microsoft.rest.v2.RestResponse"
+            }));
+
+            string implements = (fluent ? "" : $" implements {codeModel.Name}");
             javaFile.MultipleLineComment(comment =>
             {
                 comment.Line($"Initializes a new instance of the {className} class.");
             });
-            javaFile.Block($"public class {className}{codeModel.ParentDeclaration}", classBlock =>
+            javaFile.Block($"public class {className} extends AzureServiceClient{implements}", classBlock =>
             {
                 string serviceClientType = codeModel.ServiceClientServiceType;
                 IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
@@ -325,7 +354,7 @@ namespace AutoRest.Java.DanModel
 
                 if (hasRootMethods)
                 {
-                    classBlock.SingleLineComment("The RestProxy service to perform REST calls.");
+                    classBlock.SingleLineComment($"The {restProxyType} service to perform REST calls.");
                     classBlock.Line($"private {serviceClientType} service;");
                 }
                 classBlock.Line();
@@ -353,90 +382,81 @@ namespace AutoRest.Java.DanModel
                 }
                 classBlock.Line();
 
-                Action<JavaMultipleLineComment> addConstructorDescription = (JavaMultipleLineComment comment) =>
-                {
-                    comment.Line($"Initializes an instance of {codeModel.Name} client.");
-                };
+                string constructorDescription = $"Initializes an instance of {codeModel.Name} client.";
                 if (settings.AddCredentials)
                 {
-                    string constructorDescription = $"Initializes an instance of {codeModel.Name} client.";
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                         comment.Line();
                         comment.Param("credentials", "the management credentials for Azure");
                     });
                     classBlock.Block($"public {className}(ServiceClientCredentials credentials)", constructor =>
                     {
-                        constructor.Line($"this(\"{codeModel.BaseUrl}\", credentials);");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials));");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                         comment.Line();
-                        comment.Param("baseUrl", "the base URL of the host");
                         comment.Param("credentials", "the management credentials for Azure");
+                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
                     });
-
-                    string constructorVisibility = codeModel.IsCustomBaseUri ? "private" : "public";
-                    classBlock.Block($"{constructorVisibility} {className}(String baseUrl, ServiceClientCredentials credentials)", constructor =>
+                    classBlock.Block($"public {className}(ServiceClientCredentials credentials, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
                     {
-                        constructor.Line("super(baseUrl, credentials);");
-                        constructor.Line("initialize();");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
                     });
-                    classBlock.Line();
-
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        addConstructorDescription(comment);
-                        comment.Line();
-                        comment.Param("restClient", "the REST client to connect to Azure.");
-                    });
-                    classBlock.Block($"public {className}(RestClient restClient)", constructor =>
-                    {
-                        constructor.Line("super(restClient);");
-                        constructor.Line("initialize();");
-                    });
-                    classBlock.Line();
                 }
                 else
                 {
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                     });
                     classBlock.Block($"public {className}()", constructor =>
                     {
-                        constructor.Line($"this(\"{codeModel.BaseUrl}\");");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials));");
                     });
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
-                        addConstructorDescription(comment);
+                        comment.Line(constructorDescription);
                         comment.Line();
-                        comment.Param("baseUrl", "the base URL of the host");
+                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"{(codeModel.IsCustomBaseUri ? "private" : "public")} {className}(String baseUrl)", constructor =>
+                    classBlock.Block($"public {className}({azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
                     {
-                        constructor.Line("this(baseUrl, null);");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
                     });
-                    classBlock.Line();
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        addConstructorDescription(comment);
-                        comment.Line();
-                        comment.Param("restClient", "the REST client to connect to Azure");
-                    });
-                    classBlock.Block($"public {className}(RestClient restClient)", constructor =>
-                    {
-                        constructor.Line("super(restClient);");
-                        constructor.Line($"restClient.baseUrl(\"{codeModel.BaseUrl}\");");
-                        constructor.Line("initialize();");
-                    });
-                    classBlock.Line();
                 }
 
+
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                    comment.Line();
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                });
+                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
+                {
+                    constructor.Line($"this({httpPipelineVariableName}, null);");
+                });
+                classBlock.Line();
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(constructorDescription);
+                    comment.Line();
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
+                    comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
+                });
+                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
+                {
+                    constructor.Line($"super({httpPipelineVariableName}, {azureEnvironemntVariableName});");
+                    constructor.Line("initialize();");
+                });
+                classBlock.Line();
                 classBlock.Block("protected void initialize()", function =>
                 {
                     foreach (Property property in codeModel.PropertiesEx.Where(p => p.DefaultValue != null))
@@ -460,32 +480,13 @@ namespace AutoRest.Java.DanModel
                         function.Line("initializeService();");
                     }
                 });
-                classBlock.Line();
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("Gets the User-Agent header for the client.");
-                    comment.Line();
-                    comment.Return("the user agent string.");
-                });
-                classBlock.Annotation("Override");
-                classBlock.Block("public String userAgent()", function =>
-                {
-                    if (codeModel.ApiVersion == null)
-                    {
-                        function.Return($"String.format(\"%s (%s)\", super.userAgent(), \"{codeModel.Name}\")");
-                    }
-                    else
-                    {
-                        function.Return($"String.format(\"%s (%s, %s)\", super.userAgent(), \"{codeModel.Name}\", \"{codeModel.ApiVersion}\")");
-                    }
-                });
 
                 if (hasRootMethods)
                 {
                     classBlock.Line();
                     classBlock.Block("private void initializeService()", function =>
                     {
-                        function.Line($"service = AzureProxy.create({serviceClientType}.class, restClient().baseURL(), httpClient(), serializerAdapter());");
+                        function.Line($"service = {azureProxyType}.create({serviceClientType}.class, this);");
                     });
 
                     classBlock.Line();
@@ -494,7 +495,7 @@ namespace AutoRest.Java.DanModel
 
                     classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                     {
-                        comment.Line($"The interface defining all the services for {methodGroup.Name} to be used by RestProxy to perform REST calls.");
+                        comment.Line($"The interface defining all the services for {methodGroup.Name} to be used by {restProxyType} to perform REST calls.");
                     });
                     classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
                     classBlock.Block($"interface {methodGroup.ServiceType}", interfaceBlock =>
@@ -1001,7 +1002,12 @@ namespace AutoRest.Java.DanModel
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
-            javaFile.Import(codeModel.InterfaceImports);
+            List<string> imports = codeModel.InterfaceImports;
+            if (IsFluent(codeModel))
+            {
+                imports.Add("com.microsoft.azure.v2.AzureClient");
+            }
+            javaFile.Import(imports);
 
             javaFile.MultipleLineComment(comment =>
             {
@@ -1009,16 +1015,7 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                AddRestClientGetterSignature(interfaceBlock);
-                interfaceBlock.Line();
-                interfaceBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("Gets the User-Agent header for the client.");
-                    comment.Line();
-                    comment.Return("the user agent string.");
-                });
-                interfaceBlock.Line("String userAgent();");
-
+                bool isFirstMethod = true;
                 foreach (Property property in codeModel.PropertiesEx)
                 {
                     string propertyDescription = property.Documentation;
@@ -1026,7 +1023,14 @@ namespace AutoRest.Java.DanModel
                     string propertyNameCamelCase = propertyName.ToCamelCase();
                     string propertyType = property.ModelType.ServiceResponseVariant().Name;
 
-                    interfaceBlock.Line();
+                    if (isFirstMethod)
+                    {
+                        isFirstMethod = false;
+                    }
+                    else
+                    {
+                        interfaceBlock.Line();
+                    }
                     interfaceBlock.MultipleLineComment(comment =>
                     {
                         comment.Line($"Gets {propertyDescription}.");
@@ -1086,7 +1090,7 @@ namespace AutoRest.Java.DanModel
                 string methodGroupServiceType = methodGroup.MethodGroupServiceType;
                 string serviceClientType = methodGroup.ServiceClientType;
 
-                classBlock.SingleLineComment($"The RestProxy service to perform REST calls.");
+                classBlock.SingleLineComment($"The {restProxyType} service to perform REST calls.");
                 classBlock.Line($"private {methodGroupServiceType} service;");
                 classBlock.SingleLineComment($"The service client containing this operation class.");
                 classBlock.Line($"private {serviceClientType} client;");
@@ -1099,7 +1103,7 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.Block($"public {className}({serviceClientType} client)", constructor =>
                 {
-                    constructor.Line($"this.service = AzureProxy.create({methodGroupServiceType}.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());");
+                    constructor.Line($"this.service = {azureProxyType}.create({methodGroupServiceType}.class, client);");
                     constructor.Line("this.client = client;");
                 });
                 classBlock.Line();
@@ -1107,7 +1111,7 @@ namespace AutoRest.Java.DanModel
                 IMethodGroupJva methodGroupJva = (IMethodGroupJva)methodGroup;
                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                 {
-                    comment.Line($"The interface defining all the services for {methodGroupJva.Name} to be used by RestProxy to perform REST calls.");
+                    comment.Line($"The interface defining all the services for {methodGroupJva.Name} to be used by {restProxyType} to perform REST calls.");
                 });
                 classBlock.Annotation($"Host(\"{methodGroupJva.CodeModel.BaseUrl}\")");
                 classBlock.Block($"interface {methodGroupJva.ServiceType}", interfaceBlock =>
@@ -1921,29 +1925,39 @@ namespace AutoRest.Java.DanModel
 
             string interfaceName = codeModel.Name.ToPascalCase();
             string className = $"{interfaceName}Impl";
+            IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
+            bool hasRootMethods = rootMethods.Any();
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
 
-            javaFile.Import(codeModel.ImplImports);
+            List<string> imports = new List<string>(codeModel.ImplImports);
+            imports.AddRange(new[]
+            {
+                httpPipelineImport,
+                restProxyImport,
+                "com.microsoft.rest.v2.ServiceClient"
+            });
+            if (hasRootMethods)
+            {
+                imports.AddRange(new[]
+                {
+                    "com.microsoft.rest.v2.RestResponse",
+                });
+            }
+            javaFile.Import(imports);
 
             javaFile.MultipleLineComment(comment =>
             {
                 comment.Line($"Initializes a new instance of the {interfaceName} class.");
             });
-            javaFile.Block($"public class {className} extends ServiceClient implements {interfaceName}", classBlock =>
+            javaFile.PublicClass($"{className} extends ServiceClient implements {interfaceName}", classBlock =>
             {
-                IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
-                bool hasRootMethods = rootMethods.Any();
                 string serviceClientType = codeModel.ServiceClientServiceType;
                 string baseUrl = codeModel.BaseUrl;
 
                 if (hasRootMethods)
                 {
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Line("The Retrofit service to perform REST calls.");
-                    });
-                    classBlock.Line($"private {serviceClientType} service;");
+                    classBlock.PrivateMemberVariable("The proxy service to use to perform REST calls.", serviceClientType, "service");
                 }
 
                 AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.Properties, className);
@@ -1954,92 +1968,49 @@ namespace AutoRest.Java.DanModel
                     string operationName = operation.Name;
 
                     classBlock.Line();
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Line($"The {operationType} object to access its operations.");
-                    });
-                    classBlock.Line($"private {operationType} {operationName};");
+                    classBlock.PrivateMemberVariable($"The {operationType} object to access its operations.", operationType, operationName);
                     classBlock.Line();
-                    classBlock.MultipleLineComment(comment =>
-                    {
-                        comment.Line($"Gets the {operationType} object to access its operations.");
-                        comment.Return($"the {operationType} object.");
-                    });
-                    classBlock.Block($"public {operationType} {operationName}()", function =>
-                    {
-                        function.Return($"this.{operationName}");
-                    });
+                    classBlock.PublicGetter(operationType, operationName);
                 }
 
                 classBlock.Line();
+                classBlock.PublicConstructor(
+                    $"Initializes an instance of {interfaceName} client.",
+                    className, constructor =>
+                    {
+                        constructor.Line($"this({restProxyType}.createDefaultPipeline());");
+                    });
 
-                string constructorDescription = $"Initializes an instance of {interfaceName} client.";
+                classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
                 {
-                    comment.Line(constructorDescription);
+                    comment.Line($"Initializes an instance of {interfaceName} client.");
                     comment.Line();
-                    comment.Param("baseUrl", "the base URL of the host");
+                    comment.Param(httpPipelineVariableName, httpPipelineDescription);
                 });
-                string baseUrlConstructorVisibility = codeModel.IsCustomBaseUri ? "private" : "public";
-                classBlock.Block($"{baseUrlConstructorVisibility} {className}(String baseUrl)", constructor =>
+                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName})", constructor =>
                 {
-                    constructor.Line("super(baseUrl);");
-                    constructor.Line("initialize();");
-                });
+                    constructor.Line($"super({httpPipelineVariableName});");
 
-                classBlock.Line();
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line(constructorDescription);
-                });
-                classBlock.Block($"public {className}()", constructor =>
-                {
-                    constructor.Line($"this(\"{baseUrl}\");");
-                    constructor.Line("initialize();");
-                });
-
-                classBlock.Line();
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line(constructorDescription);
-                    comment.Line();
-                    comment.Param("restClient", "the REST client containing pre-configured settings");
-                });
-                classBlock.Block($"public {className}(RestClient restClient)", constructor =>
-                {
-                    constructor.Line("super(restClient);");
-                    constructor.Line("initialize();");
-                });
-
-                classBlock.Line();
-
-                classBlock.Block("private void initialize()", function =>
-                {
+                    constructor.Line();
                     foreach (Property property in codeModel.Properties.Where(p => p.DefaultValue != null))
                     {
-                        function.Line($"this.{property.Name} = {property.DefaultValue};");
+                        constructor.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
-
                     foreach (MethodGroupJv operation in codeModel.AllOperations)
                     {
-                        function.Line($"this.{operation.Name} = new {operation.TypeName}Impl(this);");
+                        constructor.Line($"this.{operation.Name} = new {operation.TypeName}Impl(this);");
                     }
 
                     if (hasRootMethods)
                     {
-                        function.Line("initializeService();");
+                        constructor.Line();
+                        constructor.Line($"service = {restProxyType}.create({serviceClientType}.class, {httpPipelineVariableName});");
                     }
                 });
 
                 if (hasRootMethods)
                 {
-                    classBlock.Line();
-                    classBlock.Block("private void initializeService()", function =>
-                    {
-                        function.Line($"service = RestProxy.create({serviceClientType}.class, restClient().baseURL(), httpClient(), serializerAdapter());");
-                    });
                     classBlock.Line();
                     classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                     {
@@ -2048,11 +2019,21 @@ namespace AutoRest.Java.DanModel
                     classBlock.Annotation($"Host(\"{baseUrl}\")");
                     classBlock.Block($"interface {serviceClientType}", interfaceBlock =>
                     {
+                        bool isFirstLine = true;
                         foreach (MethodJv method in codeModel.Methods)
                         {
+                            if (isFirstLine)
+                            {
+                                isFirstLine = false;
+                            }
+                            else
+                            {
+                                interfaceBlock.Line();
+                            }
+
                             if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
                             {
-                                interfaceBlock.SingleLineSlashSlashComment("@Multipart not supported by RestProxy");
+                                interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
                             }
                             else
                             {
@@ -2061,7 +2042,7 @@ namespace AutoRest.Java.DanModel
                             interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
                             if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                             {
-                                interfaceBlock.SingleLineSlashSlashComment("@Streaming not supported by RestProxy");
+                                interfaceBlock.SingleLineSlashSlashComment($"@Streaming not supported by {restProxyType}");
                             }
                             interfaceBlock.Line(method.ExpectedResponsesAnnotation);
                             if (method.DefaultResponse.Body != null)
@@ -2069,16 +2050,13 @@ namespace AutoRest.Java.DanModel
                                 interfaceBlock.Annotation($"UnexpectedResponseExceptionType({method.OperationExceptionTypeString}.class)");
                             }
                             interfaceBlock.Line($"Single<{method.RestResponseConcreteTypeName}> {method.Name}({method.MethodParameterApiDeclaration});");
-                            interfaceBlock.Line();
                         }
                     });
-                    classBlock.Line();
 
                     foreach (MethodJv method in rootMethods)
                     {
-                        GenerateRootMethodFunctions(classBlock, method);
-
                         classBlock.Line();
+                        GenerateRootMethodFunctions(classBlock, method);
                     }
                 }
             });
@@ -2100,8 +2078,6 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                AddRestClientGetterSignature(interfaceBlock);
-                interfaceBlock.Line();
                 interfaceBlock.MultipleLineComment(comment =>
                 {
                     comment.Line("The default base URL.");
@@ -2148,17 +2124,6 @@ namespace AutoRest.Java.DanModel
             });
 
             return javaFile;
-        }
-
-        private static void AddRestClientGetterSignature(JavaBlock interfaceBlock)
-        {
-            interfaceBlock.MultipleLineComment(comment =>
-            {
-                comment.Line("Gets the REST client.");
-                comment.Line();
-                comment.Return("the {@link RestClient} object.");
-            });
-            interfaceBlock.Line("RestClient restClient();");
         }
 
         private static void AddInterfaceMethodSignatures(JavaBlock interfaceBlock, CodeModelJv codeModel)
@@ -2325,7 +2290,10 @@ namespace AutoRest.Java.DanModel
                 string propertyNameCamelCase = propertyName.ToCamelCase();
 
                 classBlock.Line();
-                classBlock.SingleLineComment(propertyDocumentation);
+                classBlock.MultipleLineComment(comment =>
+                {
+                    comment.Line(propertyDocumentation);
+                });
                 classBlock.Line($"private {propertyType} {propertyNameCamelCase};");
                 classBlock.Line();
                 AddPropertyGetterComment(classBlock, propertyDocumentation, propertyNameCamelCase);
@@ -2425,13 +2393,12 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicClass($"{className}{methodGroup.ParentDeclaration}", classBlock =>
             {
-                classBlock.SingleLineComment("The RestProxy service to perform REST calls.");
                 string serviceType = methodGroup.MethodGroupServiceType;
-                classBlock.Line($"private {serviceType} service;");
-
                 string serviceClientType = methodGroup.ServiceClientType;
-                classBlock.SingleLineComment("The service client containing this operation class.");
-                classBlock.Line($"private {serviceClientType} client;");
+
+                classBlock.PrivateMemberVariable($"The {restProxyType} service to perform REST calls.", serviceType, "service");
+                classBlock.Line();
+                classBlock.PrivateMemberVariable("The service client containing this operation class.", serviceClientType, "client");
                 classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
                 {
@@ -2441,14 +2408,14 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.Block($"public {className}({serviceClientType} client)", constructor =>
                 {
-                    constructor.Line($"this.service = RestProxy.create({serviceType}.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());");
+                    constructor.Line($"this.service = {restProxyType}.create({serviceType}.class, client.httpPipeline(), client.serializerAdapter());");
                     constructor.Line("this.client = client;");
                 });
                 classBlock.Line();
 
                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                 {
-                    comment.Line($"The interface defining all the services for {methodGroupTypeName} to be used by RestProxy to perform REST calls.");
+                    comment.Line($"The interface defining all the services for {methodGroupTypeName} to be used by {restProxyType} to perform REST calls.");
                 });
 
                 classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
@@ -2460,7 +2427,7 @@ namespace AutoRest.Java.DanModel
                         string methodRequestContentType = method.RequestContentType;
                         if (methodRequestContentType == "multipart/form-data" || methodRequestContentType == "application/x-www-form-urlencoded")
                         {
-                            interfaceBlock.SingleLineSlashSlashComment("@Multipart not supported by RestProxy");
+                            interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
                         }
                         else
                         {
@@ -2469,7 +2436,7 @@ namespace AutoRest.Java.DanModel
                         interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
                         if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                         {
-                            interfaceBlock.SingleLineSlashSlashComment("@Streaming not supported by RestProxy");
+                            interfaceBlock.SingleLineSlashSlashComment($"@Streaming not supported by {restProxyType}");
                         }
                         string expectedResponsesAnnotation = method.ExpectedResponsesAnnotation;
                         if (!string.IsNullOrWhiteSpace(expectedResponsesAnnotation))
@@ -3364,5 +3331,8 @@ namespace AutoRest.Java.DanModel
             classBlock.Text(method.ObservableImpl(parameterVariants.AllParameters));
             classBlock.Line();
         }
+
+        private static bool IsFluent(CodeModel codeModel)
+            => codeModel is CodeModelJvaf;
     }
 }

@@ -46,9 +46,14 @@ import rx.functions.Func1;
  * Dictionarys.
  */
 public class DictionarysImpl implements Dictionarys {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private DictionarysService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATdictionaryServiceImpl client;
 
     /**
@@ -57,7 +62,7 @@ public class DictionarysImpl implements Dictionarys {
      * @param client the instance of the service client containing this operation class.
      */
     public DictionarysImpl(AutoRestSwaggerBATdictionaryServiceImpl client) {
-        this.service = RestProxy.create(DictionarysService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(DictionarysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

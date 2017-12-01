@@ -36,9 +36,14 @@ import rx.functions.Func1;
  * Numbers.
  */
 public class NumbersImpl implements Numbers {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private NumbersService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestNumberTestServiceImpl client;
 
     /**
@@ -47,7 +52,7 @@ public class NumbersImpl implements Numbers {
      * @param client the instance of the service client containing this operation class.
      */
     public NumbersImpl(AutoRestNumberTestServiceImpl client) {
-        this.service = RestProxy.create(NumbersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(NumbersService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

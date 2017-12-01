@@ -41,9 +41,14 @@ import rx.functions.Func1;
  * Queries.
  */
 public class QueriesImpl implements Queries {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private QueriesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestUrlTestServiceImpl client;
 
     /**
@@ -52,7 +57,7 @@ public class QueriesImpl implements Queries {
      * @param client the instance of the service client containing this operation class.
      */
     public QueriesImpl(AutoRestUrlTestServiceImpl client) {
-        this.service = RestProxy.create(QueriesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(QueriesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

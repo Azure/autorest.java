@@ -35,9 +35,14 @@ import rx.functions.Func1;
  * PathItems.
  */
 public class PathItemsImpl implements PathItems {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PathItemsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestUrlTestServiceImpl client;
 
     /**
@@ -46,7 +51,7 @@ public class PathItemsImpl implements PathItems {
      * @param client the instance of the service client containing this operation class.
      */
     public PathItemsImpl(AutoRestUrlTestServiceImpl client) {
-        this.service = RestProxy.create(PathItemsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(PathItemsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

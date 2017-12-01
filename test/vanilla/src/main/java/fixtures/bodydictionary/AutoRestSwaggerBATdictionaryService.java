@@ -10,19 +10,10 @@
 
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestSwaggerBATdictionaryService class.
  */
 public interface AutoRestSwaggerBATdictionaryService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
     /**
      * The default base URL.
      */

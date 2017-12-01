@@ -10,7 +10,6 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -25,13 +24,6 @@ import rx.Single;
  * The interface for AutoRestValidationTest class.
  */
 public interface AutoRestValidationTest {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
     /**
      * The default base URL.
      */

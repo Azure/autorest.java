@@ -34,9 +34,14 @@ import rx.functions.Func1;
  * Files.
  */
 public class FilesImpl implements Files {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private FilesService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestSwaggerBATFileServiceImpl client;
 
     /**
@@ -45,7 +50,7 @@ public class FilesImpl implements Files {
      * @param client the instance of the service client containing this operation class.
      */
     public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
-        this.service = RestProxy.create(FilesService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = RestProxy.create(FilesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
 

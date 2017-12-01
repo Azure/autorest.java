@@ -10,19 +10,10 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestSwaggerBATArrayService class.
  */
 public interface AutoRestSwaggerBATArrayService {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
     /**
      * The default base URL.
      */

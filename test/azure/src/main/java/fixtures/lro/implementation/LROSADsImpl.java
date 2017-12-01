@@ -72,7 +72,7 @@ public class LROSADsImpl implements LROSADs {
      * @param client the instance of the service client containing this operation class.
      */
     public LROSADsImpl(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LROSADsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LROSADsService.class, client);
         this.client = client;
     }
 
@@ -86,313 +86,313 @@ public class LROSADsImpl implements LROSADs {
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry400" })
         @PUT("lro/nonretryerror/put/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> putNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Product>> putNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry201Creating400" })
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry201Creating400" })
         @PUT("lro/nonretryerror/put/201/creating/400")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Product>> putNonRetry201Creating400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry201Creating400InvalidJson" })
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putNonRetry201Creating400InvalidJson" })
         @PUT("lro/nonretryerror/put/201/creating/400/invalidjson")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetry400" })
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetry400" })
         @PUT("lro/nonretryerror/putasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteNonRetry400" })
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteNonRetry400" })
         @DELETE("lro/nonretryerror/delete/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteNonRetry400Headers, Void>> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDeleteNonRetry400Headers, Void>> deleteNonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDelete202NonRetry400" })
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDelete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs delete202NonRetry400" })
         @DELETE("lro/nonretryerror/delete/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDelete202NonRetry400Headers, Void>> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDelete202NonRetry400Headers, Void>> delete202NonRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetry400" })
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetry400" })
         @DELETE("lro/nonretryerror/deleteasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void>> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void>> deleteAsyncRelativeRetry400(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostNonRetry400" })
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postNonRetry400" })
         @POST("lro/nonretryerror/post/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPost202NonRetry400" })
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs post202NonRetry400" })
         @POST("lro/nonretryerror/post/202/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetry400" })
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetry400" })
         @POST("lro/nonretryerror/postasync/retry/400")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutError201NoProvisioningStatePayload" })
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putError201NoProvisioningStatePayload" })
         @PUT("lro/error/put/201/noprovisioningstatepayload")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryNoStatus" })
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryNoStatus" })
         @PUT("lro/error/putasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatus(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryNoStatusPayload" })
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryNoStatusPayload" })
         @PUT("lro/error/putasync/retry/nostatuspayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDelete204Succeeded" })
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs delete204Succeeded" })
         @DELETE("lro/error/delete/204/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryNoStatus" })
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryNoStatus" })
         @DELETE("lro/error/deleteasync/retry/nostatus")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void>> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void>> deleteAsyncRelativeRetryNoStatus(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPost202NoLocation" })
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs post202NoLocation" })
         @POST("lro/error/post/202/nolocation")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocation(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryNoPayload" })
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryNoPayload" })
         @POST("lro/error/postasync/retry/nopayload")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayload(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPut200InvalidJson" })
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPut200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPut200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs put200InvalidJson" })
         @PUT("lro/error/put/200/invalidjson")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Product>> put200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Product>> put200InvalidJson(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryInvalidHeader" })
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryInvalidHeader" })
         @PUT("lro/error/putasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutAsyncRelativeRetryInvalidJsonPolling" })
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs putAsyncRelativeRetryInvalidJsonPolling" })
         @PUT("lro/error/putasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDelete202RetryInvalidHeader" })
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs delete202RetryInvalidHeader" })
         @DELETE("lro/error/delete/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void>> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void>> delete202RetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryInvalidHeader" })
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryInvalidHeader" })
         @DELETE("lro/error/deleteasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>> deleteAsyncRelativeRetryInvalidHeader(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginDeleteAsyncRelativeRetryInvalidJsonPolling" })
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs deleteAsyncRelativeRetryInvalidJsonPolling" })
         @DELETE("lro/error/deleteasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> deleteAsyncRelativeRetryInvalidJsonPolling(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPost202RetryInvalidHeader" })
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs post202RetryInvalidHeader" })
         @POST("lro/error/post/202/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryInvalidHeader" })
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryInvalidHeader" })
         @POST("lro/error/postasync/retry/invalidheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeader(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPostAsyncRelativeRetryInvalidJsonPolling" })
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs postAsyncRelativeRetryInvalidJsonPolling" })
         @POST("lro/error/postasync/retry/invalidjsonpolling")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -427,7 +427,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry400Async() {
         final Product product = null;
-        return service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -464,7 +464,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry400Async(Product product) {
         Validator.validate(product);
-        return service.beginPutNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -499,7 +499,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<Void, Product>> putNonRetry400WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -547,7 +547,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putNonRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -594,7 +594,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400Async() {
         final Product product = null;
-        return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -631,7 +631,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400Async(Product product) {
         Validator.validate(product);
-        return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonRetry201Creating400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -666,7 +666,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -714,7 +714,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putNonRetry201Creating400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -761,7 +761,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync() {
         final Product product = null;
-        return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -798,7 +798,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutNonRetry201Creating400InvalidJsonAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -833,7 +833,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -881,7 +881,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -928,7 +928,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async() {
         final Product product = null;
-        return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -965,7 +965,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1000,7 +1000,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1048,7 +1048,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1093,7 +1093,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteNonRetry400Async() {
-        return service.beginDeleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteNonRetry400(this.client.acceptLanguage());
     }
 
     /**
@@ -1126,7 +1126,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteNonRetry400Headers, Void> object
      */
     public Single<RestResponse<LROSADsDeleteNonRetry400Headers, Void>> deleteNonRetry400WithRestResponseAsync() {
-        return service.deleteNonRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteNonRetry400(this.client.acceptLanguage());
     }
 
     /**
@@ -1170,7 +1170,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDelete202NonRetry400Async() {
-        return service.beginDelete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDelete202NonRetry400(this.client.acceptLanguage());
     }
 
     /**
@@ -1203,7 +1203,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDelete202NonRetry400Headers, Void> object
      */
     public Single<RestResponse<LROSADsDelete202NonRetry400Headers, Void>> delete202NonRetry400WithRestResponseAsync() {
-        return service.delete202NonRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return service.delete202NonRetry400(this.client.acceptLanguage());
     }
 
     /**
@@ -1247,7 +1247,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetry400Async() {
-        return service.beginDeleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRelativeRetry400(this.client.acceptLanguage());
     }
 
     /**
@@ -1280,7 +1280,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void> object
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void>> deleteAsyncRelativeRetry400WithRestResponseAsync() {
-        return service.deleteAsyncRelativeRetry400(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRelativeRetry400(this.client.acceptLanguage());
     }
 
     /**
@@ -1325,7 +1325,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostNonRetry400Async() {
         final Product product = null;
-        return service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1361,7 +1361,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostNonRetry400Async(Product product) {
         Validator.validate(product);
-        return service.beginPostNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1396,7 +1396,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1444,7 +1444,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.postNonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postNonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1490,7 +1490,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPost202NonRetry400Async() {
         final Product product = null;
-        return service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202NonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1526,7 +1526,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPost202NonRetry400Async(Product product) {
         Validator.validate(product);
-        return service.beginPost202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202NonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1561,7 +1561,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1609,7 +1609,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.post202NonRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1655,7 +1655,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async() {
         final Product product = null;
-        return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1691,7 +1691,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetry400Async(Product product) {
         Validator.validate(product);
-        return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1726,7 +1726,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400WithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1774,7 +1774,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400WithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1821,7 +1821,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync() {
         final Product product = null;
-        return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1858,7 +1858,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutError201NoProvisioningStatePayloadAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1893,7 +1893,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1941,7 +1941,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1988,7 +1988,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync() {
         final Product product = null;
-        return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2025,7 +2025,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2060,7 +2060,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2108,7 +2108,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatusWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2155,7 +2155,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync() {
         final Product product = null;
-        return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2192,7 +2192,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2227,7 +2227,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2275,7 +2275,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2320,7 +2320,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDelete204SucceededAsync() {
-        return service.beginDelete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDelete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -2353,7 +2353,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
-        return service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -2397,7 +2397,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryNoStatusAsync() {
-        return service.beginDeleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage());
     }
 
     /**
@@ -2430,7 +2430,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void> object
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void>> deleteAsyncRelativeRetryNoStatusWithRestResponseAsync() {
-        return service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRelativeRetryNoStatus(this.client.acceptLanguage());
     }
 
     /**
@@ -2475,7 +2475,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPost202NoLocationAsync() {
         final Product product = null;
-        return service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202NoLocation(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2511,7 +2511,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPost202NoLocationAsync(Product product) {
         Validator.validate(product);
-        return service.beginPost202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202NoLocation(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2546,7 +2546,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocationWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202NoLocation(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2594,7 +2594,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocationWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.post202NoLocation(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202NoLocation(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2640,7 +2640,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync() {
         final Product product = null;
-        return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2676,7 +2676,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryNoPayloadAsync(Product product) {
         Validator.validate(product);
-        return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2711,7 +2711,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2759,7 +2759,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2806,7 +2806,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPut200InvalidJsonAsync() {
         final Product product = null;
-        return service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2843,7 +2843,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPut200InvalidJsonAsync(Product product) {
         Validator.validate(product);
-        return service.beginPut200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2878,7 +2878,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<Void, Product>> put200InvalidJsonWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2926,7 +2926,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> put200InvalidJsonWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.put200InvalidJson(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2973,7 +2973,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync() {
         final Product product = null;
-        return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3010,7 +3010,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3045,7 +3045,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3093,7 +3093,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3140,7 +3140,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync() {
         final Product product = null;
-        return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3177,7 +3177,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Product>> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);
-        return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3212,7 +3212,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3260,7 +3260,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3305,7 +3305,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDelete202RetryInvalidHeaderAsync() {
-        return service.beginDelete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDelete202RetryInvalidHeader(this.client.acceptLanguage());
     }
 
     /**
@@ -3338,7 +3338,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void> object
      */
     public Single<RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void>> delete202RetryInvalidHeaderWithRestResponseAsync() {
-        return service.delete202RetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
+        return service.delete202RetryInvalidHeader(this.client.acceptLanguage());
     }
 
     /**
@@ -3382,7 +3382,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
-        return service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage());
     }
 
     /**
@@ -3415,7 +3415,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void> object
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>> deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
-        return service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRelativeRetryInvalidHeader(this.client.acceptLanguage());
     }
 
     /**
@@ -3459,7 +3459,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
-        return service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage());
     }
 
     /**
@@ -3492,7 +3492,7 @@ public class LROSADsImpl implements LROSADs {
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void> object
      */
     public Single<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
-        return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.acceptLanguage());
     }
 
     /**
@@ -3537,7 +3537,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync() {
         final Product product = null;
-        return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3573,7 +3573,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPost202RetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
-        return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3608,7 +3608,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3656,7 +3656,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeaderWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.post202RetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3702,7 +3702,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync() {
         final Product product = null;
-        return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3738,7 +3738,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         Validator.validate(product);
-        return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3773,7 +3773,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3821,7 +3821,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3867,7 +3867,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync() {
         final Product product = null;
-        return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3903,7 +3903,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         Validator.validate(product);
-        return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3938,7 +3938,7 @@ public class LROSADsImpl implements LROSADs {
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final Product product = null;
         Validator.validate(product);
-        return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3986,7 +3986,7 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(Product product) {
         Validator.validate(product);
-        return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
     /**

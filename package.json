@@ -32,8 +32,8 @@
   },
   "homepage": "https://github.com/Azure/autorest.java/blob/master/README.md",
   "devDependencies": {
-    "autorest": "^2.0.0",
     "@microsoft.azure/autorest.testserver": "^1.9.0",
+    "autorest": "^2.0.0",
     "coffee-script": "^1.11.1",
     "dotnet-sdk-2.0.0": "^1.1.1",
     "gulp": "^3.9.1",
@@ -43,6 +43,7 @@
     "marked": "^0.3.6",
     "marked-terminal": "^2.0.0",
     "moment": "^2.17.1",
+    "rimraf": "^2.6.2",
     "run-sequence": "*",
     "shx": "^0.2.2",
     "through2-parallel": "^0.1.3",

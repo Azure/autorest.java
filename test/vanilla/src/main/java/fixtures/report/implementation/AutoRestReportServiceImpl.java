@@ -11,7 +11,6 @@
 package fixtures.report.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -23,6 +22,7 @@ import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.report.AutoRestReportService;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
@@ -36,44 +36,27 @@ import rx.functions.Func1;
  */
 public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
     /**
-     * The Retrofit service to perform REST calls.
+     * The proxy service to use to perform REST calls.
      */
     private AutoRestReportServiceService service;
 
     /**
      * Initializes an instance of AutoRestReportService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestReportServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportService client.
      */
     public AutoRestReportServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestReportService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestReportServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestReportServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
-        initializeService();
-    }
 
-    private void initializeService() {
-        service = RestProxy.create(AutoRestReportServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = RestProxy.create(AutoRestReportServiceService.class, httpPipeline);
     }
 
     /**
@@ -87,7 +70,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Map<String, Integer>>> getReport();
-
     }
 
     /**
@@ -133,6 +115,5 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
         return getReportWithRestResponseAsync()
             .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
         }
-
 
 }

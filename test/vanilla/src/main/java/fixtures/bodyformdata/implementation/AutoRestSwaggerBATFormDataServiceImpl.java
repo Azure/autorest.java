@@ -10,13 +10,11 @@
 
 package fixtures.bodyformdata.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
 import fixtures.bodyformdata.Formdatas;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService class.
@@ -30,6 +28,7 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
 
     /**
      * Gets the Formdatas object to access its operations.
+     *
      * @return the Formdatas object.
      */
     public Formdatas formdatas() {
@@ -38,33 +37,19 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestSwaggerBATFormDataServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestSwaggerBATFormDataService client.
      */
     public AutoRestSwaggerBATFormDataServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestSwaggerBATFormDataServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.formdatas = new FormdatasImpl(this);
     }
 }

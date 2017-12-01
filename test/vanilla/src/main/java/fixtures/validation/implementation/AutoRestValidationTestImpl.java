@@ -11,7 +11,6 @@
 package fixtures.validation.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
@@ -30,6 +29,7 @@ import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.validation.AutoRestValidationTest;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
@@ -43,11 +43,13 @@ import rx.functions.Func1;
  */
 public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
-     * The Retrofit service to perform REST calls.
+     * The proxy service to use to perform REST calls.
      */
     private AutoRestValidationTestService service;
 
-    /** Subscription ID. */
+    /**
+     * Subscription ID.
+     */
     private String subscriptionId;
 
     /**
@@ -70,7 +72,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         return this;
     }
 
-    /** Required string following pattern \d{2}-\d{2}-\d{4}. */
+    /**
+     * Required string following pattern \d{2}-\d{2}-\d{4}.
+     */
     private String apiVersion;
 
     /**
@@ -95,38 +99,21 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      * Initializes an instance of AutoRestValidationTest client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestValidationTestImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestValidationTest client.
      */
     public AutoRestValidationTestImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestValidationTest client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestValidationTestImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestValidationTestImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
-        initializeService();
-    }
 
-    private void initializeService() {
-        service = RestProxy.create(AutoRestValidationTestService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = RestProxy.create(AutoRestValidationTestService.class, httpPipeline);
     }
 
     /**
@@ -156,7 +143,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         @POST("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);
-
     }
 
     /**
@@ -481,6 +467,5 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
         return postWithConstantInBodyWithRestResponseAsync(body)
             .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
         }
-
 
 }

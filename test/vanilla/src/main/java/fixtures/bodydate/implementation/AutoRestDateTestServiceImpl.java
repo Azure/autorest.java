@@ -10,13 +10,11 @@
 
 package fixtures.bodydate.implementation;
 
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.bodydate.AutoRestDateTestService;
 import fixtures.bodydate.Dates;
-import rx.Single;
 
 /**
  * Initializes a new instance of the AutoRestDateTestService class.
@@ -30,6 +28,7 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
 
     /**
      * Gets the Dates object to access its operations.
+     *
      * @return the Dates object.
      */
     public Dates dates() {
@@ -38,33 +37,19 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
 
     /**
      * Initializes an instance of AutoRestDateTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestDateTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestDateTestService client.
      */
     public AutoRestDateTestServiceImpl() {
-        this("https://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestDateTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestDateTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestDateTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
         this.dates = new DatesImpl(this);
     }
 }

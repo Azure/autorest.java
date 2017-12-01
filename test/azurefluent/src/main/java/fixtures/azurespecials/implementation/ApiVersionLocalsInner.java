@@ -45,7 +45,7 @@ public class ApiVersionLocalsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public ApiVersionLocalsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(ApiVersionLocalsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ApiVersionLocalsService.class, client);
         this.client = client;
     }
 
@@ -59,25 +59,25 @@ public class ApiVersionLocalsInner {
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalNull" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getPathLocalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getSwaggerLocalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -112,7 +112,7 @@ public class ApiVersionLocalsInner {
      */
     public Single<RestResponse<Void, Void>> getMethodLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
-        return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMethodLocalValid(apiVersion, this.client.acceptLanguage());
     }
 
     /**
@@ -158,7 +158,7 @@ public class ApiVersionLocalsInner {
      */
     public Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync() {
         final String apiVersion = null;
-        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
     }
 
     /**
@@ -205,7 +205,7 @@ public class ApiVersionLocalsInner {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> getMethodLocalNullWithRestResponseAsync(String apiVersion) {
-        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMethodLocalNull(apiVersion, this.client.acceptLanguage());
     }
 
     /**
@@ -252,7 +252,7 @@ public class ApiVersionLocalsInner {
      */
     public Single<RestResponse<Void, Void>> getPathLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
-        return service.getPathLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getPathLocalValid(apiVersion, this.client.acceptLanguage());
     }
 
     /**
@@ -298,7 +298,7 @@ public class ApiVersionLocalsInner {
      */
     public Single<RestResponse<Void, Void>> getSwaggerLocalValidWithRestResponseAsync() {
         final String apiVersion = "2.0";
-        return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getSwaggerLocalValid(apiVersion, this.client.acceptLanguage());
     }
 
     /**

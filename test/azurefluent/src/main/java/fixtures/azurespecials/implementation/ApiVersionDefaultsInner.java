@@ -45,7 +45,7 @@ public class ApiVersionDefaultsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public ApiVersionDefaultsInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(ApiVersionDefaultsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(ApiVersionDefaultsService.class, client);
         this.client = client;
     }
 
@@ -59,25 +59,25 @@ public class ApiVersionDefaultsInner {
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalNotProvidedValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getPathGlobalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getSwaggerGlobalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -114,7 +114,7 @@ public class ApiVersionDefaultsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMethodGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
     }
 
     /**
@@ -162,7 +162,7 @@ public class ApiVersionDefaultsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        return service.getMethodGlobalNotProvidedValid(this.client.apiVersion(), this.client.acceptLanguage());
     }
 
     /**
@@ -210,7 +210,7 @@ public class ApiVersionDefaultsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        return service.getPathGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
     }
 
     /**
@@ -258,7 +258,7 @@ public class ApiVersionDefaultsInner {
         if (this.client.apiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
-        return service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent());
+        return service.getSwaggerGlobalValid(this.client.apiVersion(), this.client.acceptLanguage());
     }
 
     /**

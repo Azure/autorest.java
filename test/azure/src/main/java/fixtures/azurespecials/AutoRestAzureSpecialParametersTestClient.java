@@ -10,26 +10,10 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.v2.RestClient;
-
 /**
  * The interface for AutoRestAzureSpecialParametersTestClient class.
  */
 public interface AutoRestAzureSpecialParametersTestClient {
-    /**
-     * Gets the REST client.
-     *
-     * @return the {@link RestClient} object.
-     */
-    RestClient restClient();
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    String userAgent();
-
     /**
      * Gets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      *

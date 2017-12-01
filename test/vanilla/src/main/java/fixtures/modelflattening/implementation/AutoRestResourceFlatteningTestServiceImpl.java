@@ -11,7 +11,6 @@
 package fixtures.modelflattening.implementation;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.v2.RestClient;
 import com.microsoft.rest.v2.RestProxy;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
@@ -28,6 +27,7 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
@@ -49,44 +49,27 @@ import rx.functions.Func1;
  */
 public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     /**
-     * The Retrofit service to perform REST calls.
+     * The proxy service to use to perform REST calls.
      */
     private AutoRestResourceFlatteningTestServiceService service;
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl) {
-        super(baseUrl);
-        initialize();
-    }
-
-    /**
-     * Initializes an instance of AutoRestResourceFlatteningTestService client.
      */
     public AutoRestResourceFlatteningTestServiceImpl() {
-        this("http://localhost");
-        initialize();
+        this(RestProxy.createDefaultPipeline());
     }
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param restClient the REST client containing pre-configured settings
+     * @param httpPipeline The HTTP pipeline to send requests through.
      */
-    public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
-        super(restClient);
-        initialize();
-    }
+    public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
+        super(httpPipeline);
 
-    private void initialize() {
-        initializeService();
-    }
 
-    private void initializeService() {
-        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, restClient().baseURL(), httpClient(), serializerAdapter());
+        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpPipeline);
     }
 
     /**
@@ -161,7 +144,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, SimpleProduct>> putSimpleProductWithGrouping(@PathParam("name") String name, @BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
-
     }
 
     /**
@@ -1037,6 +1019,5 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
             .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
         }
-
 
 }
