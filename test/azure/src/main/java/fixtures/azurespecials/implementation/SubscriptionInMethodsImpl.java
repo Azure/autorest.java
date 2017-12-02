@@ -47,7 +47,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param client the instance of the service client containing this operation class.
      */
     public SubscriptionInMethodsImpl(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(SubscriptionInMethodsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(SubscriptionInMethodsService.class, client);
         this.client = client;
     }
 
@@ -61,25 +61,25 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postMethodLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postMethodLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postMethodLocalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postMethodLocalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postPathLocalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postPathLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postPathLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postSwaggerLocalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> postSwaggerLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> postSwaggerLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -119,7 +119,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        return service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postMethodLocalValid(subscriptionId, this.client.acceptLanguage());
     }
 
     /**
@@ -171,7 +171,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        return service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postMethodLocalNull(subscriptionId, this.client.acceptLanguage());
     }
 
     /**
@@ -223,7 +223,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        return service.postPathLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postPathLocalValid(subscriptionId, this.client.acceptLanguage());
     }
 
     /**
@@ -275,7 +275,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         if (subscriptionId == null) {
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
-        return service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postSwaggerLocalValid(subscriptionId, this.client.acceptLanguage());
     }
 
     /**

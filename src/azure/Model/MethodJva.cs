@@ -89,19 +89,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 List<ParameterJv> parameters = base.RetrofitParameters.ToList();
-                var par = new ParameterJv
-                {
-                    SerializedName = "User-Agent",
-                    Location = ParameterLocation.Header,
-                    ModelType = new PrimaryTypeJv(KnownPrimaryType.String),
-                    ClientProperty = new PropertyJv
-                    {
-                        Name = "userAgent"
-                    }
-                };
-                par.Name.FixedValue = Group.IsNullOrEmpty() ? "this.userAgent()" : "this.client.userAgent()";
-                parameters.Add(par);
-
+                
                 if (IsPagingNextOperation)
                 {
                     parameters.RemoveAll(p => p.Location == ParameterLocation.Path);

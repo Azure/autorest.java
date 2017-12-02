@@ -47,7 +47,7 @@ public class PathsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public PathsInner(AutoRestParameterizedHostTestClientImpl client) {
-        this.service = AzureProxy.create(PathsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(PathsService.class, client);
         this.client = client;
     }
 
@@ -61,7 +61,7 @@ public class PathsInner {
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -104,7 +104,7 @@ public class PathsInner {
         if (this.client.host() == null) {
             throw new IllegalArgumentException("Parameter this.client.host() is required and cannot be null.");
         }
-        return service.getEmpty(accountName, this.client.host(), this.client.acceptLanguage(), this.client.userAgent());
+        return service.getEmpty(accountName, this.client.host(), this.client.acceptLanguage());
     }
 
     /**

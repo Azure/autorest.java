@@ -47,7 +47,7 @@ public class HeadersInner {
      * @param client the instance of the service client containing this operation class.
      */
     public HeadersInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(HeadersService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(HeadersService.class, client);
         this.client = client;
     }
 
@@ -61,19 +61,19 @@ public class HeadersInner {
         @POST("azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId);
 
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdHead" })
         @HEAD("azurespecials/customNamedRequestIdHead")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -113,7 +113,7 @@ public class HeadersInner {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        return service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.customNamedRequestId(fooClientRequestId, this.client.acceptLanguage());
     }
 
     /**
@@ -167,7 +167,7 @@ public class HeadersInner {
         }
         Validator.validate(headerCustomNamedRequestIdParamGroupingParameters);
         String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.fooClientRequestId();
-        return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId, this.client.userAgent());
+        return service.customNamedRequestIdParamGrouping(this.client.acceptLanguage(), fooClientRequestId);
     }
 
     /**
@@ -219,7 +219,7 @@ public class HeadersInner {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        return service.customNamedRequestIdHead(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent());
+        return service.customNamedRequestIdHead(fooClientRequestId, this.client.acceptLanguage());
     }
 
     /**

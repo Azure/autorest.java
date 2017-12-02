@@ -2,6 +2,10 @@ package fixtures.headexceptions;
 
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import fixtures.headexceptions.implementation.AutoRestHeadExceptionTestServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +15,11 @@ public class HeadExceptionTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHeadExceptionTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)));
+        client = new AutoRestHeadExceptionTestServiceImpl(httpPipeline);
     }
 
     @Test

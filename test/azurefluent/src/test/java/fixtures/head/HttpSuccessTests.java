@@ -1,6 +1,10 @@
 package fixtures.head;
 
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.policy.CredentialsPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,7 +16,11 @@ public class HttpSuccessTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestHeadTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
+        final HttpPipeline httpPipeline = HttpPipeline.build(
+                new ProtocolPolicy.Factory("http"),
+                new PortPolicy.Factory(3000),
+                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)));
+        client = new AutoRestHeadTestServiceImpl(httpPipeline);
     }
 
     @Test

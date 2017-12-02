@@ -10,8 +10,12 @@
 
 package fixtures.azurespecials.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azurespecials.ApiVersionDefaults;
 import fixtures.azurespecials.ApiVersionLocals;
 import fixtures.azurespecials.AutoRestAzureSpecialParametersTestClient;
@@ -258,10 +262,30 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      *
+     * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials), azureEnvironment);
+    }
+
+    /**
+     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestAzureSpecialParametersTestClientImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestAzureSpecialParametersTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -278,15 +302,5 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
         this.skipUrlEncodings = new SkipUrlEncodingsImpl(this);
         this.odatas = new OdatasImpl(this);
         this.headers = new HeadersImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestAzureSpecialParametersTestClient", "2015-07-01-preview");
     }
 }

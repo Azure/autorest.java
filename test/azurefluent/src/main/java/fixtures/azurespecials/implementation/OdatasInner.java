@@ -46,7 +46,7 @@ public class OdatasInner {
      * @param client the instance of the service client containing this operation class.
      */
     public OdatasInner(AutoRestAzureSpecialParametersTestClientImpl client) {
-        this.service = AzureProxy.create(OdatasService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(OdatasService.class, client);
         this.client = client;
     }
 
@@ -60,7 +60,7 @@ public class OdatasInner {
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -97,7 +97,7 @@ public class OdatasInner {
         final String filter = null;
         final Integer top = null;
         final String orderby = null;
-        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 
     /**
@@ -150,7 +150,7 @@ public class OdatasInner {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> getWithFilterWithRestResponseAsync(String filter, Integer top, String orderby) {
-        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage(), this.client.userAgent());
+        return service.getWithFilter(filter, top, orderby, this.client.acceptLanguage());
     }
 
     /**

@@ -10,8 +10,12 @@
 
 package fixtures.paging.implementation;
 
+import com.microsoft.azure.v2.AzureEnvironment;
+import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
+import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
 
@@ -121,10 +125,30 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
     /**
      * Initializes an instance of AutoRestPagingTestService client.
      *
+     * @param credentials the management credentials for Azure
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
+        this(AzureProxy.defaultPipeline(AutoRestPagingTestServiceImpl.class, credentials), azureEnvironment);
+    }
+
+    /**
+     * Initializes an instance of AutoRestPagingTestService client.
+     *
      * @param httpPipeline The HTTP pipeline to send requests through.
      */
     public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline) {
-        super(httpPipeline);
+        this(httpPipeline, null);
+    }
+
+    /**
+     * Initializes an instance of AutoRestPagingTestService client.
+     *
+     * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param azureEnvironment The environment that requests will target.
+     */
+    public AutoRestPagingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
+        super(httpPipeline, azureEnvironment);
         initialize();
     }
 
@@ -133,15 +157,5 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.pagings = new PagingsImpl(this);
-    }
-
-    /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    @Override
-    public String userAgent() {
-        return String.format("%s (%s, %s)", super.userAgent(), "AutoRestPagingTestService", "1.0.0");
     }
 }

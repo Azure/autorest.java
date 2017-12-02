@@ -51,7 +51,7 @@ public class LROsInner {
      * @param client the instance of the service client containing this operation class.
      */
     public LROsInner(AutoRestLongRunningOperationTestServiceImpl client) {
-        this.service = AzureProxy.create(LROsService.class, client.restClient().baseURL(), client.httpClient(), client.serializerAdapter());
+        this.service = AzureProxy.create(LROsService.class, client);
         this.client = client;
     }
 
@@ -65,433 +65,433 @@ public class LROsInner {
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200Succeeded" })
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut202Retry200" })
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put202Retry200" })
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNonResource" })
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<SkuInner>> beginPutNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SkuInner>> beginPutNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putNonResource" })
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<SkuInner>> beginPutAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SkuInner>> beginPutAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutSubResource" })
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<SubProductInner>> beginPutSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SubProductInner>> beginPutSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putSubResource" })
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginDelete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginDelete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost200WithPayload" })
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<SkuInner>> beginPost200WithPayload(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<SkuInner>> beginPost200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs post200WithPayload" })
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202Retry200" })
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs post202Retry200" })
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPost202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPost202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs post202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Observable<OperationStatus<Void>> beginPostAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Observable<OperationStatus<Void>> beginPostAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
-        Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage, @HeaderParam("User-Agent") String userAgent);
+        Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
     }
 
@@ -526,7 +526,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededAsync() {
         final ProductInner product = null;
-        return service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200Succeeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -563,7 +563,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200Succeeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -598,7 +598,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200Succeeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -646,7 +646,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put200Succeeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200Succeeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -693,7 +693,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededNoStateAsync() {
         final ProductInner product = null;
-        return service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200SucceededNoState(product, this.client.acceptLanguage());
     }
 
     /**
@@ -730,7 +730,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200SucceededNoStateAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200SucceededNoState(product, this.client.acceptLanguage());
     }
 
     /**
@@ -765,7 +765,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
 
     /**
@@ -813,7 +813,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put200SucceededNoState(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
 
     /**
@@ -860,7 +860,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut202Retry200Async() {
         final ProductInner product = null;
-        return service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -897,7 +897,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut202Retry200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -932,7 +932,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -980,7 +980,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1027,7 +1027,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async() {
         final ProductInner product = null;
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1064,7 +1064,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1099,7 +1099,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1147,7 +1147,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1194,7 +1194,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204Async() {
         final ProductInner product = null;
-        return service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1231,7 +1231,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1266,7 +1266,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1314,7 +1314,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1361,7 +1361,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200Async() {
         final ProductInner product = null;
-        return service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1398,7 +1398,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1433,7 +1433,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1481,7 +1481,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put201CreatingFailed200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1528,7 +1528,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200Async() {
         final ProductInner product = null;
-        return service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1565,7 +1565,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPut200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1600,7 +1600,7 @@ public class LROsInner {
     public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1648,7 +1648,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.put200Acceptedcanceled200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1695,7 +1695,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetryAsync() {
         final ProductInner product = null;
-        return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1732,7 +1732,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetryAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1767,7 +1767,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1815,7 +1815,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.putNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1862,7 +1862,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync() {
         final ProductInner product = null;
-        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1899,7 +1899,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1934,7 +1934,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -1982,7 +1982,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2029,7 +2029,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceededAsync() {
         final ProductInner product = null;
-        return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2066,7 +2066,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2101,7 +2101,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2149,7 +2149,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2196,7 +2196,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailedAsync() {
         final ProductInner product = null;
-        return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2233,7 +2233,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailedAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2268,7 +2268,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2316,7 +2316,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.putAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2363,7 +2363,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceledAsync() {
         final ProductInner product = null;
-        return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2400,7 +2400,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceledAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2435,7 +2435,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2483,7 +2483,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2530,7 +2530,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetryAsync() {
         final ProductInner product = null;
-        return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2567,7 +2567,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetryAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2602,7 +2602,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2650,7 +2650,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
     /**
@@ -2697,7 +2697,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SkuInner>> beginPutNonResourceAsync() {
         final SkuInner sku = null;
-        return service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2734,7 +2734,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SkuInner>> beginPutNonResourceAsync(SkuInner sku) {
         Validator.validate(sku);
-        return service.beginPutNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2769,7 +2769,7 @@ public class LROsInner {
     public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
         Validator.validate(sku);
-        return service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2817,7 +2817,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
-        return service.putNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2864,7 +2864,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SkuInner>> beginPutAsyncNonResourceAsync() {
         final SkuInner sku = null;
-        return service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2901,7 +2901,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SkuInner>> beginPutAsyncNonResourceAsync(SkuInner sku) {
         Validator.validate(sku);
-        return service.beginPutAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2936,7 +2936,7 @@ public class LROsInner {
     public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
         Validator.validate(sku);
-        return service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -2984,7 +2984,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync(SkuInner sku) {
         Validator.validate(sku);
-        return service.putAsyncNonResource(sku, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
     /**
@@ -3031,7 +3031,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SubProductInner>> beginPutSubResourceAsync() {
         final SubProductInner product = null;
-        return service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3068,7 +3068,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SubProductInner>> beginPutSubResourceAsync(SubProductInner product) {
         Validator.validate(product);
-        return service.beginPutSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3103,7 +3103,7 @@ public class LROsInner {
     public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
         Validator.validate(product);
-        return service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3151,7 +3151,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
-        return service.putSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3198,7 +3198,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResourceAsync() {
         final SubProductInner product = null;
-        return service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3235,7 +3235,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResourceAsync(SubProductInner product) {
         Validator.validate(product);
-        return service.beginPutAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPutAsyncSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3270,7 +3270,7 @@ public class LROsInner {
     public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
         Validator.validate(product);
-        return service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3318,7 +3318,7 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync(SubProductInner product) {
         Validator.validate(product);
-        return service.putAsyncSubResource(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
 
     /**
@@ -3364,7 +3364,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200SucceededAsync() {
-        return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -3397,7 +3397,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> object
      */
     public Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200SucceededWithRestResponseAsync() {
-        return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteProvisioning202Accepted200Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -3442,7 +3442,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202DeletingFailed200Async() {
-        return service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
     }
 
     /**
@@ -3475,7 +3475,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner> object
      */
     public Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200WithRestResponseAsync() {
-        return service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteProvisioning202DeletingFailed200(this.client.acceptLanguage());
     }
 
     /**
@@ -3520,7 +3520,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Deletingcanceled200Async() {
-        return service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
     }
 
     /**
@@ -3553,7 +3553,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner> object
      */
     public Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200WithRestResponseAsync() {
-        return service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteProvisioning202Deletingcanceled200(this.client.acceptLanguage());
     }
 
     /**
@@ -3597,7 +3597,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDelete204SucceededAsync() {
-        return service.beginDelete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDelete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -3630,7 +3630,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Single<RestResponse<Void, Void>> delete204SucceededWithRestResponseAsync() {
-        return service.delete204Succeeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.delete204Succeeded(this.client.acceptLanguage());
     }
 
     /**
@@ -3675,7 +3675,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<ProductInner>> beginDelete202Retry200Async() {
-        return service.beginDelete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDelete202Retry200(this.client.acceptLanguage());
     }
 
     /**
@@ -3708,7 +3708,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDelete202Retry200HeadersInner, ProductInner> object
      */
     public Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200WithRestResponseAsync() {
-        return service.delete202Retry200(this.client.acceptLanguage(), this.client.userAgent());
+        return service.delete202Retry200(this.client.acceptLanguage());
     }
 
     /**
@@ -3753,7 +3753,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<ProductInner>> beginDelete202NoRetry204Async() {
-        return service.beginDelete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDelete202NoRetry204(this.client.acceptLanguage());
     }
 
     /**
@@ -3786,7 +3786,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner> object
      */
     public Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204WithRestResponseAsync() {
-        return service.delete202NoRetry204(this.client.acceptLanguage(), this.client.userAgent());
+        return service.delete202NoRetry204(this.client.acceptLanguage());
     }
 
     /**
@@ -3830,7 +3830,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetryAsync() {
-        return service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
@@ -3863,7 +3863,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void> object
      */
     public Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetryWithRestResponseAsync() {
-        return service.deleteNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
@@ -3907,7 +3907,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetryAsync() {
-        return service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
@@ -3940,7 +3940,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void> object
      */
     public Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetryWithRestResponseAsync() {
-        return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncNoHeaderInRetry(this.client.acceptLanguage());
     }
 
     /**
@@ -3984,7 +3984,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceededAsync() {
-        return service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
@@ -4017,7 +4017,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void> object
      */
     public Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceededWithRestResponseAsync() {
-        return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
@@ -4061,7 +4061,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceededAsync() {
-        return service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
@@ -4094,7 +4094,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void> object
      */
     public Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceededWithRestResponseAsync() {
-        return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncNoRetrySucceeded(this.client.acceptLanguage());
     }
 
     /**
@@ -4138,7 +4138,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailedAsync() {
-        return service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRetryFailed(this.client.acceptLanguage());
     }
 
     /**
@@ -4171,7 +4171,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void> object
      */
     public Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailedWithRestResponseAsync() {
-        return service.deleteAsyncRetryFailed(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRetryFailed(this.client.acceptLanguage());
     }
 
     /**
@@ -4215,7 +4215,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceledAsync() {
-        return service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginDeleteAsyncRetrycanceled(this.client.acceptLanguage());
     }
 
     /**
@@ -4248,7 +4248,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void> object
      */
     public Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceledWithRestResponseAsync() {
-        return service.deleteAsyncRetrycanceled(this.client.acceptLanguage(), this.client.userAgent());
+        return service.deleteAsyncRetrycanceled(this.client.acceptLanguage());
     }
 
     /**
@@ -4293,7 +4293,7 @@ public class LROsInner {
      * @return the observable for the request
      */
     public Observable<OperationStatus<SkuInner>> beginPost200WithPayloadAsync() {
-        return service.beginPost200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost200WithPayload(this.client.acceptLanguage());
     }
 
     /**
@@ -4326,7 +4326,7 @@ public class LROsInner {
      * @return a {@link Single} emitting the RestResponse<Void, SkuInner> object
      */
     public Single<RestResponse<Void, SkuInner>> post200WithPayloadWithRestResponseAsync() {
-        return service.post200WithPayload(this.client.acceptLanguage(), this.client.userAgent());
+        return service.post200WithPayload(this.client.acceptLanguage());
     }
 
     /**
@@ -4371,7 +4371,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async() {
         final ProductInner product = null;
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4407,7 +4407,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<Void>> beginPost202Retry200Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPost202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4442,7 +4442,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4490,7 +4490,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.post202Retry200(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4537,7 +4537,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPost202NoRetry204Async() {
         final ProductInner product = null;
-        return service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202NoRetry204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4574,7 +4574,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPost202NoRetry204Async(ProductInner product) {
         Validator.validate(product);
-        return service.beginPost202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPost202NoRetry204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4609,7 +4609,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4657,7 +4657,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.post202NoRetry204(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4704,7 +4704,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceededAsync() {
         final ProductInner product = null;
-        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4741,7 +4741,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4776,7 +4776,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4824,7 +4824,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4871,7 +4871,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceededAsync() {
         final ProductInner product = null;
-        return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4908,7 +4908,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceededAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4943,7 +4943,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -4991,7 +4991,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5037,7 +5037,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync() {
         final ProductInner product = null;
-        return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5073,7 +5073,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5108,7 +5108,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5156,7 +5156,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.postAsyncRetryFailed(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5202,7 +5202,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync() {
         final ProductInner product = null;
-        return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5238,7 +5238,7 @@ public class LROsInner {
      */
     public Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync(ProductInner product) {
         Validator.validate(product);
-        return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.beginPostAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5273,7 +5273,7 @@ public class LROsInner {
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
         Validator.validate(product);
-        return service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**
@@ -5321,7 +5321,7 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync(ProductInner product) {
         Validator.validate(product);
-        return service.postAsyncRetrycanceled(product, this.client.acceptLanguage(), this.client.userAgent());
+        return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 
     /**

@@ -15,13 +15,6 @@ package fixtures.azureparametergrouping;
  */
 public interface AutoRestParameterGroupingTestService {
     /**
-     * Gets the User-Agent header for the client.
-     *
-     * @return the user agent string.
-     */
-    String userAgent();
-
-    /**
      * Gets Gets or sets the preferred language for the response..
      *
      * @return the acceptLanguage value.
