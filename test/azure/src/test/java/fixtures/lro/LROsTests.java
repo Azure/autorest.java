@@ -236,12 +236,12 @@ public class LROsTests {
 
     @Test
     public void delete202Retry200() throws Exception {
-        Product response = client.lROs().delete202Retry200();
+        Product response = client.lROs().delete202Retry200WithRestResponseAsync().blockingGet().body();
     }
 
     @Test
     public void delete202NoRetry204() throws Exception {
-        Product response = client.lROs().delete202NoRetry204();
+        Product response = client.lROs().delete202NoRetry204WithRestResponseAsync().blockingGet().body();
     }
 
     @Test
@@ -301,7 +301,7 @@ public class LROsTests {
     public void post202NoRetry204() throws Exception {
         Product product = new Product();
         product.withLocation("West US");
-        Product response = client.lROs().post202NoRetry204(product);
+        Product response = client.lROs().post202NoRetry204WithRestResponseAsync(product).blockingGet().body();
     }
 
     @Test

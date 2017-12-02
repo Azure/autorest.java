@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
@@ -11,7 +12,8 @@ import org.junit.Test;
 
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
-@Ignore("RestProxy doesn't currently support response status or headers")
+import static org.junit.Assert.assertEquals;
+
 public class ApiVersionDefaultTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;
 
@@ -26,25 +28,25 @@ public class ApiVersionDefaultTests {
 
     @Test
     public void getMethodGlobalValid() throws Exception {
-        Void response = client.apiVersionDefaults().getMethodGlobalValidAsync().blockingGet();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getMethodGlobalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        Void response = client.apiVersionDefaults().getMethodGlobalNotProvidedValidAsync().blockingGet();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getMethodGlobalNotProvidedValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        Void response = client.apiVersionDefaults().getPathGlobalValidAsync().blockingGet();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getPathGlobalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        Void response = client.apiVersionDefaults().getSwaggerGlobalValidAsync().blockingGet();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionDefaults().getSwaggerGlobalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 }

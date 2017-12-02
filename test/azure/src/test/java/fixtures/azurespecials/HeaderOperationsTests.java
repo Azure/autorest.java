@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
@@ -15,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("RestProxy doesn't currently support response status or headers")
 public class HeaderOperationsTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;
 
@@ -30,25 +30,25 @@ public class HeaderOperationsTests {
 
     @Test
     public void customNamedRequestId() throws Exception {
-        Void response = client.headers().customNamedRequestIdAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
-//        Assert.assertEquals(200, response.response().code());
-//        Assert.assertEquals("123", response.headers().fooRequestId());
+        RestResponse<HeaderCustomNamedRequestIdHeaders, Void> response = client.headers().customNamedRequestIdWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
+        Assert.assertEquals(200, response.statusCode());
+        Assert.assertEquals("123", response.headers().fooRequestId());
     }
 
     @Test
     public void customNamedRequestIdParamGrouping() throws Exception {
         HeaderCustomNamedRequestIdParamGroupingParameters group = new HeaderCustomNamedRequestIdParamGroupingParameters();
         group.withFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
-        Void response = client.headers().customNamedRequestIdParamGroupingAsync(group).blockingGet();
-//        Assert.assertEquals(200, response.response().code());
-//        Assert.assertEquals("123", response.headers().fooRequestId());
+        RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> response = client.headers().customNamedRequestIdParamGroupingWithRestResponseAsync(group).blockingGet();
+        Assert.assertEquals(200, response.statusCode());
+        Assert.assertEquals("123", response.headers().fooRequestId());
     }
 
     @Test
     public void customNamedRequestIdHead() throws Exception {
-        Boolean response = client.headers().customNamedRequestIdHeadAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
-//        Assert.assertEquals(200, response.headResponse().code());
-//        Assert.assertTrue(response.body());
-//        Assert.assertEquals("123", response.headers().fooRequestId());
+        RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> response = client.headers().customNamedRequestIdHeadWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
+        Assert.assertEquals(200, response.statusCode());
+        Assert.assertTrue(response.body());
+        Assert.assertEquals("123", response.headers().fooRequestId());
     }
 }

@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.TokenCredentials;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
@@ -13,6 +14,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
 
 public class XMsClientRequestIdTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;
@@ -32,16 +35,14 @@ public class XMsClientRequestIdTests {
     }
 
     @Test
-    @Ignore("RestProxy doesn't support reading HTTP response codes yet")
     public void get() throws Exception {
-        Void response = client.xMsClientRequestIds().getAsync().blockingGet();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.xMsClientRequestIds().getWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
-    @Ignore("RestProxy doesn't support reading HTTP response codes yet")
     public void paramGet() throws Exception {
-        Void response = client.xMsClientRequestIds().paramGetAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.xMsClientRequestIds().paramGetWithRestResponseAsync("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").blockingGet();
+        assertEquals(200, response.statusCode());
     }
 }
