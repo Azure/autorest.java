@@ -124,7 +124,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -159,7 +159,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) {
-        return beginPutAsyncRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -291,7 +291,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
 
     /**
@@ -326,7 +326,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -457,7 +457,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -491,7 +491,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -622,7 +622,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededAsync().toBlocking().last().result();
+        beginPostAsyncRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -656,7 +656,7 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded(Product product) {
-        beginPostAsyncRetrySucceededAsync(product).toBlocking().last();
+        beginPostAsyncRetrySucceededAsync(product).blockingLast();
     }
 
     /**

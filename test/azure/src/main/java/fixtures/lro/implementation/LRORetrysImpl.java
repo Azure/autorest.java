@@ -164,7 +164,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
 
     /**
@@ -199,7 +199,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -331,7 +331,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -366,7 +366,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -498,7 +498,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().last().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
     }
 
     /**
@@ -575,7 +575,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200Async().toBlocking().last();
+        beginDelete202Retry200Async().blockingLast();
     }
 
     /**
@@ -652,7 +652,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
+        beginDeleteAsyncRelativeRetrySucceededAsync().blockingLast();
     }
 
     /**
@@ -729,7 +729,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -763,7 +763,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -894,7 +894,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
+        beginPostAsyncRelativeRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -928,7 +928,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded(Product product) {
-        beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
+        beginPostAsyncRelativeRetrySucceededAsync(product).blockingLast();
     }
 
     /**

@@ -2486,9 +2486,9 @@ public interface LROs {
      * Long running delete succeeds and returns right away.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDelete204SucceededAsync();
+    Observable<OperationStatus<Void>> beginDelete204SucceededAsync();
 
     /**
      * Long running delete succeeds and returns right away.
@@ -2670,9 +2670,9 @@ public interface LROs {
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDeleteNoHeaderInRetryAsync();
+    Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetryAsync();
 
     /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
@@ -2730,9 +2730,9 @@ public interface LROs {
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDeleteAsyncNoHeaderInRetryAsync();
+    Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetryAsync();
 
     /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -2790,9 +2790,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDeleteAsyncRetrySucceededAsync();
+    Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2850,9 +2850,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDeleteAsyncNoRetrySucceededAsync();
+    Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2910,9 +2910,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDeleteAsyncRetryFailedAsync();
+    Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailedAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2970,9 +2970,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginDeleteAsyncRetrycanceledAsync();
+    Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceledAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3092,9 +3092,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginPost202Retry200Async();
+    Observable<OperationStatus<Void>> beginPost202Retry200Async();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -3121,9 +3121,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginPost202Retry200Async(Product product);
+    Observable<OperationStatus<Void>> beginPost202Retry200Async(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -3612,9 +3612,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginPostAsyncRetryFailedAsync();
+    Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3641,9 +3641,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginPostAsyncRetryFailedAsync(Product product);
+    Observable<OperationStatus<Void>> beginPostAsyncRetryFailedAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3739,9 +3739,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginPostAsyncRetrycanceledAsync();
+    Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3768,9 +3768,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Completable} object if successful.
+     * @return the {@link Observable&lt;OperationStatus&lt;Void&gt;&gt;} object if successful.
      */
-    Completable beginPostAsyncRetrycanceledAsync(Product product);
+    Observable<OperationStatus<Void>> beginPostAsyncRetrycanceledAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
