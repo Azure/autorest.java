@@ -334,13 +334,13 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (ReturnType.Body == null)
-                {
-                    return "Completable";
-                }
-                else if (IsLongRunningOperation)
+                if (IsLongRunningOperation)
                 {
                     return $"Observable<OperationStatus<{ReturnTypeJv.ServiceResponseGenericParameterString}>>";
+                }
+                else if (ReturnType.Body == null)
+                {
+                    return "Completable";
                 }
                 else if (IsPagingOperation || IsPagingNextOperation)
                 {
