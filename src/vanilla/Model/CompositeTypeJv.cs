@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Model;
 using AutoRest.Extensions;
+using AutoRest.Java.DanModel;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Model
 {
@@ -23,7 +23,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ModelsPackage => (this.CodeModel as CodeModelJv).ModelsPackage;
+        public virtual string ModelsPackage => DanCodeGenerator.modelsPackage;
 
         [JsonIgnore]
         public virtual string Package

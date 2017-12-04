@@ -11,7 +11,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java
 {
-    public sealed class PluginJv : Plugin<IGeneratorSettings, TransformerJv, CodeGeneratorJv, CodeNamerJv, CodeModelJv>
+    public sealed class PluginJv : Plugin<IGeneratorSettings, TransformerJv, CodeGeneratorJv, CodeNamerJv, CodeModel>
     {
         public PluginJv()
         {
@@ -21,7 +21,6 @@ namespace AutoRest.Java
                 Context,
 
                 // set code model implementations our own implementations 
-                new Factory<CodeModel, CodeModelJv>(),
                 new Factory<Method, MethodJv>(),
                 new Factory<CompositeType, CompositeTypeJv>(),
                 new Factory<Property, PropertyJv>(),

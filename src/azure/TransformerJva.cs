@@ -2,26 +2,23 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
-using AutoRest.Java.Model;
-using static AutoRest.Core.Utilities.DependencyInjection;
-using System.Net;
 using AutoRest.Java.DanModel;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
-    public class TransformerJva : TransformerJv, ITransformer<CodeModelJva>
+    public class TransformerJva : TransformerJv
     {
         /// <summary>
         /// A type-specific method for code model tranformation.
@@ -29,10 +26,8 @@ namespace AutoRest.Java.Azure
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override CodeModelJv TransformCodeModel(CodeModel cm)
+        public override CodeModel TransformCodeModel(CodeModel codeModel)
         {
-            var codeModel = cm as CodeModelJva;
-
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
@@ -124,12 +119,6 @@ namespace AutoRest.Java.Azure
                     }
                 }
             }
-        }
-        
-
-        CodeModelJva ITransformer<CodeModelJva>.TransformCodeModel(CodeModel codeModel)
-        {
-            return this.TransformCodeModel(codeModel) as CodeModelJva;
         }
 
         /// <summary>

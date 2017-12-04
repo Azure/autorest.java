@@ -94,10 +94,14 @@ namespace AutoRest.Java
             Settings.Instance.MaximumCommentColumns = await GetValue<int?>("max-comment-columns") ?? Settings.DefaultMaximumCommentColumns;
             Settings.Instance.OutputFileName = await GetValue<string>("output-file");
 
+            bool azure = await GetValue<bool?>("azure-arm").ConfigureAwait(false) ?? false;
+            Settings.Instance.CustomSettings.Add("Azure", azure);
+
+            bool fluent = await GetValue<bool?>("fluent").ConfigureAwait(false) ?? false;
+            Settings.Instance.CustomSettings.Add("Fluent", fluent);
+
             // process
-            var plugin = ExtensionsLoader.GetPlugin(
-                await GetValue<bool?>("azure-arm") ?? false,
-                await GetValue<bool?>("fluent") ?? false);
+            IAnyPlugin plugin = ExtensionsLoader.GetPlugin(azure, fluent);
             Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             
             using (plugin.Activate())

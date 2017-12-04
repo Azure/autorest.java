@@ -3,10 +3,7 @@
 
 using AutoRest.Core;
 using AutoRest.Core.Model;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.DanModel;
-using AutoRest.Java.Model;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -34,74 +31,54 @@ namespace AutoRest.Java
         /// <returns></returns>
         public override async Task Generate(CodeModel cm)
         {
-            // get Java specific codeModel
-            var codeModel = cm as CodeModelJv;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("CodeModel is not a Java CodeModel");
-            }
-
             // Service client
-            await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
+            await WriteServiceClientJavaFile(cm).ConfigureAwait(false);
 
             // Service client interface
-            await WriteServiceClientInterfaceJavaFile(codeModel).ConfigureAwait(false);
+            await WriteServiceClientInterfaceJavaFile(cm).ConfigureAwait(false);
 
             // operations
-            foreach (MethodGroupJv methodGroup in codeModel.AllOperations)
-            {
-                // Operation
-                await WriteMethodGroupJavaFile(codeModel, methodGroup).ConfigureAwait(false);
-
-                // Operation interface
-                await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
-            }
+            await WriteOperationJavaFiles(cm).ConfigureAwait(false);
 
             //Models
-            await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
+            await WriteModelJavaFiles(cm).ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
+            await WriteEnumJavaFiles(cm).ConfigureAwait(false);
 
             // XML wrappers
-            await WriteXmlWrapperJavaFiles(codeModel).ConfigureAwait(false);
+            await WriteXmlWrapperJavaFiles(cm).ConfigureAwait(false);
 
             // Exceptions
-            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
+            await WriteExceptionJavaFiles(cm).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(cm, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
 
-        protected Task WriteAzureServiceManagerJavaFile(CodeModelJva codeModel)
+        protected Task WriteOperationJavaFiles(CodeModel codeModel)
+            => WriteJavaFiles(DanCodeGenerator.GetOperationJavaFiles(codeModel, Settings));
+
+        protected Task WriteAzureServiceManagerJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceManagerJavaFile(codeModel, Settings));
 
-        protected Task WritePageJavaFiles(CodeModelJva codeModel)
+        protected Task WritePageJavaFiles(CodeModel codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetPageJavaFiles(codeModel, Settings));
 
-        protected Task WriteXmlWrapperJavaFiles(CodeModelJv codeModel)
+        protected Task WriteXmlWrapperJavaFiles(CodeModel codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetXmlWrapperJavaFiles(codeModel, Settings));
 
-        protected Task WriteAzureServiceClientJavaFile(CodeModelJva codeModel)
+        protected Task WriteAzureServiceClientJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientJavaFile(codeModel, Settings));
 
-        protected Task WriteAzureServiceClientInterfaceJavaFile(CodeModelJva codeModel)
+        protected Task WriteAzureServiceClientInterfaceJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientInterfaceJavaFile(codeModel, Settings));
 
-        protected Task WriteAzureMethodGroupJavaFile(CodeModelJva codeModel, MethodGroupJva methodGroup)
-            => WriteJavaFile(DanCodeGenerator.GetAzureMethodGroupJavaFile(codeModel, Settings, methodGroup));
-
-        protected Task WriteServiceClientJavaFile(CodeModelJv codeModel)
+        protected Task WriteServiceClientJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientJavaFile(codeModel, Settings));
 
-        protected Task WriteServiceClientInterfaceJavaFile(CodeModelJv codeModel)
+        protected Task WriteServiceClientInterfaceJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetServiceClientInterfaceJavaFile(codeModel, Settings));
-
-        protected Task WriteMethodGroupJavaFile(CodeModelJv codeModel, MethodGroupJv methodGroup)
-            => WriteJavaFile(DanCodeGenerator.GetMethodGroupJavaFile(codeModel, Settings, methodGroup));
-
-        protected Task WriteMethodGroupInterfaceJavaFile(CodeModel codeModel, MethodGroupJv methodGroup)
-            => WriteJavaFile(DanCodeGenerator.GetMethodGroupInterfaceJavaFile(codeModel, Settings, methodGroup));
 
         protected Task WritePackageInfoJavaFiles(CodeModel codeModel, string[] subPackages)
             => WriteJavaFiles(DanCodeGenerator.GetPackageInfoJavaFiles(codeModel, Settings, subPackages));
@@ -109,10 +86,10 @@ namespace AutoRest.Java
         protected Task WriteModelJavaFiles(CodeModel codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetModelJavaFiles(codeModel, Settings));
 
-        protected Task WriteEnumJavaFiles(CodeModelJv codeModel)
+        protected Task WriteEnumJavaFiles(CodeModel codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetEnumJavaFiles(codeModel, Settings));
 
-        protected Task WriteExceptionJavaFiles(CodeModelJv codeModel)
+        protected Task WriteExceptionJavaFiles(CodeModel codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetExceptionJavaFiles(codeModel, Settings));
 
         protected async Task WriteJavaFiles(IEnumerable<JavaFile> javaFiles)
