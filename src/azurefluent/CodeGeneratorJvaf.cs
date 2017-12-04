@@ -15,42 +15,42 @@ namespace AutoRest.Java.Azure.Fluent
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public override async Task Generate(CodeModel cm)
+        public override async Task Generate(CodeModel codeModel)
         {
             // Service client
-            await WriteAzureServiceClientJavaFile(cm).ConfigureAwait(false);
+            await WriteAzureServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // operations
-            await WriteOperationJavaFiles(cm).ConfigureAwait(false);
+            await WriteOperationJavaFiles(codeModel).ConfigureAwait(false);
 
             //Models
-            await WriteModelJavaFiles(cm).ConfigureAwait(false);
+            await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
 
             //XML wrappers
-            await WriteXmlWrapperJavaFiles(cm).ConfigureAwait(false);
+            await WriteXmlWrapperJavaFiles(codeModel).ConfigureAwait(false);
 
             //Enums
-            await WriteEnumJavaFiles(cm).ConfigureAwait(false);
+            await WriteEnumJavaFiles(codeModel).ConfigureAwait(false);
 
             // Page class
-            await WritePageJavaFiles(cm).ConfigureAwait(false);
+            await WritePageJavaFiles(codeModel).ConfigureAwait(false);
 
             // Exceptions
-            await WriteExceptionJavaFiles(cm).ConfigureAwait(false);
+            await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(cm, new[] { "", "implementation" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation" }).ConfigureAwait(false);
 
             if (true == Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
                 // Manager
-                await WriteAzureServiceManagerJavaFile(cm).ConfigureAwait(false);
+                await WriteAzureServiceManagerJavaFile(codeModel).ConfigureAwait(false);
             }
 
             if (true == Settings.Instance.Host?.GetValue<bool?>("regenerate-pom").Result)
             { 
                 // POM
-                await Write(new AzurePomTemplate { Model = cm }, "pom.xml");
+                await Write(new AzurePomTemplate { Model = codeModel }, "pom.xml");
             }
         }
     }
