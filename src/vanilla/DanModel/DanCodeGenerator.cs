@@ -12,11 +12,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public const string targetVersion = "1.1.3";
+        public const string pomVersion = targetVersion + "-SNAPSHOT";
+
         private const string httpPipelineImport = "com.microsoft.rest.v2.http." + httpPipelineType;
         private const string httpPipelineDescription = "The HTTP pipeline to send requests through.";
         private const string httpPipelineType = "HttpPipeline";
@@ -35,11 +39,27 @@ namespace AutoRest.Java.DanModel
         private const string azureProxyImport = "com.microsoft.azure.v2." + azureProxyType;
         private const string azureProxyType = "AzureProxy";
 
+        public static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
+
+        public static string BetaSinceVersion()
+        {
+            string[] versionParts = targetVersion.Split('.');
+            int minorVersion = int.Parse(versionParts[1]);
+            int patchVersion = int.Parse(versionParts[2]);
+
+            int newMinorVersion = patchVersion == 0
+                ? minorVersion
+                : minorVersion + 1;
+
+            string result = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
+            return result;
+        }
+
         public static JavaFile GetAzureServiceManagerJavaFile(CodeModelJva codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
-            string serviceName = codeModel.ServiceName;
+            string serviceName = GetServiceName(settings, codeModel);
             if (string.IsNullOrEmpty(serviceName))
             {
                 serviceName = "MissingServiceName";
@@ -62,7 +82,7 @@ namespace AutoRest.Java.DanModel
             {
                 comment.Line($"Entry point to Azure {serviceName} resource management.");
             });
-            javaFile.Annotation($"Beta(SinceVersion.{codeModel.BetaSinceVersion})");
+            javaFile.Annotation($"Beta(SinceVersion.{BetaSinceVersion()})");
             javaFile.Block($"public final class {className} extends Manager<{className}, {codeModel.Name + "Impl"}>", classBlock =>
             {
                 classBlock.MultipleLineComment(comment =>
@@ -153,7 +173,7 @@ namespace AutoRest.Java.DanModel
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
             
-            foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in codeModel.pageClasses)
+            foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in pageClasses)
             {
                 string nextLinkName = pageClass.Key.Key;
                 string itemName = pageClass.Key.Value;
@@ -359,7 +379,7 @@ namespace AutoRest.Java.DanModel
                 }
                 classBlock.Line();
 
-                AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.PropertiesEx, className);
+                AddMemberVariablesWithGettersAndSettings(classBlock, GetPropertiesEx(codeModel), className);
 
                 foreach (MethodGroupJv operation in codeModel.AllOperations)
                 {
@@ -459,7 +479,7 @@ namespace AutoRest.Java.DanModel
                 classBlock.Line();
                 classBlock.Block("protected void initialize()", function =>
                 {
-                    foreach (Property property in codeModel.PropertiesEx.Where(p => p.DefaultValue != null))
+                    foreach (Property property in GetPropertiesEx(codeModel).Where(p => p.DefaultValue != null))
                     {
                         function.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
@@ -469,10 +489,10 @@ namespace AutoRest.Java.DanModel
                         function.Line($"this.{operation.Name} = new {operation.MethodGroupImplType}(this);");
                     }
 
-                    string defaultHeaders = codeModel.SetDefaultHeaders;
+                    string defaultHeaders = "";
                     if (!string.IsNullOrWhiteSpace(defaultHeaders))
                     {
-                        function.Line(codeModel.SetDefaultHeaders);
+                        function.Line(defaultHeaders);
                     }
 
                     if (hasRootMethods)
@@ -491,18 +511,16 @@ namespace AutoRest.Java.DanModel
 
                     classBlock.Line();
 
-                    IMethodGroupJva methodGroup = codeModel;
-
                     classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                     {
-                        comment.Line($"The interface defining all the services for {methodGroup.Name} to be used by {restProxyType} to perform REST calls.");
+                        comment.Line($"The interface defining all the services for {codeModel.Name} to be used by {restProxyType} to perform REST calls.");
                     });
-                    classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
-                    classBlock.Block($"interface {methodGroup.ServiceType}", interfaceBlock =>
+                    classBlock.Annotation($"Host(\"{codeModel.BaseUrl}\")");
+                    classBlock.Block($"interface {codeModel.ServiceClientServiceType}", interfaceBlock =>
                     {
-                        foreach (MethodJva method in methodGroup.Methods)
+                        foreach (MethodJva method in codeModel.RootMethods.Cast<MethodJva>())
                         {
-                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroup.LoggingContext} {method.Name}\" }})");
+                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {codeModel.FullyQualifiedDomainName} {method.Name}\" }})");
                             if (method.IsPagingNextOperation)
                             {
                                 interfaceBlock.Annotation("GET(\"{{nextUrl}}\")");
@@ -1016,7 +1034,7 @@ namespace AutoRest.Java.DanModel
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
                 bool isFirstMethod = true;
-                foreach (Property property in codeModel.PropertiesEx)
+                foreach (Property property in GetPropertiesEx(codeModel))
                 {
                     string propertyDescription = property.Documentation;
                     string propertyName = property.Name;
@@ -3237,6 +3255,20 @@ namespace AutoRest.Java.DanModel
             return settings.MaximumCommentColumns;
         }
 
+        public static string GetServiceName(Settings settings, CodeModel codeModel)
+        {
+            var serviceNameSetting = settings.Host?.GetValue<string>("service-name").Result;
+            if (!string.IsNullOrEmpty(serviceNameSetting))
+            {
+                return serviceNameSetting;
+            }
+
+            var method = codeModel.Methods[0];
+            var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+            var serviceName = match.Groups[1].Value.ToPascalCase();
+            return serviceName;
+        }
+
         private static JavaFile GenerateJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
         {
             string package = GetPackage(codeModel, subPackage);
@@ -3334,5 +3366,11 @@ namespace AutoRest.Java.DanModel
 
         private static bool IsFluent(CodeModel codeModel)
             => codeModel is CodeModelJvaf;
+
+        private static bool IsAzure(CodeModel codeModel)
+            => codeModel is CodeModelJva;
+
+        private static IEnumerable<Property> GetPropertiesEx(CodeModel codeModel)
+            => codeModel.Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials");
     }
 }

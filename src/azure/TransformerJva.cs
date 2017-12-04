@@ -17,6 +17,7 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using System.Net;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure
 {
@@ -65,7 +66,7 @@ namespace AutoRest.Java.Azure
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? name : $"{name}s";
             }
             
-            NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
+            NormalizePaginatedMethods(codeModel, DanCodeGenerator.pageClasses);
 
             // param order (PATH first)
             foreach (MethodJva method in codeModel.Methods)

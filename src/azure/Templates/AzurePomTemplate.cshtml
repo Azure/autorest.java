@@ -1,11 +1,10 @@
-﻿@using System
-@using System.Linq;
-@using AutoRest.Java
-@using AutoRest.Java.Model
-@using AutoRest.Java.Azure.Model
+﻿@using AutoRest.Java
+@using AutoRest.Java.DanModel
 @inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.CodeModelJva>
 @{
-    var serviceName = Model.ServiceName;
+    string serviceName = DanCodeGenerator.GetServiceName(Settings, Model);
+    string serviceNameLower = serviceName.ToLower();
+    string pomVersion = DanCodeGenerator.pomVersion;
 }
 <!--
 @Header(" * ").TrimMultilineHeader()
@@ -15,11 +14,11 @@
     <parent>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-parent</artifactId>
-        <version>@Model.PomVersion</version>
+        <version>@pomVersion</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>azure-mgmt-@serviceName.ToLower()</artifactId>
+    <artifactId>azure-mgmt-@serviceNameLower</artifactId>
     <packaging>jar</packaging>
 
     <name>Microsoft Azure SDK for @serviceName Management</name>
@@ -60,7 +59,7 @@
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-mgmt-resources</artifactId>
-            <version>@Model.PomVersion</version>
+            <version>@pomVersion</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

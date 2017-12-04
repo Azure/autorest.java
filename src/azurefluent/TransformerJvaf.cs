@@ -17,6 +17,7 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Java.Azure.Fluent.Model;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure
 {
@@ -59,7 +60,7 @@ namespace AutoRest.Java.Azure
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? $"{name}" : $"{name}s";
             }
 
-            NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
+            NormalizePaginatedMethods(codeModel, DanCodeGenerator.pageClasses);
 
             // determine inner models
             NormalizeTopLevelTypes(codeModel);

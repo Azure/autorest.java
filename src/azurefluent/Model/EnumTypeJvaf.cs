@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using AutoRest.Java.Azure.Model;
+﻿using AutoRest.Java.Azure.Model;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -18,15 +17,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         (CodeModel?.Namespace.ToLowerInvariant()) + (Name.ToString().EndsWith("Inner") ? ".implementation" : ""),
                         Name);
                 }
-            }
-        }
-
-        [JsonIgnore]
-        public override string ModelsPackage
-        {
-            get
-            {
-                return "";
             }
         }
     }
