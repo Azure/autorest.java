@@ -2,30 +2,24 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Model;
-using AutoRest.Java.Model;
-using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Java.Azure.Fluent.Model;
+using AutoRest.Java.Azure.Model;
+using AutoRest.Java.DanModel;
+using System;
+using System.Linq;
 
 namespace AutoRest.Java.Azure
 {
-    public class TransformerJvaf : TransformerJva, ITransformer<CodeModelJvaf>
+    public class TransformerJvaf : TransformerJva
     {
-        public override CodeModelJv TransformCodeModel(CodeModel cm)
+        public override CodeModel TransformCodeModel(CodeModel codeModel)
         {
-            var codeModel = cm as CodeModelJva;
-
             // we're guaranteed to be in our language-specific context here.
             Settings.Instance.AddCredentials = true;
 
@@ -59,7 +53,7 @@ namespace AutoRest.Java.Azure
                 mg.Name.OnGet += name => name.IsNullOrEmpty() || name.EndsWith("s", StringComparison.OrdinalIgnoreCase) ? $"{name}" : $"{name}s";
             }
 
-            NormalizePaginatedMethods(codeModel, codeModel.pageClasses);
+            NormalizePaginatedMethods(codeModel, DanCodeGenerator.pageClasses);
 
             // determine inner models
             NormalizeTopLevelTypes(codeModel);
@@ -80,11 +74,6 @@ namespace AutoRest.Java.Azure
             }
 
             return codeModel;
-        }
-
-        CodeModelJvaf ITransformer<CodeModelJvaf>.TransformCodeModel(CodeModel cm)
-        {
-            return TransformCodeModel(cm) as CodeModelJvaf;
         }
 
         public void NormalizeTopLevelTypes(CodeModel serviceClient)

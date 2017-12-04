@@ -1,11 +1,10 @@
-﻿using System;
-using System.Globalization;
-using AutoRest.Core.Model;
+﻿using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {

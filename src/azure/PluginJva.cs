@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
-using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -12,7 +11,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
-    public sealed class PluginJva : Plugin<IGeneratorSettings, TransformerJva, CodeGeneratorJva, CodeNamerJva, CodeModelJva>
+    public sealed class PluginJva : Plugin<IGeneratorSettings, TransformerJva, CodeGeneratorJva, CodeNamerJva, CodeModel>
     {
         public PluginJva()
         {
@@ -22,7 +21,6 @@ namespace AutoRest.Java.Azure
                 Context,
 
                 // set code model implementations our own implementations 
-                new Factory<CodeModel, CodeModelJva>(),
                 new Factory<Method, MethodJva>(),
                 new Factory<CompositeType, CompositeTypeJva>(),
                 new Factory<Property, PropertyJv>(),
