@@ -28,6 +28,7 @@ import fixtures.bodycomplex.Readonlypropertys;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -117,9 +118,17 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ReadonlyObj> object
      */
-    public Single<ReadonlyObj> getValidAsync() {
+    public Maybe<ReadonlyObj> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, ReadonlyObj>, ReadonlyObj>() { public ReadonlyObj apply(RestResponse<Void, ReadonlyObj> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ReadonlyObj>, Maybe<ReadonlyObj>>() {
+                public Maybe<ReadonlyObj> apply(RestResponse<Void, ReadonlyObj> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

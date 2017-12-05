@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyduration.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Durations {
      * Get null duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Period&gt;} object if successful.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    Single<Period> getNullAsync();
+    Maybe<Period> getNullAsync();
 
     /**
      * Get null duration value.
@@ -121,9 +122,9 @@ public interface Durations {
      * Get a positive duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Period&gt;} object if successful.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    Single<Period> getPositiveDurationAsync();
+    Maybe<Period> getPositiveDurationAsync();
 
     /**
      * Get a positive duration value.
@@ -156,9 +157,9 @@ public interface Durations {
      * Get an invalid duration value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Period&gt;} object if successful.
+     * @return the {@link Maybe&lt;Period&gt;} object if successful.
      */
-    Single<Period> getInvalidAsync();
+    Maybe<Period> getInvalidAsync();
 
     /**
      * Get an invalid duration value.

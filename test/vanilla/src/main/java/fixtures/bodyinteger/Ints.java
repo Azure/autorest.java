@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyinteger.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Ints {
      * Get null Int value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Integer&gt;} object if successful.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
-    Single<Integer> getNullAsync();
+    Maybe<Integer> getNullAsync();
 
     /**
      * Get null Int value.
@@ -83,9 +84,9 @@ public interface Ints {
      * Get invalid Int value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Integer&gt;} object if successful.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
-    Single<Integer> getInvalidAsync();
+    Maybe<Integer> getInvalidAsync();
 
     /**
      * Get invalid Int value.
@@ -118,9 +119,9 @@ public interface Ints {
      * Get overflow Int32 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Integer&gt;} object if successful.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
-    Single<Integer> getOverflowInt32Async();
+    Maybe<Integer> getOverflowInt32Async();
 
     /**
      * Get overflow Int32 value.
@@ -153,9 +154,9 @@ public interface Ints {
      * Get underflow Int32 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Integer&gt;} object if successful.
+     * @return the {@link Maybe&lt;Integer&gt;} object if successful.
      */
-    Single<Integer> getUnderflowInt32Async();
+    Maybe<Integer> getUnderflowInt32Async();
 
     /**
      * Get underflow Int32 value.
@@ -188,9 +189,9 @@ public interface Ints {
      * Get overflow Int64 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Long&gt;} object if successful.
+     * @return the {@link Maybe&lt;Long&gt;} object if successful.
      */
-    Single<Long> getOverflowInt64Async();
+    Maybe<Long> getOverflowInt64Async();
 
     /**
      * Get overflow Int64 value.
@@ -223,9 +224,9 @@ public interface Ints {
      * Get underflow Int64 value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Long&gt;} object if successful.
+     * @return the {@link Maybe&lt;Long&gt;} object if successful.
      */
-    Single<Long> getUnderflowInt64Async();
+    Maybe<Long> getUnderflowInt64Async();
 
     /**
      * Get underflow Int64 value.
@@ -410,9 +411,9 @@ public interface Ints {
      * Get datetime encoded as Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUnixTimeAsync();
+    Maybe<DateTime> getUnixTimeAsync();
 
     /**
      * Get datetime encoded as Unix time value.
@@ -483,9 +484,9 @@ public interface Ints {
      * Get invalid Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getInvalidUnixTimeAsync();
+    Maybe<DateTime> getInvalidUnixTimeAsync();
 
     /**
      * Get invalid Unix time value.
@@ -518,9 +519,9 @@ public interface Ints {
      * Get null Unix time value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getNullUnixTimeAsync();
+    Maybe<DateTime> getNullUnixTimeAsync();
 
     /**
      * Get null Unix time value.

@@ -57,6 +57,7 @@ import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -634,9 +635,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededAsync() {
+    public Maybe<Product> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -683,9 +692,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededAsync(Product product) {
+    public Maybe<Product> put200SucceededAsync(Product product) {
         return put200SucceededWithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -801,9 +818,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededNoStateAsync() {
+    public Maybe<Product> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -850,9 +875,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededNoStateAsync(Product product) {
+    public Maybe<Product> put200SucceededNoStateAsync(Product product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -968,9 +1001,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put202Retry200Async() {
+    public Maybe<Product> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1017,9 +1058,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put202Retry200Async(Product product) {
+    public Maybe<Product> put202Retry200Async(Product product) {
         return put202Retry200WithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1135,9 +1184,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingSucceeded200Async() {
+    public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1184,9 +1241,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingSucceeded200Async(Product product) {
+    public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1302,9 +1367,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200UpdatingSucceeded204Async() {
+    public Maybe<Product> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1351,9 +1424,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200UpdatingSucceeded204Async(Product product) {
+    public Maybe<Product> put200UpdatingSucceeded204Async(Product product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1469,9 +1550,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingFailed200Async() {
+    public Maybe<Product> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1518,9 +1607,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingFailed200Async(Product product) {
+    public Maybe<Product> put201CreatingFailed200Async(Product product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1636,9 +1733,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200Acceptedcanceled200Async() {
+    public Maybe<Product> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1685,9 +1790,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200Acceptedcanceled200Async(Product product) {
+    public Maybe<Product> put200Acceptedcanceled200Async(Product product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, Product>, Product>() { public Product apply(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1803,9 +1916,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putNoHeaderInRetryAsync() {
+    public Maybe<Product> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1852,9 +1973,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putNoHeaderInRetryAsync(Product product) {
+    public Maybe<Product> putNoHeaderInRetryAsync(Product product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1970,9 +2099,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncRetrySucceededAsync() {
+    public Maybe<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2019,9 +2156,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncRetrySucceededAsync(Product product) {
+    public Maybe<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2137,9 +2282,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrySucceededAsync() {
+    public Maybe<Product> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2186,9 +2339,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrySucceededAsync(Product product) {
+    public Maybe<Product> putAsyncNoRetrySucceededAsync(Product product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2304,9 +2465,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeaders, Product> object
      */
-    public Single<Product> putAsyncRetryFailedAsync() {
+    public Maybe<Product> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2353,9 +2522,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeaders, Product> object
      */
-    public Single<Product> putAsyncRetryFailedAsync(Product product) {
+    public Maybe<Product> putAsyncRetryFailedAsync(Product product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2471,9 +2648,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrycanceledAsync() {
+    public Maybe<Product> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2520,9 +2705,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrycanceledAsync(Product product) {
+    public Maybe<Product> putAsyncNoRetrycanceledAsync(Product product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2638,9 +2831,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putAsyncNoHeaderInRetryAsync() {
+    public Maybe<Product> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2687,9 +2888,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putAsyncNoHeaderInRetryAsync(Product product) {
+    public Maybe<Product> putAsyncNoHeaderInRetryAsync(Product product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2805,9 +3014,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putNonResourceAsync() {
+    public Maybe<Sku> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Sku>, Sku>() { public Sku apply(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2854,9 +3071,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putNonResourceAsync(Sku sku) {
+    public Maybe<Sku> putNonResourceAsync(Sku sku) {
         return putNonResourceWithRestResponseAsync(sku)
-            .map(new Function<RestResponse<Void, Sku>, Sku>() { public Sku apply(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2972,9 +3197,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putAsyncNonResourceAsync() {
+    public Maybe<Sku> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Sku>, Sku>() { public Sku apply(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3021,9 +3254,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putAsyncNonResourceAsync(Sku sku) {
+    public Maybe<Sku> putAsyncNonResourceAsync(Sku sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
-            .map(new Function<RestResponse<Void, Sku>, Sku>() { public Sku apply(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3139,9 +3380,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putSubResourceAsync() {
+    public Maybe<SubProduct> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct apply(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3188,9 +3437,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putSubResourceAsync(SubProduct product) {
+    public Maybe<SubProduct> putSubResourceAsync(SubProduct product) {
         return putSubResourceWithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct apply(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3306,9 +3563,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putAsyncSubResourceAsync() {
+    public Maybe<SubProduct> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct apply(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3355,9 +3620,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putAsyncSubResourceAsync(SubProduct product) {
+    public Maybe<SubProduct> putAsyncSubResourceAsync(SubProduct product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
-            .map(new Function<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct apply(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3433,9 +3706,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> object
      */
-    public Single<Product> deleteProvisioning202Accepted200SucceededAsync() {
+    public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3511,9 +3792,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> object
      */
-    public Single<Product> deleteProvisioning202DeletingFailed200Async() {
+    public Maybe<Product> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>, Product>() { public Product apply(RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3589,9 +3878,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> object
      */
-    public Single<Product> deleteProvisioning202Deletingcanceled200Async() {
+    public Maybe<Product> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>, Product>() { public Product apply(RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3744,9 +4041,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDelete202Retry200Headers, Product> object
      */
-    public Single<Product> delete202Retry200Async() {
+    public Maybe<Product> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDelete202Retry200Headers, Product>, Product>() { public Product apply(RestResponse<LROsDelete202Retry200Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDelete202Retry200Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDelete202Retry200Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3822,9 +4127,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDelete202NoRetry204Headers, Product> object
      */
-    public Single<Product> delete202NoRetry204Async() {
+    public Maybe<Product> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsDelete202NoRetry204Headers, Product>, Product>() { public Product apply(RestResponse<LROsDelete202NoRetry204Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDelete202NoRetry204Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDelete202NoRetry204Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4362,9 +4675,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> post200WithPayloadAsync() {
+    public Maybe<Sku> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Sku>, Sku>() { public Sku apply(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4645,9 +4966,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204Headers, Product> object
      */
-    public Single<Product> post202NoRetry204Async() {
+    public Maybe<Product> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Product>() { public Product apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -4694,9 +5023,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204Headers, Product> object
      */
-    public Single<Product> post202NoRetry204Async(Product product) {
+    public Maybe<Product> post202NoRetry204Async(Product product) {
         return post202NoRetry204WithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Product>() { public Product apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4812,9 +5149,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncRetrySucceededAsync() {
+    public Maybe<Product> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -4861,9 +5206,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncRetrySucceededAsync(Product product) {
+    public Maybe<Product> postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4979,9 +5332,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncNoRetrySucceededAsync() {
+    public Maybe<Product> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
-            .map(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -5028,9 +5389,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncNoRetrySucceededAsync(Product product) {
+    public Maybe<Product> postAsyncNoRetrySucceededAsync(Product product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .map(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

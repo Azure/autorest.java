@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetime.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Datetimes {
      * Get null datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getNullAsync();
+    Maybe<DateTime> getNullAsync();
 
     /**
      * Get null datetime value.
@@ -83,9 +84,9 @@ public interface Datetimes {
      * Get invalid datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getInvalidAsync();
+    Maybe<DateTime> getInvalidAsync();
 
     /**
      * Get invalid datetime value.
@@ -118,9 +119,9 @@ public interface Datetimes {
      * Get overflow datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getOverflowAsync();
+    Maybe<DateTime> getOverflowAsync();
 
     /**
      * Get overflow datetime value.
@@ -153,9 +154,9 @@ public interface Datetimes {
      * Get underflow datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUnderflowAsync();
+    Maybe<DateTime> getUnderflowAsync();
 
     /**
      * Get underflow datetime value.
@@ -226,9 +227,9 @@ public interface Datetimes {
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUtcLowercaseMaxDateTimeAsync();
+    Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -261,9 +262,9 @@ public interface Datetimes {
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUtcUppercaseMaxDateTimeAsync();
+    Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
@@ -334,9 +335,9 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
+    Maybe<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -369,9 +370,9 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
+    Maybe<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
@@ -442,9 +443,9 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
+    Maybe<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -477,9 +478,9 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
+    Maybe<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
@@ -550,9 +551,9 @@ public interface Datetimes {
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUtcMinDateTimeAsync();
+    Maybe<DateTime> getUtcMinDateTimeAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -623,9 +624,9 @@ public interface Datetimes {
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
+    Maybe<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -696,9 +697,9 @@ public interface Datetimes {
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getLocalNegativeOffsetMinDateTimeAsync();
+    Maybe<DateTime> getLocalNegativeOffsetMinDateTimeAsync();
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.

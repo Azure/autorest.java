@@ -29,6 +29,7 @@ import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -142,9 +143,17 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Colors> object
      */
-    public Single<Colors> getNotExpandableAsync() {
+    public Maybe<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Colors>, Colors>() { public Colors apply(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
+                public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -239,9 +248,17 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Colors> object
      */
-    public Single<Colors> getReferencedAsync() {
+    public Maybe<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Colors>, Colors>() { public Colors apply(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
+                public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -336,9 +353,17 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, RefColorConstant> object
      */
-    public Single<RefColorConstant> getReferencedConstantAsync() {
+    public Maybe<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, RefColorConstant>, RefColorConstant>() { public RefColorConstant apply(RestResponse<Void, RefColorConstant> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, RefColorConstant>, Maybe<RefColorConstant>>() {
+                public Maybe<RefColorConstant> apply(RestResponse<Void, RefColorConstant> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

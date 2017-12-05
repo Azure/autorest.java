@@ -26,6 +26,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodydatetime.Datetimes;
 import fixtures.bodydatetime.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -218,9 +219,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getNullAsync() {
+    public Maybe<DateTime> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -263,9 +272,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getInvalidAsync() {
+    public Maybe<DateTime> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -308,9 +325,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getOverflowAsync() {
+    public Maybe<DateTime> getOverflowAsync() {
         return getOverflowWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -353,9 +378,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUnderflowAsync() {
+    public Maybe<DateTime> getUnderflowAsync() {
         return getUnderflowWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -450,9 +483,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUtcLowercaseMaxDateTimeAsync() {
+    public Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync() {
         return getUtcLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -495,9 +536,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUtcUppercaseMaxDateTimeAsync() {
+    public Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync() {
         return getUtcUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -592,9 +641,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
+    public Maybe<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -637,9 +694,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
+    public Maybe<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -734,9 +799,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
+    public Maybe<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -779,9 +852,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
+    public Maybe<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -876,9 +957,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUtcMinDateTimeAsync() {
+    public Maybe<DateTime> getUtcMinDateTimeAsync() {
         return getUtcMinDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -973,9 +1062,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getLocalPositiveOffsetMinDateTimeAsync() {
+    public Maybe<DateTime> getLocalPositiveOffsetMinDateTimeAsync() {
         return getLocalPositiveOffsetMinDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1070,9 +1167,17 @@ public class DatetimesImpl implements Datetimes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getLocalNegativeOffsetMinDateTimeAsync() {
+    public Maybe<DateTime> getLocalNegativeOffsetMinDateTimeAsync() {
         return getLocalNegativeOffsetMinDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

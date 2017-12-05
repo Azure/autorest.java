@@ -38,6 +38,7 @@ import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -247,9 +248,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, IntWrapper> object
      */
-    public Single<IntWrapper> getIntAsync() {
+    public Maybe<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, IntWrapper>, IntWrapper>() { public IntWrapper apply(RestResponse<Void, IntWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, IntWrapper>, Maybe<IntWrapper>>() {
+                public Maybe<IntWrapper> apply(RestResponse<Void, IntWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -345,9 +354,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LongWrapper> object
      */
-    public Single<LongWrapper> getLongAsync() {
+    public Maybe<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LongWrapper>, LongWrapper>() { public LongWrapper apply(RestResponse<Void, LongWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LongWrapper>, Maybe<LongWrapper>>() {
+                public Maybe<LongWrapper> apply(RestResponse<Void, LongWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -443,9 +460,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, FloatWrapper> object
      */
-    public Single<FloatWrapper> getFloatAsync() {
+    public Maybe<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, FloatWrapper>, FloatWrapper>() { public FloatWrapper apply(RestResponse<Void, FloatWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, FloatWrapper>, Maybe<FloatWrapper>>() {
+                public Maybe<FloatWrapper> apply(RestResponse<Void, FloatWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -541,9 +566,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DoubleWrapper> object
      */
-    public Single<DoubleWrapper> getDoubleAsync() {
+    public Maybe<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DoubleWrapper>, DoubleWrapper>() { public DoubleWrapper apply(RestResponse<Void, DoubleWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DoubleWrapper>, Maybe<DoubleWrapper>>() {
+                public Maybe<DoubleWrapper> apply(RestResponse<Void, DoubleWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -639,9 +672,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BooleanWrapper> object
      */
-    public Single<BooleanWrapper> getBoolAsync() {
+    public Maybe<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, BooleanWrapper>, BooleanWrapper>() { public BooleanWrapper apply(RestResponse<Void, BooleanWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BooleanWrapper>, Maybe<BooleanWrapper>>() {
+                public Maybe<BooleanWrapper> apply(RestResponse<Void, BooleanWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -737,9 +778,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, StringWrapper> object
      */
-    public Single<StringWrapper> getStringAsync() {
+    public Maybe<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, StringWrapper>, StringWrapper>() { public StringWrapper apply(RestResponse<Void, StringWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, StringWrapper>, Maybe<StringWrapper>>() {
+                public Maybe<StringWrapper> apply(RestResponse<Void, StringWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -835,9 +884,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateWrapper> object
      */
-    public Single<DateWrapper> getDateAsync() {
+    public Maybe<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateWrapper>, DateWrapper>() { public DateWrapper apply(RestResponse<Void, DateWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateWrapper>, Maybe<DateWrapper>>() {
+                public Maybe<DateWrapper> apply(RestResponse<Void, DateWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -933,9 +990,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DatetimeWrapper> object
      */
-    public Single<DatetimeWrapper> getDateTimeAsync() {
+    public Maybe<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DatetimeWrapper>, DatetimeWrapper>() { public DatetimeWrapper apply(RestResponse<Void, DatetimeWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DatetimeWrapper>, Maybe<DatetimeWrapper>>() {
+                public Maybe<DatetimeWrapper> apply(RestResponse<Void, DatetimeWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1031,9 +1096,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Datetimerfc1123Wrapper> object
      */
-    public Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
+    public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() { public Datetimerfc1123Wrapper apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Maybe<Datetimerfc1123Wrapper>>() {
+                public Maybe<Datetimerfc1123Wrapper> apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1129,9 +1202,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DurationWrapper> object
      */
-    public Single<DurationWrapper> getDurationAsync() {
+    public Maybe<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DurationWrapper>, DurationWrapper>() { public DurationWrapper apply(RestResponse<Void, DurationWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DurationWrapper>, Maybe<DurationWrapper>>() {
+                public Maybe<DurationWrapper> apply(RestResponse<Void, DurationWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1227,9 +1308,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ByteWrapper> object
      */
-    public Single<ByteWrapper> getByteAsync() {
+    public Maybe<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, ByteWrapper>, ByteWrapper>() { public ByteWrapper apply(RestResponse<Void, ByteWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ByteWrapper>, Maybe<ByteWrapper>>() {
+                public Maybe<ByteWrapper> apply(RestResponse<Void, ByteWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

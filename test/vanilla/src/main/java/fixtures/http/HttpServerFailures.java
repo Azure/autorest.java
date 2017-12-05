@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -47,9 +48,9 @@ public interface HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> head501Async();
+    Maybe<Error> head501Async();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -82,9 +83,9 @@ public interface HttpServerFailures {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get501Async();
+    Maybe<Error> get501Async();
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -117,9 +118,9 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post505Async();
+    Maybe<Error> post505Async();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -155,9 +156,9 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post505Async(Boolean booleanValue);
+    Maybe<Error> post505Async(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -191,9 +192,9 @@ public interface HttpServerFailures {
      * Return 505 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete505Async();
+    Maybe<Error> delete505Async();
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -229,9 +230,9 @@ public interface HttpServerFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete505Async(Boolean booleanValue);
+    Maybe<Error> delete505Async(Boolean booleanValue);
 
     /**
      * Return 505 status code - should be represented in the client as an error.

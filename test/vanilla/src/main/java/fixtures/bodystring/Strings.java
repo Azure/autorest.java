@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodystring.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -47,9 +48,9 @@ public interface Strings {
      * Get null string value value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;String&gt;} object if successful.
+     * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
-    Single<String> getNullAsync();
+    Maybe<String> getNullAsync();
 
     /**
      * Get null string value value.
@@ -154,9 +155,9 @@ public interface Strings {
      * Get empty string value value ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;String&gt;} object if successful.
+     * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
-    Single<String> getEmptyAsync();
+    Maybe<String> getEmptyAsync();
 
     /**
      * Get empty string value value ''.
@@ -227,9 +228,9 @@ public interface Strings {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;String&gt;} object if successful.
+     * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
-    Single<String> getMbcsAsync();
+    Maybe<String> getMbcsAsync();
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -300,9 +301,9 @@ public interface Strings {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;String&gt;} object if successful.
+     * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
-    Single<String> getWhitespaceAsync();
+    Maybe<String> getWhitespaceAsync();
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -373,9 +374,9 @@ public interface Strings {
      * Get String value when no string value is sent in response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;String&gt;} object if successful.
+     * @return the {@link Maybe&lt;String&gt;} object if successful.
      */
-    Single<String> getNotProvidedAsync();
+    Maybe<String> getNotProvidedAsync();
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -408,9 +409,9 @@ public interface Strings {
      * Get value that is base64 encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getBase64EncodedAsync();
+    Maybe<byte[]> getBase64EncodedAsync();
 
     /**
      * Get value that is base64 encoded.
@@ -443,9 +444,9 @@ public interface Strings {
      * Get value that is base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getBase64UrlEncodedAsync();
+    Maybe<byte[]> getBase64UrlEncodedAsync();
 
     /**
      * Get value that is base64url encoded.
@@ -516,9 +517,9 @@ public interface Strings {
      * Get null value that is expected to be base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getNullBase64UrlEncodedAsync();
+    Maybe<byte[]> getNullBase64UrlEncodedAsync();
 
     /**
      * Get null value that is expected to be base64url encoded.

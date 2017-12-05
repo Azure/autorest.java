@@ -32,6 +32,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azureresource.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -352,9 +353,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProductInner>> object
      */
-    public Single<List<FlattenedProductInner>> getArrayAsync() {
+    public Maybe<List<FlattenedProductInner>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, List<FlattenedProductInner>>, List<FlattenedProductInner>>() { public List<FlattenedProductInner> apply(RestResponse<Void, List<FlattenedProductInner>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProductInner>>, Maybe<List<FlattenedProductInner>>>() {
+                public Maybe<List<FlattenedProductInner>> apply(RestResponse<Void, List<FlattenedProductInner>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -493,9 +502,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProductInner>> object
      */
-    public Single<Map<String, FlattenedProductInner>> getDictionaryAsync() {
+    public Maybe<Map<String, FlattenedProductInner>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Map<String, FlattenedProductInner>>, Map<String, FlattenedProductInner>>() { public Map<String, FlattenedProductInner> apply(RestResponse<Void, Map<String, FlattenedProductInner>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProductInner>>, Maybe<Map<String, FlattenedProductInner>>>() {
+                public Maybe<Map<String, FlattenedProductInner>> apply(RestResponse<Void, Map<String, FlattenedProductInner>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -634,9 +651,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ResourceCollectionInner> object
      */
-    public Single<ResourceCollectionInner> getResourceCollectionAsync() {
+    public Maybe<ResourceCollectionInner> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, ResourceCollectionInner>, ResourceCollectionInner>() { public ResourceCollectionInner apply(RestResponse<Void, ResourceCollectionInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ResourceCollectionInner>, Maybe<ResourceCollectionInner>>() {
+                public Maybe<ResourceCollectionInner> apply(RestResponse<Void, ResourceCollectionInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

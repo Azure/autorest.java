@@ -28,6 +28,7 @@ import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -135,9 +136,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getValidAsync() {
+    public Maybe<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper apply(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -233,9 +242,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getEmptyAsync() {
+    public Maybe<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper apply(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -331,9 +348,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getNotProvidedAsync() {
+    public Maybe<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper apply(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

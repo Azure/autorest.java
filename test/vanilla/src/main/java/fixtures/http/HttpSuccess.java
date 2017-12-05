@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -81,9 +82,9 @@ public interface HttpSuccess {
      * Get 200 success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> get200Async();
+    Maybe<Boolean> get200Async();
 
     /**
      * Get 200 success.

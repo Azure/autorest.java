@@ -26,6 +26,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyduration.Durations;
 import fixtures.bodyduration.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -128,9 +129,17 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getNullAsync() {
+    public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Period>, Period>() { public Period apply(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -225,9 +234,17 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getPositiveDurationAsync() {
+    public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Period>, Period>() { public Period apply(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -270,9 +287,17 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getInvalidAsync() {
+    public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Period>, Period>() { public Period apply(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

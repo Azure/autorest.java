@@ -26,6 +26,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodydate.Dates;
 import fixtures.bodydate.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -152,9 +153,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getNullAsync() {
+    public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -197,9 +206,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getInvalidDateAsync() {
+    public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -242,9 +259,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getOverflowDateAsync() {
+    public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -287,9 +312,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getUnderflowDateAsync() {
+    public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -384,9 +417,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getMaxDateAsync() {
+    public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -481,9 +522,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getMinDateAsync() {
+    public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate apply(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

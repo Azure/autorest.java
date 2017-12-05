@@ -28,6 +28,7 @@ import fixtures.bodycomplex.Inheritances;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -117,9 +118,17 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Siamese> object
      */
-    public Single<Siamese> getValidAsync() {
+    public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Siamese>, Siamese>() { public Siamese apply(RestResponse<Void, Siamese> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Siamese>, Maybe<Siamese>>() {
+                public Maybe<Siamese> apply(RestResponse<Void, Siamese> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

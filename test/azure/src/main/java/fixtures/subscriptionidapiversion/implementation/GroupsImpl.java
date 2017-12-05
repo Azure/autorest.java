@@ -27,6 +27,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.subscriptionidapiversion.Groups;
 import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -118,9 +119,17 @@ public class GroupsImpl implements Groups {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SampleResourceGroup> object
      */
-    public Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Maybe<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .map(new Function<RestResponse<Void, SampleResourceGroup>, SampleResourceGroup>() { public SampleResourceGroup apply(RestResponse<Void, SampleResourceGroup> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroup>, Maybe<SampleResourceGroup>>() {
+                public Maybe<SampleResourceGroup> apply(RestResponse<Void, SampleResourceGroup> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

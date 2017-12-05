@@ -28,6 +28,7 @@ import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -117,9 +118,17 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Fish> object
      */
-    public Single<Fish> getValidAsync() {
+    public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Fish>, Fish>() { public Fish apply(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
+                public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

@@ -30,6 +30,7 @@ import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -97,9 +98,9 @@ public interface HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
-    Single<List<String>> get300Async();
+    Maybe<List<String>> get300Async();
 
     /**
      * Return 300 status code and redirect to /http/success/200.

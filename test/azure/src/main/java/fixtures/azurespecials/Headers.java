@@ -19,6 +19,7 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -130,9 +131,9 @@ public interface Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
+    Maybe<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId);
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.

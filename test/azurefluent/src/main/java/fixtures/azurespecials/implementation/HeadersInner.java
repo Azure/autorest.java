@@ -26,6 +26,7 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -229,9 +230,17 @@ public class HeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> object
      */
-    public Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
+    public Maybe<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .map(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>, Boolean>() { public Boolean apply(RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

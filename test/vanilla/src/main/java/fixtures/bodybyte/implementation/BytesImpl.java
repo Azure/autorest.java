@@ -26,6 +26,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodybyte.Bytes;
 import fixtures.bodybyte.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -133,9 +134,17 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getNullAsync() {
+    public Maybe<byte[]> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -178,9 +187,17 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getEmptyAsync() {
+    public Maybe<byte[]> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -223,9 +240,17 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getNonAsciiAsync() {
+    public Maybe<byte[]> getNonAsciiAsync() {
         return getNonAsciiWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -320,9 +345,17 @@ public class BytesImpl implements Bytes {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getInvalidAsync() {
+    public Maybe<byte[]> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, byte[]>, byte[]>() { public byte[] apply(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

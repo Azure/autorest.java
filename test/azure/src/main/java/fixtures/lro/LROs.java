@@ -42,6 +42,7 @@ import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -131,9 +132,9 @@ public interface LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200SucceededAsync();
+    Maybe<Product> put200SucceededAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -169,9 +170,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200SucceededAsync(Product product);
+    Maybe<Product> put200SucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -262,9 +263,9 @@ public interface LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200SucceededNoStateAsync();
+    Maybe<Product> put200SucceededNoStateAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -300,9 +301,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200SucceededNoStateAsync(Product product);
+    Maybe<Product> put200SucceededNoStateAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -393,9 +394,9 @@ public interface LROs {
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put202Retry200Async();
+    Maybe<Product> put202Retry200Async();
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -431,9 +432,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put202Retry200Async(Product product);
+    Maybe<Product> put202Retry200Async(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -524,9 +525,9 @@ public interface LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put201CreatingSucceeded200Async();
+    Maybe<Product> put201CreatingSucceeded200Async();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -562,9 +563,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put201CreatingSucceeded200Async(Product product);
+    Maybe<Product> put201CreatingSucceeded200Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -655,9 +656,9 @@ public interface LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200UpdatingSucceeded204Async();
+    Maybe<Product> put200UpdatingSucceeded204Async();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -693,9 +694,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200UpdatingSucceeded204Async(Product product);
+    Maybe<Product> put200UpdatingSucceeded204Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -786,9 +787,9 @@ public interface LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put201CreatingFailed200Async();
+    Maybe<Product> put201CreatingFailed200Async();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -824,9 +825,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put201CreatingFailed200Async(Product product);
+    Maybe<Product> put201CreatingFailed200Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -917,9 +918,9 @@ public interface LROs {
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200Acceptedcanceled200Async();
+    Maybe<Product> put200Acceptedcanceled200Async();
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -955,9 +956,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put200Acceptedcanceled200Async(Product product);
+    Maybe<Product> put200Acceptedcanceled200Async(Product product);
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1048,9 +1049,9 @@ public interface LROs {
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putNoHeaderInRetryAsync();
+    Maybe<Product> putNoHeaderInRetryAsync();
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1086,9 +1087,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putNoHeaderInRetryAsync(Product product);
+    Maybe<Product> putNoHeaderInRetryAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1179,9 +1180,9 @@ public interface LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncRetrySucceededAsync();
+    Maybe<Product> putAsyncRetrySucceededAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1217,9 +1218,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncRetrySucceededAsync(Product product);
+    Maybe<Product> putAsyncRetrySucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1310,9 +1311,9 @@ public interface LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncNoRetrySucceededAsync();
+    Maybe<Product> putAsyncNoRetrySucceededAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1348,9 +1349,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncNoRetrySucceededAsync(Product product);
+    Maybe<Product> putAsyncNoRetrySucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1441,9 +1442,9 @@ public interface LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncRetryFailedAsync();
+    Maybe<Product> putAsyncRetryFailedAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1479,9 +1480,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncRetryFailedAsync(Product product);
+    Maybe<Product> putAsyncRetryFailedAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1572,9 +1573,9 @@ public interface LROs {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncNoRetrycanceledAsync();
+    Maybe<Product> putAsyncNoRetrycanceledAsync();
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1610,9 +1611,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncNoRetrycanceledAsync(Product product);
+    Maybe<Product> putAsyncNoRetrycanceledAsync(Product product);
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -1703,9 +1704,9 @@ public interface LROs {
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncNoHeaderInRetryAsync();
+    Maybe<Product> putAsyncNoHeaderInRetryAsync();
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1741,9 +1742,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncNoHeaderInRetryAsync(Product product);
+    Maybe<Product> putAsyncNoHeaderInRetryAsync(Product product);
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -1834,9 +1835,9 @@ public interface LROs {
      * Long running put request with non resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Sku&gt;} object if successful.
+     * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
-    Single<Sku> putNonResourceAsync();
+    Maybe<Sku> putNonResourceAsync();
 
     /**
      * Long running put request with non resource.
@@ -1872,9 +1873,9 @@ public interface LROs {
      *
      * @param sku sku to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Sku&gt;} object if successful.
+     * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
-    Single<Sku> putNonResourceAsync(Sku sku);
+    Maybe<Sku> putNonResourceAsync(Sku sku);
 
     /**
      * Long running put request with non resource.
@@ -1965,9 +1966,9 @@ public interface LROs {
      * Long running put request with non resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Sku&gt;} object if successful.
+     * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
-    Single<Sku> putAsyncNonResourceAsync();
+    Maybe<Sku> putAsyncNonResourceAsync();
 
     /**
      * Long running put request with non resource.
@@ -2003,9 +2004,9 @@ public interface LROs {
      *
      * @param sku Sku to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Sku&gt;} object if successful.
+     * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
-    Single<Sku> putAsyncNonResourceAsync(Sku sku);
+    Maybe<Sku> putAsyncNonResourceAsync(Sku sku);
 
     /**
      * Long running put request with non resource.
@@ -2096,9 +2097,9 @@ public interface LROs {
      * Long running put request with sub resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;SubProduct&gt;} object if successful.
+     * @return the {@link Maybe&lt;SubProduct&gt;} object if successful.
      */
-    Single<SubProduct> putSubResourceAsync();
+    Maybe<SubProduct> putSubResourceAsync();
 
     /**
      * Long running put request with sub resource.
@@ -2134,9 +2135,9 @@ public interface LROs {
      *
      * @param product Sub Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;SubProduct&gt;} object if successful.
+     * @return the {@link Maybe&lt;SubProduct&gt;} object if successful.
      */
-    Single<SubProduct> putSubResourceAsync(SubProduct product);
+    Maybe<SubProduct> putSubResourceAsync(SubProduct product);
 
     /**
      * Long running put request with sub resource.
@@ -2227,9 +2228,9 @@ public interface LROs {
      * Long running put request with sub resource.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;SubProduct&gt;} object if successful.
+     * @return the {@link Maybe&lt;SubProduct&gt;} object if successful.
      */
-    Single<SubProduct> putAsyncSubResourceAsync();
+    Maybe<SubProduct> putAsyncSubResourceAsync();
 
     /**
      * Long running put request with sub resource.
@@ -2265,9 +2266,9 @@ public interface LROs {
      *
      * @param product Sub Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;SubProduct&gt;} object if successful.
+     * @return the {@link Maybe&lt;SubProduct&gt;} object if successful.
      */
-    Single<SubProduct> putAsyncSubResourceAsync(SubProduct product);
+    Maybe<SubProduct> putAsyncSubResourceAsync(SubProduct product);
 
     /**
      * Long running put request with sub resource.
@@ -2328,9 +2329,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> deleteProvisioning202Accepted200SucceededAsync();
+    Maybe<Product> deleteProvisioning202Accepted200SucceededAsync();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -2390,9 +2391,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> deleteProvisioning202DeletingFailed200Async();
+    Maybe<Product> deleteProvisioning202DeletingFailed200Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -2452,9 +2453,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> deleteProvisioning202Deletingcanceled200Async();
+    Maybe<Product> deleteProvisioning202Deletingcanceled200Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -2574,9 +2575,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> delete202Retry200Async();
+    Maybe<Product> delete202Retry200Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -2636,9 +2637,9 @@ public interface LROs {
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> delete202NoRetry204Async();
+    Maybe<Product> delete202NoRetry204Async();
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -3058,9 +3059,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Sku&gt;} object if successful.
+     * @return the {@link Maybe&lt;Sku&gt;} object if successful.
      */
-    Single<Sku> post200WithPayloadAsync();
+    Maybe<Sku> post200WithPayloadAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
@@ -3277,9 +3278,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> post202NoRetry204Async();
+    Maybe<Product> post202NoRetry204Async();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -3315,9 +3316,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> post202NoRetry204Async(Product product);
+    Maybe<Product> post202NoRetry204Async(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -3408,9 +3409,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> postAsyncRetrySucceededAsync();
+    Maybe<Product> postAsyncRetrySucceededAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3446,9 +3447,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> postAsyncRetrySucceededAsync(Product product);
+    Maybe<Product> postAsyncRetrySucceededAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3539,9 +3540,9 @@ public interface LROs {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> postAsyncNoRetrySucceededAsync();
+    Maybe<Product> postAsyncNoRetrySucceededAsync();
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -3577,9 +3578,9 @@ public interface LROs {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> postAsyncNoRetrySucceededAsync(Product product);
+    Maybe<Product> postAsyncNoRetrySucceededAsync(Product product);
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.

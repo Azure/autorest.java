@@ -25,6 +25,7 @@ import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.subscriptionidapiversion.ErrorException;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -116,9 +117,17 @@ public class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SampleResourceGroupInner> object
      */
-    public Single<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .map(new Function<RestResponse<Void, SampleResourceGroupInner>, SampleResourceGroupInner>() { public SampleResourceGroupInner apply(RestResponse<Void, SampleResourceGroupInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroupInner>, Maybe<SampleResourceGroupInner>>() {
+                public Maybe<SampleResourceGroupInner> apply(RestResponse<Void, SampleResourceGroupInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

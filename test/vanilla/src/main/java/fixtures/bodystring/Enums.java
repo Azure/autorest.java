@@ -17,6 +17,7 @@ import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -49,9 +50,9 @@ public interface Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Colors&gt;} object if successful.
+     * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
-    Single<Colors> getNotExpandableAsync();
+    Maybe<Colors> getNotExpandableAsync();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -122,9 +123,9 @@ public interface Enums {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Colors&gt;} object if successful.
+     * @return the {@link Maybe&lt;Colors&gt;} object if successful.
      */
-    Single<Colors> getReferencedAsync();
+    Maybe<Colors> getReferencedAsync();
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -195,9 +196,9 @@ public interface Enums {
      * Get value 'green-color' from the constant.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RefColorConstant&gt;} object if successful.
+     * @return the {@link Maybe&lt;RefColorConstant&gt;} object if successful.
      */
-    Single<RefColorConstant> getReferencedConstantAsync();
+    Maybe<RefColorConstant> getReferencedConstantAsync();
 
     /**
      * Get value 'green-color' from the constant.

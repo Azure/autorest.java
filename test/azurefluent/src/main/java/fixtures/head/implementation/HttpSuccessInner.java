@@ -23,6 +23,7 @@ import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -113,9 +114,17 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> head200Async() {
+    public Maybe<Boolean> head200Async() {
         return head200WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -158,9 +167,17 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> head204Async() {
+    public Maybe<Boolean> head204Async() {
         return head204WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -203,9 +220,17 @@ public class HttpSuccessInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> head404Async() {
+    public Maybe<Boolean> head404Async() {
         return head404WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Boolean>, Boolean>() { public Boolean apply(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

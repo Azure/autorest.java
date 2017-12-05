@@ -28,6 +28,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyinteger.Ints;
 import fixtures.bodyinteger.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -194,9 +195,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getNullAsync() {
+    public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -239,9 +248,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getInvalidAsync() {
+    public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -284,9 +301,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getOverflowInt32Async() {
+    public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -329,9 +354,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getUnderflowInt32Async() {
+    public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Integer>, Integer>() { public Integer apply(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -374,9 +407,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Long> object
      */
-    public Single<Long> getOverflowInt64Async() {
+    public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Long>, Long>() { public Long apply(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
+                public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -419,9 +460,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Long> object
      */
-    public Single<Long> getUnderflowInt64Async() {
+    public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Long>, Long>() { public Long apply(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
+                public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -660,9 +709,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUnixTimeAsync() {
+    public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -755,9 +812,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getInvalidUnixTimeAsync() {
+    public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -800,9 +865,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getNullUnixTimeAsync() {
+    public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, DateTime>, DateTime>() { public DateTime apply(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

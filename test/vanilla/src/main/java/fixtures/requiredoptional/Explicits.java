@@ -25,6 +25,7 @@ import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -61,9 +62,9 @@ public interface Explicits {
      *
      * @param bodyParameter the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredIntegerParameterAsync(int bodyParameter);
+    Maybe<Error> postRequiredIntegerParameterAsync(int bodyParameter);
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
@@ -172,9 +173,9 @@ public interface Explicits {
      *
      * @param bodyParameter the IntWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter);
+    Maybe<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -283,9 +284,9 @@ public interface Explicits {
      *
      * @param headerParameter the int value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredIntegerHeaderAsync(int headerParameter);
+    Maybe<Error> postRequiredIntegerHeaderAsync(int headerParameter);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -394,9 +395,9 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredStringParameterAsync(String bodyParameter);
+    Maybe<Error> postRequiredStringParameterAsync(String bodyParameter);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -505,9 +506,9 @@ public interface Explicits {
      *
      * @param bodyParameter the StringWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter);
+    Maybe<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -616,9 +617,9 @@ public interface Explicits {
      *
      * @param headerParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredStringHeaderAsync(String headerParameter);
+    Maybe<Error> postRequiredStringHeaderAsync(String headerParameter);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -727,9 +728,9 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredClassParameterAsync(Product bodyParameter);
+    Maybe<Error> postRequiredClassParameterAsync(Product bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -838,9 +839,9 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter);
+    Maybe<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -949,9 +950,9 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredArrayParameterAsync(List<String> bodyParameter);
+    Maybe<Error> postRequiredArrayParameterAsync(List<String> bodyParameter);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -1060,9 +1061,9 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayWrapper value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter);
+    Maybe<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -1171,9 +1172,9 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> postRequiredArrayHeaderAsync(List<String> headerParameter);
+    Maybe<Error> postRequiredArrayHeaderAsync(List<String> headerParameter);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.

@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Arrays {
      * Get complex types with array property.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ArrayWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
-    Single<ArrayWrapper> getValidAsync();
+    Maybe<ArrayWrapper> getValidAsync();
 
     /**
      * Get complex types with array property.
@@ -121,9 +122,9 @@ public interface Arrays {
      * Get complex types with array property which is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ArrayWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
-    Single<ArrayWrapper> getEmptyAsync();
+    Maybe<ArrayWrapper> getEmptyAsync();
 
     /**
      * Get complex types with array property which is empty.
@@ -194,9 +195,9 @@ public interface Arrays {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ArrayWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
-    Single<ArrayWrapper> getNotProvidedAsync();
+    Maybe<ArrayWrapper> getNotProvidedAsync();
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.

@@ -26,6 +26,7 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodynumber.Numbers;
 import fixtures.bodynumber.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -248,9 +249,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getNullAsync() {
+    public Maybe<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -293,9 +302,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getInvalidFloatAsync() {
+    public Maybe<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -338,9 +355,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getInvalidDoubleAsync() {
+    public Maybe<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -383,9 +408,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getInvalidDecimalAsync() {
+    public Maybe<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -477,9 +510,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigFloatAsync() {
+    public Maybe<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -571,9 +612,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigDoubleAsync() {
+    public Maybe<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -665,9 +714,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigDoublePositiveDecimalAsync() {
+    public Maybe<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -759,9 +816,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigDoubleNegativeDecimalAsync() {
+    public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -856,9 +921,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getBigDecimalAsync() {
+    public Maybe<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -953,9 +1026,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getBigDecimalPositiveDecimalAsync() {
+    public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1050,9 +1131,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getBigDecimalNegativeDecimalAsync() {
+    public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1144,9 +1233,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getSmallFloatAsync() {
+    public Maybe<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1238,9 +1335,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getSmallDoubleAsync() {
+    public Maybe<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Double>, Double>() { public Double apply(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1335,9 +1440,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getSmallDecimalAsync() {
+    public Maybe<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal apply(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

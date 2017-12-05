@@ -45,6 +45,7 @@ import fixtures.http.models.HttpRedirectsPost307Headers;
 import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -258,9 +259,17 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HttpRedirectsGet300Headers, List<String>> object
      */
-    public Single<List<String>> get300Async() {
+    public Maybe<List<String>> get300Async() {
         return get300WithRestResponseAsync()
-            .map(new Function<RestResponse<HttpRedirectsGet300Headers, List<String>>, List<String>>() { public List<String> apply(RestResponse<HttpRedirectsGet300Headers, List<String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<HttpRedirectsGet300Headers, List<String>>, Maybe<List<String>>>() {
+                public Maybe<List<String>> apply(RestResponse<HttpRedirectsGet300Headers, List<String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

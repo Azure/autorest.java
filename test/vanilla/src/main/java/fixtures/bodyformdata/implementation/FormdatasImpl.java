@@ -25,6 +25,7 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -131,9 +132,17 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
+    public Maybe<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
+                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -183,9 +192,17 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
+    public Maybe<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .map(new Function<RestResponse<Void, InputStream>, InputStream>() { public InputStream apply(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
+                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

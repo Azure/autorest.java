@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -47,9 +48,9 @@ public interface HttpFailures {
      * Get empty error form server.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getEmptyErrorAsync();
+    Maybe<Boolean> getEmptyErrorAsync();
 
     /**
      * Get empty error form server.
@@ -82,9 +83,9 @@ public interface HttpFailures {
      * Get empty error form server.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getNoModelErrorAsync();
+    Maybe<Boolean> getNoModelErrorAsync();
 
     /**
      * Get empty error form server.
@@ -117,9 +118,9 @@ public interface HttpFailures {
      * Get empty response from server.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getNoModelEmptyAsync();
+    Maybe<Boolean> getNoModelEmptyAsync();
 
     /**
      * Get empty response from server.

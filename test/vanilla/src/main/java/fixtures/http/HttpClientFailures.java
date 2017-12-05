@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -47,9 +48,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> head400Async();
+    Maybe<Error> head400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -82,9 +83,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get400Async();
+    Maybe<Error> get400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -117,9 +118,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put400Async();
+    Maybe<Error> put400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -155,9 +156,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put400Async(Boolean booleanValue);
+    Maybe<Error> put400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -191,9 +192,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> patch400Async();
+    Maybe<Error> patch400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -229,9 +230,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> patch400Async(Boolean booleanValue);
+    Maybe<Error> patch400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -265,9 +266,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post400Async();
+    Maybe<Error> post400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -303,9 +304,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post400Async(Boolean booleanValue);
+    Maybe<Error> post400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -339,9 +340,9 @@ public interface HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete400Async();
+    Maybe<Error> delete400Async();
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -377,9 +378,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete400Async(Boolean booleanValue);
+    Maybe<Error> delete400Async(Boolean booleanValue);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -413,9 +414,9 @@ public interface HttpClientFailures {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> head401Async();
+    Maybe<Error> head401Async();
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -448,9 +449,9 @@ public interface HttpClientFailures {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get402Async();
+    Maybe<Error> get402Async();
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -483,9 +484,9 @@ public interface HttpClientFailures {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get403Async();
+    Maybe<Error> get403Async();
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -518,9 +519,9 @@ public interface HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put404Async();
+    Maybe<Error> put404Async();
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -556,9 +557,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put404Async(Boolean booleanValue);
+    Maybe<Error> put404Async(Boolean booleanValue);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -592,9 +593,9 @@ public interface HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> patch405Async();
+    Maybe<Error> patch405Async();
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -630,9 +631,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> patch405Async(Boolean booleanValue);
+    Maybe<Error> patch405Async(Boolean booleanValue);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -666,9 +667,9 @@ public interface HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post406Async();
+    Maybe<Error> post406Async();
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -704,9 +705,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post406Async(Boolean booleanValue);
+    Maybe<Error> post406Async(Boolean booleanValue);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -740,9 +741,9 @@ public interface HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete407Async();
+    Maybe<Error> delete407Async();
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -778,9 +779,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete407Async(Boolean booleanValue);
+    Maybe<Error> delete407Async(Boolean booleanValue);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -814,9 +815,9 @@ public interface HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put409Async();
+    Maybe<Error> put409Async();
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -852,9 +853,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put409Async(Boolean booleanValue);
+    Maybe<Error> put409Async(Boolean booleanValue);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -888,9 +889,9 @@ public interface HttpClientFailures {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> head410Async();
+    Maybe<Error> head410Async();
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -923,9 +924,9 @@ public interface HttpClientFailures {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get411Async();
+    Maybe<Error> get411Async();
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -958,9 +959,9 @@ public interface HttpClientFailures {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get412Async();
+    Maybe<Error> get412Async();
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -993,9 +994,9 @@ public interface HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put413Async();
+    Maybe<Error> put413Async();
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -1031,9 +1032,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> put413Async(Boolean booleanValue);
+    Maybe<Error> put413Async(Boolean booleanValue);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -1067,9 +1068,9 @@ public interface HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> patch414Async();
+    Maybe<Error> patch414Async();
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1105,9 +1106,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> patch414Async(Boolean booleanValue);
+    Maybe<Error> patch414Async(Boolean booleanValue);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1141,9 +1142,9 @@ public interface HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post415Async();
+    Maybe<Error> post415Async();
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1179,9 +1180,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> post415Async(Boolean booleanValue);
+    Maybe<Error> post415Async(Boolean booleanValue);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1215,9 +1216,9 @@ public interface HttpClientFailures {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> get416Async();
+    Maybe<Error> get416Async();
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -1250,9 +1251,9 @@ public interface HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete417Async();
+    Maybe<Error> delete417Async();
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1288,9 +1289,9 @@ public interface HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> delete417Async(Boolean booleanValue);
+    Maybe<Error> delete417Async(Boolean booleanValue);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -1324,9 +1325,9 @@ public interface HttpClientFailures {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> head429Async();
+    Maybe<Error> head429Async();
 
     /**
      * Return 429 status code - should be represented in the client as an error.

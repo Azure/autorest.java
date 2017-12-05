@@ -23,6 +23,7 @@ import fixtures.lro.models.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.LRORetrysPutAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.Product;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -112,9 +113,9 @@ public interface LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put201CreatingSucceeded200Async();
+    Maybe<Product> put201CreatingSucceeded200Async();
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -150,9 +151,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> put201CreatingSucceeded200Async(Product product);
+    Maybe<Product> put201CreatingSucceeded200Async(Product product);
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -243,9 +244,9 @@ public interface LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncRelativeRetrySucceededAsync();
+    Maybe<Product> putAsyncRelativeRetrySucceededAsync();
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -281,9 +282,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> putAsyncRelativeRetrySucceededAsync(Product product);
+    Maybe<Product> putAsyncRelativeRetrySucceededAsync(Product product);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -344,9 +345,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Product&gt;} object if successful.
+     * @return the {@link Maybe&lt;Product&gt;} object if successful.
      */
-    Single<Product> deleteProvisioning202Accepted200SucceededAsync();
+    Maybe<Product> deleteProvisioning202Accepted200SucceededAsync();
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.

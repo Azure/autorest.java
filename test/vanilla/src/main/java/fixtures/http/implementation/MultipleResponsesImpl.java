@@ -30,6 +30,7 @@ import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -288,9 +289,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model204NoModelDefaultError200ValidAsync() {
+    public Maybe<A> get200Model204NoModelDefaultError200ValidAsync() {
         return get200Model204NoModelDefaultError200ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -333,9 +342,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model204NoModelDefaultError204ValidAsync() {
+    public Maybe<A> get200Model204NoModelDefaultError204ValidAsync() {
         return get200Model204NoModelDefaultError204ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -378,9 +395,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model204NoModelDefaultError201InvalidAsync() {
+    public Maybe<A> get200Model204NoModelDefaultError201InvalidAsync() {
         return get200Model204NoModelDefaultError201InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -423,9 +448,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model204NoModelDefaultError202NoneAsync() {
+    public Maybe<A> get200Model204NoModelDefaultError202NoneAsync() {
         return get200Model204NoModelDefaultError202NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -468,9 +501,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model204NoModelDefaultError400ValidAsync() {
+    public Maybe<A> get200Model204NoModelDefaultError400ValidAsync() {
         return get200Model204NoModelDefaultError400ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -513,9 +554,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model201ModelDefaultError200ValidAsync() {
+    public Maybe<A> get200Model201ModelDefaultError200ValidAsync() {
         return get200Model201ModelDefaultError200ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -558,9 +607,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model201ModelDefaultError201ValidAsync() {
+    public Maybe<A> get200Model201ModelDefaultError201ValidAsync() {
         return get200Model201ModelDefaultError201ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -603,9 +660,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200Model201ModelDefaultError400ValidAsync() {
+    public Maybe<A> get200Model201ModelDefaultError400ValidAsync() {
         return get200Model201ModelDefaultError400ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -648,9 +713,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Object> object
      */
-    public Single<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
+    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -693,9 +766,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Object> object
      */
-    public Single<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
+    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -738,9 +819,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Object> object
      */
-    public Single<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
+    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -783,9 +872,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Object> object
      */
-    public Single<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
+    public Maybe<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, Object>, Object>() { public Object apply(RestResponse<Void, Object> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Object>, Maybe<Object>>() {
+                public Maybe<Object> apply(RestResponse<Void, Object> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1143,9 +1240,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> getDefaultModelA200ValidAsync() {
+    public Maybe<A> getDefaultModelA200ValidAsync() {
         return getDefaultModelA200ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1188,9 +1293,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> getDefaultModelA200NoneAsync() {
+    public Maybe<A> getDefaultModelA200NoneAsync() {
         return getDefaultModelA200NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1233,9 +1346,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> getDefaultModelA400ValidAsync() {
+    public Maybe<A> getDefaultModelA400ValidAsync() {
         return getDefaultModelA400ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1278,9 +1399,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> getDefaultModelA400NoneAsync() {
+    public Maybe<A> getDefaultModelA400NoneAsync() {
         return getDefaultModelA400NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1503,9 +1632,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA200NoneAsync() {
+    public Maybe<A> get200ModelA200NoneAsync() {
         return get200ModelA200NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1548,9 +1685,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA200ValidAsync() {
+    public Maybe<A> get200ModelA200ValidAsync() {
         return get200ModelA200ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1593,9 +1738,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA200InvalidAsync() {
+    public Maybe<A> get200ModelA200InvalidAsync() {
         return get200ModelA200InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1638,9 +1791,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA400NoneAsync() {
+    public Maybe<A> get200ModelA400NoneAsync() {
         return get200ModelA400NoneWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1683,9 +1844,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA400ValidAsync() {
+    public Maybe<A> get200ModelA400ValidAsync() {
         return get200ModelA400ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1728,9 +1897,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA400InvalidAsync() {
+    public Maybe<A> get200ModelA400InvalidAsync() {
         return get200ModelA400InvalidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1773,9 +1950,17 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, A> object
      */
-    public Single<A> get200ModelA202ValidAsync() {
+    public Maybe<A> get200ModelA202ValidAsync() {
         return get200ModelA202ValidWithRestResponseAsync()
-            .map(new Function<RestResponse<Void, A>, A>() { public A apply(RestResponse<Void, A> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, A>, Maybe<A>>() {
+                public Maybe<A> apply(RestResponse<Void, A> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

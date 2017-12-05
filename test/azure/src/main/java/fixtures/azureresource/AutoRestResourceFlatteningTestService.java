@@ -18,6 +18,7 @@ import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -95,7 +96,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
     Completable putArrayAsync();
 
@@ -131,7 +132,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
     Completable putArrayAsync(List<Resource> resourceArray);
 
@@ -170,7 +171,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Single<List<FlattenedProduct>> getArrayAsync();
+    Maybe<List<FlattenedProduct>> getArrayAsync();
 
     /**
      * Get External Resource as an Array.
@@ -203,7 +204,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
     Completable putDictionaryAsync();
 
@@ -239,7 +240,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
     Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
 
@@ -278,7 +279,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    Single<Map<String, FlattenedProduct>> getDictionaryAsync();
+    Maybe<Map<String, FlattenedProduct>> getDictionaryAsync();
 
     /**
      * Get External Resource as a Dictionary.
@@ -311,7 +312,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
     Completable putResourceCollectionAsync();
 
@@ -347,7 +348,7 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
     Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject);
 
@@ -386,7 +387,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollection object
      */
-    Single<ResourceCollection> getResourceCollectionAsync();
+    Maybe<ResourceCollection> getResourceCollectionAsync();
 
     /**
      * Get External Resource as a ResourceCollection.

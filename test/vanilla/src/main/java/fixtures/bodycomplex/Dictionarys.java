@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Dictionarys {
      * Get complex types with dictionary property.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DictionaryWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
-    Single<DictionaryWrapper> getValidAsync();
+    Maybe<DictionaryWrapper> getValidAsync();
 
     /**
      * Get complex types with dictionary property.
@@ -121,9 +122,9 @@ public interface Dictionarys {
      * Get complex types with dictionary property which is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DictionaryWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
-    Single<DictionaryWrapper> getEmptyAsync();
+    Maybe<DictionaryWrapper> getEmptyAsync();
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -194,9 +195,9 @@ public interface Dictionarys {
      * Get complex types with dictionary property which is null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DictionaryWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
-    Single<DictionaryWrapper> getNullAsync();
+    Maybe<DictionaryWrapper> getNullAsync();
 
     /**
      * Get complex types with dictionary property which is null.
@@ -229,9 +230,9 @@ public interface Dictionarys {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DictionaryWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DictionaryWrapper&gt;} object if successful.
      */
-    Single<DictionaryWrapper> getNotProvidedAsync();
+    Maybe<DictionaryWrapper> getNotProvidedAsync();
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.

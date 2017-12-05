@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodynumber.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Numbers {
      * Get null Number value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getNullAsync();
+    Maybe<Double> getNullAsync();
 
     /**
      * Get null Number value.
@@ -83,9 +84,9 @@ public interface Numbers {
      * Get invalid float Number value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getInvalidFloatAsync();
+    Maybe<Double> getInvalidFloatAsync();
 
     /**
      * Get invalid float Number value.
@@ -118,9 +119,9 @@ public interface Numbers {
      * Get invalid double Number value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getInvalidDoubleAsync();
+    Maybe<Double> getInvalidDoubleAsync();
 
     /**
      * Get invalid double Number value.
@@ -153,9 +154,9 @@ public interface Numbers {
      * Get invalid decimal Number value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;BigDecimal&gt;} object if successful.
+     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
-    Single<BigDecimal> getInvalidDecimalAsync();
+    Maybe<BigDecimal> getInvalidDecimalAsync();
 
     /**
      * Get invalid decimal Number value.
@@ -226,9 +227,9 @@ public interface Numbers {
      * Get big float value 3.402823e+20.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getBigFloatAsync();
+    Maybe<Double> getBigFloatAsync();
 
     /**
      * Get big float value 3.402823e+20.
@@ -299,9 +300,9 @@ public interface Numbers {
      * Get big double value 2.5976931e+101.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getBigDoubleAsync();
+    Maybe<Double> getBigDoubleAsync();
 
     /**
      * Get big double value 2.5976931e+101.
@@ -372,9 +373,9 @@ public interface Numbers {
      * Get big double value 99999999.99.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getBigDoublePositiveDecimalAsync();
+    Maybe<Double> getBigDoublePositiveDecimalAsync();
 
     /**
      * Get big double value 99999999.99.
@@ -445,9 +446,9 @@ public interface Numbers {
      * Get big double value -99999999.99.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getBigDoubleNegativeDecimalAsync();
+    Maybe<Double> getBigDoubleNegativeDecimalAsync();
 
     /**
      * Get big double value -99999999.99.
@@ -518,9 +519,9 @@ public interface Numbers {
      * Get big decimal value 2.5976931e+101.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;BigDecimal&gt;} object if successful.
+     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
-    Single<BigDecimal> getBigDecimalAsync();
+    Maybe<BigDecimal> getBigDecimalAsync();
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -591,9 +592,9 @@ public interface Numbers {
      * Get big decimal value 99999999.99.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;BigDecimal&gt;} object if successful.
+     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
-    Single<BigDecimal> getBigDecimalPositiveDecimalAsync();
+    Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync();
 
     /**
      * Get big decimal value 99999999.99.
@@ -664,9 +665,9 @@ public interface Numbers {
      * Get big decimal value -99999999.99.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;BigDecimal&gt;} object if successful.
+     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
-    Single<BigDecimal> getBigDecimalNegativeDecimalAsync();
+    Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync();
 
     /**
      * Get big decimal value -99999999.99.
@@ -737,9 +738,9 @@ public interface Numbers {
      * Get big double value 3.402823e-20.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getSmallFloatAsync();
+    Maybe<Double> getSmallFloatAsync();
 
     /**
      * Get big double value 3.402823e-20.
@@ -810,9 +811,9 @@ public interface Numbers {
      * Get big double value 2.5976931e-101.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Double&gt;} object if successful.
+     * @return the {@link Maybe&lt;Double&gt;} object if successful.
      */
-    Single<Double> getSmallDoubleAsync();
+    Maybe<Double> getSmallDoubleAsync();
 
     /**
      * Get big double value 2.5976931e-101.
@@ -883,9 +884,9 @@ public interface Numbers {
      * Get small decimal value 2.5976931e-101.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;BigDecimal&gt;} object if successful.
+     * @return the {@link Maybe&lt;BigDecimal&gt;} object if successful.
      */
-    Single<BigDecimal> getSmallDecimalAsync();
+    Maybe<BigDecimal> getSmallDecimalAsync();
 
     /**
      * Get small decimal value 2.5976931e-101.

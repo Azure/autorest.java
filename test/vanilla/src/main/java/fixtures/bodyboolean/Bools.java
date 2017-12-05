@@ -15,6 +15,7 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyboolean.models.ErrorException;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -47,9 +48,9 @@ public interface Bools {
      * Get true Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getTrueAsync();
+    Maybe<Boolean> getTrueAsync();
 
     /**
      * Get true Boolean value.
@@ -120,9 +121,9 @@ public interface Bools {
      * Get false Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getFalseAsync();
+    Maybe<Boolean> getFalseAsync();
 
     /**
      * Get false Boolean value.
@@ -193,9 +194,9 @@ public interface Bools {
      * Get null Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getNullAsync();
+    Maybe<Boolean> getNullAsync();
 
     /**
      * Get null Boolean value.
@@ -228,9 +229,9 @@ public interface Bools {
      * Get invalid Boolean value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> getInvalidAsync();
+    Maybe<Boolean> getInvalidAsync();
 
     /**
      * Get invalid Boolean value.

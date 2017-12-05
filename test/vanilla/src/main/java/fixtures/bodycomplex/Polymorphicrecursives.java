@@ -16,6 +16,7 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import java.io.IOException;
@@ -48,9 +49,9 @@ public interface Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Fish&gt;} object if successful.
+     * @return the {@link Maybe&lt;Fish&gt;} object if successful.
      */
-    Single<Fish> getValidAsync();
+    Maybe<Fish> getValidAsync();
 
     /**
      * Get complex types that are polymorphic and have recursive references.
