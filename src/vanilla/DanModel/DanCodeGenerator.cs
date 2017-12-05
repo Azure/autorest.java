@@ -2230,13 +2230,13 @@ namespace AutoRest.Java.DanModel
                             }
                             else
                             {
-                                comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
+                                comment.Return($"the {{@link Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                             }
                         });
 
                         if (method.ReturnTypeResponseName.Else("void") != "void")
                         {
-                            interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+                            interfaceBlock.Line($"Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
                         }
                         else
                         {
@@ -2304,13 +2304,13 @@ namespace AutoRest.Java.DanModel
                         }
                         else
                         {
-                            comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
+                            comment.Return($"the {{@link Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                         }
                     });
 
                     if (method.ReturnTypeResponseName.Else("void") != "void")
                     {
-                        interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
+                        interfaceBlock.Line($"Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
                     }
                     else
                     {
@@ -2622,7 +2622,7 @@ namespace AutoRest.Java.DanModel
                 }
                 else
                 {
-                    asyncReturnType = $"Single<{asyncInnerReturnType}>";
+                    asyncReturnType = $"Maybe<{asyncInnerReturnType}>";
                 }
             }
             else

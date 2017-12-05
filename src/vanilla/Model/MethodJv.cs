@@ -387,9 +387,9 @@ namespace AutoRest.Java.Model
             }
             else
             {
-                returnType = $"Single<{ReturnTypeJv.ClientResponseTypeString}>";   
+                returnType = $"Maybe<{ReturnTypeJv.ClientResponseTypeString}>";   
             }
-        
+            
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine($"public {returnType} {Name}Async({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
@@ -402,7 +402,23 @@ namespace AutoRest.Java.Model
             }
             else
             {
-                builder.AppendLine($".map(new Function<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} apply({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
+                builder.AppendLine($".flatMapMaybe(new Function<{RestResponseAbstractTypeName}, Maybe<{ReturnTypeJv.ClientResponseTypeString}>>() {{");
+                builder.Indent();
+                builder.AppendLine($"public Maybe<{ReturnTypeJv.ClientResponseTypeString}> apply({RestResponseAbstractTypeName} restResponse) {{");
+                builder.Indent();
+                builder.AppendLine("if (restResponse.body() == null) {");
+                builder.Indent();
+                builder.AppendLine("return Maybe.empty();");
+                builder.Outdent();
+                builder.AppendLine("} else {");
+                builder.Indent();
+                builder.AppendLine("return Maybe.just(restResponse.body());");
+                builder.Outdent();
+                builder.AppendLine("}");
+                builder.Outdent();
+                builder.AppendLine("}");
+                builder.Outdent();
+                builder.AppendLine("});");
             }
             
             builder.Outdent();
@@ -809,6 +825,10 @@ namespace AutoRest.Java.Model
                 {
                     imports.Add("io.reactivex.Completable");
                 }
+                else
+                {
+                    imports.Add("io.reactivex.Maybe");
+                }
                 
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
@@ -851,7 +871,11 @@ namespace AutoRest.Java.Model
                     {
                         imports.Add("io.reactivex.Completable");
                     }
-                    
+                    else
+                    {
+                        imports.Add("io.reactivex.Maybe");
+                    }
+
                     this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                     // Http verb annotations
                     imports.Add(this.HttpMethod.ImportFrom());

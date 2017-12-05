@@ -348,7 +348,7 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else 
                 {
-                    return $"Single<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
+                    return $"Maybe<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }
             }
         }
