@@ -12,11 +12,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.DanModel
 {
     public static class DanCodeGenerator
     {
+        public const string targetVersion = "1.1.3";
+        public const string pomVersion = targetVersion + "-SNAPSHOT";
+
         private const string httpPipelineImport = "com.microsoft.rest.v2.http." + httpPipelineType;
         private const string httpPipelineDescription = "The HTTP pipeline to send requests through.";
         private const string httpPipelineType = "HttpPipeline";
@@ -35,18 +39,64 @@ namespace AutoRest.Java.DanModel
         private const string azureProxyImport = "com.microsoft.azure.v2." + azureProxyType;
         private const string azureProxyType = "AzureProxy";
 
-        public static JavaFile GetAzureServiceManagerJavaFile(CodeModelJva codeModel, Settings settings)
+        private const string implPackage = "implementation";
+        internal const string modelsPackage = ".models";
+
+        public static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
+
+        public static string BetaSinceVersion()
+        {
+            string[] versionParts = targetVersion.Split('.');
+            int minorVersion = int.Parse(versionParts[1]);
+            int patchVersion = int.Parse(versionParts[2]);
+
+            int newMinorVersion = patchVersion == 0
+                ? minorVersion
+                : minorVersion + 1;
+
+            string result = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
+            return result;
+        }
+
+        public static IEnumerable<JavaFile> GetOperationJavaFiles(CodeModel codeModel, Settings settings)
+        {
+            List<JavaFile> result = new List<JavaFile>();
+
+            bool isFluent = IsFluent(settings);
+            bool isAzure = IsAzure(settings);
+
+            foreach (MethodGroupJv methodGroup in GetAllOperations(codeModel))
+            {
+                if (isFluent || isAzure)
+                {
+                    result.Add(GetAzureMethodGroupJavaFile(codeModel, settings, methodGroup as MethodGroupJva));
+                }
+                else
+                {
+                    result.Add(GetMethodGroupJavaFile(codeModel, settings, methodGroup));
+                }
+
+                if (!isFluent)
+                {
+                    result.Add(GetMethodGroupInterfaceJavaFile(codeModel, settings, methodGroup));
+                }
+            }
+
+            return result;
+        }
+
+        public static JavaFile GetAzureServiceManagerJavaFile(CodeModel codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
-            string serviceName = codeModel.ServiceName;
+            string serviceName = GetServiceName(settings, codeModel);
             if (string.IsNullOrEmpty(serviceName))
             {
                 serviceName = "MissingServiceName";
             }
             string className = $"{serviceName}Manager";
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
 
             javaFile.Import(
                 "com.microsoft.azure.management.apigeneration.Beta",
@@ -62,7 +112,7 @@ namespace AutoRest.Java.DanModel
             {
                 comment.Line($"Entry point to Azure {serviceName} resource management.");
             });
-            javaFile.Annotation($"Beta(SinceVersion.{codeModel.BetaSinceVersion})");
+            javaFile.Annotation($"Beta(SinceVersion.{BetaSinceVersion()})");
             javaFile.Block($"public final class {className} extends Manager<{className}, {codeModel.Name + "Impl"}>", classBlock =>
             {
                 classBlock.MultipleLineComment(comment =>
@@ -147,20 +197,20 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static IEnumerable<JavaFile> GetPageJavaFiles(CodeModelJva codeModel, Settings settings)
+        public static IEnumerable<JavaFile> GetPageJavaFiles(CodeModel codeModel, Settings settings)
         {
             List<JavaFile> result = new List<JavaFile>();
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
             
-            foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in codeModel.pageClasses)
+            foreach (KeyValuePair<KeyValuePair<string, string>, string> pageClass in pageClasses)
             {
                 string nextLinkName = pageClass.Key.Key;
                 string itemName = pageClass.Key.Value;
 
                 string className = pageClass.Value.ToPascalCase();
 
-                string subPackage = (IsFluent(codeModel) ? codeModel.ImplPackage : codeModel.ModelsPackage);
+                string subPackage = (IsFluent(settings) ? implPackage : modelsPackage);
                 JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
                 javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                                 "com.microsoft.azure.v2.Page",
@@ -245,10 +295,10 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        public static IEnumerable<JavaFile> GetXmlWrapperJavaFiles(CodeModelJv codeModel, Settings settings)
+        public static IEnumerable<JavaFile> GetXmlWrapperJavaFiles(CodeModel codeModel, Settings settings)
         {
             IEnumerable<JavaFile> result;
-            if (!codeModel.ShouldGenerateXmlSerializationCached)
+            if (!codeModel.ShouldGenerateXmlSerialization)
             {
                 result = Enumerable.Empty<JavaFile>();
             }
@@ -271,7 +321,7 @@ namespace AutoRest.Java.DanModel
                                 string xmlNameCamelCase = xmlName.ToCamelCase();
                                 string className = $"{xmlName.ToPascalCase()}Wrapper";
 
-                                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+                                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
                                 javaFile.Import(sequenceType.Imports.Concat(new string[]
                                 {
                                     "com.fasterxml.jackson.annotation.JsonCreator",
@@ -314,21 +364,21 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        public static JavaFile GetAzureServiceClientJavaFile(CodeModelJva codeModel, Settings settings)
+        public static JavaFile GetAzureServiceClientJavaFile(CodeModel codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
             string className = $"{codeModel.Name.ToPascalCase()}Impl";
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
 
-            bool fluent = IsFluent(codeModel);
+            bool fluent = IsFluent(settings);
 
-            IEnumerable<string> imports = codeModel.ImplImports;
+            IEnumerable<string> imports = GetImplImports(codeModel);
             if (fluent)
             {
                 imports = imports.Where(import =>
-                    !import.StartsWith($"{codeModel.Namespace}.{codeModel.ImplPackage}", StringComparison.OrdinalIgnoreCase) &&
+                    !import.StartsWith($"{codeModel.Namespace}.{implPackage}", StringComparison.OrdinalIgnoreCase) &&
                     !codeModel.Operations.Any(operation => import.EndsWith(operation.TypeName, StringComparison.OrdinalIgnoreCase)) &&
                     !import.EndsWith(codeModel.Name, StringComparison.OrdinalIgnoreCase));
             }
@@ -348,8 +398,8 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.Block($"public class {className} extends AzureServiceClient{implements}", classBlock =>
             {
-                string serviceClientType = codeModel.ServiceClientServiceType;
-                IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
+                string serviceClientType = GetServiceClientServiceType(codeModel);
+                IEnumerable<MethodJv> rootMethods = GetRootMethods(codeModel);
                 bool hasRootMethods = rootMethods.Any();
 
                 if (hasRootMethods)
@@ -359,9 +409,9 @@ namespace AutoRest.Java.DanModel
                 }
                 classBlock.Line();
 
-                AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.PropertiesEx, className);
+                AddMemberVariablesWithGettersAndSettings(classBlock, GetPropertiesEx(codeModel), className);
 
-                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
                 {
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
@@ -459,20 +509,20 @@ namespace AutoRest.Java.DanModel
                 classBlock.Line();
                 classBlock.Block("protected void initialize()", function =>
                 {
-                    foreach (Property property in codeModel.PropertiesEx.Where(p => p.DefaultValue != null))
+                    foreach (Property property in GetPropertiesEx(codeModel).Where(p => p.DefaultValue != null))
                     {
                         function.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
 
-                    foreach (MethodGroupJva operation in codeModel.AllOperations)
+                    foreach (MethodGroupJva operation in GetAllOperations(codeModel))
                     {
                         function.Line($"this.{operation.Name} = new {operation.MethodGroupImplType}(this);");
                     }
 
-                    string defaultHeaders = codeModel.SetDefaultHeaders;
+                    string defaultHeaders = "";
                     if (!string.IsNullOrWhiteSpace(defaultHeaders))
                     {
-                        function.Line(codeModel.SetDefaultHeaders);
+                        function.Line(defaultHeaders);
                     }
 
                     if (hasRootMethods)
@@ -491,18 +541,16 @@ namespace AutoRest.Java.DanModel
 
                     classBlock.Line();
 
-                    IMethodGroupJva methodGroup = codeModel;
-
                     classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                     {
-                        comment.Line($"The interface defining all the services for {methodGroup.Name} to be used by {restProxyType} to perform REST calls.");
+                        comment.Line($"The interface defining all the services for {codeModel.Name} to be used by {restProxyType} to perform REST calls.");
                     });
-                    classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
-                    classBlock.Block($"interface {methodGroup.ServiceType}", interfaceBlock =>
+                    classBlock.Annotation($"Host(\"{GetBaseUrl(codeModel)}\")");
+                    classBlock.Block($"interface {GetServiceClientServiceType(codeModel)}", interfaceBlock =>
                     {
-                        foreach (MethodJva method in methodGroup.Methods)
+                        foreach (MethodJva method in GetRootMethods(codeModel).Cast<MethodJva>())
                         {
-                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroup.LoggingContext} {method.Name}\" }})");
+                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {GetFullyQualifiedDomainName(codeModel)} {method.Name}\" }})");
                             if (method.IsPagingNextOperation)
                             {
                                 interfaceBlock.Annotation("GET(\"{{nextUrl}}\")");
@@ -996,14 +1044,14 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModelJva codeModel, Settings settings)
+        public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModel codeModel, Settings settings)
         {
             string interfaceName = codeModel.Name;
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
-            List<string> imports = codeModel.InterfaceImports;
-            if (IsFluent(codeModel))
+            List<string> imports = GetInterfaceImports(codeModel).ToList();
+            if (IsFluent(settings))
             {
                 imports.Add("com.microsoft.azure.v2.AzureClient");
             }
@@ -1016,7 +1064,7 @@ namespace AutoRest.Java.DanModel
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
                 bool isFirstMethod = true;
-                foreach (Property property in codeModel.PropertiesEx)
+                foreach (Property property in GetPropertiesEx(codeModel))
                 {
                     string propertyDescription = property.Documentation;
                     string propertyName = property.Name;
@@ -1052,7 +1100,7 @@ namespace AutoRest.Java.DanModel
                     }
                 }
 
-                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
                 {
                     string operationType = operation.TypeName;
 
@@ -1072,13 +1120,13 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetAzureMethodGroupJavaFile(CodeModelJva codeModel, Settings settings, MethodGroupJva methodGroup)
+        public static JavaFile GetAzureMethodGroupJavaFile(CodeModel codeModel, Settings settings, MethodGroupJva methodGroup)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
             string className = methodGroup.MethodGroupImplType;
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
             javaFile.Import(methodGroup.ImplImports);
             
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
@@ -1113,7 +1161,7 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Line($"The interface defining all the services for {methodGroupJva.Name} to be used by {restProxyType} to perform REST calls.");
                 });
-                classBlock.Annotation($"Host(\"{methodGroupJva.CodeModel.BaseUrl}\")");
+                classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroupJva.CodeModel)}\")");
                 classBlock.Block($"interface {methodGroupJva.ServiceType}", interfaceBlock =>
                 {
                     foreach (MethodJva method in methodGroupJva.Methods)
@@ -1919,18 +1967,18 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetServiceClientJavaFile(CodeModelJv codeModel, Settings settings)
+        public static JavaFile GetServiceClientJavaFile(CodeModel codeModel, Settings settings)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
             string interfaceName = codeModel.Name.ToPascalCase();
             string className = $"{interfaceName}Impl";
-            IEnumerable<MethodJv> rootMethods = codeModel.RootMethods;
+            IEnumerable<MethodJv> rootMethods = GetRootMethods(codeModel);
             bool hasRootMethods = rootMethods.Any();
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
 
-            List<string> imports = new List<string>(codeModel.ImplImports);
+            List<string> imports = new List<string>(GetImplImports(codeModel));
             imports.AddRange(new[]
             {
                 httpPipelineImport,
@@ -1952,8 +2000,8 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicClass($"{className} extends ServiceClient implements {interfaceName}", classBlock =>
             {
-                string serviceClientType = codeModel.ServiceClientServiceType;
-                string baseUrl = codeModel.BaseUrl;
+                string serviceClientType = GetServiceClientServiceType(codeModel);
+                string baseUrl = GetBaseUrl(codeModel);
 
                 if (hasRootMethods)
                 {
@@ -1962,7 +2010,7 @@ namespace AutoRest.Java.DanModel
 
                 AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.Properties, className);
 
-                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
                 {
                     string operationType = operation.TypeName;
                     string operationName = operation.Name;
@@ -1997,7 +2045,7 @@ namespace AutoRest.Java.DanModel
                     {
                         constructor.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
-                    foreach (MethodGroupJv operation in codeModel.AllOperations)
+                    foreach (MethodGroupJv operation in GetAllOperations(codeModel))
                     {
                         constructor.Line($"this.{operation.Name} = new {operation.TypeName}Impl(this);");
                     }
@@ -2037,7 +2085,7 @@ namespace AutoRest.Java.DanModel
                             }
                             else
                             {
-                                interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {codeModel.FullyQualifiedDomainName} {method.Name}\" }})");
+                                interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {GetFullyQualifiedDomainName(codeModel)} {method.Name}\" }})");
                             }
                             interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
                             if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
@@ -2064,13 +2112,13 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetServiceClientInterfaceJavaFile(CodeModelJv codeModel, Settings settings)
+        public static JavaFile GetServiceClientInterfaceJavaFile(CodeModel codeModel, Settings settings)
         {
             string interfaceName = codeModel.Name;
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
-            javaFile.Import(codeModel.InterfaceImports);
+            javaFile.Import(GetInterfaceImports(codeModel));
 
             javaFile.MultipleLineComment(comment =>
             {
@@ -2082,7 +2130,7 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Line("The default base URL.");
                 });
-                interfaceBlock.Line($"String DEFAULT_BASE_URL = \"{codeModel.BaseUrl}\";");
+                interfaceBlock.Line($"String DEFAULT_BASE_URL = \"{GetBaseUrl(codeModel)}\";");
 
                 foreach (Property property in codeModel.Properties)
                 {
@@ -2103,7 +2151,7 @@ namespace AutoRest.Java.DanModel
                     }
                 }
 
-                foreach (MethodGroupJv operation in codeModel.AllOperations)
+                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
                 {
                     string operationType = operation.TypeName;
                     string operationName = operation.Name;
@@ -2126,11 +2174,12 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        private static void AddInterfaceMethodSignatures(JavaBlock interfaceBlock, CodeModelJv codeModel)
+        private static void AddInterfaceMethodSignatures(JavaBlock interfaceBlock, CodeModel codeModel)
         {
-            if (codeModel.RootMethods.Any())
+            IEnumerable<MethodJv> rootMethods = GetRootMethods(codeModel);
+            if (rootMethods.Any())
             {
-                foreach (MethodJv method in codeModel.RootMethods)
+                foreach (MethodJv method in rootMethods)
                 {
                     string methodSummary = method.Summary;
                     string methodSummaryXmlEscaped = methodSummary?.EscapeXmlComment().Period();
@@ -2393,12 +2442,12 @@ namespace AutoRest.Java.DanModel
             comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         }
 
-        public static JavaFile GetMethodGroupJavaFile(CodeModelJv codeModel, Settings settings, MethodGroupJv methodGroup)
+        public static JavaFile GetMethodGroupJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
         {
             string methodGroupTypeName = methodGroup.TypeName;
             string className = $"{methodGroupTypeName.ToPascalCase()}Impl";
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ImplPackage, settings, className);
+            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
 
             javaFile.Import(methodGroup.ImplImports);
 
@@ -2434,7 +2483,7 @@ namespace AutoRest.Java.DanModel
                     comment.Line($"The interface defining all the services for {methodGroupTypeName} to be used by {restProxyType} to perform REST calls.");
                 });
 
-                classBlock.Annotation($"Host(\"{methodGroup.CodeModel.BaseUrl}\")");
+                classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroup.CodeModel)}\")");
                 classBlock.Block($"interface {methodGroup.MethodGroupServiceType}", interfaceBlock =>
                 {
                     foreach (MethodJv method in methodGroup.Methods)
@@ -3053,7 +3102,7 @@ namespace AutoRest.Java.DanModel
             return exceptionJavaFiles;
         }
 
-        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModelJv codeModel, Settings settings)
+        public static IEnumerable<JavaFile> GetExceptionJavaFiles(CodeModel codeModel, Settings settings)
         {
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
 
@@ -3118,7 +3167,7 @@ namespace AutoRest.Java.DanModel
             return exceptionJavaFiles;
         }
 
-        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModelJv codeModel, Settings settings)
+        public static IEnumerable<JavaFile> GetEnumJavaFiles(CodeModel codeModel, Settings settings)
         {
             List<JavaFile> enumJavaFiles = new List<JavaFile>();
 
@@ -3130,7 +3179,7 @@ namespace AutoRest.Java.DanModel
                 IEnumerable<JavaEnumValue> enumValues = enumType.Values
                     .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
 
-                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, codeModel.ModelsPackage, settings, enumName);
+                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, modelsPackage, settings, enumName);
                 if (enumType.ModelAsString)
                 {
                     javaFile.Import("java.util.Collection",
@@ -3271,6 +3320,20 @@ namespace AutoRest.Java.DanModel
             return settings.MaximumCommentColumns;
         }
 
+        public static string GetServiceName(Settings settings, CodeModel codeModel)
+        {
+            var serviceNameSetting = settings.Host?.GetValue<string>("service-name").Result;
+            if (!string.IsNullOrEmpty(serviceNameSetting))
+            {
+                return serviceNameSetting;
+            }
+
+            var method = codeModel.Methods[0];
+            var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+            var serviceName = match.Groups[1].Value.ToPascalCase();
+            return serviceName;
+        }
+
         private static JavaFile GenerateJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
         {
             string package = GetPackage(codeModel, subPackage);
@@ -3366,7 +3429,79 @@ namespace AutoRest.Java.DanModel
             classBlock.Line();
         }
 
-        private static bool IsFluent(CodeModel codeModel)
-            => codeModel is CodeModelJvaf;
+        private static bool IsFluent(Settings settings)
+            => GetBoolSetting(settings, "Fluent");
+
+        private static bool IsAzure(Settings settings)
+            => GetBoolSetting(settings, "Azure");
+
+        private static bool GetBoolSetting(Settings settings, string settingName)
+        {
+            bool result = false;
+
+            object value;
+            if (settings.CustomSettings.TryGetValue(settingName, out value))
+            {
+                result = (bool)value;
+            }
+
+            return result;
+        }
+
+        private static IEnumerable<Property> GetPropertiesEx(CodeModel codeModel)
+            => codeModel.Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials");
+
+        private static string GetBaseUrl(CodeModel codeModel)
+        {
+            string result = codeModel.BaseUrl;
+            if (!result.Contains("://"))
+            {
+                result = $"https://{result}";
+            }
+            return result;
+        }
+
+        private static IEnumerable<string> GetImplImports(CodeModel codeModel)
+        {
+            HashSet<string> classes = new HashSet<string>();
+            classes.Add(GetFullyQualifiedDomainName(codeModel));
+            foreach (var methodGroupFullType in GetAllOperations(codeModel).Select(op => op.MethodGroupFullType).Distinct())
+            {
+                classes.Add(methodGroupFullType);
+            }
+            if (codeModel.Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)))
+            {
+                classes.Add("com.microsoft.rest.v2.credentials.ServiceClientCredentials");
+            }
+
+            classes.AddRange(GetRootMethods(codeModel)
+                .SelectMany(m => m.ImplImports)
+                .OrderBy(i => i));
+
+            return classes.AsEnumerable();
+        }
+
+        private static IEnumerable<string> GetInterfaceImports(CodeModel codeModel)
+        {
+            HashSet<string> classes = new HashSet<string>();
+
+            classes.AddRange(GetRootMethods(codeModel)
+                .SelectMany(m => m.InterfaceImports)
+                .OrderBy(i => i).Distinct());
+
+            return classes.ToList();
+        }
+
+        private static IEnumerable<MethodGroupJv> GetAllOperations(CodeModel codeModel)
+            => codeModel.Operations.Where(operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupJv>();
+
+        private static string GetServiceClientServiceType(CodeModel codeModel)
+            => CodeNamerJv.GetServiceName(codeModel.Name.ToPascalCase());
+
+        private static IEnumerable<MethodJv> GetRootMethods(CodeModel codeModel)
+            => codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
+
+        private static string GetFullyQualifiedDomainName(CodeModel codeModel)
+            => codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name;
     }
 }

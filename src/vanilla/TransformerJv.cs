@@ -4,19 +4,14 @@
 
 using AutoRest.Core;
 using AutoRest.Core.Model;
-using AutoRest.Java.Model;
 using AutoRest.Extensions;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java
 {
-    public class TransformerJv : CodeModelTransformer<CodeModelJv>
+    public class TransformerJv : CodeModelTransformer<CodeModel>
     {
-        public override CodeModelJv TransformCodeModel(CodeModel cs)
+        public override CodeModel TransformCodeModel(CodeModel codeModel)
         {
-            var codeModel = cs as CodeModelJv;
-            // we're guaranteed to be in our language-specific context here.
-
             // todo: these should be turned into individual transformers
             SwaggerExtensions.NormalizeClientModel(codeModel);
 

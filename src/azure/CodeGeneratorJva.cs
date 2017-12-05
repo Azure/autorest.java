@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Model;
-using AutoRest.Java.Azure.Model;
-using System;
 using System.Threading.Tasks;
 
 namespace AutoRest.Java.Azure
@@ -15,15 +13,8 @@ namespace AutoRest.Java.Azure
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public override async Task Generate(CodeModel cm)
+        public override async Task Generate(CodeModel codeModel)
         {
-            // get Azure Java specific codeModel
-            var codeModel = cm as CodeModelJva;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("CodeModel is not a Azure Java CodeModel");
-            }
-
             // Service client
             await WriteAzureServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
@@ -31,14 +22,7 @@ namespace AutoRest.Java.Azure
             await WriteAzureServiceClientInterfaceJavaFile(codeModel).ConfigureAwait(false);
 
             // operations
-            foreach (MethodGroupJva methodGroup in codeModel.AllOperations)
-            {
-                // Operation
-                await WriteAzureMethodGroupJavaFile(codeModel, methodGroup).ConfigureAwait(false);
-
-                // Operation interface
-                await WriteMethodGroupInterfaceJavaFile(codeModel, methodGroup).ConfigureAwait(false);
-            }
+            await WriteOperationJavaFiles(codeModel).ConfigureAwait(false);
 
             //Models
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
@@ -56,7 +40,7 @@ namespace AutoRest.Java.Azure
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(cm, new[] { "", "implementation", "models" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation", "models" }).ConfigureAwait(false);
         }
     }
 }

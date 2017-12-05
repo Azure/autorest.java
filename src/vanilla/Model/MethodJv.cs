@@ -64,7 +64,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                bool shouldGenerateXmlSerialization = ((CodeModelJv)CodeModel).ShouldGenerateXmlSerializationCached;
+                bool shouldGenerateXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
 
                 List<string> declarations = new List<string>();
                 foreach (ParameterJv parameter in OrderedRetrofitParameters)
@@ -212,7 +212,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var shouldUseXmlSerialization = ((CodeModelJv)CodeModel).ShouldGenerateXmlSerializationCached;
+                var shouldUseXmlSerialization = CodeModel.ShouldGenerateXmlSerialization;
 
                 var arguments = OrderedRetrofitParameters.Select(
                     p => shouldUseXmlSerialization && (p.WireType is SequenceType)

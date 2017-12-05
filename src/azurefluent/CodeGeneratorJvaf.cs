@@ -4,8 +4,6 @@
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Java.azure.Templates;
-using AutoRest.Java.Azure.Fluent.Model;
-using System;
 using System.Threading.Tasks;
 
 namespace AutoRest.Java.Azure.Fluent
@@ -17,24 +15,13 @@ namespace AutoRest.Java.Azure.Fluent
         /// </summary>
         /// <param name="serviceClient"></param>
         /// <returns></returns>
-        public override async Task Generate(CodeModel cm)
+        public override async Task Generate(CodeModel codeModel)
         {
-            // get Azure Java specific codeModel
-            var codeModel = cm as CodeModelJvaf;
-            if (codeModel == null)
-            {
-                throw new InvalidCastException("CodeModel is not a Azure Java Fluent CodeModel");
-            }
-
             // Service client
             await WriteAzureServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // operations
-            foreach (MethodGroupJvaf methodGroup in codeModel.AllOperations)
-            {
-                // Operation
-                await WriteAzureMethodGroupJavaFile(codeModel, methodGroup).ConfigureAwait(false);
-            }
+            await WriteOperationJavaFiles(codeModel).ConfigureAwait(false);
 
             //Models
             await WriteModelJavaFiles(codeModel).ConfigureAwait(false);
@@ -52,7 +39,7 @@ namespace AutoRest.Java.Azure.Fluent
             await WriteExceptionJavaFiles(codeModel).ConfigureAwait(false);
 
             // package-info.java
-            await WritePackageInfoJavaFiles(cm, new[] { "", "implementation" }).ConfigureAwait(false);
+            await WritePackageInfoJavaFiles(codeModel, new[] { "", "implementation" }).ConfigureAwait(false);
 
             if (true == Settings.Instance.Host?.GetValue<bool?>("regenerate-manager").Result)
             {
