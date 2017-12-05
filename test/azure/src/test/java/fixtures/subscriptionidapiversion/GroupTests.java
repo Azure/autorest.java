@@ -1,7 +1,5 @@
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.*;
 import org.junit.Assert;

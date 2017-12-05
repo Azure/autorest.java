@@ -2,7 +2,6 @@ package fixtures.bodycomplex;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
-import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.PortPolicy;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
