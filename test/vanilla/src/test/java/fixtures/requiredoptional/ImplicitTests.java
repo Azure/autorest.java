@@ -73,6 +73,6 @@ public class ImplicitTests {
 
     @Test
     public void getOptionalGlobalQuery() throws Exception {
-        client.implicits().getOptionalGlobalQueryWithRestResponseAsync().blockingGet().body();
+        client.implicits().getOptionalGlobalQuery();
     }
 }

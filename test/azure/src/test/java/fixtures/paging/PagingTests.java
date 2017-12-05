@@ -2,9 +2,13 @@ package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.LogLevel;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy.LogLevel;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.models.CustomParameterGroup;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;

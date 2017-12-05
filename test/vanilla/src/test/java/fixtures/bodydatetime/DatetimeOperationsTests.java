@@ -24,7 +24,7 @@ public class DatetimeOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.datetimes().getNullWithRestResponseAsync().blockingGet().body());
+        Assert.assertNull(client.datetimes().getNull());
     }
 
     @Test

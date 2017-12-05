@@ -18,7 +18,7 @@ public class ByteOperationsTests {
 
     @Test
     public void getEmpty() throws Exception {
-        byte[] result = client.bytes().getNullWithRestResponseAsync().blockingGet().body();
+        byte[] result = client.bytes().getNull();
         Assert.assertEquals(0, result.length);
     }
 

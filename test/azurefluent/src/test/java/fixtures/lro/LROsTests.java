@@ -271,12 +271,12 @@ public class LROsTests {
 
     @Test
     public void delete202Retry200() throws Exception {
-        ProductInner response = client.lROs().delete202Retry200WithRestResponseAsync().blockingGet().body();
+        ProductInner response = client.lROs().delete202Retry200();
     }
 
     @Test
     public void delete202NoRetry204() throws Exception {
-        ProductInner response = client.lROs().delete202NoRetry204WithRestResponseAsync().blockingGet().body();
+        ProductInner response = client.lROs().delete202NoRetry204();
     }
 
     @Test

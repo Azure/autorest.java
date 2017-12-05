@@ -37,7 +37,7 @@ public class ArrayTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.arrays().getNullWithRestResponseAsync().blockingGet().body());
+        Assert.assertNull(client.arrays().getNull());
     }
 
     @Test
@@ -438,7 +438,7 @@ public class ArrayTests {
     @Test
     public void getComplexNull() throws Exception {
         try {
-            List<Product> result = client.arrays().getComplexNullWithRestResponseAsync().blockingGet().body();
+            List<Product> result = client.arrays().getComplexNull();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -494,7 +494,7 @@ public class ArrayTests {
     @Test
     public void getArrayNull() throws Exception {
         try {
-            List<List<String>> result = client.arrays().getArrayNullWithRestResponseAsync().blockingGet().body();
+            List<List<String>> result = client.arrays().getArrayNull();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
@@ -541,7 +541,7 @@ public class ArrayTests {
     @Test
     public void getDictionaryNull() throws Exception {
         try {
-            List<Map<String, String>> result = client.arrays().getDictionaryNullWithRestResponseAsync().blockingGet().body();
+            List<Map<String, String>> result = client.arrays().getDictionaryNull();
         } catch (ErrorException ex) {
             // expected
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));

@@ -2,7 +2,6 @@ package fixtures.bodycomplex;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
-import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.PortPolicy;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
@@ -58,12 +57,12 @@ public class BasicOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Basic result = client.basics().getNullWithRestResponseAsync().blockingGet().body();
+        Basic result = client.basics().getNull();
         Assert.assertNull(result.name());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        Assert.assertNull(client.basics().getNotProvidedWithRestResponseAsync().blockingGet().body());
+        Assert.assertNull(client.basics().getNotProvided());
     }
 }

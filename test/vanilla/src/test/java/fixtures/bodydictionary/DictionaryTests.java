@@ -30,7 +30,7 @@ public class DictionaryTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.dictionarys().getNullWithRestResponseAsync().blockingGet().body());
+        Assert.assertNull(client.dictionarys().getNull());
     }
 
     @Test
@@ -442,7 +442,7 @@ public class DictionaryTests {
 
     @Test
     public void getComplexNull() throws Exception {
-        Map<String, Widget> result = client.dictionarys().getComplexNullWithRestResponseAsync().blockingGet().body();
+        Map<String, Widget> result = client.dictionarys().getComplexNull();
         Assert.assertNull(result);
     }
 
@@ -495,7 +495,7 @@ public class DictionaryTests {
 
     @Test
     public void getArrayNull() throws Exception {
-        Map<String, List<String>> result = client.dictionarys().getArrayNullWithRestResponseAsync().blockingGet().body();
+        Map<String, List<String>> result = client.dictionarys().getArrayNull();
         Assert.assertNull(result);
     }
 
@@ -536,7 +536,7 @@ public class DictionaryTests {
 
     @Test
     public void getDictionaryNull() throws Exception {
-        Assert.assertNull(client.dictionarys().getDictionaryNullWithRestResponseAsync().blockingGet().body());
+        Assert.assertNull(client.dictionarys().getDictionaryNull());
     }
 
     @Test

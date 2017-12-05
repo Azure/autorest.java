@@ -2,10 +2,14 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.LogLevel;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy;
+import com.microsoft.rest.v2.policy.LoggingPolicy.LogLevel;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
@@ -236,12 +240,12 @@ public class LROsTests {
 
     @Test
     public void delete202Retry200() throws Exception {
-        Product response = client.lROs().delete202Retry200WithRestResponseAsync().blockingGet().body();
+        Product response = client.lROs().delete202Retry200();
     }
 
     @Test
     public void delete202NoRetry204() throws Exception {
-        Product response = client.lROs().delete202NoRetry204WithRestResponseAsync().blockingGet().body();
+        Product response = client.lROs().delete202NoRetry204();
     }
 
     @Test

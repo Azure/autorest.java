@@ -1,6 +1,5 @@
 package fixtures.http;
 
-import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpRequest;
@@ -45,7 +44,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200Model204NoModelDefaultError204Valid() throws Exception {
-        A result = client.multipleResponses().get200Model204NoModelDefaultError204ValidWithRestResponseAsync().blockingGet().body();
+        A result = client.multipleResponses().get200Model204NoModelDefaultError204Valid();
         Assert.assertNull(result);
     }
 
@@ -260,7 +259,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void getDefaultModelA200None() throws Exception {
-        A result = client.multipleResponses().getDefaultModelA200NoneWithRestResponseAsync().blockingGet().body();
+        A result = client.multipleResponses().getDefaultModelA200None();
         Assert.assertNull(result);
     }
 
@@ -317,7 +316,7 @@ public class MultipleResponsesTests {
 
     @Test
     public void get200ModelA200None() throws Exception {
-        A result = client.multipleResponses().get200ModelA200NoneWithRestResponseAsync().blockingGet().body();
+        A result = client.multipleResponses().get200ModelA200None();
         Assert.assertNull(result);
     }
 
