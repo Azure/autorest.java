@@ -14,10 +14,6 @@ package fixtures.bodycomplex;
  * The interface for AutoRestComplexTestService class.
  */
 public interface AutoRestComplexTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets API ID.

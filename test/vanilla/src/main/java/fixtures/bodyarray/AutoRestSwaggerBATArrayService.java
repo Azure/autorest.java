@@ -14,10 +14,6 @@ package fixtures.bodyarray;
  * The interface for AutoRestSwaggerBATArrayService class.
  */
 public interface AutoRestSwaggerBATArrayService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Arrays object to access its operations.

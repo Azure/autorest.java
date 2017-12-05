@@ -14,10 +14,6 @@ package fixtures.bodyfile;
  * The interface for AutoRestSwaggerBATFileService class.
  */
 public interface AutoRestSwaggerBATFileService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Files object to access its operations.

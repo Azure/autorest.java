@@ -14,10 +14,6 @@ package fixtures.bodydatetimerfc1123;
  * The interface for AutoRestRFC1123DateTimeTestService class.
  */
 public interface AutoRestRFC1123DateTimeTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Datetimerfc1123s object to access its operations.

@@ -14,10 +14,6 @@ package fixtures.url;
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path

@@ -14,10 +14,6 @@ package fixtures.bodydatetime;
  * The interface for AutoRestDateTimeTestService class.
  */
 public interface AutoRestDateTimeTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Datetimes object to access its operations.
