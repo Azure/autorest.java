@@ -550,7 +550,6 @@ namespace AutoRest.Java.DanModel
                     {
                         foreach (MethodJva method in GetRootMethods(codeModel).Cast<MethodJva>())
                         {
-                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {GetFullyQualifiedDomainName(codeModel)} {method.Name}\" }})");
                             if (method.IsPagingNextOperation)
                             {
                                 interfaceBlock.Annotation("GET(\"{{nextUrl}}\")");
@@ -2083,10 +2082,6 @@ namespace AutoRest.Java.DanModel
                             {
                                 interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
                             }
-                            else
-                            {
-                                interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {GetFullyQualifiedDomainName(codeModel)} {method.Name}\" }})");
-                            }
                             interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
                             if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                             {
@@ -3430,7 +3425,7 @@ namespace AutoRest.Java.DanModel
         private static IEnumerable<string> GetImplImports(CodeModel codeModel)
         {
             HashSet<string> classes = new HashSet<string>();
-            classes.Add(GetFullyQualifiedDomainName(codeModel));
+            classes.Add(codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name);
             foreach (var methodGroupFullType in GetAllOperations(codeModel).Select(op => op.MethodGroupFullType).Distinct())
             {
                 classes.Add(methodGroupFullType);
@@ -3466,8 +3461,5 @@ namespace AutoRest.Java.DanModel
 
         private static IEnumerable<MethodJv> GetRootMethods(CodeModel codeModel)
             => codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
-
-        private static string GetFullyQualifiedDomainName(CodeModel codeModel)
-            => codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name;
     }
 }
