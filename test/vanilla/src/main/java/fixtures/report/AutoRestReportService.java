@@ -24,10 +24,6 @@ import java.util.Map;
  * The interface for AutoRestReportService class.
  */
 public interface AutoRestReportService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Get test coverage report.

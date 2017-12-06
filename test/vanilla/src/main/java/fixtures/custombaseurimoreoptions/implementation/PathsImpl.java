@@ -61,7 +61,7 @@ public class PathsImpl implements Paths {
      * The interface defining all the services for Paths to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("https://{vault}{secret}{dnsSuffix}")
+    @Host("{vault}{secret}{dnsSuffix}")
     interface PathsService {
         @Headers({ "x-ms-logging-context: fixtures.custombaseurimoreoptions.Paths getEmpty" })
         @GET("customuri/{subscriptionId}/{keyName}")

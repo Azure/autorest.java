@@ -1,6 +1,7 @@
 ﻿using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Java.Azure.Model;
+using AutoRest.Java.DanModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             get
             {
-                var res = base.Properties;
-                res.OfType<PropertyJvaf>().ForEach(p => p.IsInnerModel = IsInnerModel);
+                IEnumerableWithIndex<Property> res = base.Properties;
+                foreach (Property property in res)
+                {
+                    if (IsInnerModel)
+                    {
+                        DanCodeGenerator.innerModelProperties.Add(property);
+                    }
+                    else
+                    {
+                        DanCodeGenerator.innerModelProperties.Remove(property);
+                    }
+                }
                 return res;
             }
         }

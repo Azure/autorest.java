@@ -33,8 +33,7 @@ public class LROsTests {
                 new ProtocolPolicy.Factory("http"),
                 new PortPolicy.Factory(3000),
                 new RetryPolicy.Factory(),
-                new AddCookiesPolicy.Factory(),
-                new LoggingPolicy.Factory(LogLevel.BODY_AND_HEADERS));
+                new AddCookiesPolicy.Factory());
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
     }

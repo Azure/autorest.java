@@ -23,8 +23,7 @@ public class LRORetrysTests {
             new ProtocolPolicy.Factory("http"),
             new PortPolicy.Factory(3000),
             new RetryPolicy.Factory(),
-            new AddCookiesPolicy.Factory(),
-            new LoggingPolicy.Factory(LogLevel.BODY_AND_HEADERS));
+            new AddCookiesPolicy.Factory());
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline)
             .withLongRunningOperationRetryTimeout(0);

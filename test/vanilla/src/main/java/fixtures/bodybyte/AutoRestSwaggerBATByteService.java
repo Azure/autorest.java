@@ -14,10 +14,6 @@ package fixtures.bodybyte;
  * The interface for AutoRestSwaggerBATByteService class.
  */
 public interface AutoRestSwaggerBATByteService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Bytes object to access its operations.

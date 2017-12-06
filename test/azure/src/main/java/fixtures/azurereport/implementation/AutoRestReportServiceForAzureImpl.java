@@ -175,7 +175,6 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      */
     @Host("http://localhost")
     interface AutoRestReportServiceForAzureService {
-        @Headers({ "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

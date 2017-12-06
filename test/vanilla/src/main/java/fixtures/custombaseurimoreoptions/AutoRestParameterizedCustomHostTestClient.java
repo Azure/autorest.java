@@ -14,10 +14,6 @@ package fixtures.custombaseurimoreoptions;
  * The interface for AutoRestParameterizedCustomHostTestClient class.
  */
 public interface AutoRestParameterizedCustomHostTestClient {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://{vault}{secret}{dnsSuffix}";
 
     /**
      * Gets The subscription id with value 'test12'.

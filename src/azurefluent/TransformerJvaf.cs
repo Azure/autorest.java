@@ -78,16 +78,16 @@ namespace AutoRest.Java.Azure
 
         public void NormalizeTopLevelTypes(CodeModel serviceClient)
         {
-            foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
+            foreach (Parameter param in serviceClient.Methods.SelectMany(m => m.Parameters))
             {
                 AppendInnerToTopLevelType(param.ModelType, serviceClient);
             }
-            foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
+            foreach (Response response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
             {
                 AppendInnerToTopLevelType(response.Body, serviceClient);
                 AppendInnerToTopLevelType(response.Headers, serviceClient);
             }
-            foreach (var model in serviceClient.ModelTypes)
+            foreach (CompositeType model in serviceClient.ModelTypes)
             {
                 if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
                     AppendInnerToTopLevelType(model, serviceClient);

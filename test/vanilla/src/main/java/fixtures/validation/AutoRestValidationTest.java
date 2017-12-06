@@ -26,10 +26,6 @@ import java.io.IOException;
  * The interface for AutoRestValidationTest class.
  */
 public interface AutoRestValidationTest {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets Subscription ID.

@@ -33,10 +33,6 @@ import java.util.Map;
  * The interface for AutoRestResourceFlatteningTestService class.
  */
 public interface AutoRestResourceFlatteningTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Put External Resource as an Array.

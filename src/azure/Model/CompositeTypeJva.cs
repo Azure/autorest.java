@@ -2,6 +2,7 @@
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
+using AutoRest.Java.DanModel;
 using AutoRest.Java.Model;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -81,9 +82,9 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.ImportList.ToList();
                 foreach (var property in this.Properties)
                 {
-                    if (property.ModelType.IsResource())
+                    if (DanCodeGenerator.GetPropertyModelType(property).IsResource())
                     {
-                        imports.Add("com.microsoft.azure.v2." + property.ModelType.Name);
+                        imports.Add("com.microsoft.azure.v2." + DanCodeGenerator.GetPropertyModelType(property).Name);
                     }
                 }
                 if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))

@@ -14,10 +14,6 @@ package fixtures.header;
  * The interface for AutoRestSwaggerBATHeaderService class.
  */
 public interface AutoRestSwaggerBATHeaderService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Headers object to access its operations.
