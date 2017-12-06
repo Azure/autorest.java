@@ -2,7 +2,6 @@ package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
 import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.*;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
@@ -30,8 +29,7 @@ public class PagingTests {
                 new ProtocolPolicy.Factory("http"),
                 new PortPolicy.Factory(3000),
                 new RetryPolicy.Factory(),
-                new AddCookiesPolicy.Factory(),
-                new LoggingPolicy.Factory(LogLevel.BODY_AND_HEADERS));
+                new AddCookiesPolicy.Factory());
         client = new AutoRestPagingTestServiceImpl(httpPipeline);
     }
 

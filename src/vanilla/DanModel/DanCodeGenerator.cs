@@ -2778,7 +2778,7 @@ namespace AutoRest.Java.DanModel
                 if (shouldGenerate)
                 {
                     List<string> imports = new List<string>();
-                    imports.AddRange(modelType.Properties.SelectMany(pm => (pm as PropertyJv).Imports));
+                    imports.AddRange(modelType.Properties.SelectMany(pm => GetImports(pm)));
 
                     if (modelType.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {
@@ -3469,5 +3469,47 @@ namespace AutoRest.Java.DanModel
 
         private static string GetFullyQualifiedDomainName(CodeModel codeModel)
             => codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name;
+
+        internal static IEnumerable<string> GetImports(Property property)
+        {
+            IEnumerable<string> result = null;
+
+            if (property is PropertyJvaf propertyJvaf)
+            {
+                IModelType modelType = propertyJvaf.ModelType;
+                List<string> imports = new List<string>(modelType.ImportSafe()
+                            .Where(c => !c.StartsWith(property.Parent.CodeModel?.Namespace.ToLowerInvariant(), StringComparison.Ordinal) ||
+                                c.EndsWith("Inner", StringComparison.Ordinal) ^ propertyJvaf.IsInnerModel));
+
+                if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+                {
+                    imports.AddRange(modelType.ImportSafe());
+                    imports.AddRange((modelType as IModelTypeJv).ResponseVariant.ImportSafe());
+                }
+
+                result = imports;
+            }
+            else if (property is PropertyJv propertyJv)
+            {
+                IModelType modelType = propertyJv.ModelType;
+                List<string> imports = new List<string>(modelType.ImportSafe()
+                        .Where(c => !c.StartsWith(
+                            string.Join(
+                                ".",
+                                property.Parent?.CodeModel?.Namespace.ToLowerInvariant(),
+                                "models"),
+                            StringComparison.OrdinalIgnoreCase)));
+                if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
+                    || modelType.IsPrimaryType(KnownPrimaryType.Base64Url))
+                {
+                    imports.AddRange(modelType.ImportSafe());
+                    imports.AddRange(((IModelTypeJv)modelType).ResponseVariant.ImportSafe());
+                }
+
+                result = imports;
+            }
+
+            return result;
+        }
     }
 }
