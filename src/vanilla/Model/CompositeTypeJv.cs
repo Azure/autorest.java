@@ -84,7 +84,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return Properties.OfType<PropertyJv>().Any(p => p.WasFlattened());
+                return Properties.Any(p => p.WasFlattened());
             }
         }
 
@@ -112,7 +112,7 @@ namespace AutoRest.Java.Model
             get
             {
                 var classes = new HashSet<string>();
-                classes.AddRange(Properties.SelectMany(pm => (pm as PropertyJv).Imports));
+                classes.AddRange(Properties.SelectMany(pm => DanCodeGenerator.GetImports(pm)));
                 if (this.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                 {
                     classes.Add("com.fasterxml.jackson.annotation.JsonProperty");

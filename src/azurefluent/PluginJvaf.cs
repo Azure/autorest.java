@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
-using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -26,7 +25,6 @@ namespace AutoRest.Java.Azure
                 // set code model implementations our own implementations 
                 new Factory<Method, MethodJvaf>(),
                 new Factory<CompositeType, CompositeTypeJvaf>(),
-                new Factory<Property, PropertyJvaf>(),
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<SequenceType, SequenceTypeJva>(),
