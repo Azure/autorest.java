@@ -2,11 +2,7 @@ package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.rest.v2.LogLevel;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.CredentialsPolicy;
-import com.microsoft.rest.v2.policy.LoggingPolicy;
 import com.microsoft.rest.v2.policy.PortPolicy;
 import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
@@ -25,9 +21,7 @@ public class LROSADsTests {
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         final HttpPipeline httpPipeline = HttpPipeline.build(
                 new ProtocolPolicy.Factory("http"),
-                new PortPolicy.Factory(3000),
-                new CredentialsPolicy.Factory(new BasicAuthenticationCredentials(null, null)),
-                new LoggingPolicy.Factory(LogLevel.BODY_AND_HEADERS));
+                new PortPolicy.Factory(3000));
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline);
     }
 

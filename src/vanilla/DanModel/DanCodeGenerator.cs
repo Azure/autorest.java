@@ -2126,12 +2126,6 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                interfaceBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("The default base URL.");
-                });
-                interfaceBlock.Line($"String DEFAULT_BASE_URL = \"{GetBaseUrl(codeModel)}\";");
-
                 foreach (Property property in codeModel.Properties)
                 {
                     string propertyDescription = property.Documentation;
@@ -3419,12 +3413,7 @@ namespace AutoRest.Java.DanModel
 
         private static string GetBaseUrl(CodeModel codeModel)
         {
-            string result = codeModel.BaseUrl;
-            if (!result.Contains("://"))
-            {
-                result = $"https://{result}";
-            }
-            return result;
+            return codeModel.BaseUrl;
         }
 
         private static IEnumerable<string> GetImplImports(CodeModel codeModel)

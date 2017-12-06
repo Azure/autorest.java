@@ -1,6 +1,5 @@
 package fixtures.http;
 
-import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.RestException;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.http.HttpRequest;

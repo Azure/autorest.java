@@ -14,10 +14,6 @@ package fixtures.http;
  * The interface for AutoRestHttpInfrastructureTestService class.
  */
 public interface AutoRestHttpInfrastructureTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the HttpFailures object to access its operations.

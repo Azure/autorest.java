@@ -14,10 +14,6 @@ package fixtures.bodyduration;
  * The interface for AutoRestDurationTestService class.
  */
 public interface AutoRestDurationTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Durations object to access its operations.

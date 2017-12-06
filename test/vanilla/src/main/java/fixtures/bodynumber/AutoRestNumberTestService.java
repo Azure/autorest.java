@@ -14,10 +14,6 @@ package fixtures.bodynumber;
  * The interface for AutoRestNumberTestService class.
  */
 public interface AutoRestNumberTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "https://localhost";
 
     /**
      * Gets the Numbers object to access its operations.

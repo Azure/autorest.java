@@ -14,10 +14,6 @@ package fixtures.requiredoptional;
  * The interface for AutoRestRequiredOptionalTestService class.
  */
 public interface AutoRestRequiredOptionalTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets number of items to skip
