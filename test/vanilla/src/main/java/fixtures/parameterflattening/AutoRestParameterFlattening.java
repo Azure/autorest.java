@@ -14,10 +14,6 @@ package fixtures.parameterflattening;
  * The interface for AutoRestParameterFlattening class.
  */
 public interface AutoRestParameterFlattening {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the AvailabilitySets object to access its operations.

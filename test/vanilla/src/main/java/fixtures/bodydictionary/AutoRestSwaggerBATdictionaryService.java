@@ -14,10 +14,6 @@ package fixtures.bodydictionary;
  * The interface for AutoRestSwaggerBATdictionaryService class.
  */
 public interface AutoRestSwaggerBATdictionaryService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Dictionarys object to access its operations.

@@ -14,10 +14,6 @@ package fixtures.bodystring;
  * The interface for AutoRestSwaggerBATService class.
  */
 public interface AutoRestSwaggerBATService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Strings object to access its operations.

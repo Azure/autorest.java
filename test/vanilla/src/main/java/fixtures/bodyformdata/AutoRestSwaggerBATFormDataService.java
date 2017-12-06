@@ -14,10 +14,6 @@ package fixtures.bodyformdata;
  * The interface for AutoRestSwaggerBATFormDataService class.
  */
 public interface AutoRestSwaggerBATFormDataService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Formdatas object to access its operations.
