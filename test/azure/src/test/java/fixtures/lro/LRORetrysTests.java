@@ -1,7 +1,6 @@
 package fixtures.lro;
 
 import com.microsoft.azure.v2.AzureProxy;
-import com.microsoft.rest.v2.LogLevel;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.*;
 import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
@@ -19,8 +18,7 @@ public class LRORetrysTests {
             new ProtocolPolicy.Factory("http"),
             new PortPolicy.Factory(3000),
             new RetryPolicy.Factory(),
-            new AddCookiesPolicy.Factory(),
-            new LoggingPolicy.Factory(LogLevel.BODY_AND_HEADERS));
+            new AddCookiesPolicy.Factory());
         AzureProxy.setDefaultPollingDelayInMilliseconds(0);
         client = new AutoRestLongRunningOperationTestServiceImpl(httpPipeline)
             .withLongRunningOperationRetryTimeout(0);
