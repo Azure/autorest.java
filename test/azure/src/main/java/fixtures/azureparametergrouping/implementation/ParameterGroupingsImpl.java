@@ -61,7 +61,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * The interface defining all the services for ParameterGroupings to be
      * used by RestProxy to perform REST calls.
      */
-    @Host("https://localhost")
+    @Host("http://localhost:3000")
     interface ParameterGroupingsService {
         @Headers({ "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postRequired" })
         @POST("parameterGrouping/postRequired/{path}")

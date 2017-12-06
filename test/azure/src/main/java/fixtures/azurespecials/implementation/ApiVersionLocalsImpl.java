@@ -54,7 +54,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * The interface defining all the services for ApiVersionLocals to be used
      * by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface ApiVersionLocalsService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")

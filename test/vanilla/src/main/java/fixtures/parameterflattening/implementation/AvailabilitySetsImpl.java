@@ -62,7 +62,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * The interface defining all the services for AvailabilitySets to be used
      * by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface AvailabilitySetsService {
         @Headers({ "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")

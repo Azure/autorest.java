@@ -61,7 +61,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * The interface defining all the services for Readonlypropertys to be used
      * by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface ReadonlypropertysService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
         @GET("complex/readonlyproperty/valid")

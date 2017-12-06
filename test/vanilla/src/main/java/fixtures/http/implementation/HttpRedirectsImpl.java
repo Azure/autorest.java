@@ -79,7 +79,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * The interface defining all the services for HttpRedirects to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HttpRedirectsService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects head300" })
         @HEAD("http/redirect/300")

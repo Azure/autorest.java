@@ -16,25 +16,25 @@ import com.microsoft.rest.v2.http.HttpResponse;
 /**
  * Exception thrown for an invalid response with A information.
  */
-public class MyException extends RestException {
+public class AException extends RestException {
     /**
-     * Initializes a new instance of the MyException class.
+     * Initializes a new instance of the AException class.
      *
      * @param message the exception message or the response content if a message is not available
      * @param response the HTTP response
      */
-    public MyException(final String message, HttpResponse response) {
+    public AException(final String message, HttpResponse response) {
         super(message, response);
     }
 
     /**
-     * Initializes a new instance of the MyException class.
+     * Initializes a new instance of the AException class.
      *
      * @param message the exception message or the response content if a message is not available
      * @param response the HTTP response
      * @param body the deserialized response body
      */
-    public MyException(final String message, final HttpResponse response, final A body) {
+    public AException(final String message, final HttpResponse response, final A body) {
         super(message, response, body);
     }
 

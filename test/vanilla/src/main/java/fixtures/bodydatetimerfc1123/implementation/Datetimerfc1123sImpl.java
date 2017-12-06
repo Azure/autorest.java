@@ -62,7 +62,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * The interface defining all the services for Datetimerfc1123s to be used
      * by RestProxy to perform REST calls.
      */
-    @Host("https://localhost")
+    @Host("http://localhost:3000")
     interface Datetimerfc1123sService {
         @Headers({ "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getNull" })
         @GET("datetimerfc1123/null")

@@ -15,8 +15,8 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.A;
+import fixtures.http.models.AException;
 import fixtures.http.models.ErrorException;
-import fixtures.http.models.MyException;
 import java.io.IOException;
 import rx.Observable;
 import rx.Single;
@@ -688,7 +688,7 @@ public interface MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -723,7 +723,7 @@ public interface MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -758,7 +758,7 @@ public interface MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -793,7 +793,7 @@ public interface MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */

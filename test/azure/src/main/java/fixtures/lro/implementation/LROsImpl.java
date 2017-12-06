@@ -85,7 +85,7 @@ public class LROsImpl implements LROs {
      * The interface defining all the services for LROs to be used by RestProxy
      * to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface LROsService {
         @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Succeeded" })
         @PUT("lro/put/200/succeeded")

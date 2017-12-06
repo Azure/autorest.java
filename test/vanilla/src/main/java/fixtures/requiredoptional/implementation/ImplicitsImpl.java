@@ -63,7 +63,7 @@ public class ImplicitsImpl implements Implicits {
      * The interface defining all the services for Implicits to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface ImplicitsService {
         @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })
         @GET("reqopt/implicit/required/path/{pathParameter}")

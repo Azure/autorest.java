@@ -52,7 +52,7 @@ public class HeadExceptionsInner {
      * The interface defining all the services for HeadExceptions to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HeadExceptionsService {
         @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")

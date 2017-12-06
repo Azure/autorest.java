@@ -60,7 +60,7 @@ public class DatesImpl implements Dates {
      * The interface defining all the services for Dates to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("https://localhost")
+    @Host("http://localhost:3000")
     interface DatesService {
         @Headers({ "x-ms-logging-context: fixtures.bodydate.Dates getNull" })
         @GET("date/null")

@@ -70,7 +70,7 @@ public class DictionarysImpl implements Dictionarys {
      * The interface defining all the services for Dictionarys to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface DictionarysService {
         @Headers({ "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNull" })
         @GET("dictionary/null")

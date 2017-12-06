@@ -63,7 +63,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      * The interface defining all the services for HttpRetrys to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HttpRetrysService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys head408" })
         @HEAD("http/retry/408")

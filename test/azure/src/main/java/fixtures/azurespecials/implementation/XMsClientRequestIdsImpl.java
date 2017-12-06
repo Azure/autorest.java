@@ -54,7 +54,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * The interface defining all the services for XMsClientRequestIds to be
      * used by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface XMsClientRequestIdsService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds get" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")

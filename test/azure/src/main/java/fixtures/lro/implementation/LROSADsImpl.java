@@ -80,7 +80,7 @@ public class LROSADsImpl implements LROSADs {
      * The interface defining all the services for LROSADs to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface LROSADsService {
         @Headers({ "x-ms-logging-context: fixtures.lro.LROSADs beginPutNonRetry400" })
         @PUT("lro/nonretryerror/put/400")
