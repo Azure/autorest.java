@@ -25,7 +25,6 @@ namespace AutoRest.Java.Azure
                 // set code model implementations our own implementations 
                 new Factory<Method, MethodJvaf>(),
                 new Factory<CompositeType, CompositeTypeJvaf>(),
-                new Factory<Property, PropertyJvaf>(),
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<SequenceType, SequenceTypeJva>(),

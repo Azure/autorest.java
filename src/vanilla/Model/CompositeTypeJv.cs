@@ -84,7 +84,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return Properties.OfType<PropertyJv>().Any(p => p.WasFlattened());
+                return Properties.Any(p => p.WasFlattened());
             }
         }
 

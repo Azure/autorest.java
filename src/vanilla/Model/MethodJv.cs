@@ -6,6 +6,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
+using AutoRest.Java.DanModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -895,7 +896,7 @@ namespace AutoRest.Java.Model
 
             if (mt is CompositeType ct)
             {
-                return ct.Properties.Any(p => HasSequenceType(p.ModelType));
+                return ct.Properties.Any(p => HasSequenceType(DanCodeGenerator.GetPropertyModelType(p)));
             }
 
             return false;

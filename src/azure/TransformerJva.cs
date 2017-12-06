@@ -152,7 +152,7 @@ namespace AutoRest.Java.Azure
                 {
                     anyTypeConverted = true;
                     var compositeType = (CompositeTypeJva)method.Responses[responseStatus].Body;
-                    var sequenceType = compositeType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
+                    var sequenceType = compositeType.Properties.Select(p => DanCodeGenerator.GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)

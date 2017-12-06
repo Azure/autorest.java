@@ -44,6 +44,8 @@ namespace AutoRest.Java.DanModel
 
         public static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
 
+        public static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
+
         public static string BetaSinceVersion()
         {
             string[] versionParts = targetVersion.Split('.');
@@ -1069,7 +1071,7 @@ namespace AutoRest.Java.DanModel
                     string propertyDescription = property.Documentation;
                     string propertyName = property.Name;
                     string propertyNameCamelCase = propertyName.ToCamelCase();
-                    string propertyType = property.ModelType.ServiceResponseVariant().Name;
+                    string propertyType = GetPropertyModelType(property).ServiceResponseVariant().Name;
 
                     if (isFirstMethod)
                     {
@@ -2135,7 +2137,7 @@ namespace AutoRest.Java.DanModel
                 foreach (Property property in codeModel.Properties)
                 {
                     string propertyDescription = property.Documentation;
-                    string propertyType = property.ModelType.ServiceResponseVariant().Name;
+                    string propertyType = GetPropertyModelType(property).ServiceResponseVariant().Name;
                     string propertyName = property.Name;
                     string propertyNameCamelCase = propertyName.ToCamelCase();
 
@@ -2334,7 +2336,7 @@ namespace AutoRest.Java.DanModel
             foreach (Property property in properties)
             {
                 string propertyDocumentation = property.Documentation.ToString().Period();
-                string propertyType = property.ModelType.ServiceResponseVariant().Name;
+                string propertyType = GetPropertyModelType(property).ServiceResponseVariant().Name;
                 string propertyName = property.Name;
                 string propertyNameCamelCase = propertyName.ToCamelCase();
 
@@ -2778,7 +2780,7 @@ namespace AutoRest.Java.DanModel
                 if (shouldGenerate)
                 {
                     List<string> imports = new List<string>();
-                    imports.AddRange(modelType.Properties.SelectMany(pm => GetImports(pm)));
+                    imports.AddRange(modelType.Properties.SelectMany(pm => GetImports(pm, settings)));
 
                     if (modelType.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {
@@ -2811,9 +2813,9 @@ namespace AutoRest.Java.DanModel
                     {
                         foreach (Property property in azureModelType.Properties)
                         {
-                            if (property.ModelType.IsResource())
+                            if (GetPropertyModelType(property).IsResource())
                             {
-                                imports.Add($"com.microsoft.azure.v2.{property.ModelType.Name}");
+                                imports.Add($"com.microsoft.azure.v2.{GetPropertyModelType(property).Name}");
                             }
                         }
 
@@ -2924,9 +2926,9 @@ namespace AutoRest.Java.DanModel
                         bool isConstant = property.IsConstant;
                         bool isReadOnly = property.IsReadOnly;
 
-                        bool isPrimitive = !(property.ModelType is CompositeType);
-                        JavaType wireType = new JavaType(property.ModelType.Name, isPrimitive);
-                        JavaType clientType = new JavaType(((IModelTypeJv)property.ModelType).ResponseVariant.Name, isPrimitive);
+                        bool isPrimitive = !(GetPropertyModelType(property) is CompositeType);
+                        JavaType wireType = new JavaType(GetPropertyModelType(property).Name, isPrimitive);
+                        JavaType clientType = new JavaType(((IModelTypeJv)GetPropertyModelType(property)).ResponseVariant.Name, isPrimitive);
 
                         string name = property.Name;
 
@@ -3395,10 +3397,10 @@ namespace AutoRest.Java.DanModel
             classBlock.Line();
         }
 
-        private static bool IsFluent(Settings settings)
+        internal static bool IsFluent(Settings settings)
             => GetBoolSetting(settings, "Fluent");
 
-        private static bool IsAzure(Settings settings)
+        internal static bool IsAzure(Settings settings)
             => GetBoolSetting(settings, "Azure");
 
         private static bool GetBoolSetting(Settings settings, string settingName)
@@ -3415,7 +3417,7 @@ namespace AutoRest.Java.DanModel
         }
 
         private static IEnumerable<Property> GetPropertiesEx(CodeModel codeModel)
-            => codeModel.Properties.Where(p => p.ModelType.Name != "ServiceClientCredentials");
+            => codeModel.Properties.Where(p => GetPropertyModelType(p).Name != "ServiceClientCredentials");
 
         private static string GetBaseUrl(CodeModel codeModel)
         {
@@ -3435,7 +3437,7 @@ namespace AutoRest.Java.DanModel
             {
                 classes.Add(methodGroupFullType);
             }
-            if (codeModel.Properties.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)))
+            if (codeModel.Properties.Any(p => GetPropertyModelType(p).IsPrimaryType(KnownPrimaryType.Credentials)))
             {
                 classes.Add("com.microsoft.rest.v2.credentials.ServiceClientCredentials");
             }
@@ -3471,15 +3473,18 @@ namespace AutoRest.Java.DanModel
             => codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name;
 
         internal static IEnumerable<string> GetImports(Property property)
+            => GetImports(property, Settings.Instance);
+
+        private static IEnumerable<string> GetImports(Property property, Settings settings)
         {
             IEnumerable<string> result = null;
 
-            if (property is PropertyJvaf propertyJvaf)
+            if (IsFluent(settings))
             {
-                IModelType modelType = propertyJvaf.ModelType;
+                IModelType modelType = GetPropertyModelType(property);
                 List<string> imports = new List<string>(modelType.ImportSafe()
                             .Where(c => !c.StartsWith(property.Parent.CodeModel?.Namespace.ToLowerInvariant(), StringComparison.Ordinal) ||
-                                c.EndsWith("Inner", StringComparison.Ordinal) ^ propertyJvaf.IsInnerModel));
+                                c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
 
                 if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
@@ -3489,9 +3494,9 @@ namespace AutoRest.Java.DanModel
 
                 result = imports;
             }
-            else if (property is PropertyJv propertyJv)
+            else
             {
-                IModelType modelType = propertyJv.ModelType;
+                IModelType modelType = GetPropertyModelType(property);
                 List<string> imports = new List<string>(modelType.ImportSafe()
                         .Where(c => !c.StartsWith(
                             string.Join(
@@ -3510,6 +3515,17 @@ namespace AutoRest.Java.DanModel
             }
 
             return result;
+        }
+
+        internal static IModelType GetPropertyModelType(Property property)
+        {
+            if (property.ModelType == null)
+            {
+                return null;
+            }
+            return property.IsXNullable ?? !property.IsRequired
+                ? property.ModelType
+                : (property.ModelType as IModelTypeJv).NonNullableVariant;
         }
     }
 }
