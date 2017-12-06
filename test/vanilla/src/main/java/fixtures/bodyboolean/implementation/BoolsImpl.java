@@ -61,7 +61,7 @@ public class BoolsImpl implements Bools {
      * The interface defining all the services for Bools to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface BoolsService {
         @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
         @GET("bool/true")

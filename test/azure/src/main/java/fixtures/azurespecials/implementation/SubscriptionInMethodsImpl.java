@@ -55,7 +55,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * The interface defining all the services for SubscriptionInMethods to be
      * used by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface SubscriptionInMethodsService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")

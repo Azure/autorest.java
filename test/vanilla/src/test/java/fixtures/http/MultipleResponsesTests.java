@@ -7,11 +7,11 @@ import com.microsoft.rest.v2.http.HttpResponse;
 import com.microsoft.rest.v2.policy.*;
 import fixtures.http.implementation.AutoRestHttpInfrastructureTestServiceImpl;
 import fixtures.http.models.A;
+import fixtures.http.models.AException;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
-import fixtures.http.models.MyException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -268,7 +268,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().getDefaultModelA400Valid();
             fail();
-        } catch (MyException ex) {
+        } catch (AException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
             Assert.assertEquals("400", ex.body().statusCode());
         }
@@ -279,7 +279,7 @@ public class MultipleResponsesTests {
         try {
             client.multipleResponses().getDefaultModelA400None();
             fail();
-        } catch (MyException ex) {
+        } catch (AException ex) {
             Assert.assertEquals(400, ex.response().statusCode());
         }
     }

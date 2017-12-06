@@ -61,7 +61,7 @@ public class FormdatasImpl implements Formdatas {
      * The interface defining all the services for Formdatas to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface FormdatasService {
         // @Multipart not supported by RestProxy
         @POST("formdata/stream/uploadfile")

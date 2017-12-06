@@ -61,7 +61,7 @@ public class BytesImpl implements Bytes {
      * The interface defining all the services for Bytes to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface BytesService {
         @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getNull" })
         @GET("byte/null")

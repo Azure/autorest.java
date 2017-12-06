@@ -73,7 +73,7 @@ public class PrimitivesImpl implements Primitives {
      * The interface defining all the services for Primitives to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface PrimitivesService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Primitives getInt" })
         @GET("complex/primitive/integer")

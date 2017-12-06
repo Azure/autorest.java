@@ -59,7 +59,7 @@ public class HttpFailuresImpl implements HttpFailures {
      * The interface defining all the services for HttpFailures to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HttpFailuresService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getEmptyError" })
         @GET("http/failure/emptybody/error")

@@ -55,7 +55,7 @@ public class SkipUrlEncodingsInner {
      * The interface defining all the services for SkipUrlEncodings to be used
      * by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface SkipUrlEncodingsService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodPathValid" })
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")

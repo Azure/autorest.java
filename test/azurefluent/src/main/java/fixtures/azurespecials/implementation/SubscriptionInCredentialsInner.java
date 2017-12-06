@@ -55,7 +55,7 @@ public class SubscriptionInCredentialsInner {
      * The interface defining all the services for SubscriptionInCredentials to
      * be used by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface SubscriptionInCredentialsService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")

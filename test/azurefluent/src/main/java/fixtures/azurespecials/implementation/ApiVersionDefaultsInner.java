@@ -54,7 +54,7 @@ public class ApiVersionDefaultsInner {
      * The interface defining all the services for ApiVersionDefaults to be
      * used by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface ApiVersionDefaultsService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")

@@ -64,7 +64,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * The interface defining all the services for HttpClientFailures to be
      * used by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HttpClientFailuresService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures head400" })
         @HEAD("http/failure/client/400")

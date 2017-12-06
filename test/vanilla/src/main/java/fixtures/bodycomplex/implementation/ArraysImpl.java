@@ -63,7 +63,7 @@ public class ArraysImpl implements Arrays {
      * The interface defining all the services for Arrays to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface ArraysService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getValid" })
         @GET("complex/array/valid")

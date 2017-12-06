@@ -79,7 +79,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * AutoRestResourceFlatteningTestService to be used by Retrofit to perform
      * actually REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface AutoRestResourceFlatteningTestServiceService {
         @PUT("model-flatten/array")
         @ExpectedResponses({200})

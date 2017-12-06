@@ -74,7 +74,7 @@ public class ExplicitsImpl implements Explicits {
      * The interface defining all the services for Explicits to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface ExplicitsService {
         @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
         @POST("reqopt/requied/integer/parameter")

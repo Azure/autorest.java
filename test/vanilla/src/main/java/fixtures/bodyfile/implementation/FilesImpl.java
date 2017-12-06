@@ -59,7 +59,7 @@ public class FilesImpl implements Files {
      * The interface defining all the services for Files to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface FilesService {
         @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getFile" })
         @GET("files/stream/nonempty")

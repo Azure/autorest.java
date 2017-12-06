@@ -63,7 +63,7 @@ public class InheritancesImpl implements Inheritances {
      * The interface defining all the services for Inheritances to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface InheritancesService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Inheritances getValid" })
         @GET("complex/inheritance/valid")

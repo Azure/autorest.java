@@ -60,7 +60,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * The interface defining all the services for Headers to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HeadersService {
         @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId" })
         @POST("azurespecials/customNamedRequestId")

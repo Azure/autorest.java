@@ -68,7 +68,7 @@ public class PagingsImpl implements Pagings {
      * The interface defining all the services for Pagings to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface PagingsService {
         @Headers({ "x-ms-logging-context: fixtures.paging.Pagings getSinglePages" })
         @GET("paging/single")

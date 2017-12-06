@@ -60,7 +60,7 @@ public class LRORetrysInner {
      * The interface defining all the services for LRORetrys to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface LRORetrysService {
         @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginPut201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")

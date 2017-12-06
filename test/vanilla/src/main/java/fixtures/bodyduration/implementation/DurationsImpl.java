@@ -62,7 +62,7 @@ public class DurationsImpl implements Durations {
      * The interface defining all the services for Durations to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("https://localhost")
+    @Host("http://localhost:3000")
     interface DurationsService {
         @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getNull" })
         @GET("duration/null")
