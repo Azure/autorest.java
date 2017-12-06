@@ -15,9 +15,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -50,9 +51,9 @@ public interface Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;SampleResourceGroup&gt;} object if successful.
+     * @return the {@link Maybe&lt;SampleResourceGroup&gt;} object if successful.
      */
-    Single<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
+    Maybe<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

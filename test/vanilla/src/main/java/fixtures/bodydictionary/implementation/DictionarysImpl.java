@@ -30,6 +30,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodydictionary.Dictionarys;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -37,9 +42,6 @@ import java.util.Map;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -475,7 +477,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -505,9 +507,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getNullAsync() {
+    public Maybe<Map<String, Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -520,7 +530,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -550,9 +560,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getEmptyAsync() {
+    public Maybe<Map<String, Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -566,7 +584,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putEmpty(Map<String, String> arrayBody) {
-        putEmptyAsync(arrayBody).toBlocking().value();
+        putEmptyAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -603,9 +621,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(Map<String, String> arrayBody) {
+    public Completable putEmptyAsync(Map<String, String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -618,7 +636,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullValue() {
-        return getNullValueAsync().toBlocking().value();
+        return getNullValueAsync().blockingGet();
     }
 
     /**
@@ -648,9 +666,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getNullValueAsync() {
+    public Maybe<Map<String, String>> getNullValueAsync() {
         return getNullValueWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -663,7 +689,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullKey() {
-        return getNullKeyAsync().toBlocking().value();
+        return getNullKeyAsync().blockingGet();
     }
 
     /**
@@ -693,9 +719,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getNullKeyAsync() {
+    public Maybe<Map<String, String>> getNullKeyAsync() {
         return getNullKeyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -708,7 +742,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getEmptyStringKey() {
-        return getEmptyStringKeyAsync().toBlocking().value();
+        return getEmptyStringKeyAsync().blockingGet();
     }
 
     /**
@@ -738,9 +772,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getEmptyStringKeyAsync() {
+    public Maybe<Map<String, String>> getEmptyStringKeyAsync() {
         return getEmptyStringKeyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -753,7 +795,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -783,9 +825,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getInvalidAsync() {
+    public Maybe<Map<String, String>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -798,7 +848,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanTfft() {
-        return getBooleanTfftAsync().toBlocking().value();
+        return getBooleanTfftAsync().blockingGet();
     }
 
     /**
@@ -828,9 +878,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Boolean>> object
      */
-    public Single<Map<String, Boolean>> getBooleanTfftAsync() {
+    public Maybe<Map<String, Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Boolean>>, Map<String, Boolean>>() { public Map<String, Boolean> call(RestResponse<Void, Map<String, Boolean>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Boolean>>, Maybe<Map<String, Boolean>>>() {
+                public Maybe<Map<String, Boolean>> apply(RestResponse<Void, Map<String, Boolean>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -844,7 +902,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).toBlocking().value();
+        putBooleanTfftAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -881,9 +939,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
+    public Completable putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -896,7 +954,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullAsync().toBlocking().value();
+        return getBooleanInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -926,9 +984,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Boolean>> object
      */
-    public Single<Map<String, Boolean>> getBooleanInvalidNullAsync() {
+    public Maybe<Map<String, Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Boolean>>, Map<String, Boolean>>() { public Map<String, Boolean> call(RestResponse<Void, Map<String, Boolean>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Boolean>>, Maybe<Map<String, Boolean>>>() {
+                public Maybe<Map<String, Boolean>> apply(RestResponse<Void, Map<String, Boolean>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -941,7 +1007,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringAsync().toBlocking().value();
+        return getBooleanInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -971,9 +1037,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Boolean>> object
      */
-    public Single<Map<String, Boolean>> getBooleanInvalidStringAsync() {
+    public Maybe<Map<String, Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Boolean>>, Map<String, Boolean>>() { public Map<String, Boolean> call(RestResponse<Void, Map<String, Boolean>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Boolean>>, Maybe<Map<String, Boolean>>>() {
+                public Maybe<Map<String, Boolean>> apply(RestResponse<Void, Map<String, Boolean>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -986,7 +1060,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntegerValid() {
-        return getIntegerValidAsync().toBlocking().value();
+        return getIntegerValidAsync().blockingGet();
     }
 
     /**
@@ -1016,9 +1090,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getIntegerValidAsync() {
+    public Maybe<Map<String, Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1032,7 +1114,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putIntegerValid(Map<String, Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).toBlocking().value();
+        putIntegerValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1069,9 +1151,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putIntegerValidAsync(Map<String, Integer> arrayBody) {
+    public Completable putIntegerValidAsync(Map<String, Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1084,7 +1166,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidNull() {
-        return getIntInvalidNullAsync().toBlocking().value();
+        return getIntInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1114,9 +1196,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getIntInvalidNullAsync() {
+    public Maybe<Map<String, Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1129,7 +1219,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidString() {
-        return getIntInvalidStringAsync().toBlocking().value();
+        return getIntInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1159,9 +1249,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getIntInvalidStringAsync() {
+    public Maybe<Map<String, Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1174,7 +1272,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongValid() {
-        return getLongValidAsync().toBlocking().value();
+        return getLongValidAsync().blockingGet();
     }
 
     /**
@@ -1204,9 +1302,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Long>> object
      */
-    public Single<Map<String, Long>> getLongValidAsync() {
+    public Maybe<Map<String, Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Long>>, Map<String, Long>>() { public Map<String, Long> call(RestResponse<Void, Map<String, Long>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Long>>, Maybe<Map<String, Long>>>() {
+                public Maybe<Map<String, Long>> apply(RestResponse<Void, Map<String, Long>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1220,7 +1326,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putLongValid(Map<String, Long> arrayBody) {
-        putLongValidAsync(arrayBody).toBlocking().value();
+        putLongValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1257,9 +1363,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLongValidAsync(Map<String, Long> arrayBody) {
+    public Completable putLongValidAsync(Map<String, Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1272,7 +1378,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidNull() {
-        return getLongInvalidNullAsync().toBlocking().value();
+        return getLongInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1302,9 +1408,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Long>> object
      */
-    public Single<Map<String, Long>> getLongInvalidNullAsync() {
+    public Maybe<Map<String, Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Long>>, Map<String, Long>>() { public Map<String, Long> call(RestResponse<Void, Map<String, Long>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Long>>, Maybe<Map<String, Long>>>() {
+                public Maybe<Map<String, Long>> apply(RestResponse<Void, Map<String, Long>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1317,7 +1431,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidString() {
-        return getLongInvalidStringAsync().toBlocking().value();
+        return getLongInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1347,9 +1461,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Long>> object
      */
-    public Single<Map<String, Long>> getLongInvalidStringAsync() {
+    public Maybe<Map<String, Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Long>>, Map<String, Long>>() { public Map<String, Long> call(RestResponse<Void, Map<String, Long>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Long>>, Maybe<Map<String, Long>>>() {
+                public Maybe<Map<String, Long>> apply(RestResponse<Void, Map<String, Long>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1362,7 +1484,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatValid() {
-        return getFloatValidAsync().toBlocking().value();
+        return getFloatValidAsync().blockingGet();
     }
 
     /**
@@ -1392,9 +1514,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Double>> object
      */
-    public Single<Map<String, Double>> getFloatValidAsync() {
+    public Maybe<Map<String, Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Double>>, Map<String, Double>>() { public Map<String, Double> call(RestResponse<Void, Map<String, Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
+                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1408,7 +1538,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putFloatValid(Map<String, Double> arrayBody) {
-        putFloatValidAsync(arrayBody).toBlocking().value();
+        putFloatValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1445,9 +1575,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFloatValidAsync(Map<String, Double> arrayBody) {
+    public Completable putFloatValidAsync(Map<String, Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1460,7 +1590,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidNull() {
-        return getFloatInvalidNullAsync().toBlocking().value();
+        return getFloatInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1490,9 +1620,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Double>> object
      */
-    public Single<Map<String, Double>> getFloatInvalidNullAsync() {
+    public Maybe<Map<String, Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Double>>, Map<String, Double>>() { public Map<String, Double> call(RestResponse<Void, Map<String, Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
+                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1505,7 +1643,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidString() {
-        return getFloatInvalidStringAsync().toBlocking().value();
+        return getFloatInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1535,9 +1673,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Double>> object
      */
-    public Single<Map<String, Double>> getFloatInvalidStringAsync() {
+    public Maybe<Map<String, Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Double>>, Map<String, Double>>() { public Map<String, Double> call(RestResponse<Void, Map<String, Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
+                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1550,7 +1696,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleValid() {
-        return getDoubleValidAsync().toBlocking().value();
+        return getDoubleValidAsync().blockingGet();
     }
 
     /**
@@ -1580,9 +1726,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Double>> object
      */
-    public Single<Map<String, Double>> getDoubleValidAsync() {
+    public Maybe<Map<String, Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Double>>, Map<String, Double>>() { public Map<String, Double> call(RestResponse<Void, Map<String, Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
+                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1596,7 +1750,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDoubleValid(Map<String, Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).toBlocking().value();
+        putDoubleValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1633,9 +1787,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDoubleValidAsync(Map<String, Double> arrayBody) {
+    public Completable putDoubleValidAsync(Map<String, Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1648,7 +1802,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullAsync().toBlocking().value();
+        return getDoubleInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1678,9 +1832,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Double>> object
      */
-    public Single<Map<String, Double>> getDoubleInvalidNullAsync() {
+    public Maybe<Map<String, Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Double>>, Map<String, Double>>() { public Map<String, Double> call(RestResponse<Void, Map<String, Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
+                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1693,7 +1855,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringAsync().toBlocking().value();
+        return getDoubleInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1723,9 +1885,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Double>> object
      */
-    public Single<Map<String, Double>> getDoubleInvalidStringAsync() {
+    public Maybe<Map<String, Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Double>>, Map<String, Double>>() { public Map<String, Double> call(RestResponse<Void, Map<String, Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Double>>, Maybe<Map<String, Double>>>() {
+                public Maybe<Map<String, Double>> apply(RestResponse<Void, Map<String, Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1738,7 +1908,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringValid() {
-        return getStringValidAsync().toBlocking().value();
+        return getStringValidAsync().blockingGet();
     }
 
     /**
@@ -1768,9 +1938,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getStringValidAsync() {
+    public Maybe<Map<String, String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1784,7 +1962,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putStringValid(Map<String, String> arrayBody) {
-        putStringValidAsync(arrayBody).toBlocking().value();
+        putStringValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1821,9 +1999,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putStringValidAsync(Map<String, String> arrayBody) {
+    public Completable putStringValidAsync(Map<String, String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1836,7 +2014,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithNull() {
-        return getStringWithNullAsync().toBlocking().value();
+        return getStringWithNullAsync().blockingGet();
     }
 
     /**
@@ -1866,9 +2044,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getStringWithNullAsync() {
+    public Maybe<Map<String, String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1881,7 +2067,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithInvalid() {
-        return getStringWithInvalidAsync().toBlocking().value();
+        return getStringWithInvalidAsync().blockingGet();
     }
 
     /**
@@ -1911,9 +2097,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, String>> object
      */
-    public Single<Map<String, String>> getStringWithInvalidAsync() {
+    public Maybe<Map<String, String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, String>>, Map<String, String>>() { public Map<String, String> call(RestResponse<Void, Map<String, String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, String>>, Maybe<Map<String, String>>>() {
+                public Maybe<Map<String, String>> apply(RestResponse<Void, Map<String, String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1926,7 +2120,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateValid() {
-        return getDateValidAsync().toBlocking().value();
+        return getDateValidAsync().blockingGet();
     }
 
     /**
@@ -1956,9 +2150,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, LocalDate>> object
      */
-    public Single<Map<String, LocalDate>> getDateValidAsync() {
+    public Maybe<Map<String, LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, LocalDate>>, Map<String, LocalDate>>() { public Map<String, LocalDate> call(RestResponse<Void, Map<String, LocalDate>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, LocalDate>>, Maybe<Map<String, LocalDate>>>() {
+                public Maybe<Map<String, LocalDate>> apply(RestResponse<Void, Map<String, LocalDate>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1972,7 +2174,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDateValid(Map<String, LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).toBlocking().value();
+        putDateValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2009,9 +2211,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateValidAsync(Map<String, LocalDate> arrayBody) {
+    public Completable putDateValidAsync(Map<String, LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2024,7 +2226,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullAsync().toBlocking().value();
+        return getDateInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -2054,9 +2256,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, LocalDate>> object
      */
-    public Single<Map<String, LocalDate>> getDateInvalidNullAsync() {
+    public Maybe<Map<String, LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, LocalDate>>, Map<String, LocalDate>>() { public Map<String, LocalDate> call(RestResponse<Void, Map<String, LocalDate>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, LocalDate>>, Maybe<Map<String, LocalDate>>>() {
+                public Maybe<Map<String, LocalDate>> apply(RestResponse<Void, Map<String, LocalDate>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2069,7 +2279,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsAsync().toBlocking().value();
+        return getDateInvalidCharsAsync().blockingGet();
     }
 
     /**
@@ -2099,9 +2309,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, LocalDate>> object
      */
-    public Single<Map<String, LocalDate>> getDateInvalidCharsAsync() {
+    public Maybe<Map<String, LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, LocalDate>>, Map<String, LocalDate>>() { public Map<String, LocalDate> call(RestResponse<Void, Map<String, LocalDate>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, LocalDate>>, Maybe<Map<String, LocalDate>>>() {
+                public Maybe<Map<String, LocalDate>> apply(RestResponse<Void, Map<String, LocalDate>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2114,7 +2332,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeValid() {
-        return getDateTimeValidAsync().toBlocking().value();
+        return getDateTimeValidAsync().blockingGet();
     }
 
     /**
@@ -2144,9 +2362,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, DateTime>> object
      */
-    public Single<Map<String, DateTime>> getDateTimeValidAsync() {
+    public Maybe<Map<String, DateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, DateTime>>, Map<String, DateTime>>() { public Map<String, DateTime> call(RestResponse<Void, Map<String, DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
+                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2160,7 +2386,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDateTimeValid(Map<String, DateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).toBlocking().value();
+        putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2197,9 +2423,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
+    public Completable putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2212,7 +2438,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullAsync().toBlocking().value();
+        return getDateTimeInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -2242,9 +2468,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, DateTime>> object
      */
-    public Single<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
+    public Maybe<Map<String, DateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, DateTime>>, Map<String, DateTime>>() { public Map<String, DateTime> call(RestResponse<Void, Map<String, DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
+                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2257,7 +2491,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsAsync().toBlocking().value();
+        return getDateTimeInvalidCharsAsync().blockingGet();
     }
 
     /**
@@ -2287,9 +2521,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, DateTime>> object
      */
-    public Single<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
+    public Maybe<Map<String, DateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, DateTime>>, Map<String, DateTime>>() { public Map<String, DateTime> call(RestResponse<Void, Map<String, DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
+                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2302,7 +2544,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidAsync().toBlocking().value();
+        return getDateTimeRfc1123ValidAsync().blockingGet();
     }
 
     /**
@@ -2332,9 +2574,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, DateTime>> object
      */
-    public Single<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
+    public Maybe<Map<String, DateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, DateTime>>, Map<String, DateTime>>() { public Map<String, DateTime> call(RestResponse<Void, Map<String, DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, DateTime>>, Maybe<Map<String, DateTime>>>() {
+                public Maybe<Map<String, DateTime>> apply(RestResponse<Void, Map<String, DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2348,7 +2598,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).toBlocking().value();
+        putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2391,9 +2641,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
+    public Completable putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2406,7 +2656,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Period&gt; object if successful.
      */
     public Map<String, Period> getDurationValid() {
-        return getDurationValidAsync().toBlocking().value();
+        return getDurationValidAsync().blockingGet();
     }
 
     /**
@@ -2436,9 +2686,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Period>> object
      */
-    public Single<Map<String, Period>> getDurationValidAsync() {
+    public Maybe<Map<String, Period>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Period>>, Map<String, Period>>() { public Map<String, Period> call(RestResponse<Void, Map<String, Period>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Period>>, Maybe<Map<String, Period>>>() {
+                public Maybe<Map<String, Period>> apply(RestResponse<Void, Map<String, Period>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2452,7 +2710,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDurationValid(Map<String, Period> arrayBody) {
-        putDurationValidAsync(arrayBody).toBlocking().value();
+        putDurationValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2489,9 +2747,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDurationValidAsync(Map<String, Period> arrayBody) {
+    public Completable putDurationValidAsync(Map<String, Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2504,7 +2762,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteValid() {
-        return getByteValidAsync().toBlocking().value();
+        return getByteValidAsync().blockingGet();
     }
 
     /**
@@ -2534,9 +2792,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, byte[]>> object
      */
-    public Single<Map<String, byte[]>> getByteValidAsync() {
+    public Maybe<Map<String, byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, byte[]>>, Map<String, byte[]>>() { public Map<String, byte[]> call(RestResponse<Void, Map<String, byte[]>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, byte[]>>, Maybe<Map<String, byte[]>>>() {
+                public Maybe<Map<String, byte[]>> apply(RestResponse<Void, Map<String, byte[]>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2550,7 +2816,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putByteValid(Map<String, byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).toBlocking().value();
+        putByteValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2587,9 +2853,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putByteValidAsync(Map<String, byte[]> arrayBody) {
+    public Completable putByteValidAsync(Map<String, byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2602,7 +2868,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteInvalidNull() {
-        return getByteInvalidNullAsync().toBlocking().value();
+        return getByteInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -2632,9 +2898,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, byte[]>> object
      */
-    public Single<Map<String, byte[]>> getByteInvalidNullAsync() {
+    public Maybe<Map<String, byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, byte[]>>, Map<String, byte[]>>() { public Map<String, byte[]> call(RestResponse<Void, Map<String, byte[]>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, byte[]>>, Maybe<Map<String, byte[]>>>() {
+                public Maybe<Map<String, byte[]>> apply(RestResponse<Void, Map<String, byte[]>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2647,7 +2921,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getBase64Url() {
-        return getBase64UrlAsync().toBlocking().value();
+        return getBase64UrlAsync().blockingGet();
     }
 
     /**
@@ -2677,9 +2951,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, byte[]>> object
      */
-    public Single<Map<String, byte[]>> getBase64UrlAsync() {
+    public Maybe<Map<String, byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, byte[]>>, Map<String, byte[]>>() { public Map<String, byte[]> call(RestResponse<Void, Map<String, byte[]>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, byte[]>>, Maybe<Map<String, byte[]>>>() {
+                public Maybe<Map<String, byte[]>> apply(RestResponse<Void, Map<String, byte[]>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2692,7 +2974,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexNull() {
-        return getComplexNullAsync().toBlocking().value();
+        return getComplexNullAsync().blockingGet();
     }
 
     /**
@@ -2722,9 +3004,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Widget>> object
      */
-    public Single<Map<String, Widget>> getComplexNullAsync() {
+    public Maybe<Map<String, Widget>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Widget>>, Map<String, Widget>>() { public Map<String, Widget> call(RestResponse<Void, Map<String, Widget>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
+                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2737,7 +3027,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexEmpty() {
-        return getComplexEmptyAsync().toBlocking().value();
+        return getComplexEmptyAsync().blockingGet();
     }
 
     /**
@@ -2767,9 +3057,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Widget>> object
      */
-    public Single<Map<String, Widget>> getComplexEmptyAsync() {
+    public Maybe<Map<String, Widget>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Widget>>, Map<String, Widget>>() { public Map<String, Widget> call(RestResponse<Void, Map<String, Widget>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
+                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2782,7 +3080,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemNull() {
-        return getComplexItemNullAsync().toBlocking().value();
+        return getComplexItemNullAsync().blockingGet();
     }
 
     /**
@@ -2812,9 +3110,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Widget>> object
      */
-    public Single<Map<String, Widget>> getComplexItemNullAsync() {
+    public Maybe<Map<String, Widget>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Widget>>, Map<String, Widget>>() { public Map<String, Widget> call(RestResponse<Void, Map<String, Widget>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
+                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2827,7 +3133,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemEmpty() {
-        return getComplexItemEmptyAsync().toBlocking().value();
+        return getComplexItemEmptyAsync().blockingGet();
     }
 
     /**
@@ -2857,9 +3163,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Widget>> object
      */
-    public Single<Map<String, Widget>> getComplexItemEmptyAsync() {
+    public Maybe<Map<String, Widget>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Widget>>, Map<String, Widget>>() { public Map<String, Widget> call(RestResponse<Void, Map<String, Widget>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
+                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2872,7 +3186,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexValid() {
-        return getComplexValidAsync().toBlocking().value();
+        return getComplexValidAsync().blockingGet();
     }
 
     /**
@@ -2902,9 +3216,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Widget>> object
      */
-    public Single<Map<String, Widget>> getComplexValidAsync() {
+    public Maybe<Map<String, Widget>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Widget>>, Map<String, Widget>>() { public Map<String, Widget> call(RestResponse<Void, Map<String, Widget>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Widget>>, Maybe<Map<String, Widget>>>() {
+                public Maybe<Map<String, Widget>> apply(RestResponse<Void, Map<String, Widget>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2918,7 +3240,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putComplexValid(Map<String, Widget> arrayBody) {
-        putComplexValidAsync(arrayBody).toBlocking().value();
+        putComplexValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2955,9 +3277,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putComplexValidAsync(Map<String, Widget> arrayBody) {
+    public Completable putComplexValidAsync(Map<String, Widget> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2970,7 +3292,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayNull() {
-        return getArrayNullAsync().toBlocking().value();
+        return getArrayNullAsync().blockingGet();
     }
 
     /**
@@ -3000,9 +3322,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, List<String>>> object
      */
-    public Single<Map<String, List<String>>> getArrayNullAsync() {
+    public Maybe<Map<String, List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, List<String>>>, Map<String, List<String>>>() { public Map<String, List<String>> call(RestResponse<Void, Map<String, List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
+                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3015,7 +3345,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayEmpty() {
-        return getArrayEmptyAsync().toBlocking().value();
+        return getArrayEmptyAsync().blockingGet();
     }
 
     /**
@@ -3045,9 +3375,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, List<String>>> object
      */
-    public Single<Map<String, List<String>>> getArrayEmptyAsync() {
+    public Maybe<Map<String, List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, List<String>>>, Map<String, List<String>>>() { public Map<String, List<String>> call(RestResponse<Void, Map<String, List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
+                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3060,7 +3398,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemNull() {
-        return getArrayItemNullAsync().toBlocking().value();
+        return getArrayItemNullAsync().blockingGet();
     }
 
     /**
@@ -3090,9 +3428,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, List<String>>> object
      */
-    public Single<Map<String, List<String>>> getArrayItemNullAsync() {
+    public Maybe<Map<String, List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, List<String>>>, Map<String, List<String>>>() { public Map<String, List<String>> call(RestResponse<Void, Map<String, List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
+                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3105,7 +3451,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyAsync().toBlocking().value();
+        return getArrayItemEmptyAsync().blockingGet();
     }
 
     /**
@@ -3135,9 +3481,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, List<String>>> object
      */
-    public Single<Map<String, List<String>>> getArrayItemEmptyAsync() {
+    public Maybe<Map<String, List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, List<String>>>, Map<String, List<String>>>() { public Map<String, List<String>> call(RestResponse<Void, Map<String, List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
+                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3150,7 +3504,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayValid() {
-        return getArrayValidAsync().toBlocking().value();
+        return getArrayValidAsync().blockingGet();
     }
 
     /**
@@ -3180,9 +3534,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, List<String>>> object
      */
-    public Single<Map<String, List<String>>> getArrayValidAsync() {
+    public Maybe<Map<String, List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, List<String>>>, Map<String, List<String>>>() { public Map<String, List<String>> call(RestResponse<Void, Map<String, List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, List<String>>>, Maybe<Map<String, List<String>>>>() {
+                public Maybe<Map<String, List<String>>> apply(RestResponse<Void, Map<String, List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3196,7 +3558,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putArrayValid(Map<String, List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).toBlocking().value();
+        putArrayValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3233,9 +3595,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayValidAsync(Map<String, List<String>> arrayBody) {
+    public Completable putArrayValidAsync(Map<String, List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3248,7 +3610,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullAsync().toBlocking().value();
+        return getDictionaryNullAsync().blockingGet();
     }
 
     /**
@@ -3278,9 +3640,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Map<String, String>>> object
      */
-    public Single<Map<String, Map<String, String>>> getDictionaryNullAsync() {
+    public Maybe<Map<String, Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() { public Map<String, Map<String, String>> call(RestResponse<Void, Map<String, Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
+                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3293,7 +3663,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyAsync().toBlocking().value();
+        return getDictionaryEmptyAsync().blockingGet();
     }
 
     /**
@@ -3323,9 +3693,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Map<String, String>>> object
      */
-    public Single<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
+    public Maybe<Map<String, Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() { public Map<String, Map<String, String>> call(RestResponse<Void, Map<String, Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
+                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3338,7 +3716,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullAsync().toBlocking().value();
+        return getDictionaryItemNullAsync().blockingGet();
     }
 
     /**
@@ -3368,9 +3746,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Map<String, String>>> object
      */
-    public Single<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
+    public Maybe<Map<String, Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() { public Map<String, Map<String, String>> call(RestResponse<Void, Map<String, Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
+                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3383,7 +3769,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyAsync().toBlocking().value();
+        return getDictionaryItemEmptyAsync().blockingGet();
     }
 
     /**
@@ -3413,9 +3799,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Map<String, String>>> object
      */
-    public Single<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
+    public Maybe<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() { public Map<String, Map<String, String>> call(RestResponse<Void, Map<String, Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
+                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3428,7 +3822,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidAsync().toBlocking().value();
+        return getDictionaryValidAsync().blockingGet();
     }
 
     /**
@@ -3458,9 +3852,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Map<String, String>>> object
      */
-    public Single<Map<String, Map<String, String>>> getDictionaryValidAsync() {
+    public Maybe<Map<String, Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() { public Map<String, Map<String, String>> call(RestResponse<Void, Map<String, Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Map<String, String>>>, Maybe<Map<String, Map<String, String>>>>() {
+                public Maybe<Map<String, Map<String, String>>> apply(RestResponse<Void, Map<String, Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3474,7 +3876,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).toBlocking().value();
+        putDictionaryValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3511,9 +3913,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
+    public Completable putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

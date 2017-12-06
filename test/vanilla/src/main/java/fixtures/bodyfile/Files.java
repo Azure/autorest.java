@@ -14,10 +14,11 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyfile.models.ErrorException;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.InputStream;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,9 +48,9 @@ public interface Files {
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;InputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Single<InputStream> getFileAsync();
+    Maybe<InputStream> getFileAsync();
 
     /**
      * Get file.
@@ -82,9 +83,9 @@ public interface Files {
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;InputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Single<InputStream> getFileLargeAsync();
+    Maybe<InputStream> getFileLargeAsync();
 
     /**
      * Get a large file.
@@ -117,9 +118,9 @@ public interface Files {
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;InputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Single<InputStream> getEmptyFileAsync();
+    Maybe<InputStream> getEmptyFileAsync();
 
     /**
      * Get empty file.

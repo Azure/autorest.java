@@ -338,13 +338,17 @@ namespace AutoRest.Java.Azure.Model
                 {
                     return $"Observable<OperationStatus<{ReturnTypeJv.ServiceResponseGenericParameterString}>>";
                 }
+                else if (ReturnType.Body == null)
+                {
+                    return "Completable";
+                }
                 else if (IsPagingOperation || IsPagingNextOperation)
                 {
                     return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }
-                else
+                else 
                 {
-                    return $"Single<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
+                    return $"Maybe<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
                 }
             }
         }

@@ -27,10 +27,12 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodystring.Strings;
 import fixtures.bodystring.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -155,7 +157,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -185,9 +187,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, String> object
      */
-    public Single<String> getNullAsync() {
+    public Maybe<String> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, String>, String>() { public String call(RestResponse<Void, String> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -200,7 +210,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putNull() {
-        putNullAsync().toBlocking().value();
+        putNullAsync().blockingAwait();
     }
 
     /**
@@ -231,9 +241,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNullAsync() {
+    public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -246,7 +256,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putNull(String stringBody) {
-        putNullAsync(stringBody).toBlocking().value();
+        putNullAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -279,9 +289,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNullAsync(String stringBody) {
+    public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -294,7 +304,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -324,9 +334,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, String> object
      */
-    public Single<String> getEmptyAsync() {
+    public Maybe<String> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, String>, String>() { public String call(RestResponse<Void, String> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -340,7 +358,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putEmpty(String stringBody) {
-        putEmptyAsync(stringBody).toBlocking().value();
+        putEmptyAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -376,9 +394,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(String stringBody) {
+    public Completable putEmptyAsync(String stringBody) {
         return putEmptyWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -391,7 +409,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getMbcs() {
-        return getMbcsAsync().toBlocking().value();
+        return getMbcsAsync().blockingGet();
     }
 
     /**
@@ -421,9 +439,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, String> object
      */
-    public Single<String> getMbcsAsync() {
+    public Maybe<String> getMbcsAsync() {
         return getMbcsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, String>, String>() { public String call(RestResponse<Void, String> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -437,7 +463,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putMbcs(String stringBody) {
-        putMbcsAsync(stringBody).toBlocking().value();
+        putMbcsAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -473,9 +499,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMbcsAsync(String stringBody) {
+    public Completable putMbcsAsync(String stringBody) {
         return putMbcsWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -488,7 +514,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getWhitespace() {
-        return getWhitespaceAsync().toBlocking().value();
+        return getWhitespaceAsync().blockingGet();
     }
 
     /**
@@ -518,9 +544,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, String> object
      */
-    public Single<String> getWhitespaceAsync() {
+    public Maybe<String> getWhitespaceAsync() {
         return getWhitespaceWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, String>, String>() { public String call(RestResponse<Void, String> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -534,7 +568,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putWhitespace(String stringBody) {
-        putWhitespaceAsync(stringBody).toBlocking().value();
+        putWhitespaceAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -570,9 +604,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWhitespaceAsync(String stringBody) {
+    public Completable putWhitespaceAsync(String stringBody) {
         return putWhitespaceWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -585,7 +619,7 @@ public class StringsImpl implements Strings {
      * @return the String object if successful.
      */
     public String getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -615,9 +649,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, String> object
      */
-    public Single<String> getNotProvidedAsync() {
+    public Maybe<String> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, String>, String>() { public String call(RestResponse<Void, String> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, String>, Maybe<String>>() {
+                public Maybe<String> apply(RestResponse<Void, String> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -630,7 +672,7 @@ public class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64Encoded() {
-        return getBase64EncodedAsync().toBlocking().value();
+        return getBase64EncodedAsync().blockingGet();
     }
 
     /**
@@ -660,9 +702,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getBase64EncodedAsync() {
+    public Maybe<byte[]> getBase64EncodedAsync() {
         return getBase64EncodedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -675,7 +725,7 @@ public class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getBase64UrlEncoded() {
-        return getBase64UrlEncodedAsync().toBlocking().value();
+        return getBase64UrlEncodedAsync().blockingGet();
     }
 
     /**
@@ -705,9 +755,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getBase64UrlEncodedAsync() {
+    public Maybe<byte[]> getBase64UrlEncodedAsync() {
         return getBase64UrlEncodedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -721,7 +779,7 @@ public class StringsImpl implements Strings {
      * @return the void object if successful.
      */
     public void putBase64UrlEncoded(byte[] stringBody) {
-        putBase64UrlEncodedAsync(stringBody).toBlocking().value();
+        putBase64UrlEncodedAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -758,9 +816,9 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
+    public Completable putBase64UrlEncodedAsync(byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -773,7 +831,7 @@ public class StringsImpl implements Strings {
      * @return the byte[] object if successful.
      */
     public byte[] getNullBase64UrlEncoded() {
-        return getNullBase64UrlEncodedAsync().toBlocking().value();
+        return getNullBase64UrlEncodedAsync().blockingGet();
     }
 
     /**
@@ -803,9 +861,17 @@ public class StringsImpl implements Strings {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, byte[]> object
      */
-    public Single<byte[]> getNullBase64UrlEncodedAsync() {
+    public Maybe<byte[]> getNullBase64UrlEncodedAsync() {
         return getNullBase64UrlEncodedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, byte[]>, byte[]>() { public byte[] call(RestResponse<Void, byte[]> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, byte[]>, Maybe<byte[]>>() {
+                public Maybe<byte[]> apply(RestResponse<Void, byte[]> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

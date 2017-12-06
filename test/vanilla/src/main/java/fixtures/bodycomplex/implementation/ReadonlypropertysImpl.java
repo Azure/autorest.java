@@ -27,10 +27,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodycomplex.Readonlypropertys;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -86,7 +88,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the ReadonlyObj object if successful.
      */
     public ReadonlyObj getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -116,9 +118,17 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ReadonlyObj> object
      */
-    public Single<ReadonlyObj> getValidAsync() {
+    public Maybe<ReadonlyObj> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ReadonlyObj>, ReadonlyObj>() { public ReadonlyObj call(RestResponse<Void, ReadonlyObj> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ReadonlyObj>, Maybe<ReadonlyObj>>() {
+                public Maybe<ReadonlyObj> apply(RestResponse<Void, ReadonlyObj> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -132,7 +142,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the void object if successful.
      */
     public void putValid(ReadonlyObj complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -169,9 +179,9 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(ReadonlyObj complexBody) {
+    public Completable putValidAsync(ReadonlyObj complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

@@ -25,11 +25,13 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodydate.Dates;
 import fixtures.bodydate.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.joda.time.LocalDate;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -121,7 +123,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -151,9 +153,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getNullAsync() {
+    public Maybe<LocalDate> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -166,7 +176,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getInvalidDate() {
-        return getInvalidDateAsync().toBlocking().value();
+        return getInvalidDateAsync().blockingGet();
     }
 
     /**
@@ -196,9 +206,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getInvalidDateAsync() {
+    public Maybe<LocalDate> getInvalidDateAsync() {
         return getInvalidDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -211,7 +229,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getOverflowDate() {
-        return getOverflowDateAsync().toBlocking().value();
+        return getOverflowDateAsync().blockingGet();
     }
 
     /**
@@ -241,9 +259,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getOverflowDateAsync() {
+    public Maybe<LocalDate> getOverflowDateAsync() {
         return getOverflowDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -256,7 +282,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getUnderflowDate() {
-        return getUnderflowDateAsync().toBlocking().value();
+        return getUnderflowDateAsync().blockingGet();
     }
 
     /**
@@ -286,9 +312,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getUnderflowDateAsync() {
+    public Maybe<LocalDate> getUnderflowDateAsync() {
         return getUnderflowDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -302,7 +336,7 @@ public class DatesImpl implements Dates {
      * @return the void object if successful.
      */
     public void putMaxDate(LocalDate dateBody) {
-        putMaxDateAsync(dateBody).toBlocking().value();
+        putMaxDateAsync(dateBody).blockingAwait();
     }
 
     /**
@@ -338,9 +372,9 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMaxDateAsync(LocalDate dateBody) {
+    public Completable putMaxDateAsync(LocalDate dateBody) {
         return putMaxDateWithRestResponseAsync(dateBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -353,7 +387,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMaxDate() {
-        return getMaxDateAsync().toBlocking().value();
+        return getMaxDateAsync().blockingGet();
     }
 
     /**
@@ -383,9 +417,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getMaxDateAsync() {
+    public Maybe<LocalDate> getMaxDateAsync() {
         return getMaxDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -399,7 +441,7 @@ public class DatesImpl implements Dates {
      * @return the void object if successful.
      */
     public void putMinDate(LocalDate dateBody) {
-        putMinDateAsync(dateBody).toBlocking().value();
+        putMinDateAsync(dateBody).blockingAwait();
     }
 
     /**
@@ -435,9 +477,9 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMinDateAsync(LocalDate dateBody) {
+    public Completable putMinDateAsync(LocalDate dateBody) {
         return putMinDateWithRestResponseAsync(dateBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -450,7 +492,7 @@ public class DatesImpl implements Dates {
      * @return the LocalDate object if successful.
      */
     public LocalDate getMinDate() {
-        return getMinDateAsync().toBlocking().value();
+        return getMinDateAsync().blockingGet();
     }
 
     /**
@@ -480,9 +522,17 @@ public class DatesImpl implements Dates {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LocalDate> object
      */
-    public Single<LocalDate> getMinDateAsync() {
+    public Maybe<LocalDate> getMinDateAsync() {
         return getMinDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LocalDate>, LocalDate>() { public LocalDate call(RestResponse<Void, LocalDate> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LocalDate>, Maybe<LocalDate>>() {
+                public Maybe<LocalDate> apply(RestResponse<Void, LocalDate> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

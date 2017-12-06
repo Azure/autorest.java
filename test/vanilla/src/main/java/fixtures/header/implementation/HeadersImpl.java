@@ -39,14 +39,15 @@ import fixtures.header.models.HeaderResponseIntegerHeaders;
 import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -265,7 +266,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramExistingKey(String userAgent) {
-        paramExistingKeyAsync(userAgent).toBlocking().value();
+        paramExistingKeyAsync(userAgent).blockingAwait();
     }
 
     /**
@@ -301,9 +302,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramExistingKeyAsync(String userAgent) {
+    public Completable paramExistingKeyAsync(String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -316,7 +317,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseExistingKey() {
-        responseExistingKeyAsync().toBlocking().value();
+        responseExistingKeyAsync().blockingAwait();
     }
 
     /**
@@ -346,9 +347,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseExistingKeyHeaders, Void> object
      */
-    public Single<Void> responseExistingKeyAsync() {
+    public Completable responseExistingKeyAsync() {
         return responseExistingKeyWithRestResponseAsync()
-            .map(new Func1<RestResponse<HeaderResponseExistingKeyHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseExistingKeyHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -362,7 +363,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramProtectedKey(String contentType) {
-        paramProtectedKeyAsync(contentType).toBlocking().value();
+        paramProtectedKeyAsync(contentType).blockingAwait();
     }
 
     /**
@@ -398,9 +399,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramProtectedKeyAsync(String contentType) {
+    public Completable paramProtectedKeyAsync(String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -413,7 +414,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseProtectedKey() {
-        responseProtectedKeyAsync().toBlocking().value();
+        responseProtectedKeyAsync().blockingAwait();
     }
 
     /**
@@ -443,9 +444,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseProtectedKeyHeaders, Void> object
      */
-    public Single<Void> responseProtectedKeyAsync() {
+    public Completable responseProtectedKeyAsync() {
         return responseProtectedKeyWithRestResponseAsync()
-            .map(new Func1<RestResponse<HeaderResponseProtectedKeyHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseProtectedKeyHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -460,7 +461,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramInteger(String scenario, int value) {
-        paramIntegerAsync(scenario, value).toBlocking().value();
+        paramIntegerAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -499,9 +500,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramIntegerAsync(String scenario, int value) {
+    public Completable paramIntegerAsync(String scenario, int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -515,7 +516,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseInteger(String scenario) {
-        responseIntegerAsync(scenario).toBlocking().value();
+        responseIntegerAsync(scenario).blockingAwait();
     }
 
     /**
@@ -551,9 +552,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseIntegerHeaders, Void> object
      */
-    public Single<Void> responseIntegerAsync(String scenario) {
+    public Completable responseIntegerAsync(String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseIntegerHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseIntegerHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -568,7 +569,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramLong(String scenario, long value) {
-        paramLongAsync(scenario, value).toBlocking().value();
+        paramLongAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -607,9 +608,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramLongAsync(String scenario, long value) {
+    public Completable paramLongAsync(String scenario, long value) {
         return paramLongWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -623,7 +624,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseLong(String scenario) {
-        responseLongAsync(scenario).toBlocking().value();
+        responseLongAsync(scenario).blockingAwait();
     }
 
     /**
@@ -659,9 +660,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseLongHeaders, Void> object
      */
-    public Single<Void> responseLongAsync(String scenario) {
+    public Completable responseLongAsync(String scenario) {
         return responseLongWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseLongHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseLongHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -676,7 +677,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramFloat(String scenario, double value) {
-        paramFloatAsync(scenario, value).toBlocking().value();
+        paramFloatAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -715,9 +716,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramFloatAsync(String scenario, double value) {
+    public Completable paramFloatAsync(String scenario, double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -731,7 +732,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseFloat(String scenario) {
-        responseFloatAsync(scenario).toBlocking().value();
+        responseFloatAsync(scenario).blockingAwait();
     }
 
     /**
@@ -767,9 +768,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseFloatHeaders, Void> object
      */
-    public Single<Void> responseFloatAsync(String scenario) {
+    public Completable responseFloatAsync(String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseFloatHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseFloatHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -784,7 +785,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDouble(String scenario, double value) {
-        paramDoubleAsync(scenario, value).toBlocking().value();
+        paramDoubleAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -823,9 +824,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramDoubleAsync(String scenario, double value) {
+    public Completable paramDoubleAsync(String scenario, double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -839,7 +840,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDouble(String scenario) {
-        responseDoubleAsync(scenario).toBlocking().value();
+        responseDoubleAsync(scenario).blockingAwait();
     }
 
     /**
@@ -875,9 +876,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseDoubleHeaders, Void> object
      */
-    public Single<Void> responseDoubleAsync(String scenario) {
+    public Completable responseDoubleAsync(String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDoubleHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDoubleHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -892,7 +893,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramBool(String scenario, boolean value) {
-        paramBoolAsync(scenario, value).toBlocking().value();
+        paramBoolAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -931,9 +932,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramBoolAsync(String scenario, boolean value) {
+    public Completable paramBoolAsync(String scenario, boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -947,7 +948,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseBool(String scenario) {
-        responseBoolAsync(scenario).toBlocking().value();
+        responseBoolAsync(scenario).blockingAwait();
     }
 
     /**
@@ -983,9 +984,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseBoolHeaders, Void> object
      */
-    public Single<Void> responseBoolAsync(String scenario) {
+    public Completable responseBoolAsync(String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseBoolHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseBoolHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -999,7 +1000,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramString(String scenario) {
-        paramStringAsync(scenario).toBlocking().value();
+        paramStringAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1036,9 +1037,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramStringAsync(String scenario) {
+    public Completable paramStringAsync(String scenario) {
         return paramStringWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1052,7 +1053,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramString(String scenario, String value) {
-        paramStringAsync(scenario, value).toBlocking().value();
+        paramStringAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1091,9 +1092,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramStringAsync(String scenario, String value) {
+    public Completable paramStringAsync(String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1107,7 +1108,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseString(String scenario) {
-        responseStringAsync(scenario).toBlocking().value();
+        responseStringAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1143,9 +1144,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseStringHeaders, Void> object
      */
-    public Single<Void> responseStringAsync(String scenario) {
+    public Completable responseStringAsync(String scenario) {
         return responseStringWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseStringHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseStringHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1160,7 +1161,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDate(String scenario, LocalDate value) {
-        paramDateAsync(scenario, value).toBlocking().value();
+        paramDateAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1202,9 +1203,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramDateAsync(String scenario, LocalDate value) {
+    public Completable paramDateAsync(String scenario, LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1218,7 +1219,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDate(String scenario) {
-        responseDateAsync(scenario).toBlocking().value();
+        responseDateAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1254,9 +1255,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseDateHeaders, Void> object
      */
-    public Single<Void> responseDateAsync(String scenario) {
+    public Completable responseDateAsync(String scenario) {
         return responseDateWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDateHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDateHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1271,7 +1272,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetime(String scenario, DateTime value) {
-        paramDatetimeAsync(scenario, value).toBlocking().value();
+        paramDatetimeAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1313,9 +1314,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramDatetimeAsync(String scenario, DateTime value) {
+    public Completable paramDatetimeAsync(String scenario, DateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1329,7 +1330,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDatetime(String scenario) {
-        responseDatetimeAsync(scenario).toBlocking().value();
+        responseDatetimeAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1365,9 +1366,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseDatetimeHeaders, Void> object
      */
-    public Single<Void> responseDatetimeAsync(String scenario) {
+    public Completable responseDatetimeAsync(String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDatetimeHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDatetimeHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1381,7 +1382,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetimeRfc1123(String scenario) {
-        paramDatetimeRfc1123Async(scenario).toBlocking().value();
+        paramDatetimeRfc1123Async(scenario).blockingAwait();
     }
 
     /**
@@ -1422,9 +1423,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramDatetimeRfc1123Async(String scenario) {
+    public Completable paramDatetimeRfc1123Async(String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1438,7 +1439,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) {
-        paramDatetimeRfc1123Async(scenario, value).toBlocking().value();
+        paramDatetimeRfc1123Async(scenario, value).blockingAwait();
     }
 
     /**
@@ -1481,9 +1482,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramDatetimeRfc1123Async(String scenario, DateTime value) {
+    public Completable paramDatetimeRfc1123Async(String scenario, DateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1497,7 +1498,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDatetimeRfc1123(String scenario) {
-        responseDatetimeRfc1123Async(scenario).toBlocking().value();
+        responseDatetimeRfc1123Async(scenario).blockingAwait();
     }
 
     /**
@@ -1533,9 +1534,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> object
      */
-    public Single<Void> responseDatetimeRfc1123Async(String scenario) {
+    public Completable responseDatetimeRfc1123Async(String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>, Void>() { public Void call(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1550,7 +1551,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramDuration(String scenario, Period value) {
-        paramDurationAsync(scenario, value).toBlocking().value();
+        paramDurationAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1592,9 +1593,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramDurationAsync(String scenario, Period value) {
+    public Completable paramDurationAsync(String scenario, Period value) {
         return paramDurationWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1608,7 +1609,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseDuration(String scenario) {
-        responseDurationAsync(scenario).toBlocking().value();
+        responseDurationAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1644,9 +1645,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseDurationHeaders, Void> object
      */
-    public Single<Void> responseDurationAsync(String scenario) {
+    public Completable responseDurationAsync(String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseDurationHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseDurationHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1661,7 +1662,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramByte(String scenario, byte[] value) {
-        paramByteAsync(scenario, value).toBlocking().value();
+        paramByteAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1704,9 +1705,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramByteAsync(String scenario, byte[] value) {
+    public Completable paramByteAsync(String scenario, byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1720,7 +1721,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseByte(String scenario) {
-        responseByteAsync(scenario).toBlocking().value();
+        responseByteAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1756,9 +1757,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseByteHeaders, Void> object
      */
-    public Single<Void> responseByteAsync(String scenario) {
+    public Completable responseByteAsync(String scenario) {
         return responseByteWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseByteHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseByteHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1772,7 +1773,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramEnum(String scenario) {
-        paramEnumAsync(scenario).toBlocking().value();
+        paramEnumAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1809,9 +1810,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramEnumAsync(String scenario) {
+    public Completable paramEnumAsync(String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1825,7 +1826,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void paramEnum(String scenario, GreyscaleColors value) {
-        paramEnumAsync(scenario, value).toBlocking().value();
+        paramEnumAsync(scenario, value).blockingAwait();
     }
 
     /**
@@ -1864,9 +1865,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
+    public Completable paramEnumAsync(String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1880,7 +1881,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void responseEnum(String scenario) {
-        responseEnumAsync(scenario).toBlocking().value();
+        responseEnumAsync(scenario).blockingAwait();
     }
 
     /**
@@ -1916,9 +1917,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderResponseEnumHeaders, Void> object
      */
-    public Single<Void> responseEnumAsync(String scenario) {
+    public Completable responseEnumAsync(String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
-            .map(new Func1<RestResponse<HeaderResponseEnumHeaders, Void>, Void>() { public Void call(RestResponse<HeaderResponseEnumHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1931,7 +1932,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @return the void object if successful.
      */
     public void customRequestId() {
-        customRequestIdAsync().toBlocking().value();
+        customRequestIdAsync().blockingAwait();
     }
 
     /**
@@ -1961,9 +1962,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> customRequestIdAsync() {
+    public Completable customRequestIdAsync() {
         return customRequestIdWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

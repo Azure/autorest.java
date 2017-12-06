@@ -37,11 +37,13 @@ import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -207,7 +209,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerParameter(int bodyParameter) {
-        return postRequiredIntegerParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredIntegerParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -240,9 +242,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredIntegerParameterAsync(int bodyParameter) {
+    public Maybe<Error> postRequiredIntegerParameterAsync(int bodyParameter) {
         return postRequiredIntegerParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -255,7 +265,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerParameter() {
-        postOptionalIntegerParameterAsync().toBlocking().value();
+        postOptionalIntegerParameterAsync().blockingAwait();
     }
 
     /**
@@ -286,9 +296,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalIntegerParameterAsync() {
+    public Completable postOptionalIntegerParameterAsync() {
         return postOptionalIntegerParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -301,7 +311,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalIntegerParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -334,9 +344,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalIntegerParameterAsync(Integer bodyParameter) {
+    public Completable postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -350,7 +360,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredIntegerPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -387,9 +397,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
+    public Maybe<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter) {
         return postRequiredIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -402,7 +420,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerProperty() {
-        postOptionalIntegerPropertyAsync().toBlocking().value();
+        postOptionalIntegerPropertyAsync().blockingAwait();
     }
 
     /**
@@ -434,9 +452,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalIntegerPropertyAsync() {
+    public Completable postOptionalIntegerPropertyAsync() {
         return postOptionalIntegerPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -449,7 +467,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalIntegerPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -483,9 +501,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
+    public Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -499,7 +517,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerHeader(int headerParameter) {
-        return postRequiredIntegerHeaderAsync(headerParameter).toBlocking().value();
+        return postRequiredIntegerHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -532,9 +550,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredIntegerHeaderAsync(int headerParameter) {
+    public Maybe<Error> postRequiredIntegerHeaderAsync(int headerParameter) {
         return postRequiredIntegerHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -547,7 +573,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerHeader() {
-        postOptionalIntegerHeaderAsync().toBlocking().value();
+        postOptionalIntegerHeaderAsync().blockingAwait();
     }
 
     /**
@@ -578,9 +604,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalIntegerHeaderAsync() {
+    public Completable postOptionalIntegerHeaderAsync() {
         return postOptionalIntegerHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -593,7 +619,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderAsync(headerParameter).toBlocking().value();
+        postOptionalIntegerHeaderAsync(headerParameter).blockingAwait();
     }
 
     /**
@@ -626,9 +652,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalIntegerHeaderAsync(Integer headerParameter) {
+    public Completable postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -642,7 +668,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringParameter(String bodyParameter) {
-        return postRequiredStringParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredStringParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -678,9 +704,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredStringParameterAsync(String bodyParameter) {
+    public Maybe<Error> postRequiredStringParameterAsync(String bodyParameter) {
         return postRequiredStringParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -693,7 +727,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringParameter() {
-        postOptionalStringParameterAsync().toBlocking().value();
+        postOptionalStringParameterAsync().blockingAwait();
     }
 
     /**
@@ -724,9 +758,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalStringParameterAsync() {
+    public Completable postOptionalStringParameterAsync() {
         return postOptionalStringParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -739,7 +773,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalStringParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -772,9 +806,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalStringParameterAsync(String bodyParameter) {
+    public Completable postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -788,7 +822,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringProperty(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredStringPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -825,9 +859,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
+    public Maybe<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter) {
         return postRequiredStringPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -840,7 +882,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringProperty() {
-        postOptionalStringPropertyAsync().toBlocking().value();
+        postOptionalStringPropertyAsync().blockingAwait();
     }
 
     /**
@@ -872,9 +914,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalStringPropertyAsync() {
+    public Completable postOptionalStringPropertyAsync() {
         return postOptionalStringPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -887,7 +929,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalStringPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -921,9 +963,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
+    public Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -937,7 +979,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringHeader(String headerParameter) {
-        return postRequiredStringHeaderAsync(headerParameter).toBlocking().value();
+        return postRequiredStringHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -973,9 +1015,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredStringHeaderAsync(String headerParameter) {
+    public Maybe<Error> postRequiredStringHeaderAsync(String headerParameter) {
         return postRequiredStringHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -988,7 +1038,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringHeader() {
-        postOptionalStringHeaderAsync().toBlocking().value();
+        postOptionalStringHeaderAsync().blockingAwait();
     }
 
     /**
@@ -1019,9 +1069,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalStringHeaderAsync() {
+    public Completable postOptionalStringHeaderAsync() {
         return postOptionalStringHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1034,7 +1084,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderAsync(bodyParameter).toBlocking().value();
+        postOptionalStringHeaderAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1067,9 +1117,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalStringHeaderAsync(String bodyParameter) {
+    public Completable postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1083,7 +1133,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassParameter(Product bodyParameter) {
-        return postRequiredClassParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredClassParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1120,9 +1170,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredClassParameterAsync(Product bodyParameter) {
+    public Maybe<Error> postRequiredClassParameterAsync(Product bodyParameter) {
         return postRequiredClassParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1135,7 +1193,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassParameter() {
-        postOptionalClassParameterAsync().toBlocking().value();
+        postOptionalClassParameterAsync().blockingAwait();
     }
 
     /**
@@ -1167,9 +1225,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalClassParameterAsync() {
+    public Completable postOptionalClassParameterAsync() {
         return postOptionalClassParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1182,7 +1240,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalClassParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1216,9 +1274,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalClassParameterAsync(Product bodyParameter) {
+    public Completable postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1232,7 +1290,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredClassPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1269,9 +1327,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
+    public Maybe<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter) {
         return postRequiredClassPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1284,7 +1350,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassProperty() {
-        postOptionalClassPropertyAsync().toBlocking().value();
+        postOptionalClassPropertyAsync().blockingAwait();
     }
 
     /**
@@ -1316,9 +1382,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalClassPropertyAsync() {
+    public Completable postOptionalClassPropertyAsync() {
         return postOptionalClassPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1331,7 +1397,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalClassPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1365,9 +1431,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
+    public Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1381,7 +1447,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayParameter(List<String> bodyParameter) {
-        return postRequiredArrayParameterAsync(bodyParameter).toBlocking().value();
+        return postRequiredArrayParameterAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1418,9 +1484,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredArrayParameterAsync(List<String> bodyParameter) {
+    public Maybe<Error> postRequiredArrayParameterAsync(List<String> bodyParameter) {
         return postRequiredArrayParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1433,7 +1507,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayParameter() {
-        postOptionalArrayParameterAsync().toBlocking().value();
+        postOptionalArrayParameterAsync().blockingAwait();
     }
 
     /**
@@ -1465,9 +1539,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalArrayParameterAsync() {
+    public Completable postOptionalArrayParameterAsync() {
         return postOptionalArrayParameterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1480,7 +1554,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterAsync(bodyParameter).toBlocking().value();
+        postOptionalArrayParameterAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1514,9 +1588,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalArrayParameterAsync(List<String> bodyParameter) {
+    public Completable postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1530,7 +1604,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyAsync(bodyParameter).toBlocking().value();
+        return postRequiredArrayPropertyAsync(bodyParameter).blockingGet();
     }
 
     /**
@@ -1567,9 +1641,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
+    public Maybe<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter) {
         return postRequiredArrayPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1582,7 +1664,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayProperty() {
-        postOptionalArrayPropertyAsync().toBlocking().value();
+        postOptionalArrayPropertyAsync().blockingAwait();
     }
 
     /**
@@ -1614,9 +1696,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalArrayPropertyAsync() {
+    public Completable postOptionalArrayPropertyAsync() {
         return postOptionalArrayPropertyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1629,7 +1711,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyAsync(bodyParameter).toBlocking().value();
+        postOptionalArrayPropertyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -1663,9 +1745,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
+    public Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1679,7 +1761,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayHeader(List<String> headerParameter) {
-        return postRequiredArrayHeaderAsync(headerParameter).toBlocking().value();
+        return postRequiredArrayHeaderAsync(headerParameter).blockingGet();
     }
 
     /**
@@ -1717,9 +1799,17 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> postRequiredArrayHeaderAsync(List<String> headerParameter) {
+    public Maybe<Error> postRequiredArrayHeaderAsync(List<String> headerParameter) {
         return postRequiredArrayHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1732,7 +1822,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayHeader() {
-        postOptionalArrayHeaderAsync().toBlocking().value();
+        postOptionalArrayHeaderAsync().blockingAwait();
     }
 
     /**
@@ -1765,9 +1855,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalArrayHeaderAsync() {
+    public Completable postOptionalArrayHeaderAsync() {
         return postOptionalArrayHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1780,7 +1870,7 @@ public class ExplicitsImpl implements Explicits {
      * @return the void object if successful.
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderAsync(headerParameter).toBlocking().value();
+        postOptionalArrayHeaderAsync(headerParameter).blockingAwait();
     }
 
     /**
@@ -1815,9 +1905,9 @@ public class ExplicitsImpl implements Explicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalArrayHeaderAsync(List<String> headerParameter) {
+    public Completable postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

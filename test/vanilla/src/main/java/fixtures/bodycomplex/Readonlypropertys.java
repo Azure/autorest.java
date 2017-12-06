@@ -15,9 +15,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,9 +49,9 @@ public interface Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ReadonlyObj&gt;} object if successful.
+     * @return the {@link Maybe&lt;ReadonlyObj&gt;} object if successful.
      */
-    Single<ReadonlyObj> getValidAsync();
+    Maybe<ReadonlyObj> getValidAsync();
 
     /**
      * Get complex types that have readonly properties.
@@ -84,9 +86,9 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(ReadonlyObj complexBody);
+    Completable putValidAsync(ReadonlyObj complexBody);
 
     /**
      * Put complex types that have readonly properties.

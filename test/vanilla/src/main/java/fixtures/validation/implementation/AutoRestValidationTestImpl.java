@@ -33,10 +33,12 @@ import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.validation.AutoRestValidationTest;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
@@ -152,7 +154,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
-        return validationOfMethodParametersAsync(resourceGroupName, id).toBlocking().value();
+        return validationOfMethodParametersAsync(resourceGroupName, id).blockingGet();
     }
 
     /**
@@ -197,9 +199,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
+    public Maybe<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
         return validationOfMethodParametersWithRestResponseAsync(resourceGroupName, id)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -214,7 +224,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id) {
-        return validationOfBodyAsync(resourceGroupName, id).toBlocking().value();
+        return validationOfBodyAsync(resourceGroupName, id).blockingGet();
     }
 
     /**
@@ -261,9 +271,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> validationOfBodyAsync(String resourceGroupName, int id) {
+    public Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -278,7 +296,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
-        return validationOfBodyAsync(resourceGroupName, id, body).toBlocking().value();
+        return validationOfBodyAsync(resourceGroupName, id, body).blockingGet();
     }
 
     /**
@@ -327,9 +345,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
+    public Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
         return validationOfBodyWithRestResponseAsync(resourceGroupName, id, body)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -341,7 +367,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the void object if successful.
      */
     public void getWithConstantInPath() {
-        getWithConstantInPathAsync().toBlocking().value();
+        getWithConstantInPathAsync().blockingAwait();
     }
 
     /**
@@ -369,9 +395,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithConstantInPathAsync() {
+    public Completable getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -383,7 +409,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody() {
-        return postWithConstantInBodyAsync().toBlocking().value();
+        return postWithConstantInBodyAsync().blockingGet();
     }
 
     /**
@@ -413,9 +439,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> postWithConstantInBodyAsync() {
+    public Maybe<Product> postWithConstantInBodyAsync() {
         return postWithConstantInBodyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -427,7 +461,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyAsync(body).toBlocking().value();
+        return postWithConstantInBodyAsync(body).blockingGet();
     }
 
     /**
@@ -459,9 +493,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> postWithConstantInBodyAsync(Product body) {
+    public Maybe<Product> postWithConstantInBodyAsync(Product body) {
         return postWithConstantInBodyWithRestResponseAsync(body)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 }

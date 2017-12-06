@@ -27,12 +27,14 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyinteger.Ints;
 import fixtures.bodyinteger.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -163,7 +165,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -193,9 +195,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getNullAsync() {
+    public Maybe<Integer> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -208,7 +218,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -238,9 +248,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getInvalidAsync() {
+    public Maybe<Integer> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -253,7 +271,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
-        return getOverflowInt32Async().toBlocking().value();
+        return getOverflowInt32Async().blockingGet();
     }
 
     /**
@@ -283,9 +301,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getOverflowInt32Async() {
+    public Maybe<Integer> getOverflowInt32Async() {
         return getOverflowInt32WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -298,7 +324,7 @@ public class IntsImpl implements Ints {
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
-        return getUnderflowInt32Async().toBlocking().value();
+        return getUnderflowInt32Async().blockingGet();
     }
 
     /**
@@ -328,9 +354,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Integer> object
      */
-    public Single<Integer> getUnderflowInt32Async() {
+    public Maybe<Integer> getUnderflowInt32Async() {
         return getUnderflowInt32WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Integer>, Integer>() { public Integer call(RestResponse<Void, Integer> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Integer>, Maybe<Integer>>() {
+                public Maybe<Integer> apply(RestResponse<Void, Integer> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -343,7 +377,7 @@ public class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
-        return getOverflowInt64Async().toBlocking().value();
+        return getOverflowInt64Async().blockingGet();
     }
 
     /**
@@ -373,9 +407,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Long> object
      */
-    public Single<Long> getOverflowInt64Async() {
+    public Maybe<Long> getOverflowInt64Async() {
         return getOverflowInt64WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Long>, Long>() { public Long call(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
+                public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -388,7 +430,7 @@ public class IntsImpl implements Ints {
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
-        return getUnderflowInt64Async().toBlocking().value();
+        return getUnderflowInt64Async().blockingGet();
     }
 
     /**
@@ -418,9 +460,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Long> object
      */
-    public Single<Long> getUnderflowInt64Async() {
+    public Maybe<Long> getUnderflowInt64Async() {
         return getUnderflowInt64WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Long>, Long>() { public Long call(RestResponse<Void, Long> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Long>, Maybe<Long>>() {
+                public Maybe<Long> apply(RestResponse<Void, Long> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -434,7 +484,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMax32(int intBody) {
-        putMax32Async(intBody).toBlocking().value();
+        putMax32Async(intBody).blockingAwait();
     }
 
     /**
@@ -467,9 +517,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMax32Async(int intBody) {
+    public Completable putMax32Async(int intBody) {
         return putMax32WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -483,7 +533,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMax64(long intBody) {
-        putMax64Async(intBody).toBlocking().value();
+        putMax64Async(intBody).blockingAwait();
     }
 
     /**
@@ -516,9 +566,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMax64Async(long intBody) {
+    public Completable putMax64Async(long intBody) {
         return putMax64WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -532,7 +582,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMin32(int intBody) {
-        putMin32Async(intBody).toBlocking().value();
+        putMin32Async(intBody).blockingAwait();
     }
 
     /**
@@ -565,9 +615,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMin32Async(int intBody) {
+    public Completable putMin32Async(int intBody) {
         return putMin32WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -581,7 +631,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putMin64(long intBody) {
-        putMin64Async(intBody).toBlocking().value();
+        putMin64Async(intBody).blockingAwait();
     }
 
     /**
@@ -614,9 +664,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putMin64Async(long intBody) {
+    public Completable putMin64Async(long intBody) {
         return putMin64WithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -629,7 +679,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getUnixTime() {
-        return getUnixTimeAsync().toBlocking().value();
+        return getUnixTimeAsync().blockingGet();
     }
 
     /**
@@ -659,9 +709,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getUnixTimeAsync() {
+    public Maybe<DateTime> getUnixTimeAsync() {
         return getUnixTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -675,7 +733,7 @@ public class IntsImpl implements Ints {
      * @return the void object if successful.
      */
     public void putUnixTimeDate(DateTime intBody) {
-        putUnixTimeDateAsync(intBody).toBlocking().value();
+        putUnixTimeDateAsync(intBody).blockingAwait();
     }
 
     /**
@@ -709,9 +767,9 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUnixTimeDateAsync(DateTime intBody) {
+    public Completable putUnixTimeDateAsync(DateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -724,7 +782,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalidUnixTime() {
-        return getInvalidUnixTimeAsync().toBlocking().value();
+        return getInvalidUnixTimeAsync().blockingGet();
     }
 
     /**
@@ -754,9 +812,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getInvalidUnixTimeAsync() {
+    public Maybe<DateTime> getInvalidUnixTimeAsync() {
         return getInvalidUnixTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -769,7 +835,7 @@ public class IntsImpl implements Ints {
      * @return the DateTime object if successful.
      */
     public DateTime getNullUnixTime() {
-        return getNullUnixTimeAsync().toBlocking().value();
+        return getNullUnixTimeAsync().blockingGet();
     }
 
     /**
@@ -799,9 +865,17 @@ public class IntsImpl implements Ints {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateTime> object
      */
-    public Single<DateTime> getNullUnixTimeAsync() {
+    public Maybe<DateTime> getNullUnixTimeAsync() {
         return getNullUnixTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateTime>, DateTime>() { public DateTime call(RestResponse<Void, DateTime> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateTime>, Maybe<DateTime>>() {
+                public Maybe<DateTime> apply(RestResponse<Void, DateTime> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

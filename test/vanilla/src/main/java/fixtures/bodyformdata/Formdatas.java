@@ -14,10 +14,11 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyformdata.models.ErrorException;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.InputStream;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -53,9 +54,9 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;InputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
+    Maybe<InputStream> uploadFileAsync(byte[] fileContent, String fileName);
 
     /**
      * Upload file.
@@ -93,9 +94,9 @@ public interface Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;InputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
+    Maybe<InputStream> uploadFileViaBodyAsync(byte[] fileContent);
 
     /**
      * Upload file.

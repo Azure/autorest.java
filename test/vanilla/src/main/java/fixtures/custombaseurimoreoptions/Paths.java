@@ -14,9 +14,10 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -54,9 +55,9 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getEmptyAsync(String vault, String secret, String keyName);
+    Completable getEmptyAsync(String vault, String secret, String keyName);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -103,9 +104,9 @@ public interface Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
+    Completable getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
 
     /**
      * Get a 200 to test a valid base uri.

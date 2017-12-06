@@ -56,10 +56,12 @@ import fixtures.lro.models.LROsPutNoHeaderInRetryHeaders;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -530,7 +532,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded() {
-        return beginPut200SucceededAsync().toBlocking().last().result();
+        return beginPut200SucceededAsync().blockingLast().result();
     }
 
     /**
@@ -565,7 +567,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Succeeded(Product product) {
-        return beginPut200SucceededAsync(product).toBlocking().last().result();
+        return beginPut200SucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -601,7 +603,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Succeeded() {
-        return put200SucceededAsync().toBlocking().value();
+        return put200SucceededAsync().blockingGet();
     }
 
     /**
@@ -633,9 +635,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededAsync() {
+    public Maybe<Product> put200SucceededAsync() {
         return put200SucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -648,7 +658,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Succeeded(Product product) {
-        return put200SucceededAsync(product).toBlocking().value();
+        return put200SucceededAsync(product).blockingGet();
     }
 
     /**
@@ -682,9 +692,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededAsync(Product product) {
+    public Maybe<Product> put200SucceededAsync(Product product) {
         return put200SucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -697,7 +715,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateAsync().toBlocking().last().result();
+        return beginPut200SucceededNoStateAsync().blockingLast().result();
     }
 
     /**
@@ -732,7 +750,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200SucceededNoState(Product product) {
-        return beginPut200SucceededNoStateAsync(product).toBlocking().last().result();
+        return beginPut200SucceededNoStateAsync(product).blockingLast().result();
     }
 
     /**
@@ -768,7 +786,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200SucceededNoState() {
-        return put200SucceededNoStateAsync().toBlocking().value();
+        return put200SucceededNoStateAsync().blockingGet();
     }
 
     /**
@@ -800,9 +818,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededNoStateAsync() {
+    public Maybe<Product> put200SucceededNoStateAsync() {
         return put200SucceededNoStateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -815,7 +841,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200SucceededNoState(Product product) {
-        return put200SucceededNoStateAsync(product).toBlocking().value();
+        return put200SucceededNoStateAsync(product).blockingGet();
     }
 
     /**
@@ -849,9 +875,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200SucceededNoStateAsync(Product product) {
+    public Maybe<Product> put200SucceededNoStateAsync(Product product) {
         return put200SucceededNoStateWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -864,7 +898,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200() {
-        return beginPut202Retry200Async().toBlocking().last().result();
+        return beginPut202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -899,7 +933,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut202Retry200(Product product) {
-        return beginPut202Retry200Async(product).toBlocking().last().result();
+        return beginPut202Retry200Async(product).blockingLast().result();
     }
 
     /**
@@ -935,7 +969,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put202Retry200() {
-        return put202Retry200Async().toBlocking().value();
+        return put202Retry200Async().blockingGet();
     }
 
     /**
@@ -967,9 +1001,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put202Retry200Async() {
+    public Maybe<Product> put202Retry200Async() {
         return put202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -982,7 +1024,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put202Retry200(Product product) {
-        return put202Retry200Async(product).toBlocking().value();
+        return put202Retry200Async(product).blockingGet();
     }
 
     /**
@@ -1016,9 +1058,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put202Retry200Async(Product product) {
+    public Maybe<Product> put202Retry200Async(Product product) {
         return put202Retry200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1031,7 +1081,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
 
     /**
@@ -1066,7 +1116,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -1102,7 +1152,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().toBlocking().value();
+        return put201CreatingSucceeded200Async().blockingGet();
     }
 
     /**
@@ -1134,9 +1184,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingSucceeded200Async() {
+    public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1149,7 +1207,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200Async(product).toBlocking().value();
+        return put201CreatingSucceeded200Async(product).blockingGet();
     }
 
     /**
@@ -1183,9 +1241,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingSucceeded200Async(Product product) {
+    public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1198,7 +1264,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204Async().toBlocking().last().result();
+        return beginPut200UpdatingSucceeded204Async().blockingLast().result();
     }
 
     /**
@@ -1233,7 +1299,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200UpdatingSucceeded204(Product product) {
-        return beginPut200UpdatingSucceeded204Async(product).toBlocking().last().result();
+        return beginPut200UpdatingSucceeded204Async(product).blockingLast().result();
     }
 
     /**
@@ -1269,7 +1335,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200UpdatingSucceeded204() {
-        return put200UpdatingSucceeded204Async().toBlocking().value();
+        return put200UpdatingSucceeded204Async().blockingGet();
     }
 
     /**
@@ -1301,9 +1367,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200UpdatingSucceeded204Async() {
+    public Maybe<Product> put200UpdatingSucceeded204Async() {
         return put200UpdatingSucceeded204WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1316,7 +1390,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200UpdatingSucceeded204(Product product) {
-        return put200UpdatingSucceeded204Async(product).toBlocking().value();
+        return put200UpdatingSucceeded204Async(product).blockingGet();
     }
 
     /**
@@ -1350,9 +1424,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200UpdatingSucceeded204Async(Product product) {
+    public Maybe<Product> put200UpdatingSucceeded204Async(Product product) {
         return put200UpdatingSucceeded204WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1365,7 +1447,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200Async().toBlocking().last().result();
+        return beginPut201CreatingFailed200Async().blockingLast().result();
     }
 
     /**
@@ -1400,7 +1482,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingFailed200(Product product) {
-        return beginPut201CreatingFailed200Async(product).toBlocking().last().result();
+        return beginPut201CreatingFailed200Async(product).blockingLast().result();
     }
 
     /**
@@ -1436,7 +1518,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingFailed200() {
-        return put201CreatingFailed200Async().toBlocking().value();
+        return put201CreatingFailed200Async().blockingGet();
     }
 
     /**
@@ -1468,9 +1550,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingFailed200Async() {
+    public Maybe<Product> put201CreatingFailed200Async() {
         return put201CreatingFailed200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1483,7 +1573,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put201CreatingFailed200(Product product) {
-        return put201CreatingFailed200Async(product).toBlocking().value();
+        return put201CreatingFailed200Async(product).blockingGet();
     }
 
     /**
@@ -1517,9 +1607,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingFailed200Async(Product product) {
+    public Maybe<Product> put201CreatingFailed200Async(Product product) {
         return put201CreatingFailed200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1532,7 +1630,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200Async().toBlocking().last().result();
+        return beginPut200Acceptedcanceled200Async().blockingLast().result();
     }
 
     /**
@@ -1567,7 +1665,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPut200Acceptedcanceled200(Product product) {
-        return beginPut200Acceptedcanceled200Async(product).toBlocking().last().result();
+        return beginPut200Acceptedcanceled200Async(product).blockingLast().result();
     }
 
     /**
@@ -1603,7 +1701,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Acceptedcanceled200() {
-        return put200Acceptedcanceled200Async().toBlocking().value();
+        return put200Acceptedcanceled200Async().blockingGet();
     }
 
     /**
@@ -1635,9 +1733,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200Acceptedcanceled200Async() {
+    public Maybe<Product> put200Acceptedcanceled200Async() {
         return put200Acceptedcanceled200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1650,7 +1756,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product put200Acceptedcanceled200(Product product) {
-        return put200Acceptedcanceled200Async(product).toBlocking().value();
+        return put200Acceptedcanceled200Async(product).blockingGet();
     }
 
     /**
@@ -1684,9 +1790,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200Acceptedcanceled200Async(Product product) {
+    public Maybe<Product> put200Acceptedcanceled200Async(Product product) {
         return put200Acceptedcanceled200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1699,7 +1813,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryAsync().toBlocking().last().result();
+        return beginPutNoHeaderInRetryAsync().blockingLast().result();
     }
 
     /**
@@ -1734,7 +1848,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutNoHeaderInRetry(Product product) {
-        return beginPutNoHeaderInRetryAsync(product).toBlocking().last().result();
+        return beginPutNoHeaderInRetryAsync(product).blockingLast().result();
     }
 
     /**
@@ -1770,7 +1884,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putNoHeaderInRetry() {
-        return putNoHeaderInRetryAsync().toBlocking().value();
+        return putNoHeaderInRetryAsync().blockingGet();
     }
 
     /**
@@ -1802,9 +1916,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putNoHeaderInRetryAsync() {
+    public Maybe<Product> putNoHeaderInRetryAsync() {
         return putNoHeaderInRetryWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1817,7 +1939,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putNoHeaderInRetry(Product product) {
-        return putNoHeaderInRetryAsync(product).toBlocking().value();
+        return putNoHeaderInRetryAsync(product).blockingGet();
     }
 
     /**
@@ -1851,9 +1973,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putNoHeaderInRetryAsync(Product product) {
+    public Maybe<Product> putNoHeaderInRetryAsync(Product product) {
         return putNoHeaderInRetryWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1866,7 +1996,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -1901,7 +2031,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) {
-        return beginPutAsyncRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -1937,7 +2067,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededAsync().toBlocking().value();
+        return putAsyncRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -1969,9 +2099,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncRetrySucceededAsync() {
+    public Maybe<Product> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1984,7 +2122,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded(Product product) {
-        return putAsyncRetrySucceededAsync(product).toBlocking().value();
+        return putAsyncRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -2018,9 +2156,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncRetrySucceededAsync(Product product) {
+    public Maybe<Product> putAsyncRetrySucceededAsync(Product product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2033,7 +2179,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncNoRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -2068,7 +2214,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrySucceeded(Product product) {
-        return beginPutAsyncNoRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncNoRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -2104,7 +2250,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrySucceeded() {
-        return putAsyncNoRetrySucceededAsync().toBlocking().value();
+        return putAsyncNoRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -2136,9 +2282,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrySucceededAsync() {
+    public Maybe<Product> putAsyncNoRetrySucceededAsync() {
         return putAsyncNoRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2151,7 +2305,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrySucceeded(Product product) {
-        return putAsyncNoRetrySucceededAsync(product).toBlocking().value();
+        return putAsyncNoRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -2185,9 +2339,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrySucceededAsync(Product product) {
+    public Maybe<Product> putAsyncNoRetrySucceededAsync(Product product) {
         return putAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2200,7 +2362,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedAsync().toBlocking().last().result();
+        return beginPutAsyncRetryFailedAsync().blockingLast().result();
     }
 
     /**
@@ -2235,7 +2397,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetryFailed(Product product) {
-        return beginPutAsyncRetryFailedAsync(product).toBlocking().last().result();
+        return beginPutAsyncRetryFailedAsync(product).blockingLast().result();
     }
 
     /**
@@ -2271,7 +2433,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetryFailed() {
-        return putAsyncRetryFailedAsync().toBlocking().value();
+        return putAsyncRetryFailedAsync().blockingGet();
     }
 
     /**
@@ -2303,9 +2465,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeaders, Product> object
      */
-    public Single<Product> putAsyncRetryFailedAsync() {
+    public Maybe<Product> putAsyncRetryFailedAsync() {
         return putAsyncRetryFailedWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2318,7 +2488,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncRetryFailed(Product product) {
-        return putAsyncRetryFailedAsync(product).toBlocking().value();
+        return putAsyncRetryFailedAsync(product).blockingGet();
     }
 
     /**
@@ -2352,9 +2522,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncRetryFailedHeaders, Product> object
      */
-    public Single<Product> putAsyncRetryFailedAsync(Product product) {
+    public Maybe<Product> putAsyncRetryFailedAsync(Product product) {
         return putAsyncRetryFailedWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncRetryFailedHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2367,7 +2545,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledAsync().toBlocking().last().result();
+        return beginPutAsyncNoRetrycanceledAsync().blockingLast().result();
     }
 
     /**
@@ -2402,7 +2580,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoRetrycanceled(Product product) {
-        return beginPutAsyncNoRetrycanceledAsync(product).toBlocking().last().result();
+        return beginPutAsyncNoRetrycanceledAsync(product).blockingLast().result();
     }
 
     /**
@@ -2438,7 +2616,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrycanceled() {
-        return putAsyncNoRetrycanceledAsync().toBlocking().value();
+        return putAsyncNoRetrycanceledAsync().blockingGet();
     }
 
     /**
@@ -2470,9 +2648,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrycanceledAsync() {
+    public Maybe<Product> putAsyncNoRetrycanceledAsync() {
         return putAsyncNoRetrycanceledWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2485,7 +2671,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoRetrycanceled(Product product) {
-        return putAsyncNoRetrycanceledAsync(product).toBlocking().value();
+        return putAsyncNoRetrycanceledAsync(product).blockingGet();
     }
 
     /**
@@ -2519,9 +2705,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> object
      */
-    public Single<Product> putAsyncNoRetrycanceledAsync(Product product) {
+    public Maybe<Product> putAsyncNoRetrycanceledAsync(Product product) {
         return putAsyncNoRetrycanceledWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2534,7 +2728,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryAsync().toBlocking().last().result();
+        return beginPutAsyncNoHeaderInRetryAsync().blockingLast().result();
     }
 
     /**
@@ -2569,7 +2763,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncNoHeaderInRetry(Product product) {
-        return beginPutAsyncNoHeaderInRetryAsync(product).toBlocking().last().result();
+        return beginPutAsyncNoHeaderInRetryAsync(product).blockingLast().result();
     }
 
     /**
@@ -2605,7 +2799,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoHeaderInRetry() {
-        return putAsyncNoHeaderInRetryAsync().toBlocking().value();
+        return putAsyncNoHeaderInRetryAsync().blockingGet();
     }
 
     /**
@@ -2637,9 +2831,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putAsyncNoHeaderInRetryAsync() {
+    public Maybe<Product> putAsyncNoHeaderInRetryAsync() {
         return putAsyncNoHeaderInRetryWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2652,7 +2854,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product putAsyncNoHeaderInRetry(Product product) {
-        return putAsyncNoHeaderInRetryAsync(product).toBlocking().value();
+        return putAsyncNoHeaderInRetryAsync(product).blockingGet();
     }
 
     /**
@@ -2686,9 +2888,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> object
      */
-    public Single<Product> putAsyncNoHeaderInRetryAsync(Product product) {
+    public Maybe<Product> putAsyncNoHeaderInRetryAsync(Product product) {
         return putAsyncNoHeaderInRetryWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Product>() { public Product call(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2701,7 +2911,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource() {
-        return beginPutNonResourceAsync().toBlocking().last().result();
+        return beginPutNonResourceAsync().blockingLast().result();
     }
 
     /**
@@ -2736,7 +2946,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutNonResource(Sku sku) {
-        return beginPutNonResourceAsync(sku).toBlocking().last().result();
+        return beginPutNonResourceAsync(sku).blockingLast().result();
     }
 
     /**
@@ -2772,7 +2982,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putNonResource() {
-        return putNonResourceAsync().toBlocking().value();
+        return putNonResourceAsync().blockingGet();
     }
 
     /**
@@ -2804,9 +3014,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putNonResourceAsync() {
+    public Maybe<Sku> putNonResourceAsync() {
         return putNonResourceWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Sku>, Sku>() { public Sku call(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2819,7 +3037,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putNonResource(Sku sku) {
-        return putNonResourceAsync(sku).toBlocking().value();
+        return putNonResourceAsync(sku).blockingGet();
     }
 
     /**
@@ -2853,9 +3071,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putNonResourceAsync(Sku sku) {
+    public Maybe<Sku> putNonResourceAsync(Sku sku) {
         return putNonResourceWithRestResponseAsync(sku)
-            .map(new Func1<RestResponse<Void, Sku>, Sku>() { public Sku call(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2868,7 +3094,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceAsync().toBlocking().last().result();
+        return beginPutAsyncNonResourceAsync().blockingLast().result();
     }
 
     /**
@@ -2903,7 +3129,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPutAsyncNonResource(Sku sku) {
-        return beginPutAsyncNonResourceAsync(sku).toBlocking().last().result();
+        return beginPutAsyncNonResourceAsync(sku).blockingLast().result();
     }
 
     /**
@@ -2939,7 +3165,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putAsyncNonResource() {
-        return putAsyncNonResourceAsync().toBlocking().value();
+        return putAsyncNonResourceAsync().blockingGet();
     }
 
     /**
@@ -2971,9 +3197,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putAsyncNonResourceAsync() {
+    public Maybe<Sku> putAsyncNonResourceAsync() {
         return putAsyncNonResourceWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Sku>, Sku>() { public Sku call(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2986,7 +3220,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku putAsyncNonResource(Sku sku) {
-        return putAsyncNonResourceAsync(sku).toBlocking().value();
+        return putAsyncNonResourceAsync(sku).blockingGet();
     }
 
     /**
@@ -3020,9 +3254,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> putAsyncNonResourceAsync(Sku sku) {
+    public Maybe<Sku> putAsyncNonResourceAsync(Sku sku) {
         return putAsyncNonResourceWithRestResponseAsync(sku)
-            .map(new Func1<RestResponse<Void, Sku>, Sku>() { public Sku call(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3035,7 +3277,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource() {
-        return beginPutSubResourceAsync().toBlocking().last().result();
+        return beginPutSubResourceAsync().blockingLast().result();
     }
 
     /**
@@ -3070,7 +3312,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutSubResource(SubProduct product) {
-        return beginPutSubResourceAsync(product).toBlocking().last().result();
+        return beginPutSubResourceAsync(product).blockingLast().result();
     }
 
     /**
@@ -3106,7 +3348,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putSubResource() {
-        return putSubResourceAsync().toBlocking().value();
+        return putSubResourceAsync().blockingGet();
     }
 
     /**
@@ -3138,9 +3380,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putSubResourceAsync() {
+    public Maybe<SubProduct> putSubResourceAsync() {
         return putSubResourceWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct call(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3153,7 +3403,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putSubResource(SubProduct product) {
-        return putSubResourceAsync(product).toBlocking().value();
+        return putSubResourceAsync(product).blockingGet();
     }
 
     /**
@@ -3187,9 +3437,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putSubResourceAsync(SubProduct product) {
+    public Maybe<SubProduct> putSubResourceAsync(SubProduct product) {
         return putSubResourceWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct call(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3202,7 +3460,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceAsync().toBlocking().last().result();
+        return beginPutAsyncSubResourceAsync().blockingLast().result();
     }
 
     /**
@@ -3237,7 +3495,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct beginPutAsyncSubResource(SubProduct product) {
-        return beginPutAsyncSubResourceAsync(product).toBlocking().last().result();
+        return beginPutAsyncSubResourceAsync(product).blockingLast().result();
     }
 
     /**
@@ -3273,7 +3531,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putAsyncSubResource() {
-        return putAsyncSubResourceAsync().toBlocking().value();
+        return putAsyncSubResourceAsync().blockingGet();
     }
 
     /**
@@ -3305,9 +3563,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putAsyncSubResourceAsync() {
+    public Maybe<SubProduct> putAsyncSubResourceAsync() {
         return putAsyncSubResourceWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct call(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3320,7 +3586,7 @@ public class LROsImpl implements LROs {
      * @return the SubProduct object if successful.
      */
     public SubProduct putAsyncSubResource(SubProduct product) {
-        return putAsyncSubResourceAsync(product).toBlocking().value();
+        return putAsyncSubResourceAsync(product).blockingGet();
     }
 
     /**
@@ -3354,9 +3620,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SubProduct> object
      */
-    public Single<SubProduct> putAsyncSubResourceAsync(SubProduct product) {
+    public Maybe<SubProduct> putAsyncSubResourceAsync(SubProduct product) {
         return putAsyncSubResourceWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, SubProduct>, SubProduct>() { public SubProduct call(RestResponse<Void, SubProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SubProduct>, Maybe<SubProduct>>() {
+                public Maybe<SubProduct> apply(RestResponse<Void, SubProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3369,7 +3643,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().last().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
     }
 
     /**
@@ -3402,7 +3676,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().value();
+        return deleteProvisioning202Accepted200SucceededAsync().blockingGet();
     }
 
     /**
@@ -3432,9 +3706,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> object
      */
-    public Single<Product> deleteProvisioning202Accepted200SucceededAsync() {
+    public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3447,7 +3729,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200Async().toBlocking().last().result();
+        return beginDeleteProvisioning202DeletingFailed200Async().blockingLast().result();
     }
 
     /**
@@ -3480,7 +3762,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202DeletingFailed200() {
-        return deleteProvisioning202DeletingFailed200Async().toBlocking().value();
+        return deleteProvisioning202DeletingFailed200Async().blockingGet();
     }
 
     /**
@@ -3510,9 +3792,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> object
      */
-    public Single<Product> deleteProvisioning202DeletingFailed200Async() {
+    public Maybe<Product> deleteProvisioning202DeletingFailed200Async() {
         return deleteProvisioning202DeletingFailed200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>, Product>() { public Product call(RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202DeletingFailed200Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3525,7 +3815,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200Async().toBlocking().last().result();
+        return beginDeleteProvisioning202Deletingcanceled200Async().blockingLast().result();
     }
 
     /**
@@ -3558,7 +3848,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Deletingcanceled200() {
-        return deleteProvisioning202Deletingcanceled200Async().toBlocking().value();
+        return deleteProvisioning202Deletingcanceled200Async().blockingGet();
     }
 
     /**
@@ -3588,9 +3878,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> object
      */
-    public Single<Product> deleteProvisioning202Deletingcanceled200Async() {
+    public Maybe<Product> deleteProvisioning202Deletingcanceled200Async() {
         return deleteProvisioning202Deletingcanceled200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>, Product>() { public Product call(RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDeleteProvisioning202Deletingcanceled200Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3602,7 +3900,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().toBlocking().last();
+        beginDelete204SucceededAsync().blockingLast();
     }
 
     /**
@@ -3635,7 +3933,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void delete204Succeeded() {
-        delete204SucceededAsync().toBlocking().value();
+        delete204SucceededAsync().blockingAwait();
     }
 
     /**
@@ -3665,9 +3963,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204SucceededAsync() {
+    public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3680,7 +3978,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDelete202Retry200() {
-        return beginDelete202Retry200Async().toBlocking().last().result();
+        return beginDelete202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -3713,7 +4011,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product delete202Retry200() {
-        return delete202Retry200Async().toBlocking().value();
+        return delete202Retry200Async().blockingGet();
     }
 
     /**
@@ -3743,9 +4041,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDelete202Retry200Headers, Product> object
      */
-    public Single<Product> delete202Retry200Async() {
+    public Maybe<Product> delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDelete202Retry200Headers, Product>, Product>() { public Product call(RestResponse<LROsDelete202Retry200Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDelete202Retry200Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDelete202Retry200Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3758,7 +4064,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204Async().toBlocking().last().result();
+        return beginDelete202NoRetry204Async().blockingLast().result();
     }
 
     /**
@@ -3791,7 +4097,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product delete202NoRetry204() {
-        return delete202NoRetry204Async().toBlocking().value();
+        return delete202NoRetry204Async().blockingGet();
     }
 
     /**
@@ -3821,9 +4127,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDelete202NoRetry204Headers, Product> object
      */
-    public Single<Product> delete202NoRetry204Async() {
+    public Maybe<Product> delete202NoRetry204Async() {
         return delete202NoRetry204WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDelete202NoRetry204Headers, Product>, Product>() { public Product call(RestResponse<LROsDelete202NoRetry204Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsDelete202NoRetry204Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsDelete202NoRetry204Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3835,7 +4149,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryAsync().toBlocking().last();
+        beginDeleteNoHeaderInRetryAsync().blockingLast();
     }
 
     /**
@@ -3868,7 +4182,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteNoHeaderInRetry() {
-        deleteNoHeaderInRetryAsync().toBlocking().value();
+        deleteNoHeaderInRetryAsync().blockingAwait();
     }
 
     /**
@@ -3898,9 +4212,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void> object
      */
-    public Single<Void> deleteNoHeaderInRetryAsync() {
+    public Completable deleteNoHeaderInRetryAsync() {
         return deleteNoHeaderInRetryWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void>, Void>() { public Void call(RestResponse<LROsDeleteNoHeaderInRetryHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3912,7 +4226,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryAsync().toBlocking().last();
+        beginDeleteAsyncNoHeaderInRetryAsync().blockingLast();
     }
 
     /**
@@ -3945,7 +4259,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncNoHeaderInRetry() {
-        deleteAsyncNoHeaderInRetryAsync().toBlocking().value();
+        deleteAsyncNoHeaderInRetryAsync().blockingAwait();
     }
 
     /**
@@ -3975,9 +4289,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void> object
      */
-    public Single<Void> deleteAsyncNoHeaderInRetryAsync() {
+    public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncNoHeaderInRetryHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3989,7 +4303,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededAsync().toBlocking().last();
+        beginDeleteAsyncRetrySucceededAsync().blockingLast();
     }
 
     /**
@@ -4022,7 +4336,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncRetrySucceeded() {
-        deleteAsyncRetrySucceededAsync().toBlocking().value();
+        deleteAsyncRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -4052,9 +4366,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRetrySucceededAsync() {
+    public Completable deleteAsyncRetrySucceededAsync() {
         return deleteAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4066,7 +4380,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededAsync().toBlocking().last();
+        beginDeleteAsyncNoRetrySucceededAsync().blockingLast();
     }
 
     /**
@@ -4099,7 +4413,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncNoRetrySucceeded() {
-        deleteAsyncNoRetrySucceededAsync().toBlocking().value();
+        deleteAsyncNoRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -4129,9 +4443,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void> object
      */
-    public Single<Void> deleteAsyncNoRetrySucceededAsync() {
+    public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncNoRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4143,7 +4457,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedAsync().toBlocking().last();
+        beginDeleteAsyncRetryFailedAsync().blockingLast();
     }
 
     /**
@@ -4176,7 +4490,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncRetryFailed() {
-        deleteAsyncRetryFailedAsync().toBlocking().value();
+        deleteAsyncRetryFailedAsync().blockingAwait();
     }
 
     /**
@@ -4206,9 +4520,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRetryFailedAsync() {
+    public Completable deleteAsyncRetryFailedAsync() {
         return deleteAsyncRetryFailedWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncRetryFailedHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4220,7 +4534,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledAsync().toBlocking().last();
+        beginDeleteAsyncRetrycanceledAsync().blockingLast();
     }
 
     /**
@@ -4253,7 +4567,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void deleteAsyncRetrycanceled() {
-        deleteAsyncRetrycanceledAsync().toBlocking().value();
+        deleteAsyncRetrycanceledAsync().blockingAwait();
     }
 
     /**
@@ -4283,9 +4597,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRetrycanceledAsync() {
+    public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void>, Void>() { public Void call(RestResponse<LROsDeleteAsyncRetrycanceledHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4298,7 +4612,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku beginPost200WithPayload() {
-        return beginPost200WithPayloadAsync().toBlocking().last().result();
+        return beginPost200WithPayloadAsync().blockingLast().result();
     }
 
     /**
@@ -4331,7 +4645,7 @@ public class LROsImpl implements LROs {
      * @return the Sku object if successful.
      */
     public Sku post200WithPayload() {
-        return post200WithPayloadAsync().toBlocking().value();
+        return post200WithPayloadAsync().blockingGet();
     }
 
     /**
@@ -4361,9 +4675,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Sku> object
      */
-    public Single<Sku> post200WithPayloadAsync() {
+    public Maybe<Sku> post200WithPayloadAsync() {
         return post200WithPayloadWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Sku>, Sku>() { public Sku call(RestResponse<Void, Sku> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Sku>, Maybe<Sku>>() {
+                public Maybe<Sku> apply(RestResponse<Void, Sku> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4375,7 +4697,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -4409,7 +4731,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -4445,7 +4767,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().toBlocking().value();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -4477,9 +4799,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200Headers, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPost202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LROsPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -4492,7 +4814,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).toBlocking().value();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -4526,9 +4848,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202Retry200Headers, Void> object
      */
-    public Single<Void> post202Retry200Async(Product product) {
+    public Completable post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPost202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LROsPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -4541,7 +4863,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204() {
-        return beginPost202NoRetry204Async().toBlocking().last().result();
+        return beginPost202NoRetry204Async().blockingLast().result();
     }
 
     /**
@@ -4576,7 +4898,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPost202NoRetry204(Product product) {
-        return beginPost202NoRetry204Async(product).toBlocking().last().result();
+        return beginPost202NoRetry204Async(product).blockingLast().result();
     }
 
     /**
@@ -4612,7 +4934,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product post202NoRetry204() {
-        return post202NoRetry204Async().toBlocking().value();
+        return post202NoRetry204Async().blockingGet();
     }
 
     /**
@@ -4644,9 +4966,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204Headers, Product> object
      */
-    public Single<Product> post202NoRetry204Async() {
+    public Maybe<Product> post202NoRetry204Async() {
         return post202NoRetry204WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPost202NoRetry204Headers, Product>, Product>() { public Product call(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -4659,7 +4989,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product post202NoRetry204(Product product) {
-        return post202NoRetry204Async(product).toBlocking().value();
+        return post202NoRetry204Async(product).blockingGet();
     }
 
     /**
@@ -4693,9 +5023,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPost202NoRetry204Headers, Product> object
      */
-    public Single<Product> post202NoRetry204Async(Product product) {
+    public Maybe<Product> post202NoRetry204Async(Product product) {
         return post202NoRetry204WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPost202NoRetry204Headers, Product>, Product>() { public Product call(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPost202NoRetry204Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPost202NoRetry204Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4708,7 +5046,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededAsync().toBlocking().last().result();
+        return beginPostAsyncRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -4743,7 +5081,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncRetrySucceeded(Product product) {
-        return beginPostAsyncRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPostAsyncRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -4779,7 +5117,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncRetrySucceeded() {
-        return postAsyncRetrySucceededAsync().toBlocking().value();
+        return postAsyncRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -4811,9 +5149,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncRetrySucceededAsync() {
+    public Maybe<Product> postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -4826,7 +5172,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncRetrySucceeded(Product product) {
-        return postAsyncRetrySucceededAsync(product).toBlocking().value();
+        return postAsyncRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -4860,9 +5206,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncRetrySucceededAsync(Product product) {
+    public Maybe<Product> postAsyncRetrySucceededAsync(Product product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -4875,7 +5229,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededAsync().toBlocking().last().result();
+        return beginPostAsyncNoRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -4910,7 +5264,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product beginPostAsyncNoRetrySucceeded(Product product) {
-        return beginPostAsyncNoRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPostAsyncNoRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -4946,7 +5300,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncNoRetrySucceeded() {
-        return postAsyncNoRetrySucceededAsync().toBlocking().value();
+        return postAsyncNoRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -4978,9 +5332,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncNoRetrySucceededAsync() {
+    public Maybe<Product> postAsyncNoRetrySucceededAsync() {
         return postAsyncNoRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -4993,7 +5355,7 @@ public class LROsImpl implements LROs {
      * @return the Product object if successful.
      */
     public Product postAsyncNoRetrySucceeded(Product product) {
-        return postAsyncNoRetrySucceededAsync(product).toBlocking().value();
+        return postAsyncNoRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -5027,9 +5389,17 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> object
      */
-    public Single<Product> postAsyncNoRetrySucceededAsync(Product product) {
+    public Maybe<Product> postAsyncNoRetrySucceededAsync(Product product) {
         return postAsyncNoRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -5041,7 +5411,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedAsync().toBlocking().last().result();
+        beginPostAsyncRetryFailedAsync().blockingLast().result();
     }
 
     /**
@@ -5075,7 +5445,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetryFailed(Product product) {
-        beginPostAsyncRetryFailedAsync(product).toBlocking().last();
+        beginPostAsyncRetryFailedAsync(product).blockingLast();
     }
 
     /**
@@ -5111,7 +5481,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetryFailed() {
-        postAsyncRetryFailedAsync().toBlocking().value();
+        postAsyncRetryFailedAsync().blockingAwait();
     }
 
     /**
@@ -5143,9 +5513,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeaders, Void> object
      */
-    public Single<Void> postAsyncRetryFailedAsync() {
+    public Completable postAsyncRetryFailedAsync() {
         return postAsyncRetryFailedWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetryFailedHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -5158,7 +5528,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetryFailed(Product product) {
-        postAsyncRetryFailedAsync(product).toBlocking().value();
+        postAsyncRetryFailedAsync(product).blockingAwait();
     }
 
     /**
@@ -5192,9 +5562,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetryFailedHeaders, Void> object
      */
-    public Single<Void> postAsyncRetryFailedAsync(Product product) {
+    public Completable postAsyncRetryFailedAsync(Product product) {
         return postAsyncRetryFailedWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetryFailedHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -5206,7 +5576,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledAsync().toBlocking().last().result();
+        beginPostAsyncRetrycanceledAsync().blockingLast().result();
     }
 
     /**
@@ -5240,7 +5610,7 @@ public class LROsImpl implements LROs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrycanceled(Product product) {
-        beginPostAsyncRetrycanceledAsync(product).toBlocking().last();
+        beginPostAsyncRetrycanceledAsync(product).blockingLast();
     }
 
     /**
@@ -5276,7 +5646,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetrycanceled() {
-        postAsyncRetrycanceledAsync().toBlocking().value();
+        postAsyncRetrycanceledAsync().blockingAwait();
     }
 
     /**
@@ -5308,9 +5678,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> object
      */
-    public Single<Void> postAsyncRetrycanceledAsync() {
+    public Completable postAsyncRetrycanceledAsync() {
         return postAsyncRetrycanceledWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -5323,7 +5693,7 @@ public class LROsImpl implements LROs {
      * @return the void object if successful.
      */
     public void postAsyncRetrycanceled(Product product) {
-        postAsyncRetrycanceledAsync(product).toBlocking().value();
+        postAsyncRetrycanceledAsync(product).blockingAwait();
     }
 
     /**
@@ -5357,9 +5727,9 @@ public class LROsImpl implements LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> object
      */
-    public Single<Void> postAsyncRetrycanceledAsync(Product product) {
+    public Completable postAsyncRetrycanceledAsync(Product product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>, Void>() { public Void call(RestResponse<LROsPostAsyncRetrycanceledHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

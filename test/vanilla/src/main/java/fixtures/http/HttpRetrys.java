@@ -14,9 +14,10 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.http.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -45,9 +46,9 @@ public interface HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head408Async();
+    Completable head408Async();
 
     /**
      * Return 408 status code, then 200 after retry.
@@ -79,9 +80,9 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put500Async();
+    Completable put500Async();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -116,9 +117,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put500Async(Boolean booleanValue);
+    Completable put500Async(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -151,9 +152,9 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch500Async();
+    Completable patch500Async();
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -188,9 +189,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch500Async(Boolean booleanValue);
+    Completable patch500Async(Boolean booleanValue);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -223,9 +224,9 @@ public interface HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> get502Async();
+    Completable get502Async();
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -257,9 +258,9 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post503Async();
+    Completable post503Async();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -294,9 +295,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> post503Async(Boolean booleanValue);
+    Completable post503Async(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -329,9 +330,9 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete503Async();
+    Completable delete503Async();
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -366,9 +367,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> delete503Async(Boolean booleanValue);
+    Completable delete503Async(Boolean booleanValue);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -401,9 +402,9 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put504Async();
+    Completable put504Async();
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -438,9 +439,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> put504Async(Boolean booleanValue);
+    Completable put504Async(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -473,9 +474,9 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch504Async();
+    Completable patch504Async();
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -510,9 +511,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> patch504Async(Boolean booleanValue);
+    Completable patch504Async(Boolean booleanValue);
 
     /**
      * Return 504 status code, then 200 after retry.

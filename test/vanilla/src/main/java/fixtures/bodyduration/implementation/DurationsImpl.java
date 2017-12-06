@@ -25,11 +25,13 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyduration.Durations;
 import fixtures.bodyduration.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import org.joda.time.Period;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -97,7 +99,7 @@ public class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -127,9 +129,17 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getNullAsync() {
+    public Maybe<Period> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -143,7 +153,7 @@ public class DurationsImpl implements Durations {
      * @return the void object if successful.
      */
     public void putPositiveDuration(Period durationBody) {
-        putPositiveDurationAsync(durationBody).toBlocking().value();
+        putPositiveDurationAsync(durationBody).blockingAwait();
     }
 
     /**
@@ -179,9 +189,9 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putPositiveDurationAsync(Period durationBody) {
+    public Completable putPositiveDurationAsync(Period durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -194,7 +204,7 @@ public class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getPositiveDuration() {
-        return getPositiveDurationAsync().toBlocking().value();
+        return getPositiveDurationAsync().blockingGet();
     }
 
     /**
@@ -224,9 +234,17 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getPositiveDurationAsync() {
+    public Maybe<Period> getPositiveDurationAsync() {
         return getPositiveDurationWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -239,7 +257,7 @@ public class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -269,9 +287,17 @@ public class DurationsImpl implements Durations {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Period> object
      */
-    public Single<Period> getInvalidAsync() {
+    public Maybe<Period> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Period>, Period>() { public Period call(RestResponse<Void, Period> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Period>, Maybe<Period>>() {
+                public Maybe<Period> apply(RestResponse<Void, Period> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

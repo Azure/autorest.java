@@ -14,10 +14,12 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydate.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.LocalDate;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,9 +49,9 @@ public interface Dates {
      * Get null date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<LocalDate> getNullAsync();
+    Maybe<LocalDate> getNullAsync();
 
     /**
      * Get null date value.
@@ -82,9 +84,9 @@ public interface Dates {
      * Get invalid date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<LocalDate> getInvalidDateAsync();
+    Maybe<LocalDate> getInvalidDateAsync();
 
     /**
      * Get invalid date value.
@@ -117,9 +119,9 @@ public interface Dates {
      * Get overflow date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<LocalDate> getOverflowDateAsync();
+    Maybe<LocalDate> getOverflowDateAsync();
 
     /**
      * Get overflow date value.
@@ -152,9 +154,9 @@ public interface Dates {
      * Get underflow date value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<LocalDate> getUnderflowDateAsync();
+    Maybe<LocalDate> getUnderflowDateAsync();
 
     /**
      * Get underflow date value.
@@ -189,9 +191,9 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMaxDateAsync(LocalDate dateBody);
+    Completable putMaxDateAsync(LocalDate dateBody);
 
     /**
      * Put max date value 9999-12-31.
@@ -225,9 +227,9 @@ public interface Dates {
      * Get max date value 9999-12-31.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<LocalDate> getMaxDateAsync();
+    Maybe<LocalDate> getMaxDateAsync();
 
     /**
      * Get max date value 9999-12-31.
@@ -262,9 +264,9 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putMinDateAsync(LocalDate dateBody);
+    Completable putMinDateAsync(LocalDate dateBody);
 
     /**
      * Put min date value 0000-01-01.
@@ -298,9 +300,9 @@ public interface Dates {
      * Get min date value 0000-01-01.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LocalDate&gt;} object if successful.
+     * @return the {@link Maybe&lt;LocalDate&gt;} object if successful.
      */
-    Single<LocalDate> getMinDateAsync();
+    Maybe<LocalDate> getMinDateAsync();
 
     /**
      * Get min date value 0000-01-01.

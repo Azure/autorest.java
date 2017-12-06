@@ -26,7 +26,6 @@ import java.util.UUID;
 import fixtures.bodyarray.implementation.AutoRestSwaggerBATArrayServiceImpl;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
-import rx.Single;
 
 public class ArrayTests {
     private static AutoRestSwaggerBATArrayService client;

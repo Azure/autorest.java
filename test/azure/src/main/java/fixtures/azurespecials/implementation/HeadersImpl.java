@@ -29,10 +29,12 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -90,7 +92,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the void object if successful.
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdAsync(fooClientRequestId).toBlocking().value();
+        customNamedRequestIdAsync(fooClientRequestId).blockingAwait();
     }
 
     /**
@@ -126,9 +128,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdHeaders, Void> object
      */
-    public Single<Void> customNamedRequestIdAsync(String fooClientRequestId) {
+    public Completable customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdHeaders, Void>, Void>() { public Void call(RestResponse<HeaderCustomNamedRequestIdHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -142,7 +144,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the void object if successful.
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().value();
+        customNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).blockingAwait();
     }
 
     /**
@@ -180,9 +182,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> object
      */
-    public Single<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
+    public Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void>, Void>() { public Void call(RestResponse<HeaderCustomNamedRequestIdParamGroupingHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -196,7 +198,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the boolean object if successful.
      */
     public boolean customNamedRequestIdHead(String fooClientRequestId) {
-        return customNamedRequestIdHeadAsync(fooClientRequestId).toBlocking().value();
+        return customNamedRequestIdHeadAsync(fooClientRequestId).blockingGet();
     }
 
     /**
@@ -232,9 +234,17 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> object
      */
-    public Single<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
+    public Maybe<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
         return customNamedRequestIdHeadWithRestResponseAsync(fooClientRequestId)
-            .map(new Func1<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>, Boolean>() { public Boolean call(RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

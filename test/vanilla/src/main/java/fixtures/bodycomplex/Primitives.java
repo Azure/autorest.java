@@ -25,9 +25,11 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -57,9 +59,9 @@ public interface Primitives {
      * Get complex types with integer properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;IntWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;IntWrapper&gt;} object if successful.
      */
-    Single<IntWrapper> getIntAsync();
+    Maybe<IntWrapper> getIntAsync();
 
     /**
      * Get complex types with integer properties.
@@ -94,9 +96,9 @@ public interface Primitives {
      *
      * @param complexBody Please put -1 and 2
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putIntAsync(IntWrapper complexBody);
+    Completable putIntAsync(IntWrapper complexBody);
 
     /**
      * Put complex types with integer properties.
@@ -130,9 +132,9 @@ public interface Primitives {
      * Get complex types with long properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;LongWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;LongWrapper&gt;} object if successful.
      */
-    Single<LongWrapper> getLongAsync();
+    Maybe<LongWrapper> getLongAsync();
 
     /**
      * Get complex types with long properties.
@@ -167,9 +169,9 @@ public interface Primitives {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLongAsync(LongWrapper complexBody);
+    Completable putLongAsync(LongWrapper complexBody);
 
     /**
      * Put complex types with long properties.
@@ -203,9 +205,9 @@ public interface Primitives {
      * Get complex types with float properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;FloatWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;FloatWrapper&gt;} object if successful.
      */
-    Single<FloatWrapper> getFloatAsync();
+    Maybe<FloatWrapper> getFloatAsync();
 
     /**
      * Get complex types with float properties.
@@ -240,9 +242,9 @@ public interface Primitives {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putFloatAsync(FloatWrapper complexBody);
+    Completable putFloatAsync(FloatWrapper complexBody);
 
     /**
      * Put complex types with float properties.
@@ -276,9 +278,9 @@ public interface Primitives {
      * Get complex types with double properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DoubleWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DoubleWrapper&gt;} object if successful.
      */
-    Single<DoubleWrapper> getDoubleAsync();
+    Maybe<DoubleWrapper> getDoubleAsync();
 
     /**
      * Get complex types with double properties.
@@ -313,9 +315,9 @@ public interface Primitives {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDoubleAsync(DoubleWrapper complexBody);
+    Completable putDoubleAsync(DoubleWrapper complexBody);
 
     /**
      * Put complex types with double properties.
@@ -349,9 +351,9 @@ public interface Primitives {
      * Get complex types with bool properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;BooleanWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;BooleanWrapper&gt;} object if successful.
      */
-    Single<BooleanWrapper> getBoolAsync();
+    Maybe<BooleanWrapper> getBoolAsync();
 
     /**
      * Get complex types with bool properties.
@@ -386,9 +388,9 @@ public interface Primitives {
      *
      * @param complexBody Please put true and false
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putBoolAsync(BooleanWrapper complexBody);
+    Completable putBoolAsync(BooleanWrapper complexBody);
 
     /**
      * Put complex types with bool properties.
@@ -422,9 +424,9 @@ public interface Primitives {
      * Get complex types with string properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;StringWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;StringWrapper&gt;} object if successful.
      */
-    Single<StringWrapper> getStringAsync();
+    Maybe<StringWrapper> getStringAsync();
 
     /**
      * Get complex types with string properties.
@@ -459,9 +461,9 @@ public interface Primitives {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putStringAsync(StringWrapper complexBody);
+    Completable putStringAsync(StringWrapper complexBody);
 
     /**
      * Put complex types with string properties.
@@ -495,9 +497,9 @@ public interface Primitives {
      * Get complex types with date properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateWrapper&gt;} object if successful.
      */
-    Single<DateWrapper> getDateAsync();
+    Maybe<DateWrapper> getDateAsync();
 
     /**
      * Get complex types with date properties.
@@ -532,9 +534,9 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateAsync(DateWrapper complexBody);
+    Completable putDateAsync(DateWrapper complexBody);
 
     /**
      * Put complex types with date properties.
@@ -568,9 +570,9 @@ public interface Primitives {
      * Get complex types with datetime properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DatetimeWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DatetimeWrapper&gt;} object if successful.
      */
-    Single<DatetimeWrapper> getDateTimeAsync();
+    Maybe<DatetimeWrapper> getDateTimeAsync();
 
     /**
      * Get complex types with datetime properties.
@@ -605,9 +607,9 @@ public interface Primitives {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeAsync(DatetimeWrapper complexBody);
+    Completable putDateTimeAsync(DatetimeWrapper complexBody);
 
     /**
      * Put complex types with datetime properties.
@@ -641,9 +643,9 @@ public interface Primitives {
      * Get complex types with datetimeRfc1123 properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Datetimerfc1123Wrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;Datetimerfc1123Wrapper&gt;} object if successful.
      */
-    Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
+    Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async();
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -678,9 +680,9 @@ public interface Primitives {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
+    Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody);
 
     /**
      * Put complex types with datetimeRfc1123 properties.
@@ -714,9 +716,9 @@ public interface Primitives {
      * Get complex types with duration properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DurationWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;DurationWrapper&gt;} object if successful.
      */
-    Single<DurationWrapper> getDurationAsync();
+    Maybe<DurationWrapper> getDurationAsync();
 
     /**
      * Get complex types with duration properties.
@@ -751,9 +753,9 @@ public interface Primitives {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDurationAsync(DurationWrapper complexBody);
+    Completable putDurationAsync(DurationWrapper complexBody);
 
     /**
      * Put complex types with duration properties.
@@ -787,9 +789,9 @@ public interface Primitives {
      * Get complex types with byte properties.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ByteWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ByteWrapper&gt;} object if successful.
      */
-    Single<ByteWrapper> getByteAsync();
+    Maybe<ByteWrapper> getByteAsync();
 
     /**
      * Get complex types with byte properties.
@@ -824,9 +826,9 @@ public interface Primitives {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putByteAsync(ByteWrapper complexBody);
+    Completable putByteAsync(ByteWrapper complexBody);
 
     /**
      * Put complex types with byte properties.

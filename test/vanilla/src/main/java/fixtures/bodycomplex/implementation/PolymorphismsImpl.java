@@ -28,10 +28,12 @@ import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -105,7 +107,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -135,9 +137,17 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Fish> object
      */
-    public Single<Fish> getValidAsync() {
+    public Maybe<Fish> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Fish>, Fish>() { public Fish call(RestResponse<Void, Fish> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Fish>, Maybe<Fish>>() {
+                public Maybe<Fish> apply(RestResponse<Void, Fish> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -183,7 +193,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -316,9 +326,9 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Fish complexBody) {
+    public Completable putValidAsync(Fish complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -331,7 +341,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the Salmon object if successful.
      */
     public Salmon getComplicated() {
-        return getComplicatedAsync().toBlocking().value();
+        return getComplicatedAsync().blockingGet();
     }
 
     /**
@@ -361,9 +371,17 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Salmon> object
      */
-    public Single<Salmon> getComplicatedAsync() {
+    public Maybe<Salmon> getComplicatedAsync() {
         return getComplicatedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Salmon>, Salmon>() { public Salmon call(RestResponse<Void, Salmon> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Salmon>, Maybe<Salmon>>() {
+                public Maybe<Salmon> apply(RestResponse<Void, Salmon> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -377,7 +395,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putComplicated(Salmon complexBody) {
-        putComplicatedAsync(complexBody).toBlocking().value();
+        putComplicatedAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -414,9 +432,9 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putComplicatedAsync(Salmon complexBody) {
+    public Completable putComplicatedAsync(Salmon complexBody) {
         return putComplicatedWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -455,7 +473,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @return the void object if successful.
      */
     public void putValidMissingRequired(Fish complexBody) {
-        putValidMissingRequiredAsync(complexBody).toBlocking().value();
+        putValidMissingRequiredAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -567,9 +585,9 @@ public class PolymorphismsImpl implements Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidMissingRequiredAsync(Fish complexBody) {
+    public Completable putValidMissingRequiredAsync(Fish complexBody) {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

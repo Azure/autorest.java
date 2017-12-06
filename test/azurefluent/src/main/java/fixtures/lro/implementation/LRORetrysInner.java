@@ -29,10 +29,12 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -155,7 +157,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
 
     /**
@@ -190,7 +192,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -226,7 +228,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().toBlocking().value();
+        return put201CreatingSucceeded200Async().blockingGet();
     }
 
     /**
@@ -258,9 +260,17 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async() {
+    public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -273,7 +283,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200Async(product).toBlocking().value();
+        return put201CreatingSucceeded200Async(product).blockingGet();
     }
 
     /**
@@ -307,9 +317,17 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+    public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -322,7 +340,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -357,7 +375,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -393,7 +411,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded() {
-        return putAsyncRelativeRetrySucceededAsync().toBlocking().value();
+        return putAsyncRelativeRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -425,9 +443,17 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRelativeRetrySucceededAsync() {
+    public Maybe<ProductInner> putAsyncRelativeRetrySucceededAsync() {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -440,7 +466,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded(ProductInner product) {
-        return putAsyncRelativeRetrySucceededAsync(product).toBlocking().value();
+        return putAsyncRelativeRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -474,9 +500,17 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
+    public Maybe<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -489,7 +523,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().last().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
     }
 
     /**
@@ -522,7 +556,7 @@ public class LRORetrysInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().value();
+        return deleteProvisioning202Accepted200SucceededAsync().blockingGet();
     }
 
     /**
@@ -552,9 +586,17 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
+    public Maybe<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -566,7 +608,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200Async().toBlocking().last();
+        beginDelete202Retry200Async().blockingLast();
     }
 
     /**
@@ -599,7 +641,7 @@ public class LRORetrysInner {
      * @return the void object if successful.
      */
     public void delete202Retry200() {
-        delete202Retry200Async().toBlocking().value();
+        delete202Retry200Async().blockingAwait();
     }
 
     /**
@@ -629,9 +671,9 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysDelete202Retry200HeadersInner, Void> object
      */
-    public Single<Void> delete202Retry200Async() {
+    public Completable delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysDelete202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LRORetrysDelete202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -643,7 +685,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
+        beginDeleteAsyncRelativeRetrySucceededAsync().blockingLast();
     }
 
     /**
@@ -676,7 +718,7 @@ public class LRORetrysInner {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededAsync().toBlocking().value();
+        deleteAsyncRelativeRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -706,9 +748,9 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetrySucceededAsync() {
+    public Completable deleteAsyncRelativeRetrySucceededAsync() {
         return deleteAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -720,7 +762,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -754,7 +796,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -790,7 +832,7 @@ public class LRORetrysInner {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().toBlocking().value();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -822,9 +864,9 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LRORetrysPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -837,7 +879,7 @@ public class LRORetrysInner {
      * @return the void object if successful.
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200Async(product).toBlocking().value();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -871,9 +913,9 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async(ProductInner product) {
+    public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LRORetrysPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LRORetrysPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -885,7 +927,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
+        beginPostAsyncRelativeRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -919,7 +961,7 @@ public class LRORetrysInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded(ProductInner product) {
-        beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
+        beginPostAsyncRelativeRetrySucceededAsync(product).blockingLast();
     }
 
     /**
@@ -955,7 +997,7 @@ public class LRORetrysInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetrySucceeded() {
-        postAsyncRelativeRetrySucceededAsync().toBlocking().value();
+        postAsyncRelativeRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -987,9 +1029,9 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetrySucceededAsync() {
+    public Completable postAsyncRelativeRetrySucceededAsync() {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1002,7 +1044,7 @@ public class LRORetrysInner {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetrySucceeded(ProductInner product) {
-        postAsyncRelativeRetrySucceededAsync(product).toBlocking().value();
+        postAsyncRelativeRetrySucceededAsync(product).blockingAwait();
     }
 
     /**
@@ -1036,9 +1078,9 @@ public class LRORetrysInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRelativeRetrySucceededAsync(ProductInner product) {
+    public Completable postAsyncRelativeRetrySucceededAsync(ProductInner product) {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

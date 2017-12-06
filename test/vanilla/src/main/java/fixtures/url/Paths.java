@@ -15,12 +15,13 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -49,9 +50,9 @@ public interface Paths {
      * Get true Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getBooleanTrueAsync();
+    Completable getBooleanTrueAsync();
 
     /**
      * Get true Boolean value on path.
@@ -83,9 +84,9 @@ public interface Paths {
      * Get false Boolean value on path.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getBooleanFalseAsync();
+    Completable getBooleanFalseAsync();
 
     /**
      * Get false Boolean value on path.
@@ -117,9 +118,9 @@ public interface Paths {
      * Get '1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getIntOneMillionAsync();
+    Completable getIntOneMillionAsync();
 
     /**
      * Get '1000000' integer value.
@@ -151,9 +152,9 @@ public interface Paths {
      * Get '-1000000' integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getIntNegativeOneMillionAsync();
+    Completable getIntNegativeOneMillionAsync();
 
     /**
      * Get '-1000000' integer value.
@@ -185,9 +186,9 @@ public interface Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getTenBillionAsync();
+    Completable getTenBillionAsync();
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -219,9 +220,9 @@ public interface Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getNegativeTenBillionAsync();
+    Completable getNegativeTenBillionAsync();
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -253,9 +254,9 @@ public interface Paths {
      * Get '1.034E+20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> floatScientificPositiveAsync();
+    Completable floatScientificPositiveAsync();
 
     /**
      * Get '1.034E+20' numeric value.
@@ -287,9 +288,9 @@ public interface Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> floatScientificNegativeAsync();
+    Completable floatScientificNegativeAsync();
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -321,9 +322,9 @@ public interface Paths {
      * Get '9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> doubleDecimalPositiveAsync();
+    Completable doubleDecimalPositiveAsync();
 
     /**
      * Get '9999999.999' numeric value.
@@ -355,9 +356,9 @@ public interface Paths {
      * Get '-9999999.999' numeric value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> doubleDecimalNegativeAsync();
+    Completable doubleDecimalNegativeAsync();
 
     /**
      * Get '-9999999.999' numeric value.
@@ -389,9 +390,9 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringUnicodeAsync();
+    Completable stringUnicodeAsync();
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -423,9 +424,9 @@ public interface Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringUrlEncodedAsync();
+    Completable stringUrlEncodedAsync();
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -457,9 +458,9 @@ public interface Paths {
      * Get ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringEmptyAsync();
+    Completable stringEmptyAsync();
 
     /**
      * Get ''.
@@ -494,9 +495,9 @@ public interface Paths {
      *
      * @param stringPath null string value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> stringNullAsync(String stringPath);
+    Completable stringNullAsync(String stringPath);
 
     /**
      * Get null (should throw).
@@ -532,9 +533,9 @@ public interface Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> enumValidAsync(UriColor enumPath);
+    Completable enumValidAsync(UriColor enumPath);
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -570,9 +571,9 @@ public interface Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> enumNullAsync(UriColor enumPath);
+    Completable enumNullAsync(UriColor enumPath);
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -608,9 +609,9 @@ public interface Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteMultiByteAsync(byte[] bytePath);
+    Completable byteMultiByteAsync(byte[] bytePath);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -643,9 +644,9 @@ public interface Paths {
      * Get '' as byte array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteEmptyAsync();
+    Completable byteEmptyAsync();
 
     /**
      * Get '' as byte array.
@@ -680,9 +681,9 @@ public interface Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> byteNullAsync(byte[] bytePath);
+    Completable byteNullAsync(byte[] bytePath);
 
     /**
      * Get null as byte array (should throw).
@@ -715,9 +716,9 @@ public interface Paths {
      * Get '2012-01-01' as date.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateValidAsync();
+    Completable dateValidAsync();
 
     /**
      * Get '2012-01-01' as date.
@@ -752,9 +753,9 @@ public interface Paths {
      *
      * @param datePath null as date (should throw)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateNullAsync(LocalDate datePath);
+    Completable dateNullAsync(LocalDate datePath);
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -787,9 +788,9 @@ public interface Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateTimeValidAsync();
+    Completable dateTimeValidAsync();
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -824,9 +825,9 @@ public interface Paths {
      *
      * @param dateTimePath null as date-time
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> dateTimeNullAsync(DateTime dateTimePath);
+    Completable dateTimeNullAsync(DateTime dateTimePath);
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -862,9 +863,9 @@ public interface Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> base64UrlAsync(byte[] base64UrlPath);
+    Completable base64UrlAsync(byte[] base64UrlPath);
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
@@ -900,9 +901,9 @@ public interface Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> arrayCsvInPathAsync(List<String> arrayPath);
+    Completable arrayCsvInPathAsync(List<String> arrayPath);
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -938,9 +939,9 @@ public interface Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
+    Completable unixTimeUrlAsync(DateTime unixTimeUrlPath);
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).

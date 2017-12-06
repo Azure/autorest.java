@@ -17,11 +17,13 @@ import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -94,9 +96,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> putArrayAsync();
+    Completable putArrayAsync();
 
     /**
      * Put External Resource as an Array.
@@ -130,9 +132,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> putArrayAsync(List<Resource> resourceArray);
+    Completable putArrayAsync(List<Resource> resourceArray);
 
     /**
      * Put External Resource as an Array.
@@ -169,7 +171,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
-    Single<List<FlattenedProduct>> getArrayAsync();
+    Maybe<List<FlattenedProduct>> getArrayAsync();
 
     /**
      * Get External Resource as an Array.
@@ -202,9 +204,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> putDictionaryAsync();
+    Completable putDictionaryAsync();
 
     /**
      * Put External Resource as a Dictionary.
@@ -238,9 +240,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
+    Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
 
     /**
      * Put External Resource as a Dictionary.
@@ -277,7 +279,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
-    Single<Map<String, FlattenedProduct>> getDictionaryAsync();
+    Maybe<Map<String, FlattenedProduct>> getDictionaryAsync();
 
     /**
      * Get External Resource as a Dictionary.
@@ -310,9 +312,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> putResourceCollectionAsync();
+    Completable putResourceCollectionAsync();
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -346,9 +348,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
+    Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -385,7 +387,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollection object
      */
-    Single<ResourceCollection> getResourceCollectionAsync();
+    Maybe<ResourceCollection> getResourceCollectionAsync();
 
     /**
      * Get External Resource as a ResourceCollection.

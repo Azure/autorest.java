@@ -15,9 +15,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,9 +49,9 @@ public interface Arrays {
      * Get complex types with array property.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ArrayWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
-    Single<ArrayWrapper> getValidAsync();
+    Maybe<ArrayWrapper> getValidAsync();
 
     /**
      * Get complex types with array property.
@@ -84,9 +86,9 @@ public interface Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(ArrayWrapper complexBody);
+    Completable putValidAsync(ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property.
@@ -120,9 +122,9 @@ public interface Arrays {
      * Get complex types with array property which is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ArrayWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
-    Single<ArrayWrapper> getEmptyAsync();
+    Maybe<ArrayWrapper> getEmptyAsync();
 
     /**
      * Get complex types with array property which is empty.
@@ -157,9 +159,9 @@ public interface Arrays {
      *
      * @param complexBody Please put an empty array
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putEmptyAsync(ArrayWrapper complexBody);
+    Completable putEmptyAsync(ArrayWrapper complexBody);
 
     /**
      * Put complex types with array property which is empty.
@@ -193,9 +195,9 @@ public interface Arrays {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;ArrayWrapper&gt;} object if successful.
+     * @return the {@link Maybe&lt;ArrayWrapper&gt;} object if successful.
      */
-    Single<ArrayWrapper> getNotProvidedAsync();
+    Maybe<ArrayWrapper> getNotProvidedAsync();
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.

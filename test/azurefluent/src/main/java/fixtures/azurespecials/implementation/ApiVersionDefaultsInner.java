@@ -24,10 +24,11 @@ import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -90,7 +91,7 @@ public class ApiVersionDefaultsInner {
      * @return the void object if successful.
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidAsync().toBlocking().value();
+        getMethodGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -123,9 +124,9 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodGlobalValidAsync() {
+    public Completable getMethodGlobalValidAsync() {
         return getMethodGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -138,7 +139,7 @@ public class ApiVersionDefaultsInner {
      * @return the void object if successful.
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidAsync().toBlocking().value();
+        getMethodGlobalNotProvidedValidAsync().blockingAwait();
     }
 
     /**
@@ -171,9 +172,9 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodGlobalNotProvidedValidAsync() {
+    public Completable getMethodGlobalNotProvidedValidAsync() {
         return getMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -186,7 +187,7 @@ public class ApiVersionDefaultsInner {
      * @return the void object if successful.
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidAsync().toBlocking().value();
+        getPathGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -219,9 +220,9 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathGlobalValidAsync() {
+    public Completable getPathGlobalValidAsync() {
         return getPathGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -234,7 +235,7 @@ public class ApiVersionDefaultsInner {
      * @return the void object if successful.
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidAsync().toBlocking().value();
+        getSwaggerGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -267,9 +268,9 @@ public class ApiVersionDefaultsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerGlobalValidAsync() {
+    public Completable getSwaggerGlobalValidAsync() {
         return getSwaggerGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

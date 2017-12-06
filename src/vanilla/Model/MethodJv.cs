@@ -381,12 +381,47 @@ namespace AutoRest.Java.Model
         
         public string ObservableImpl(IEnumerable<ParameterJv> parameters)
         {
+            string returnType;
+            if (ReturnType.Body == null)
+            {
+                returnType = "Completable";
+            }
+            else
+            {
+                returnType = $"Maybe<{ReturnTypeJv.ClientResponseTypeString}>";   
+            }
+            
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            builder.AppendLine($"public Single<{ReturnTypeJv.ClientResponseTypeString}> {Name}Async({ParameterDeclaration(parameters)}) {{");
+            builder.AppendLine($"public {returnType} {Name}Async({ParameterDeclaration(parameters)}) {{");
             builder.Indent();
             builder.AppendLine($"return {Name}WithRestResponseAsync({Arguments(parameters)})");
             builder.Indent();
-            builder.AppendLine($".map(new Func1<{RestResponseAbstractTypeName}, {ReturnTypeJv.ClientResponseTypeString}>() {{ public {ReturnTypeJv.ClientResponseTypeString} call({RestResponseAbstractTypeName} restResponse) {{ return restResponse.body(); }} }});");
+
+            if (ReturnType.Body == null)
+            {
+                builder.AppendLine($".toCompletable();");
+            }
+            else
+            {
+                builder.AppendLine($".flatMapMaybe(new Function<{RestResponseAbstractTypeName}, Maybe<{ReturnTypeJv.ClientResponseTypeString}>>() {{");
+                builder.Indent();
+                builder.AppendLine($"public Maybe<{ReturnTypeJv.ClientResponseTypeString}> apply({RestResponseAbstractTypeName} restResponse) {{");
+                builder.Indent();
+                builder.AppendLine("if (restResponse.body() == null) {");
+                builder.Indent();
+                builder.AppendLine("return Maybe.empty();");
+                builder.Outdent();
+                builder.AppendLine("} else {");
+                builder.Indent();
+                builder.AppendLine("return Maybe.just(restResponse.body());");
+                builder.Outdent();
+                builder.AppendLine("}");
+                builder.Outdent();
+                builder.AppendLine("}");
+                builder.Outdent();
+                builder.AppendLine("});");
+            }
+            
             builder.Outdent();
             builder.AppendLine("}");
             return builder.ToString();
@@ -432,11 +467,11 @@ namespace AutoRest.Java.Model
 
             if (ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
             {
-                builder.AppendLine($"{Name}Async({argsString}).toBlocking().value();");
+                builder.AppendLine($"{Name}Async({argsString}).blockingAwait();");
             }
             else
             {
-                builder.AppendLine($"return {Name}Async({argsString}).toBlocking().value();");
+                builder.AppendLine($"return {Name}Async({argsString}).blockingGet();");
             }
 
             builder.Outdent();
@@ -781,11 +816,21 @@ namespace AutoRest.Java.Model
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("rx.Observable");
-                imports.Add("rx.Single");
+                imports.Add("io.reactivex.Observable");
+                imports.Add("io.reactivex.Single");
                 imports.Add("com.microsoft.rest.v2.ServiceFuture");
                 imports.Add("com.microsoft.rest.v2.ServiceCallback");
                 imports.Add("com.microsoft.rest.v2.RestResponse");
+
+                if (ReturnType.Body == null)
+                {
+                    imports.Add("io.reactivex.Completable");
+                }
+                else
+                {
+                    imports.Add("io.reactivex.Maybe");
+                }
+                
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
@@ -812,9 +857,9 @@ namespace AutoRest.Java.Model
                 {
                     HashSet<string> imports = new HashSet<string>();
                     // static imports
-                    imports.Add("rx.Observable");
-                    imports.Add("rx.Single");
-                    imports.Add("rx.functions.Func1");
+                    imports.Add("io.reactivex.Observable");
+                    imports.Add("io.reactivex.Single");
+                    imports.Add("io.reactivex.functions.Function");
                     imports.Add("com.microsoft.rest.v2.annotations.Headers");
                     imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
                     imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
@@ -822,6 +867,16 @@ namespace AutoRest.Java.Model
                     imports.Add("com.microsoft.rest.v2.http.HttpClient");
                     imports.Add("com.microsoft.rest.v2.ServiceFuture");
                     imports.Add("com.microsoft.rest.v2.ServiceCallback");
+                    
+                    if (ReturnType.Body == null)
+                    {
+                        imports.Add("io.reactivex.Completable");
+                    }
+                    else
+                    {
+                        imports.Add("io.reactivex.Maybe");
+                    }
+
                     this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                     // Http verb annotations
                     imports.Add(this.HttpMethod.ImportFrom());

@@ -25,10 +25,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -92,7 +93,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postMethodLocalValid(String subscriptionId) {
-        postMethodLocalValidAsync(subscriptionId).toBlocking().value();
+        postMethodLocalValidAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -128,9 +129,9 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodLocalValidAsync(String subscriptionId) {
+    public Completable postMethodLocalValidAsync(String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -144,7 +145,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postMethodLocalNull(String subscriptionId) {
-        postMethodLocalNullAsync(subscriptionId).toBlocking().value();
+        postMethodLocalNullAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -180,9 +181,9 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodLocalNullAsync(String subscriptionId) {
+    public Completable postMethodLocalNullAsync(String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -196,7 +197,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postPathLocalValid(String subscriptionId) {
-        postPathLocalValidAsync(subscriptionId).toBlocking().value();
+        postPathLocalValidAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -232,9 +233,9 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postPathLocalValidAsync(String subscriptionId) {
+    public Completable postPathLocalValidAsync(String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -248,7 +249,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the void object if successful.
      */
     public void postSwaggerLocalValid(String subscriptionId) {
-        postSwaggerLocalValidAsync(subscriptionId).toBlocking().value();
+        postSwaggerLocalValidAsync(subscriptionId).blockingAwait();
     }
 
     /**
@@ -284,9 +285,9 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSwaggerLocalValidAsync(String subscriptionId) {
+    public Completable postSwaggerLocalValidAsync(String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

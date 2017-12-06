@@ -37,12 +37,14 @@ import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.WrappedProduct;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
@@ -144,7 +146,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putArray() {
-        putArrayAsync().toBlocking().value();
+        putArrayAsync().blockingAwait();
     }
 
     /**
@@ -176,9 +178,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync() {
+    public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -191,7 +193,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).toBlocking().value();
+        putArrayAsync(resourceArray).blockingAwait();
     }
 
     /**
@@ -225,9 +227,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync(List<Resource> resourceArray) {
+    public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -240,7 +242,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayAsync().toBlocking().value();
+        return getArrayAsync().blockingGet();
     }
 
     /**
@@ -270,9 +272,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
      */
-    public Single<List<FlattenedProduct>> getArrayAsync() {
+    public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<FlattenedProduct>>, List<FlattenedProduct>>() { public List<FlattenedProduct> call(RestResponse<Void, List<FlattenedProduct>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProduct>>, Maybe<List<FlattenedProduct>>>() {
+                public Maybe<List<FlattenedProduct>> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -285,7 +295,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putWrappedArray() {
-        putWrappedArrayAsync().toBlocking().value();
+        putWrappedArrayAsync().blockingAwait();
     }
 
     /**
@@ -317,9 +327,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWrappedArrayAsync() {
+    public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -332,7 +342,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putWrappedArray(List<WrappedProduct> resourceArray) {
-        putWrappedArrayAsync(resourceArray).toBlocking().value();
+        putWrappedArrayAsync(resourceArray).blockingAwait();
     }
 
     /**
@@ -366,9 +376,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
+    public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -381,7 +391,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the List&lt;ProductWrapper&gt; object if successful.
      */
     public List<ProductWrapper> getWrappedArray() {
-        return getWrappedArrayAsync().toBlocking().value();
+        return getWrappedArrayAsync().blockingGet();
     }
 
     /**
@@ -411,9 +421,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<ProductWrapper>> object
      */
-    public Single<List<ProductWrapper>> getWrappedArrayAsync() {
+    public Maybe<List<ProductWrapper>> getWrappedArrayAsync() {
         return getWrappedArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<ProductWrapper>>, List<ProductWrapper>>() { public List<ProductWrapper> call(RestResponse<Void, List<ProductWrapper>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<ProductWrapper>>, Maybe<List<ProductWrapper>>>() {
+                public Maybe<List<ProductWrapper>> apply(RestResponse<Void, List<ProductWrapper>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -426,7 +444,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putDictionary() {
-        putDictionaryAsync().toBlocking().value();
+        putDictionaryAsync().blockingAwait();
     }
 
     /**
@@ -458,9 +476,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync() {
+    public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -473,7 +491,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).toBlocking().value();
+        putDictionaryAsync(resourceDictionary).blockingAwait();
     }
 
     /**
@@ -507,9 +525,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -522,7 +540,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryAsync().toBlocking().value();
+        return getDictionaryAsync().blockingGet();
     }
 
     /**
@@ -552,9 +570,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
      */
-    public Single<Map<String, FlattenedProduct>> getDictionaryAsync() {
+    public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() { public Map<String, FlattenedProduct> call(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Maybe<Map<String, FlattenedProduct>>>() {
+                public Maybe<Map<String, FlattenedProduct>> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -567,7 +593,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putResourceCollection() {
-        putResourceCollectionAsync().toBlocking().value();
+        putResourceCollectionAsync().blockingAwait();
     }
 
     /**
@@ -599,9 +625,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync() {
+    public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -614,7 +640,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the void object if successful.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).toBlocking().value();
+        putResourceCollectionAsync(resourceComplexObject).blockingAwait();
     }
 
     /**
@@ -648,9 +674,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+    public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -663,7 +689,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionAsync().toBlocking().value();
+        return getResourceCollectionAsync().blockingGet();
     }
 
     /**
@@ -693,9 +719,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
      */
-    public Single<ResourceCollection> getResourceCollectionAsync() {
+    public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ResourceCollection>, ResourceCollection>() { public ResourceCollection call(RestResponse<Void, ResourceCollection> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ResourceCollection>, Maybe<ResourceCollection>>() {
+                public Maybe<ResourceCollection> apply(RestResponse<Void, ResourceCollection> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -708,7 +742,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct() {
-        return putSimpleProductAsync().toBlocking().value();
+        return putSimpleProductAsync().blockingGet();
     }
 
     /**
@@ -740,9 +774,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> putSimpleProductAsync() {
+    public Maybe<SimpleProduct> putSimpleProductAsync() {
         return putSimpleProductWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -755,7 +797,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductAsync(simpleBodyProduct).toBlocking().value();
+        return putSimpleProductAsync(simpleBodyProduct).blockingGet();
     }
 
     /**
@@ -789,9 +831,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
+    public Maybe<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct) {
         return putSimpleProductWithRestResponseAsync(simpleBodyProduct)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -806,7 +856,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) {
-        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName).toBlocking().value();
+        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName).blockingGet();
     }
 
     /**
@@ -857,9 +907,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
+    public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -876,7 +934,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
-        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().value();
+        return postFlattenedSimpleProductAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).blockingGet();
     }
 
     /**
@@ -936,9 +994,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
+    public Maybe<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
         return postFlattenedSimpleProductWithRestResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -952,7 +1018,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingAsync(flattenParameterGroup).toBlocking().value();
+        return putSimpleProductWithGroupingAsync(flattenParameterGroup).blockingGet();
     }
 
     /**
@@ -1004,9 +1070,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SimpleProduct> object
      */
-    public Single<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
+    public Maybe<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup) {
         return putSimpleProductWithGroupingWithRestResponseAsync(flattenParameterGroup)
-            .map(new Func1<RestResponse<Void, SimpleProduct>, SimpleProduct>() { public SimpleProduct call(RestResponse<Void, SimpleProduct> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SimpleProduct>, Maybe<SimpleProduct>>() {
+                public Maybe<SimpleProduct> apply(RestResponse<Void, SimpleProduct> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 }

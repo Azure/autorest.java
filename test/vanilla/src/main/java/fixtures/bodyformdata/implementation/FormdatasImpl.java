@@ -25,11 +25,12 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyformdata.Formdatas;
 import fixtures.bodyformdata.models.ErrorException;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.InputStream;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -89,7 +90,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) {
-        return uploadFileAsync(fileContent, fileName).toBlocking().value();
+        return uploadFileAsync(fileContent, fileName).blockingGet();
     }
 
     /**
@@ -131,9 +132,17 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
+    public Maybe<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
         return uploadFileWithRestResponseAsync(fileContent, fileName)
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
+                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -147,7 +156,7 @@ public class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) {
-        return uploadFileViaBodyAsync(fileContent).toBlocking().value();
+        return uploadFileViaBodyAsync(fileContent).blockingGet();
     }
 
     /**
@@ -183,9 +192,17 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
      */
-    public Single<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
+    public Maybe<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
         return uploadFileViaBodyWithRestResponseAsync(fileContent)
-            .map(new Func1<RestResponse<Void, InputStream>, InputStream>() { public InputStream call(RestResponse<Void, InputStream> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
+                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
