@@ -79,67 +79,56 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     @Host("http://localhost")
     interface AutoRestResourceFlatteningTestServiceService {
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putArray" })
         @PUT("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putArray(@BodyParam("application/json; charset=utf-8") List<Resource> resourceArray);
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getArray" })
         @GET("model-flatten/array")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, List<FlattenedProduct>>> getArray();
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putWrappedArray" })
         @PUT("model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putWrappedArray(@BodyParam("application/json; charset=utf-8") List<WrappedProduct> resourceArray);
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getWrappedArray" })
         @GET("model-flatten/wrappedarray")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, List<ProductWrapper>>> getWrappedArray();
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDictionary(@BodyParam("application/json; charset=utf-8") Map<String, FlattenedProduct> resourceDictionary);
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getDictionary" })
         @GET("model-flatten/dictionary")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionary();
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putResourceCollection(@BodyParam("application/json; charset=utf-8") ResourceCollection resourceComplexObject);
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("model-flatten/resourcecollection")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ResourceCollection>> getResourceCollection();
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putSimpleProduct" })
         @PUT("model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, SimpleProduct>> putSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService postFlattenedSimpleProduct" })
         @POST("model-flatten/customFlattening")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, SimpleProduct>> postFlattenedSimpleProduct(@BodyParam("application/json; charset=utf-8") SimpleProduct simpleBodyProduct);
 
-        @Headers({ "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putSimpleProductWithGrouping" })
         @PUT("model-flatten/customFlattening/parametergrouping/{name}/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

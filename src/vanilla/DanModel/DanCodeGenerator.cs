@@ -552,7 +552,6 @@ namespace AutoRest.Java.DanModel
                     {
                         foreach (MethodJva method in GetRootMethods(codeModel).Cast<MethodJva>())
                         {
-                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {GetFullyQualifiedDomainName(codeModel)} {method.Name}\" }})");
                             if (method.IsPagingNextOperation)
                             {
                                 interfaceBlock.Annotation("GET(\"{{nextUrl}}\")");
@@ -2085,10 +2084,6 @@ namespace AutoRest.Java.DanModel
                             {
                                 interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
                             }
-                            else
-                            {
-                                interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {GetFullyQualifiedDomainName(codeModel)} {method.Name}\" }})");
-                            }
                             interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
                             if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
                             {
@@ -2128,12 +2123,6 @@ namespace AutoRest.Java.DanModel
             });
             javaFile.PublicInterface(interfaceName, interfaceBlock =>
             {
-                interfaceBlock.MultipleLineComment(comment =>
-                {
-                    comment.Line("The default base URL.");
-                });
-                interfaceBlock.Line($"String DEFAULT_BASE_URL = \"{GetBaseUrl(codeModel)}\";");
-
                 foreach (Property property in codeModel.Properties)
                 {
                     string propertyDescription = property.Documentation;
@@ -3421,18 +3410,13 @@ namespace AutoRest.Java.DanModel
 
         private static string GetBaseUrl(CodeModel codeModel)
         {
-            string result = codeModel.BaseUrl;
-            if (!result.Contains("://"))
-            {
-                result = $"https://{result}";
-            }
-            return result;
+            return codeModel.BaseUrl;
         }
 
         private static IEnumerable<string> GetImplImports(CodeModel codeModel)
         {
             HashSet<string> classes = new HashSet<string>();
-            classes.Add(GetFullyQualifiedDomainName(codeModel));
+            classes.Add(codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name);
             foreach (var methodGroupFullType in GetAllOperations(codeModel).Select(op => op.MethodGroupFullType).Distinct())
             {
                 classes.Add(methodGroupFullType);
@@ -3468,9 +3452,6 @@ namespace AutoRest.Java.DanModel
 
         private static IEnumerable<MethodJv> GetRootMethods(CodeModel codeModel)
             => codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
-
-        private static string GetFullyQualifiedDomainName(CodeModel codeModel)
-            => codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name;
 
         internal static IEnumerable<string> GetImports(Property property)
             => GetImports(property, Settings.Instance);

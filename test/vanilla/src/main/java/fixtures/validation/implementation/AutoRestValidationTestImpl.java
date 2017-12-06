@@ -122,24 +122,20 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     @Host("http://localhost")
     interface AutoRestValidationTestService {
-        @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest validationOfMethodParameters" })
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Product>> validationOfMethodParameters(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @QueryParam("apiVersion") String apiVersion);
 
-        @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest validationOfBody" })
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Product>> validationOfBody(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @PathParam("id") int id, @BodyParam("application/json; charset=utf-8") Product body, @QueryParam("apiVersion") String apiVersion);
 
-        @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest getWithConstantInPath" })
         @GET("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Void>> getWithConstantInPath(@PathParam("constantParam") String constantParam);
 
-        @Headers({ "x-ms-logging-context: fixtures.validation.AutoRestValidationTest postWithConstantInBody" })
         @POST("validation/constantsInPath/{constantParam}/value")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Product>> postWithConstantInBody(@PathParam("constantParam") String constantParam, @BodyParam("application/json; charset=utf-8") Product body);

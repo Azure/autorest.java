@@ -14,10 +14,6 @@ package fixtures.bodyboolean;
  * The interface for AutoRestBoolTestService class.
  */
 public interface AutoRestBoolTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Bools object to access its operations.

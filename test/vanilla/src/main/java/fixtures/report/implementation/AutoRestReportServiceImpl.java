@@ -65,7 +65,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      */
     @Host("http://localhost")
     interface AutoRestReportServiceService {
-        @Headers({ "x-ms-logging-context: fixtures.report.AutoRestReportService getReport" })
         @GET("report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

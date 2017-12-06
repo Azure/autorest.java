@@ -14,10 +14,6 @@ package fixtures.bodyinteger;
  * The interface for AutoRestIntegerTestService class.
  */
 public interface AutoRestIntegerTestService {
-    /**
-     * The default base URL.
-     */
-    String DEFAULT_BASE_URL = "http://localhost";
 
     /**
      * Gets the Ints object to access its operations.
