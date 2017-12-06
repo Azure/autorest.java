@@ -47,7 +47,7 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @return the observable to the Map<String, Integer> object
      */
     Single<Map<String, Integer>> getReportAsync();
 
@@ -55,9 +55,47 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @return the observable to the Map<String, Integer> object
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     */
+    Map<String, Integer> getReport(String qualifier);
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, final ServiceCallback<Map<String, Integer>> serviceCallback);
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Single<Map<String, Integer>> getReportAsync(String qualifier);
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the Map&lt;String, Integer&gt; object
+     */
+    Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 
 
 }

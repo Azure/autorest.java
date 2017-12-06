@@ -20,6 +20,7 @@ import com.microsoft.rest.v2.annotations.ExpectedResponses;
 import com.microsoft.rest.v2.annotations.GET;
 import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
+import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
@@ -63,12 +64,12 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * The interface defining all the services for AutoRestReportService to be
      * used by Retrofit to perform actually REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface AutoRestReportServiceService {
         @GET("report")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, Map<String, Integer>>> getReport();
+        Single<RestResponse<Void, Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier);
     }
 
     /**
@@ -101,7 +102,8 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
     public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync() {
-        return service.getReport();
+        final String qualifier = null;
+        return service.getReport(qualifier);
     }
 
     /**
@@ -112,6 +114,54 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      */
     public Single<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
+            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+        }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the Map&lt;String, Integer&gt; object if successful.
+     */
+    public Map<String, Integer> getReport(String qualifier) {
+        return getReportAsync(qualifier).toBlocking().value();
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Map<String, Integer>> getReportAsync(String qualifier, ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceFuture.fromBody(getReportAsync(qualifier), serviceCallback);
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
+     */
+    public Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier) {
+        return service.getReport(qualifier);
+    }
+
+    /**
+     * Get test coverage report.
+     *
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
+     */
+    public Single<Map<String, Integer>> getReportAsync(String qualifier) {
+        return getReportWithRestResponseAsync(qualifier)
             .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
         }
 

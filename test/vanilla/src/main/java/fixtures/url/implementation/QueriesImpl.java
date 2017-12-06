@@ -65,7 +65,7 @@ public class QueriesImpl implements Queries {
      * The interface defining all the services for Queries to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface QueriesService {
         @Headers({ "x-ms-logging-context: fixtures.url.Queries getBooleanTrue" })
         @GET("queries/bool/true")

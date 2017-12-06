@@ -52,7 +52,7 @@ public class HttpSuccessInner {
      * The interface defining all the services for HttpSuccess to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HttpSuccessService {
         @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")

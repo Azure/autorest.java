@@ -61,7 +61,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      * The interface defining all the services for HttpServerFailures to be
      * used by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface HttpServerFailuresService {
         @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures head501" })
         @HEAD("http/failure/server/501")

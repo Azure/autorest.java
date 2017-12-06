@@ -62,7 +62,7 @@ public class BasicsImpl implements Basics {
      * The interface defining all the services for Basics to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface BasicsService {
         @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getValid" })
         @GET("complex/basic/valid")

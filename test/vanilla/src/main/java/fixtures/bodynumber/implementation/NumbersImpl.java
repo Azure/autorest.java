@@ -60,7 +60,7 @@ public class NumbersImpl implements Numbers {
      * The interface defining all the services for Numbers to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("https://localhost")
+    @Host("http://localhost:3000")
     interface NumbersService {
         @Headers({ "x-ms-logging-context: fixtures.bodynumber.Numbers getNull" })
         @GET("number/null")

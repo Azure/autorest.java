@@ -63,7 +63,7 @@ public class IntsImpl implements Ints {
      * The interface defining all the services for Ints to be used by RestProxy
      * to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface IntsService {
         @Headers({ "x-ms-logging-context: fixtures.bodyinteger.Ints getNull" })
         @GET("int/null")

@@ -67,7 +67,7 @@ public class PathsImpl implements Paths {
      * The interface defining all the services for Paths to be used by
      * RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface PathsService {
         @Headers({ "x-ms-logging-context: fixtures.url.Paths getBooleanTrue" })
         @GET("paths/bool/true/{boolPath}")

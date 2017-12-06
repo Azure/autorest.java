@@ -120,7 +120,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * The interface defining all the services for AutoRestValidationTest to be
      * used by Retrofit to perform actually REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface AutoRestValidationTestService {
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({200})

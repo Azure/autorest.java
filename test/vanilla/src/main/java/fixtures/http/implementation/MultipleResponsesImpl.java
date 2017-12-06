@@ -24,11 +24,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.http.MultipleResponses;
 import fixtures.http.models.A;
+import fixtures.http.models.AException;
 import fixtures.http.models.B;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
-import fixtures.http.models.MyException;
 import java.io.IOException;
 import rx.Observable;
 import rx.Single;
@@ -63,7 +63,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * The interface defining all the services for MultipleResponses to be used
      * by RestProxy to perform REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface MultipleResponsesService {
         @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError200Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
@@ -177,22 +177,22 @@ public class MultipleResponsesImpl implements MultipleResponses {
 
         @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200Valid" })
         @GET("http/payloads/default/A/response/200/valid")
-        @UnexpectedResponseExceptionType(MyException.class)
+        @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA200Valid();
 
         @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200None" })
         @GET("http/payloads/default/A/response/200/none")
-        @UnexpectedResponseExceptionType(MyException.class)
+        @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA200None();
 
         @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400Valid" })
         @GET("http/payloads/default/A/response/400/valid")
-        @UnexpectedResponseExceptionType(MyException.class)
+        @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA400Valid();
 
         @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400None" })
         @GET("http/payloads/default/A/response/400/none")
-        @UnexpectedResponseExceptionType(MyException.class)
+        @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA400None();
 
         @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200Invalid" })
@@ -1107,7 +1107,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1152,7 +1152,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 200 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1197,7 +1197,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */
@@ -1242,7 +1242,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      * Send a 400 response with no payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @throws MyException thrown if the request is rejected by server
+     * @throws AException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the A object if successful.
      */

@@ -176,7 +176,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * AutoRestResourceFlatteningTestService to be used by RestProxy to perform
      * REST calls.
      */
-    @Host("http://localhost")
+    @Host("http://localhost:3000")
     interface AutoRestResourceFlatteningTestServiceService {
         @PUT("azure/resource-flatten/array")
         @ExpectedResponses({200})
