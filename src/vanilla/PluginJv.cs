@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
 
-using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -27,7 +26,6 @@ namespace AutoRest.Java
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<SequenceType, SequenceTypeJv>(),
                 new Factory<MethodGroup, MethodGroupJv>(),
-                new Factory<EnumType, EnumTypeJv>(),
                 new Factory<PrimaryType, PrimaryTypeJv>(),
                 new Factory<Response, ResponseJv>()
             };

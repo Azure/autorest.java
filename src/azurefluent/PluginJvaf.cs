@@ -29,7 +29,6 @@ namespace AutoRest.Java.Azure
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<SequenceType, SequenceTypeJva>(),
                 new Factory<MethodGroup, MethodGroupJvaf>(),
-                new Factory<EnumType, EnumTypeJvaf>(),
                 new Factory<PrimaryType, PrimaryTypeJv>(),
                 new Factory<Response, ResponseJva>()
             };

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.Core.Model;
 using AutoRest.Java.Model;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java
 {
@@ -83,11 +84,7 @@ namespace AutoRest.Java
         /// <returns>a list of imports to append</returns>
         public static IEnumerable<string> ImportSafe(this IModelType type)
         {
-            if (type == null)
-            {
-                return new List<string>();
-            }
-            return ((IModelTypeJv) type).Imports;
+            return DanCodeGenerator.GetIModelTypeImports(type);
         }
 
         public static string ImportFrom(this HttpMethod httpMethod)

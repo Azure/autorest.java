@@ -89,7 +89,7 @@ namespace AutoRest.Java.Azure
             }
             foreach (CompositeType model in serviceClient.ModelTypes)
             {
-                if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
+                if (model.BaseModelType != null && (DanCodeGenerator.GetIModelTypeName(model.BaseModelType) == "Resource" || DanCodeGenerator.GetIModelTypeName(model.BaseModelType) == "SubResource"))
                     AppendInnerToTopLevelType(model, serviceClient);
             }
         }

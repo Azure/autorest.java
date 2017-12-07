@@ -45,6 +45,7 @@ namespace AutoRest.Java.DanModel
         public static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
 
         public static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
+        public static readonly ISet<SequenceType> pagedListTypes = new HashSet<SequenceType>();
 
         public static string BetaSinceVersion()
         {
@@ -318,13 +319,13 @@ namespace AutoRest.Java.DanModel
                             IModelType parameterType = parameter.ModelType;
                             if (parameterType is SequenceTypeJv sequenceType && !javaFileMap.Keys.Contains(sequenceType, ModelNameComparer.Instance))
                             {
-                                string sequenceTypeName = sequenceType.Name;
+                                string sequenceTypeName = GetIModelTypeName(sequenceType);
                                 string xmlName = sequenceType.XmlName;
                                 string xmlNameCamelCase = xmlName.ToCamelCase();
                                 string className = $"{xmlName.ToPascalCase()}Wrapper";
 
                                 JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
-                                javaFile.Import(sequenceType.Imports.Concat(new string[]
+                                javaFile.Import(GetIModelTypeImports(sequenceType, settings).Concat(new string[]
                                 {
                                     "com.fasterxml.jackson.annotation.JsonCreator",
                                     "com.fasterxml.jackson.annotation.JsonProperty",
@@ -701,11 +702,11 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"});");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"});");
                                     }
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"});");
+                                        function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"});");
                                     }
                                 }
 
@@ -837,7 +838,7 @@ namespace AutoRest.Java.DanModel
                             {
                                 if (parameter.IsConstant)
                                 {
-                                    function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                 }
                             }
 
@@ -885,7 +886,7 @@ namespace AutoRest.Java.DanModel
                                 });
                                 classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
                                 {
-                                    if (method.ReturnTypeJva.BodyClientType.ResponseVariant.Name == "void")
+                                    if (GetIModelTypeName(GetIModelTypeResponseVariant(method.ReturnTypeJva.BodyClientType)) == "void")
                                     {
                                         function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result();");
                                     }
@@ -940,11 +941,11 @@ namespace AutoRest.Java.DanModel
                                     {
                                         if (!parameter.IsRequired)
                                         {
-                                            function.Line($"final {parameter.WireType.Name} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
                                         }
                                         if (parameter.IsConstant)
                                         {
-                                            function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                         }
                                     }
 
@@ -1027,7 +1028,7 @@ namespace AutoRest.Java.DanModel
                                     {
                                         if (parameter.IsConstant)
                                         {
-                                            function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                         }
                                     }
 
@@ -1070,7 +1071,7 @@ namespace AutoRest.Java.DanModel
                     string propertyDescription = property.Documentation;
                     string propertyName = property.Name;
                     string propertyNameCamelCase = propertyName.ToCamelCase();
-                    string propertyType = GetPropertyModelType(property).ServiceResponseVariant().Name;
+                    string propertyType = GetIModelTypeName(GetPropertyModelType(property).ServiceResponseVariant());
 
                     if (isFirstMethod)
                     {
@@ -1220,7 +1221,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 ThrowsOperationException(comment, method.OperationExceptionTypeString);
@@ -1257,7 +1258,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 if (method.ReturnType.Body != null)
@@ -1308,7 +1309,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + DanCodeGenerator.GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 if (method.ReturnType.Body != null)
@@ -1340,12 +1341,12 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
                                     }
 
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                     }
                                 }
 
@@ -1388,7 +1389,7 @@ namespace AutoRest.Java.DanModel
                             AddMethodSummaryAndDescription(comment, method);
                             foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                             }
                             ThrowsIllegalArgumentException(comment);
                             ThrowsOperationException(comment, method.OperationExceptionTypeString);
@@ -1425,7 +1426,7 @@ namespace AutoRest.Java.DanModel
                             AddMethodSummaryAndDescription(comment, method);
                             foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                             }
                             ThrowsIllegalArgumentException(comment);
                             if (method.ReturnType.Body != null)
@@ -1477,7 +1478,7 @@ namespace AutoRest.Java.DanModel
                             AddMethodSummaryAndDescription(comment, method);
                             foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                             }
                             ThrowsIllegalArgumentException(comment);
                             if (method.ReturnType.Body != null)
@@ -1508,7 +1509,7 @@ namespace AutoRest.Java.DanModel
                             {
                                 if (parameter.IsConstant)
                                 {
-                                    function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                 }
                             }
 
@@ -1554,7 +1555,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 if (method.ReturnType.Body != null)
                                 {
@@ -1585,7 +1586,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 if (method.ReturnType.Body != null)
                                 {
@@ -1613,11 +1614,11 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
                                     }
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {parameter.ClientType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                     }
                                 }
 
@@ -1655,7 +1656,7 @@ namespace AutoRest.Java.DanModel
                             AddMethodSummaryAndDescription(comment, method);
                             foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                             }
                             if (method.ReturnType.Body != null)
                             {
@@ -1686,7 +1687,7 @@ namespace AutoRest.Java.DanModel
                             AddMethodSummaryAndDescription(comment, method);
                             foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                             }
                             if (method.ReturnType.Body != null)
                             {
@@ -1714,7 +1715,7 @@ namespace AutoRest.Java.DanModel
                             {
                                 if (parameter.IsConstant)
                                 {
-                                    function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                 }
                             }
 
@@ -1761,7 +1762,7 @@ namespace AutoRest.Java.DanModel
                                     AddMethodSummaryAndDescription(comment, method);
                                     foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                     {
-                                        comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                        comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                     }
                                     ThrowsIllegalArgumentException(comment);
                                     ThrowsOperationException(comment, method.OperationExceptionTypeString);
@@ -1773,7 +1774,7 @@ namespace AutoRest.Java.DanModel
                                 });
                                 classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
                                 {
-                                    if (method.ReturnTypeJva.BodyClientType.ResponseVariant.Name == "void")
+                                    if (GetIModelTypeName(GetIModelTypeResponseVariant(method.ReturnTypeJva.BodyClientType)) == "void")
                                     {
                                         function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result();");
                                     }
@@ -1792,7 +1793,7 @@ namespace AutoRest.Java.DanModel
                                     AddMethodSummaryAndDescription(comment, method);
                                     foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                     {
-                                        comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                        comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                     }
                                     ParamServiceCallback(comment);
                                     ThrowsIllegalArgumentException(comment);
@@ -1812,7 +1813,7 @@ namespace AutoRest.Java.DanModel
                                     AddMethodSummaryAndDescription(comment, method);
                                     foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                                     {
-                                        comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                        comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                     }
                                     ThrowsIllegalArgumentException(comment);
                                     comment.Return("the observable for the request");
@@ -1834,11 +1835,11 @@ namespace AutoRest.Java.DanModel
                                     {
                                         if (!parameter.IsRequired)
                                         {
-                                            function.Line($"final {parameter.WireType.Name} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
                                         }
                                         if (parameter.IsConstant)
                                         {
-                                            function.Line($"final {parameter.ClientType.ParameterVariant.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                         }
                                     }
 
@@ -1867,7 +1868,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 ThrowsOperationException(comment, method.OperationExceptionTypeString);
@@ -1898,7 +1899,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 ParamServiceCallback(comment);
                                 ThrowsIllegalArgumentException(comment);
@@ -1918,7 +1919,7 @@ namespace AutoRest.Java.DanModel
                                 AddMethodSummaryAndDescription(comment, method);
                                 foreach (ParameterJv param in method.LocalParameters.Where(p => !p.IsConstant))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim());
+                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 comment.Return("the observable for the request");
@@ -1940,7 +1941,7 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {parameter.ModelType.Name} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
                                     }
                                 }
 
@@ -2126,7 +2127,7 @@ namespace AutoRest.Java.DanModel
                 foreach (Property property in codeModel.Properties)
                 {
                     string propertyDescription = property.Documentation;
-                    string propertyType = GetPropertyModelType(property).ServiceResponseVariant().Name;
+                    string propertyType = GetIModelTypeName(GetPropertyModelType(property).ServiceResponseVariant());
                     string propertyName = property.Name;
                     string propertyNameCamelCase = propertyName.ToCamelCase();
 
@@ -2325,7 +2326,7 @@ namespace AutoRest.Java.DanModel
             foreach (Property property in properties)
             {
                 string propertyDocumentation = property.Documentation.ToString().Period();
-                string propertyType = GetPropertyModelType(property).ServiceResponseVariant().Name;
+                string propertyType = GetIModelTypeName(GetPropertyModelType(property).ServiceResponseVariant());
                 string propertyName = property.Name;
                 string propertyNameCamelCase = propertyName.ToCamelCase();
 
@@ -2393,7 +2394,7 @@ namespace AutoRest.Java.DanModel
         {
             foreach (ParameterJv param in parameters)
             {
-                comment.Param(param.Name, param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment());
+                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment());
             }
         }
 
@@ -2688,8 +2689,8 @@ namespace AutoRest.Java.DanModel
 
         private static JavaMethodParameter ParseParameter(ParameterJv parameter)
         {
-            string description = parameter.Documentation.Else($"the {parameter.ModelType.Name} value").EscapeXmlComment();
-            string type = parameter.ClientType.ParameterVariant.Name;
+            string description = parameter.Documentation.Else($"the {GetIModelTypeName(parameter.ModelType)} value").EscapeXmlComment();
+            string type = GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType));
             string name = parameter.Name;
             return new JavaMethodParameter(description, type, name);
         }
@@ -2804,18 +2805,18 @@ namespace AutoRest.Java.DanModel
                         {
                             if (GetPropertyModelType(property).IsResource())
                             {
-                                imports.Add($"com.microsoft.azure.v2.{GetPropertyModelType(property).Name}");
+                                imports.Add($"com.microsoft.azure.v2.{GetIModelTypeName(GetPropertyModelType(property))}");
                             }
                         }
 
-                        if (azureModelType.BaseModelType != null && (azureModelType.BaseModelType.Name == "Resource" || azureModelType.BaseModelType.Name == "SubResource"))
+                        if (azureModelType.BaseModelType != null && (GetIModelTypeName(azureModelType.BaseModelType) == "Resource" || GetIModelTypeName(azureModelType.BaseModelType) == "SubResource"))
                         {
-                            imports.Add("com.microsoft.azure.v2." + azureModelType.BaseModelType.Name);
+                            imports.Add("com.microsoft.azure.v2." + DanCodeGenerator.GetIModelTypeName(azureModelType.BaseModelType));
                         }
 
                         if (azureModelType is CompositeTypeJvaf fluentModelType)
                         {
-                            if (fluentModelType.BaseModelType != null && fluentModelType.BaseModelType.Name.ToString().EndsWith("Inner", StringComparison.Ordinal) ^ fluentModelType.IsInnerModel)
+                            if (fluentModelType.BaseModelType != null && DanCodeGenerator.GetIModelTypeName(fluentModelType.BaseModelType).EndsWith("Inner", StringComparison.Ordinal) ^ fluentModelType.IsInnerModel)
                             {
                                 imports.AddRange(fluentModelType.BaseModelType.ImportSafe());
                             }
@@ -2825,7 +2826,7 @@ namespace AutoRest.Java.DanModel
                     string classComment;
                     if (string.IsNullOrEmpty(modelType.Summary) && string.IsNullOrEmpty(modelType.Documentation))
                     {
-                        classComment = $"The {modelType.Name} model.";
+                        classComment = $"The {GetIModelTypeName(modelType)} model.";
                     }
                     else
                     {
@@ -2846,7 +2847,7 @@ namespace AutoRest.Java.DanModel
 
                             Func<CompositeType, bool, string> getSubTypeAnnotation = (CompositeType subType, bool isLast) =>
                             {
-                                string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {subType.Name}.class)";
+                                string subTypeAnnotation = $"@JsonSubTypes.Type(name = \"{subType.SerializedName}\", value = {GetIModelTypeName(subType)}.class)";
                                 if (!isLast)
                                 {
                                     subTypeAnnotation += ",";
@@ -2871,9 +2872,9 @@ namespace AutoRest.Java.DanModel
                         classAnnotations.Add("JsonFlatten");
                     }
 
-                    string className = modelType.Name;
+                    string className = GetIModelTypeName(modelType);
 
-                    string baseTypeName = modelType.BaseModelType?.Name?.Value;
+                    string baseTypeName = GetIModelTypeName(modelType.BaseModelType);
 
                     IEnumerable<JavaMemberVariable> memberVariables = modelType.Properties.Select((Property property) =>
                     {
@@ -2916,8 +2917,8 @@ namespace AutoRest.Java.DanModel
                         bool isReadOnly = property.IsReadOnly;
 
                         bool isPrimitive = !(GetPropertyModelType(property) is CompositeType);
-                        JavaType wireType = new JavaType(GetPropertyModelType(property).Name, isPrimitive);
-                        JavaType clientType = new JavaType(((IModelTypeJv)GetPropertyModelType(property)).ResponseVariant.Name, isPrimitive);
+                        JavaType wireType = new JavaType(GetIModelTypeName(GetPropertyModelType(property)), isPrimitive);
+                        JavaType clientType = new JavaType(GetIModelTypeName(GetIModelTypeResponseVariant(GetPropertyModelType(property))), isPrimitive);
 
                         string name = property.Name;
 
@@ -3069,7 +3070,7 @@ namespace AutoRest.Java.DanModel
 
             foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
             {
-                string exceptionBodyTypeName = exceptionType.Name;
+                string exceptionBodyTypeName = DanCodeGenerator.GetIModelTypeName(exceptionType);
                 string exceptionName = exceptionType.ExceptionTypeDefinitionName;
 
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
@@ -3130,7 +3131,7 @@ namespace AutoRest.Java.DanModel
 
             foreach (EnumType enumType in codeModel.EnumTypes)
             {
-                string enumName = enumType.Name;
+                string enumName = DanCodeGenerator.GetIModelTypeName(enumType);
                 string enumTypeComment = $"Defines values for {enumName}.";
 
                 IEnumerable<JavaEnumValue> enumValues = enumType.Values
@@ -3247,12 +3248,18 @@ namespace AutoRest.Java.DanModel
             return enumJavaFiles;
         }
 
-        private static string GetPackage(CodeModel codeModel, string packageSuffix = null)
+        private static string GetPackage(CodeModel codeModel, params string[] packageSuffixes)
         {
             string package = codeModel.Namespace.ToLowerInvariant();
-            if (!string.IsNullOrEmpty(packageSuffix))
+            if (packageSuffixes != null && packageSuffixes.Length > 0)
             {
-                package = $"{package}.{packageSuffix.Trim('.')}";
+                foreach (string packageSuffix in packageSuffixes)
+                {
+                    if (!string.IsNullOrEmpty(packageSuffix))
+                    {
+                        package = $"{package}.{packageSuffix.Trim('.')}";
+                    }
+                }
             }
             return package;
         }
@@ -3406,7 +3413,7 @@ namespace AutoRest.Java.DanModel
         }
 
         private static IEnumerable<Property> GetPropertiesEx(CodeModel codeModel)
-            => codeModel.Properties.Where(p => GetPropertyModelType(p).Name != "ServiceClientCredentials");
+            => codeModel.Properties.Where(p => GetIModelTypeName(GetPropertyModelType(p)) != "ServiceClientCredentials");
 
         private static string GetBaseUrl(CodeModel codeModel)
         {
@@ -3470,7 +3477,7 @@ namespace AutoRest.Java.DanModel
                 if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
                     imports.AddRange(modelType.ImportSafe());
-                    imports.AddRange((modelType as IModelTypeJv).ResponseVariant.ImportSafe());
+                    imports.AddRange(GetIModelTypeResponseVariant(modelType).ImportSafe());
                 }
 
                 result = imports;
@@ -3489,7 +3496,7 @@ namespace AutoRest.Java.DanModel
                     || modelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
                     imports.AddRange(modelType.ImportSafe());
-                    imports.AddRange(((IModelTypeJv)modelType).ResponseVariant.ImportSafe());
+                    imports.AddRange(GetIModelTypeResponseVariant(modelType).ImportSafe());
                 }
 
                 result = imports;
@@ -3506,7 +3513,120 @@ namespace AutoRest.Java.DanModel
             }
             return property.IsXNullable ?? !property.IsRequired
                 ? property.ModelType
-                : (property.ModelType as IModelTypeJv).NonNullableVariant;
+                : DanCodeGenerator.GetIModelTypeNonNullableVariant(property.ModelType);
+        }
+
+        internal static IEnumerable<string> GetIModelTypeImports(IModelType modelType)
+            => GetIModelTypeImports(modelType, Settings.Instance);
+
+        private static IEnumerable<string> GetIModelTypeImports(IModelType modelType, Settings settings)
+        {
+            IEnumerable<string> result = Enumerable.Empty<string>();
+
+            if (modelType != null)
+            {
+                if (modelType is EnumType)
+                {
+                    if (GetIModelTypeName(modelType) != "String")
+                    {
+                        if (!IsFluent(settings))
+                        {
+                            result = new[]
+                            {
+                                string.Join(".", modelType.CodeModel?.Namespace.ToLowerInvariant(), "models", GetIModelTypeName(modelType))
+                            };
+                        }
+                        else
+                        {
+                            result = new[]
+                            {
+                                string.Join(".", (modelType.CodeModel?.Namespace.ToLowerInvariant()) + (GetIModelTypeName(modelType).EndsWith("Inner") ? ".implementation" : ""), GetIModelTypeName(modelType))
+                            };
+                        }
+                    }
+                }
+                else if (modelType is IModelTypeJv modelTypeJv)
+                {
+                    result = modelTypeJv.Imports;
+                }
+            }
+
+            return result;
+        }
+
+        internal static IModelType GetIModelTypeResponseVariant(IModelType modelType)
+        {
+            IModelType result = modelType;
+
+            if (modelType is IModelTypeJv modelTypeJv)
+            {
+                result = modelTypeJv.ResponseVariant;
+            }
+
+            return result;
+        }
+
+        internal static IModelType GetIModelTypeParameterVariant(IModelType modelType)
+        {
+            IModelType result = modelType;
+
+            if (modelType is IModelTypeJv modelTypeJv)
+            {
+                result = modelTypeJv.ParameterVariant;
+            }
+
+            return result;
+        }
+
+        internal static IModelType GetIModelTypeNonNullableVariant(IModelType modelType)
+        {
+            IModelType result = modelType;
+
+            if (modelType is IModelTypeJv modelTypeJv)
+            {
+                result = modelTypeJv.NonNullableVariant;
+            }
+
+            return result;
+        }
+
+        internal static string GetIModelTypeName(IModelType modelType)
+        {
+            string result = null;
+            if (modelType != null)
+            {
+                result = modelType.Name.ToString();
+                if (modelType is EnumType)
+                {
+                    result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
+                }
+                else if (modelType is SequenceTypeJv sequenceTypeJv)
+                {
+                    result = $"List<{GetIModelTypeName(sequenceTypeJv.ElementType)}>";
+                    if (pagedListTypes.Contains(modelType))
+                    {
+                        result = "Paged" + result;
+                    }
+                }
+                else if (modelType is DictionaryTypeJv dictionaryTypeJv)
+                {
+                    result = $"Map<String, {GetIModelTypeName(dictionaryTypeJv.ValueType)}>";
+                }
+                else if (modelType is CompositeTypeJvaf compositeTypeJvaf)
+                {
+                    result = string.IsNullOrEmpty(result) || !compositeTypeJvaf.IsInnerModel ? result : result + "Inner";
+                }
+                else if (modelType is PrimaryTypeJv primaryTypeJv)
+                {
+                    result = primaryTypeJv.ImplementationName;
+                }
+            }
+            return result;
+        }
+
+        internal static string GetIModelTypeFixedName(IModelType modelType)
+        {
+            return modelType?.Name?.FixedValue;
         }
     }
 }

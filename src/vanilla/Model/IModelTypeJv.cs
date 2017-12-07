@@ -1,4 +1,5 @@
 ﻿using AutoRest.Core.Model;
+using AutoRest.Java.DanModel;
 using System.Collections.Generic;
 
 namespace AutoRest.Java.Model
@@ -21,12 +22,12 @@ namespace AutoRest.Java.Model
             {
                 return original; // the original is always nullable
             }
-            return (original as IModelTypeJv)?.ResponseVariant?.NonNullableVariant ?? original;
+            return DanCodeGenerator.GetIModelTypeNonNullableVariant(DanCodeGenerator.GetIModelTypeResponseVariant(original)) ?? original;
         }
 
         public static string GetDefaultValue(this IModelType type, Method parent)
         {
-            return type is PrimaryTypeJv && type.Name == "RequestBody"
+            return type is PrimaryTypeJv && DanCodeGenerator.GetIModelTypeName(type) == "RequestBody"
                 ? "RequestBody.create(MediaType.parse(\"" + parent.RequestContentType + "\"), new byte[0])"
                 : type.DefaultValue;
         }

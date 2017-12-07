@@ -29,7 +29,7 @@ namespace AutoRest.Java.Azure.Model
 
         [JsonIgnore]
         public bool IsResource =>
-            (Name.RawValue == "Resource" || Name.RawValue == "SubResource") &&
+            (DanCodeGenerator.GetIModelTypeName(this) == "Resource" || DanCodeGenerator.GetIModelTypeName(this) == "SubResource") &&
             Extensions.ContainsKey(AzureExtensions.AzureResourceExtension) && (bool)Extensions[AzureExtensions.AzureResourceExtension];
 
         [JsonIgnore]
@@ -45,7 +45,7 @@ namespace AutoRest.Java.Azure.Model
                         return ext["name"].ToString();
                     }
                 }
-                return this.Name + "Exception";
+                return DanCodeGenerator.GetIModelTypeName(this) + "Exception";
             }
         }
 
@@ -55,19 +55,19 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var imports = new List<string>();
-                if (Name.Contains('<'))
+                if (DanCodeGenerator.GetIModelTypeName(this).Contains('<'))
                 {
-                    imports.AddRange(ParseGenericType().SelectMany(t => t.Imports));
+                    imports.AddRange(ParseGenericType().SelectMany(t => DanCodeGenerator.GetIModelTypeImports(t)));
                 }
                 else
                 {
                     if (IsResource || Extensions.Get<bool>(ExternalExtension) == true)
                     {
-                        imports.Add(string.Join(".", Package, Name));
+                        imports.Add(string.Join(".", Package, DanCodeGenerator.GetIModelTypeName(this)));
                     }
                     else
                     {
-                        imports.Add(string.Join(".", Package, "models", Name));
+                        imports.Add(string.Join(".", Package, "models", DanCodeGenerator.GetIModelTypeName(this)));
                     }
                 }
                 return imports;
@@ -84,12 +84,13 @@ namespace AutoRest.Java.Azure.Model
                 {
                     if (DanCodeGenerator.GetPropertyModelType(property).IsResource())
                     {
-                        imports.Add("com.microsoft.azure.v2." + DanCodeGenerator.GetPropertyModelType(property).Name);
+                        imports.Add("com.microsoft.azure.v2." + DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetPropertyModelType(property)));
                     }
                 }
-                if (this.BaseModelType != null && (this.BaseModelType.Name == "Resource" || this.BaseModelType.Name == "SubResource"))
+                string baseModelTypeName = DanCodeGenerator.GetIModelTypeName(BaseModelType);
+                if (baseModelTypeName == "Resource" || baseModelTypeName == "SubResource")
                 {
-                    imports.Add("com.microsoft.azure.v2." + BaseModelType.Name);
+                    imports.Add("com.microsoft.azure.v2." + baseModelTypeName);
                 }
                 return imports.Distinct();
             }

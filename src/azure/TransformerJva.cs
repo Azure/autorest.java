@@ -200,7 +200,7 @@ namespace AutoRest.Java.Azure
             }
 
             SwaggerExtensions.RemoveUnreferencedTypes(serviceClient,
-                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeTypeJva).Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
+                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeTypeJva).Cast<CompositeTypeJva>().Select(t => DanCodeGenerator.GetIModelTypeName(t))));
         }
 
         public virtual void NormalizeODataMethods(CodeModel client)
@@ -237,7 +237,7 @@ namespace AutoRest.Java.Azure
                     {
                         SerializedName = "$filter",
                         Name = "odataQuery",
-                        ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{odataFilter.ModelType.Name}>"),
+                        ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{DanCodeGenerator.GetIModelTypeName(odataFilter.ModelType)}>"),
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
                         odataFilter.IsRequired

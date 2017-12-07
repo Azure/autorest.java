@@ -5,6 +5,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using System;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Model
 {
@@ -49,7 +50,7 @@ namespace AutoRest.Java.Model
                         }
                         else if (currentType is PrimaryType currentPrimaryType)
                         {
-                            string currentPrimaryTypeName = currentPrimaryType.Name.FixedValue;
+                            string currentPrimaryTypeName = DanCodeGenerator.GetIModelTypeFixedName(currentPrimaryType);
                             if (currentPrimaryTypeName.EqualsIgnoreCase("Base64Url") ||
                                 currentPrimaryTypeName.EqualsIgnoreCase("DateTimeRfc1123") ||
                                 currentPrimaryTypeName.EqualsIgnoreCase("UnixTime"))
@@ -73,7 +74,7 @@ namespace AutoRest.Java.Model
             get
             {
                 return 
-                    ((BodyWireType == null ? BodyClientType != null : !BodyWireType.StructurallyEquals(BodyClientType)) && BodyClientType.Name != "void") ||
+                    ((BodyWireType == null ? BodyClientType != null : !BodyWireType.StructurallyEquals(BodyClientType)) && DanCodeGenerator.GetIModelTypeName(BodyClientType) != "void") ||
                     (HeaderWireType == null ? HeaderClientType != null : !HeaderWireType.StructurallyEquals(HeaderClientType));
             }
         }
@@ -83,7 +84,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyWireType.ResponseVariant;
+                return (IModelTypeJv)DanCodeGenerator.GetIModelTypeResponseVariant(BodyWireType);
             }
         }
 
@@ -120,7 +121,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    return HeaderWireType.ResponseVariant;
+                    return (IModelTypeJv)DanCodeGenerator.GetIModelTypeResponseVariant(HeaderWireType);
                 }
             }
         }
@@ -170,12 +171,12 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var respvariant = BodyWireType.ResponseVariant;
+                IModelType respvariant = DanCodeGenerator.GetIModelTypeResponseVariant(BodyWireType);
                 if ((respvariant as PrimaryTypeJv)?.Nullable != false)
                 {
-                    return respvariant.Name;
+                    return DanCodeGenerator.GetIModelTypeName(respvariant);
                 }
-                return BodyWireType.Name;
+                return DanCodeGenerator.GetIModelTypeName(BodyWireType);
             }
         }
 
@@ -200,13 +201,13 @@ namespace AutoRest.Java.Model
         public virtual string ServiceResponseConcreteParameterString => GenericBodyClientTypeString;
 
         [JsonIgnore]
-        public virtual string GenericHeaderClientTypeString => HeaderClientType.ResponseVariant.Name;
+        public virtual string GenericHeaderClientTypeString => DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(HeaderClientType));
 
         [JsonIgnore]
-        public virtual string GenericBodyWireTypeString => BodyWireType.Name;
+        public virtual string GenericBodyWireTypeString => DanCodeGenerator.GetIModelTypeName(BodyWireType);
 
         [JsonIgnore]
-        public virtual string GenericHeaderWireTypeString => HeaderWireType.Name;
+        public virtual string GenericHeaderWireTypeString => DanCodeGenerator.GetIModelTypeName(HeaderWireType);
 
         [JsonIgnore]
         public virtual string SequenceElementTypeString
@@ -214,7 +215,7 @@ namespace AutoRest.Java.Model
             get
             {
                 var sequenceType = Body as SequenceTypeJv;
-                return sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void";
+                return sequenceType != null ? DanCodeGenerator.GetIModelTypeName(sequenceType.ElementType) : "Void";
             }
         }
 
@@ -285,9 +286,9 @@ namespace AutoRest.Java.Model
                 var elementType = sequenceType.ElementType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0} = new ArrayList<{1}>();", target, elementType.ResponseVariant.Name)
-                    .AppendLine("for ({0} {1} : {2}) {{", elementType.Name, itemName, source)
-                    .Indent().AppendLine("{0} {1};", elementType.ResponseVariant.Name, itemTarget)
+                builder.AppendLine("{0} = new ArrayList<{1}>();", target, DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(elementType)))
+                    .AppendLine("for ({0} {1} : {2}) {{", DanCodeGenerator.GetIModelTypeName(elementType), itemName, source)
+                    .Indent().AppendLine("{0} {1};", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(elementType)), itemTarget)
                         .AppendLine(convertToClientType(elementType, itemName, itemTarget, level + 1))
                         .AppendLine("{0}.add({1});", target, itemTarget)
                     .Outdent().Append("}");
@@ -299,9 +300,9 @@ namespace AutoRest.Java.Model
                 var valueType = dictionaryType.ValueType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0} = new HashMap<String, {1}>();", target, valueType.ResponseVariant.Name)
-                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.Name, itemName, source)
-                    .Indent().AppendLine("{0} {1};", valueType.ResponseVariant.Name, itemTarget)
+                builder.AppendLine("{0} = new HashMap<String, {1}>();", target, DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(valueType)))
+                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", DanCodeGenerator.GetIModelTypeName(valueType), itemName, source)
+                    .Indent().AppendLine("{0} {1};", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(valueType)), itemTarget)
                         .AppendLine(convertToClientType(valueType, itemName + ".getValue()", itemTarget, level + 1))
                         .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
                     .Outdent().Append("}");
