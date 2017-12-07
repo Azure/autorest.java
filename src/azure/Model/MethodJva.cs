@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Collections.Immutable;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -67,7 +68,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
+                if (DefaultResponse.Body == null || DanCodeGenerator.GetIModelTypeName(DefaultResponse.Body) == "CloudError")
                 {
                     return "CloudException";
                 }
@@ -142,7 +143,7 @@ namespace AutoRest.Java.Azure.Model
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                     {
-                        declarations.Add("final " + parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+                        declarations.Add("final " + DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -162,7 +163,7 @@ namespace AutoRest.Java.Azure.Model
                     List<string> declarations = new List<string>();
                     foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+                        declarations.Add("final " + DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
                     }
 
                     var declaration = string.Join(", ", declarations);
@@ -323,7 +324,7 @@ namespace AutoRest.Java.Azure.Model
                 string args = "new TypeToken<" + ReturnTypeJva.GenericBodyClientTypeString + ">() { }.getType()";
                 if (ReturnType.Headers != null)
                 {
-                    args += ", " + ReturnTypeJva.HeaderWireType.Name + ".class";
+                    args += ", " + DanCodeGenerator.GetIModelTypeName(ReturnTypeJva.HeaderWireType) + ".class";
                 }
                 return args;
             }
@@ -354,8 +355,8 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public override string ReturnTypeResponseName => 
-            ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
+        public override string ReturnTypeResponseName =>
+            DanCodeGenerator.GetIModelTypeName(ReturnTypeJv?.BodyClientType?.ServiceResponseVariant());
 
         public string PagingGroupedParameterTransformation(bool filterRequired = false)
         {
@@ -576,7 +577,7 @@ namespace AutoRest.Java.Azure.Model
                         // return type may have been removed as a side effect
                         imports.AddRange(ReturnTypeJva.ImplImports);
                     }
-                    var typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
+                    string typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
                     CompositeType ctype = null;
                     if (typeName != null)
                     {

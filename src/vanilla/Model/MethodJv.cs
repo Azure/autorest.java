@@ -106,7 +106,7 @@ namespace AutoRest.Java.Model
                     }
                     else
                     {
-                        declarationBuilder.Append(parameter.WireType.Name);
+                        declarationBuilder.Append(DanCodeGenerator.GetIModelTypeName(parameter.WireType));
                     }
 
                     declarationBuilder.Append(" " + declarativeName);
@@ -126,7 +126,7 @@ namespace AutoRest.Java.Model
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant))
                 {
-                    declarations.Add(parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+                    declarations.Add(DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -142,7 +142,7 @@ namespace AutoRest.Java.Model
                 List<string> declarations = new List<string>();
                 foreach (var parameter in LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+                    declarations.Add(DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
                 }
 
                 var declaration = string.Join(", ", declarations);
@@ -273,7 +273,7 @@ namespace AutoRest.Java.Model
 
             foreach (var param in parameters)
             {
-                var paramDoc = param.Documentation.Else($"the {param.ModelType.Name} value").EscapeXmlComment().Trim();
+                var paramDoc = param.Documentation.Else($"the {DanCodeGenerator.GetIModelTypeName(param.ModelType)} value").EscapeXmlComment().Trim();
                 builder.AppendLine($" * @param {param.Name} {paramDoc}");
             }
 
@@ -293,7 +293,7 @@ namespace AutoRest.Java.Model
 
         public static string ParameterDeclaration(IEnumerable<ParameterJv> parameters)
         {
-            var paramDecls = parameters.Select(parameter => parameter.ClientType.ParameterVariant.Name + " " + parameter.Name);
+            var paramDecls = parameters.Select(parameter => DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
             var paramString = string.Join(", ", paramDecls);
             return paramString;
         }
@@ -309,7 +309,7 @@ namespace AutoRest.Java.Model
 
         public string RestResponseHeadersName => ReturnType.Headers == null
             ? "Void"
-            : ReturnTypeJv.HeaderClientType.Name.Value;
+            : DanCodeGenerator.GetIModelTypeName(ReturnTypeJv.HeaderClientType);
 
         public string RestResponseAbstractBodyName => ReturnType.Body == null
             ? "Void"
@@ -347,11 +347,11 @@ namespace AutoRest.Java.Model
             {
                 if (takeOnlyRequiredParameters && !param.IsRequired)
                 {
-                    builder.AppendLine($"final {param.ClientType.Name} {param.Name} = {param.ClientType.GetDefaultValue(this) ?? "null"};");
+                    builder.AppendLine($"final {DanCodeGenerator.GetIModelTypeName(param.ClientType)} {param.Name} = {param.ClientType.GetDefaultValue(this) ?? "null"};");
                 }
                 else if (param.IsConstant)
                 {
-                    builder.AppendLine($"final {param.ClientType.Name} {param.Name} = {param.DefaultValue ?? "null"};");
+                    builder.AppendLine($"final {DanCodeGenerator.GetIModelTypeName(param.ClientType)} {param.Name} = {param.DefaultValue ?? "null"};");
                 }
             }
 
@@ -465,7 +465,7 @@ namespace AutoRest.Java.Model
             builder.AppendLine($"public {ReturnTypeResponseName} {Name}({paramString}) {{");
             builder.Indent();
 
-            if (ReturnTypeJv.BodyClientType.ResponseVariant.Name == "void")
+            if (DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(ReturnTypeJv.BodyClientType)) == "void")
             {
                 builder.AppendLine($"{Name}Async({argsString}).blockingAwait();");
             }
@@ -543,7 +543,7 @@ namespace AutoRest.Java.Model
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
-                            ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name,
+                            DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(((ParameterJv)transformation.OutputParameter).ClientType)),
                             outParamName);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
@@ -552,16 +552,16 @@ namespace AutoRest.Java.Model
                     transformation.OutputParameter.ModelType is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        !conditionalAssignment ? ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name + " " : "",
+                        !conditionalAssignment ? DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(((ParameterJv)transformation.OutputParameter).ClientType)) + " " : "",
                         outParamName,
-                        transformation.OutputParameter.ModelType.Name);
+                        DanCodeGenerator.GetIModelTypeName(transformation.OutputParameter.ModelType));
                 }
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}{2};",
                         !conditionalAssignment && !(transformation.OutputParameter.ModelType is CompositeType) ?
-                            ((ParameterJv)transformation.OutputParameter).ClientType.ParameterVariant.Name + " " : "",
+                            DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(((ParameterJv)transformation.OutputParameter).ClientType)) + " " : "",
                         outParamName,
                         GetMapping(mapping, filterRequired));
                 }
@@ -804,7 +804,7 @@ namespace AutoRest.Java.Model
         public ResponseJv ReturnTypeJv => ReturnType as ResponseJv;
 
         [JsonIgnore]
-        public virtual string ReturnTypeResponseName => ReturnTypeJv?.BodyClientType?.ServiceResponseVariant()?.Name;
+        public virtual string ReturnTypeResponseName => DanCodeGenerator.GetIModelTypeName(ReturnTypeJv?.BodyClientType?.ServiceResponseVariant());
 
         [JsonIgnore]
         public virtual string ServiceFutureFactoryMethod => "fromBody";

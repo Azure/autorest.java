@@ -1,24 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Model;
+﻿using AutoRest.Core.Model;
+using AutoRest.Java.DanModel;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Model
 {
     public class SequenceTypeJv : SequenceType, IModelTypeJv
     {
-        public SequenceTypeJv()
-        {
-            Name.OnGet += v => $"List<{ElementType.Name}>";
-        }
-
         [JsonIgnore]
         public IModelTypeJv ResponseVariant
         {
             get
             {
-                var respvariant = (ElementType as IModelTypeJv).ResponseVariant;
+                IModelType respvariant = DanCodeGenerator.GetIModelTypeResponseVariant(ElementType);
                 if (respvariant != ElementType && (respvariant as PrimaryTypeJv)?.Nullable != false)
                 {
                     return new SequenceTypeJv { ElementType = respvariant };
@@ -32,7 +27,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var respvariant = (ElementType as IModelTypeJv).ParameterVariant;
+                IModelType respvariant = DanCodeGenerator.GetIModelTypeParameterVariant(ElementType);
                 if (respvariant != ElementType && (respvariant as PrimaryTypeJv)?.Nullable != false)
                 {
                     return new SequenceTypeJv { ElementType = respvariant };
@@ -47,7 +42,7 @@ namespace AutoRest.Java.Model
             get
             {
                 List<string> imports = new List<string> { "java.util.List" };
-                return imports.Concat(((IModelTypeJv) this.ElementType).Imports);
+                return imports.Concat(DanCodeGenerator.GetIModelTypeImports(ElementType));
             }
         }
 

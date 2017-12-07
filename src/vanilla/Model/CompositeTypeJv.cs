@@ -75,7 +75,7 @@ namespace AutoRest.Java.Model
                         return ext["name"].ToString();
                     }
                 }
-                return this.Name + "Exception";
+                return DanCodeGenerator.GetIModelTypeName(this) + "Exception";
             }
         }
 
@@ -94,13 +94,13 @@ namespace AutoRest.Java.Model
             get
             {
                 var imports = new List<string>();
-                if (Name.Contains('<'))
+                if (DanCodeGenerator.GetIModelTypeName(this).Contains('<'))
                 {
-                    imports.AddRange(ParseGenericType().SelectMany(t => t.Imports));
+                    imports.AddRange(ParseGenericType().SelectMany(t => DanCodeGenerator.GetIModelTypeImports(t)));
                 }
                 else
                 {
-                    imports.Add(string.Join(".", Package, Name));
+                    imports.Add(string.Join(".", Package, DanCodeGenerator.GetIModelTypeName(this)));
                 }
                 return imports;
             }
@@ -152,9 +152,9 @@ namespace AutoRest.Java.Model
 
         protected IEnumerable<IModelTypeJv> ParseGenericType()
         {
-            string name = Name;
-            string[] types = Name.ToString().Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var innerType in types.Where(t => !string.IsNullOrWhiteSpace(t)))
+            string name = DanCodeGenerator.GetIModelTypeName(this);
+            string[] types = DanCodeGenerator.GetIModelTypeName(this).Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string innerType in types.Where(t => !string.IsNullOrWhiteSpace(t)))
             {
                 if (!CodeNamerJv.PrimaryTypes.Contains(innerType.Trim()))
                 {

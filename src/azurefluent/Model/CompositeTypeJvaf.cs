@@ -13,12 +13,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public CompositeTypeJvaf()
         {
-            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
         }
 
         public CompositeTypeJvaf(string name) : base(name)
         {
-            Name.OnGet += nam => nam.IsNullOrEmpty() || !IsInnerModel ? nam : nam + "Inner";
         }
 
         public override IEnumerableWithIndex<Property> Properties
@@ -55,7 +53,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 {
                     return _runtimePackage;
                 }
-                else if (Name.ToString().EndsWith("Inner", StringComparison.Ordinal))
+                else if (DanCodeGenerator.GetIModelTypeName(this).EndsWith("Inner", StringComparison.Ordinal))
                 {
                     return (CodeModel?.Namespace.ToLowerInvariant()) + ".implementation";
                 }
@@ -78,13 +76,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 var imports = new List<string>();
-                if (Name.Contains('<'))
+                if (DanCodeGenerator.GetIModelTypeName(this).Contains('<'))
                 {
-                    imports.AddRange(ParseGenericType().SelectMany(t => t.Imports));
+                    imports.AddRange(ParseGenericType().SelectMany(t => DanCodeGenerator.GetIModelTypeImports(t)));
                 }
                 else
                 {
-                    imports.Add(string.Join(".", Package, Name));
+                    imports.Add(string.Join(".", Package, DanCodeGenerator.GetIModelTypeName(this)));
                 }
                 return imports;
             }
@@ -96,7 +94,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 List<string> imports = base.ImportList.ToList();
-                if (BaseModelType != null && BaseModelType.Name.ToString().EndsWith("Inner", StringComparison.Ordinal) ^ IsInnerModel)
+                if (BaseModelType != null && DanCodeGenerator.GetIModelTypeName(BaseModelType).EndsWith("Inner", StringComparison.Ordinal) ^ IsInnerModel)
                 {
                     imports.AddRange(BaseModelType.ImportSafe());
                 }

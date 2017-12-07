@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Model;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java
 {
@@ -13,12 +14,12 @@ namespace AutoRest.Java
 
         public bool Equals(ModelType x, ModelType y)
         {
-            return x.Name.Equals(y.Name) || x.XmlName.Equals(y.XmlName);
+            return DanCodeGenerator.GetIModelTypeName(x).Equals(DanCodeGenerator.GetIModelTypeName(y)) || x.XmlName.Equals(y.XmlName);
         }
 
         public int GetHashCode(ModelType obj)
         {
-            return obj.Name.GetHashCode() ^ obj.XmlName.GetHashCode();
+            return DanCodeGenerator.GetIModelTypeName(obj).GetHashCode() ^ obj.XmlName.GetHashCode();
         }
     }
 }

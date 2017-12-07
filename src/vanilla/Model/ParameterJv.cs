@@ -4,6 +4,7 @@ using System.Globalization;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Model
 {
@@ -34,7 +35,7 @@ namespace AutoRest.Java.Model
                 }
                 return WantNullable
                     ? base.ModelType
-                    : (base.ModelType as IModelTypeJv).NonNullableVariant;
+                    : DanCodeGenerator.GetIModelTypeNonNullableVariant(base.ModelType);
             }
             set
             {
@@ -43,16 +44,16 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public IModelTypeJv ClientType
+        public IModelType ClientType
         {
             get
             {
-                return ((IModelTypeJv)ModelType).ParameterVariant;
+                return DanCodeGenerator.GetIModelTypeParameterVariant(ModelType);
             }
         }
 
         [JsonIgnore]
-        public IModelTypeJv WireType
+        public IModelType WireType
         {
             get
             {
@@ -70,7 +71,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    return (IModelTypeJv) ModelType;
+                    return ModelType;
                 }
             }
         }
@@ -93,18 +94,18 @@ namespace AutoRest.Java.Model
                 {
                     if (WireType.IsPrimaryType(KnownPrimaryType.String))
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64.encodeBase64String({2});", WireType.Name, WireName, source);
+                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64.encodeBase64String({2});", DanCodeGenerator.GetIModelTypeName(WireType), WireName, source);
                     }
                     else
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64Url.encode({2});", WireType.Name, WireName, source);
+                        return string.Format(CultureInfo.InvariantCulture, "{0} {1} = Base64Url.encode({2});", DanCodeGenerator.GetIModelTypeName(WireType), WireName, source);
                     }
                 }
                 else if (sequence != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
                         "{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
-                        WireType.Name,
+                        DanCodeGenerator.GetIModelTypeName(WireType),
                         WireName,
                         clientReference,
                         source,
@@ -115,7 +116,7 @@ namespace AutoRest.Java.Model
             return convertClientTypeToWireType(WireType, source, WireName, clientReference);
         }
 
-        private string convertClientTypeToWireType(IModelTypeJv wireType, string source, string target, string clientReference, int level = 0)
+        private string convertClientTypeToWireType(IModelType wireType, string source, string target, string clientReference, int level = 0)
         {
             IndentedStringBuilder builder = new IndentedStringBuilder();
             if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
@@ -157,15 +158,15 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.GetDefaultValue(Method) ?? "null")
+                    builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, wireType.GetDefaultValue(Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 var sequenceType = wireType as SequenceTypeJv;
                 var elementType = sequenceType.ElementType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0}{1} = new ArrayList<{2}>();", IsRequired ? wireType.Name + " " : "", target, elementType.Name)
-                    .AppendLine("for ({0} {1} : {2}) {{", elementType.ParameterVariant.Name, itemName, source)
+                builder.AppendLine("{0}{1} = new ArrayList<{2}>();", IsRequired ? DanCodeGenerator.GetIModelTypeName(wireType) + " " : "", target, DanCodeGenerator.GetIModelTypeName(elementType))
+                    .AppendLine("for ({0} {1} : {2}) {{", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(elementType)), itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(elementType, itemName, itemTarget, clientReference, level + 1))
                         .AppendLine("{0}.add({1});", target, itemTarget)
                     .Outdent().Append("}");
@@ -179,15 +180,15 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", WireType.Name, target, wireType.GetDefaultValue(Method) ?? "null")
+                    builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, wireType.GetDefaultValue(Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 var dictionaryType = wireType as DictionaryTypeJv;
                 var valueType = dictionaryType.ValueType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0}{1} = new HashMap<String, {2}>();", IsRequired ? wireType.Name + " " : "", target, valueType.Name)
-                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", valueType.ParameterVariant.Name, itemName, source)
+                builder.AppendLine("{0}{1} = new HashMap<String, {2}>();", IsRequired ? DanCodeGenerator.GetIModelTypeName(wireType) + " " : "", target, DanCodeGenerator.GetIModelTypeName(valueType))
+                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(valueType)), itemName, source)
                     .Indent().AppendLine(convertClientTypeToWireType(valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1))
                         .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
                     .Outdent().Append("}");
@@ -205,7 +206,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return ClientType.Imports;
+                return DanCodeGenerator.GetIModelTypeImports(ClientType);
             }
         }
 
@@ -218,7 +219,7 @@ namespace AutoRest.Java.Model
                 // type imports
                 if (this.Location == Core.Model.ParameterLocation.Body || !NeedsSpecialSerialization(ModelType))
                 {
-                    imports.AddRange(WireType.Imports);
+                    imports.AddRange(DanCodeGenerator.GetIModelTypeImports(WireType));
                 }
                 // parameter location
                 var locImport = LocationImport(this.Location);
@@ -237,7 +238,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return ClientType.Imports;
+                return DanCodeGenerator.GetIModelTypeImports(ClientType);
             }
         }
 
@@ -246,7 +247,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                var imports = new List<string>(WireType.Imports);
+                var imports = new List<string>(DanCodeGenerator.GetIModelTypeImports(WireType));
                 if (Location != Core.Model.ParameterLocation.Body)
                 {
                     if (this.ModelType.IsPrimaryType(KnownPrimaryType.ByteArray))

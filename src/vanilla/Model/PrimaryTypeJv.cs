@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Model
 {
@@ -10,13 +11,11 @@ namespace AutoRest.Java.Model
     {
         public PrimaryTypeJv()
         {
-            Name.OnGet += v => ImplementationName;
         }
 
         public PrimaryTypeJv(KnownPrimaryType type)
             : base(type)
         {
-            Name.OnGet += v => ImplementationName;
         }
 
         public bool WantNullable { get; private set; } = true;
@@ -49,11 +48,11 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                if (Name == "byte[]")
+                if (DanCodeGenerator.GetIModelTypeName(this) == "byte[]")
                 {
                     return "new byte[0]";
                 }
-                else if (Name == "Byte[]")
+                else if (DanCodeGenerator.GetIModelTypeName(this) == "Byte[]")
                 {
                     return "new Byte[0]";
                 }
@@ -63,7 +62,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    throw new NotSupportedException(this.Name + " does not have default value!");
+                    throw new NotSupportedException(DanCodeGenerator.GetIModelTypeName(this) + " does not have default value!");
                 }
             }
         }
@@ -115,7 +114,7 @@ namespace AutoRest.Java.Model
                 }
                 else if (KnownPrimaryType == KnownPrimaryType.None)
                 {
-                    return NonNullableVariant;
+                    return (IModelTypeJv)DanCodeGenerator.GetIModelTypeNonNullableVariant(this);
                 }
                 return this;
             }
