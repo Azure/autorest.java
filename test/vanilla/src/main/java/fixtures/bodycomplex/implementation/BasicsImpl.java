@@ -28,10 +28,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodycomplex.Basics;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -111,7 +113,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -141,9 +143,17 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getValidAsync() {
+    public Maybe<Basic> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -157,7 +167,7 @@ public class BasicsImpl implements Basics {
      * @return the void object if successful.
      */
     public void putValid(Basic complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -194,9 +204,9 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Basic complexBody) {
+    public Completable putValidAsync(Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -209,7 +219,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -239,9 +249,17 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getInvalidAsync() {
+    public Maybe<Basic> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -254,7 +272,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -284,9 +302,17 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getEmptyAsync() {
+    public Maybe<Basic> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -299,7 +325,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -329,9 +355,17 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getNullAsync() {
+    public Maybe<Basic> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -344,7 +378,7 @@ public class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -374,9 +408,17 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Basic> object
      */
-    public Single<Basic> getNotProvidedAsync() {
+    public Maybe<Basic> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Basic>, Basic>() { public Basic call(RestResponse<Void, Basic> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Basic>, Maybe<Basic>>() {
+                public Maybe<Basic> apply(RestResponse<Void, Basic> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

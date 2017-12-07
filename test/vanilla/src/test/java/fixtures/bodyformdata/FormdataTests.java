@@ -1,5 +1,6 @@
 package fixtures.bodyformdata;
 
+import io.reactivex.functions.Function;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.PortPolicy;
 import org.apache.commons.io.IOUtils;
@@ -8,12 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import fixtures.bodyformdata.implementation.AutoRestSwaggerBATFormDataServiceImpl;
-import rx.exceptions.Exceptions;
-import rx.functions.Func1;
 
 public class FormdataTests {
     private static AutoRestSwaggerBATFormDataService client;
@@ -46,16 +44,12 @@ public class FormdataTests {
             byte[] bytes = IOUtils.toByteArray(stream);
             stream.close();
             byte[] actual = client.formdatas().uploadFileViaBodyAsync(bytes)
-                    .map(new Func1<InputStream, byte[]>() {
+                    .map(new Function<InputStream, byte[]>() {
                         @Override
-                        public byte[] call(InputStream inputStreamServiceResponse) {
-                            try {
-                                return IOUtils.toByteArray(inputStreamServiceResponse);
-                            } catch (IOException e) {
-                                throw Exceptions.propagate(e);
-                            }
+                        public byte[] apply(InputStream inputStreamServiceResponse) throws Exception {
+                            return IOUtils.toByteArray(inputStreamServiceResponse);
                         }
-                    }).toBlocking().value();
+                    }).blockingGet();
             Assert.assertEquals(new String(bytes), IOUtils.toString(actual));
         }
     }

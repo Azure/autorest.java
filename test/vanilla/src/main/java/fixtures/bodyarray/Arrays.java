@@ -15,6 +15,10 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +26,6 @@ import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -53,9 +55,9 @@ public interface Arrays {
      * Get null array value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
-    Single<List<Integer>> getNullAsync();
+    Maybe<List<Integer>> getNullAsync();
 
     /**
      * Get null array value.
@@ -88,9 +90,9 @@ public interface Arrays {
      * Get invalid array [1, 2, 3.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
-    Single<List<Integer>> getInvalidAsync();
+    Maybe<List<Integer>> getInvalidAsync();
 
     /**
      * Get invalid array [1, 2, 3.
@@ -123,9 +125,9 @@ public interface Arrays {
      * Get empty array value [].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
-    Single<List<Integer>> getEmptyAsync();
+    Maybe<List<Integer>> getEmptyAsync();
 
     /**
      * Get empty array value [].
@@ -160,9 +162,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putEmptyAsync(List<String> arrayBody);
+    Completable putEmptyAsync(List<String> arrayBody);
 
     /**
      * Set array value empty [].
@@ -196,9 +198,9 @@ public interface Arrays {
      * Get boolean array value [true, false, false, true].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
-    Single<List<Boolean>> getBooleanTfftAsync();
+    Maybe<List<Boolean>> getBooleanTfftAsync();
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -233,9 +235,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putBooleanTfftAsync(List<Boolean> arrayBody);
+    Completable putBooleanTfftAsync(List<Boolean> arrayBody);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -269,9 +271,9 @@ public interface Arrays {
      * Get boolean array value [true, null, false].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
-    Single<List<Boolean>> getBooleanInvalidNullAsync();
+    Maybe<List<Boolean>> getBooleanInvalidNullAsync();
 
     /**
      * Get boolean array value [true, null, false].
@@ -304,9 +306,9 @@ public interface Arrays {
      * Get boolean array value [true, 'boolean', false].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Boolean&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Boolean&gt;&gt;} object if successful.
      */
-    Single<List<Boolean>> getBooleanInvalidStringAsync();
+    Maybe<List<Boolean>> getBooleanInvalidStringAsync();
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -339,9 +341,9 @@ public interface Arrays {
      * Get integer array value [1, -1, 3, 300].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
-    Single<List<Integer>> getIntegerValidAsync();
+    Maybe<List<Integer>> getIntegerValidAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -376,9 +378,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putIntegerValidAsync(List<Integer> arrayBody);
+    Completable putIntegerValidAsync(List<Integer> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -412,9 +414,9 @@ public interface Arrays {
      * Get integer array value [1, null, 0].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
-    Single<List<Integer>> getIntInvalidNullAsync();
+    Maybe<List<Integer>> getIntInvalidNullAsync();
 
     /**
      * Get integer array value [1, null, 0].
@@ -447,9 +449,9 @@ public interface Arrays {
      * Get integer array value [1, 'integer', 0].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Integer&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Integer&gt;&gt;} object if successful.
      */
-    Single<List<Integer>> getIntInvalidStringAsync();
+    Maybe<List<Integer>> getIntInvalidStringAsync();
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -482,9 +484,9 @@ public interface Arrays {
      * Get integer array value [1, -1, 3, 300].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
-    Single<List<Long>> getLongValidAsync();
+    Maybe<List<Long>> getLongValidAsync();
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -519,9 +521,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putLongValidAsync(List<Long> arrayBody);
+    Completable putLongValidAsync(List<Long> arrayBody);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -555,9 +557,9 @@ public interface Arrays {
      * Get long array value [1, null, 0].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
-    Single<List<Long>> getLongInvalidNullAsync();
+    Maybe<List<Long>> getLongInvalidNullAsync();
 
     /**
      * Get long array value [1, null, 0].
@@ -590,9 +592,9 @@ public interface Arrays {
      * Get long array value [1, 'integer', 0].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Long&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Long&gt;&gt;} object if successful.
      */
-    Single<List<Long>> getLongInvalidStringAsync();
+    Maybe<List<Long>> getLongInvalidStringAsync();
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -625,9 +627,9 @@ public interface Arrays {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
-    Single<List<Double>> getFloatValidAsync();
+    Maybe<List<Double>> getFloatValidAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -662,9 +664,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putFloatValidAsync(List<Double> arrayBody);
+    Completable putFloatValidAsync(List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -698,9 +700,9 @@ public interface Arrays {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
-    Single<List<Double>> getFloatInvalidNullAsync();
+    Maybe<List<Double>> getFloatInvalidNullAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -733,9 +735,9 @@ public interface Arrays {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
-    Single<List<Double>> getFloatInvalidStringAsync();
+    Maybe<List<Double>> getFloatInvalidStringAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -768,9 +770,9 @@ public interface Arrays {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
-    Single<List<Double>> getDoubleValidAsync();
+    Maybe<List<Double>> getDoubleValidAsync();
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -805,9 +807,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDoubleValidAsync(List<Double> arrayBody);
+    Completable putDoubleValidAsync(List<Double> arrayBody);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -841,9 +843,9 @@ public interface Arrays {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
-    Single<List<Double>> getDoubleInvalidNullAsync();
+    Maybe<List<Double>> getDoubleInvalidNullAsync();
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -876,9 +878,9 @@ public interface Arrays {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Double&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Double&gt;&gt;} object if successful.
      */
-    Single<List<Double>> getDoubleInvalidStringAsync();
+    Maybe<List<Double>> getDoubleInvalidStringAsync();
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -911,9 +913,9 @@ public interface Arrays {
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
-    Single<List<String>> getStringValidAsync();
+    Maybe<List<String>> getStringValidAsync();
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -948,9 +950,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putStringValidAsync(List<String> arrayBody);
+    Completable putStringValidAsync(List<String> arrayBody);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -984,9 +986,9 @@ public interface Arrays {
      * Get string array value ['foo', null, 'foo2'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
-    Single<List<String>> getStringWithNullAsync();
+    Maybe<List<String>> getStringWithNullAsync();
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -1019,9 +1021,9 @@ public interface Arrays {
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;String&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;String&gt;&gt;} object if successful.
      */
-    Single<List<String>> getStringWithInvalidAsync();
+    Maybe<List<String>> getStringWithInvalidAsync();
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -1054,9 +1056,9 @@ public interface Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;UUID&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
      */
-    Single<List<UUID>> getUuidValidAsync();
+    Maybe<List<UUID>> getUuidValidAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1091,9 +1093,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUuidValidAsync(List<UUID> arrayBody);
+    Completable putUuidValidAsync(List<UUID> arrayBody);
 
     /**
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
@@ -1127,9 +1129,9 @@ public interface Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;UUID&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;UUID&gt;&gt;} object if successful.
      */
-    Single<List<UUID>> getUuidInvalidCharsAsync();
+    Maybe<List<UUID>> getUuidInvalidCharsAsync();
 
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
@@ -1162,9 +1164,9 @@ public interface Arrays {
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
-    Single<List<LocalDate>> getDateValidAsync();
+    Maybe<List<LocalDate>> getDateValidAsync();
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1199,9 +1201,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateValidAsync(List<LocalDate> arrayBody);
+    Completable putDateValidAsync(List<LocalDate> arrayBody);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -1235,9 +1237,9 @@ public interface Arrays {
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
-    Single<List<LocalDate>> getDateInvalidNullAsync();
+    Maybe<List<LocalDate>> getDateInvalidNullAsync();
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -1270,9 +1272,9 @@ public interface Arrays {
      * Get date array value ['2011-03-22', 'date'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;LocalDate&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;LocalDate&gt;&gt;} object if successful.
      */
-    Single<List<LocalDate>> getDateInvalidCharsAsync();
+    Maybe<List<LocalDate>> getDateInvalidCharsAsync();
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -1305,9 +1307,9 @@ public interface Arrays {
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
-    Single<List<DateTime>> getDateTimeValidAsync();
+    Maybe<List<DateTime>> getDateTimeValidAsync();
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1342,9 +1344,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeValidAsync(List<DateTime> arrayBody);
+    Completable putDateTimeValidAsync(List<DateTime> arrayBody);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -1378,9 +1380,9 @@ public interface Arrays {
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
-    Single<List<DateTime>> getDateTimeInvalidNullAsync();
+    Maybe<List<DateTime>> getDateTimeInvalidNullAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -1413,9 +1415,9 @@ public interface Arrays {
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
-    Single<List<DateTime>> getDateTimeInvalidCharsAsync();
+    Maybe<List<DateTime>> getDateTimeInvalidCharsAsync();
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -1448,9 +1450,9 @@ public interface Arrays {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;DateTime&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;DateTime&gt;&gt;} object if successful.
      */
-    Single<List<DateTime>> getDateTimeRfc1123ValidAsync();
+    Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync();
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1485,9 +1487,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
+    Completable putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -1521,9 +1523,9 @@ public interface Arrays {
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Period&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Period&gt;&gt;} object if successful.
      */
-    Single<List<Period>> getDurationValidAsync();
+    Maybe<List<Period>> getDurationValidAsync();
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1558,9 +1560,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDurationValidAsync(List<Period> arrayBody);
+    Completable putDurationValidAsync(List<Period> arrayBody);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -1594,9 +1596,9 @@ public interface Arrays {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
-    Single<List<byte[]>> getByteValidAsync();
+    Maybe<List<byte[]>> getByteValidAsync();
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1631,9 +1633,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putByteValidAsync(List<byte[]> arrayBody);
+    Completable putByteValidAsync(List<byte[]> arrayBody);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1667,9 +1669,9 @@ public interface Arrays {
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
-    Single<List<byte[]>> getByteInvalidNullAsync();
+    Maybe<List<byte[]>> getByteInvalidNullAsync();
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1702,9 +1704,9 @@ public interface Arrays {
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;byte[]&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;byte[]&gt;&gt;} object if successful.
      */
-    Single<List<byte[]>> getBase64UrlAsync();
+    Maybe<List<byte[]>> getBase64UrlAsync();
 
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
@@ -1737,9 +1739,9 @@ public interface Arrays {
      * Get array of complex type null value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
-    Single<List<Product>> getComplexNullAsync();
+    Maybe<List<Product>> getComplexNullAsync();
 
     /**
      * Get array of complex type null value.
@@ -1772,9 +1774,9 @@ public interface Arrays {
      * Get empty array of complex type [].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
-    Single<List<Product>> getComplexEmptyAsync();
+    Maybe<List<Product>> getComplexEmptyAsync();
 
     /**
      * Get empty array of complex type [].
@@ -1807,9 +1809,9 @@ public interface Arrays {
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
-    Single<List<Product>> getComplexItemNullAsync();
+    Maybe<List<Product>> getComplexItemNullAsync();
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1842,9 +1844,9 @@ public interface Arrays {
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
-    Single<List<Product>> getComplexItemEmptyAsync();
+    Maybe<List<Product>> getComplexItemEmptyAsync();
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1877,9 +1879,9 @@ public interface Arrays {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Product&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Product&gt;&gt;} object if successful.
      */
-    Single<List<Product>> getComplexValidAsync();
+    Maybe<List<Product>> getComplexValidAsync();
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1914,9 +1916,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putComplexValidAsync(List<Product> arrayBody);
+    Completable putComplexValidAsync(List<Product> arrayBody);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1950,9 +1952,9 @@ public interface Arrays {
      * Get a null array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<List<String>>> getArrayNullAsync();
+    Maybe<List<List<String>>> getArrayNullAsync();
 
     /**
      * Get a null array.
@@ -1985,9 +1987,9 @@ public interface Arrays {
      * Get an empty array [].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<List<String>>> getArrayEmptyAsync();
+    Maybe<List<List<String>>> getArrayEmptyAsync();
 
     /**
      * Get an empty array [].
@@ -2020,9 +2022,9 @@ public interface Arrays {
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<List<String>>> getArrayItemNullAsync();
+    Maybe<List<List<String>>> getArrayItemNullAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -2055,9 +2057,9 @@ public interface Arrays {
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<List<String>>> getArrayItemEmptyAsync();
+    Maybe<List<List<String>>> getArrayItemEmptyAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -2090,9 +2092,9 @@ public interface Arrays {
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;List&lt;String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<List<String>>> getArrayValidAsync();
+    Maybe<List<List<String>>> getArrayValidAsync();
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2127,9 +2129,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putArrayValidAsync(List<List<String>> arrayBody);
+    Completable putArrayValidAsync(List<List<String>> arrayBody);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -2163,9 +2165,9 @@ public interface Arrays {
      * Get an array of Dictionaries with value null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<Map<String, String>>> getDictionaryNullAsync();
+    Maybe<List<Map<String, String>>> getDictionaryNullAsync();
 
     /**
      * Get an array of Dictionaries with value null.
@@ -2198,9 +2200,9 @@ public interface Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<Map<String, String>>> getDictionaryEmptyAsync();
+    Maybe<List<Map<String, String>>> getDictionaryEmptyAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -2233,9 +2235,9 @@ public interface Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<Map<String, String>>> getDictionaryItemNullAsync();
+    Maybe<List<Map<String, String>>> getDictionaryItemNullAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2268,9 +2270,9 @@ public interface Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<Map<String, String>>> getDictionaryItemEmptyAsync();
+    Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2303,9 +2305,9 @@ public interface Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
+     * @return the {@link Maybe&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;} object if successful.
      */
-    Single<List<Map<String, String>>> getDictionaryValidAsync();
+    Maybe<List<Map<String, String>>> getDictionaryValidAsync();
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -2340,9 +2342,9 @@ public interface Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody);
+    Completable putDictionaryValidAsync(List<Map<String, String>> arrayBody);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].

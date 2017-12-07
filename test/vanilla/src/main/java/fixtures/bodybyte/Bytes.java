@@ -14,9 +14,11 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodybyte.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -46,9 +48,9 @@ public interface Bytes {
      * Get null byte value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getNullAsync();
+    Maybe<byte[]> getNullAsync();
 
     /**
      * Get null byte value.
@@ -81,9 +83,9 @@ public interface Bytes {
      * Get empty byte value ''.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getEmptyAsync();
+    Maybe<byte[]> getEmptyAsync();
 
     /**
      * Get empty byte value ''.
@@ -116,9 +118,9 @@ public interface Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getNonAsciiAsync();
+    Maybe<byte[]> getNonAsciiAsync();
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -153,9 +155,9 @@ public interface Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putNonAsciiAsync(byte[] byteBody);
+    Completable putNonAsciiAsync(byte[] byteBody);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -189,9 +191,9 @@ public interface Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;byte[]&gt;} object if successful.
+     * @return the {@link Maybe&lt;byte[]&gt;} object if successful.
      */
-    Single<byte[]> getInvalidAsync();
+    Maybe<byte[]> getInvalidAsync();
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.

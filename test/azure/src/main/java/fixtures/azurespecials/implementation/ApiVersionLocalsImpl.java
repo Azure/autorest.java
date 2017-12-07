@@ -25,10 +25,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.ApiVersionLocals;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -91,7 +92,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidAsync().toBlocking().value();
+        getMethodLocalValidAsync().blockingAwait();
     }
 
     /**
@@ -122,9 +123,9 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalValidAsync() {
+    public Completable getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -137,7 +138,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullAsync().toBlocking().value();
+        getMethodLocalNullAsync().blockingAwait();
     }
 
     /**
@@ -168,9 +169,9 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalNullAsync() {
+    public Completable getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -183,7 +184,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullAsync(apiVersion).toBlocking().value();
+        getMethodLocalNullAsync(apiVersion).blockingAwait();
     }
 
     /**
@@ -216,9 +217,9 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getMethodLocalNullAsync(String apiVersion) {
+    public Completable getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -231,7 +232,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getPathLocalValid() {
-        getPathLocalValidAsync().toBlocking().value();
+        getPathLocalValidAsync().blockingAwait();
     }
 
     /**
@@ -262,9 +263,9 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getPathLocalValidAsync() {
+    public Completable getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -277,7 +278,7 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the void object if successful.
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidAsync().toBlocking().value();
+        getSwaggerLocalValidAsync().blockingAwait();
     }
 
     /**
@@ -308,9 +309,9 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getSwaggerLocalValidAsync() {
+    public Completable getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

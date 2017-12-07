@@ -1,7 +1,9 @@
 package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.HostPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

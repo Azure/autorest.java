@@ -25,10 +25,11 @@ import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.subscriptionidapiversion.ErrorException;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -74,7 +75,7 @@ public class GroupsInner {
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupAsync(resourceGroupName).toBlocking().value();
+        return getSampleResourceGroupAsync(resourceGroupName).blockingGet();
     }
 
     /**
@@ -116,9 +117,17 @@ public class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, SampleResourceGroupInner> object
      */
-    public Single<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
+    public Maybe<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
         return getSampleResourceGroupWithRestResponseAsync(resourceGroupName)
-            .map(new Func1<RestResponse<Void, SampleResourceGroupInner>, SampleResourceGroupInner>() { public SampleResourceGroupInner call(RestResponse<Void, SampleResourceGroupInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, SampleResourceGroupInner>, Maybe<SampleResourceGroupInner>>() {
+                public Maybe<SampleResourceGroupInner> apply(RestResponse<Void, SampleResourceGroupInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

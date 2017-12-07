@@ -14,9 +14,10 @@ import com.microsoft.azure.v2.CloudException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -46,9 +47,9 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> head200Async();
+    Maybe<Boolean> head200Async();
 
     /**
      * Return 200 status code if successful.
@@ -81,9 +82,9 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> head204Async();
+    Maybe<Boolean> head204Async();
 
     /**
      * Return 204 status code if successful.
@@ -116,9 +117,9 @@ public interface HttpSuccess {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Boolean&gt;} object if successful.
+     * @return the {@link Maybe&lt;Boolean&gt;} object if successful.
      */
-    Single<Boolean> head404Async();
+    Maybe<Boolean> head404Async();
 
     /**
      * Return 404 status code if successful.

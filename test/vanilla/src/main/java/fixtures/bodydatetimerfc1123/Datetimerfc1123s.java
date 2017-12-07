@@ -14,10 +14,12 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import org.joda.time.DateTime;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,9 +49,9 @@ public interface Datetimerfc1123s {
      * Get null datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getNullAsync();
+    Maybe<DateTime> getNullAsync();
 
     /**
      * Get null datetime value.
@@ -82,9 +84,9 @@ public interface Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getInvalidAsync();
+    Maybe<DateTime> getInvalidAsync();
 
     /**
      * Get invalid datetime value.
@@ -117,9 +119,9 @@ public interface Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getOverflowAsync();
+    Maybe<DateTime> getOverflowAsync();
 
     /**
      * Get overflow datetime value.
@@ -152,9 +154,9 @@ public interface Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUnderflowAsync();
+    Maybe<DateTime> getUnderflowAsync();
 
     /**
      * Get underflow datetime value.
@@ -189,9 +191,9 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
+    Completable putUtcMaxDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -225,9 +227,9 @@ public interface Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUtcLowercaseMaxDateTimeAsync();
+    Maybe<DateTime> getUtcLowercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -260,9 +262,9 @@ public interface Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUtcUppercaseMaxDateTimeAsync();
+    Maybe<DateTime> getUtcUppercaseMaxDateTimeAsync();
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -297,9 +299,9 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
+    Completable putUtcMinDateTimeAsync(DateTime datetimeBody);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -333,9 +335,9 @@ public interface Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;DateTime&gt;} object if successful.
+     * @return the {@link Maybe&lt;DateTime&gt;} object if successful.
      */
-    Single<DateTime> getUtcMinDateTimeAsync();
+    Maybe<DateTime> getUtcMinDateTimeAsync();
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.

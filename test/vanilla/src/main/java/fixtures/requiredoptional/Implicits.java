@@ -15,9 +15,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -50,9 +52,9 @@ public interface Implicits {
      *
      * @param pathParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> getRequiredPathAsync(String pathParameter);
+    Maybe<Error> getRequiredPathAsync(String pathParameter);
 
     /**
      * Test implicitly required path parameter.
@@ -85,9 +87,9 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putOptionalQueryAsync();
+    Completable putOptionalQueryAsync();
 
     /**
      * Test implicitly optional query parameter.
@@ -122,9 +124,9 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putOptionalQueryAsync(String queryParameter);
+    Completable putOptionalQueryAsync(String queryParameter);
 
     /**
      * Test implicitly optional query parameter.
@@ -157,9 +159,9 @@ public interface Implicits {
      * Test implicitly optional header parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putOptionalHeaderAsync();
+    Completable putOptionalHeaderAsync();
 
     /**
      * Test implicitly optional header parameter.
@@ -194,9 +196,9 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putOptionalHeaderAsync(String queryParameter);
+    Completable putOptionalHeaderAsync(String queryParameter);
 
     /**
      * Test implicitly optional header parameter.
@@ -229,9 +231,9 @@ public interface Implicits {
      * Test implicitly optional body parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putOptionalBodyAsync();
+    Completable putOptionalBodyAsync();
 
     /**
      * Test implicitly optional body parameter.
@@ -266,9 +268,9 @@ public interface Implicits {
      *
      * @param bodyParameter the String value
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putOptionalBodyAsync(String bodyParameter);
+    Completable putOptionalBodyAsync(String bodyParameter);
 
     /**
      * Test implicitly optional body parameter.
@@ -302,9 +304,9 @@ public interface Implicits {
      * Test implicitly required path parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> getRequiredGlobalPathAsync();
+    Maybe<Error> getRequiredGlobalPathAsync();
 
     /**
      * Test implicitly required path parameter.
@@ -337,9 +339,9 @@ public interface Implicits {
      * Test implicitly required query parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> getRequiredGlobalQueryAsync();
+    Maybe<Error> getRequiredGlobalQueryAsync();
 
     /**
      * Test implicitly required query parameter.
@@ -372,9 +374,9 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Error&gt;} object if successful.
+     * @return the {@link Maybe&lt;Error&gt;} object if successful.
      */
-    Single<Error> getOptionalGlobalQueryAsync();
+    Maybe<Error> getOptionalGlobalQueryAsync();
 
     /**
      * Test implicitly optional query parameter.

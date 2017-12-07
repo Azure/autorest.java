@@ -336,7 +336,7 @@ public class LROsTests {
     public void post202NoRetry204() throws Exception {
         ProductInner product = new ProductInner();
         product.withLocation("West US");
-        ProductInner response = client.lROs().post202NoRetry204(product);
+        ProductInner response = client.lROs().post202NoRetry204WithRestResponseAsync(product).blockingGet().body();
     }
 
     @Test

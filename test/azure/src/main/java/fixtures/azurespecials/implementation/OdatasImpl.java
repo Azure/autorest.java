@@ -25,10 +25,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.Odatas;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -73,7 +74,7 @@ public class OdatasImpl implements Odatas {
      * @return the void object if successful.
      */
     public void getWithFilter() {
-        getWithFilterAsync().toBlocking().value();
+        getWithFilterAsync().blockingAwait();
     }
 
     /**
@@ -106,9 +107,9 @@ public class OdatasImpl implements Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithFilterAsync() {
+    public Completable getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -123,7 +124,7 @@ public class OdatasImpl implements Odatas {
      * @return the void object if successful.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterAsync(filter, top, orderby).toBlocking().value();
+        getWithFilterAsync(filter, top, orderby).blockingAwait();
     }
 
     /**
@@ -162,9 +163,9 @@ public class OdatasImpl implements Odatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getWithFilterAsync(String filter, Integer top, String orderby) {
+    public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

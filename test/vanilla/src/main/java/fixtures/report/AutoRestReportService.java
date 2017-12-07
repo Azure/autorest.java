@@ -14,10 +14,11 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.report.models.ErrorException;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
 
 /**
  * The interface for AutoRestReportService class.
@@ -49,7 +50,7 @@ public interface AutoRestReportService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map<String, Integer> object
      */
-    Single<Map<String, Integer>> getReportAsync();
+    Maybe<Map<String, Integer>> getReportAsync();
 
     /**
      * Get test coverage report.
@@ -86,7 +87,7 @@ public interface AutoRestReportService {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
-    Single<Map<String, Integer>> getReportAsync(String qualifier);
+    Maybe<Map<String, Integer>> getReportAsync(String qualifier);
 
     /**
      * Get test coverage report.

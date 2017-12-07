@@ -27,10 +27,11 @@ import com.microsoft.rest.v2.annotations.QueryParam;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azureparametergrouping.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -94,7 +95,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
-        postRequiredAsync(parameterGroupingPostRequiredParameters).toBlocking().value();
+        postRequiredAsync(parameterGroupingPostRequiredParameters).blockingAwait();
     }
 
     /**
@@ -135,9 +136,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
+    public Completable postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -150,7 +151,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postOptional() {
-        postOptionalAsync().toBlocking().value();
+        postOptionalAsync().blockingAwait();
     }
 
     /**
@@ -184,9 +185,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalAsync() {
+    public Completable postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -199,7 +200,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
-        postOptionalAsync(parameterGroupingPostOptionalParameters).toBlocking().value();
+        postOptionalAsync(parameterGroupingPostOptionalParameters).blockingAwait();
     }
 
     /**
@@ -241,9 +242,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
+    public Completable postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -256,7 +257,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsAsync().toBlocking().value();
+        postMultiParamGroupsAsync().blockingAwait();
     }
 
     /**
@@ -294,9 +295,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMultiParamGroupsAsync() {
+    public Completable postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -310,7 +311,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().value();
+        postMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).blockingAwait();
     }
 
     /**
@@ -364,9 +365,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
+    public Completable postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -379,7 +380,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectAsync().toBlocking().value();
+        postSharedParameterGroupObjectAsync().blockingAwait();
     }
 
     /**
@@ -413,9 +414,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSharedParameterGroupObjectAsync() {
+    public Completable postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -428,7 +429,7 @@ public class ParameterGroupingsInner {
      * @return the void object if successful.
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
-        postSharedParameterGroupObjectAsync(firstParameterGroup).toBlocking().value();
+        postSharedParameterGroupObjectAsync(firstParameterGroup).blockingAwait();
     }
 
     /**
@@ -470,9 +471,9 @@ public class ParameterGroupingsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
+    public Completable postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

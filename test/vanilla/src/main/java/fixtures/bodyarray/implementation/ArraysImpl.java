@@ -30,6 +30,11 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyarray.Arrays;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +43,6 @@ import java.util.UUID;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -476,7 +478,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -506,9 +508,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Integer>> object
      */
-    public Single<List<Integer>> getNullAsync() {
+    public Maybe<List<Integer>> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Integer>>, List<Integer>>() { public List<Integer> call(RestResponse<Void, List<Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -521,7 +531,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -551,9 +561,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Integer>> object
      */
-    public Single<List<Integer>> getInvalidAsync() {
+    public Maybe<List<Integer>> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Integer>>, List<Integer>>() { public List<Integer> call(RestResponse<Void, List<Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -566,7 +584,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -596,9 +614,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Integer>> object
      */
-    public Single<List<Integer>> getEmptyAsync() {
+    public Maybe<List<Integer>> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Integer>>, List<Integer>>() { public List<Integer> call(RestResponse<Void, List<Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -612,7 +638,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putEmpty(List<String> arrayBody) {
-        putEmptyAsync(arrayBody).toBlocking().value();
+        putEmptyAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -649,9 +675,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(List<String> arrayBody) {
+    public Completable putEmptyAsync(List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -664,7 +690,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanTfft() {
-        return getBooleanTfftAsync().toBlocking().value();
+        return getBooleanTfftAsync().blockingGet();
     }
 
     /**
@@ -694,9 +720,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Boolean>> object
      */
-    public Single<List<Boolean>> getBooleanTfftAsync() {
+    public Maybe<List<Boolean>> getBooleanTfftAsync() {
         return getBooleanTfftWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Boolean>>, List<Boolean>>() { public List<Boolean> call(RestResponse<Void, List<Boolean>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
+                public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -710,7 +744,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putBooleanTfft(List<Boolean> arrayBody) {
-        putBooleanTfftAsync(arrayBody).toBlocking().value();
+        putBooleanTfftAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -747,9 +781,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBooleanTfftAsync(List<Boolean> arrayBody) {
+    public Completable putBooleanTfftAsync(List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -762,7 +796,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullAsync().toBlocking().value();
+        return getBooleanInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -792,9 +826,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Boolean>> object
      */
-    public Single<List<Boolean>> getBooleanInvalidNullAsync() {
+    public Maybe<List<Boolean>> getBooleanInvalidNullAsync() {
         return getBooleanInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Boolean>>, List<Boolean>>() { public List<Boolean> call(RestResponse<Void, List<Boolean>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
+                public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -807,7 +849,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringAsync().toBlocking().value();
+        return getBooleanInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -837,9 +879,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Boolean>> object
      */
-    public Single<List<Boolean>> getBooleanInvalidStringAsync() {
+    public Maybe<List<Boolean>> getBooleanInvalidStringAsync() {
         return getBooleanInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Boolean>>, List<Boolean>>() { public List<Boolean> call(RestResponse<Void, List<Boolean>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Boolean>>, Maybe<List<Boolean>>>() {
+                public Maybe<List<Boolean>> apply(RestResponse<Void, List<Boolean>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -852,7 +902,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntegerValid() {
-        return getIntegerValidAsync().toBlocking().value();
+        return getIntegerValidAsync().blockingGet();
     }
 
     /**
@@ -882,9 +932,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Integer>> object
      */
-    public Single<List<Integer>> getIntegerValidAsync() {
+    public Maybe<List<Integer>> getIntegerValidAsync() {
         return getIntegerValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Integer>>, List<Integer>>() { public List<Integer> call(RestResponse<Void, List<Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -898,7 +956,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putIntegerValid(List<Integer> arrayBody) {
-        putIntegerValidAsync(arrayBody).toBlocking().value();
+        putIntegerValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -935,9 +993,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putIntegerValidAsync(List<Integer> arrayBody) {
+    public Completable putIntegerValidAsync(List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -950,7 +1008,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidNull() {
-        return getIntInvalidNullAsync().toBlocking().value();
+        return getIntInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -980,9 +1038,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Integer>> object
      */
-    public Single<List<Integer>> getIntInvalidNullAsync() {
+    public Maybe<List<Integer>> getIntInvalidNullAsync() {
         return getIntInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Integer>>, List<Integer>>() { public List<Integer> call(RestResponse<Void, List<Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -995,7 +1061,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidString() {
-        return getIntInvalidStringAsync().toBlocking().value();
+        return getIntInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1025,9 +1091,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Integer>> object
      */
-    public Single<List<Integer>> getIntInvalidStringAsync() {
+    public Maybe<List<Integer>> getIntInvalidStringAsync() {
         return getIntInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Integer>>, List<Integer>>() { public List<Integer> call(RestResponse<Void, List<Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Integer>>, Maybe<List<Integer>>>() {
+                public Maybe<List<Integer>> apply(RestResponse<Void, List<Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1040,7 +1114,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongValid() {
-        return getLongValidAsync().toBlocking().value();
+        return getLongValidAsync().blockingGet();
     }
 
     /**
@@ -1070,9 +1144,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Long>> object
      */
-    public Single<List<Long>> getLongValidAsync() {
+    public Maybe<List<Long>> getLongValidAsync() {
         return getLongValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Long>>, List<Long>>() { public List<Long> call(RestResponse<Void, List<Long>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
+                public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1086,7 +1168,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putLongValid(List<Long> arrayBody) {
-        putLongValidAsync(arrayBody).toBlocking().value();
+        putLongValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1123,9 +1205,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLongValidAsync(List<Long> arrayBody) {
+    public Completable putLongValidAsync(List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1138,7 +1220,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidNull() {
-        return getLongInvalidNullAsync().toBlocking().value();
+        return getLongInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1168,9 +1250,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Long>> object
      */
-    public Single<List<Long>> getLongInvalidNullAsync() {
+    public Maybe<List<Long>> getLongInvalidNullAsync() {
         return getLongInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Long>>, List<Long>>() { public List<Long> call(RestResponse<Void, List<Long>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
+                public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1183,7 +1273,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidString() {
-        return getLongInvalidStringAsync().toBlocking().value();
+        return getLongInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1213,9 +1303,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Long>> object
      */
-    public Single<List<Long>> getLongInvalidStringAsync() {
+    public Maybe<List<Long>> getLongInvalidStringAsync() {
         return getLongInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Long>>, List<Long>>() { public List<Long> call(RestResponse<Void, List<Long>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Long>>, Maybe<List<Long>>>() {
+                public Maybe<List<Long>> apply(RestResponse<Void, List<Long>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1228,7 +1326,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatValid() {
-        return getFloatValidAsync().toBlocking().value();
+        return getFloatValidAsync().blockingGet();
     }
 
     /**
@@ -1258,9 +1356,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Double>> object
      */
-    public Single<List<Double>> getFloatValidAsync() {
+    public Maybe<List<Double>> getFloatValidAsync() {
         return getFloatValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Double>>, List<Double>>() { public List<Double> call(RestResponse<Void, List<Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1274,7 +1380,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putFloatValid(List<Double> arrayBody) {
-        putFloatValidAsync(arrayBody).toBlocking().value();
+        putFloatValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1311,9 +1417,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFloatValidAsync(List<Double> arrayBody) {
+    public Completable putFloatValidAsync(List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1326,7 +1432,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidNull() {
-        return getFloatInvalidNullAsync().toBlocking().value();
+        return getFloatInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1356,9 +1462,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Double>> object
      */
-    public Single<List<Double>> getFloatInvalidNullAsync() {
+    public Maybe<List<Double>> getFloatInvalidNullAsync() {
         return getFloatInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Double>>, List<Double>>() { public List<Double> call(RestResponse<Void, List<Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1371,7 +1485,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidString() {
-        return getFloatInvalidStringAsync().toBlocking().value();
+        return getFloatInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1401,9 +1515,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Double>> object
      */
-    public Single<List<Double>> getFloatInvalidStringAsync() {
+    public Maybe<List<Double>> getFloatInvalidStringAsync() {
         return getFloatInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Double>>, List<Double>>() { public List<Double> call(RestResponse<Void, List<Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1416,7 +1538,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleValid() {
-        return getDoubleValidAsync().toBlocking().value();
+        return getDoubleValidAsync().blockingGet();
     }
 
     /**
@@ -1446,9 +1568,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Double>> object
      */
-    public Single<List<Double>> getDoubleValidAsync() {
+    public Maybe<List<Double>> getDoubleValidAsync() {
         return getDoubleValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Double>>, List<Double>>() { public List<Double> call(RestResponse<Void, List<Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1462,7 +1592,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDoubleValid(List<Double> arrayBody) {
-        putDoubleValidAsync(arrayBody).toBlocking().value();
+        putDoubleValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1499,9 +1629,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDoubleValidAsync(List<Double> arrayBody) {
+    public Completable putDoubleValidAsync(List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1514,7 +1644,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullAsync().toBlocking().value();
+        return getDoubleInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -1544,9 +1674,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Double>> object
      */
-    public Single<List<Double>> getDoubleInvalidNullAsync() {
+    public Maybe<List<Double>> getDoubleInvalidNullAsync() {
         return getDoubleInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Double>>, List<Double>>() { public List<Double> call(RestResponse<Void, List<Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1559,7 +1697,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringAsync().toBlocking().value();
+        return getDoubleInvalidStringAsync().blockingGet();
     }
 
     /**
@@ -1589,9 +1727,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Double>> object
      */
-    public Single<List<Double>> getDoubleInvalidStringAsync() {
+    public Maybe<List<Double>> getDoubleInvalidStringAsync() {
         return getDoubleInvalidStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Double>>, List<Double>>() { public List<Double> call(RestResponse<Void, List<Double>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Double>>, Maybe<List<Double>>>() {
+                public Maybe<List<Double>> apply(RestResponse<Void, List<Double>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1604,7 +1750,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringValid() {
-        return getStringValidAsync().toBlocking().value();
+        return getStringValidAsync().blockingGet();
     }
 
     /**
@@ -1634,9 +1780,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<String>> object
      */
-    public Single<List<String>> getStringValidAsync() {
+    public Maybe<List<String>> getStringValidAsync() {
         return getStringValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<String>>, List<String>>() { public List<String> call(RestResponse<Void, List<String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
+                public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1650,7 +1804,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putStringValid(List<String> arrayBody) {
-        putStringValidAsync(arrayBody).toBlocking().value();
+        putStringValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1687,9 +1841,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putStringValidAsync(List<String> arrayBody) {
+    public Completable putStringValidAsync(List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1702,7 +1856,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithNull() {
-        return getStringWithNullAsync().toBlocking().value();
+        return getStringWithNullAsync().blockingGet();
     }
 
     /**
@@ -1732,9 +1886,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<String>> object
      */
-    public Single<List<String>> getStringWithNullAsync() {
+    public Maybe<List<String>> getStringWithNullAsync() {
         return getStringWithNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<String>>, List<String>>() { public List<String> call(RestResponse<Void, List<String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
+                public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1747,7 +1909,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithInvalid() {
-        return getStringWithInvalidAsync().toBlocking().value();
+        return getStringWithInvalidAsync().blockingGet();
     }
 
     /**
@@ -1777,9 +1939,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<String>> object
      */
-    public Single<List<String>> getStringWithInvalidAsync() {
+    public Maybe<List<String>> getStringWithInvalidAsync() {
         return getStringWithInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<String>>, List<String>>() { public List<String> call(RestResponse<Void, List<String>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<String>>, Maybe<List<String>>>() {
+                public Maybe<List<String>> apply(RestResponse<Void, List<String>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1792,7 +1962,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidValid() {
-        return getUuidValidAsync().toBlocking().value();
+        return getUuidValidAsync().blockingGet();
     }
 
     /**
@@ -1822,9 +1992,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<UUID>> object
      */
-    public Single<List<UUID>> getUuidValidAsync() {
+    public Maybe<List<UUID>> getUuidValidAsync() {
         return getUuidValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<UUID>>, List<UUID>>() { public List<UUID> call(RestResponse<Void, List<UUID>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<UUID>>, Maybe<List<UUID>>>() {
+                public Maybe<List<UUID>> apply(RestResponse<Void, List<UUID>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1838,7 +2016,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putUuidValid(List<UUID> arrayBody) {
-        putUuidValidAsync(arrayBody).toBlocking().value();
+        putUuidValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -1875,9 +2053,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putUuidValidAsync(List<UUID> arrayBody) {
+    public Completable putUuidValidAsync(List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1890,7 +2068,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidInvalidChars() {
-        return getUuidInvalidCharsAsync().toBlocking().value();
+        return getUuidInvalidCharsAsync().blockingGet();
     }
 
     /**
@@ -1920,9 +2098,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<UUID>> object
      */
-    public Single<List<UUID>> getUuidInvalidCharsAsync() {
+    public Maybe<List<UUID>> getUuidInvalidCharsAsync() {
         return getUuidInvalidCharsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<UUID>>, List<UUID>>() { public List<UUID> call(RestResponse<Void, List<UUID>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<UUID>>, Maybe<List<UUID>>>() {
+                public Maybe<List<UUID>> apply(RestResponse<Void, List<UUID>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1935,7 +2121,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateValid() {
-        return getDateValidAsync().toBlocking().value();
+        return getDateValidAsync().blockingGet();
     }
 
     /**
@@ -1965,9 +2151,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<LocalDate>> object
      */
-    public Single<List<LocalDate>> getDateValidAsync() {
+    public Maybe<List<LocalDate>> getDateValidAsync() {
         return getDateValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<LocalDate>>, List<LocalDate>>() { public List<LocalDate> call(RestResponse<Void, List<LocalDate>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
+                public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1981,7 +2175,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDateValid(List<LocalDate> arrayBody) {
-        putDateValidAsync(arrayBody).toBlocking().value();
+        putDateValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2018,9 +2212,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateValidAsync(List<LocalDate> arrayBody) {
+    public Completable putDateValidAsync(List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2033,7 +2227,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullAsync().toBlocking().value();
+        return getDateInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -2063,9 +2257,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<LocalDate>> object
      */
-    public Single<List<LocalDate>> getDateInvalidNullAsync() {
+    public Maybe<List<LocalDate>> getDateInvalidNullAsync() {
         return getDateInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<LocalDate>>, List<LocalDate>>() { public List<LocalDate> call(RestResponse<Void, List<LocalDate>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
+                public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2078,7 +2280,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsAsync().toBlocking().value();
+        return getDateInvalidCharsAsync().blockingGet();
     }
 
     /**
@@ -2108,9 +2310,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<LocalDate>> object
      */
-    public Single<List<LocalDate>> getDateInvalidCharsAsync() {
+    public Maybe<List<LocalDate>> getDateInvalidCharsAsync() {
         return getDateInvalidCharsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<LocalDate>>, List<LocalDate>>() { public List<LocalDate> call(RestResponse<Void, List<LocalDate>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<LocalDate>>, Maybe<List<LocalDate>>>() {
+                public Maybe<List<LocalDate>> apply(RestResponse<Void, List<LocalDate>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2123,7 +2333,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeValid() {
-        return getDateTimeValidAsync().toBlocking().value();
+        return getDateTimeValidAsync().blockingGet();
     }
 
     /**
@@ -2153,9 +2363,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<DateTime>> object
      */
-    public Single<List<DateTime>> getDateTimeValidAsync() {
+    public Maybe<List<DateTime>> getDateTimeValidAsync() {
         return getDateTimeValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<DateTime>>, List<DateTime>>() { public List<DateTime> call(RestResponse<Void, List<DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2169,7 +2387,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDateTimeValid(List<DateTime> arrayBody) {
-        putDateTimeValidAsync(arrayBody).toBlocking().value();
+        putDateTimeValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2206,9 +2424,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeValidAsync(List<DateTime> arrayBody) {
+    public Completable putDateTimeValidAsync(List<DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2221,7 +2439,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullAsync().toBlocking().value();
+        return getDateTimeInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -2251,9 +2469,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<DateTime>> object
      */
-    public Single<List<DateTime>> getDateTimeInvalidNullAsync() {
+    public Maybe<List<DateTime>> getDateTimeInvalidNullAsync() {
         return getDateTimeInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<DateTime>>, List<DateTime>>() { public List<DateTime> call(RestResponse<Void, List<DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2266,7 +2492,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsAsync().toBlocking().value();
+        return getDateTimeInvalidCharsAsync().blockingGet();
     }
 
     /**
@@ -2296,9 +2522,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<DateTime>> object
      */
-    public Single<List<DateTime>> getDateTimeInvalidCharsAsync() {
+    public Maybe<List<DateTime>> getDateTimeInvalidCharsAsync() {
         return getDateTimeInvalidCharsWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<DateTime>>, List<DateTime>>() { public List<DateTime> call(RestResponse<Void, List<DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2311,7 +2545,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidAsync().toBlocking().value();
+        return getDateTimeRfc1123ValidAsync().blockingGet();
     }
 
     /**
@@ -2341,9 +2575,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<DateTime>> object
      */
-    public Single<List<DateTime>> getDateTimeRfc1123ValidAsync() {
+    public Maybe<List<DateTime>> getDateTimeRfc1123ValidAsync() {
         return getDateTimeRfc1123ValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<DateTime>>, List<DateTime>>() { public List<DateTime> call(RestResponse<Void, List<DateTime>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<DateTime>>, Maybe<List<DateTime>>>() {
+                public Maybe<List<DateTime>> apply(RestResponse<Void, List<DateTime>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2357,7 +2599,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
-        putDateTimeRfc1123ValidAsync(arrayBody).toBlocking().value();
+        putDateTimeRfc1123ValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2400,9 +2642,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
+    public Completable putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2415,7 +2657,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Period&gt; object if successful.
      */
     public List<Period> getDurationValid() {
-        return getDurationValidAsync().toBlocking().value();
+        return getDurationValidAsync().blockingGet();
     }
 
     /**
@@ -2445,9 +2687,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Period>> object
      */
-    public Single<List<Period>> getDurationValidAsync() {
+    public Maybe<List<Period>> getDurationValidAsync() {
         return getDurationValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Period>>, List<Period>>() { public List<Period> call(RestResponse<Void, List<Period>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Period>>, Maybe<List<Period>>>() {
+                public Maybe<List<Period>> apply(RestResponse<Void, List<Period>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2461,7 +2711,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDurationValid(List<Period> arrayBody) {
-        putDurationValidAsync(arrayBody).toBlocking().value();
+        putDurationValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2498,9 +2748,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDurationValidAsync(List<Period> arrayBody) {
+    public Completable putDurationValidAsync(List<Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2513,7 +2763,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteValid() {
-        return getByteValidAsync().toBlocking().value();
+        return getByteValidAsync().blockingGet();
     }
 
     /**
@@ -2543,9 +2793,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<byte[]>> object
      */
-    public Single<List<byte[]>> getByteValidAsync() {
+    public Maybe<List<byte[]>> getByteValidAsync() {
         return getByteValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<byte[]>>, List<byte[]>>() { public List<byte[]> call(RestResponse<Void, List<byte[]>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
+                public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2559,7 +2817,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putByteValid(List<byte[]> arrayBody) {
-        putByteValidAsync(arrayBody).toBlocking().value();
+        putByteValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2596,9 +2854,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putByteValidAsync(List<byte[]> arrayBody) {
+    public Completable putByteValidAsync(List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2611,7 +2869,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteInvalidNull() {
-        return getByteInvalidNullAsync().toBlocking().value();
+        return getByteInvalidNullAsync().blockingGet();
     }
 
     /**
@@ -2641,9 +2899,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<byte[]>> object
      */
-    public Single<List<byte[]>> getByteInvalidNullAsync() {
+    public Maybe<List<byte[]>> getByteInvalidNullAsync() {
         return getByteInvalidNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<byte[]>>, List<byte[]>>() { public List<byte[]> call(RestResponse<Void, List<byte[]>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
+                public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2656,7 +2922,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getBase64Url() {
-        return getBase64UrlAsync().toBlocking().value();
+        return getBase64UrlAsync().blockingGet();
     }
 
     /**
@@ -2686,9 +2952,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<byte[]>> object
      */
-    public Single<List<byte[]>> getBase64UrlAsync() {
+    public Maybe<List<byte[]>> getBase64UrlAsync() {
         return getBase64UrlWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<byte[]>>, List<byte[]>>() { public List<byte[]> call(RestResponse<Void, List<byte[]>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<byte[]>>, Maybe<List<byte[]>>>() {
+                public Maybe<List<byte[]>> apply(RestResponse<Void, List<byte[]>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2701,7 +2975,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexNull() {
-        return getComplexNullAsync().toBlocking().value();
+        return getComplexNullAsync().blockingGet();
     }
 
     /**
@@ -2731,9 +3005,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Product>> object
      */
-    public Single<List<Product>> getComplexNullAsync() {
+    public Maybe<List<Product>> getComplexNullAsync() {
         return getComplexNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Product>>, List<Product>>() { public List<Product> call(RestResponse<Void, List<Product>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2746,7 +3028,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexEmpty() {
-        return getComplexEmptyAsync().toBlocking().value();
+        return getComplexEmptyAsync().blockingGet();
     }
 
     /**
@@ -2776,9 +3058,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Product>> object
      */
-    public Single<List<Product>> getComplexEmptyAsync() {
+    public Maybe<List<Product>> getComplexEmptyAsync() {
         return getComplexEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Product>>, List<Product>>() { public List<Product> call(RestResponse<Void, List<Product>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2791,7 +3081,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemNull() {
-        return getComplexItemNullAsync().toBlocking().value();
+        return getComplexItemNullAsync().blockingGet();
     }
 
     /**
@@ -2821,9 +3111,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Product>> object
      */
-    public Single<List<Product>> getComplexItemNullAsync() {
+    public Maybe<List<Product>> getComplexItemNullAsync() {
         return getComplexItemNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Product>>, List<Product>>() { public List<Product> call(RestResponse<Void, List<Product>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2836,7 +3134,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemEmpty() {
-        return getComplexItemEmptyAsync().toBlocking().value();
+        return getComplexItemEmptyAsync().blockingGet();
     }
 
     /**
@@ -2866,9 +3164,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Product>> object
      */
-    public Single<List<Product>> getComplexItemEmptyAsync() {
+    public Maybe<List<Product>> getComplexItemEmptyAsync() {
         return getComplexItemEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Product>>, List<Product>>() { public List<Product> call(RestResponse<Void, List<Product>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2881,7 +3187,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexValid() {
-        return getComplexValidAsync().toBlocking().value();
+        return getComplexValidAsync().blockingGet();
     }
 
     /**
@@ -2911,9 +3217,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Product>> object
      */
-    public Single<List<Product>> getComplexValidAsync() {
+    public Maybe<List<Product>> getComplexValidAsync() {
         return getComplexValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Product>>, List<Product>>() { public List<Product> call(RestResponse<Void, List<Product>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Product>>, Maybe<List<Product>>>() {
+                public Maybe<List<Product>> apply(RestResponse<Void, List<Product>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2927,7 +3241,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putComplexValid(List<Product> arrayBody) {
-        putComplexValidAsync(arrayBody).toBlocking().value();
+        putComplexValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -2964,9 +3278,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putComplexValidAsync(List<Product> arrayBody) {
+    public Completable putComplexValidAsync(List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2979,7 +3293,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayNull() {
-        return getArrayNullAsync().toBlocking().value();
+        return getArrayNullAsync().blockingGet();
     }
 
     /**
@@ -3009,9 +3323,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<List<String>>> object
      */
-    public Single<List<List<String>>> getArrayNullAsync() {
+    public Maybe<List<List<String>>> getArrayNullAsync() {
         return getArrayNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<List<String>>>, List<List<String>>>() { public List<List<String>> call(RestResponse<Void, List<List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3024,7 +3346,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayEmpty() {
-        return getArrayEmptyAsync().toBlocking().value();
+        return getArrayEmptyAsync().blockingGet();
     }
 
     /**
@@ -3054,9 +3376,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<List<String>>> object
      */
-    public Single<List<List<String>>> getArrayEmptyAsync() {
+    public Maybe<List<List<String>>> getArrayEmptyAsync() {
         return getArrayEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<List<String>>>, List<List<String>>>() { public List<List<String>> call(RestResponse<Void, List<List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3069,7 +3399,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemNull() {
-        return getArrayItemNullAsync().toBlocking().value();
+        return getArrayItemNullAsync().blockingGet();
     }
 
     /**
@@ -3099,9 +3429,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<List<String>>> object
      */
-    public Single<List<List<String>>> getArrayItemNullAsync() {
+    public Maybe<List<List<String>>> getArrayItemNullAsync() {
         return getArrayItemNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<List<String>>>, List<List<String>>>() { public List<List<String>> call(RestResponse<Void, List<List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3114,7 +3452,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyAsync().toBlocking().value();
+        return getArrayItemEmptyAsync().blockingGet();
     }
 
     /**
@@ -3144,9 +3482,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<List<String>>> object
      */
-    public Single<List<List<String>>> getArrayItemEmptyAsync() {
+    public Maybe<List<List<String>>> getArrayItemEmptyAsync() {
         return getArrayItemEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<List<String>>>, List<List<String>>>() { public List<List<String>> call(RestResponse<Void, List<List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3159,7 +3505,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayValid() {
-        return getArrayValidAsync().toBlocking().value();
+        return getArrayValidAsync().blockingGet();
     }
 
     /**
@@ -3189,9 +3535,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<List<String>>> object
      */
-    public Single<List<List<String>>> getArrayValidAsync() {
+    public Maybe<List<List<String>>> getArrayValidAsync() {
         return getArrayValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<List<String>>>, List<List<String>>>() { public List<List<String>> call(RestResponse<Void, List<List<String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<List<String>>>, Maybe<List<List<String>>>>() {
+                public Maybe<List<List<String>>> apply(RestResponse<Void, List<List<String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3205,7 +3559,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putArrayValid(List<List<String>> arrayBody) {
-        putArrayValidAsync(arrayBody).toBlocking().value();
+        putArrayValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3242,9 +3596,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayValidAsync(List<List<String>> arrayBody) {
+    public Completable putArrayValidAsync(List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3257,7 +3611,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullAsync().toBlocking().value();
+        return getDictionaryNullAsync().blockingGet();
     }
 
     /**
@@ -3287,9 +3641,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Map<String, String>>> object
      */
-    public Single<List<Map<String, String>>> getDictionaryNullAsync() {
+    public Maybe<List<Map<String, String>>> getDictionaryNullAsync() {
         return getDictionaryNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Map<String, String>>>, List<Map<String, String>>>() { public List<Map<String, String>> call(RestResponse<Void, List<Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3302,7 +3664,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyAsync().toBlocking().value();
+        return getDictionaryEmptyAsync().blockingGet();
     }
 
     /**
@@ -3332,9 +3694,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Map<String, String>>> object
      */
-    public Single<List<Map<String, String>>> getDictionaryEmptyAsync() {
+    public Maybe<List<Map<String, String>>> getDictionaryEmptyAsync() {
         return getDictionaryEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Map<String, String>>>, List<Map<String, String>>>() { public List<Map<String, String>> call(RestResponse<Void, List<Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3347,7 +3717,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullAsync().toBlocking().value();
+        return getDictionaryItemNullAsync().blockingGet();
     }
 
     /**
@@ -3377,9 +3747,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Map<String, String>>> object
      */
-    public Single<List<Map<String, String>>> getDictionaryItemNullAsync() {
+    public Maybe<List<Map<String, String>>> getDictionaryItemNullAsync() {
         return getDictionaryItemNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Map<String, String>>>, List<Map<String, String>>>() { public List<Map<String, String>> call(RestResponse<Void, List<Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3392,7 +3770,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyAsync().toBlocking().value();
+        return getDictionaryItemEmptyAsync().blockingGet();
     }
 
     /**
@@ -3422,9 +3800,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Map<String, String>>> object
      */
-    public Single<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
+    public Maybe<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
         return getDictionaryItemEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Map<String, String>>>, List<Map<String, String>>>() { public List<Map<String, String>> call(RestResponse<Void, List<Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3437,7 +3823,7 @@ public class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidAsync().toBlocking().value();
+        return getDictionaryValidAsync().blockingGet();
     }
 
     /**
@@ -3467,9 +3853,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<Map<String, String>>> object
      */
-    public Single<List<Map<String, String>>> getDictionaryValidAsync() {
+    public Maybe<List<Map<String, String>>> getDictionaryValidAsync() {
         return getDictionaryValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<Map<String, String>>>, List<Map<String, String>>>() { public List<Map<String, String>> call(RestResponse<Void, List<Map<String, String>>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<Map<String, String>>>, Maybe<List<Map<String, String>>>>() {
+                public Maybe<List<Map<String, String>>> apply(RestResponse<Void, List<Map<String, String>>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3483,7 +3877,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
-        putDictionaryValidAsync(arrayBody).toBlocking().value();
+        putDictionaryValidAsync(arrayBody).blockingAwait();
     }
 
     /**
@@ -3520,9 +3914,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
+    public Completable putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

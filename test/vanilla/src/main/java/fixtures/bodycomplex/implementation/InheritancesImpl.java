@@ -27,10 +27,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodycomplex.Inheritances;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Siamese;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -86,7 +88,7 @@ public class InheritancesImpl implements Inheritances {
      * @return the Siamese object if successful.
      */
     public Siamese getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -116,9 +118,17 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Siamese> object
      */
-    public Single<Siamese> getValidAsync() {
+    public Maybe<Siamese> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Siamese>, Siamese>() { public Siamese call(RestResponse<Void, Siamese> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Siamese>, Maybe<Siamese>>() {
+                public Maybe<Siamese> apply(RestResponse<Void, Siamese> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -132,7 +142,7 @@ public class InheritancesImpl implements Inheritances {
      * @return the void object if successful.
      */
     public void putValid(Siamese complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -169,9 +179,9 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(Siamese complexBody) {
+    public Completable putValidAsync(Siamese complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

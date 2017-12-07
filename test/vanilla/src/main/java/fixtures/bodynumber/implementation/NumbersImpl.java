@@ -25,11 +25,13 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodynumber.Numbers;
 import fixtures.bodynumber.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.math.BigDecimal;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -217,7 +219,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -247,9 +249,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getNullAsync() {
+    public Maybe<Double> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -262,7 +272,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidFloat() {
-        return getInvalidFloatAsync().toBlocking().value();
+        return getInvalidFloatAsync().blockingGet();
     }
 
     /**
@@ -292,9 +302,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getInvalidFloatAsync() {
+    public Maybe<Double> getInvalidFloatAsync() {
         return getInvalidFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -307,7 +325,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getInvalidDouble() {
-        return getInvalidDoubleAsync().toBlocking().value();
+        return getInvalidDoubleAsync().blockingGet();
     }
 
     /**
@@ -337,9 +355,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getInvalidDoubleAsync() {
+    public Maybe<Double> getInvalidDoubleAsync() {
         return getInvalidDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -352,7 +378,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getInvalidDecimal() {
-        return getInvalidDecimalAsync().toBlocking().value();
+        return getInvalidDecimalAsync().blockingGet();
     }
 
     /**
@@ -382,9 +408,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getInvalidDecimalAsync() {
+    public Maybe<BigDecimal> getInvalidDecimalAsync() {
         return getInvalidDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -398,7 +432,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigFloat(double numberBody) {
-        putBigFloatAsync(numberBody).toBlocking().value();
+        putBigFloatAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -431,9 +465,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigFloatAsync(double numberBody) {
+    public Completable putBigFloatAsync(double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -446,7 +480,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigFloat() {
-        return getBigFloatAsync().toBlocking().value();
+        return getBigFloatAsync().blockingGet();
     }
 
     /**
@@ -476,9 +510,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigFloatAsync() {
+    public Maybe<Double> getBigFloatAsync() {
         return getBigFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -492,7 +534,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDouble(double numberBody) {
-        putBigDoubleAsync(numberBody).toBlocking().value();
+        putBigDoubleAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -525,9 +567,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDoubleAsync(double numberBody) {
+    public Completable putBigDoubleAsync(double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -540,7 +582,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDouble() {
-        return getBigDoubleAsync().toBlocking().value();
+        return getBigDoubleAsync().blockingGet();
     }
 
     /**
@@ -570,9 +612,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigDoubleAsync() {
+    public Maybe<Double> getBigDoubleAsync() {
         return getBigDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -586,7 +636,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDoublePositiveDecimal(double numberBody) {
-        putBigDoublePositiveDecimalAsync(numberBody).toBlocking().value();
+        putBigDoublePositiveDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -619,9 +669,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDoublePositiveDecimalAsync(double numberBody) {
+    public Completable putBigDoublePositiveDecimalAsync(double numberBody) {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -634,7 +684,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoublePositiveDecimal() {
-        return getBigDoublePositiveDecimalAsync().toBlocking().value();
+        return getBigDoublePositiveDecimalAsync().blockingGet();
     }
 
     /**
@@ -664,9 +714,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigDoublePositiveDecimalAsync() {
+    public Maybe<Double> getBigDoublePositiveDecimalAsync() {
         return getBigDoublePositiveDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -680,7 +738,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDoubleNegativeDecimal(double numberBody) {
-        putBigDoubleNegativeDecimalAsync(numberBody).toBlocking().value();
+        putBigDoubleNegativeDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -713,9 +771,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDoubleNegativeDecimalAsync(double numberBody) {
+    public Completable putBigDoubleNegativeDecimalAsync(double numberBody) {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -728,7 +786,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getBigDoubleNegativeDecimal() {
-        return getBigDoubleNegativeDecimalAsync().toBlocking().value();
+        return getBigDoubleNegativeDecimalAsync().blockingGet();
     }
 
     /**
@@ -758,9 +816,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getBigDoubleNegativeDecimalAsync() {
+    public Maybe<Double> getBigDoubleNegativeDecimalAsync() {
         return getBigDoubleNegativeDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -774,7 +840,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimal(BigDecimal numberBody) {
-        putBigDecimalAsync(numberBody).toBlocking().value();
+        putBigDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -810,9 +876,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDecimalAsync(BigDecimal numberBody) {
+    public Completable putBigDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -825,7 +891,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimal() {
-        return getBigDecimalAsync().toBlocking().value();
+        return getBigDecimalAsync().blockingGet();
     }
 
     /**
@@ -855,9 +921,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getBigDecimalAsync() {
+    public Maybe<BigDecimal> getBigDecimalAsync() {
         return getBigDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -871,7 +945,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimalPositiveDecimal(BigDecimal numberBody) {
-        putBigDecimalPositiveDecimalAsync(numberBody).toBlocking().value();
+        putBigDecimalPositiveDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -907,9 +981,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
+    public Completable putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -922,7 +996,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalPositiveDecimal() {
-        return getBigDecimalPositiveDecimalAsync().toBlocking().value();
+        return getBigDecimalPositiveDecimalAsync().blockingGet();
     }
 
     /**
@@ -952,9 +1026,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getBigDecimalPositiveDecimalAsync() {
+    public Maybe<BigDecimal> getBigDecimalPositiveDecimalAsync() {
         return getBigDecimalPositiveDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -968,7 +1050,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putBigDecimalNegativeDecimal(BigDecimal numberBody) {
-        putBigDecimalNegativeDecimalAsync(numberBody).toBlocking().value();
+        putBigDecimalNegativeDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1004,9 +1086,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
+    public Completable putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1019,7 +1101,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getBigDecimalNegativeDecimal() {
-        return getBigDecimalNegativeDecimalAsync().toBlocking().value();
+        return getBigDecimalNegativeDecimalAsync().blockingGet();
     }
 
     /**
@@ -1049,9 +1131,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getBigDecimalNegativeDecimalAsync() {
+    public Maybe<BigDecimal> getBigDecimalNegativeDecimalAsync() {
         return getBigDecimalNegativeDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1065,7 +1155,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallFloat(double numberBody) {
-        putSmallFloatAsync(numberBody).toBlocking().value();
+        putSmallFloatAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1098,9 +1188,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putSmallFloatAsync(double numberBody) {
+    public Completable putSmallFloatAsync(double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1113,7 +1203,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallFloat() {
-        return getSmallFloatAsync().toBlocking().value();
+        return getSmallFloatAsync().blockingGet();
     }
 
     /**
@@ -1143,9 +1233,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getSmallFloatAsync() {
+    public Maybe<Double> getSmallFloatAsync() {
         return getSmallFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1159,7 +1257,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallDouble(double numberBody) {
-        putSmallDoubleAsync(numberBody).toBlocking().value();
+        putSmallDoubleAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1192,9 +1290,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putSmallDoubleAsync(double numberBody) {
+    public Completable putSmallDoubleAsync(double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1207,7 +1305,7 @@ public class NumbersImpl implements Numbers {
      * @return the double object if successful.
      */
     public double getSmallDouble() {
-        return getSmallDoubleAsync().toBlocking().value();
+        return getSmallDoubleAsync().blockingGet();
     }
 
     /**
@@ -1237,9 +1335,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Double> object
      */
-    public Single<Double> getSmallDoubleAsync() {
+    public Maybe<Double> getSmallDoubleAsync() {
         return getSmallDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Double>, Double>() { public Double call(RestResponse<Void, Double> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Double>, Maybe<Double>>() {
+                public Maybe<Double> apply(RestResponse<Void, Double> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1253,7 +1359,7 @@ public class NumbersImpl implements Numbers {
      * @return the void object if successful.
      */
     public void putSmallDecimal(BigDecimal numberBody) {
-        putSmallDecimalAsync(numberBody).toBlocking().value();
+        putSmallDecimalAsync(numberBody).blockingAwait();
     }
 
     /**
@@ -1289,9 +1395,9 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putSmallDecimalAsync(BigDecimal numberBody) {
+    public Completable putSmallDecimalAsync(BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1304,7 +1410,7 @@ public class NumbersImpl implements Numbers {
      * @return the BigDecimal object if successful.
      */
     public BigDecimal getSmallDecimal() {
-        return getSmallDecimalAsync().toBlocking().value();
+        return getSmallDecimalAsync().blockingGet();
     }
 
     /**
@@ -1334,9 +1440,17 @@ public class NumbersImpl implements Numbers {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BigDecimal> object
      */
-    public Single<BigDecimal> getSmallDecimalAsync() {
+    public Maybe<BigDecimal> getSmallDecimalAsync() {
         return getSmallDecimalWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BigDecimal>, BigDecimal>() { public BigDecimal call(RestResponse<Void, BigDecimal> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BigDecimal>, Maybe<BigDecimal>>() {
+                public Maybe<BigDecimal> apply(RestResponse<Void, BigDecimal> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

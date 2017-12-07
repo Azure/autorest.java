@@ -26,10 +26,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -98,7 +99,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @return the void object if successful.
      */
     public void postMethodGlobalValid() {
-        postMethodGlobalValidAsync().toBlocking().value();
+        postMethodGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -131,9 +132,9 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodGlobalValidAsync() {
+    public Completable postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -146,7 +147,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @return the void object if successful.
      */
     public void postMethodGlobalNull() {
-        postMethodGlobalNullAsync().toBlocking().value();
+        postMethodGlobalNullAsync().blockingAwait();
     }
 
     /**
@@ -179,9 +180,9 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodGlobalNullAsync() {
+    public Completable postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -194,7 +195,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @return the void object if successful.
      */
     public void postMethodGlobalNotProvidedValid() {
-        postMethodGlobalNotProvidedValidAsync().toBlocking().value();
+        postMethodGlobalNotProvidedValidAsync().blockingAwait();
     }
 
     /**
@@ -230,9 +231,9 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postMethodGlobalNotProvidedValidAsync() {
+    public Completable postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -245,7 +246,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @return the void object if successful.
      */
     public void postPathGlobalValid() {
-        postPathGlobalValidAsync().toBlocking().value();
+        postPathGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -278,9 +279,9 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postPathGlobalValidAsync() {
+    public Completable postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -293,7 +294,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @return the void object if successful.
      */
     public void postSwaggerGlobalValid() {
-        postSwaggerGlobalValidAsync().toBlocking().value();
+        postSwaggerGlobalValidAsync().blockingAwait();
     }
 
     /**
@@ -326,9 +327,9 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> postSwaggerGlobalValidAsync() {
+    public Completable postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

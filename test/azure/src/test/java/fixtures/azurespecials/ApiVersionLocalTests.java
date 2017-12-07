@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.CredentialsPolicy;
@@ -12,7 +13,8 @@ import org.junit.Test;
 
 import fixtures.azurespecials.implementation.AutoRestAzureSpecialParametersTestClientImpl;
 
-@Ignore("RestProxy doesn't currently support ServiceResponse")
+import static org.junit.Assert.assertEquals;
+
 public class ApiVersionLocalTests {
     private static AutoRestAzureSpecialParametersTestClientImpl client;
 
@@ -27,25 +29,25 @@ public class ApiVersionLocalTests {
 
     @Test
     public void getMethodLocalValid() throws Exception {
-        Void response = client.apiVersionLocals().getMethodLocalValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionLocals().getMethodLocalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getMethodGlobalNotProvidedValid() throws Exception {
-        Void response = client.apiVersionLocals().getMethodLocalNullAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionLocals().getMethodLocalNullWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getPathGlobalValid() throws Exception {
-        Void response = client.apiVersionLocals().getPathLocalValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionLocals().getPathLocalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 
     @Test
     public void getSwaggerGlobalValid() throws Exception {
-        Void response = client.apiVersionLocals().getSwaggerLocalValidAsync().toBlocking().value();
-//        Assert.assertEquals(200, response.response().code());
+        RestResponse<Void, Void> response = client.apiVersionLocals().getSwaggerLocalValidWithRestResponseAsync().blockingGet();
+        assertEquals(200, response.statusCode());
     }
 }

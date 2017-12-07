@@ -16,9 +16,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * The interface for AutoRestValidationTest class.
@@ -86,7 +88,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Single<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
+    Maybe<Product> validationOfMethodParametersAsync(String resourceGroupName, int id);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -130,7 +132,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Single<Product> validationOfBodyAsync(String resourceGroupName, int id);
+    Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -175,7 +177,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Single<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
+    Maybe<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -208,9 +210,9 @@ public interface AutoRestValidationTest {
     /**
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single<Void>} object if successful.
+     * @return the {@link Maybe<Void>} object if successful.
      */
-    Single<Void> getWithConstantInPathAsync();
+    Completable getWithConstantInPathAsync();
 
     /**
      *
@@ -242,7 +244,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Single<Product> postWithConstantInBodyAsync();
+    Maybe<Product> postWithConstantInBodyAsync();
 
     /**
      *
@@ -275,7 +277,7 @@ public interface AutoRestValidationTest {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
-    Single<Product> postWithConstantInBodyAsync(Product body);
+    Maybe<Product> postWithConstantInBodyAsync(Product body);
 
     /**
      *

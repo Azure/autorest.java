@@ -1,19 +1,20 @@
 package fixtures.paging;
 
 import com.microsoft.azure.v2.CloudException;
-import com.microsoft.azure.v2.ListOperationCallback;
 import com.microsoft.azure.v2.Page;
-import com.microsoft.rest.v2.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
-import com.microsoft.rest.v2.http.HttpResponse;
-import com.microsoft.rest.v2.policy.*;
+import com.microsoft.rest.v2.policy.AddCookiesPolicy;
+import com.microsoft.rest.v2.policy.PortPolicy;
+import com.microsoft.rest.v2.policy.ProtocolPolicy;
+import com.microsoft.rest.v2.policy.RetryPolicy;
 import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
 import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
 import fixtures.paging.implementation.ProductInner;
+import io.reactivex.disposables.Disposable;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import rx.Observer;
+import io.reactivex.Observer;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -75,12 +76,12 @@ public class PagingTests {
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
         client.pagings().getMultiplePagesAsync("client-id", null)
-                .toBlocking()
-                .subscribe(new Observer<Page<ProductInner>>() {
+                .blockingSubscribe(new Observer<Page<ProductInner>>() {
                     @Override
-                    public void onCompleted() {
-                        lock.countDown();
-                    }
+                    public void onSubscribe(Disposable d) {}
+
+                    @Override
+                    public void onNext(Page<ProductInner> productInnerPage) {}
 
                     @Override
                     public void onError(Throwable throwable) {
@@ -88,7 +89,9 @@ public class PagingTests {
                     }
 
                     @Override
-                    public void onNext(Page<ProductInner> productInnerPage) {}
+                    public void onComplete() {
+                        lock.countDown();
+                    }
                 });
 
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));

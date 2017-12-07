@@ -610,14 +610,14 @@ namespace AutoRest.Java.DanModel
                             });
                             classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
                             {
-                                function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation}).toBlocking().value();");
+                                function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation}).blockingGet();");
                                 function.Block($"return new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
                                 {
                                     anonymousClass.Annotation("Override");
                                     anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} nextPage(String {method.PagingNextPageLinkParameterName})", subFunction =>
                                     {
                                         subFunction.Line(method.PagingGroupedParameterTransformation(filterRequired: true));
-                                        subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation(filterRequired: true)}).toBlocking().value()");
+                                        subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation(filterRequired: true)}).blockingGet()");
                                     });
                                 });
                             });
@@ -646,11 +646,11 @@ namespace AutoRest.Java.DanModel
                                 function.Indent(() =>
                                 {
                                     function.Line(".toObservable()");
-                                    function.Line($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
+                                    function.Line($".concatMap(new Function<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
                                     function.Indent(() =>
                                     {
                                         function.Annotation("Override");
-                                        function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                        function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> apply({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
                                         {
                                             subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
                                             subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
@@ -716,10 +716,10 @@ namespace AutoRest.Java.DanModel
                                 {
                                     function.Line($"String nextUrl = {method.NextUrlConstruction};");
                                 }
-                                function.Block($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>()", anonymousClass =>
+                                function.Block($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Function<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>()", anonymousClass =>
                                 {
                                     anonymousClass.Annotation("Override");
-                                    anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                    anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} apply({method.RestResponseConcreteTypeName} response)", subFunction =>
                                     {
                                         subFunction.Return("response.body()");
                                     });
@@ -745,14 +745,14 @@ namespace AutoRest.Java.DanModel
                         });
                         classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration})", function =>
                         {
-                            function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodParameterInvocation}).toBlocking().value();");
+                            function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodParameterInvocation}).blockingGet();");
                             function.Block($"return new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
                             {
                                 anonymousClass.Annotation("Override");
                                 anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} nextPage(String {method.PagingNextPageLinkParameterName})", subFunction =>
                                 {
                                     subFunction.Line(method.PagingGroupedParameterTransformation());
-                                    subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation()}).toBlocking().value()");
+                                    subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation()}).blockingGet()");
                                 });
                             });
                         });
@@ -782,11 +782,11 @@ namespace AutoRest.Java.DanModel
                             function.Indent(() =>
                             {
                                 function.Line(".toObservable()");
-                                function.Line($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
+                                function.Line($".concatMap(new Function<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
                                 function.Indent(() =>
                                 {
                                     function.Annotation("Override");
-                                    function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                    function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> apply({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
                                     {
                                         subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
                                         subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
@@ -848,10 +848,10 @@ namespace AutoRest.Java.DanModel
                             {
                                 function.Line($"String nextUrl = {method.NextUrlConstruction};");
                             }
-                            function.Block($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>()", anonymousClass =>
+                            function.Block($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Function<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>()", anonymousClass =>
                             {
                                 anonymousClass.Annotation("Override");
-                                anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                anonymousClass.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} apply({method.RestResponseConcreteTypeName} response)", subFunction =>
                                 {
                                     subFunction.Return("response.body()");
                                 });
@@ -888,11 +888,11 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (GetIModelTypeName(GetIModelTypeResponseVariant(method.ReturnTypeJva.BodyClientType)) == "void")
                                     {
-                                        function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result();");
+                                        function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).blockingLast().result();");
                                     }
                                     else
                                     {
-                                        function.Return($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result()");
+                                        function.Return($"{method.Name}Async({method.MethodRequiredParameterInvocation}).blockingLast().result()");
                                     }
                                 });
 
@@ -973,11 +973,11 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (method.ReturnTypeResponseName == "void")
                                     {
-                                        function.Line($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last();");
+                                        function.Line($"{method.Name}Async({method.MethodParameterInvocation}).blockingLast();");
                                     }
                                     else
                                     {
-                                        function.Return($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last().result()");
+                                        function.Return($"{method.Name}Async({method.MethodParameterInvocation}).blockingLast().result()");
                                     }
                                 });
                                 classBlock.Line();
@@ -1233,7 +1233,7 @@ namespace AutoRest.Java.DanModel
                             });
                             classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
                             {
-                                function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation}).toBlocking().value();");
+                                function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodRequiredParameterInvocation}).blockingGet();");
                                 function.ReturnBlock($"new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
                                 {
                                     anonymousClass.Annotation("Override");
@@ -1244,7 +1244,7 @@ namespace AutoRest.Java.DanModel
                                         {
                                             subFunction.Line(transformation);
                                         }
-                                        subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation(filterRequired: true)}).toBlocking().value()");
+                                        subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation(filterRequired: true)}).blockingGet()");
                                     });
                                 });
                             });
@@ -1277,11 +1277,11 @@ namespace AutoRest.Java.DanModel
                                 {
                                     function.Line(".toObservable()");
                                     string serviceResponseGenericParameterString = method.ReturnTypeJva.ServiceResponseGenericParameterString;
-                                    function.Line($".concatMap(new Func1<{serviceResponseGenericParameterString}, Observable<{serviceResponseGenericParameterString}>>() {{");
+                                    function.Line($".concatMap(new Function<{serviceResponseGenericParameterString}, Observable<{serviceResponseGenericParameterString}>>() {{");
                                     function.Indent(() =>
                                     {
                                         function.Annotation("Override");
-                                        function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                        function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> apply({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
                                         {
                                             subFunction.Line($"String {method.PagingNextPageLinkParameterName} = page.nextPageLink();");
                                             subFunction.If($"{method.PagingNextPageLinkParameterName} == null", ifBlock =>
@@ -1367,11 +1367,11 @@ namespace AutoRest.Java.DanModel
                                     function.Line($"String nextUrl = {method.NextUrlConstruction};");
                                 }
 
-                                function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                                function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Function<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
                                 function.Indent(() =>
                                 {
                                     function.Annotation("Override");
-                                    function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                    function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} apply({method.RestResponseConcreteTypeName} response)", subFunction =>
                                     {
                                         subFunction.Return("response.body()");
                                     });
@@ -1401,7 +1401,7 @@ namespace AutoRest.Java.DanModel
                         });
                         classBlock.Block($"public {method.ReturnTypeResponseName} {method.Name}({method.MethodParameterDeclaration})", function =>
                         {
-                            function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodParameterInvocation}).toBlocking().value();");
+                            function.Line($"{method.ReturnTypeJva.ServiceResponseGenericParameterString} response = {method.Name}SinglePageAsync({method.MethodParameterInvocation}).blockingGet();");
                             function.ReturnBlock($"new {method.ReturnTypeJva.GenericBodyClientTypeString}(response)", anonymousClass =>
                             {
                                 anonymousClass.Annotation("Override");
@@ -1412,7 +1412,7 @@ namespace AutoRest.Java.DanModel
                                     {
                                         subFunction.Line(transformation);
                                     }
-                                    subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation()}).toBlocking().value()");
+                                    subFunction.Return($"{method.GetPagingNextMethodInvocation(async: true)}({method.NextMethodParameterInvocation()}).blockingGet()");
                                 });
                             });
                         });
@@ -1444,11 +1444,11 @@ namespace AutoRest.Java.DanModel
                             function.Indent(() =>
                             {
                                 function.Line(".toObservable()");
-                                function.Line($".concatMap(new Func1<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
+                                function.Line($".concatMap(new Function<{method.ReturnTypeJva.ServiceResponseGenericParameterString}, Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}>>() {{");
                                 function.Indent(() =>
                                 {
                                     function.Annotation("Override");
-                                    function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> call({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
+                                    function.Block($"public Observable<{method.ReturnTypeJva.ServiceResponseGenericParameterString}> apply({method.ReturnTypeJva.ServiceResponseGenericParameterString} page)", subFunction =>
                                     {
                                         string nextPageLinkVariableName = method.PagingNextPageLinkParameterName;
                                         subFunction.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
@@ -1530,11 +1530,11 @@ namespace AutoRest.Java.DanModel
                                 function.Line($"String nextUrl = {method.NextUrlConstruction};");
                             }
 
-                            function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                            function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Function<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
                             function.Indent(() =>
                             {
                                 function.Annotation("Override");
-                                function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} apply({method.RestResponseConcreteTypeName} response)", subFunction =>
                                 {
                                     subFunction.Return("response.body()");
                                 });
@@ -1634,11 +1634,11 @@ namespace AutoRest.Java.DanModel
                                     function.Line(parameterConversion);
                                 }
 
-                                function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                                function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Function<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
                                 function.Indent(() =>
                                 {
                                     function.Annotation("Override");
-                                    function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                    function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} apply({method.RestResponseConcreteTypeName} response)", subFunction =>
                                     {
                                         subFunction.Return("response.body()");
                                     });
@@ -1731,11 +1731,11 @@ namespace AutoRest.Java.DanModel
                                 function.Line(parameterConversion);
                             }
 
-                            function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Func1<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
+                            function.Line($"return service.{method.Name}({method.MethodParameterApiInvocation}).map(new Function<{method.RestResponseConcreteTypeName}, {method.ReturnTypeJva.ServiceResponseGenericParameterString}>() {{");
                             function.Indent(() =>
                             {
                                 function.Annotation("Override");
-                                function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} call({method.RestResponseConcreteTypeName} response)", subFunction =>
+                                function.Block($"public {method.ReturnTypeJva.ServiceResponseGenericParameterString} apply({method.RestResponseConcreteTypeName} response)", subFunction =>
                                 {
                                     subFunction.Return("response.body()");
                                 });
@@ -1776,11 +1776,11 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (GetIModelTypeName(GetIModelTypeResponseVariant(method.ReturnTypeJva.BodyClientType)) == "void")
                                     {
-                                        function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result();");
+                                        function.Line($"{method.Name}Async({method.MethodRequiredParameterInvocation}).blockingLast().result();");
                                     }
                                     else
                                     {
-                                        function.Return($"{method.Name}Async({method.MethodRequiredParameterInvocation}).toBlocking().last().result()");
+                                        function.Return($"{method.Name}Async({method.MethodRequiredParameterInvocation}).blockingLast().result()");
                                     }
                                 });
                                 classBlock.Line();
@@ -1882,11 +1882,11 @@ namespace AutoRest.Java.DanModel
                             {
                                 if (method.ReturnTypeResponseName == "void")
                                 {
-                                    function.Line($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last();");
+                                    function.Line($"{method.Name}Async({method.MethodParameterInvocation}).blockingLast();");
                                 }
                                 else
                                 {
-                                    function.Return($"{method.Name}Async({method.MethodParameterInvocation}).toBlocking().last().result()");
+                                    function.Return($"{method.Name}Async({method.MethodParameterInvocation}).blockingLast().result()");
                                 }
                             });
                             classBlock.Line();
@@ -2222,10 +2222,18 @@ namespace AutoRest.Java.DanModel
                             }
                             else
                             {
-                                comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
+                                comment.Return($"the {{@link Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                             }
                         });
-                        interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+
+                        if (method.ReturnTypeResponseName.Else("void") != "void")
+                        {
+                            interfaceBlock.Line($"Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+                        }
+                        else
+                        {
+                            interfaceBlock.Line($"Completable {method.Name}Async({method.MethodRequiredParameterDeclaration});");
+                        }
 
                         if (method.ShouldGenerateBeginRestResponseMethod())
                         {
@@ -2288,10 +2296,18 @@ namespace AutoRest.Java.DanModel
                         }
                         else
                         {
-                            comment.Return($"the {{@link Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
+                            comment.Return($"the {{@link Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}>}} object if successful.");
                         }
                     });
-                    interfaceBlock.Line($"Single<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
+
+                    if (method.ReturnTypeResponseName.Else("void") != "void")
+                    {
+                        interfaceBlock.Line($"Maybe<{method.ReturnTypeJv.ServiceResponseGenericParameterString}> {method.Name}Async({method.MethodParameterDeclaration});");
+                    }
+                    else
+                    {
+                        interfaceBlock.Line($"Completable {method.Name}Async({method.MethodParameterDeclaration});");
+                    }
 
                     interfaceBlock.Line();
 
@@ -2576,7 +2592,7 @@ namespace AutoRest.Java.DanModel
                 description += method.Description.EscapeXmlComment().Period();
             }
 
-            MethodJv methodJv = method as MethodJv;
+            MethodJv methodJv = (MethodJv) method;
             MethodJva methodJva = methodJv as MethodJva;
 
             JavaThrow operationExceptionThrow = new JavaThrow(methodJv.OperationExceptionTypeString, "thrown if the request is rejected by server");
@@ -2587,7 +2603,25 @@ namespace AutoRest.Java.DanModel
             string xmlEscapedSyncReturnType = syncReturnType.EscapeXmlComment();
             string asyncInnerReturnType = methodJv.ReturnTypeJv.GenericBodyClientTypeString;
             string serviceFutureReturnType = $"ServiceFuture<{asyncInnerReturnType}>";
-            string asyncReturnType = methodJva != null ? methodJva.AsyncClientReturnTypeString : $"Single<{asyncInnerReturnType}>";
+            
+            string asyncReturnType;
+            if (methodJva == null)
+            {
+                // TODO: consolidate this conversion
+                if (methodJv.ReturnType.Body == null)
+                {
+                    asyncReturnType = "Completable";
+                }
+                else
+                {
+                    asyncReturnType = $"Maybe<{asyncInnerReturnType}>";
+                }
+            }
+            else
+            {
+                asyncReturnType = methodJva.AsyncClientReturnTypeString;
+            }
+            
             string asyncRestResponseReturnType = $"Single<{methodJv.RestResponseAbstractTypeName}>";
             
             JavaMethodReturn syncReturn = new JavaMethodReturn(
@@ -2636,7 +2670,7 @@ namespace AutoRest.Java.DanModel
 
             List<JavaMethod> javaMethods = new List<JavaMethod>();
 
-            Action<IEnumerable<JavaMethodParameter>> addMethods = (IEnumerable<JavaMethodParameter> methodParameters) =>
+            void addMethods(IEnumerable<JavaMethodParameter> methodParameters)
             {
                 // Sync
                 javaMethods.Add(new JavaMethod(

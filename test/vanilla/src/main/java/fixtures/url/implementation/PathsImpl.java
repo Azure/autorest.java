@@ -28,15 +28,16 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.url.Paths;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -236,7 +237,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getBooleanTrue() {
-        getBooleanTrueAsync().toBlocking().value();
+        getBooleanTrueAsync().blockingAwait();
     }
 
     /**
@@ -267,9 +268,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanTrueAsync() {
+    public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -282,7 +283,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getBooleanFalse() {
-        getBooleanFalseAsync().toBlocking().value();
+        getBooleanFalseAsync().blockingAwait();
     }
 
     /**
@@ -313,9 +314,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getBooleanFalseAsync() {
+    public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -328,7 +329,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getIntOneMillion() {
-        getIntOneMillionAsync().toBlocking().value();
+        getIntOneMillionAsync().blockingAwait();
     }
 
     /**
@@ -359,9 +360,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntOneMillionAsync() {
+    public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -374,7 +375,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionAsync().toBlocking().value();
+        getIntNegativeOneMillionAsync().blockingAwait();
     }
 
     /**
@@ -405,9 +406,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getIntNegativeOneMillionAsync() {
+    public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -420,7 +421,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getTenBillion() {
-        getTenBillionAsync().toBlocking().value();
+        getTenBillionAsync().blockingAwait();
     }
 
     /**
@@ -451,9 +452,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getTenBillionAsync() {
+    public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -466,7 +467,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionAsync().toBlocking().value();
+        getNegativeTenBillionAsync().blockingAwait();
     }
 
     /**
@@ -497,9 +498,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getNegativeTenBillionAsync() {
+    public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -512,7 +513,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void floatScientificPositive() {
-        floatScientificPositiveAsync().toBlocking().value();
+        floatScientificPositiveAsync().blockingAwait();
     }
 
     /**
@@ -543,9 +544,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificPositiveAsync() {
+    public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -558,7 +559,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void floatScientificNegative() {
-        floatScientificNegativeAsync().toBlocking().value();
+        floatScientificNegativeAsync().blockingAwait();
     }
 
     /**
@@ -589,9 +590,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> floatScientificNegativeAsync() {
+    public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -604,7 +605,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveAsync().toBlocking().value();
+        doubleDecimalPositiveAsync().blockingAwait();
     }
 
     /**
@@ -635,9 +636,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalPositiveAsync() {
+    public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -650,7 +651,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeAsync().toBlocking().value();
+        doubleDecimalNegativeAsync().blockingAwait();
     }
 
     /**
@@ -681,9 +682,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> doubleDecimalNegativeAsync() {
+    public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -696,7 +697,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringUnicode() {
-        stringUnicodeAsync().toBlocking().value();
+        stringUnicodeAsync().blockingAwait();
     }
 
     /**
@@ -727,9 +728,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUnicodeAsync() {
+    public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -742,7 +743,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedAsync().toBlocking().value();
+        stringUrlEncodedAsync().blockingAwait();
     }
 
     /**
@@ -773,9 +774,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringUrlEncodedAsync() {
+    public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -788,7 +789,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringEmpty() {
-        stringEmptyAsync().toBlocking().value();
+        stringEmptyAsync().blockingAwait();
     }
 
     /**
@@ -819,9 +820,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringEmptyAsync() {
+    public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -835,7 +836,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void stringNull(String stringPath) {
-        stringNullAsync(stringPath).toBlocking().value();
+        stringNullAsync(stringPath).blockingAwait();
     }
 
     /**
@@ -871,9 +872,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> stringNullAsync(String stringPath) {
+    public Completable stringNullAsync(String stringPath) {
         return stringNullWithRestResponseAsync(stringPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -887,7 +888,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void enumValid(UriColor enumPath) {
-        enumValidAsync(enumPath).toBlocking().value();
+        enumValidAsync(enumPath).blockingAwait();
     }
 
     /**
@@ -923,9 +924,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumValidAsync(UriColor enumPath) {
+    public Completable enumValidAsync(UriColor enumPath) {
         return enumValidWithRestResponseAsync(enumPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -939,7 +940,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void enumNull(UriColor enumPath) {
-        enumNullAsync(enumPath).toBlocking().value();
+        enumNullAsync(enumPath).blockingAwait();
     }
 
     /**
@@ -975,9 +976,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> enumNullAsync(UriColor enumPath) {
+    public Completable enumNullAsync(UriColor enumPath) {
         return enumNullWithRestResponseAsync(enumPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -991,7 +992,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteMultiByte(byte[] bytePath) {
-        byteMultiByteAsync(bytePath).toBlocking().value();
+        byteMultiByteAsync(bytePath).blockingAwait();
     }
 
     /**
@@ -1028,9 +1029,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteMultiByteAsync(byte[] bytePath) {
+    public Completable byteMultiByteAsync(byte[] bytePath) {
         return byteMultiByteWithRestResponseAsync(bytePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1043,7 +1044,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteEmpty() {
-        byteEmptyAsync().toBlocking().value();
+        byteEmptyAsync().blockingAwait();
     }
 
     /**
@@ -1075,9 +1076,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteEmptyAsync() {
+    public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1091,7 +1092,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void byteNull(byte[] bytePath) {
-        byteNullAsync(bytePath).toBlocking().value();
+        byteNullAsync(bytePath).blockingAwait();
     }
 
     /**
@@ -1128,9 +1129,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> byteNullAsync(byte[] bytePath) {
+    public Completable byteNullAsync(byte[] bytePath) {
         return byteNullWithRestResponseAsync(bytePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1143,7 +1144,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateValid() {
-        dateValidAsync().toBlocking().value();
+        dateValidAsync().blockingAwait();
     }
 
     /**
@@ -1174,9 +1175,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateValidAsync() {
+    public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1190,7 +1191,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateNull(LocalDate datePath) {
-        dateNullAsync(datePath).toBlocking().value();
+        dateNullAsync(datePath).blockingAwait();
     }
 
     /**
@@ -1226,9 +1227,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateNullAsync(LocalDate datePath) {
+    public Completable dateNullAsync(LocalDate datePath) {
         return dateNullWithRestResponseAsync(datePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1241,7 +1242,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateTimeValid() {
-        dateTimeValidAsync().toBlocking().value();
+        dateTimeValidAsync().blockingAwait();
     }
 
     /**
@@ -1272,9 +1273,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeValidAsync() {
+    public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1288,7 +1289,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void dateTimeNull(DateTime dateTimePath) {
-        dateTimeNullAsync(dateTimePath).toBlocking().value();
+        dateTimeNullAsync(dateTimePath).blockingAwait();
     }
 
     /**
@@ -1324,9 +1325,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> dateTimeNullAsync(DateTime dateTimePath) {
+    public Completable dateTimeNullAsync(DateTime dateTimePath) {
         return dateTimeNullWithRestResponseAsync(dateTimePath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1340,7 +1341,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void base64Url(byte[] base64UrlPath) {
-        base64UrlAsync(base64UrlPath).toBlocking().value();
+        base64UrlAsync(base64UrlPath).blockingAwait();
     }
 
     /**
@@ -1377,9 +1378,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> base64UrlAsync(byte[] base64UrlPath) {
+    public Completable base64UrlAsync(byte[] base64UrlPath) {
         return base64UrlWithRestResponseAsync(base64UrlPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1393,7 +1394,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void arrayCsvInPath(List<String> arrayPath) {
-        arrayCsvInPathAsync(arrayPath).toBlocking().value();
+        arrayCsvInPathAsync(arrayPath).blockingAwait();
     }
 
     /**
@@ -1431,9 +1432,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> arrayCsvInPathAsync(List<String> arrayPath) {
+    public Completable arrayCsvInPathAsync(List<String> arrayPath) {
         return arrayCsvInPathWithRestResponseAsync(arrayPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1447,7 +1448,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
-        unixTimeUrlAsync(unixTimeUrlPath).toBlocking().value();
+        unixTimeUrlAsync(unixTimeUrlPath).blockingAwait();
     }
 
     /**
@@ -1481,9 +1482,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
+    public Completable unixTimeUrlAsync(DateTime unixTimeUrlPath) {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

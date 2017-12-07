@@ -15,9 +15,11 @@ import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -47,9 +49,9 @@ public interface Basics {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Basic&gt;} object if successful.
+     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
-    Single<Basic> getValidAsync();
+    Maybe<Basic> getValidAsync();
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -84,9 +86,9 @@ public interface Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> putValidAsync(Basic complexBody);
+    Completable putValidAsync(Basic complexBody);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -120,9 +122,9 @@ public interface Basics {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Basic&gt;} object if successful.
+     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
-    Single<Basic> getInvalidAsync();
+    Maybe<Basic> getInvalidAsync();
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -155,9 +157,9 @@ public interface Basics {
      * Get a basic complex type that is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Basic&gt;} object if successful.
+     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
-    Single<Basic> getEmptyAsync();
+    Maybe<Basic> getEmptyAsync();
 
     /**
      * Get a basic complex type that is empty.
@@ -190,9 +192,9 @@ public interface Basics {
      * Get a basic complex type whose properties are null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Basic&gt;} object if successful.
+     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
-    Single<Basic> getNullAsync();
+    Maybe<Basic> getNullAsync();
 
     /**
      * Get a basic complex type whose properties are null.
@@ -225,9 +227,9 @@ public interface Basics {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Basic&gt;} object if successful.
+     * @return the {@link Maybe&lt;Basic&gt;} object if successful.
      */
-    Single<Basic> getNotProvidedAsync();
+    Maybe<Basic> getNotProvidedAsync();
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.

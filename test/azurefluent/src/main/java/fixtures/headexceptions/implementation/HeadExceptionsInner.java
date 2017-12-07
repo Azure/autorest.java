@@ -23,10 +23,11 @@ import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -83,7 +84,7 @@ public class HeadExceptionsInner {
      * @return the void object if successful.
      */
     public void head200() {
-        head200Async().toBlocking().value();
+        head200Async().blockingAwait();
     }
 
     /**
@@ -113,9 +114,9 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head200Async() {
+    public Completable head200Async() {
         return head200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -128,7 +129,7 @@ public class HeadExceptionsInner {
      * @return the void object if successful.
      */
     public void head204() {
-        head204Async().toBlocking().value();
+        head204Async().blockingAwait();
     }
 
     /**
@@ -158,9 +159,9 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head204Async() {
+    public Completable head204Async() {
         return head204WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -173,7 +174,7 @@ public class HeadExceptionsInner {
      * @return the void object if successful.
      */
     public void head404() {
-        head404Async().toBlocking().value();
+        head404Async().blockingAwait();
     }
 
     /**
@@ -203,9 +204,9 @@ public class HeadExceptionsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> head404Async() {
+    public Completable head404Async() {
         return head404WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

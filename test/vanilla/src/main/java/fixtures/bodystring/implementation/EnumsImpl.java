@@ -28,10 +28,12 @@ import fixtures.bodystring.Enums;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -111,7 +113,7 @@ public class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getNotExpandable() {
-        return getNotExpandableAsync().toBlocking().value();
+        return getNotExpandableAsync().blockingGet();
     }
 
     /**
@@ -141,9 +143,17 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Colors> object
      */
-    public Single<Colors> getNotExpandableAsync() {
+    public Maybe<Colors> getNotExpandableAsync() {
         return getNotExpandableWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Colors>, Colors>() { public Colors call(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
+                public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -157,7 +167,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putNotExpandable(Colors stringBody) {
-        putNotExpandableAsync(stringBody).toBlocking().value();
+        putNotExpandableAsync(stringBody).blockingAwait();
     }
 
     /**
@@ -193,9 +203,9 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putNotExpandableAsync(Colors stringBody) {
+    public Completable putNotExpandableAsync(Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -208,7 +218,7 @@ public class EnumsImpl implements Enums {
      * @return the Colors object if successful.
      */
     public Colors getReferenced() {
-        return getReferencedAsync().toBlocking().value();
+        return getReferencedAsync().blockingGet();
     }
 
     /**
@@ -238,9 +248,17 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Colors> object
      */
-    public Single<Colors> getReferencedAsync() {
+    public Maybe<Colors> getReferencedAsync() {
         return getReferencedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Colors>, Colors>() { public Colors call(RestResponse<Void, Colors> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Colors>, Maybe<Colors>>() {
+                public Maybe<Colors> apply(RestResponse<Void, Colors> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -254,7 +272,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putReferenced(Colors enumStringBody) {
-        putReferencedAsync(enumStringBody).toBlocking().value();
+        putReferencedAsync(enumStringBody).blockingAwait();
     }
 
     /**
@@ -290,9 +308,9 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putReferencedAsync(Colors enumStringBody) {
+    public Completable putReferencedAsync(Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -305,7 +323,7 @@ public class EnumsImpl implements Enums {
      * @return the RefColorConstant object if successful.
      */
     public RefColorConstant getReferencedConstant() {
-        return getReferencedConstantAsync().toBlocking().value();
+        return getReferencedConstantAsync().blockingGet();
     }
 
     /**
@@ -335,9 +353,17 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, RefColorConstant> object
      */
-    public Single<RefColorConstant> getReferencedConstantAsync() {
+    public Maybe<RefColorConstant> getReferencedConstantAsync() {
         return getReferencedConstantWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, RefColorConstant>, RefColorConstant>() { public RefColorConstant call(RestResponse<Void, RefColorConstant> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, RefColorConstant>, Maybe<RefColorConstant>>() {
+                public Maybe<RefColorConstant> apply(RestResponse<Void, RefColorConstant> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -351,7 +377,7 @@ public class EnumsImpl implements Enums {
      * @return the void object if successful.
      */
     public void putReferencedConstant(RefColorConstant enumStringBody) {
-        putReferencedConstantAsync(enumStringBody).toBlocking().value();
+        putReferencedConstantAsync(enumStringBody).blockingAwait();
     }
 
     /**
@@ -388,9 +414,9 @@ public class EnumsImpl implements Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putReferencedConstantAsync(RefColorConstant enumStringBody) {
+    public Completable putReferencedConstantAsync(RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

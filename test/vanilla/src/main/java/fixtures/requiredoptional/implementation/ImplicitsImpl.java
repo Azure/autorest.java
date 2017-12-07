@@ -29,10 +29,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.requiredoptional.Implicits;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -115,7 +117,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredPath(String pathParameter) {
-        return getRequiredPathAsync(pathParameter).toBlocking().value();
+        return getRequiredPathAsync(pathParameter).blockingGet();
     }
 
     /**
@@ -151,9 +153,17 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> getRequiredPathAsync(String pathParameter) {
+    public Maybe<Error> getRequiredPathAsync(String pathParameter) {
         return getRequiredPathWithRestResponseAsync(pathParameter)
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -166,7 +176,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalQuery() {
-        putOptionalQueryAsync().toBlocking().value();
+        putOptionalQueryAsync().blockingAwait();
     }
 
     /**
@@ -197,9 +207,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalQueryAsync() {
+    public Completable putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -212,7 +222,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalQuery(String queryParameter) {
-        putOptionalQueryAsync(queryParameter).toBlocking().value();
+        putOptionalQueryAsync(queryParameter).blockingAwait();
     }
 
     /**
@@ -245,9 +255,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalQueryAsync(String queryParameter) {
+    public Completable putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -260,7 +270,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalHeader() {
-        putOptionalHeaderAsync().toBlocking().value();
+        putOptionalHeaderAsync().blockingAwait();
     }
 
     /**
@@ -291,9 +301,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalHeaderAsync() {
+    public Completable putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -306,7 +316,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalHeader(String queryParameter) {
-        putOptionalHeaderAsync(queryParameter).toBlocking().value();
+        putOptionalHeaderAsync(queryParameter).blockingAwait();
     }
 
     /**
@@ -339,9 +349,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalHeaderAsync(String queryParameter) {
+    public Completable putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -354,7 +364,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalBody() {
-        putOptionalBodyAsync().toBlocking().value();
+        putOptionalBodyAsync().blockingAwait();
     }
 
     /**
@@ -385,9 +395,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalBodyAsync() {
+    public Completable putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -400,7 +410,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the void object if successful.
      */
     public void putOptionalBody(String bodyParameter) {
-        putOptionalBodyAsync(bodyParameter).toBlocking().value();
+        putOptionalBodyAsync(bodyParameter).blockingAwait();
     }
 
     /**
@@ -433,9 +443,9 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putOptionalBodyAsync(String bodyParameter) {
+    public Completable putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -448,7 +458,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalPath() {
-        return getRequiredGlobalPathAsync().toBlocking().value();
+        return getRequiredGlobalPathAsync().blockingGet();
     }
 
     /**
@@ -481,9 +491,17 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> getRequiredGlobalPathAsync() {
+    public Maybe<Error> getRequiredGlobalPathAsync() {
         return getRequiredGlobalPathWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -496,7 +514,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalQuery() {
-        return getRequiredGlobalQueryAsync().toBlocking().value();
+        return getRequiredGlobalQueryAsync().blockingGet();
     }
 
     /**
@@ -529,9 +547,17 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> getRequiredGlobalQueryAsync() {
+    public Maybe<Error> getRequiredGlobalQueryAsync() {
         return getRequiredGlobalQueryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -544,7 +570,7 @@ public class ImplicitsImpl implements Implicits {
      * @return the Error object if successful.
      */
     public Error getOptionalGlobalQuery() {
-        return getOptionalGlobalQueryAsync().toBlocking().value();
+        return getOptionalGlobalQueryAsync().blockingGet();
     }
 
     /**
@@ -574,9 +600,17 @@ public class ImplicitsImpl implements Implicits {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Error> object
      */
-    public Single<Error> getOptionalGlobalQueryAsync() {
+    public Maybe<Error> getOptionalGlobalQueryAsync() {
         return getOptionalGlobalQueryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Error>, Error>() { public Error call(RestResponse<Void, Error> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Error>, Maybe<Error>>() {
+                public Maybe<Error> apply(RestResponse<Void, Error> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

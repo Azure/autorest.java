@@ -27,11 +27,12 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -83,7 +84,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the void object if successful.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
-        updateAsync(resourceGroupName, avset, tags).toBlocking().value();
+        updateAsync(resourceGroupName, avset, tags).blockingAwait();
     }
 
     /**
@@ -134,9 +135,9 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
+    public Completable updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

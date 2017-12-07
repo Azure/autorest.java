@@ -14,9 +14,10 @@ import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -48,9 +49,9 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getMethodPathValidAsync(String unencodedPathParam);
+    Completable getMethodPathValidAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -86,9 +87,9 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getPathPathValidAsync(String unencodedPathParam);
+    Completable getPathPathValidAsync(String unencodedPathParam);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -121,9 +122,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getSwaggerPathValidAsync();
+    Completable getSwaggerPathValidAsync();
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -158,9 +159,9 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getMethodQueryValidAsync(String q1);
+    Completable getMethodQueryValidAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -193,9 +194,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getMethodQueryNullAsync();
+    Completable getMethodQueryNullAsync();
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -230,9 +231,9 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value null
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getMethodQueryNullAsync(String q1);
+    Completable getMethodQueryNullAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -268,9 +269,9 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getPathQueryValidAsync(String q1);
+    Completable getPathQueryValidAsync(String q1);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -303,9 +304,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> getSwaggerQueryValidAsync();
+    Completable getSwaggerQueryValidAsync();
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.

@@ -25,10 +25,12 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodyboolean.Bools;
 import fixtures.bodyboolean.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -108,7 +110,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
-        return getTrueAsync().toBlocking().value();
+        return getTrueAsync().blockingGet();
     }
 
     /**
@@ -138,9 +140,17 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getTrueAsync() {
+    public Maybe<Boolean> getTrueAsync() {
         return getTrueWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -154,7 +164,7 @@ public class BoolsImpl implements Bools {
      * @return the void object if successful.
      */
     public void putTrue(boolean boolBody) {
-        putTrueAsync(boolBody).toBlocking().value();
+        putTrueAsync(boolBody).blockingAwait();
     }
 
     /**
@@ -187,9 +197,9 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putTrueAsync(boolean boolBody) {
+    public Completable putTrueAsync(boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -202,7 +212,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
-        return getFalseAsync().toBlocking().value();
+        return getFalseAsync().blockingGet();
     }
 
     /**
@@ -232,9 +242,17 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getFalseAsync() {
+    public Maybe<Boolean> getFalseAsync() {
         return getFalseWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -248,7 +266,7 @@ public class BoolsImpl implements Bools {
      * @return the void object if successful.
      */
     public void putFalse(boolean boolBody) {
-        putFalseAsync(boolBody).toBlocking().value();
+        putFalseAsync(boolBody).blockingAwait();
     }
 
     /**
@@ -281,9 +299,9 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFalseAsync(boolean boolBody) {
+    public Completable putFalseAsync(boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -296,7 +314,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -326,9 +344,17 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getNullAsync() {
+    public Maybe<Boolean> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -341,7 +367,7 @@ public class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
-        return getInvalidAsync().toBlocking().value();
+        return getInvalidAsync().blockingGet();
     }
 
     /**
@@ -371,9 +397,17 @@ public class BoolsImpl implements Bools {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
      */
-    public Single<Boolean> getInvalidAsync() {
+    public Maybe<Boolean> getInvalidAsync() {
         return getInvalidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Boolean>, Boolean>() { public Boolean call(RestResponse<Void, Boolean> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Boolean>, Maybe<Boolean>>() {
+                public Maybe<Boolean> apply(RestResponse<Void, Boolean> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

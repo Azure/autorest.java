@@ -51,10 +51,12 @@ import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders
 import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
 import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
 import fixtures.lro.models.Product;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -405,7 +407,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400() {
-        return beginPutNonRetry400Async().toBlocking().last().result();
+        return beginPutNonRetry400Async().blockingLast().result();
     }
 
     /**
@@ -440,7 +442,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry400(Product product) {
-        return beginPutNonRetry400Async(product).toBlocking().last().result();
+        return beginPutNonRetry400Async(product).blockingLast().result();
     }
 
     /**
@@ -476,7 +478,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400() {
-        return putNonRetry400Async().toBlocking().value();
+        return putNonRetry400Async().blockingGet();
     }
 
     /**
@@ -508,9 +510,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putNonRetry400Async() {
+    public Maybe<Product> putNonRetry400Async() {
         return putNonRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -523,7 +533,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry400(Product product) {
-        return putNonRetry400Async(product).toBlocking().value();
+        return putNonRetry400Async(product).blockingGet();
     }
 
     /**
@@ -557,9 +567,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putNonRetry400Async(Product product) {
+    public Maybe<Product> putNonRetry400Async(Product product) {
         return putNonRetry400WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -572,7 +590,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400() {
-        return beginPutNonRetry201Creating400Async().toBlocking().last().result();
+        return beginPutNonRetry201Creating400Async().blockingLast().result();
     }
 
     /**
@@ -607,7 +625,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400(Product product) {
-        return beginPutNonRetry201Creating400Async(product).toBlocking().last().result();
+        return beginPutNonRetry201Creating400Async(product).blockingLast().result();
     }
 
     /**
@@ -643,7 +661,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400() {
-        return putNonRetry201Creating400Async().toBlocking().value();
+        return putNonRetry201Creating400Async().blockingGet();
     }
 
     /**
@@ -675,9 +693,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putNonRetry201Creating400Async() {
+    public Maybe<Product> putNonRetry201Creating400Async() {
         return putNonRetry201Creating400WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -690,7 +716,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400(Product product) {
-        return putNonRetry201Creating400Async(product).toBlocking().value();
+        return putNonRetry201Creating400Async(product).blockingGet();
     }
 
     /**
@@ -724,9 +750,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putNonRetry201Creating400Async(Product product) {
+    public Maybe<Product> putNonRetry201Creating400Async(Product product) {
         return putNonRetry201Creating400WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -739,7 +773,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson() {
-        return beginPutNonRetry201Creating400InvalidJsonAsync().toBlocking().last().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync().blockingLast().result();
     }
 
     /**
@@ -774,7 +808,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutNonRetry201Creating400InvalidJson(Product product) {
-        return beginPutNonRetry201Creating400InvalidJsonAsync(product).toBlocking().last().result();
+        return beginPutNonRetry201Creating400InvalidJsonAsync(product).blockingLast().result();
     }
 
     /**
@@ -810,7 +844,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson() {
-        return putNonRetry201Creating400InvalidJsonAsync().toBlocking().value();
+        return putNonRetry201Creating400InvalidJsonAsync().blockingGet();
     }
 
     /**
@@ -842,9 +876,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putNonRetry201Creating400InvalidJsonAsync() {
+    public Maybe<Product> putNonRetry201Creating400InvalidJsonAsync() {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -857,7 +899,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putNonRetry201Creating400InvalidJson(Product product) {
-        return putNonRetry201Creating400InvalidJsonAsync(product).toBlocking().value();
+        return putNonRetry201Creating400InvalidJsonAsync(product).blockingGet();
     }
 
     /**
@@ -891,9 +933,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putNonRetry201Creating400InvalidJsonAsync(Product product) {
+    public Maybe<Product> putNonRetry201Creating400InvalidJsonAsync(Product product) {
         return putNonRetry201Creating400InvalidJsonWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -906,7 +956,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400() {
-        return beginPutAsyncRelativeRetry400Async().toBlocking().last().result();
+        return beginPutAsyncRelativeRetry400Async().blockingLast().result();
     }
 
     /**
@@ -941,7 +991,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetry400(Product product) {
-        return beginPutAsyncRelativeRetry400Async(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetry400Async(product).blockingLast().result();
     }
 
     /**
@@ -977,7 +1027,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400() {
-        return putAsyncRelativeRetry400Async().toBlocking().value();
+        return putAsyncRelativeRetry400Async().blockingGet();
     }
 
     /**
@@ -1009,9 +1059,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> object
      */
-    public Single<Product> putAsyncRelativeRetry400Async() {
+    public Maybe<Product> putAsyncRelativeRetry400Async() {
         return putAsyncRelativeRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1024,7 +1082,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetry400(Product product) {
-        return putAsyncRelativeRetry400Async(product).toBlocking().value();
+        return putAsyncRelativeRetry400Async(product).blockingGet();
     }
 
     /**
@@ -1058,9 +1116,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> object
      */
-    public Single<Product> putAsyncRelativeRetry400Async(Product product) {
+    public Maybe<Product> putAsyncRelativeRetry400Async(Product product) {
         return putAsyncRelativeRetry400WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1072,7 +1138,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteNonRetry400() {
-        beginDeleteNonRetry400Async().toBlocking().last();
+        beginDeleteNonRetry400Async().blockingLast();
     }
 
     /**
@@ -1105,7 +1171,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void deleteNonRetry400() {
-        deleteNonRetry400Async().toBlocking().value();
+        deleteNonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1135,9 +1201,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteNonRetry400Headers, Void> object
      */
-    public Single<Void> deleteNonRetry400Async() {
+    public Completable deleteNonRetry400Async() {
         return deleteNonRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDeleteNonRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsDeleteNonRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1149,7 +1215,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202NonRetry400() {
-        beginDelete202NonRetry400Async().toBlocking().last();
+        beginDelete202NonRetry400Async().blockingLast();
     }
 
     /**
@@ -1182,7 +1248,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void delete202NonRetry400() {
-        delete202NonRetry400Async().toBlocking().value();
+        delete202NonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1212,9 +1278,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDelete202NonRetry400Headers, Void> object
      */
-    public Single<Void> delete202NonRetry400Async() {
+    public Completable delete202NonRetry400Async() {
         return delete202NonRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDelete202NonRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsDelete202NonRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1226,7 +1292,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetry400() {
-        beginDeleteAsyncRelativeRetry400Async().toBlocking().last();
+        beginDeleteAsyncRelativeRetry400Async().blockingLast();
     }
 
     /**
@@ -1259,7 +1325,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetry400() {
-        deleteAsyncRelativeRetry400Async().toBlocking().value();
+        deleteAsyncRelativeRetry400Async().blockingAwait();
     }
 
     /**
@@ -1289,9 +1355,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetry400Async() {
+    public Completable deleteAsyncRelativeRetry400Async() {
         return deleteAsyncRelativeRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsDeleteAsyncRelativeRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1303,7 +1369,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostNonRetry400() {
-        beginPostNonRetry400Async().toBlocking().last().result();
+        beginPostNonRetry400Async().blockingLast().result();
     }
 
     /**
@@ -1337,7 +1403,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostNonRetry400(Product product) {
-        beginPostNonRetry400Async(product).toBlocking().last();
+        beginPostNonRetry400Async(product).blockingLast();
     }
 
     /**
@@ -1373,7 +1439,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postNonRetry400() {
-        postNonRetry400Async().toBlocking().value();
+        postNonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1405,9 +1471,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostNonRetry400Headers, Void> object
      */
-    public Single<Void> postNonRetry400Async() {
+    public Completable postNonRetry400Async() {
         return postNonRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPostNonRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsPostNonRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1420,7 +1486,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postNonRetry400(Product product) {
-        postNonRetry400Async(product).toBlocking().value();
+        postNonRetry400Async(product).blockingAwait();
     }
 
     /**
@@ -1454,9 +1520,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostNonRetry400Headers, Void> object
      */
-    public Single<Void> postNonRetry400Async(Product product) {
+    public Completable postNonRetry400Async(Product product) {
         return postNonRetry400WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPostNonRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsPostNonRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1468,7 +1534,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NonRetry400() {
-        beginPost202NonRetry400Async().toBlocking().last().result();
+        beginPost202NonRetry400Async().blockingLast().result();
     }
 
     /**
@@ -1502,7 +1568,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NonRetry400(Product product) {
-        beginPost202NonRetry400Async(product).toBlocking().last();
+        beginPost202NonRetry400Async(product).blockingLast();
     }
 
     /**
@@ -1538,7 +1604,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void post202NonRetry400() {
-        post202NonRetry400Async().toBlocking().value();
+        post202NonRetry400Async().blockingAwait();
     }
 
     /**
@@ -1570,9 +1636,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NonRetry400Headers, Void> object
      */
-    public Single<Void> post202NonRetry400Async() {
+    public Completable post202NonRetry400Async() {
         return post202NonRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPost202NonRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsPost202NonRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1585,7 +1651,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void post202NonRetry400(Product product) {
-        post202NonRetry400Async(product).toBlocking().value();
+        post202NonRetry400Async(product).blockingAwait();
     }
 
     /**
@@ -1619,9 +1685,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NonRetry400Headers, Void> object
      */
-    public Single<Void> post202NonRetry400Async(Product product) {
+    public Completable post202NonRetry400Async(Product product) {
         return post202NonRetry400WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPost202NonRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsPost202NonRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1633,7 +1699,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetry400() {
-        beginPostAsyncRelativeRetry400Async().toBlocking().last().result();
+        beginPostAsyncRelativeRetry400Async().blockingLast().result();
     }
 
     /**
@@ -1667,7 +1733,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetry400(Product product) {
-        beginPostAsyncRelativeRetry400Async(product).toBlocking().last();
+        beginPostAsyncRelativeRetry400Async(product).blockingLast();
     }
 
     /**
@@ -1703,7 +1769,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetry400() {
-        postAsyncRelativeRetry400Async().toBlocking().value();
+        postAsyncRelativeRetry400Async().blockingAwait();
     }
 
     /**
@@ -1735,9 +1801,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void> object
      */
-    public Single<Void> postAsyncRelativeRetry400Async() {
+    public Completable postAsyncRelativeRetry400Async() {
         return postAsyncRelativeRetry400WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1750,7 +1816,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetry400(Product product) {
-        postAsyncRelativeRetry400Async(product).toBlocking().value();
+        postAsyncRelativeRetry400Async(product).blockingAwait();
     }
 
     /**
@@ -1784,9 +1850,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void> object
      */
-    public Single<Void> postAsyncRelativeRetry400Async(Product product) {
+    public Completable postAsyncRelativeRetry400Async(Product product) {
         return postAsyncRelativeRetry400WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1799,7 +1865,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload() {
-        return beginPutError201NoProvisioningStatePayloadAsync().toBlocking().last().result();
+        return beginPutError201NoProvisioningStatePayloadAsync().blockingLast().result();
     }
 
     /**
@@ -1834,7 +1900,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutError201NoProvisioningStatePayload(Product product) {
-        return beginPutError201NoProvisioningStatePayloadAsync(product).toBlocking().last().result();
+        return beginPutError201NoProvisioningStatePayloadAsync(product).blockingLast().result();
     }
 
     /**
@@ -1870,7 +1936,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload() {
-        return putError201NoProvisioningStatePayloadAsync().toBlocking().value();
+        return putError201NoProvisioningStatePayloadAsync().blockingGet();
     }
 
     /**
@@ -1902,9 +1968,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putError201NoProvisioningStatePayloadAsync() {
+    public Maybe<Product> putError201NoProvisioningStatePayloadAsync() {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -1917,7 +1991,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putError201NoProvisioningStatePayload(Product product) {
-        return putError201NoProvisioningStatePayloadAsync(product).toBlocking().value();
+        return putError201NoProvisioningStatePayloadAsync(product).blockingGet();
     }
 
     /**
@@ -1951,9 +2025,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> putError201NoProvisioningStatePayloadAsync(Product product) {
+    public Maybe<Product> putError201NoProvisioningStatePayloadAsync(Product product) {
         return putError201NoProvisioningStatePayloadWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1966,7 +2048,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus() {
-        return beginPutAsyncRelativeRetryNoStatusAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync().blockingLast().result();
     }
 
     /**
@@ -2001,7 +2083,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatus(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetryNoStatusAsync(product).blockingLast().result();
     }
 
     /**
@@ -2037,7 +2119,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus() {
-        return putAsyncRelativeRetryNoStatusAsync().toBlocking().value();
+        return putAsyncRelativeRetryNoStatusAsync().blockingGet();
     }
 
     /**
@@ -2069,9 +2151,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryNoStatusAsync() {
+    public Maybe<Product> putAsyncRelativeRetryNoStatusAsync() {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2084,7 +2174,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatus(Product product) {
-        return putAsyncRelativeRetryNoStatusAsync(product).toBlocking().value();
+        return putAsyncRelativeRetryNoStatusAsync(product).blockingGet();
     }
 
     /**
@@ -2118,9 +2208,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryNoStatusAsync(Product product) {
+    public Maybe<Product> putAsyncRelativeRetryNoStatusAsync(Product product) {
         return putAsyncRelativeRetryNoStatusWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2133,7 +2231,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload() {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync().blockingLast().result();
     }
 
     /**
@@ -2168,7 +2266,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryNoStatusPayload(Product product) {
-        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetryNoStatusPayloadAsync(product).blockingLast().result();
     }
 
     /**
@@ -2204,7 +2302,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload() {
-        return putAsyncRelativeRetryNoStatusPayloadAsync().toBlocking().value();
+        return putAsyncRelativeRetryNoStatusPayloadAsync().blockingGet();
     }
 
     /**
@@ -2236,9 +2334,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryNoStatusPayloadAsync() {
+    public Maybe<Product> putAsyncRelativeRetryNoStatusPayloadAsync() {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2251,7 +2357,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryNoStatusPayload(Product product) {
-        return putAsyncRelativeRetryNoStatusPayloadAsync(product).toBlocking().value();
+        return putAsyncRelativeRetryNoStatusPayloadAsync(product).blockingGet();
     }
 
     /**
@@ -2285,9 +2391,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
+    public Maybe<Product> putAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
         return putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2299,7 +2413,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededAsync().toBlocking().last();
+        beginDelete204SucceededAsync().blockingLast();
     }
 
     /**
@@ -2332,7 +2446,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void delete204Succeeded() {
-        delete204SucceededAsync().toBlocking().value();
+        delete204SucceededAsync().blockingAwait();
     }
 
     /**
@@ -2362,9 +2476,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> delete204SucceededAsync() {
+    public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2376,7 +2490,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetryNoStatus() {
-        beginDeleteAsyncRelativeRetryNoStatusAsync().toBlocking().last();
+        beginDeleteAsyncRelativeRetryNoStatusAsync().blockingLast();
     }
 
     /**
@@ -2409,7 +2523,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetryNoStatus() {
-        deleteAsyncRelativeRetryNoStatusAsync().toBlocking().value();
+        deleteAsyncRelativeRetryNoStatusAsync().blockingAwait();
     }
 
     /**
@@ -2439,9 +2553,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetryNoStatusAsync() {
+    public Completable deleteAsyncRelativeRetryNoStatusAsync() {
         return deleteAsyncRelativeRetryNoStatusWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2453,7 +2567,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NoLocation() {
-        beginPost202NoLocationAsync().toBlocking().last().result();
+        beginPost202NoLocationAsync().blockingLast().result();
     }
 
     /**
@@ -2487,7 +2601,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202NoLocation(Product product) {
-        beginPost202NoLocationAsync(product).toBlocking().last();
+        beginPost202NoLocationAsync(product).blockingLast();
     }
 
     /**
@@ -2523,7 +2637,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void post202NoLocation() {
-        post202NoLocationAsync().toBlocking().value();
+        post202NoLocationAsync().blockingAwait();
     }
 
     /**
@@ -2555,9 +2669,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NoLocationHeaders, Void> object
      */
-    public Single<Void> post202NoLocationAsync() {
+    public Completable post202NoLocationAsync() {
         return post202NoLocationWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPost202NoLocationHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPost202NoLocationHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2570,7 +2684,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void post202NoLocation(Product product) {
-        post202NoLocationAsync(product).toBlocking().value();
+        post202NoLocationAsync(product).blockingAwait();
     }
 
     /**
@@ -2604,9 +2718,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202NoLocationHeaders, Void> object
      */
-    public Single<Void> post202NoLocationAsync(Product product) {
+    public Completable post202NoLocationAsync(Product product) {
         return post202NoLocationWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPost202NoLocationHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPost202NoLocationHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2618,7 +2732,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryNoPayload() {
-        beginPostAsyncRelativeRetryNoPayloadAsync().toBlocking().last().result();
+        beginPostAsyncRelativeRetryNoPayloadAsync().blockingLast().result();
     }
 
     /**
@@ -2652,7 +2766,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryNoPayload(Product product) {
-        beginPostAsyncRelativeRetryNoPayloadAsync(product).toBlocking().last();
+        beginPostAsyncRelativeRetryNoPayloadAsync(product).blockingLast();
     }
 
     /**
@@ -2688,7 +2802,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryNoPayload() {
-        postAsyncRelativeRetryNoPayloadAsync().toBlocking().value();
+        postAsyncRelativeRetryNoPayloadAsync().blockingAwait();
     }
 
     /**
@@ -2720,9 +2834,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryNoPayloadAsync() {
+    public Completable postAsyncRelativeRetryNoPayloadAsync() {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -2735,7 +2849,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryNoPayload(Product product) {
-        postAsyncRelativeRetryNoPayloadAsync(product).toBlocking().value();
+        postAsyncRelativeRetryNoPayloadAsync(product).blockingAwait();
     }
 
     /**
@@ -2769,9 +2883,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryNoPayloadAsync(Product product) {
+    public Completable postAsyncRelativeRetryNoPayloadAsync(Product product) {
         return postAsyncRelativeRetryNoPayloadWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -2784,7 +2898,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson() {
-        return beginPut200InvalidJsonAsync().toBlocking().last().result();
+        return beginPut200InvalidJsonAsync().blockingLast().result();
     }
 
     /**
@@ -2819,7 +2933,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPut200InvalidJson(Product product) {
-        return beginPut200InvalidJsonAsync(product).toBlocking().last().result();
+        return beginPut200InvalidJsonAsync(product).blockingLast().result();
     }
 
     /**
@@ -2855,7 +2969,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson() {
-        return put200InvalidJsonAsync().toBlocking().value();
+        return put200InvalidJsonAsync().blockingGet();
     }
 
     /**
@@ -2887,9 +3001,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200InvalidJsonAsync() {
+    public Maybe<Product> put200InvalidJsonAsync() {
         return put200InvalidJsonWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -2902,7 +3024,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product put200InvalidJson(Product product) {
-        return put200InvalidJsonAsync(product).toBlocking().value();
+        return put200InvalidJsonAsync(product).blockingGet();
     }
 
     /**
@@ -2936,9 +3058,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put200InvalidJsonAsync(Product product) {
+    public Maybe<Product> put200InvalidJsonAsync(Product product) {
         return put200InvalidJsonWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -2951,7 +3081,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader() {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync().blockingLast().result();
     }
 
     /**
@@ -2986,7 +3116,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidHeader(Product product) {
-        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast().result();
     }
 
     /**
@@ -3022,7 +3152,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader() {
-        return putAsyncRelativeRetryInvalidHeaderAsync().toBlocking().value();
+        return putAsyncRelativeRetryInvalidHeaderAsync().blockingGet();
     }
 
     /**
@@ -3054,9 +3184,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryInvalidHeaderAsync() {
+    public Maybe<Product> putAsyncRelativeRetryInvalidHeaderAsync() {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3069,7 +3207,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidHeader(Product product) {
-        return putAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().value();
+        return putAsyncRelativeRetryInvalidHeaderAsync(product).blockingGet();
     }
 
     /**
@@ -3103,9 +3241,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product) {
+    public Maybe<Product> putAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3118,7 +3264,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling() {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast().result();
     }
 
     /**
@@ -3153,7 +3299,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast().result();
     }
 
     /**
@@ -3189,7 +3335,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling() {
-        return putAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().value();
+        return putAsyncRelativeRetryInvalidJsonPollingAsync().blockingGet();
     }
 
     /**
@@ -3221,9 +3367,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Maybe<Product> putAsyncRelativeRetryInvalidJsonPollingAsync() {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -3236,7 +3390,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        return putAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().value();
+        return putAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingGet();
     }
 
     /**
@@ -3270,9 +3424,17 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
+    public Maybe<Product> putAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>, Product>() { public Product call(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -3284,7 +3446,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202RetryInvalidHeader() {
-        beginDelete202RetryInvalidHeaderAsync().toBlocking().last();
+        beginDelete202RetryInvalidHeaderAsync().blockingLast();
     }
 
     /**
@@ -3317,7 +3479,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void delete202RetryInvalidHeader() {
-        delete202RetryInvalidHeaderAsync().toBlocking().value();
+        delete202RetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3347,9 +3509,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void> object
      */
-    public Single<Void> delete202RetryInvalidHeaderAsync() {
+    public Completable delete202RetryInvalidHeaderAsync() {
         return delete202RetryInvalidHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsDelete202RetryInvalidHeaderHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3361,7 +3523,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetryInvalidHeader() {
-        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last();
+        beginDeleteAsyncRelativeRetryInvalidHeaderAsync().blockingLast();
     }
 
     /**
@@ -3394,7 +3556,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetryInvalidHeader() {
-        deleteAsyncRelativeRetryInvalidHeaderAsync().toBlocking().value();
+        deleteAsyncRelativeRetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3424,9 +3586,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetryInvalidHeaderAsync() {
+    public Completable deleteAsyncRelativeRetryInvalidHeaderAsync() {
         return deleteAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3438,7 +3600,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
-        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last();
+        beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast();
     }
 
     /**
@@ -3471,7 +3633,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetryInvalidJsonPolling() {
-        deleteAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().value();
+        deleteAsyncRelativeRetryInvalidJsonPollingAsync().blockingAwait();
     }
 
     /**
@@ -3501,9 +3663,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Completable deleteAsyncRelativeRetryInvalidJsonPollingAsync() {
         return deleteAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3515,7 +3677,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202RetryInvalidHeader() {
-        beginPost202RetryInvalidHeaderAsync().toBlocking().last().result();
+        beginPost202RetryInvalidHeaderAsync().blockingLast().result();
     }
 
     /**
@@ -3549,7 +3711,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202RetryInvalidHeader(Product product) {
-        beginPost202RetryInvalidHeaderAsync(product).toBlocking().last();
+        beginPost202RetryInvalidHeaderAsync(product).blockingLast();
     }
 
     /**
@@ -3585,7 +3747,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void post202RetryInvalidHeader() {
-        post202RetryInvalidHeaderAsync().toBlocking().value();
+        post202RetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3617,9 +3779,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void> object
      */
-    public Single<Void> post202RetryInvalidHeaderAsync() {
+    public Completable post202RetryInvalidHeaderAsync() {
         return post202RetryInvalidHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -3632,7 +3794,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void post202RetryInvalidHeader(Product product) {
-        post202RetryInvalidHeaderAsync(product).toBlocking().value();
+        post202RetryInvalidHeaderAsync(product).blockingAwait();
     }
 
     /**
@@ -3666,9 +3828,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void> object
      */
-    public Single<Void> post202RetryInvalidHeaderAsync(Product product) {
+    public Completable post202RetryInvalidHeaderAsync(Product product) {
         return post202RetryInvalidHeaderWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3680,7 +3842,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidHeader() {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync().toBlocking().last().result();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync().blockingLast().result();
     }
 
     /**
@@ -3714,7 +3876,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidHeader(Product product) {
-        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().last();
+        beginPostAsyncRelativeRetryInvalidHeaderAsync(product).blockingLast();
     }
 
     /**
@@ -3750,7 +3912,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidHeader() {
-        postAsyncRelativeRetryInvalidHeaderAsync().toBlocking().value();
+        postAsyncRelativeRetryInvalidHeaderAsync().blockingAwait();
     }
 
     /**
@@ -3782,9 +3944,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidHeaderAsync() {
+    public Completable postAsyncRelativeRetryInvalidHeaderAsync() {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -3797,7 +3959,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidHeader(Product product) {
-        postAsyncRelativeRetryInvalidHeaderAsync(product).toBlocking().value();
+        postAsyncRelativeRetryInvalidHeaderAsync(product).blockingAwait();
     }
 
     /**
@@ -3831,9 +3993,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
+    public Completable postAsyncRelativeRetryInvalidHeaderAsync(Product product) {
         return postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -3845,7 +4007,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling() {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().last().result();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync().blockingLast().result();
     }
 
     /**
@@ -3879,7 +4041,7 @@ public class LROSADsImpl implements LROSADs {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().last();
+        beginPostAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingLast();
     }
 
     /**
@@ -3915,7 +4077,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidJsonPolling() {
-        postAsyncRelativeRetryInvalidJsonPollingAsync().toBlocking().value();
+        postAsyncRelativeRetryInvalidJsonPollingAsync().blockingAwait();
     }
 
     /**
@@ -3947,9 +4109,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync() {
+    public Completable postAsyncRelativeRetryInvalidJsonPollingAsync() {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -3962,7 +4124,7 @@ public class LROSADsImpl implements LROSADs {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetryInvalidJsonPolling(Product product) {
-        postAsyncRelativeRetryInvalidJsonPollingAsync(product).toBlocking().value();
+        postAsyncRelativeRetryInvalidJsonPollingAsync(product).blockingAwait();
     }
 
     /**
@@ -3996,9 +4158,9 @@ public class LROSADsImpl implements LROSADs {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
+    public Completable postAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>, Void>() { public Void call(RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

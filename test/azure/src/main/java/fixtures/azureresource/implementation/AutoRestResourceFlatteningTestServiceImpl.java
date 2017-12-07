@@ -34,12 +34,14 @@ import fixtures.azureresource.AutoRestResourceFlatteningTestService;
 import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
@@ -222,7 +224,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putArray() {
-        putArrayAsync().toBlocking().value();
+        putArrayAsync().blockingAwait();
     }
 
     /**
@@ -254,9 +256,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync() {
+    public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -269,7 +271,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayAsync(resourceArray).toBlocking().value();
+        putArrayAsync(resourceArray).blockingAwait();
     }
 
     /**
@@ -303,9 +305,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putArrayAsync(List<Resource> resourceArray) {
+    public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -318,7 +320,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayAsync().toBlocking().value();
+        return getArrayAsync().blockingGet();
     }
 
     /**
@@ -348,9 +350,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, List<FlattenedProduct>> object
      */
-    public Single<List<FlattenedProduct>> getArrayAsync() {
+    public Maybe<List<FlattenedProduct>> getArrayAsync() {
         return getArrayWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, List<FlattenedProduct>>, List<FlattenedProduct>>() { public List<FlattenedProduct> call(RestResponse<Void, List<FlattenedProduct>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, List<FlattenedProduct>>, Maybe<List<FlattenedProduct>>>() {
+                public Maybe<List<FlattenedProduct>> apply(RestResponse<Void, List<FlattenedProduct>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -363,7 +373,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putDictionary() {
-        putDictionaryAsync().toBlocking().value();
+        putDictionaryAsync().blockingAwait();
     }
 
     /**
@@ -395,9 +405,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync() {
+    public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -410,7 +420,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryAsync(resourceDictionary).toBlocking().value();
+        putDictionaryAsync(resourceDictionary).blockingAwait();
     }
 
     /**
@@ -444,9 +454,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
+    public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -459,7 +469,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryAsync().toBlocking().value();
+        return getDictionaryAsync().blockingGet();
     }
 
     /**
@@ -489,9 +499,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, FlattenedProduct>> object
      */
-    public Single<Map<String, FlattenedProduct>> getDictionaryAsync() {
+    public Maybe<Map<String, FlattenedProduct>> getDictionaryAsync() {
         return getDictionaryWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() { public Map<String, FlattenedProduct> call(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, FlattenedProduct>>, Maybe<Map<String, FlattenedProduct>>>() {
+                public Maybe<Map<String, FlattenedProduct>> apply(RestResponse<Void, Map<String, FlattenedProduct>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -504,7 +522,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putResourceCollection() {
-        putResourceCollectionAsync().toBlocking().value();
+        putResourceCollectionAsync().blockingAwait();
     }
 
     /**
@@ -536,9 +554,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync() {
+    public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -551,7 +569,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the void object if successful.
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionAsync(resourceComplexObject).toBlocking().value();
+        putResourceCollectionAsync(resourceComplexObject).blockingAwait();
     }
 
     /**
@@ -585,9 +603,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
+    public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -600,7 +618,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionAsync().toBlocking().value();
+        return getResourceCollectionAsync().blockingGet();
     }
 
     /**
@@ -630,9 +648,17 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ResourceCollection> object
      */
-    public Single<ResourceCollection> getResourceCollectionAsync() {
+    public Maybe<ResourceCollection> getResourceCollectionAsync() {
         return getResourceCollectionWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ResourceCollection>, ResourceCollection>() { public ResourceCollection call(RestResponse<Void, ResourceCollection> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ResourceCollection>, Maybe<ResourceCollection>>() {
+                public Maybe<ResourceCollection> apply(RestResponse<Void, ResourceCollection> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

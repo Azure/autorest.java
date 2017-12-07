@@ -37,10 +37,12 @@ import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -216,7 +218,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the IntWrapper object if successful.
      */
     public IntWrapper getInt() {
-        return getIntAsync().toBlocking().value();
+        return getIntAsync().blockingGet();
     }
 
     /**
@@ -246,9 +248,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, IntWrapper> object
      */
-    public Single<IntWrapper> getIntAsync() {
+    public Maybe<IntWrapper> getIntAsync() {
         return getIntWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, IntWrapper>, IntWrapper>() { public IntWrapper call(RestResponse<Void, IntWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, IntWrapper>, Maybe<IntWrapper>>() {
+                public Maybe<IntWrapper> apply(RestResponse<Void, IntWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -262,7 +272,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putInt(IntWrapper complexBody) {
-        putIntAsync(complexBody).toBlocking().value();
+        putIntAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -299,9 +309,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putIntAsync(IntWrapper complexBody) {
+    public Completable putIntAsync(IntWrapper complexBody) {
         return putIntWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -314,7 +324,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the LongWrapper object if successful.
      */
     public LongWrapper getLong() {
-        return getLongAsync().toBlocking().value();
+        return getLongAsync().blockingGet();
     }
 
     /**
@@ -344,9 +354,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, LongWrapper> object
      */
-    public Single<LongWrapper> getLongAsync() {
+    public Maybe<LongWrapper> getLongAsync() {
         return getLongWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, LongWrapper>, LongWrapper>() { public LongWrapper call(RestResponse<Void, LongWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, LongWrapper>, Maybe<LongWrapper>>() {
+                public Maybe<LongWrapper> apply(RestResponse<Void, LongWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -360,7 +378,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putLong(LongWrapper complexBody) {
-        putLongAsync(complexBody).toBlocking().value();
+        putLongAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -397,9 +415,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putLongAsync(LongWrapper complexBody) {
+    public Completable putLongAsync(LongWrapper complexBody) {
         return putLongWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -412,7 +430,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the FloatWrapper object if successful.
      */
     public FloatWrapper getFloat() {
-        return getFloatAsync().toBlocking().value();
+        return getFloatAsync().blockingGet();
     }
 
     /**
@@ -442,9 +460,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, FloatWrapper> object
      */
-    public Single<FloatWrapper> getFloatAsync() {
+    public Maybe<FloatWrapper> getFloatAsync() {
         return getFloatWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, FloatWrapper>, FloatWrapper>() { public FloatWrapper call(RestResponse<Void, FloatWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, FloatWrapper>, Maybe<FloatWrapper>>() {
+                public Maybe<FloatWrapper> apply(RestResponse<Void, FloatWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -458,7 +484,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putFloat(FloatWrapper complexBody) {
-        putFloatAsync(complexBody).toBlocking().value();
+        putFloatAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -495,9 +521,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putFloatAsync(FloatWrapper complexBody) {
+    public Completable putFloatAsync(FloatWrapper complexBody) {
         return putFloatWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -510,7 +536,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DoubleWrapper object if successful.
      */
     public DoubleWrapper getDouble() {
-        return getDoubleAsync().toBlocking().value();
+        return getDoubleAsync().blockingGet();
     }
 
     /**
@@ -540,9 +566,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DoubleWrapper> object
      */
-    public Single<DoubleWrapper> getDoubleAsync() {
+    public Maybe<DoubleWrapper> getDoubleAsync() {
         return getDoubleWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DoubleWrapper>, DoubleWrapper>() { public DoubleWrapper call(RestResponse<Void, DoubleWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DoubleWrapper>, Maybe<DoubleWrapper>>() {
+                public Maybe<DoubleWrapper> apply(RestResponse<Void, DoubleWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -556,7 +590,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDouble(DoubleWrapper complexBody) {
-        putDoubleAsync(complexBody).toBlocking().value();
+        putDoubleAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -593,9 +627,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDoubleAsync(DoubleWrapper complexBody) {
+    public Completable putDoubleAsync(DoubleWrapper complexBody) {
         return putDoubleWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -608,7 +642,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the BooleanWrapper object if successful.
      */
     public BooleanWrapper getBool() {
-        return getBoolAsync().toBlocking().value();
+        return getBoolAsync().blockingGet();
     }
 
     /**
@@ -638,9 +672,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, BooleanWrapper> object
      */
-    public Single<BooleanWrapper> getBoolAsync() {
+    public Maybe<BooleanWrapper> getBoolAsync() {
         return getBoolWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, BooleanWrapper>, BooleanWrapper>() { public BooleanWrapper call(RestResponse<Void, BooleanWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, BooleanWrapper>, Maybe<BooleanWrapper>>() {
+                public Maybe<BooleanWrapper> apply(RestResponse<Void, BooleanWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -654,7 +696,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putBool(BooleanWrapper complexBody) {
-        putBoolAsync(complexBody).toBlocking().value();
+        putBoolAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -691,9 +733,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putBoolAsync(BooleanWrapper complexBody) {
+    public Completable putBoolAsync(BooleanWrapper complexBody) {
         return putBoolWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -706,7 +748,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the StringWrapper object if successful.
      */
     public StringWrapper getString() {
-        return getStringAsync().toBlocking().value();
+        return getStringAsync().blockingGet();
     }
 
     /**
@@ -736,9 +778,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, StringWrapper> object
      */
-    public Single<StringWrapper> getStringAsync() {
+    public Maybe<StringWrapper> getStringAsync() {
         return getStringWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, StringWrapper>, StringWrapper>() { public StringWrapper call(RestResponse<Void, StringWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, StringWrapper>, Maybe<StringWrapper>>() {
+                public Maybe<StringWrapper> apply(RestResponse<Void, StringWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -752,7 +802,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putString(StringWrapper complexBody) {
-        putStringAsync(complexBody).toBlocking().value();
+        putStringAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -789,9 +839,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putStringAsync(StringWrapper complexBody) {
+    public Completable putStringAsync(StringWrapper complexBody) {
         return putStringWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -804,7 +854,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DateWrapper object if successful.
      */
     public DateWrapper getDate() {
-        return getDateAsync().toBlocking().value();
+        return getDateAsync().blockingGet();
     }
 
     /**
@@ -834,9 +884,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DateWrapper> object
      */
-    public Single<DateWrapper> getDateAsync() {
+    public Maybe<DateWrapper> getDateAsync() {
         return getDateWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DateWrapper>, DateWrapper>() { public DateWrapper call(RestResponse<Void, DateWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DateWrapper>, Maybe<DateWrapper>>() {
+                public Maybe<DateWrapper> apply(RestResponse<Void, DateWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -850,7 +908,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDate(DateWrapper complexBody) {
-        putDateAsync(complexBody).toBlocking().value();
+        putDateAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -887,9 +945,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateAsync(DateWrapper complexBody) {
+    public Completable putDateAsync(DateWrapper complexBody) {
         return putDateWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -902,7 +960,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DatetimeWrapper object if successful.
      */
     public DatetimeWrapper getDateTime() {
-        return getDateTimeAsync().toBlocking().value();
+        return getDateTimeAsync().blockingGet();
     }
 
     /**
@@ -932,9 +990,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DatetimeWrapper> object
      */
-    public Single<DatetimeWrapper> getDateTimeAsync() {
+    public Maybe<DatetimeWrapper> getDateTimeAsync() {
         return getDateTimeWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DatetimeWrapper>, DatetimeWrapper>() { public DatetimeWrapper call(RestResponse<Void, DatetimeWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DatetimeWrapper>, Maybe<DatetimeWrapper>>() {
+                public Maybe<DatetimeWrapper> apply(RestResponse<Void, DatetimeWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -948,7 +1014,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDateTime(DatetimeWrapper complexBody) {
-        putDateTimeAsync(complexBody).toBlocking().value();
+        putDateTimeAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -985,9 +1051,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeAsync(DatetimeWrapper complexBody) {
+    public Completable putDateTimeAsync(DatetimeWrapper complexBody) {
         return putDateTimeWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1000,7 +1066,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the Datetimerfc1123Wrapper object if successful.
      */
     public Datetimerfc1123Wrapper getDateTimeRfc1123() {
-        return getDateTimeRfc1123Async().toBlocking().value();
+        return getDateTimeRfc1123Async().blockingGet();
     }
 
     /**
@@ -1030,9 +1096,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Datetimerfc1123Wrapper> object
      */
-    public Single<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
+    public Maybe<Datetimerfc1123Wrapper> getDateTimeRfc1123Async() {
         return getDateTimeRfc1123WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Datetimerfc1123Wrapper>, Datetimerfc1123Wrapper>() { public Datetimerfc1123Wrapper call(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Datetimerfc1123Wrapper>, Maybe<Datetimerfc1123Wrapper>>() {
+                public Maybe<Datetimerfc1123Wrapper> apply(RestResponse<Void, Datetimerfc1123Wrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1046,7 +1120,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) {
-        putDateTimeRfc1123Async(complexBody).toBlocking().value();
+        putDateTimeRfc1123Async(complexBody).blockingAwait();
     }
 
     /**
@@ -1083,9 +1157,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
+    public Completable putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody) {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1098,7 +1172,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the DurationWrapper object if successful.
      */
     public DurationWrapper getDuration() {
-        return getDurationAsync().toBlocking().value();
+        return getDurationAsync().blockingGet();
     }
 
     /**
@@ -1128,9 +1202,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DurationWrapper> object
      */
-    public Single<DurationWrapper> getDurationAsync() {
+    public Maybe<DurationWrapper> getDurationAsync() {
         return getDurationWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DurationWrapper>, DurationWrapper>() { public DurationWrapper call(RestResponse<Void, DurationWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DurationWrapper>, Maybe<DurationWrapper>>() {
+                public Maybe<DurationWrapper> apply(RestResponse<Void, DurationWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1144,7 +1226,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putDuration(DurationWrapper complexBody) {
-        putDurationAsync(complexBody).toBlocking().value();
+        putDurationAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -1181,9 +1263,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putDurationAsync(DurationWrapper complexBody) {
+    public Completable putDurationAsync(DurationWrapper complexBody) {
         return putDurationWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -1196,7 +1278,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the ByteWrapper object if successful.
      */
     public ByteWrapper getByte() {
-        return getByteAsync().toBlocking().value();
+        return getByteAsync().blockingGet();
     }
 
     /**
@@ -1226,9 +1308,17 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ByteWrapper> object
      */
-    public Single<ByteWrapper> getByteAsync() {
+    public Maybe<ByteWrapper> getByteAsync() {
         return getByteWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ByteWrapper>, ByteWrapper>() { public ByteWrapper call(RestResponse<Void, ByteWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ByteWrapper>, Maybe<ByteWrapper>>() {
+                public Maybe<ByteWrapper> apply(RestResponse<Void, ByteWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -1242,7 +1332,7 @@ public class PrimitivesImpl implements Primitives {
      * @return the void object if successful.
      */
     public void putByte(ByteWrapper complexBody) {
-        putByteAsync(complexBody).toBlocking().value();
+        putByteAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -1279,9 +1369,9 @@ public class PrimitivesImpl implements Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putByteAsync(ByteWrapper complexBody) {
+    public Completable putByteAsync(ByteWrapper complexBody) {
         return putByteWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

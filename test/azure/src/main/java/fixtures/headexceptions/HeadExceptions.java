@@ -14,9 +14,10 @@ import com.microsoft.azure.v2.CloudException;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.ServiceCallback;
 import com.microsoft.rest.v2.ServiceFuture;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -45,9 +46,9 @@ public interface HeadExceptions {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head200Async();
+    Completable head200Async();
 
     /**
      * Return 200 status code if successful.
@@ -79,9 +80,9 @@ public interface HeadExceptions {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head204Async();
+    Completable head204Async();
 
     /**
      * Return 204 status code if successful.
@@ -113,9 +114,9 @@ public interface HeadExceptions {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;Void&gt;} object if successful.
+     * @return the {@link Completable} object if successful.
      */
-    Single<Void> head404Async();
+    Completable head404Async();
 
     /**
      * Return 404 status code if successful.

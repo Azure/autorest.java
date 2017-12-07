@@ -28,10 +28,12 @@ import com.microsoft.rest.v2.annotations.POST;
 import com.microsoft.rest.v2.annotations.PUT;
 import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -118,7 +120,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -153,7 +155,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -189,7 +191,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededAsync().toBlocking().value();
+        return putAsyncRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -221,9 +223,17 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetrySucceededAsync() {
+    public Maybe<ProductInner> putAsyncRetrySucceededAsync() {
         return putAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -236,7 +246,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededAsync(product).toBlocking().value();
+        return putAsyncRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -270,9 +280,17 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> object
      */
-    public Single<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
+    public Maybe<ProductInner> putAsyncRetrySucceededAsync(ProductInner product) {
         return putAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeadersInner, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -285,7 +303,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
 
     /**
@@ -320,7 +338,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -356,7 +374,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().toBlocking().value();
+        return put201CreatingSucceeded200Async().blockingGet();
     }
 
     /**
@@ -388,9 +406,17 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async() {
+    public Maybe<ProductInner> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -403,7 +429,7 @@ public class LROsCustomHeadersInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200Async(product).toBlocking().value();
+        return put201CreatingSucceeded200Async(product).blockingGet();
     }
 
     /**
@@ -437,9 +463,17 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ProductInner> object
      */
-    public Single<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
+    public Maybe<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, ProductInner>, ProductInner>() { public ProductInner call(RestResponse<Void, ProductInner> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ProductInner>, Maybe<ProductInner>>() {
+                public Maybe<ProductInner> apply(RestResponse<Void, ProductInner> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -451,7 +485,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -485,7 +519,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -521,7 +555,7 @@ public class LROsCustomHeadersInner {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().toBlocking().value();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -553,9 +587,9 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -568,7 +602,7 @@ public class LROsCustomHeadersInner {
      * @return the void object if successful.
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200Async(product).toBlocking().value();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -602,9 +636,9 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> object
      */
-    public Single<Void> post202Retry200Async(ProductInner product) {
+    public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPost202Retry200HeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -616,7 +650,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededAsync().toBlocking().last().result();
+        beginPostAsyncRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -650,7 +684,7 @@ public class LROsCustomHeadersInner {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRetrySucceeded(ProductInner product) {
-        beginPostAsyncRetrySucceededAsync(product).toBlocking().last();
+        beginPostAsyncRetrySucceededAsync(product).blockingLast();
     }
 
     /**
@@ -686,7 +720,7 @@ public class LROsCustomHeadersInner {
      * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded() {
-        postAsyncRetrySucceededAsync().toBlocking().value();
+        postAsyncRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -718,9 +752,9 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrySucceededAsync() {
+    public Completable postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -733,7 +767,7 @@ public class LROsCustomHeadersInner {
      * @return the void object if successful.
      */
     public void postAsyncRetrySucceeded(ProductInner product) {
-        postAsyncRetrySucceededAsync(product).toBlocking().value();
+        postAsyncRetrySucceededAsync(product).blockingAwait();
     }
 
     /**
@@ -767,9 +801,9 @@ public class LROsCustomHeadersInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> object
      */
-    public Single<Void> postAsyncRetrySucceededAsync(ProductInner product) {
+    public Completable postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void>, Void>() { public Void call(RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeadersInner, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

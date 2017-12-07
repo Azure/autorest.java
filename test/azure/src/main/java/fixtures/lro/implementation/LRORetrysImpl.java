@@ -37,10 +37,12 @@ import fixtures.lro.models.LRORetrysPost202Retry200Headers;
 import fixtures.lro.models.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.LRORetrysPutAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.Product;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -163,7 +165,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200Async().toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async().blockingLast().result();
     }
 
     /**
@@ -198,7 +200,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200Async(product).toBlocking().last().result();
+        return beginPut201CreatingSucceeded200Async(product).blockingLast().result();
     }
 
     /**
@@ -234,7 +236,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200Async().toBlocking().value();
+        return put201CreatingSucceeded200Async().blockingGet();
     }
 
     /**
@@ -266,9 +268,17 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingSucceeded200Async() {
+    public Maybe<Product> put201CreatingSucceeded200Async() {
         return put201CreatingSucceeded200WithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -281,7 +291,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200Async(product).toBlocking().value();
+        return put201CreatingSucceeded200Async(product).blockingGet();
     }
 
     /**
@@ -315,9 +325,17 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
-    public Single<Product> put201CreatingSucceeded200Async(Product product) {
+    public Maybe<Product> put201CreatingSucceeded200Async(Product product) {
         return put201CreatingSucceeded200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<Void, Product>, Product>() { public Product call(RestResponse<Void, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<Void, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -330,7 +348,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
+        return beginPutAsyncRelativeRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -365,7 +383,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
-        return beginPutAsyncRelativeRetrySucceededAsync(product).toBlocking().last().result();
+        return beginPutAsyncRelativeRetrySucceededAsync(product).blockingLast().result();
     }
 
     /**
@@ -401,7 +419,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded() {
-        return putAsyncRelativeRetrySucceededAsync().toBlocking().value();
+        return putAsyncRelativeRetrySucceededAsync().blockingGet();
     }
 
     /**
@@ -433,9 +451,17 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetrySucceededAsync() {
+    public Maybe<Product> putAsyncRelativeRetrySucceededAsync() {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -448,7 +474,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded(Product product) {
-        return putAsyncRelativeRetrySucceededAsync(product).toBlocking().value();
+        return putAsyncRelativeRetrySucceededAsync(product).blockingGet();
     }
 
     /**
@@ -482,9 +508,17 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> object
      */
-    public Single<Product> putAsyncRelativeRetrySucceededAsync(Product product) {
+    public Maybe<Product> putAsyncRelativeRetrySucceededAsync(Product product) {
         return putAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>, Product>() { public Product call(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -497,7 +531,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededAsync().toBlocking().last().result();
+        return beginDeleteProvisioning202Accepted200SucceededAsync().blockingLast().result();
     }
 
     /**
@@ -530,7 +564,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededAsync().toBlocking().value();
+        return deleteProvisioning202Accepted200SucceededAsync().blockingGet();
     }
 
     /**
@@ -560,9 +594,17 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product> object
      */
-    public Single<Product> deleteProvisioning202Accepted200SucceededAsync() {
+    public Maybe<Product> deleteProvisioning202Accepted200SucceededAsync() {
         return deleteProvisioning202Accepted200SucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product>, Product>() { public Product call(RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product>, Maybe<Product>>() {
+                public Maybe<Product> apply(RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeaders, Product> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -574,7 +616,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200Async().toBlocking().last();
+        beginDelete202Retry200Async().blockingLast();
     }
 
     /**
@@ -607,7 +649,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void delete202Retry200() {
-        delete202Retry200Async().toBlocking().value();
+        delete202Retry200Async().blockingAwait();
     }
 
     /**
@@ -637,9 +679,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysDelete202Retry200Headers, Void> object
      */
-    public Single<Void> delete202Retry200Async() {
+    public Completable delete202Retry200Async() {
         return delete202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysDelete202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LRORetrysDelete202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -651,7 +693,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededAsync().toBlocking().last();
+        beginDeleteAsyncRelativeRetrySucceededAsync().blockingLast();
     }
 
     /**
@@ -684,7 +726,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededAsync().toBlocking().value();
+        deleteAsyncRelativeRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -714,9 +756,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void> object
      */
-    public Single<Void> deleteAsyncRelativeRetrySucceededAsync() {
+    public Completable deleteAsyncRelativeRetrySucceededAsync() {
         return deleteAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -728,7 +770,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().toBlocking().last().result();
+        beginPost202Retry200Async().blockingLast().result();
     }
 
     /**
@@ -762,7 +804,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200Async(product).toBlocking().last();
+        beginPost202Retry200Async(product).blockingLast();
     }
 
     /**
@@ -798,7 +840,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void post202Retry200() {
-        post202Retry200Async().toBlocking().value();
+        post202Retry200Async().blockingAwait();
     }
 
     /**
@@ -830,9 +872,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPost202Retry200Headers, Void> object
      */
-    public Single<Void> post202Retry200Async() {
+    public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysPost202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LRORetrysPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -845,7 +887,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void post202Retry200(Product product) {
-        post202Retry200Async(product).toBlocking().value();
+        post202Retry200Async(product).blockingAwait();
     }
 
     /**
@@ -879,9 +921,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPost202Retry200Headers, Void> object
      */
-    public Single<Void> post202Retry200Async(Product product) {
+    public Completable post202Retry200Async(Product product) {
         return post202Retry200WithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LRORetrysPost202Retry200Headers, Void>, Void>() { public Void call(RestResponse<LRORetrysPost202Retry200Headers, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -893,7 +935,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().toBlocking().last().result();
+        beginPostAsyncRelativeRetrySucceededAsync().blockingLast().result();
     }
 
     /**
@@ -927,7 +969,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded(Product product) {
-        beginPostAsyncRelativeRetrySucceededAsync(product).toBlocking().last();
+        beginPostAsyncRelativeRetrySucceededAsync(product).blockingLast();
     }
 
     /**
@@ -963,7 +1005,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetrySucceeded() {
-        postAsyncRelativeRetrySucceededAsync().toBlocking().value();
+        postAsyncRelativeRetrySucceededAsync().blockingAwait();
     }
 
     /**
@@ -995,9 +1037,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetrySucceededAsync() {
+    public Completable postAsyncRelativeRetrySucceededAsync() {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync()
-            .map(new Func1<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -1010,7 +1052,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @return the void object if successful.
      */
     public void postAsyncRelativeRetrySucceeded(Product product) {
-        postAsyncRelativeRetrySucceededAsync(product).toBlocking().value();
+        postAsyncRelativeRetrySucceededAsync(product).blockingAwait();
     }
 
     /**
@@ -1044,9 +1086,9 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> object
      */
-    public Single<Void> postAsyncRelativeRetrySucceededAsync(Product product) {
+    public Completable postAsyncRelativeRetrySucceededAsync(Product product) {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
-            .map(new Func1<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>, Void>() { public Void call(RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

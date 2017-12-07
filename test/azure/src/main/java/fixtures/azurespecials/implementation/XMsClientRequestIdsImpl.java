@@ -25,10 +25,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.azurespecials.XMsClientRequestIds;
 import fixtures.azurespecials.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -79,7 +80,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the void object if successful.
      */
     public void get() {
-        getAsync().toBlocking().value();
+        getAsync().blockingAwait();
     }
 
     /**
@@ -109,9 +110,9 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getAsync() {
+    public Completable getAsync() {
         return getWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -125,7 +126,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @return the void object if successful.
      */
     public void paramGet(String xMsClientRequestId) {
-        paramGetAsync(xMsClientRequestId).toBlocking().value();
+        paramGetAsync(xMsClientRequestId).blockingAwait();
     }
 
     /**
@@ -161,9 +162,9 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> paramGetAsync(String xMsClientRequestId) {
+    public Completable paramGetAsync(String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

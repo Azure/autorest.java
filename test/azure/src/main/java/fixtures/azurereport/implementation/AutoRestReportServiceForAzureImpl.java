@@ -29,11 +29,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azurereport.AutoRestReportServiceForAzure;
 import fixtures.azurereport.models.ErrorException;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
 import java.util.Map;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
@@ -191,7 +192,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportAsync().toBlocking().value();
+        return getReportAsync().blockingGet();
     }
 
     /**
@@ -222,9 +223,17 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getReportAsync() {
+    public Maybe<Map<String, Integer>> getReportAsync() {
         return getReportWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
     /**
@@ -237,7 +246,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport(String qualifier) {
-        return getReportAsync(qualifier).toBlocking().value();
+        return getReportAsync(qualifier).blockingGet();
     }
 
     /**
@@ -270,9 +279,17 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Map<String, Integer>> object
      */
-    public Single<Map<String, Integer>> getReportAsync(String qualifier) {
+    public Maybe<Map<String, Integer>> getReportAsync(String qualifier) {
         return getReportWithRestResponseAsync(qualifier)
-            .map(new Func1<RestResponse<Void, Map<String, Integer>>, Map<String, Integer>>() { public Map<String, Integer> call(RestResponse<Void, Map<String, Integer>> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, Map<String, Integer>>, Maybe<Map<String, Integer>>>() {
+                public Maybe<Map<String, Integer>> apply(RestResponse<Void, Map<String, Integer>> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

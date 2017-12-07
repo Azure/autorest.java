@@ -27,10 +27,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodycomplex.Arrays;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -104,7 +106,7 @@ public class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -134,9 +136,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getValidAsync() {
+    public Maybe<ArrayWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -150,7 +160,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putValid(ArrayWrapper complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -187,9 +197,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(ArrayWrapper complexBody) {
+    public Completable putValidAsync(ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -202,7 +212,7 @@ public class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -232,9 +242,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getEmptyAsync() {
+    public Maybe<ArrayWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -248,7 +266,7 @@ public class ArraysImpl implements Arrays {
      * @return the void object if successful.
      */
     public void putEmpty(ArrayWrapper complexBody) {
-        putEmptyAsync(complexBody).toBlocking().value();
+        putEmptyAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -285,9 +303,9 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(ArrayWrapper complexBody) {
+    public Completable putEmptyAsync(ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -300,7 +318,7 @@ public class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -330,9 +348,17 @@ public class ArraysImpl implements Arrays {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, ArrayWrapper> object
      */
-    public Single<ArrayWrapper> getNotProvidedAsync() {
+    public Maybe<ArrayWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, ArrayWrapper>, ArrayWrapper>() { public ArrayWrapper call(RestResponse<Void, ArrayWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, ArrayWrapper>, Maybe<ArrayWrapper>>() {
+                public Maybe<ArrayWrapper> apply(RestResponse<Void, ArrayWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

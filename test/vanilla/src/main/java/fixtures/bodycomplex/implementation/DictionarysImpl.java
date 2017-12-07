@@ -27,10 +27,12 @@ import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.bodycomplex.Dictionarys;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -110,7 +112,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getValid() {
-        return getValidAsync().toBlocking().value();
+        return getValidAsync().blockingGet();
     }
 
     /**
@@ -140,9 +142,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DictionaryWrapper> object
      */
-    public Single<DictionaryWrapper> getValidAsync() {
+    public Maybe<DictionaryWrapper> getValidAsync() {
         return getValidWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -156,7 +166,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putValid(DictionaryWrapper complexBody) {
-        putValidAsync(complexBody).toBlocking().value();
+        putValidAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -193,9 +203,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putValidAsync(DictionaryWrapper complexBody) {
+    public Completable putValidAsync(DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -208,7 +218,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getEmpty() {
-        return getEmptyAsync().toBlocking().value();
+        return getEmptyAsync().blockingGet();
     }
 
     /**
@@ -238,9 +248,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DictionaryWrapper> object
      */
-    public Single<DictionaryWrapper> getEmptyAsync() {
+    public Maybe<DictionaryWrapper> getEmptyAsync() {
         return getEmptyWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -254,7 +272,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the void object if successful.
      */
     public void putEmpty(DictionaryWrapper complexBody) {
-        putEmptyAsync(complexBody).toBlocking().value();
+        putEmptyAsync(complexBody).blockingAwait();
     }
 
     /**
@@ -291,9 +309,9 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> putEmptyAsync(DictionaryWrapper complexBody) {
+    public Completable putEmptyAsync(DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 
@@ -306,7 +324,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNull() {
-        return getNullAsync().toBlocking().value();
+        return getNullAsync().blockingGet();
     }
 
     /**
@@ -336,9 +354,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DictionaryWrapper> object
      */
-    public Single<DictionaryWrapper> getNullAsync() {
+    public Maybe<DictionaryWrapper> getNullAsync() {
         return getNullWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 
@@ -351,7 +377,7 @@ public class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNotProvided() {
-        return getNotProvidedAsync().toBlocking().value();
+        return getNotProvidedAsync().blockingGet();
     }
 
     /**
@@ -381,9 +407,17 @@ public class DictionarysImpl implements Dictionarys {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, DictionaryWrapper> object
      */
-    public Single<DictionaryWrapper> getNotProvidedAsync() {
+    public Maybe<DictionaryWrapper> getNotProvidedAsync() {
         return getNotProvidedWithRestResponseAsync()
-            .map(new Func1<RestResponse<Void, DictionaryWrapper>, DictionaryWrapper>() { public DictionaryWrapper call(RestResponse<Void, DictionaryWrapper> restResponse) { return restResponse.body(); } });
+            .flatMapMaybe(new Function<RestResponse<Void, DictionaryWrapper>, Maybe<DictionaryWrapper>>() {
+                public Maybe<DictionaryWrapper> apply(RestResponse<Void, DictionaryWrapper> restResponse) {
+                    if (restResponse.body() == null) {
+                        return Maybe.empty();
+                    } else {
+                        return Maybe.just(restResponse.body());
+                    }
+                }
+            });
         }
 
 

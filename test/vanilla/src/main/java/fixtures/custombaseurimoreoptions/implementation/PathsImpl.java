@@ -26,10 +26,11 @@ import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.custombaseurimoreoptions.Paths;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
+import io.reactivex.Completable;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.functions.Function;
 import java.io.IOException;
-import rx.Observable;
-import rx.Single;
-import rx.functions.Func1;
 
 /**
  * An instance of this class provides access to all the operations defined in
@@ -82,7 +83,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName) {
-        getEmptyAsync(vault, secret, keyName).toBlocking().value();
+        getEmptyAsync(vault, secret, keyName).blockingAwait();
     }
 
     /**
@@ -137,9 +138,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getEmptyAsync(String vault, String secret, String keyName) {
+    public Completable getEmptyAsync(String vault, String secret, String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
     /**
@@ -155,7 +156,7 @@ public class PathsImpl implements Paths {
      * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
-        getEmptyAsync(vault, secret, keyName, keyVersion).toBlocking().value();
+        getEmptyAsync(vault, secret, keyName, keyVersion).blockingAwait();
     }
 
     /**
@@ -212,9 +213,9 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
-    public Single<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
+    public Completable getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
-            .map(new Func1<RestResponse<Void, Void>, Void>() { public Void call(RestResponse<Void, Void> restResponse) { return restResponse.body(); } });
+            .toCompletable();
         }
 
 

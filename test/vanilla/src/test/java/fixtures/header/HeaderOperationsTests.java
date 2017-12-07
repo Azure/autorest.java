@@ -37,7 +37,7 @@ import fixtures.header.models.HeaderResponseIntegerHeaders;
 import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 
 import static org.junit.Assert.fail;
 
@@ -69,18 +69,18 @@ public class HeaderOperationsTests {
     public void responseExistingKey() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseExistingKeyWithRestResponseAsync()
-            .subscribe(new Action1<RestResponse<HeaderResponseExistingKeyHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseExistingKeyHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseExistingKeyHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseExistingKeyHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("User-Agent") != null) {
                         Assert.assertEquals("overwrite", headers.get("User-Agent"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -100,18 +100,18 @@ public class HeaderOperationsTests {
     public void responseProtectedKey() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseProtectedKeyWithRestResponseAsync()
-            .subscribe(new Action1<RestResponse<HeaderResponseProtectedKeyHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseProtectedKeyHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseProtectedKeyHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseProtectedKeyHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("Content-Type") != null) {
                         Assert.assertTrue(headers.get("Content-Type").contains("text/html"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -128,36 +128,36 @@ public class HeaderOperationsTests {
     public void responseInteger() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseIntegerWithRestResponseAsync("positive")
-            .subscribe(new Action1<RestResponse<HeaderResponseIntegerHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseIntegerHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseIntegerHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseIntegerHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("1", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseIntegerWithRestResponseAsync("negative")
-            .subscribe(new Action1<RestResponse<HeaderResponseIntegerHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseIntegerHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseIntegerHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseIntegerHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-2", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -174,36 +174,36 @@ public class HeaderOperationsTests {
     public void responseLong() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseLongWithRestResponseAsync("positive")
-            .subscribe(new Action1<RestResponse<HeaderResponseLongHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseLongHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseLongHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseLongHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("105", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseLongWithRestResponseAsync("negative")
-            .subscribe(new Action1<RestResponse<HeaderResponseLongHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseLongHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseLongHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseLongHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-2", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -220,36 +220,36 @@ public class HeaderOperationsTests {
     public void responseFloat() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseFloatWithRestResponseAsync("positive")
-            .subscribe(new Action1<RestResponse<HeaderResponseFloatHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseFloatHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseFloatHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseFloatHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("0.07", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseFloatWithRestResponseAsync("negative")
-            .subscribe(new Action1<RestResponse<HeaderResponseFloatHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseFloatHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseFloatHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseFloatHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-3", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -266,36 +266,36 @@ public class HeaderOperationsTests {
     public void responseDouble() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDoubleWithRestResponseAsync("positive")
-            .subscribe(new Action1<RestResponse<HeaderResponseDoubleHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDoubleHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDoubleHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDoubleHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("7e+120", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseDoubleWithRestResponseAsync("negative")
-            .subscribe(new Action1<RestResponse<HeaderResponseDoubleHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDoubleHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDoubleHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDoubleHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-3", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -312,36 +312,36 @@ public class HeaderOperationsTests {
     public void responseBool() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseBoolWithRestResponseAsync("true")
-            .subscribe(new Action1<RestResponse<HeaderResponseBoolHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseBoolHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseBoolHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseBoolHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("true", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseBoolWithRestResponseAsync("false")
-            .subscribe(new Action1<RestResponse<HeaderResponseBoolHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseBoolHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseBoolHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseBoolHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("false", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -359,54 +359,54 @@ public class HeaderOperationsTests {
     public void responseString() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseStringWithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseStringHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseStringHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseStringHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseStringHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("The quick brown fox jumps over the lazy dog", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseStringWithRestResponseAsync("null")
-            .subscribe(new Action1<RestResponse<HeaderResponseStringHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseStringHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseStringHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseStringHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("null", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseStringWithRestResponseAsync("empty")
-            .subscribe(new Action1<RestResponse<HeaderResponseStringHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseStringHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseStringHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseStringHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -423,36 +423,36 @@ public class HeaderOperationsTests {
     public void responseDate() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDateWithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseDateHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDateHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDateHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDateHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("2010-01-01", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseDateWithRestResponseAsync("min")
-            .subscribe(new Action1<RestResponse<HeaderResponseDateHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDateHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDateHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDateHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("0001-01-01", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -468,18 +468,18 @@ public class HeaderOperationsTests {
     public void responseDuration() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDurationWithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseDurationHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDurationHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDurationHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDurationHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -496,27 +496,27 @@ public class HeaderOperationsTests {
     public void responseDatetimeRfc1123() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDatetimeRfc1123WithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> response) {
+                public void accept(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(100000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseDatetimeRfc1123WithRestResponseAsync("min")
-            .subscribe(new Action1<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDatetimeRfc1123Headers, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> response) {
+                public void accept(RestResponse<HeaderResponseDatetimeRfc1123Headers, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
@@ -524,9 +524,9 @@ public class HeaderOperationsTests {
 
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -543,36 +543,36 @@ public class HeaderOperationsTests {
     public void responseDatetime() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseDatetimeWithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseDatetimeHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDatetimeHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDatetimeHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDatetimeHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseDatetimeWithRestResponseAsync("min")
-            .subscribe(new Action1<RestResponse<HeaderResponseDatetimeHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseDatetimeHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseDatetimeHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseDatetimeHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -588,9 +588,9 @@ public class HeaderOperationsTests {
     public void responseByte() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseByteWithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseByteHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseByteHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseByteHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseByteHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         byte[] value = Base64.decodeBase64(headers.get("value"));
@@ -599,9 +599,9 @@ public class HeaderOperationsTests {
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
@@ -618,36 +618,36 @@ public class HeaderOperationsTests {
     public void responseEnum() throws Exception {
         lock = new CountDownLatch(1);
         client.headers().responseEnumWithRestResponseAsync("valid")
-            .subscribe(new Action1<RestResponse<HeaderResponseEnumHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseEnumHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseEnumHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseEnumHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("GREY", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
         Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
         lock = new CountDownLatch(1);
         client.headers().responseEnumWithRestResponseAsync("null")
-            .subscribe(new Action1<RestResponse<HeaderResponseEnumHeaders, Void>>() {
+            .subscribe(new Consumer<RestResponse<HeaderResponseEnumHeaders, Void>>() {
                 @Override
-                public void call(RestResponse<HeaderResponseEnumHeaders, Void> response) {
+                public void accept(RestResponse<HeaderResponseEnumHeaders, Void> response) {
                     Map<String, String> headers = response.rawHeaders();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("", headers.get("value"));
                         lock.countDown();
                     }
                 }
-            }, new Action1<Throwable>() {
+            }, new Consumer<Throwable>() {
                 @Override
-                public void call(Throwable throwable) {
+                public void accept(Throwable throwable) {
                     fail();
                 }
             });
