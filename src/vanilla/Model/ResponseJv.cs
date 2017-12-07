@@ -11,7 +11,6 @@ namespace AutoRest.Java.Model
 {
     public class ResponseJv : Response
     {
-        protected readonly List<string> _interfaceImports = new List<string>();
         protected readonly List<string> _implImports = new List<string>();
         private readonly Lazy<string> returnValueWireType;
 
@@ -80,18 +79,18 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual IModelTypeJv BodyClientType
+        public virtual IModelType BodyClientType
         {
             get
             {
-                return (IModelTypeJv)DanCodeGenerator.GetIModelTypeResponseVariant(BodyWireType);
+                return DanCodeGenerator.GetIModelTypeResponseVariant(BodyWireType);
             }
         }
 
-        private IModelTypeJv _bodyWireType;
+        private IModelType _bodyWireType;
 
         [JsonIgnore]
-        public IModelTypeJv BodyWireType
+        public IModelType BodyWireType
         {
             get
             {
@@ -103,7 +102,7 @@ namespace AutoRest.Java.Model
                     }
                     else
                     {
-                        _bodyWireType = (IModelTypeJv) Body;
+                        _bodyWireType = Body;
                     }
                 }
                 return _bodyWireType;
@@ -137,16 +136,6 @@ namespace AutoRest.Java.Model
                 }
                 return (IModelTypeJv)Headers;
             }
-        }
-
-        public string ConvertBodyToClientType(string source, string target)
-        {
-            return convertToClientType(BodyWireType, source, target);
-        }
-
-        public string ConvertHeaderToClientType(string source, string target)
-        {
-            return convertToClientType(HeaderWireType, source, target);
         }
 
         #endregion
@@ -235,7 +224,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return _interfaceImports.Concat(BodyClientType.ImportSafe()).Concat(HeaderClientType.ImportSafe());
+                return BodyClientType.ImportSafe().Concat(HeaderClientType.ImportSafe());
             }
         }
 
@@ -266,64 +255,6 @@ namespace AutoRest.Java.Model
                     }
                 }
                 return imports;
-            }
-        }
-
-        private string convertToClientType(IModelTypeJv type, string source, string target, int level = 0)
-        {
-            if (type == null)
-            {
-                return target + " = " + source + ";";
-            }
-            
-            IndentedStringBuilder builder = new IndentedStringBuilder();
-
-            var sequenceType = type as SequenceTypeJv;
-            var dictionaryType = type as DictionaryTypeJv;
-
-            if (sequenceType != null)
-            {
-                var elementType = sequenceType.ElementType as IModelTypeJv;
-                var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0} = new ArrayList<{1}>();", target, DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(elementType)))
-                    .AppendLine("for ({0} {1} : {2}) {{", DanCodeGenerator.GetIModelTypeName(elementType), itemName, source)
-                    .Indent().AppendLine("{0} {1};", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(elementType)), itemTarget)
-                        .AppendLine(convertToClientType(elementType, itemName, itemTarget, level + 1))
-                        .AppendLine("{0}.add({1});", target, itemTarget)
-                    .Outdent().Append("}");
-                _implImports.Add("java.util.ArrayList");
-                return builder.ToString();
-            }
-            else if (dictionaryType != null)
-            {
-                var valueType = dictionaryType.ValueType as IModelTypeJv;
-                var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0} = new HashMap<String, {1}>();", target, DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(valueType)))
-                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", DanCodeGenerator.GetIModelTypeName(valueType), itemName, source)
-                    .Indent().AppendLine("{0} {1};", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(valueType)), itemTarget)
-                        .AppendLine(convertToClientType(valueType, itemName + ".getValue()", itemTarget, level + 1))
-                        .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
-                    .Outdent().Append("}");
-                _implImports.Add("java.util.HashMap");
-                return builder.ToString();
-            }
-            else if (type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
-            {
-                return target + " = " + source + ".dateTime();";
-            }
-            else if (type.IsPrimaryType(KnownPrimaryType.UnixTime))
-            {
-                return target + " = new DateTime(" + source + " * 1000L, DateTimeZone.UTC);";
-            }
-            else if (type.IsPrimaryType(KnownPrimaryType.Base64Url))
-            {
-                return target + " = " + source + ".decodedBytes();";
-            }
-            else
-            {
-                return target + " = " + source + ";";
             }
         }
     }

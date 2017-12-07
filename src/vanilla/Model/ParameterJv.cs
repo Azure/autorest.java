@@ -44,16 +44,16 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public IModelTypeJv ClientType
+        public IModelType ClientType
         {
             get
             {
-                return (IModelTypeJv)DanCodeGenerator.GetIModelTypeParameterVariant(ModelType);
+                return DanCodeGenerator.GetIModelTypeParameterVariant(ModelType);
             }
         }
 
         [JsonIgnore]
-        public IModelTypeJv WireType
+        public IModelType WireType
         {
             get
             {
@@ -71,7 +71,7 @@ namespace AutoRest.Java.Model
                 }
                 else
                 {
-                    return (IModelTypeJv) ModelType;
+                    return ModelType;
                 }
             }
         }
@@ -116,7 +116,7 @@ namespace AutoRest.Java.Model
             return convertClientTypeToWireType(WireType, source, WireName, clientReference);
         }
 
-        private string convertClientTypeToWireType(IModelTypeJv wireType, string source, string target, string clientReference, int level = 0)
+        private string convertClientTypeToWireType(IModelType wireType, string source, string target, string clientReference, int level = 0)
         {
             IndentedStringBuilder builder = new IndentedStringBuilder();
             if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))

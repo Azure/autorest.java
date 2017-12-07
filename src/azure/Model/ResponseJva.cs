@@ -24,11 +24,11 @@ namespace AutoRest.Java.Azure.Model
         public bool IsPagedResponse => Parent.IsPagingNextOperation || Parent.IsPagingOperation;
 
         [JsonIgnore]
-        public override IModelTypeJv BodyClientType
+        public override IModelType BodyClientType
         {
             get
             {
-                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
+                SequenceTypeJva bodySequenceType = base.BodyClientType as SequenceTypeJva;
                 if (bodySequenceType != null && IsPagedResponse)
                 {
                     var result = new SequenceTypeJva
