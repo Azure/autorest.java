@@ -578,13 +578,6 @@ namespace AutoRest.Java.Azure.Model
                         imports.AddRange(ReturnTypeJva.ImplImports);
                     }
                     string typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
-                    CompositeType ctype = null;
-                    if (typeName != null)
-                    {
-                        ctype = new CompositeTypeJv();
-                        ctype.Name.CopyFrom(typeName);
-                        ctype.CodeModel = CodeModel;
-                    }
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Remove("java.util.ArrayList");
@@ -592,11 +585,11 @@ namespace AutoRest.Java.Azure.Model
                         imports.Add("com.microsoft.azure.v2.ListOperationCallback");
                         imports.Add("com.microsoft.azure.v2.Page");
                         imports.Add("com.microsoft.azure.v2.PagedList");
-                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsAzure(ctype));
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsAzure(typeName, CodeModel));
                     }
-                    if (this.IsPagingNonPollingOperation)
+                    else if (this.IsPagingNonPollingOperation)
                     {
-                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsAzure(ctype));
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsAzure(typeName, CodeModel));
                     }
                     cachedImplImports = imports.ToImmutableArray();
                 }

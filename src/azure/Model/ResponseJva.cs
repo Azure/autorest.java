@@ -1,9 +1,8 @@
-﻿using System.Globalization;
-using AutoRest.Core.Model;
-using AutoRest.Java.Azure.Model;
+﻿using AutoRest.Core.Model;
+using AutoRest.Java.DanModel;
 using AutoRest.Java.Model;
 using Newtonsoft.Json;
-using AutoRest.Java.DanModel;
+using System.Globalization;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -13,7 +12,7 @@ namespace AutoRest.Java.Azure.Model
         {
         }
 
-        public ResponseJva(IModelTypeJv body, IModelTypeJv headers)
+        public ResponseJva(IModelType body, IModelType headers)
             : base(body, headers)
         {
         }

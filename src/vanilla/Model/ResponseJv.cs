@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
+﻿using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Model;
+using AutoRest.Java.DanModel;
 using Newtonsoft.Json;
 using System;
-using AutoRest.Java.DanModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.Model
 {
@@ -19,7 +18,7 @@ namespace AutoRest.Java.Model
             returnValueWireType = createReturnValueWireTypeLazy();
         }
 
-        public ResponseJv(IModelTypeJv body, IModelTypeJv headers)
+        public ResponseJv(IModelType body, IModelType headers)
             : base(body, headers)
         {
             returnValueWireType = createReturnValueWireTypeLazy();
@@ -110,33 +109,10 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public IModelTypeJv HeaderClientType
-        {
-            get
-            {
-                if (Headers == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return (IModelTypeJv)DanCodeGenerator.GetIModelTypeResponseVariant(HeaderWireType);
-                }
-            }
-        }
+        public IModelType HeaderClientType => DanCodeGenerator.GetIModelTypeResponseVariant(HeaderWireType);
 
         [JsonIgnore]
-        public IModelTypeJv HeaderWireType
-        {
-            get
-            {
-                if (Headers == null)
-                {
-                    return null;
-                }
-                return (IModelTypeJv)Headers;
-            }
-        }
+        public IModelType HeaderWireType => Headers;
 
         #endregion
 

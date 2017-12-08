@@ -226,24 +226,6 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public ParameterJv CallbackParam
-        {
-            get
-            {
-                var modelType = new CompositeTypeJv();
-                modelType.Name.FixedValue = $"ServiceCallback<{ReturnTypeJv.GenericBodyClientTypeString}>";
-                var callbackParam = new ParameterJv()
-                {
-                    ModelType = modelType,
-                    Name = "serviceCallback",
-                    SerializedName = "serviceCallback",
-                    Documentation = "the async ServiceCallback to handle successful and failed responses."
-                };
-                return callbackParam;
-            }
-        }
-
-        [JsonIgnore]
         public ParameterVariants ParameterVariants
         {
             get

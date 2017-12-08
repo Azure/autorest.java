@@ -139,7 +139,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
                     if (pageType != null)
                     {
-                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(new CompositeTypeJv(pageType.PageImplType)));
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(pageType.PageImplType, null));
                     }
                 }
                 return imports;
@@ -159,8 +159,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     var imports = base.ImplImports.ToHashSet();
                     if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
                     {
-                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(new CompositeTypeJv(OperationExceptionTypeString) { CodeModel = CodeModel }).Contains(i));
-                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(new CompositeTypeJv(OperationExceptionTypeString) { CodeModel = CodeModel }));
+                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(OperationExceptionTypeString, CodeModel).Contains(i));
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(OperationExceptionTypeString, CodeModel));
                     }
                     if (this.IsLongRunningOperation)
                     {
@@ -191,13 +191,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.v2.Page");
                         if (pageType != null)
                         {
-                            imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(new CompositeTypeJv((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }).Contains(i));
+                            imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType, CodeModel).Contains(i));
                         }
                     }
 
                     if (this.IsPagingNonPollingOperation && pageType != null)
                     {
-                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(new CompositeTypeJv((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }).Contains(i));
+                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType, CodeModel ).Contains(i));
                     }
                     cachedImplImports = imports.OrderBy(i => i).ToImmutableArray();
                 }
