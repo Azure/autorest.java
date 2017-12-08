@@ -742,8 +742,8 @@ namespace AutoRest.Java.Model
             {
                 if (this.DefaultResponse.Body is CompositeType)
                 {
-                    var type = this.DefaultResponse.Body as CompositeTypeJv;
-                    return type.ExceptionTypeDefinitionName;
+                    var type = this.DefaultResponse.Body as CompositeType;
+                    return DanCodeGenerator.CompositeTypeExceptionTypeDefinitionName(type);
                 }
                 else
                 {
@@ -879,7 +879,7 @@ namespace AutoRest.Java.Model
 
                     this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                     // Http verb annotations
-                    imports.Add(this.HttpMethod.ImportFrom());
+                    imports.Add("com.microsoft.rest.v2.annotations." + HttpMethod.ToString().ToUpperInvariant());
                     // response type conversion
                     if (this.Responses.Any())
                     {
@@ -951,7 +951,7 @@ namespace AutoRest.Java.Model
 
             if (mt is CompositeType ct)
             {
-                return ct.Properties.Any(p => HasSequenceType(DanCodeGenerator.GetPropertyModelType(p)));
+                return DanCodeGenerator.GetCompositeTypeProperties(ct).Any(p => HasSequenceType(DanCodeGenerator.GetPropertyModelType(p)));
             }
 
             return false;

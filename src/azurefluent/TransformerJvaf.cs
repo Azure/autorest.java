@@ -100,12 +100,12 @@ namespace AutoRest.Java.Azure
             {
                 return;
             }
-            CompositeTypeJvaf compositeType = type as CompositeTypeJvaf;
+            CompositeType compositeType = type as CompositeType;
             SequenceType sequenceType = type as SequenceType;
             DictionaryType dictionaryType = type as DictionaryType;
-            if (compositeType != null && !compositeType.IsResource)
+            if (compositeType != null && !DanCodeGenerator.CompositeTypeIsResource(compositeType))
             {
-                compositeType.IsInnerModel = true;
+                DanCodeGenerator.innerModelCompositeType.Add(compositeType);
             }
             else if (sequenceType != null)
             {

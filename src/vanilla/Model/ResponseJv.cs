@@ -224,7 +224,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return BodyClientType.ImportSafe().Concat(HeaderClientType.ImportSafe());
+                return DanCodeGenerator.GetIModelTypeImports(BodyClientType).Concat(DanCodeGenerator.GetIModelTypeImports(HeaderClientType));
             }
         }
 
@@ -234,8 +234,8 @@ namespace AutoRest.Java.Model
             get
             {
                 var imports = new List<string>(InterfaceImports);
-                imports.AddRange(BodyWireType.ImportSafe());
-                imports.AddRange(HeaderWireType.ImportSafe());
+                imports.AddRange(DanCodeGenerator.GetIModelTypeImports(BodyWireType));
+                imports.AddRange(DanCodeGenerator.GetIModelTypeImports(HeaderWireType));
 
                 if (ReturnValueWireType != null)
                 {
