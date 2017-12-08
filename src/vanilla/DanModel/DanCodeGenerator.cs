@@ -2,11 +2,13 @@
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
+using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure;
 using AutoRest.Java.Azure.Fluent.Model;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,6 +47,8 @@ namespace AutoRest.Java.DanModel
         public static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
 
         public static readonly ISet<Property> innerModelProperties = new HashSet<Property>();
+        public static readonly ISet<CompositeType> innerModelCompositeType = new HashSet<CompositeType>();
+
         public static readonly ISet<SequenceType> pagedListTypes = new HashSet<SequenceType>();
 
         public static string BetaSinceVersion()
@@ -2788,30 +2792,30 @@ namespace AutoRest.Java.DanModel
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
-            foreach (CompositeTypeJv modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
+            foreach (CompositeType modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
                 bool shouldGenerate = true;
 
-                if (modelType is CompositeTypeJva modelTypeJva)
+                if (IsAzure(settings))
                 {
                     bool isExternalExtension =
                         modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
                         (bool)modelType.Extensions[AzureExtensions.ExternalExtension];
 
-                    shouldGenerate = !isExternalExtension && !modelTypeJva.IsResource;
+                    shouldGenerate = !isExternalExtension && !CompositeTypeIsResource(modelType);
                 }
 
                 if (shouldGenerate)
                 {
                     List<string> imports = new List<string>();
-                    imports.AddRange(modelType.Properties.SelectMany(pm => GetImports(pm, settings)));
+                    imports.AddRange(GetCompositeTypeProperties(modelType).SelectMany(pm => GetImports(pm, settings)));
 
-                    if (modelType.Properties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
+                    if (GetCompositeTypeProperties(modelType).Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
                     {
                         imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
 
-                    if (modelType.Properties.Any(p => p.XmlIsAttribute))
+                    if (GetCompositeTypeProperties(modelType).Any(p => p.XmlIsAttribute))
                     {
                         imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                     }
@@ -2821,38 +2825,39 @@ namespace AutoRest.Java.DanModel
                     {
                         imports.Add("com.fasterxml.jackson.annotation.JsonTypeInfo");
                         imports.Add("com.fasterxml.jackson.annotation.JsonTypeName");
-                        if (modelType.SubTypes.Any())
+                        if (CompositeTypeSubTypes(modelType).Any())
                         {
                             imports.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
                         }
                     }
 
                     // For flattening
-                    if (modelType.NeedsFlatten)
+                    if (CompositeTypeNeedsFlatten(modelType))
                     {
                         imports.Add("com.microsoft.rest.v2.serializer.JsonFlatten");
                     }
 
-                    if (modelType is CompositeTypeJva azureModelType)
+                    if (IsAzure(settings))
                     {
-                        foreach (Property property in azureModelType.Properties)
+                        foreach (Property property in GetCompositeTypeProperties(modelType))
                         {
-                            if (GetPropertyModelType(property).IsResource())
+                            IModelType propertyModelType = GetPropertyModelType(property);
+                            if (propertyModelType is CompositeType compositeType && CompositeTypeIsResource(compositeType))
                             {
-                                imports.Add($"com.microsoft.azure.v2.{GetIModelTypeName(GetPropertyModelType(property))}");
+                                imports.Add($"com.microsoft.azure.v2.{GetIModelTypeName(propertyModelType)}");
                             }
                         }
 
-                        if (azureModelType.BaseModelType != null && (GetIModelTypeName(azureModelType.BaseModelType) == "Resource" || GetIModelTypeName(azureModelType.BaseModelType) == "SubResource"))
+                        if (modelType.BaseModelType != null && (GetIModelTypeName(modelType.BaseModelType) == "Resource" || GetIModelTypeName(modelType.BaseModelType) == "SubResource"))
                         {
-                            imports.Add("com.microsoft.azure.v2." + DanCodeGenerator.GetIModelTypeName(azureModelType.BaseModelType));
+                            imports.Add("com.microsoft.azure.v2." + GetIModelTypeName(modelType.BaseModelType));
                         }
 
-                        if (azureModelType is CompositeTypeJvaf fluentModelType)
+                        if (IsFluent(settings))
                         {
-                            if (fluentModelType.BaseModelType != null && DanCodeGenerator.GetIModelTypeName(fluentModelType.BaseModelType).EndsWith("Inner", StringComparison.Ordinal) ^ fluentModelType.IsInnerModel)
+                            if (modelType.BaseModelType != null && GetIModelTypeName(modelType.BaseModelType).EndsWith("Inner", StringComparison.Ordinal) ^ innerModelCompositeType.Contains(modelType))
                             {
-                                imports.AddRange(fluentModelType.BaseModelType.ImportSafe());
+                                imports.AddRange(GetIModelTypeImports(modelType.BaseModelType));
                             }
                         }
                     }
@@ -2873,7 +2878,7 @@ namespace AutoRest.Java.DanModel
                         classAnnotations.Add($"JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = \"{modelType.BasePolymorphicDiscriminator}\")");
                         classAnnotations.Add($"JsonTypeName(\"{modelType.SerializedName}\")");
 
-                        List<CompositeType> types = modelType.SubTypes.ToList();
+                        List<CompositeType> types = CompositeTypeSubTypes(modelType).ToList();
                         if (types.Any())
                         {
                             StringBuilder subTypeAnnotationBuilder = new StringBuilder();
@@ -2901,7 +2906,7 @@ namespace AutoRest.Java.DanModel
                         }
                     }
 
-                    if (modelType.NeedsFlatten)
+                    if (CompositeTypeNeedsFlatten(modelType))
                     {
                         classAnnotations.Add("JsonFlatten");
                     }
@@ -2910,7 +2915,7 @@ namespace AutoRest.Java.DanModel
 
                     string baseTypeName = GetIModelTypeName(modelType.BaseModelType);
 
-                    IEnumerable<JavaMemberVariable> memberVariables = modelType.Properties.Select((Property property) =>
+                    IEnumerable<JavaMemberVariable> memberVariables = GetCompositeTypeProperties(modelType).Select((Property property) =>
                     {
                         string comment;
                         if (string.IsNullOrEmpty(property.Summary) && string.IsNullOrEmpty(property.Documentation))
@@ -2969,7 +2974,7 @@ namespace AutoRest.Java.DanModel
                         return new JavaMemberVariable(comment, annotation, isConstant, isReadOnly, wireType, clientType, name, defaultValue);
                     });
 
-                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, modelType.ModelsPackage, settings, className);
+                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(modelType, settings), settings, className);
                     javaFile.Import(imports);
                     javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, (comment) =>
                     {
@@ -3102,16 +3107,16 @@ namespace AutoRest.Java.DanModel
 
             int maximumHeaderCommentWidth = settings.MaximumCommentColumns;
 
-            foreach (CompositeTypeJv exceptionType in codeModel.ErrorTypes)
+            foreach (CompositeType exceptionType in codeModel.ErrorTypes)
             {
-                string exceptionBodyTypeName = DanCodeGenerator.GetIModelTypeName(exceptionType);
-                string exceptionName = exceptionType.ExceptionTypeDefinitionName;
+                string exceptionBodyTypeName = GetIModelTypeName(exceptionType);
+                string exceptionName = CompositeTypeExceptionTypeDefinitionName(exceptionType);
 
                 // Skip any exceptions that are named "CloudErrorException" or have a body named
                 // "CloudError" because those types already exist in the runtime.
                 if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
                 {
-                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, exceptionType.ModelsPackage, settings, exceptionName);
+                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(exceptionType, settings), settings, exceptionName);
                     javaFile.Import("com.microsoft.rest.v2.RestException",
                                     "com.microsoft.rest.v2.http.HttpResponse");
                     javaFile.MultipleLineComment((comment) =>
@@ -3365,7 +3370,16 @@ namespace AutoRest.Java.DanModel
         private static void GenerateRootMethodFunctions(JavaBlock classBlock, MethodJv method)
         {
             ParameterVariants parameterVariants = method.ParameterVariants;
-            ParameterJv callbackParam = method.CallbackParam;
+
+            CompositeType callbackParamModelType = new CompositeTypeJv();
+            callbackParamModelType.Name.FixedValue = $"ServiceCallback<{method.ReturnTypeJv.GenericBodyClientTypeString}>";
+            ParameterJv callbackParam = new ParameterJv()
+            {
+                ModelType = callbackParamModelType,
+                Name = "serviceCallback",
+                SerializedName = "serviceCallback",
+                Documentation = "the async ServiceCallback to handle successful and failed responses."
+            };
 
             if (parameterVariants.HasOptionalParameters)
             {
@@ -3494,9 +3508,6 @@ namespace AutoRest.Java.DanModel
         private static IEnumerable<MethodJv> GetRootMethods(CodeModel codeModel)
             => codeModel.Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
 
-        internal static IEnumerable<string> GetImports(Property property)
-            => GetImports(property, Settings.Instance);
-
         private static IEnumerable<string> GetImports(Property property, Settings settings)
         {
             IEnumerable<string> result = null;
@@ -3504,14 +3515,14 @@ namespace AutoRest.Java.DanModel
             if (IsFluent(settings))
             {
                 IModelType modelType = GetPropertyModelType(property);
-                List<string> imports = new List<string>(modelType.ImportSafe()
+                List<string> imports = new List<string>(GetIModelTypeImports(modelType)
                             .Where(c => !c.StartsWith(property.Parent.CodeModel?.Namespace.ToLowerInvariant(), StringComparison.Ordinal) ||
                                 c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
 
                 if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
-                    imports.AddRange(modelType.ImportSafe());
-                    imports.AddRange(GetIModelTypeResponseVariant(modelType).ImportSafe());
+                    imports.AddRange(GetIModelTypeImports(modelType));
+                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType)));
                 }
 
                 result = imports;
@@ -3519,7 +3530,7 @@ namespace AutoRest.Java.DanModel
             else
             {
                 IModelType modelType = GetPropertyModelType(property);
-                List<string> imports = new List<string>(modelType.ImportSafe()
+                List<string> imports = new List<string>(GetIModelTypeImports(modelType)
                         .Where(c => !c.StartsWith(
                             string.Join(
                                 ".",
@@ -3529,8 +3540,8 @@ namespace AutoRest.Java.DanModel
                 if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123)
                     || modelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
-                    imports.AddRange(modelType.ImportSafe());
-                    imports.AddRange(GetIModelTypeResponseVariant(modelType).ImportSafe());
+                    imports.AddRange(GetIModelTypeImports(modelType));
+                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType)));
                 }
 
                 result = imports;
@@ -3579,12 +3590,86 @@ namespace AutoRest.Java.DanModel
                         }
                     }
                 }
+                else if (modelType is CompositeType compositeType)
+                {
+                    string compositeTypeName = GetIModelTypeName(compositeType);
+                    bool compositeTypeIsExternalExtension = CompositeTypeIsExternalExtension(compositeType);
+                    bool compositeTypeIsAzureResourceExtension = CompositeTypeIsAzureResourceExtension(compositeType);
+                    result = CompositeTypeImports(compositeTypeName, compositeType.CodeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
+                }
                 else if (modelType is IModelTypeJv modelTypeJv)
                 {
                     result = modelTypeJv.Imports;
                 }
             }
 
+            return result;
+        }
+
+        private static IEnumerable<string> CompositeTypeImports(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        {
+            IEnumerable<string> result;
+
+            if (IsFluent(settings))
+            {
+                result = CompositeTypeImportsFluent(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
+            }
+            else if (IsAzure(settings))
+            {
+                result = CompositeTypeImportsAzure(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
+            }
+            else
+            {
+                List<string> imports = new List<string>();
+                if (compositeTypeName.Contains('<'))
+                {
+                    imports.AddRange(CompositeTypeGenericTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
+                }
+                else
+                {
+                    imports.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), compositeTypeName));
+                }
+                result = imports;
+            }
+
+            return result;
+        }
+
+        internal static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel)
+            => CompositeTypeImportsFluent(compositeTypeName, codeModel, false, false, Settings.Instance);
+
+        internal static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        {
+            List<string> result = new List<string>();
+            if (compositeTypeName.Contains('<'))
+            {
+                result.AddRange(CompositeTypeGenericTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
+            }
+            else
+            {
+                result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), compositeTypeName));
+            }
+            return result;
+        }
+
+        internal static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel)
+            => CompositeTypeImportsAzure(compositeTypeName, codeModel, false, false, Settings.Instance);
+
+        internal static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        {
+            List<string> result = new List<string>();
+            if (compositeTypeName.Contains('<'))
+            {
+                result.AddRange(CompositeTypeGenericTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
+            }
+            else if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension) || compositeTypeIsExternalExtension)
+            {
+                result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), compositeTypeName));
+            }
+            else
+            {
+                result.Add(string.Join(".", GetCompositeTypePackage(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings), "models", compositeTypeName));
+            }
             return result;
         }
 
@@ -3625,6 +3710,9 @@ namespace AutoRest.Java.DanModel
         }
 
         internal static string GetIModelTypeName(IModelType modelType)
+            => GetIModelTypeName(modelType, Settings.Instance);
+
+        private static string GetIModelTypeName(IModelType modelType, Settings settings)
         {
             string result = null;
             if (modelType != null)
@@ -3646,9 +3734,9 @@ namespace AutoRest.Java.DanModel
                 {
                     result = $"Map<String, {GetIModelTypeName(dictionaryTypeJv.ValueType)}>";
                 }
-                else if (modelType is CompositeTypeJvaf compositeTypeJvaf)
+                else if (modelType is CompositeType && IsFluent(settings))
                 {
-                    result = string.IsNullOrEmpty(result) || !compositeTypeJvaf.IsInnerModel ? result : result + "Inner";
+                    result = string.IsNullOrEmpty(result) || !innerModelCompositeType.Contains(modelType) ? result : result + "Inner";
                 }
                 else if (modelType is PrimaryTypeJv primaryTypeJv)
                 {
@@ -3662,5 +3750,165 @@ namespace AutoRest.Java.DanModel
         {
             return modelType?.Name?.FixedValue;
         }
+
+        internal static IEnumerable<Property> GetCompositeTypeProperties(CompositeType compositeType)
+            => GetCompositeTypeProperties(compositeType, Settings.Instance);
+
+        private static IEnumerable<Property> GetCompositeTypeProperties(CompositeType compositeType, Settings settings)
+        {
+            IEnumerable<Property> result = compositeType.Properties;
+
+            if (IsFluent(settings))
+            {
+                bool compositeTypeIsInnerModel = innerModelCompositeType.Contains(compositeType);
+                foreach (Property property in result)
+                {
+                    if (compositeTypeIsInnerModel)
+                    {
+                        innerModelProperties.Add(property);
+                    }
+                    else
+                    {
+                        innerModelProperties.Remove(property);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private static string GetCompositeTypePackage(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        {
+            string result;
+
+            if (IsFluent(settings))
+            {
+                if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension))
+                {
+                    result = "com.microsoft.azure.v2";
+                }
+                else if (compositeTypeIsExternalExtension)
+                {
+                    result = "com.microsoft.rest.v2";
+                }
+                else if (compositeTypeName.EndsWith("Inner", StringComparison.Ordinal))
+                {
+                    result = (codeModel?.Namespace.ToLowerInvariant()) + ".implementation";
+                }
+                else
+                {
+                    result = (codeModel?.Namespace.ToLowerInvariant());
+                }
+            }
+            else if (IsAzure(settings))
+            {
+                if (CompositeTypeIsResource(compositeTypeName, compositeTypeIsAzureResourceExtension))
+                {
+                    result = "com.microsoft.azure.v2";
+                }
+                else
+                {
+                    if (compositeTypeIsExternalExtension)
+                    {
+                        result = "com.microsoft.rest.v2";
+                    }
+                    else
+                    {
+                        result = codeModel?.Namespace.ToLowerInvariant();
+                    }
+                }
+            }
+            else
+            {
+                if (compositeTypeIsExternalExtension)
+                {
+                    result = "com.microsoft.rest.v2";
+                }
+                else
+                {
+                    result = string.Join(".", codeModel?.Namespace.ToLowerInvariant(), "models");
+                }
+            }
+
+            return result;
+        }
+
+        private static string GetCompositeTypeModelsPackage(CompositeType compositeType, Settings settings)
+        {
+            string result;
+
+            if (IsFluent(settings))
+            {
+                result = innerModelCompositeType.Contains(compositeType) ? ".implementation" : "";
+            }
+            else
+            {
+                result = modelsPackage;
+            }
+
+            return result;
+        }
+
+        private static IEnumerable<string> CompositeTypeGenericTypeImports(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        {
+            List<string> result = new List<string>();
+
+            string[] types = compositeTypeName.Split(new String[] { "<", ">", ",", ", " }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string innerTypeName in types.Where(t => !string.IsNullOrWhiteSpace(t)))
+            {
+                string trimmedInnerTypeName = innerTypeName.Trim();
+                if (!CodeNamerJv.PrimaryTypes.Contains(trimmedInnerTypeName))
+                {
+                    result.AddRange(CompositeTypeImports(compositeTypeName, codeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings));
+                }
+            }
+
+            return result;
+        }
+
+        internal static bool CompositeTypeIsResource(CompositeType compositeType)
+            => CompositeTypeIsResource(GetIModelTypeName(compositeType), CompositeTypeIsAzureResourceExtension(compositeType));
+
+        private static bool CompositeTypeIsResource(string compositeTypeName, bool isAzureResourceExtension)
+            => compositeTypeName == "Resource" || (compositeTypeName == "SubResource" && isAzureResourceExtension);
+
+        internal static bool CompositeTypeNeedsFlatten(CompositeType compositeType)
+            => GetCompositeTypeProperties(compositeType).Any(p => p.WasFlattened());
+
+        internal static string CompositeTypeExceptionTypeDefinitionName(CompositeType compositeType)
+        {
+            string result = GetIModelTypeName(compositeType) + "Exception";
+
+            if (compositeType.Extensions.ContainsKey(SwaggerExtensions.NameOverrideExtension))
+            {
+                JContainer ext = compositeType.Extensions[SwaggerExtensions.NameOverrideExtension] as JContainer;
+                if (ext != null && ext["name"] != null)
+                {
+                    result = ext["name"].ToString();
+                }
+            }
+            return result;
+        }
+
+        private static IEnumerable<CompositeType> CompositeTypeSubTypes(CompositeType compositeType)
+        {
+            if (compositeType.BaseIsPolymorphic)
+            {
+                foreach (CompositeType type in compositeType.CodeModel.ModelTypes)
+                {
+                    if (type.BaseModelType != null &&
+                        type.BaseModelType.SerializedName == compositeType.SerializedName)
+                    {
+                        yield return type;
+                    }
+                }
+            }
+        }
+
+        private static bool CompositeTypeIsExternalExtension(CompositeType compositeType)
+            => compositeType?.Extensions?.Get<bool>("x-ms-external") == true;
+
+        internal static bool CompositeTypeIsAzureResourceExtension(CompositeType compositeType)
+            => compositeType?.Extensions?.Get<bool>(AzureExtensions.AzureResourceExtension) == true;
     }
 }

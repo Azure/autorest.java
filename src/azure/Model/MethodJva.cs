@@ -74,8 +74,8 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else if (this.DefaultResponse.Body is CompositeType)
                 {
-                    CompositeTypeJva type = this.DefaultResponse.Body as CompositeTypeJva;
-                    return type.ExceptionTypeDefinitionName;
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    return DanCodeGenerator.CompositeTypeExceptionTypeDefinitionName(type);
                 }
                 else
                 {
@@ -571,20 +571,13 @@ namespace AutoRest.Java.Azure.Model
                         imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
                         imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                         this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
-                            .SelectMany(t => t.ImportSafe())
-                            .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
+                            .SelectMany(t => DanCodeGenerator.GetIModelTypeImports(t))
+                            .Where(i => !this.Parameters.Any(p => DanCodeGenerator.GetIModelTypeImports(p.ModelType).Contains(i)))
                             .ForEach(i => imports.Remove(i));
                         // return type may have been removed as a side effect
                         imports.AddRange(ReturnTypeJva.ImplImports);
                     }
                     string typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
-                    CompositeType ctype = null;
-                    if (typeName != null)
-                    {
-                        ctype = new CompositeTypeJva();
-                        ctype.Name.CopyFrom(typeName);
-                        ctype.CodeModel = CodeModel;
-                    }
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Remove("java.util.ArrayList");
@@ -592,11 +585,11 @@ namespace AutoRest.Java.Azure.Model
                         imports.Add("com.microsoft.azure.v2.ListOperationCallback");
                         imports.Add("com.microsoft.azure.v2.Page");
                         imports.Add("com.microsoft.azure.v2.PagedList");
-                        imports.AddRange(ctype.ImportSafe());
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsAzure(typeName, CodeModel));
                     }
-                    if (this.IsPagingNonPollingOperation)
+                    else if (this.IsPagingNonPollingOperation)
                     {
-                        imports.AddRange(ctype.ImportSafe());
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsAzure(typeName, CodeModel));
                     }
                     cachedImplImports = imports.ToImmutableArray();
                 }

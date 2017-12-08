@@ -1,21 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using AutoRest.Core.Model;
-using AutoRest.Java.Model;
-using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java
 {
     public static class ClientModelExtensions
     {
-        public const string ExternalExtension = "x-ms-external";
-
         public static string Period(this string documentation)
         {
             if (string.IsNullOrEmpty(documentation))
@@ -75,22 +70,6 @@ namespace AutoRest.Java
             {
                 hashSet.Add(item);
             }
-        }
-
-        /// <summary>
-        /// A null friendly wrapper around type imports.
-        /// </summary>
-        /// <param name="type">an instance of IJavaType</param>
-        /// <returns>a list of imports to append</returns>
-        public static IEnumerable<string> ImportSafe(this IModelType type)
-        {
-            return DanCodeGenerator.GetIModelTypeImports(type);
-        }
-
-        public static string ImportFrom(this HttpMethod httpMethod)
-        {
-            string package = "com.microsoft.rest.v2.annotations.";
-            return package + httpMethod.ToString().ToUpperInvariant();
         }
     }
 }

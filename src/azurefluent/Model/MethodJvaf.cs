@@ -13,6 +13,7 @@ using System;
 using AutoRest.Core.Utilities.Collections;
 using System.Text.RegularExpressions;
 using System.Collections.Immutable;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -138,7 +139,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
                     if (pageType != null)
                     {
-                        imports.AddRange(new CompositeTypeJvaf(pageType.PageImplType).ImportSafe());
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(pageType.PageImplType, null));
                     }
                 }
                 return imports;
@@ -158,15 +159,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     var imports = base.ImplImports.ToHashSet();
                     if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
                     {
-                        imports.RemoveWhere(i => new CompositeTypeJva(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe().Contains(i));
-                        imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe());
+                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(OperationExceptionTypeString, CodeModel).Contains(i));
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(OperationExceptionTypeString, CodeModel));
                     }
                     if (this.IsLongRunningOperation)
                     {
                         imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                         this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
-                            .SelectMany(t => t.ImportSafe())
-                            .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
+                            .SelectMany(t => DanCodeGenerator.GetIModelTypeImports(t))
+                            .Where(i => !this.Parameters.Any(p => DanCodeGenerator.GetIModelTypeImports(p.ModelType).Contains(i)))
                             .ForEach(i => imports.Remove(i));
                         // return type may have been removed as a side effect
                         imports.AddRange(this.ReturnTypeJva.ImplImports);
@@ -190,13 +191,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.v2.Page");
                         if (pageType != null)
                         {
-                            imports.RemoveWhere(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
+                            imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType, CodeModel).Contains(i));
                         }
                     }
 
                     if (this.IsPagingNonPollingOperation && pageType != null)
                     {
-                        imports.RemoveWhere(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
+                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType, CodeModel ).Contains(i));
                     }
                     cachedImplImports = imports.OrderBy(i => i).ToImmutableArray();
                 }

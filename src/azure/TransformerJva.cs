@@ -148,11 +148,11 @@ namespace AutoRest.Java.Azure
                     method.Extensions[AzureExtensions.PageableExtension] = null;
                 }
                 bool anyTypeConverted = false;
-                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeJva).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
                     anyTypeConverted = true;
-                    var compositeType = (CompositeTypeJva)method.Responses[responseStatus].Body;
-                    var sequenceType = compositeType.Properties.Select(p => DanCodeGenerator.GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
+                    CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;
+                    SequenceTypeJva sequenceType = DanCodeGenerator.GetCompositeTypeProperties(compositeType).Select(p => DanCodeGenerator.GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
@@ -200,7 +200,7 @@ namespace AutoRest.Java.Azure
             }
 
             SwaggerExtensions.RemoveUnreferencedTypes(serviceClient,
-                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeTypeJva).Cast<CompositeTypeJva>().Select(t => DanCodeGenerator.GetIModelTypeName(t))));
+                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeType).Cast<CompositeType>().Select(t => DanCodeGenerator.GetIModelTypeName(t))));
         }
 
         public virtual void NormalizeODataMethods(CodeModel client)
