@@ -84,7 +84,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (base.BodyClientType is SequenceType bodySequenceType != null && (IsPagedResponse || Parent.SimulateAsPagingOperation))
+                if (base.BodyClientType is SequenceType bodySequenceType && (IsPagedResponse || Parent.SimulateAsPagingOperation))
                 {
                     return DanCodeGenerator.SequenceTypeGetPageImplType(bodySequenceType) + "<" + DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType) + ">";
                 }
