@@ -1,23 +1,22 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Model;
-using AutoRest.Java.Model;
-using AutoRest.Core.Utilities.Collections;
-using static AutoRest.Core.Utilities.DependencyInjection;
-using Newtonsoft.Json;
-using System.Text.RegularExpressions;
-using System.Text;
-using System.Collections.Immutable;
 using AutoRest.Java.DanModel;
+using AutoRest.Java.Model;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -577,7 +576,7 @@ namespace AutoRest.Java.Azure.Model
                         // return type may have been removed as a side effect
                         imports.AddRange(ReturnTypeJva.ImplImports);
                     }
-                    string typeName = (ReturnTypeJva.BodyClientType as SequenceTypeJva)?.PageImplType;
+                    string typeName = DanCodeGenerator.SequenceTypeGetPageImplType(ReturnTypeJva.BodyClientType);
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Remove("java.util.ArrayList");

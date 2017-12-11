@@ -136,10 +136,9 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Remove("com.microsoft.rest.v2.ServiceCallback");
                     }
 
-                    var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
-                    if (pageType != null)
+                    if (ReturnTypeJva.BodyClientType is SequenceType pageType)
                     {
-                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(pageType.PageImplType, null));
+                        imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(DanCodeGenerator.SequenceTypeGetPageImplType(pageType), null));
                     }
                 }
                 return imports;
@@ -154,8 +153,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 if (cachedImplImports.IsDefault)
                 {
-                    var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
-
                     var imports = base.ImplImports.ToHashSet();
                     if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
                     {
@@ -173,6 +170,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.AddRange(this.ReturnTypeJva.ImplImports);
                     }
 
+                    SequenceType pageType = ReturnTypeJva.BodyClientType as SequenceType;
                     if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                     {
                         imports.Add("com.microsoft.azure.v2.PagedList");
@@ -191,13 +189,13 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.v2.Page");
                         if (pageType != null)
                         {
-                            imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType, CodeModel).Contains(i));
+                            imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(DanCodeGenerator.SequenceTypeGetPageImplType(ReturnTypeJva.BodyClientType), CodeModel).Contains(i));
                         }
                     }
 
                     if (this.IsPagingNonPollingOperation && pageType != null)
                     {
-                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType, CodeModel ).Contains(i));
+                        imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(DanCodeGenerator.SequenceTypeGetPageImplType(ReturnTypeJva.BodyClientType), CodeModel ).Contains(i));
                     }
                     cachedImplImports = imports.OrderBy(i => i).ToImmutableArray();
                 }
