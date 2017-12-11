@@ -64,7 +64,7 @@ namespace AutoRest.Java.DanModel
 
                 if (result == null)
                 {
-                    throw new NotSupportedException();
+                    throw new NotSupportedException($"No conversion from {sourceType.Name} to {targetType.Name} is available.");
                 }
             }
 

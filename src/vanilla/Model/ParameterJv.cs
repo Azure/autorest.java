@@ -89,7 +89,7 @@ namespace AutoRest.Java.Model
                 NeedsSpecialSerialization(ModelType))
             {
                 var primary = ClientType as PrimaryTypeJv;
-                var sequence = ClientType as SequenceTypeJv;
+                SequenceType sequence = ClientType as SequenceType;
                 if (primary != null && primary.IsPrimaryType(KnownPrimaryType.ByteArray))
                 {
                     if (WireType.IsPrimaryType(KnownPrimaryType.String))
@@ -154,15 +154,14 @@ namespace AutoRest.Java.Model
                     builder.Outdent().AppendLine("}");
                 }
             }
-            else if (wireType is SequenceTypeJv)
+            else if (wireType is SequenceType wireSequenceType)
             {
                 if (!IsRequired)
                 {
                     builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, wireType.GetDefaultValue(Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
-                var sequenceType = wireType as SequenceTypeJv;
-                var elementType = sequenceType.ElementType as IModelTypeJv;
+                var elementType = wireSequenceType.ElementType as IModelTypeJv;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0}{1} = new ArrayList<{2}>();", IsRequired ? DanCodeGenerator.GetIModelTypeName(wireType) + " " : "", target, DanCodeGenerator.GetIModelTypeName(elementType))

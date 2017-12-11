@@ -51,6 +51,8 @@ namespace AutoRest.Java.DanModel
 
         public static readonly ISet<SequenceType> pagedListTypes = new HashSet<SequenceType>();
 
+        private static readonly IDictionary<IModelType, string> pageImplTypes = new Dictionary<IModelType, string>();
+
         public static string BetaSinceVersion()
         {
             string[] versionParts = targetVersion.Split('.');
@@ -311,7 +313,7 @@ namespace AutoRest.Java.DanModel
             }
             else
             {
-                Dictionary<SequenceTypeJv, JavaFile> javaFileMap = new Dictionary<SequenceTypeJv, JavaFile>();
+                Dictionary<SequenceType, JavaFile> javaFileMap = new Dictionary<SequenceType, JavaFile>();
 
                 // Every sequence type used as a parameter to a service method.
                 foreach (MethodGroup methodGroup in codeModel.Operations)
@@ -321,7 +323,7 @@ namespace AutoRest.Java.DanModel
                         foreach (Parameter parameter in method.Parameters)
                         {
                             IModelType parameterType = parameter.ModelType;
-                            if (parameterType is SequenceTypeJv sequenceType && !javaFileMap.Keys.Contains(sequenceType, ModelNameComparer.Instance))
+                            if (parameterType is SequenceType sequenceType && !javaFileMap.Keys.Contains(sequenceType, ModelNameComparer.Instance))
                             {
                                 string sequenceTypeName = GetIModelTypeName(sequenceType);
                                 string xmlName = sequenceType.XmlName;
@@ -1568,7 +1570,7 @@ namespace AutoRest.Java.DanModel
                             });
                             classBlock.Block($"public PagedList<{method.ReturnTypeJv.SequenceElementTypeString}> {method.Name}({method.MethodRequiredParameterDeclaration})", function =>
                             {
-                                function.Line($"{(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<{method.ReturnTypeJv.SequenceElementTypeString}> page = new {(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<>();");
+                                function.Line($"{SequenceTypeGetPageImplType(method.ReturnTypeJv.BodyClientType)}<{method.ReturnTypeJv.SequenceElementTypeString}> page = new {SequenceTypeGetPageImplType(method.ReturnTypeJv.BodyClientType)}<>();");
                                 function.Line($"page.setItems({method.Name}Async({method.MethodRequiredParameterInvocation}).single().items());");
                                 function.Line("page.setNextPageLink(null);");
                                 function.ReturnBlock($"new PagedList<{method.ReturnTypeJv.SequenceElementTypeString}>(page)", anonymousClass =>
@@ -1669,7 +1671,7 @@ namespace AutoRest.Java.DanModel
                         });
                         classBlock.Block($"public PagedList<{method.ReturnTypeJv.SequenceElementTypeString}> {method.Name}({method.MethodParameterDeclaration})", function =>
                         {
-                            function.Line($"{(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<{method.ReturnTypeJv.SequenceElementTypeString}> page = new {(method.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType}<>();");
+                            function.Line($"{SequenceTypeGetPageImplType(method.ReturnTypeJv.BodyClientType)}<{method.ReturnTypeJv.SequenceElementTypeString}> page = new {SequenceTypeGetPageImplType(method.ReturnTypeJv.BodyClientType)}<>();");
                             function.Line($"page.setItems({method.Name}Async({method.MethodParameterInvocation}).toBlocking().single().items());");
                             function.Line($"page.setNextPageLink(null);");
                             function.ReturnBlock($"new PagedList<{method.ReturnTypeJv.SequenceElementTypeString}>(page)", anonymousClass =>
@@ -3371,8 +3373,9 @@ namespace AutoRest.Java.DanModel
         {
             ParameterVariants parameterVariants = method.ParameterVariants;
 
-            CompositeType callbackParamModelType = new CompositeTypeJv();
+            CompositeType callbackParamModelType = DependencyInjection.New<CompositeType>();
             callbackParamModelType.Name.FixedValue = $"ServiceCallback<{method.ReturnTypeJv.GenericBodyClientTypeString}>";
+
             ParameterJv callbackParam = new ParameterJv()
             {
                 ModelType = callbackParamModelType,
@@ -3597,6 +3600,11 @@ namespace AutoRest.Java.DanModel
                     bool compositeTypeIsAzureResourceExtension = CompositeTypeIsAzureResourceExtension(compositeType);
                     result = CompositeTypeImports(compositeTypeName, compositeType.CodeModel, compositeTypeIsExternalExtension, compositeTypeIsAzureResourceExtension, settings);
                 }
+                else if (modelType is SequenceType sequenceType)
+                {
+                    result = GetIModelTypeImports(sequenceType.ElementType)
+                        .Concat(new[] { "java.util.List" });
+                }
                 else if (modelType is IModelTypeJv modelTypeJv)
                 {
                     result = modelTypeJv.Imports;
@@ -3677,7 +3685,17 @@ namespace AutoRest.Java.DanModel
         {
             IModelType result = modelType;
 
-            if (modelType is IModelTypeJv modelTypeJv)
+            if (modelType is SequenceType sequenceTypeJv)
+            {
+                IModelType elementTypeResponseVariant = GetIModelTypeResponseVariant(sequenceTypeJv.ElementType);
+                if (elementTypeResponseVariant != sequenceTypeJv.ElementType && (elementTypeResponseVariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    SequenceType sequenceType = DependencyInjection.New<SequenceType>();
+                    sequenceType.ElementType = elementTypeResponseVariant;
+                    result = sequenceType;
+                }
+            }
+            else if (modelType is IModelTypeJv modelTypeJv)
             {
                 result = modelTypeJv.ResponseVariant;
             }
@@ -3689,7 +3707,17 @@ namespace AutoRest.Java.DanModel
         {
             IModelType result = modelType;
 
-            if (modelType is IModelTypeJv modelTypeJv)
+            if (modelType is SequenceType sequenceType)
+            {
+                IModelType elementTypeResponseVariant = GetIModelTypeParameterVariant(sequenceType.ElementType);
+                if (elementTypeResponseVariant != sequenceType.ElementType && (elementTypeResponseVariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
+                    resultSequenceType.ElementType = elementTypeResponseVariant;
+                    result = resultSequenceType;
+                }
+            }
+            else if (modelType is IModelTypeJv modelTypeJv)
             {
                 result = modelTypeJv.ParameterVariant;
             }
@@ -3722,9 +3750,9 @@ namespace AutoRest.Java.DanModel
                 {
                     result = (string.IsNullOrEmpty(result) || result == "enum" ? "String" : CodeNamer.Instance.GetTypeName(result));
                 }
-                else if (modelType is SequenceTypeJv sequenceTypeJv)
+                else if (modelType is SequenceType sequenceType)
                 {
-                    result = $"List<{GetIModelTypeName(sequenceTypeJv.ElementType)}>";
+                    result = $"List<{GetIModelTypeName(sequenceType.ElementType)}>";
                     if (pagedListTypes.Contains(modelType))
                     {
                         result = "Paged" + result;
@@ -3910,5 +3938,20 @@ namespace AutoRest.Java.DanModel
 
         internal static bool CompositeTypeIsAzureResourceExtension(CompositeType compositeType)
             => compositeType?.Extensions?.Get<bool>(AzureExtensions.AzureResourceExtension) == true;
+
+        internal static string SequenceTypeGetPageImplType(IModelType modelType)
+            => pageImplTypes.ContainsKey(modelType) ? pageImplTypes[modelType] : null;
+
+        internal static void SequenceTypeSetPageImplType(IModelType modelType, string pageImplType)
+        {
+            if (pageImplTypes.ContainsKey(modelType))
+            {
+                pageImplTypes[modelType] = pageImplType;
+            }
+            else
+            {
+                pageImplTypes.Add(modelType, pageImplType);
+            }
+        }
     }
 }

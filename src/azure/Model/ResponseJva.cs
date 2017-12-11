@@ -1,4 +1,5 @@
 ﻿using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.Java.DanModel;
 using AutoRest.Java.Model;
 using Newtonsoft.Json;
@@ -27,14 +28,11 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                SequenceTypeJva bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && IsPagedResponse)
+                if (base.BodyClientType is SequenceType bodySequenceType && IsPagedResponse)
                 {
-                    var result = new SequenceTypeJva
-                    {
-                        ElementType = bodySequenceType.ElementType,
-                        PageImplType = bodySequenceType.PageImplType
-                    };
+                    SequenceType result = DependencyInjection.New<SequenceType>();
+                    result.ElementType = bodySequenceType.ElementType;
+                    DanCodeGenerator.SequenceTypeSetPageImplType(result, DanCodeGenerator.SequenceTypeGetPageImplType(bodySequenceType));
                     DanCodeGenerator.pagedListTypes.Add(result);
                     return result;
                 }
@@ -47,8 +45,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && IsPagedResponse)
+                if (base.BodyClientType is SequenceType bodySequenceType && IsPagedResponse)
                 {
                     return string.Format(CultureInfo.InvariantCulture, "PagedList<{0}>", DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType));
                 }
@@ -61,8 +58,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && IsPagedResponse)
+                if (base.BodyClientType is SequenceType bodySequenceType && IsPagedResponse)
                 {
                     return string.Format(CultureInfo.InvariantCulture, "List<{0}>", DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType));
                 }
@@ -75,8 +71,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && (IsPagedResponse || Parent.SimulateAsPagingOperation))
+                if (base.BodyClientType is SequenceType bodySequenceType && (IsPagedResponse || Parent.SimulateAsPagingOperation))
                 {
                     return string.Format(CultureInfo.InvariantCulture, "Page<{0}>", DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType));
                 }
@@ -89,10 +84,9 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                var bodySequenceType = base.BodyClientType as SequenceTypeJva;
-                if (bodySequenceType != null && (IsPagedResponse || Parent.SimulateAsPagingOperation))
+                if (base.BodyClientType is SequenceType bodySequenceType != null && (IsPagedResponse || Parent.SimulateAsPagingOperation))
                 {
-                    return bodySequenceType.PageImplType + "<" + DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType) + ">";
+                    return DanCodeGenerator.SequenceTypeGetPageImplType(bodySequenceType) + "<" + DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType) + ">";
                 }
                 return GenericBodyClientTypeString;
             }
@@ -103,10 +97,9 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                var sequenceType = base.BodyClientType as SequenceTypeJva;
-                if (sequenceType != null && (IsPagedResponse || Parent.IsPagingNonPollingOperation))
+                if (base.BodyClientType is SequenceType sequenceType && (IsPagedResponse || Parent.IsPagingNonPollingOperation))
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", sequenceType.PageImplType, DanCodeGenerator.GetIModelTypeName(sequenceType.ElementType));
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", DanCodeGenerator.SequenceTypeGetPageImplType(sequenceType), DanCodeGenerator.GetIModelTypeName(sequenceType.ElementType));
                 }
                 return base.GenericBodyWireTypeString;
             }

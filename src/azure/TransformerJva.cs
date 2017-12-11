@@ -9,6 +9,7 @@ using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure.Model;
 using AutoRest.Java.DanModel;
+using AutoRest.Java.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -152,20 +153,17 @@ namespace AutoRest.Java.Azure
                 {
                     anyTypeConverted = true;
                     CompositeType compositeType = (CompositeType)method.Responses[responseStatus].Body;
-                    SequenceTypeJva sequenceType = DanCodeGenerator.GetCompositeTypeProperties(compositeType).Select(p => DanCodeGenerator.GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
+                    SequenceType sequenceType = DanCodeGenerator.GetCompositeTypeProperties(compositeType).Select(p => DanCodeGenerator.GetPropertyModelType(p)).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
-                        IModelType pagedResult;
-                        pagedResult = new SequenceTypeJva
-                        {
-                            ElementType = sequenceType.ElementType,
-                            PageImplType = pageClassName
-                        };
+                        SequenceType pagedResult = New<SequenceType>();
+                        pagedResult.ElementType = sequenceType.ElementType;
+                        DanCodeGenerator.SequenceTypeSetPageImplType(pagedResult, pageClassName);
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
+                        ResponseJva resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
                         resp.Parent = method;
                         method.Responses[responseStatus] = resp;
                     }
@@ -173,16 +171,13 @@ namespace AutoRest.Java.Azure
 
                 if (!anyTypeConverted && method.SimulateAsPagingOperation)
                 {
-                    foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is SequenceTypeJva).Select(s => s.Key).ToArray())
+                    foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is SequenceType).Select(s => s.Key).ToArray())
                     {
-                        var sequenceType = (SequenceTypeJva)method.Responses[responseStatus].Body;
+                        SequenceType sequenceType = (SequenceType)method.Responses[responseStatus].Body;
 
-                        IModelType pagedResult;
-                        pagedResult = new SequenceTypeJva
-                        {
-                            ElementType = sequenceType.ElementType,
-                            PageImplType = pageClassName
-                        };
+                        SequenceType pagedResult = DependencyInjection.New<SequenceType>();
+                        pagedResult.ElementType = sequenceType.ElementType;
+                        DanCodeGenerator.SequenceTypeSetPageImplType(pagedResult, pageClassName);
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;

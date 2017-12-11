@@ -176,13 +176,7 @@ namespace AutoRest.Java.Model
 
         [JsonIgnore]
         public virtual string SequenceElementTypeString
-        {
-            get
-            {
-                var sequenceType = Body as SequenceTypeJv;
-                return sequenceType != null ? DanCodeGenerator.GetIModelTypeName(sequenceType.ElementType) : "Void";
-            }
-        }
+            => Body is SequenceType bodySequenceType ? DanCodeGenerator.GetIModelTypeName(bodySequenceType.ElementType) : "Void";
 
         [JsonIgnore]
         public virtual string ReturnValueWireType
