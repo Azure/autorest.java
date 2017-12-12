@@ -3956,13 +3956,13 @@ namespace AutoRest.Java.DanModel
             => DictionaryGet(pageImplTypes, modelType);
 
         internal static void SequenceTypeSetPageImplType(IModelType modelType, string pageImplType)
-            => DictionarySet(pageImplTypes, modelType, pageImplType);
+            => pageImplTypes[modelType] = pageImplType;
 
         internal static MethodJva ResponseGetParent(Response response)
             => DictionaryGet(responseParents, response);
 
         internal static void ResponseSetParent(Response response, MethodJva parent)
-            => DictionarySet(responseParents, response, parent);
+            => responseParents[response] = parent;
 
         internal static bool ResponseIsPagedResponse(Response response)
         {
@@ -3985,18 +3985,6 @@ namespace AutoRest.Java.DanModel
                 result = resultSequenceType;
             }
             return result;
-        }
-
-        private static void DictionarySet<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                dictionary[key] = value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
-            }
         }
 
         private static TValue DictionaryGet<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey key) where TValue : class
