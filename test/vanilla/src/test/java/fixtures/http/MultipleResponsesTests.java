@@ -143,9 +143,9 @@ public class MultipleResponsesTests {
         HttpPipeline httpPipeline = HttpPipeline.build(
                 new ProtocolPolicy.Factory("http"),
                 new PortPolicy.Factory(3000),
-                new RequestPolicy.Factory() {
+                new RequestPolicyFactory() {
                 @Override
-                public RequestPolicy create(final RequestPolicy next, RequestPolicy.Options options) {
+                public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
                     return new RequestPolicy() {
                         @Override
                         public Single<HttpResponse> sendAsync(HttpRequest request) {
@@ -178,9 +178,9 @@ public class MultipleResponsesTests {
         HttpPipeline httpPipeline = HttpPipeline.build(
                 new ProtocolPolicy.Factory("http"),
                 new PortPolicy.Factory(3000),
-                new RequestPolicy.Factory() {
+                new RequestPolicyFactory() {
                 @Override
-                public RequestPolicy create(final RequestPolicy next, RequestPolicy.Options options) {
+                public RequestPolicy create(final RequestPolicy next, RequestPolicyOptions options) {
                     return new RequestPolicy() {
                         @Override
                         public Single<HttpResponse> sendAsync(HttpRequest request) {

@@ -3,10 +3,10 @@ package fixtures.header;
 import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.http.HttpHeaders;
 import com.microsoft.rest.v2.http.HttpPipeline;
+import com.microsoft.rest.v2.http.HttpPipelineBuilder;
 import com.microsoft.rest.v2.policy.AddHeadersPolicy;
 import com.microsoft.rest.v2.policy.PortPolicy;
 import com.microsoft.rest.v2.policy.ProtocolPolicy;
-import com.microsoft.rest.v2.policy.RequestPolicy;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -50,7 +50,7 @@ public class HeaderOperationsTests {
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
 
-        HttpPipeline httpPipeline = new HttpPipeline.Builder()
+        HttpPipeline httpPipeline = new HttpPipelineBuilder()
                 .withUserAgent("")
                 .withRequestPolicy(new AddHeadersPolicy.Factory(headers))
                 .withRequestPolicy(new ProtocolPolicy.Factory("http"))
