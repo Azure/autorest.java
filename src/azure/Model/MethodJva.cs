@@ -23,21 +23,6 @@ namespace AutoRest.Java.Azure.Model
     public class MethodJva : MethodJv
     {
         [JsonIgnore]
-        public string ClientRequestIdString => AzureExtensions.GetClientRequestIdString(this);
-
-        [JsonIgnore]
-        public string RequestIdString => AzureExtensions.GetRequestIdString(this);
-
-        /// <summary>
-        /// Returns true if method has x-ms-long-running-operation extension.
-        /// </summary>
-        [JsonIgnore]
-        public bool IsLongRunningOperation
-        {
-            get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
-        }
-
-        [JsonIgnore]
         public bool IsPagingNextOperation
         {
             get { return Extensions.ContainsKey("nextLinkMethod") && (bool) Extensions["nextLinkMethod"]; }
@@ -260,7 +245,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var exceptions = base.Exceptions.ToList();
-                if (this.IsLongRunningOperation)
+                if (DanCodeGenerator.MethodIsLongRunningOperation(this))
                 {
                     exceptions.Add("InterruptedException");
                 }
@@ -274,7 +259,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 List<string> exceptions = base.ExceptionStatements;
-                if (this.IsLongRunningOperation)
+                if (DanCodeGenerator.MethodIsLongRunningOperation(this))
                 {
                     exceptions.Add("InterruptedException exception thrown when long running operation is interrupted");
                 }
@@ -327,7 +312,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                if (IsLongRunningOperation)
+                if (DanCodeGenerator.MethodIsLongRunningOperation(this))
                 {
                     return $"Observable<OperationStatus<{DanCodeGenerator.ResponseServiceResponseGenericParameterString(ReturnType)}>>";
                 }
@@ -357,7 +342,7 @@ namespace AutoRest.Java.Azure.Model
             {
                 string invocation;
                 MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
-                TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
+                DanCodeGenerator.MethodTransformPagingGroupedParameter(this, builder, nextMethod, filterRequired);
             }
             return builder.ToString();
         }
@@ -455,44 +440,6 @@ namespace AutoRest.Java.Azure.Model
             return invocation;
         }
 
-        protected virtual void TransformPagingGroupedParameter(IndentedStringBuilder builder, MethodJva nextMethod, bool filterRequired = false)
-        {
-            if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
-            {
-                return;
-            }
-            var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-            var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-            if (nextGroupType.Name == groupedType.Name)
-            {
-                return;
-            }
-            var nextGroupTypeName = CodeNamerJva.Instance.GetTypeName(nextGroupType.Name);
-            if (filterRequired && !groupedType.IsRequired)
-            {
-                return;
-            }
-            if (!groupedType.IsRequired)
-            {
-                builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
-                builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
-                builder.Indent();
-                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
-            }
-            else
-            {
-                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
-            }
-            foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
-            {
-                builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
-            }
-            if (!groupedType.IsRequired)
-            {
-                builder.Outdent().AppendLine(@"}");
-            }
-        }
-
         [JsonIgnore]
         public string NextUrlConstruction
         {
@@ -526,7 +473,7 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var imports = base.InterfaceImports.ToList();
-                if (this.IsLongRunningOperation)
+                if (DanCodeGenerator.MethodIsLongRunningOperation(this))
                 {
                     imports.Add("com.microsoft.azure.v2.OperationStatus");
                 }
@@ -544,7 +491,7 @@ namespace AutoRest.Java.Azure.Model
 
         public override bool ShouldGenerateBeginRestResponseMethod()
         {
-            return !IsLongRunningOperation && !IsPagingOperation && !IsPagingNextOperation;
+            return !DanCodeGenerator.MethodIsLongRunningOperation(this) && !IsPagingOperation && !IsPagingNextOperation;
         }
 
         private ImmutableArray<string> cachedImplImports = default(ImmutableArray<string>);
@@ -557,7 +504,7 @@ namespace AutoRest.Java.Azure.Model
                 if (cachedImplImports.IsDefault)
                 {
                     var imports = base.ImplImports.ToList();
-                    if (this.IsLongRunningOperation)
+                    if (DanCodeGenerator.MethodIsLongRunningOperation(this))
                     {
                         imports.Add("com.microsoft.azure.v2.OperationStatus");
                         imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");

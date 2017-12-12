@@ -1,19 +1,18 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
-using System.Linq;
+using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Utilities.Collections;
 using AutoRest.Java.Azure.Model;
-using AutoRest.Java.Model;
-using AutoRest.Core;
+using AutoRest.Java.DanModel;
 using Newtonsoft.Json;
 using System;
-using AutoRest.Core.Utilities.Collections;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Collections.Immutable;
-using AutoRest.Java.DanModel;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -78,44 +77,6 @@ namespace AutoRest.Java.Azure.Fluent.Model
             base.Disambiguate();
         }
 
-        protected override void TransformPagingGroupedParameter(IndentedStringBuilder builder, MethodJva nextMethod, bool filterRequired = false)
-        {
-            if (this.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
-            {
-                return;
-            }
-            var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-            var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-            if (nextGroupType.Name == groupedType.Name)
-            {
-                return;
-            }
-            var nextGroupTypeName = CodeNamer.Instance.GetTypeName(nextGroupType.Name) + "Inner";
-            if (filterRequired && !groupedType.IsRequired)
-            {
-                return;
-            }
-            if (!groupedType.IsRequired)
-            {
-                builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
-                builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
-                builder.Indent();
-                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
-            }
-            else
-            {
-                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
-            }
-            foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
-            {
-                builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
-            }
-            if (!groupedType.IsRequired)
-            {
-                builder.Outdent().AppendLine(@"}");
-            }
-        }
-
         [JsonIgnore]
         public override List<string> InterfaceImports
         {
@@ -159,7 +120,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.RemoveWhere(i => DanCodeGenerator.CompositeTypeImportsAzure(OperationExceptionTypeString, CodeModel).Contains(i));
                         imports.AddRange(DanCodeGenerator.CompositeTypeImportsFluent(OperationExceptionTypeString, CodeModel));
                     }
-                    if (this.IsLongRunningOperation)
+                    if (DanCodeGenerator.MethodIsLongRunningOperation(this))
                     {
                         imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                         this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })

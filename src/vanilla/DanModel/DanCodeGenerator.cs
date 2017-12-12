@@ -576,7 +576,7 @@ namespace AutoRest.Java.DanModel
                                 interfaceBlock.Annotation($"UnexpectedResponseExceptionType({method.OperationExceptionTypeString}.class)");
                             }
 
-                            if (method.IsLongRunningOperation)
+                            if (MethodIsLongRunningOperation(method))
                             {
                                 interfaceBlock.Line($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(method.ReturnType)}>> {method.Name}({method.MethodParameterApiDeclaration});");
                             }
@@ -870,7 +870,7 @@ namespace AutoRest.Java.DanModel
                     }
                     else
                     {
-                        if (!method.IsLongRunningOperation)
+                        if (!MethodIsLongRunningOperation(method))
                         {
                             GenerateRootMethodFunctions(classBlock, method);
                         }
@@ -1201,7 +1201,7 @@ namespace AutoRest.Java.DanModel
                         }
 
                         string methodParameterApiDeclaration = method.MethodParameterApiDeclaration;
-                        if (method.IsLongRunningOperation)
+                        if (MethodIsLongRunningOperation(method))
                         {
                             interfaceBlock.Line($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(method.ReturnType)}>> {methodName}({methodParameterApiDeclaration});");
                         }
@@ -1759,7 +1759,7 @@ namespace AutoRest.Java.DanModel
                     }
                     else
                     {
-                        if (!method.IsLongRunningOperation)
+                        if (!MethodIsLongRunningOperation(method))
                         {
                             GenerateRootMethodFunctions(classBlock, method);
                         }
@@ -2677,7 +2677,7 @@ namespace AutoRest.Java.DanModel
 
             bool shouldGenerateRestResponseMethod =
                 methodJva == null ||
-                (!methodJva.IsLongRunningOperation &&
+                (!MethodIsLongRunningOperation(methodJva) &&
                  !methodJva.IsPagingOperation &&
                  !methodJva.IsPagingNextOperation);
 
@@ -3940,14 +3940,17 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        internal static bool GetBoolExtension(ModelType modelType, string extensionName)
-            => modelType?.Extensions?.Get<bool>(extensionName) == true;
+        internal static bool GetExtensionBool(IDictionary<string, object> extensions, string extensionName)
+            => extensions?.Get<bool>(extensionName) == true;
+
+        internal static bool GetExtensionBool(ModelType modelType, string extensionName)
+            => GetExtensionBool(modelType?.Extensions, extensionName);
 
         private static bool CompositeTypeIsExternalExtension(CompositeType compositeType)
-            => GetBoolExtension(compositeType, "x-ms-external");
+            => GetExtensionBool(compositeType, "x-ms-external");
 
         internal static bool CompositeTypeIsAzureResourceExtension(CompositeType compositeType)
-            => GetBoolExtension(compositeType, AzureExtensions.AzureResourceExtension);
+            => GetExtensionBool(compositeType, AzureExtensions.AzureResourceExtension);
 
         internal static string SequenceTypeGetPageImplType(IModelType modelType)
             => DictionaryGet(pageImplTypes, modelType);
@@ -4233,6 +4236,87 @@ namespace AutoRest.Java.DanModel
                 }
             }
             return imports;
+        }
+
+        internal static bool MethodIsLongRunningOperation(MethodJva method)
+            => GetExtensionBool(method?.Extensions, AzureExtensions.LongRunningExtension);
+
+        internal static void MethodTransformPagingGroupedParameter(MethodJva method, IndentedStringBuilder builder, MethodJva nextMethod, bool filterRequired = false)
+        {
+            if (method is MethodJvaf)
+            {
+                if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                {
+                    return;
+                }
+                var groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                if (nextGroupType.Name == groupedType.Name)
+                {
+                    return;
+                }
+                var nextGroupTypeName = CodeNamer.Instance.GetTypeName(nextGroupType.Name) + "Inner";
+                if (filterRequired && !groupedType.IsRequired)
+                {
+                    return;
+                }
+                if (!groupedType.IsRequired)
+                {
+                    builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
+                    builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
+                    builder.Indent();
+                    builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                }
+                else
+                {
+                    builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                }
+                foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+                {
+                    builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
+                }
+                if (!groupedType.IsRequired)
+                {
+                    builder.Outdent().AppendLine(@"}");
+                }
+            }
+            else
+            {
+                if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
+                {
+                    return;
+                }
+                var groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                if (nextGroupType.Name == groupedType.Name)
+                {
+                    return;
+                }
+                var nextGroupTypeName = CodeNamerJva.Instance.GetTypeName(nextGroupType.Name);
+                if (filterRequired && !groupedType.IsRequired)
+                {
+                    return;
+                }
+                if (!groupedType.IsRequired)
+                {
+                    builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
+                    builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
+                    builder.Indent();
+                    builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                }
+                else
+                {
+                    builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                }
+                foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+                {
+                    builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
+                }
+                if (!groupedType.IsRequired)
+                {
+                    builder.Outdent().AppendLine(@"}");
+                }
+            }
         }
     }
 }
