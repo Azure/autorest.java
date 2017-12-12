@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Java.Azure.Model;
 using Newtonsoft.Json;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -87,8 +88,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
             var listByResourceGroup = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.ListByResourceGroup));
             return listMethod != null && listByResourceGroup != null
                 && StringComparer.OrdinalIgnoreCase.Equals(
-                    ((ResponseJva)listMethod.ReturnType).SequenceElementTypeString,
-                    ((ResponseJva)listByResourceGroup.ReturnType).SequenceElementTypeString);
+                    DanCodeGenerator.ResponseSequenceElementTypeString(listMethod.ReturnType),
+                    DanCodeGenerator.ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
         }
 
         private void DiscoverAllSupportedInterfaces()
@@ -107,14 +108,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             var getMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.GetByResourceGroup));
             if (getMethod != null && Take2RequiredParameters(getMethod))
             {
-                supportedInterfaces.Add($"{InnerSupportsGet}<{((ResponseJva)getMethod.ReturnType).GenericBodyClientTypeString}>");
+                supportedInterfaces.Add($"{InnerSupportsGet}<{DanCodeGenerator.ResponseGenericBodyClientTypeString(getMethod.ReturnType)}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsGet}");
             }
 
             var deleteMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.Delete));
             if (deleteMethod != null && Take2RequiredParameters(deleteMethod))
             {
-                supportedInterfaces.Add($"{InnerSupportsDelete}<{((ResponseJva)deleteMethod.ReturnType).ClientCallbackTypeString}>");
+                supportedInterfaces.Add($"{InnerSupportsDelete}<{DanCodeGenerator.ResponseClientCallbackTypeString(deleteMethod.ReturnType)}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsDelete}");
             }
 
@@ -123,7 +124,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 // Getting list method to get the name of the type to be supported.
                 var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.List));
 
-                supportedInterfaces.Add($"{InnerSupportsListing}<{((ResponseJva)listMethod.ReturnType).SequenceElementTypeString}>");
+                supportedInterfaces.Add($"{InnerSupportsListing}<{DanCodeGenerator.ResponseSequenceElementTypeString(listMethod.ReturnType)}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsListing}");
             }
         }
