@@ -27,8 +27,7 @@ namespace AutoRest.Java.Azure
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<MethodGroup, MethodGroupJvaf>(),
-                new Factory<PrimaryType, PrimaryTypeJv>(),
-                new Factory<Response, ResponseJva>()
+                new Factory<PrimaryType, PrimaryTypeJv>()
             };
         }
     }

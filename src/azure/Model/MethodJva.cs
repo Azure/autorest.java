@@ -56,9 +56,6 @@ namespace AutoRest.Java.Azure.Model
         [JsonIgnore]
         public bool SimulateAsPagingOperation { set; get; } = false;
 
-        [JsonIgnore]
-        public ResponseJva ReturnTypeJva => ReturnType as ResponseJva;
-
         /// <summary>
         /// Get the type for operation exception.
         /// </summary>
@@ -184,17 +181,15 @@ namespace AutoRest.Java.Azure.Model
                 }
                 if (this.IsPagingOperation)
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                        ReturnTypeJva.SequenceElementTypeString);
+                    parameters += $"final ListOperationCallback<{DanCodeGenerator.ResponseSequenceElementTypeString(ReturnType)}> serviceCallback";
                 }
                 else if (this.IsPagingNextOperation)
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceFuture<{0}> serviceFuture, final ListOperationCallback<{1}> serviceCallback",
-                        ReturnTypeJva.ServiceFutureGenericParameterString, ReturnTypeJva.SequenceElementTypeString);
+                    parameters += $"final ServiceFuture<{DanCodeGenerator.ResponseServiceFutureGenericParameterString(ReturnType)}> serviceFuture, final ListOperationCallback<{DanCodeGenerator.ResponseSequenceElementTypeString(ReturnType)}> serviceCallback";
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeJva.GenericBodyClientTypeString);
+                    parameters += $"final ServiceCallback<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}> serviceCallback";
                 }
                 
                 return parameters;
@@ -213,17 +208,15 @@ namespace AutoRest.Java.Azure.Model
                 }
                 if (this.IsPagingOperation)
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
-                        ReturnTypeJva.SequenceElementTypeString);
+                    parameters += $"final ListOperationCallback<{DanCodeGenerator.ResponseSequenceElementTypeString(ReturnType)}> serviceCallback";
                 }
                 else if (this.IsPagingNextOperation)
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceFuture<{0}> serviceFuture, final ListOperationCallback<{1}> serviceCallback",
-                        ReturnTypeJva.ServiceFutureGenericParameterString, ReturnTypeJva.SequenceElementTypeString);
+                    parameters += $"final ServiceFuture<{DanCodeGenerator.ResponseServiceFutureGenericParameterString(ReturnType)}> serviceFuture, final ListOperationCallback<{DanCodeGenerator.ResponseSequenceElementTypeString(ReturnType)}> serviceCallback";
                 }
                 else
                 {
-                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", ReturnTypeJva.GenericBodyClientTypeString);
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback", DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType));
                 }
 
                 return parameters;
@@ -320,10 +313,10 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                string args = "new TypeToken<" + ReturnTypeJva.GenericBodyClientTypeString + ">() { }.getType()";
+                string args = $"new TypeToken<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}>() {{ }}.getType()";
                 if (ReturnType.Headers != null)
                 {
-                    args += ", " + DanCodeGenerator.GetIModelTypeName(ReturnTypeJva.HeaderWireType) + ".class";
+                    args += $", {DanCodeGenerator.GetIModelTypeName(ReturnType.Headers)}.class";
                 }
                 return args;
             }
@@ -336,7 +329,7 @@ namespace AutoRest.Java.Azure.Model
             {
                 if (IsLongRunningOperation)
                 {
-                    return $"Observable<OperationStatus<{ReturnTypeJv.ServiceResponseGenericParameterString}>>";
+                    return $"Observable<OperationStatus<{DanCodeGenerator.ResponseServiceResponseGenericParameterString(ReturnType)}>>";
                 }
                 else if (ReturnType.Body == null)
                 {
@@ -344,18 +337,18 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else if (IsPagingOperation || IsPagingNextOperation)
                 {
-                    return $"Observable<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
+                    return $"Observable<{DanCodeGenerator.ResponseServiceResponseGenericParameterString(ReturnType)}>";
                 }
                 else 
                 {
-                    return $"Maybe<{ReturnTypeJv.ServiceResponseGenericParameterString}>";
+                    return $"Maybe<{DanCodeGenerator.ResponseServiceResponseGenericParameterString(ReturnType)}>";
                 }
             }
         }
 
         [JsonIgnore]
         public override string ReturnTypeResponseName =>
-            DanCodeGenerator.GetIModelTypeName(ReturnTypeJv?.BodyClientType?.ServiceResponseVariant());
+            DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.ResponseBodyClientType(ReturnType)?.ServiceResponseVariant());
 
         public string PagingGroupedParameterTransformation(bool filterRequired = false)
         {
@@ -574,9 +567,9 @@ namespace AutoRest.Java.Azure.Model
                             .Where(i => !this.Parameters.Any(p => DanCodeGenerator.GetIModelTypeImports(p.ModelType).Contains(i)))
                             .ForEach(i => imports.Remove(i));
                         // return type may have been removed as a side effect
-                        imports.AddRange(ReturnTypeJva.ImplImports);
+                        imports.AddRange(DanCodeGenerator.ResponseImplImports(ReturnType));
                     }
-                    string typeName = DanCodeGenerator.SequenceTypeGetPageImplType(ReturnTypeJva.BodyClientType);
+                    string typeName = DanCodeGenerator.SequenceTypeGetPageImplType(DanCodeGenerator.ResponseBodyClientType(ReturnType));
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Remove("java.util.ArrayList");

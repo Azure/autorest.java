@@ -291,15 +291,15 @@ namespace AutoRest.Java.Model
 
         public string RestResponseHeadersName => ReturnType.Headers == null
             ? "Void"
-            : DanCodeGenerator.GetIModelTypeName(ReturnTypeJv.HeaderClientType);
+            : DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.ResponseHeaderClientType(ReturnType));
 
         public string RestResponseAbstractBodyName => ReturnType.Body == null
             ? "Void"
-            : (ReturnTypeJv).ServiceResponseGenericParameterString;
+            : DanCodeGenerator.ResponseServiceResponseGenericParameterString(ReturnType);
 
         public string RestResponseConcreteBodyName => ReturnType.Body == null
             ? "Void"
-            : (ReturnTypeJv).ServiceResponseConcreteParameterString;
+            : DanCodeGenerator.ResponseServiceResponseConcreteParameterString(ReturnType);
 
         public string RestResponseAbstractTypeName => $"RestResponse<{RestResponseHeadersName}, {RestResponseAbstractBodyName}>";
 
@@ -370,7 +370,7 @@ namespace AutoRest.Java.Model
             }
             else
             {
-                returnType = $"Maybe<{ReturnTypeJv.ClientResponseTypeString}>";   
+                returnType = $"Maybe<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}>";
             }
             
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
@@ -385,9 +385,9 @@ namespace AutoRest.Java.Model
             }
             else
             {
-                builder.AppendLine($".flatMapMaybe(new Function<{RestResponseAbstractTypeName}, Maybe<{ReturnTypeJv.ClientResponseTypeString}>>() {{");
+                builder.AppendLine($".flatMapMaybe(new Function<{RestResponseAbstractTypeName}, Maybe<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}>>() {{");
                 builder.Indent();
-                builder.AppendLine($"public Maybe<{ReturnTypeJv.ClientResponseTypeString}> apply({RestResponseAbstractTypeName} restResponse) {{");
+                builder.AppendLine($"public Maybe<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}> apply({RestResponseAbstractTypeName} restResponse) {{");
                 builder.Indent();
                 builder.AppendLine("if (restResponse.body() == null) {");
                 builder.Indent();
@@ -416,7 +416,7 @@ namespace AutoRest.Java.Model
         public string CallbackImpl(IEnumerable<ParameterJv> parameters, ParameterJv callbackParam)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
-            builder.AppendLine($"public ServiceFuture<{ReturnTypeJv.ServiceFutureGenericParameterString}> {Name}Async({ParameterDeclaration(parameters.ConcatSingleItem(callbackParam))}) {{");
+            builder.AppendLine($"public ServiceFuture<{DanCodeGenerator.ResponseServiceFutureGenericParameterString(ReturnType)}> {Name}Async({ParameterDeclaration(parameters.ConcatSingleItem(callbackParam))}) {{");
             builder.Indent();
             builder.AppendLine($"return ServiceFuture.{ServiceFutureFactoryMethod}({Name}Async({Arguments(parameters)}), {callbackParam.Name});");
             builder.Outdent();
@@ -447,7 +447,7 @@ namespace AutoRest.Java.Model
             builder.AppendLine($"public {ReturnTypeResponseName} {Name}({paramString}) {{");
             builder.Indent();
 
-            if (DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(ReturnTypeJv.BodyClientType)) == "void")
+            if (DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeResponseVariant(DanCodeGenerator.ResponseBodyClientType(ReturnType))) == "void")
             {
                 builder.AppendLine($"{Name}Async({argsString}).blockingAwait();");
             }
@@ -643,8 +643,7 @@ namespace AutoRest.Java.Model
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnTypeJv.GenericBodyClientTypeString);
+                parameters += $"final ServiceCallback<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}> serviceCallback";
                 return parameters;
             }
         }
@@ -659,8 +658,7 @@ namespace AutoRest.Java.Model
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
-                    ReturnTypeJv.GenericBodyClientTypeString);
+                parameters += $"final ServiceCallback<{DanCodeGenerator.ResponseGenericBodyClientTypeString(ReturnType)}> serviceCallback";
                 return parameters;
             }
         }
@@ -783,10 +781,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public ResponseJv ReturnTypeJv => ReturnType as ResponseJv;
-
-        [JsonIgnore]
-        public virtual string ReturnTypeResponseName => DanCodeGenerator.GetIModelTypeName(ReturnTypeJv?.BodyClientType?.ServiceResponseVariant());
+        public virtual string ReturnTypeResponseName => DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.ResponseBodyClientType(ReturnType)?.ServiceResponseVariant());
 
         [JsonIgnore]
         public virtual string ServiceFutureFactoryMethod => "fromBody";
@@ -816,7 +811,7 @@ namespace AutoRest.Java.Model
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
-                imports.AddRange(this.ReturnTypeJv.InterfaceImports);
+                imports.AddRange(DanCodeGenerator.ResponseInterfaceImports(ReturnType));
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>
@@ -877,9 +872,9 @@ namespace AutoRest.Java.Model
                         .ForEach(p => imports.AddRange(p.ClientImplImports));
                     this.RetrofitParameters.ForEach(p => imports.AddRange(p.WireImplImports));
                     // return type
-                    imports.AddRange(this.ReturnTypeJv.ImplImports);
+                    imports.AddRange(DanCodeGenerator.ResponseImplImports(ReturnType));
                     // response type (can be different from return type)
-                    this.Responses.ForEach(r => imports.AddRange((r.Value as ResponseJv).ImplImports));
+                    this.Responses.ForEach(r => imports.AddRange(DanCodeGenerator.ResponseImplImports(r.Value)));
                     // exceptions
                     this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                         .ForEach(ex =>

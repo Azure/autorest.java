@@ -38,12 +38,12 @@ namespace AutoRest.Java.Azure
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
             {
-                foreach (ResponseJva response in method.Responses.Values)
+                foreach (Response response in method.Responses.Values)
                 {
-                    response.Parent = method;
+                    DanCodeGenerator.ResponseSetParent(response, method);
                 }
-                (method.DefaultResponse as ResponseJva).Parent = method;
-                method.ReturnTypeJva.Parent = method;
+                DanCodeGenerator.ResponseSetParent(method.DefaultResponse, method);
+                DanCodeGenerator.ResponseSetParent(method.ReturnType, method);
             }
             AzureExtensions.AddPageableMethod(codeModel);
 

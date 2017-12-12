@@ -47,12 +47,12 @@ namespace AutoRest.Java.Azure
             // set Parent on responses (required for pageable)
             foreach (MethodJva method in codeModel.Methods)
             {
-                foreach (ResponseJva response in method.Responses.Values)
+                foreach (Response response in method.Responses.Values)
                 {
-                    response.Parent = method;
+                    DanCodeGenerator.ResponseSetParent(response, method);
                 }
-                (method.DefaultResponse as ResponseJva).Parent = method;
-                method.ReturnTypeJva.Parent = method;
+                DanCodeGenerator.ResponseSetParent(method.DefaultResponse, method);
+                DanCodeGenerator.ResponseSetParent(method.ReturnType, method);
             }
             AzureExtensions.AddPageableMethod(codeModel);
             
@@ -163,8 +163,8 @@ namespace AutoRest.Java.Azure
                         DanCodeGenerator.SequenceTypeSetPageImplType(pagedResult, pageClassName);
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        ResponseJva resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
-                        resp.Parent = method;
+                        Response resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers);
+                        DanCodeGenerator.ResponseSetParent(resp, method);
                         method.Responses[responseStatus] = resp;
                     }
                 }
@@ -180,16 +180,16 @@ namespace AutoRest.Java.Azure
                         DanCodeGenerator.SequenceTypeSetPageImplType(pagedResult, pageClassName);
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
-                        var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
-                        resp.Parent = method;
+                        Response resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers);
+                        DanCodeGenerator.ResponseSetParent(resp, method);
                         method.Responses[responseStatus] = resp;
                     }
                 }
 
                 if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    var resp = New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers) as ResponseJva;
-                    resp.Parent = method;
+                    Response resp = New<Response>(convertedTypes[method.ReturnType.Body], method.ReturnType.Headers);
+                    DanCodeGenerator.ResponseSetParent(resp, method);
                     method.ReturnType = resp;
                 }
             }

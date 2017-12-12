@@ -24,8 +24,7 @@ namespace AutoRest.Java
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<MethodGroup, MethodGroupJv>(),
-                new Factory<PrimaryType, PrimaryTypeJv>(),
-                new Factory<Response, ResponseJv>()
+                new Factory<PrimaryType, PrimaryTypeJv>()
             };
         }
     }
