@@ -45,7 +45,7 @@ namespace AutoRest.Java.Azure
             AzureExtensions.SetDefaultResponses(codeModel);
 
             // set Parent on responses (required for pageable)
-            foreach (MethodJva method in codeModel.Methods)
+            foreach (Method method in codeModel.Methods)
             {
                 foreach (Response response in method.Responses.Values)
                 {
@@ -65,7 +65,7 @@ namespace AutoRest.Java.Azure
             NormalizePaginatedMethods(codeModel, DanCodeGenerator.pageClasses);
 
             // param order (PATH first)
-            foreach (MethodJva method in codeModel.Methods)
+            foreach (Method method in codeModel.Methods)
             {
                 var ps = method.Parameters.ToList();
                 method.ClearParameters();
@@ -136,10 +136,10 @@ namespace AutoRest.Java.Azure
 
             var convertedTypes = new Dictionary<IModelType, IModelType>();
 
-            foreach (MethodJva method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) || (m as MethodJva).SimulateAsPagingOperation))
+            foreach (Method method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) || DanCodeGenerator.MethodSimulateAsPagingOperation(m)))
             {
                 string nextLinkString;
-                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, method.SimulateAsPagingOperation, out nextLinkString);
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, DanCodeGenerator.MethodSimulateAsPagingOperation(method), out nextLinkString);
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
@@ -169,7 +169,7 @@ namespace AutoRest.Java.Azure
                     }
                 }
 
-                if (!anyTypeConverted && method.SimulateAsPagingOperation)
+                if (!anyTypeConverted && DanCodeGenerator.MethodSimulateAsPagingOperation(method))
                 {
                     foreach (HttpStatusCode responseStatus in method.Responses.Where(r => r.Value.Body is SequenceType).Select(s => s.Key).ToArray())
                     {

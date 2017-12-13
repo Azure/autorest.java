@@ -36,7 +36,7 @@ namespace AutoRest.Java.Azure
             AzureExtensions.SetDefaultResponses(codeModel);
 
             // set Parent on responses (required for pageable)
-            foreach (MethodJva method in codeModel.Methods)
+            foreach (Method method in codeModel.Methods)
             {
                 foreach (Response response in method.Responses.Values)
                 {
@@ -59,7 +59,7 @@ namespace AutoRest.Java.Azure
             NormalizeTopLevelTypes(codeModel);
 
             // param order (PATH first)
-            foreach (MethodJva method in codeModel.Methods)
+            foreach (Method method in codeModel.Methods)
             {
                 var ps = method.Parameters.ToList();
                 method.ClearParameters();

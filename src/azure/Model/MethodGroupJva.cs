@@ -28,7 +28,7 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
-        IEnumerable<MethodJva> IMethodGroupJva.Methods => Methods.Cast<MethodJva>().ToList();
+        IEnumerable<Method> IMethodGroupJva.Methods => Methods;
         string IMethodGroupJva.LoggingContext => MethodGroupFullType;
         string IMethodGroupJva.ServiceType => MethodGroupServiceType;
         string IMethodGroupJva.Name => TypeName;
