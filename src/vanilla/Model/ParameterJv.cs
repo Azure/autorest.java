@@ -161,7 +161,7 @@ namespace AutoRest.Java.Model
                     builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, wireType.GetDefaultValue(Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
-                var elementType = wireSequenceType.ElementType as IModelTypeJv;
+                IModelType elementType = wireSequenceType.ElementType;
                 var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
                 builder.AppendLine("{0}{1} = new ArrayList<{2}>();", IsRequired ? DanCodeGenerator.GetIModelTypeName(wireType) + " " : "", target, DanCodeGenerator.GetIModelTypeName(elementType))
@@ -175,26 +175,34 @@ namespace AutoRest.Java.Model
                     builder.Outdent().AppendLine("}");
                 }
             }
-            else if (wireType is DictionaryTypeJv)
+            else if (wireType is DictionaryType dictionaryType)
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, wireType.GetDefaultValue(Method) ?? "null")
-                        .AppendLine("if ({0} != null) {{", source).Indent();
+                    builder.AppendLine($"{DanCodeGenerator.GetIModelTypeName(WireType)} {target} = {wireType.GetDefaultValue(Method) ?? "null"};");
+                    builder.AppendLine($"if ({source} != null) {{");
+                    builder.Indent();
                 }
-                var dictionaryType = wireType as DictionaryTypeJv;
-                var valueType = dictionaryType.ValueType as IModelTypeJv;
-                var itemName = string.Format(CultureInfo.InvariantCulture, "entry{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
-                builder.AppendLine("{0}{1} = new HashMap<String, {2}>();", IsRequired ? DanCodeGenerator.GetIModelTypeName(wireType) + " " : "", target, DanCodeGenerator.GetIModelTypeName(valueType))
-                    .AppendLine("for (Map.Entry<String, {0}> {1} : {2}.entrySet()) {{", DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(valueType)), itemName, source)
-                    .Indent().AppendLine(convertClientTypeToWireType(valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1))
-                        .AppendLine("{0}.put({1}.getKey(), {2});", target, itemName, itemTarget)
-                    .Outdent().Append("}");
+
+                IModelType valueType = dictionaryType.ValueType;
+
+                string levelString = (level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                string itemName = $"entry{levelString}";
+                string itemTarget = $"value{levelString}";
+
+                builder.AppendLine($"{(IsRequired ? DanCodeGenerator.GetIModelTypeName(wireType) + " " : "")}{target} = new HashMap<String, {DanCodeGenerator.GetIModelTypeName(valueType)}>();");
+                builder.AppendLine($"for (Map.Entry<String, {DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.GetIModelTypeParameterVariant(valueType))}> {itemName} : {source}.entrySet()) {{");
+                builder.Indent();
+                builder.AppendLine(convertClientTypeToWireType(valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1));
+                builder.AppendLine($"{target}.put({itemName}.getKey(), {itemTarget});");
+                builder.Outdent();
+                builder.Append("}");
+
                 _implImports.Add("java.util.HashMap");
                 if (!IsRequired)
                 {
-                    builder.Outdent().AppendLine("}");
+                    builder.Outdent();
+                    builder.AppendLine("}");
                 }
             }
             return builder.ToString();
