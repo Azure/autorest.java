@@ -8,8 +8,6 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure.Fluent.Model;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.DanModel;
 using System;
 using System.Linq;
