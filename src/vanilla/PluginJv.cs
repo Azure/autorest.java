@@ -20,7 +20,6 @@ namespace AutoRest.Java
                 Context,
 
                 // set code model implementations our own implementations 
-                new Factory<Method, MethodJv>(),
                 new Factory<Parameter, ParameterJv>(),
                 new Factory<DictionaryType, DictionaryTypeJv>(),
                 new Factory<MethodGroup, MethodGroupJv>(),

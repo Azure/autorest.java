@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
+using AutoRest.Java.DanModel;
 
 namespace AutoRest.Java.Model
 {
@@ -81,8 +82,7 @@ namespace AutoRest.Java.Model
             get
             {
                 if (this.Methods
-                    .OfType<MethodJv>()
-                    .SelectMany(m => m.ImplImports)
+                    .SelectMany(m => DanCodeGenerator.MethodImplImports(m))
                     .Any(i => i.Split('.').LastOrDefault() == TypeName))
                 {
                     return MethodGroupFullType;
@@ -122,22 +122,9 @@ namespace AutoRest.Java.Model
                     imports.Add(MethodGroupFullType);
                 }
                 imports.AddRange(this.Methods
-                    .OfType<MethodJv>()
-                    .SelectMany(m => m.ImplImports)
+                    .SelectMany(m => DanCodeGenerator.MethodImplImports(m))
                     .OrderBy(i => i).Distinct());
                 return imports;
-            }
-        }
-
-        [JsonIgnore]
-        public virtual IEnumerable<string> InterfaceImports
-        {
-            get
-            {
-                return this.Methods
-                    .OfType<MethodJv>()
-                    .SelectMany(m => m.InterfaceImports)
-                    .OrderBy(i => i).Distinct();
             }
         }
     }

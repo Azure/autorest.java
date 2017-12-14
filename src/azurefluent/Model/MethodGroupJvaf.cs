@@ -84,8 +84,8 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
         private bool AnyMethodSupportsInnerListing()
         {
-            var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.List));
-            var listByResourceGroup = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.ListByResourceGroup));
+            var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(DanCodeGenerator.MethodName(x), WellKnowMethodNames.List));
+            var listByResourceGroup = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(DanCodeGenerator.MethodName(x), WellKnowMethodNames.ListByResourceGroup));
             return listMethod != null && listByResourceGroup != null
                 && StringComparer.OrdinalIgnoreCase.Equals(
                     DanCodeGenerator.ResponseSequenceElementTypeString(listMethod.ReturnType),
@@ -105,14 +105,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
             }
 
             const string packageName = "com.microsoft.azure.management.resources.fluentcore.collection";
-            var getMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.GetByResourceGroup));
+            var getMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(DanCodeGenerator.MethodName(x), WellKnowMethodNames.GetByResourceGroup));
             if (getMethod != null && Take2RequiredParameters(getMethod))
             {
                 supportedInterfaces.Add($"{InnerSupportsGet}<{DanCodeGenerator.ResponseGenericBodyClientTypeString(getMethod.ReturnType)}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsGet}");
             }
 
-            var deleteMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.Delete));
+            var deleteMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(DanCodeGenerator.MethodName(x), WellKnowMethodNames.Delete));
             if (deleteMethod != null && Take2RequiredParameters(deleteMethod))
             {
                 supportedInterfaces.Add($"{InnerSupportsDelete}<{DanCodeGenerator.ResponseClientCallbackTypeString(deleteMethod.ReturnType)}>");
@@ -122,7 +122,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             if (AnyMethodSupportsInnerListing())
             {
                 // Getting list method to get the name of the type to be supported.
-                var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, WellKnowMethodNames.List));
+                var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(DanCodeGenerator.MethodName(x), WellKnowMethodNames.List));
 
                 supportedInterfaces.Add($"{InnerSupportsListing}<{DanCodeGenerator.ResponseSequenceElementTypeString(listMethod.ReturnType)}>");
                 interfacesToImport.Add($"{packageName}.{InnerSupportsListing}");

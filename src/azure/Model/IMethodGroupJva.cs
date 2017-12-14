@@ -1,8 +1,5 @@
-﻿using System;
+﻿using AutoRest.Core.Model;
 using System.Collections.Generic;
-using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
-using AutoRest.Java.Model;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -11,7 +8,7 @@ namespace AutoRest.Java.Azure.Model
     /// </summary>
     public interface IMethodGroupJva
     {
-        IEnumerable<MethodJva> Methods { get; }
+        IEnumerable<Method> Methods { get; }
         string LoggingContext { get; }
         string ServiceType { get; }
         string Name { get; }
