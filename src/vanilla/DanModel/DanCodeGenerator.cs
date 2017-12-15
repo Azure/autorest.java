@@ -6,7 +6,6 @@ using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Java.Azure;
 using AutoRest.Java.Azure.Fluent;
-using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using Newtonsoft.Json.Linq;
 using System;
@@ -78,11 +77,11 @@ namespace AutoRest.Java.DanModel
             bool isFluent = IsFluent(settings);
             bool isAzure = IsAzure(settings);
 
-            foreach (MethodGroupJv methodGroup in GetAllOperations(codeModel))
+            foreach (MethodGroup methodGroup in GetAllOperations(codeModel))
             {
                 if (isFluent || isAzure)
                 {
-                    result.Add(GetAzureMethodGroupJavaFile(codeModel, settings, methodGroup as MethodGroupJva));
+                    result.Add(GetAzureMethodGroupJavaFile(codeModel, settings, methodGroup));
                 }
                 else
                 {
@@ -424,23 +423,25 @@ namespace AutoRest.Java.DanModel
 
                 AddMemberVariablesWithGettersAndSettings(classBlock, GetPropertiesEx(codeModel), className);
 
-                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
+                foreach (MethodGroup operation in GetAllOperations(codeModel))
                 {
+                    string methodGroupDeclarationType = IsFluent(settings) ? MethodGroupImplType(operation, settings) : (string)operation.TypeName;
+
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
-                        comment.Line($"The {operation.MethodGroupDeclarationType} object to access its operations.");
+                        comment.Line($"The {methodGroupDeclarationType} object to access its operations.");
                     });
-                    classBlock.Line($"private {operation.MethodGroupDeclarationType} {operation.Name};");
+                    classBlock.Line($"private {methodGroupDeclarationType} {MethodGroupName(operation)};");
                     classBlock.Line();
                     classBlock.MultipleLineComment(comment =>
                     {
-                        comment.Line($"Gets the {operation.MethodGroupDeclarationType} object to access its operations.");
-                        comment.Return($"the {operation.MethodGroupDeclarationType} object.");
+                        comment.Line($"Gets the {methodGroupDeclarationType} object to access its operations.");
+                        comment.Return($"the {methodGroupDeclarationType} object.");
                     });
-                    classBlock.Block($"public {operation.MethodGroupDeclarationType} {operation.Name}()", function =>
+                    classBlock.Block($"public {methodGroupDeclarationType} {MethodGroupName(operation)}()", function =>
                     {
-                        function.Return($"this.{operation.Name}");
+                        function.Return($"this.{MethodGroupName(operation)}");
                     });
                 }
                 classBlock.Line();
@@ -527,9 +528,9 @@ namespace AutoRest.Java.DanModel
                         function.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
 
-                    foreach (MethodGroupJva operation in GetAllOperations(codeModel))
+                    foreach (MethodGroup operation in GetAllOperations(codeModel))
                     {
-                        function.Line($"this.{operation.Name} = new {operation.MethodGroupImplType}(this);");
+                        function.Line($"this.{MethodGroupName(operation)} = new {MethodGroupImplType(operation, settings)}(this);");
                     }
 
                     string defaultHeaders = "";
@@ -1115,7 +1116,7 @@ namespace AutoRest.Java.DanModel
                     }
                 }
 
-                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
+                foreach (MethodGroup operation in GetAllOperations(codeModel))
                 {
                     string operationType = operation.TypeName;
 
@@ -1125,7 +1126,7 @@ namespace AutoRest.Java.DanModel
                         comment.Line($"Gets the {operationType} object to access its operations.");
                         comment.Return($"the {operationType} object.");
                     });
-                    interfaceBlock.Line($"{operationType} {operation.Name.ToCamelCase()}();");
+                    interfaceBlock.Line($"{operationType} {MethodGroupName(operation).ToCamelCase()}();");
                 }
 
                 interfaceBlock.Line();
@@ -1135,23 +1136,23 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetAzureMethodGroupJavaFile(CodeModel codeModel, Settings settings, MethodGroupJva methodGroup)
+        public static JavaFile GetAzureMethodGroupJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
         {
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
 
-            string className = methodGroup.MethodGroupImplType;
+            string className = MethodGroupImplType(methodGroup, settings);
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
-            javaFile.Import(methodGroup.ImplImports);
+            javaFile.Import(MethodGroupImplImports(methodGroup, settings));
 
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
             {
                 comment.Line($"An instance of this class provides access to all the operations defined in {methodGroup.TypeName}.");
             });
-            javaFile.Block($"public class {className}{methodGroup.ParentDeclaration}", classBlock =>
+            javaFile.Block($"public class {className}{MethodGroupParentDeclaration(methodGroup, settings)}", classBlock =>
             {
-                string methodGroupServiceType = methodGroup.MethodGroupServiceType;
-                string serviceClientType = methodGroup.ServiceClientType;
+                string methodGroupServiceType = MethodGroupServiceType(methodGroup);
+                string serviceClientType = MethodGroupServiceClientType(methodGroup);
 
                 classBlock.SingleLineComment($"The {restProxyType} service to perform REST calls.");
                 classBlock.Line($"private {methodGroupServiceType} service;");
@@ -1171,19 +1172,18 @@ namespace AutoRest.Java.DanModel
                 });
                 classBlock.Line();
 
-                IMethodGroupJva methodGroupJva = methodGroup;
                 classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                 {
-                    comment.Line($"The interface defining all the services for {methodGroupJva.Name} to be used by {restProxyType} to perform REST calls.");
+                    comment.Line($"The interface defining all the services for {methodGroup.TypeName} to be used by {restProxyType} to perform REST calls.");
                 });
-                classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroupJva.CodeModel)}\")");
-                classBlock.Block($"interface {methodGroupJva.ServiceType}", interfaceBlock =>
+                classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroup.CodeModel)}\")");
+                classBlock.Block($"interface {MethodGroupServiceType(methodGroup)}", interfaceBlock =>
                 {
-                    foreach (Method method in methodGroupJva.Methods)
+                    foreach (Method method in methodGroup.Methods)
                     {
                         string methodName = MethodName(method);
 
-                        interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroupJva.LoggingContext} {methodName}\" }})");
+                        interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {MethodGroupFullType(methodGroup)} {methodName}\" }})");
                         if (MethodIsPagingNextOperation(method))
                         {
                             interfaceBlock.Annotation("GET(\"{nextUrl}\")");
@@ -2030,10 +2030,10 @@ namespace AutoRest.Java.DanModel
 
                 AddMemberVariablesWithGettersAndSettings(classBlock, codeModel.Properties, className);
 
-                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
+                foreach (MethodGroup operation in GetAllOperations(codeModel))
                 {
                     string operationType = operation.TypeName;
-                    string operationName = operation.Name;
+                    string operationName = MethodGroupName(operation);
 
                     classBlock.Line();
                     classBlock.PrivateMemberVariable($"The {operationType} object to access its operations.", operationType, operationName);
@@ -2065,9 +2065,9 @@ namespace AutoRest.Java.DanModel
                     {
                         constructor.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
-                    foreach (MethodGroupJv operation in GetAllOperations(codeModel))
+                    foreach (MethodGroup operation in GetAllOperations(codeModel))
                     {
-                        constructor.Line($"this.{operation.Name} = new {operation.TypeName}Impl(this);");
+                        constructor.Line($"this.{MethodGroupName(operation)} = new {operation.TypeName}Impl(this);");
                     }
 
                     if (hasRootMethods)
@@ -2161,10 +2161,10 @@ namespace AutoRest.Java.DanModel
                     }
                 }
 
-                foreach (MethodGroupJv operation in GetAllOperations(codeModel))
+                foreach (MethodGroup operation in GetAllOperations(codeModel))
                 {
                     string operationType = operation.TypeName;
-                    string operationName = operation.Name;
+                    string operationName = MethodGroupName(operation);
 
                     interfaceBlock.Line();
 
@@ -2453,24 +2453,24 @@ namespace AutoRest.Java.DanModel
             comment.Throws("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         }
 
-        public static JavaFile GetMethodGroupJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
+        public static JavaFile GetMethodGroupJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
         {
             string methodGroupTypeName = methodGroup.TypeName;
             string className = $"{methodGroupTypeName.ToPascalCase()}Impl";
 
             JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
 
-            javaFile.Import(methodGroup.ImplImports);
+            javaFile.Import(MethodGroupImplImports(methodGroup, settings));
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
             {
                 comment.Line($"An instance of this class provides access to all the operations defined in {methodGroupTypeName}.");
             });
-            javaFile.PublicClass($"{className}{methodGroup.ParentDeclaration}", classBlock =>
+            javaFile.PublicClass($"{className}{MethodGroupParentDeclaration(methodGroup, settings)}", classBlock =>
             {
-                string serviceType = methodGroup.MethodGroupServiceType;
-                string serviceClientType = methodGroup.ServiceClientType;
+                string serviceType = MethodGroupServiceType(methodGroup);
+                string serviceClientType = MethodGroupServiceClientType(methodGroup);
 
                 classBlock.PrivateMemberVariable($"The {restProxyType} service to perform REST calls.", serviceType, "service");
                 classBlock.Line();
@@ -2495,7 +2495,7 @@ namespace AutoRest.Java.DanModel
                 });
 
                 classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroup.CodeModel)}\")");
-                classBlock.Block($"interface {methodGroup.MethodGroupServiceType}", interfaceBlock =>
+                classBlock.Block($"interface {MethodGroupServiceType(methodGroup)}", interfaceBlock =>
                 {
                     foreach (Method method in methodGroup.Methods)
                     {
@@ -2507,7 +2507,7 @@ namespace AutoRest.Java.DanModel
                         }
                         else
                         {
-                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {methodGroup.MethodGroupFullType} {methodName}\" }})");
+                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {MethodGroupFullType(methodGroup)} {methodName}\" }})");
                         }
                         interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
                         if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
@@ -2546,7 +2546,7 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroupJv methodGroup)
+        public static JavaFile GetMethodGroupInterfaceJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
         {
             string interfaceName = methodGroup.TypeName;
 
@@ -3509,7 +3509,7 @@ namespace AutoRest.Java.DanModel
         {
             HashSet<string> classes = new HashSet<string>();
             classes.Add(codeModel.Namespace.ToLowerInvariant() + "." + codeModel.Name);
-            foreach (var methodGroupFullType in GetAllOperations(codeModel).Select(op => op.MethodGroupFullType).Distinct())
+            foreach (var methodGroupFullType in GetAllOperations(codeModel).Select(op => MethodGroupFullType(op)).Distinct())
             {
                 classes.Add(methodGroupFullType);
             }
@@ -3536,8 +3536,8 @@ namespace AutoRest.Java.DanModel
             return classes.ToList();
         }
 
-        private static IEnumerable<MethodGroupJv> GetAllOperations(CodeModel codeModel)
-            => codeModel.Operations.Where(operation => !operation.Name.IsNullOrEmpty()).Cast<MethodGroupJv>();
+        private static IEnumerable<MethodGroup> GetAllOperations(CodeModel codeModel)
+            => codeModel.Operations.Where(operation => !MethodGroupName(operation).IsNullOrEmpty());
 
         private static string GetServiceClientServiceType(CodeModel codeModel)
             => CodeNamerJv.GetServiceName(codeModel.Name.ToPascalCase());
@@ -4891,7 +4891,7 @@ namespace AutoRest.Java.DanModel
             string result = null;
 
             MethodGroup methodGroup = method.MethodGroup;
-            if (!string.IsNullOrEmpty(methodGroup.Name))
+            if (!string.IsNullOrEmpty(MethodGroupName(methodGroup)))
             {
                 MethodType methodType = GetMethodType(method);
                 if (methodType != MethodType.Other)
@@ -5968,6 +5968,209 @@ namespace AutoRest.Java.DanModel
             }
 
             return false;
+        }
+
+        private static IEnumerable<string> MethodGroupImplImports(MethodGroup methodGroup, Settings settings)
+        {
+            IEnumerable<string> result;
+
+            if (IsFluent(settings))
+            {
+                IEnumerable<string> interfacesToImport = MethodGroupInterfacesToImport(methodGroup);
+
+                List<string> imports = new List<string>();
+                string ns = methodGroup.CodeModel.Namespace.ToLowerInvariant();
+                foreach (string interfaceToImport in interfacesToImport)
+                {
+                    imports.Add(interfaceToImport);
+                }
+
+                List<string> azureImplImports = new List<string>();
+                azureImplImports.Add("com.microsoft.rest.v2.RestProxy");
+                azureImplImports.Add("com.microsoft.rest.v2.RestResponse");
+                if (MethodGroupTypeString(methodGroup) == methodGroup.TypeName)
+                {
+                    azureImplImports.Add(MethodGroupFullType(methodGroup));
+                }
+                azureImplImports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m)));
+                azureImplImports.Add("com.microsoft.azure.v2.AzureProxy");
+                azureImplImports.Remove("com.microsoft.rest.v2.RestProxy");
+
+                foreach (string azureImplImport in azureImplImports)
+                {
+                    if (azureImplImport.StartsWith(ns + ".implementation", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Same package, do nothing
+                    }
+                    else if (azureImplImport == ns + "." + methodGroup.TypeName)
+                    {
+                        // do nothing
+                    }
+                    else
+                    {
+                        imports.Add(azureImplImport);
+                    }
+                }
+
+                result = imports;
+            }
+            else if (IsAzure(settings))
+            {
+                List<string> imports = new List<string>();
+                imports.Add("com.microsoft.rest.v2.RestProxy");
+                imports.Add("com.microsoft.rest.v2.RestResponse");
+                if (MethodGroupTypeString(methodGroup) == methodGroup.TypeName)
+                {
+                    imports.Add(MethodGroupFullType(methodGroup));
+                }
+                imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m)));
+                imports.Add("com.microsoft.azure.v2.AzureProxy");
+                imports.Remove("com.microsoft.rest.v2.RestProxy");
+                result = imports;
+            }
+            else
+            {
+                List<string> imports = new List<string>();
+                imports.Add("com.microsoft.rest.v2.RestProxy");
+                imports.Add("com.microsoft.rest.v2.RestResponse");
+                if (MethodGroupTypeString(methodGroup) == methodGroup.TypeName)
+                {
+                    imports.Add(MethodGroupFullType(methodGroup));
+                }
+                imports.AddRange(methodGroup.Methods.SelectMany(m => MethodImplImports(m)));
+                result = imports;
+            }
+
+            return result;
+        }
+
+        internal static string MethodGroupParentDeclaration(MethodGroup methodGroup, Settings settings)
+        {
+            string result;
+
+            if (IsFluent(settings))
+            {
+                IEnumerable<string> supportedInterfaces = MethodGroupSupportedInterfaces(methodGroup);
+
+                if (supportedInterfaces.Any())
+                {
+                    result = $" implements {string.Join(", ", supportedInterfaces)}";
+                }
+                else
+                {
+                    result = "";
+                }
+            }
+            else
+            {
+                result = " implements " + MethodGroupTypeString(methodGroup);
+            }
+
+            return result;
+        }
+
+        internal static string MethodGroupServiceClientType(MethodGroup methodGroup)
+            => methodGroup.CodeModel.Name + "Impl";
+
+        internal static bool TakesTwoRequiredParameters(Method method)
+        {
+            // When parameters are optional we generate more methods.
+            return method.Parameters.Count(x => !x.IsClientProperty && !x.IsConstant && x.IsRequired) == 2;
+        }
+
+        internal static IEnumerable<string> MethodGroupSupportedInterfaces(MethodGroup methodGroup)
+        {
+            List<string> result = new List<string>();
+
+            const string InnerSupportsGet = "InnerSupportsGet";
+            const string InnerSupportsDelete = "InnerSupportsDelete";
+            const string InnerSupportsListing = "InnerSupportsListing";
+
+            Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.GetByResourceGroup));
+            if (getMethod != null && TakesTwoRequiredParameters(getMethod))
+            {
+                result.Add($"{InnerSupportsGet}<{ResponseGenericBodyClientTypeString(getMethod.ReturnType)}>");
+            }
+
+            Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.Delete));
+            if (deleteMethod != null && TakesTwoRequiredParameters(deleteMethod))
+            {
+                result.Add($"{InnerSupportsDelete}<{ResponseClientCallbackTypeString(deleteMethod.ReturnType)}>");
+            }
+
+            Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.List));
+            Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.ListByResourceGroup));
+            bool anyMethodSupportsInnerListing = listMethod != null && listByResourceGroup != null
+                && StringComparer.OrdinalIgnoreCase.Equals(
+                    ResponseSequenceElementTypeString(listMethod.ReturnType),
+                    ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
+            if (anyMethodSupportsInnerListing)
+            {
+                result.Add($"{InnerSupportsListing}<{ResponseSequenceElementTypeString(listMethod.ReturnType)}>");
+            }
+
+            return result;
+        }
+
+        internal static IEnumerable<string> MethodGroupInterfacesToImport(MethodGroup methodGroup)
+        {
+            List<string> result = new List<string>();
+
+            const string InnerSupportsGet = "InnerSupportsGet";
+            const string InnerSupportsDelete = "InnerSupportsDelete";
+            const string InnerSupportsListing = "InnerSupportsListing";
+
+            const string packageName = "com.microsoft.azure.management.resources.fluentcore.collection";
+            Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.GetByResourceGroup));
+            if (getMethod != null && TakesTwoRequiredParameters(getMethod))
+            {
+                result.Add($"{packageName}.{InnerSupportsGet}");
+            }
+
+            Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.Delete));
+            if (deleteMethod != null && TakesTwoRequiredParameters(deleteMethod))
+            {
+                result.Add($"{packageName}.{InnerSupportsDelete}");
+            }
+
+            Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.List));
+            Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.ListByResourceGroup));
+            bool anyMethodSupportsInnerListing = listMethod != null && listByResourceGroup != null
+                && StringComparer.OrdinalIgnoreCase.Equals(
+                    ResponseSequenceElementTypeString(listMethod.ReturnType),
+                    ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
+            if (anyMethodSupportsInnerListing)
+            {
+                result.Add($"{packageName}.{InnerSupportsListing}");
+            }
+
+            return result;
+        }
+
+        private static string MethodGroupFullType(MethodGroup methodGroup)
+            => methodGroup.CodeModel.Namespace.ToLowerInvariant() + "." + methodGroup.TypeName;
+
+        private static string MethodGroupImplType(MethodGroup methodGroup, Settings settings)
+            => methodGroup.TypeName + (IsFluent(settings) ? "Inner" : "Impl");
+
+        private static string MethodGroupTypeString(MethodGroup methodGroup)
+        {
+            string methodGroupTypeName = methodGroup.TypeName;
+            if (methodGroup.Methods
+                    .SelectMany(m => MethodImplImports(m))
+                    .Any(i => i.Split('.').LastOrDefault() == methodGroupTypeName))
+            {
+                return MethodGroupFullType(methodGroup);
+            }
+            return methodGroupTypeName;
+        }
+
+        private static string MethodGroupServiceType(MethodGroup methodGroup)
+            => CodeNamerJv.GetServiceName(MethodGroupName(methodGroup).ToPascalCase());
+
+        private static string MethodGroupName(MethodGroup methodGroup)
+        {
+            return methodGroup.Name.ToCamelCase();
         }
     }
 }
