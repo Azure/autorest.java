@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Model;
-using Newtonsoft.Json;
+﻿using AutoRest.Core.Model;
 using AutoRest.Java.DanModel;
+using Newtonsoft.Json;
+using System;
 
 namespace AutoRest.Java.Model
 {
-    public class PrimaryTypeJv : PrimaryType, IModelTypeJv
+    public class PrimaryTypeJv : PrimaryType
     {
         public PrimaryTypeJv()
         {
@@ -18,7 +16,7 @@ namespace AutoRest.Java.Model
         {
         }
 
-        public bool WantNullable { get; private set; } = true;
+        public bool WantNullable { get; internal set; } = true;
 
         [JsonIgnore]
         public bool Nullable
@@ -66,110 +64,6 @@ namespace AutoRest.Java.Model
                 }
             }
         }
-
-        [JsonIgnore]
-        public IModelTypeJv ParameterVariant
-        {
-            get
-            {
-                if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.Stream)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
-                }
-                else
-                {
-                    return this;
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public IModelTypeJv ResponseVariant
-        {
-            get
-            {
-                if (KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.UnixTime)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.DateTime);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.Base64Url)
-                {
-                    return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
-                }
-                else if (KnownPrimaryType == KnownPrimaryType.None)
-                {
-                    return (IModelTypeJv)DanCodeGenerator.GetIModelTypeNonNullableVariant(this);
-                }
-                return this;
-            }
-        }
-
-        [JsonIgnore]
-        public IEnumerable<string> Imports
-        {
-            get
-            {
-                switch (KnownPrimaryType)
-                {
-                    case KnownPrimaryType.Base64Url:
-                        yield return "com.microsoft.rest.v2.Base64Url";
-                        break;
-                    case KnownPrimaryType.Date:
-                        yield return "org.joda.time.LocalDate";
-                        break;
-                    case KnownPrimaryType.DateTime:
-                        yield return "org.joda.time.DateTime";
-                        break;
-                    case KnownPrimaryType.DateTimeRfc1123:
-                        yield return "com.microsoft.rest.v2.DateTimeRfc1123";
-                        break;
-                    case KnownPrimaryType.Decimal:
-                        yield return "java.math.BigDecimal";
-                        break;
-                    case KnownPrimaryType.Stream:
-                        yield return "java.io.InputStream";
-                        break;
-                    case KnownPrimaryType.TimeSpan:
-                        yield return "org.joda.time.Period";
-                        break;
-                    case KnownPrimaryType.UnixTime:
-                        yield return "org.joda.time.DateTime";
-                        yield return "org.joda.time.DateTimeZone";
-                        break;
-                    case KnownPrimaryType.Uuid:
-                        yield return "java.util.UUID";
-                        break;
-                    case KnownPrimaryType.Credentials:
-                        yield return "com.microsoft.rest.v2.ServiceClientCredentials";
-                        break;
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public IModelTypeJv NonNullableVariant =>
-            new PrimaryTypeJv
-            {
-                KnownPrimaryType = KnownPrimaryType,
-                Format = Format,
-                WantNullable = false
-            };
 
         [JsonIgnore]
         public virtual string ImplementationName

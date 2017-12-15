@@ -3639,9 +3639,13 @@ namespace AutoRest.Java.DanModel
                     result = GetIModelTypeImports(sequenceType.ElementType)
                         .Concat(new[] { "java.util.List" });
                 }
-                else if (modelType is IModelTypeJv modelTypeJv)
+                else if (modelType is DictionaryType dictionaryType)
                 {
-                    result = modelTypeJv.Imports;
+                    result = DictionaryTypeImports(dictionaryType);
+                }
+                else if (modelType is PrimaryType primaryType)
+                {
+                    result = PrimaryTypeImports(primaryType);
                 }
             }
 
@@ -3729,9 +3733,23 @@ namespace AutoRest.Java.DanModel
                     result = sequenceType;
                 }
             }
-            else if (modelType is IModelTypeJv modelTypeJv)
+            else if (modelType is DictionaryType dictionaryType)
             {
-                result = modelTypeJv.ResponseVariant;
+                IModelType valueTypeResponseVariant = GetIModelTypeResponseVariant(dictionaryType.ValueType);
+                if (valueTypeResponseVariant != dictionaryType.ValueType && (valueTypeResponseVariant as PrimaryTypeJv)?.Nullable != false)
+                {
+                    DictionaryType dictionaryTypeResult = DependencyInjection.New<DictionaryType>();
+                    dictionaryTypeResult.ValueType = valueTypeResponseVariant;
+                    result = dictionaryTypeResult;
+                }
+                else
+                {
+                    result = dictionaryType;
+                }
+            }
+            else if (modelType is PrimaryType primaryType)
+            {
+                result = PrimaryTypeResponseVariant(primaryType);
             }
 
             return result;
@@ -3751,9 +3769,13 @@ namespace AutoRest.Java.DanModel
                     result = resultSequenceType;
                 }
             }
-            else if (modelType is IModelTypeJv modelTypeJv)
+            else if (modelType is DictionaryType dictionaryType)
             {
-                result = modelTypeJv.ParameterVariant;
+                result = DictionaryTypeParameterVariant(dictionaryType);
+            }
+            else if (modelType is PrimaryType primaryType)
+            {
+                result = PrimaryTypeParameterVariant(primaryType);
             }
 
             return result;
@@ -3763,9 +3785,14 @@ namespace AutoRest.Java.DanModel
         {
             IModelType result = modelType;
 
-            if (modelType is IModelTypeJv modelTypeJv)
+            if (modelType is PrimaryTypeJv primaryType)
             {
-                result = modelTypeJv.NonNullableVariant;
+                result = new PrimaryTypeJv
+                {
+                    KnownPrimaryType = primaryType.KnownPrimaryType,
+                    Format = primaryType.Format,
+                    WantNullable = false
+                };
             }
 
             return result;
@@ -3792,9 +3819,9 @@ namespace AutoRest.Java.DanModel
                         result = "Paged" + result;
                     }
                 }
-                else if (modelType is DictionaryTypeJv dictionaryTypeJv)
+                else if (modelType is DictionaryType dictionaryType)
                 {
-                    result = $"Map<String, {GetIModelTypeName(dictionaryTypeJv.ValueType)}>";
+                    result = $"Map<String, {GetIModelTypeName(dictionaryType.ValueType)}>";
                 }
                 else if (modelType is CompositeType && IsFluent(settings))
                 {
@@ -6171,6 +6198,110 @@ namespace AutoRest.Java.DanModel
         private static string MethodGroupName(MethodGroup methodGroup)
         {
             return methodGroup.Name.ToCamelCase();
+        }
+
+        internal static IEnumerable<string> DictionaryTypeImports(DictionaryType dictionaryType)
+        {
+            List<string> imports = new List<string> { "java.util.Map" };
+            return imports.Concat(GetIModelTypeImports(dictionaryType.ValueType));
+        }
+
+        internal static IModelType DictionaryTypeParameterVariant(DictionaryType dictionaryType)
+        {
+            IModelType parameterVariant = GetIModelTypeParameterVariant(dictionaryType.ValueType);
+            if (parameterVariant != dictionaryType.ValueType && (parameterVariant as PrimaryTypeJv)?.Nullable != false)
+            {
+                DictionaryType result = DependencyInjection.New<DictionaryType>();
+                result.ValueType = parameterVariant;
+                return result;
+            }
+            return dictionaryType;
+        }
+
+        private static IEnumerable<string> PrimaryTypeImports(PrimaryType primaryType)
+        {
+            switch (primaryType.KnownPrimaryType)
+            {
+                case KnownPrimaryType.Base64Url:
+                    yield return "com.microsoft.rest.v2.Base64Url";
+                    break;
+                case KnownPrimaryType.Date:
+                    yield return "org.joda.time.LocalDate";
+                    break;
+                case KnownPrimaryType.DateTime:
+                    yield return "org.joda.time.DateTime";
+                    break;
+                case KnownPrimaryType.DateTimeRfc1123:
+                    yield return "com.microsoft.rest.v2.DateTimeRfc1123";
+                    break;
+                case KnownPrimaryType.Decimal:
+                    yield return "java.math.BigDecimal";
+                    break;
+                case KnownPrimaryType.Stream:
+                    yield return "java.io.InputStream";
+                    break;
+                case KnownPrimaryType.TimeSpan:
+                    yield return "org.joda.time.Period";
+                    break;
+                case KnownPrimaryType.UnixTime:
+                    yield return "org.joda.time.DateTime";
+                    yield return "org.joda.time.DateTimeZone";
+                    break;
+                case KnownPrimaryType.Uuid:
+                    yield return "java.util.UUID";
+                    break;
+                case KnownPrimaryType.Credentials:
+                    yield return "com.microsoft.rest.v2.ServiceClientCredentials";
+                    break;
+            }
+        }
+
+        private static IModelType PrimaryTypeResponseVariant(PrimaryType primaryType)
+        {
+            if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+            }
+            else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+            }
+            else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+            }
+            else if (primaryType.KnownPrimaryType == KnownPrimaryType.None)
+            {
+                return GetIModelTypeNonNullableVariant(primaryType);
+            }
+            else
+            {
+                return primaryType;
+            }
+        }
+
+        private static IModelType PrimaryTypeParameterVariant(PrimaryType primaryType)
+        {
+            if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+            }
+            else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+            }
+            else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+            }
+            else if (primaryType.KnownPrimaryType == KnownPrimaryType.Stream)
+            {
+                return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+            }
+            else
+            {
+                return primaryType;
+            }
         }
     }
 }
