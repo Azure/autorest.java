@@ -67,7 +67,7 @@ namespace AutoRest.Java.Model
                     Location != Core.Model.ParameterLocation.FormData &&
                     NeedsSpecialSerialization(ClientType))
                 {
-                    return new PrimaryTypeJv(KnownPrimaryType.String);
+                    return DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
                 }
                 else
                 {
@@ -88,7 +88,7 @@ namespace AutoRest.Java.Model
                 Location != Core.Model.ParameterLocation.FormData &&
                 NeedsSpecialSerialization(ModelType))
             {
-                var primary = ClientType as PrimaryTypeJv;
+                PrimaryType primary = ClientType as PrimaryType;
                 SequenceType sequence = ClientType as SequenceType;
                 if (primary != null && primary.IsPrimaryType(KnownPrimaryType.ByteArray))
                 {
@@ -123,7 +123,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, wireType.GetDefaultValue(Method) ?? "null")
+                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, DanCodeGenerator.IModelTypeDefaultValue(wireType, Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = new DateTimeRfc1123({2});", IsRequired ? "DateTimeRfc1123 " : "", target, source);
@@ -136,7 +136,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("Long {0} = {1};", target, wireType.GetDefaultValue(Method) ?? "null")
+                    builder.AppendLine("Long {0} = {1};", target, DanCodeGenerator.IModelTypeDefaultValue(wireType, Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = {2}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;", IsRequired ? "Long " : "", target, source);
@@ -145,7 +145,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("Base64Url {0} = {1};", target, wireType.GetDefaultValue(Method) ?? "null")
+                    builder.AppendLine("Base64Url {0} = {1};", target, DanCodeGenerator.IModelTypeDefaultValue(wireType, Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 builder.AppendLine("{0}{1} = Base64Url.encode({2});", IsRequired ? "Base64Url " : "", target, source);
@@ -158,7 +158,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, wireType.GetDefaultValue(Method) ?? "null")
+                    builder.AppendLine("{0} {1} = {2};", DanCodeGenerator.GetIModelTypeName(WireType), target, DanCodeGenerator.IModelTypeDefaultValue(wireType, Method) ?? "null")
                         .AppendLine("if ({0} != null) {{", source).Indent();
                 }
                 IModelType elementType = wireSequenceType.ElementType;
@@ -179,7 +179,7 @@ namespace AutoRest.Java.Model
             {
                 if (!IsRequired)
                 {
-                    builder.AppendLine($"{DanCodeGenerator.GetIModelTypeName(WireType)} {target} = {wireType.GetDefaultValue(Method) ?? "null"};");
+                    builder.AppendLine($"{DanCodeGenerator.GetIModelTypeName(WireType)} {target} = {DanCodeGenerator.IModelTypeDefaultValue(wireType, Method) ?? "null"};");
                     builder.AppendLine($"if ({source} != null) {{");
                     builder.Indent();
                 }
