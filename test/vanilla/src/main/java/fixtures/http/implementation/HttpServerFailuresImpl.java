@@ -136,7 +136,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -189,7 +189,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -243,7 +243,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -299,7 +299,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -353,7 +353,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -409,7 +409,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                     }
                 }
             });
-        }
+    }
 
 
 }

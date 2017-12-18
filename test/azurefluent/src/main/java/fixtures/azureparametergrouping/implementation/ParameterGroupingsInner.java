@@ -139,7 +139,7 @@ public class ParameterGroupingsInner {
     public Completable postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -188,7 +188,7 @@ public class ParameterGroupingsInner {
     public Completable postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -245,7 +245,7 @@ public class ParameterGroupingsInner {
     public Completable postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -298,7 +298,7 @@ public class ParameterGroupingsInner {
     public Completable postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -368,7 +368,7 @@ public class ParameterGroupingsInner {
     public Completable postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -417,7 +417,7 @@ public class ParameterGroupingsInner {
     public Completable postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post parameters with a shared parameter group object.
@@ -474,7 +474,7 @@ public class ParameterGroupingsInner {
     public Completable postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
             .toCompletable();
-        }
+    }
 
 
 }

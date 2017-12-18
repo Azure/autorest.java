@@ -140,7 +140,7 @@ public class DurationsImpl implements Durations {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -192,7 +192,7 @@ public class DurationsImpl implements Durations {
     public Completable putPositiveDurationAsync(Period durationBody) {
         return putPositiveDurationWithRestResponseAsync(durationBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -245,7 +245,7 @@ public class DurationsImpl implements Durations {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -298,7 +298,7 @@ public class DurationsImpl implements Durations {
                     }
                 }
             });
-        }
+    }
 
 
 }

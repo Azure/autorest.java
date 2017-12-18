@@ -129,7 +129,7 @@ public class HttpFailuresImpl implements HttpFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -182,7 +182,7 @@ public class HttpFailuresImpl implements HttpFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -235,7 +235,7 @@ public class HttpFailuresImpl implements HttpFailures {
                     }
                 }
             });
-        }
+    }
 
 
 }

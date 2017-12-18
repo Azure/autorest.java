@@ -128,7 +128,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     public Completable getMethodGlobalValidAsync() {
         return getMethodGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -176,7 +176,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     public Completable getMethodGlobalNotProvidedValidAsync() {
         return getMethodGlobalNotProvidedValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -224,7 +224,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     public Completable getPathGlobalValidAsync() {
         return getPathGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -272,7 +272,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     public Completable getSwaggerGlobalValidAsync() {
         return getSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

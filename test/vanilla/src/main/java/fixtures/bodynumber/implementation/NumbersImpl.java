@@ -260,7 +260,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -313,7 +313,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -366,7 +366,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -419,7 +419,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -468,7 +468,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigFloatAsync(double numberBody) {
         return putBigFloatWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -521,7 +521,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -570,7 +570,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigDoubleAsync(double numberBody) {
         return putBigDoubleWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -623,7 +623,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -672,7 +672,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigDoublePositiveDecimalAsync(double numberBody) {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -725,7 +725,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -774,7 +774,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigDoubleNegativeDecimalAsync(double numberBody) {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -827,7 +827,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -879,7 +879,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -932,7 +932,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -984,7 +984,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigDecimalPositiveDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1037,7 +1037,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1089,7 +1089,7 @@ public class NumbersImpl implements Numbers {
     public Completable putBigDecimalNegativeDecimalAsync(BigDecimal numberBody) {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1142,7 +1142,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1191,7 +1191,7 @@ public class NumbersImpl implements Numbers {
     public Completable putSmallFloatAsync(double numberBody) {
         return putSmallFloatWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1244,7 +1244,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1293,7 +1293,7 @@ public class NumbersImpl implements Numbers {
     public Completable putSmallDoubleAsync(double numberBody) {
         return putSmallDoubleWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1346,7 +1346,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1398,7 +1398,7 @@ public class NumbersImpl implements Numbers {
     public Completable putSmallDecimalAsync(BigDecimal numberBody) {
         return putSmallDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1451,7 +1451,7 @@ public class NumbersImpl implements Numbers {
                     }
                 }
             });
-        }
+    }
 
 
 }

@@ -124,7 +124,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
                     }
                 }
             });
-        }
+    }
 
     /**
      * Get test coverage report.
@@ -180,6 +180,6 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
                     }
                 }
             });
-        }
+    }
 
 }

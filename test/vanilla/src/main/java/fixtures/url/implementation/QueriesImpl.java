@@ -317,7 +317,7 @@ public class QueriesImpl implements Queries {
     public Completable getBooleanTrueAsync() {
         return getBooleanTrueWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -363,7 +363,7 @@ public class QueriesImpl implements Queries {
     public Completable getBooleanFalseAsync() {
         return getBooleanFalseWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -409,7 +409,7 @@ public class QueriesImpl implements Queries {
     public Completable getBooleanNullAsync() {
         return getBooleanNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -457,7 +457,7 @@ public class QueriesImpl implements Queries {
     public Completable getBooleanNullAsync(Boolean boolQuery) {
         return getBooleanNullWithRestResponseAsync(boolQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -503,7 +503,7 @@ public class QueriesImpl implements Queries {
     public Completable getIntOneMillionAsync() {
         return getIntOneMillionWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -549,7 +549,7 @@ public class QueriesImpl implements Queries {
     public Completable getIntNegativeOneMillionAsync() {
         return getIntNegativeOneMillionWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -595,7 +595,7 @@ public class QueriesImpl implements Queries {
     public Completable getIntNullAsync() {
         return getIntNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null integer value (no query parameter).
@@ -643,7 +643,7 @@ public class QueriesImpl implements Queries {
     public Completable getIntNullAsync(Integer intQuery) {
         return getIntNullWithRestResponseAsync(intQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -689,7 +689,7 @@ public class QueriesImpl implements Queries {
     public Completable getTenBillionAsync() {
         return getTenBillionWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -735,7 +735,7 @@ public class QueriesImpl implements Queries {
     public Completable getNegativeTenBillionAsync() {
         return getNegativeTenBillionWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -781,7 +781,7 @@ public class QueriesImpl implements Queries {
     public Completable getLongNullAsync() {
         return getLongNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -829,7 +829,7 @@ public class QueriesImpl implements Queries {
     public Completable getLongNullAsync(Long longQuery) {
         return getLongNullWithRestResponseAsync(longQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -875,7 +875,7 @@ public class QueriesImpl implements Queries {
     public Completable floatScientificPositiveAsync() {
         return floatScientificPositiveWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -921,7 +921,7 @@ public class QueriesImpl implements Queries {
     public Completable floatScientificNegativeAsync() {
         return floatScientificNegativeWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -967,7 +967,7 @@ public class QueriesImpl implements Queries {
     public Completable floatNullAsync() {
         return floatNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null numeric value (no query parameter).
@@ -1015,7 +1015,7 @@ public class QueriesImpl implements Queries {
     public Completable floatNullAsync(Double floatQuery) {
         return floatNullWithRestResponseAsync(floatQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1061,7 +1061,7 @@ public class QueriesImpl implements Queries {
     public Completable doubleDecimalPositiveAsync() {
         return doubleDecimalPositiveWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1107,7 +1107,7 @@ public class QueriesImpl implements Queries {
     public Completable doubleDecimalNegativeAsync() {
         return doubleDecimalNegativeWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1153,7 +1153,7 @@ public class QueriesImpl implements Queries {
     public Completable doubleNullAsync() {
         return doubleNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null numeric value (no query parameter).
@@ -1201,7 +1201,7 @@ public class QueriesImpl implements Queries {
     public Completable doubleNullAsync(Double doubleQuery) {
         return doubleNullWithRestResponseAsync(doubleQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1247,7 +1247,7 @@ public class QueriesImpl implements Queries {
     public Completable stringUnicodeAsync() {
         return stringUnicodeWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1293,7 +1293,7 @@ public class QueriesImpl implements Queries {
     public Completable stringUrlEncodedAsync() {
         return stringUrlEncodedWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1339,7 +1339,7 @@ public class QueriesImpl implements Queries {
     public Completable stringEmptyAsync() {
         return stringEmptyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1385,7 +1385,7 @@ public class QueriesImpl implements Queries {
     public Completable stringNullAsync() {
         return stringNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null (no query parameter in url).
@@ -1433,7 +1433,7 @@ public class QueriesImpl implements Queries {
     public Completable stringNullAsync(String stringQuery) {
         return stringNullWithRestResponseAsync(stringQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1479,7 +1479,7 @@ public class QueriesImpl implements Queries {
     public Completable enumValidAsync() {
         return enumValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -1527,7 +1527,7 @@ public class QueriesImpl implements Queries {
     public Completable enumValidAsync(UriColor enumQuery) {
         return enumValidWithRestResponseAsync(enumQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1573,7 +1573,7 @@ public class QueriesImpl implements Queries {
     public Completable enumNullAsync() {
         return enumNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null (no query parameter in url).
@@ -1621,7 +1621,7 @@ public class QueriesImpl implements Queries {
     public Completable enumNullAsync(UriColor enumQuery) {
         return enumNullWithRestResponseAsync(enumQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1668,7 +1668,7 @@ public class QueriesImpl implements Queries {
     public Completable byteMultiByteAsync() {
         return byteMultiByteWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1717,7 +1717,7 @@ public class QueriesImpl implements Queries {
     public Completable byteMultiByteAsync(byte[] byteQuery) {
         return byteMultiByteWithRestResponseAsync(byteQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1764,7 +1764,7 @@ public class QueriesImpl implements Queries {
     public Completable byteEmptyAsync() {
         return byteEmptyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1811,7 +1811,7 @@ public class QueriesImpl implements Queries {
     public Completable byteNullAsync() {
         return byteNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1860,7 +1860,7 @@ public class QueriesImpl implements Queries {
     public Completable byteNullAsync(byte[] byteQuery) {
         return byteNullWithRestResponseAsync(byteQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1906,7 +1906,7 @@ public class QueriesImpl implements Queries {
     public Completable dateValidAsync() {
         return dateValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1952,7 +1952,7 @@ public class QueriesImpl implements Queries {
     public Completable dateNullAsync() {
         return dateNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -2000,7 +2000,7 @@ public class QueriesImpl implements Queries {
     public Completable dateNullAsync(LocalDate dateQuery) {
         return dateNullWithRestResponseAsync(dateQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2046,7 +2046,7 @@ public class QueriesImpl implements Queries {
     public Completable dateTimeValidAsync() {
         return dateTimeValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2092,7 +2092,7 @@ public class QueriesImpl implements Queries {
     public Completable dateTimeNullAsync() {
         return dateTimeNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -2140,7 +2140,7 @@ public class QueriesImpl implements Queries {
     public Completable dateTimeNullAsync(DateTime dateTimeQuery) {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2188,7 +2188,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringCsvValidAsync() {
         return arrayStringCsvValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -2238,7 +2238,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringCsvValidAsync(List<String> arrayQuery) {
         return arrayStringCsvValidWithRestResponseAsync(arrayQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2286,7 +2286,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringCsvNullAsync() {
         return arrayStringCsvNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get a null array of string using the csv-array format.
@@ -2336,7 +2336,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringCsvNullAsync(List<String> arrayQuery) {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2384,7 +2384,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringCsvEmptyAsync() {
         return arrayStringCsvEmptyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -2434,7 +2434,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringCsvEmptyAsync(List<String> arrayQuery) {
         return arrayStringCsvEmptyWithRestResponseAsync(arrayQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2482,7 +2482,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringSsvValidAsync() {
         return arrayStringSsvValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -2532,7 +2532,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringSsvValidAsync(List<String> arrayQuery) {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2580,7 +2580,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringTsvValidAsync() {
         return arrayStringTsvValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -2630,7 +2630,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringTsvValidAsync(List<String> arrayQuery) {
         return arrayStringTsvValidWithRestResponseAsync(arrayQuery)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2678,7 +2678,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringPipesValidAsync() {
         return arrayStringPipesValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -2728,7 +2728,7 @@ public class QueriesImpl implements Queries {
     public Completable arrayStringPipesValidAsync(List<String> arrayQuery) {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
             .toCompletable();
-        }
+    }
 
 
 }

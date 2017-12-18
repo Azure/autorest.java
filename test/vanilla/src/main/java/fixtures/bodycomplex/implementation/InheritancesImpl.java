@@ -129,7 +129,7 @@ public class InheritancesImpl implements Inheritances {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -182,7 +182,7 @@ public class InheritancesImpl implements Inheritances {
     public Completable putValidAsync(Siamese complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
 }

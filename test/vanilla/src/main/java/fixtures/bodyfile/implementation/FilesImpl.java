@@ -134,7 +134,7 @@ public class FilesImpl implements Files {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -187,7 +187,7 @@ public class FilesImpl implements Files {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -240,7 +240,7 @@ public class FilesImpl implements Files {
                     }
                 }
             });
-        }
+    }
 
 
 }

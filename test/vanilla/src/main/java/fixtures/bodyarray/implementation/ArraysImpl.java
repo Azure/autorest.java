@@ -519,7 +519,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -572,7 +572,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -625,7 +625,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -678,7 +678,7 @@ public class ArraysImpl implements Arrays {
     public Completable putEmptyAsync(List<String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -731,7 +731,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -784,7 +784,7 @@ public class ArraysImpl implements Arrays {
     public Completable putBooleanTfftAsync(List<Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -837,7 +837,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -890,7 +890,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -943,7 +943,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -996,7 +996,7 @@ public class ArraysImpl implements Arrays {
     public Completable putIntegerValidAsync(List<Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1049,7 +1049,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1102,7 +1102,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1155,7 +1155,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1208,7 +1208,7 @@ public class ArraysImpl implements Arrays {
     public Completable putLongValidAsync(List<Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1261,7 +1261,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1314,7 +1314,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1367,7 +1367,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1420,7 +1420,7 @@ public class ArraysImpl implements Arrays {
     public Completable putFloatValidAsync(List<Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1473,7 +1473,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1526,7 +1526,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1579,7 +1579,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1632,7 +1632,7 @@ public class ArraysImpl implements Arrays {
     public Completable putDoubleValidAsync(List<Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1685,7 +1685,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1738,7 +1738,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1791,7 +1791,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1844,7 +1844,7 @@ public class ArraysImpl implements Arrays {
     public Completable putStringValidAsync(List<String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1897,7 +1897,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1950,7 +1950,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2003,7 +2003,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2056,7 +2056,7 @@ public class ArraysImpl implements Arrays {
     public Completable putUuidValidAsync(List<UUID> arrayBody) {
         return putUuidValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2109,7 +2109,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2162,7 +2162,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2215,7 +2215,7 @@ public class ArraysImpl implements Arrays {
     public Completable putDateValidAsync(List<LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2268,7 +2268,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2321,7 +2321,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2374,7 +2374,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2427,7 +2427,7 @@ public class ArraysImpl implements Arrays {
     public Completable putDateTimeValidAsync(List<DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2480,7 +2480,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2533,7 +2533,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2586,7 +2586,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2645,7 +2645,7 @@ public class ArraysImpl implements Arrays {
     public Completable putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2698,7 +2698,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2751,7 +2751,7 @@ public class ArraysImpl implements Arrays {
     public Completable putDurationValidAsync(List<Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2804,7 +2804,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2857,7 +2857,7 @@ public class ArraysImpl implements Arrays {
     public Completable putByteValidAsync(List<byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2910,7 +2910,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2963,7 +2963,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3016,7 +3016,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3069,7 +3069,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3122,7 +3122,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3175,7 +3175,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3228,7 +3228,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3281,7 +3281,7 @@ public class ArraysImpl implements Arrays {
     public Completable putComplexValidAsync(List<Product> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -3334,7 +3334,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3387,7 +3387,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3440,7 +3440,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3493,7 +3493,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3546,7 +3546,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3599,7 +3599,7 @@ public class ArraysImpl implements Arrays {
     public Completable putArrayValidAsync(List<List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -3652,7 +3652,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3705,7 +3705,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3758,7 +3758,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3811,7 +3811,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3864,7 +3864,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3917,7 +3917,7 @@ public class ArraysImpl implements Arrays {
     public Completable putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
 }

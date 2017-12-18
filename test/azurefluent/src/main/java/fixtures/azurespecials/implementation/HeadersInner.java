@@ -127,7 +127,7 @@ public class HeadersInner {
     public Completable customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -181,7 +181,7 @@ public class HeadersInner {
     public Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -241,7 +241,7 @@ public class HeadersInner {
                     }
                 }
             });
-        }
+    }
 
 
 }

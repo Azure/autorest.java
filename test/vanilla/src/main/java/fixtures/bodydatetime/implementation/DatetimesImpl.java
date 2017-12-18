@@ -230,7 +230,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -283,7 +283,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -336,7 +336,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -389,7 +389,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -441,7 +441,7 @@ public class DatetimesImpl implements Datetimes {
     public Completable putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -494,7 +494,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -547,7 +547,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -599,7 +599,7 @@ public class DatetimesImpl implements Datetimes {
     public Completable putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         return putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -652,7 +652,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -705,7 +705,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -757,7 +757,7 @@ public class DatetimesImpl implements Datetimes {
     public Completable putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody) {
         return putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -810,7 +810,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -863,7 +863,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -915,7 +915,7 @@ public class DatetimesImpl implements Datetimes {
     public Completable putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -968,7 +968,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1020,7 +1020,7 @@ public class DatetimesImpl implements Datetimes {
     public Completable putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody) {
         return putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1073,7 +1073,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1125,7 +1125,7 @@ public class DatetimesImpl implements Datetimes {
     public Completable putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody) {
         return putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1178,7 +1178,7 @@ public class DatetimesImpl implements Datetimes {
                     }
                 }
             });
-        }
+    }
 
 
 }

@@ -113,7 +113,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     public Completable getAsync() {
         return getWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -165,7 +165,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
     public Completable paramGetAsync(String xMsClientRequestId) {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
             .toCompletable();
-        }
+    }
 
 
 }

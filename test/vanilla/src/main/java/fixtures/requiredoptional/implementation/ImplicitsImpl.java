@@ -164,7 +164,7 @@ public class ImplicitsImpl implements Implicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -210,7 +210,7 @@ public class ImplicitsImpl implements Implicits {
     public Completable putOptionalQueryAsync() {
         return putOptionalQueryWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test implicitly optional query parameter.
@@ -258,7 +258,7 @@ public class ImplicitsImpl implements Implicits {
     public Completable putOptionalQueryAsync(String queryParameter) {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -304,7 +304,7 @@ public class ImplicitsImpl implements Implicits {
     public Completable putOptionalHeaderAsync() {
         return putOptionalHeaderWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test implicitly optional header parameter.
@@ -352,7 +352,7 @@ public class ImplicitsImpl implements Implicits {
     public Completable putOptionalHeaderAsync(String queryParameter) {
         return putOptionalHeaderWithRestResponseAsync(queryParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -398,7 +398,7 @@ public class ImplicitsImpl implements Implicits {
     public Completable putOptionalBodyAsync() {
         return putOptionalBodyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test implicitly optional body parameter.
@@ -446,7 +446,7 @@ public class ImplicitsImpl implements Implicits {
     public Completable putOptionalBodyAsync(String bodyParameter) {
         return putOptionalBodyWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -502,7 +502,7 @@ public class ImplicitsImpl implements Implicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -558,7 +558,7 @@ public class ImplicitsImpl implements Implicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -611,7 +611,7 @@ public class ImplicitsImpl implements Implicits {
                     }
                 }
             });
-        }
+    }
 
 
 }

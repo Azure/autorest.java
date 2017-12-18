@@ -158,7 +158,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable head408Async() {
         return head408WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -204,7 +204,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable put500Async() {
         return put500WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -252,7 +252,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable put500Async(Boolean booleanValue) {
         return put500WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -298,7 +298,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable patch500Async() {
         return patch500WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -346,7 +346,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable patch500Async(Boolean booleanValue) {
         return patch500WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -391,7 +391,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable get502Async() {
         return get502WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -437,7 +437,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable post503Async() {
         return post503WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -485,7 +485,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable post503Async(Boolean booleanValue) {
         return post503WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -531,7 +531,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable delete503Async() {
         return delete503WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -579,7 +579,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable delete503Async(Boolean booleanValue) {
         return delete503WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -625,7 +625,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable put504Async() {
         return put504WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -673,7 +673,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable put504Async(Boolean booleanValue) {
         return put504WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -719,7 +719,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable patch504Async() {
         return patch504WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -767,7 +767,7 @@ public class HttpRetrysImpl implements HttpRetrys {
     public Completable patch504Async(Boolean booleanValue) {
         return patch504WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
 }

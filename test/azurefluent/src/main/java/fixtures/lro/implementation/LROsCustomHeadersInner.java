@@ -234,7 +234,7 @@ public class LROsCustomHeadersInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -291,7 +291,7 @@ public class LROsCustomHeadersInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -417,7 +417,7 @@ public class LROsCustomHeadersInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -474,7 +474,7 @@ public class LROsCustomHeadersInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -590,7 +590,7 @@ public class LROsCustomHeadersInner {
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -639,7 +639,7 @@ public class LROsCustomHeadersInner {
     public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -755,7 +755,7 @@ public class LROsCustomHeadersInner {
     public Completable postAsyncRetrySucceededAsync() {
         return postAsyncRetrySucceededWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -804,7 +804,7 @@ public class LROsCustomHeadersInner {
     public Completable postAsyncRetrySucceededAsync(ProductInner product) {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
             .toCompletable();
-        }
+    }
 
 
 }

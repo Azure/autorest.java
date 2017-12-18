@@ -43,7 +43,7 @@ namespace AutoRest.Java.DanModel
             return parentBlock;
         }
 
-        public TParentBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public TParentBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
             return parentBlock;

@@ -210,7 +210,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -282,7 +282,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
                     }
                 }
             });
-        }
+    }
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -356,11 +356,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
                     }
                 }
             });
-        }
+    }
 
 
     /**
-     *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -371,7 +370,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -381,7 +379,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
@@ -391,18 +388,16 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Void> object
      */
     public Completable getWithConstantInPathAsync() {
         return getWithConstantInPathWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
-     *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
@@ -413,7 +408,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
@@ -423,7 +417,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
@@ -435,7 +428,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
      */
@@ -450,10 +442,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
                     }
                 }
             });
-        }
+    }
 
     /**
-     *
      * @param body the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
@@ -465,7 +456,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -476,7 +466,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @param body the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
@@ -488,7 +477,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     }
 
     /**
-     *
      * @param body the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return a {@link Single} emitting the RestResponse<Void, Product> object
@@ -504,6 +492,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
                     }
                 }
             });
-        }
+    }
 
 }

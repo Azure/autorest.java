@@ -125,7 +125,7 @@ public class HttpSuccessInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -178,7 +178,7 @@ public class HttpSuccessInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -231,7 +231,7 @@ public class HttpSuccessInner {
                     }
                 }
             });
-        }
+    }
 
 
 }

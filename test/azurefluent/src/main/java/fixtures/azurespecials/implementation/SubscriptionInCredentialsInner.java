@@ -134,7 +134,7 @@ public class SubscriptionInCredentialsInner {
     public Completable postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -182,7 +182,7 @@ public class SubscriptionInCredentialsInner {
     public Completable postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -233,7 +233,7 @@ public class SubscriptionInCredentialsInner {
     public Completable postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -281,7 +281,7 @@ public class SubscriptionInCredentialsInner {
     public Completable postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -329,7 +329,7 @@ public class SubscriptionInCredentialsInner {
     public Completable postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

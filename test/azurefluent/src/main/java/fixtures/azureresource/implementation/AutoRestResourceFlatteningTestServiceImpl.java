@@ -256,7 +256,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put External Resource as an Array.
@@ -305,7 +305,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -358,7 +358,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -405,7 +405,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put External Resource as a Dictionary.
@@ -454,7 +454,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Completable putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -507,7 +507,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -554,7 +554,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -603,7 +603,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     public Completable putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -656,7 +656,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                     }
                 }
             });
-        }
+    }
 
 
 }

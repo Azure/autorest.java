@@ -181,7 +181,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putArrayAsync() {
         return putArrayWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put External Resource as an Array.
@@ -230,7 +230,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putArrayAsync(List<Resource> resourceArray) {
         return putArrayWithRestResponseAsync(resourceArray)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -283,7 +283,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -330,7 +330,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putWrappedArrayAsync() {
         return putWrappedArrayWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
@@ -379,7 +379,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
         return putWrappedArrayWithRestResponseAsync(resourceArray)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -432,7 +432,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -479,7 +479,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putDictionaryAsync() {
         return putDictionaryWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put External Resource as a Dictionary.
@@ -528,7 +528,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary) {
         return putDictionaryWithRestResponseAsync(resourceDictionary)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -581,7 +581,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -628,7 +628,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putResourceCollectionAsync() {
         return putResourceCollectionWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -677,7 +677,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     public Completable putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithRestResponseAsync(resourceComplexObject)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -730,7 +730,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -785,7 +785,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
     /**
      * Put Simple Product with client flattening true on the model.
@@ -842,7 +842,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -918,7 +918,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
@@ -1005,7 +1005,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1081,6 +1081,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
                     }
                 }
             });
-        }
+    }
 
 }

@@ -59,10 +59,16 @@ namespace AutoRest.Java.DanModel
 
         public void Indent(Action action)
         {
-            AddToPrefix(singleIndent);
+            IncreaseIndent();
             action.Invoke();
-            RemoveFromPrefix(singleIndent);
+            DecreaseIndent();
         }
+
+        public void IncreaseIndent()
+            => AddToPrefix(singleIndent);
+
+        public void DecreaseIndent()
+            => RemoveFromPrefix(singleIndent);
 
         private IEnumerable<string> WordWrap(string line, bool addPrefix)
         {
@@ -160,9 +166,14 @@ namespace AutoRest.Java.DanModel
             Text($"{text}{Environment.NewLine}", addPrefix);
         }
 
-        public JavaFileContents Line(string text)
+        public JavaFileContents Line(string text, params object[] formattedArguments)
         {
             ClosePreviousLineEnding();
+
+            if (formattedArguments != null && formattedArguments.Length > 0)
+            {
+                text = string.Format(text, formattedArguments);
+            }
 
             Line(text, addPrefix: true);
             return this;
@@ -255,29 +266,29 @@ namespace AutoRest.Java.DanModel
             MultipleLineSlashStarComment(commentAction);
         }
 
-        public void WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public void WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             MultipleLineComment((comment) =>
             {
                 WithWordWrap(wordWrapWidth, () =>
                 {
-                    commentAction.Invoke(new JavaWordWrappedMultipleLineComment(this));
+                    commentAction.Invoke(new JavaMultipleLineComment(this));
                 });
             });
         }
 
-        public void WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public void WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             MultipleLineSlashSlashComment((comment) =>
             {
                 WithWordWrap(wordWrapWidth, () =>
                 {
-                    commentAction.Invoke(new JavaWordWrappedMultipleLineComment(this));
+                    commentAction.Invoke(new JavaMultipleLineComment(this));
                 });
             });
         }
 
-        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             WordWrappedMultipleLineSlashStarComment(wordWrapWidth, commentAction);
         }

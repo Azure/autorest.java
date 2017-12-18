@@ -153,7 +153,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -206,7 +206,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putValidAsync(DictionaryWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -259,7 +259,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -312,7 +312,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putEmptyAsync(DictionaryWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -365,7 +365,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -418,7 +418,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
 }

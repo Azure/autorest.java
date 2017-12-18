@@ -147,7 +147,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -200,7 +200,7 @@ public class ArraysImpl implements Arrays {
     public Completable putValidAsync(ArrayWrapper complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -253,7 +253,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -306,7 +306,7 @@ public class ArraysImpl implements Arrays {
     public Completable putEmptyAsync(ArrayWrapper complexBody) {
         return putEmptyWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -359,7 +359,7 @@ public class ArraysImpl implements Arrays {
                     }
                 }
             });
-        }
+    }
 
 
 }

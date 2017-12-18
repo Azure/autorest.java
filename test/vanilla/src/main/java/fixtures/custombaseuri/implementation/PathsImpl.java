@@ -122,7 +122,7 @@ public class PathsImpl implements Paths {
     public Completable getEmptyAsync(String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
             .toCompletable();
-        }
+    }
 
 
 }

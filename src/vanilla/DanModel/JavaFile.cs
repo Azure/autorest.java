@@ -75,19 +75,19 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaFile WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public JavaFile WordWrappedMultipleLineSlashStarComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             Contents.WordWrappedMultipleLineSlashStarComment(wordWrapWidth, commentAction);
             return this;
         }
 
-        public JavaFile WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public JavaFile WordWrappedMultipleLineSlashSlashComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             Contents.WordWrappedMultipleLineSlashSlashComment(wordWrapWidth, commentAction);
             return this;
         }
 
-        public JavaFile WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public JavaFile WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             Contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
             return this;

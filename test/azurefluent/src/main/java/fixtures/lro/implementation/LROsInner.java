@@ -619,7 +619,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -676,7 +676,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -802,7 +802,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
@@ -859,7 +859,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -985,7 +985,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
@@ -1042,7 +1042,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1168,7 +1168,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1225,7 +1225,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1351,7 +1351,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -1408,7 +1408,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1534,7 +1534,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
@@ -1591,7 +1591,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1717,7 +1717,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
@@ -1774,7 +1774,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1900,7 +1900,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
@@ -1957,7 +1957,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2083,7 +2083,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2140,7 +2140,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2266,7 +2266,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2323,7 +2323,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2449,7 +2449,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2506,7 +2506,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2632,7 +2632,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -2689,7 +2689,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2815,7 +2815,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
@@ -2872,7 +2872,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2998,7 +2998,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request with non resource.
@@ -3055,7 +3055,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3181,7 +3181,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request with non resource.
@@ -3238,7 +3238,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3364,7 +3364,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request with sub resource.
@@ -3421,7 +3421,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3547,7 +3547,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running put request with sub resource.
@@ -3604,7 +3604,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3690,7 +3690,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3776,7 +3776,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3862,7 +3862,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3939,7 +3939,7 @@ public class LROsInner {
     public Completable delete204SucceededAsync() {
         return delete204SucceededWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4025,7 +4025,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -4111,7 +4111,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -4188,7 +4188,7 @@ public class LROsInner {
     public Completable deleteNoHeaderInRetryAsync() {
         return deleteNoHeaderInRetryWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4265,7 +4265,7 @@ public class LROsInner {
     public Completable deleteAsyncNoHeaderInRetryAsync() {
         return deleteAsyncNoHeaderInRetryWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4342,7 +4342,7 @@ public class LROsInner {
     public Completable deleteAsyncRetrySucceededAsync() {
         return deleteAsyncRetrySucceededWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4419,7 +4419,7 @@ public class LROsInner {
     public Completable deleteAsyncNoRetrySucceededAsync() {
         return deleteAsyncNoRetrySucceededWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4496,7 +4496,7 @@ public class LROsInner {
     public Completable deleteAsyncRetryFailedAsync() {
         return deleteAsyncRetryFailedWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4573,7 +4573,7 @@ public class LROsInner {
     public Completable deleteAsyncRetrycanceledAsync() {
         return deleteAsyncRetrycanceledWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4659,7 +4659,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -4775,7 +4775,7 @@ public class LROsInner {
     public Completable post202Retry200Async() {
         return post202Retry200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -4824,7 +4824,7 @@ public class LROsInner {
     public Completable post202Retry200Async(ProductInner product) {
         return post202Retry200WithRestResponseAsync(product)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -4950,7 +4950,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
@@ -5007,7 +5007,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -5133,7 +5133,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5190,7 +5190,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -5316,7 +5316,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5373,7 +5373,7 @@ public class LROsInner {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -5489,7 +5489,7 @@ public class LROsInner {
     public Completable postAsyncRetryFailedAsync() {
         return postAsyncRetryFailedWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5538,7 +5538,7 @@ public class LROsInner {
     public Completable postAsyncRetryFailedAsync(ProductInner product) {
         return postAsyncRetryFailedWithRestResponseAsync(product)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -5654,7 +5654,7 @@ public class LROsInner {
     public Completable postAsyncRetrycanceledAsync() {
         return postAsyncRetrycanceledWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -5703,7 +5703,7 @@ public class LROsInner {
     public Completable postAsyncRetrycanceledAsync(ProductInner product) {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
             .toCompletable();
-        }
+    }
 
 
 }

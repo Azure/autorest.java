@@ -135,7 +135,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     public Completable postMethodGlobalValidAsync() {
         return postMethodGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -183,7 +183,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     public Completable postMethodGlobalNullAsync() {
         return postMethodGlobalNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -234,7 +234,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     public Completable postMethodGlobalNotProvidedValidAsync() {
         return postMethodGlobalNotProvidedValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -282,7 +282,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     public Completable postPathGlobalValidAsync() {
         return postPathGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -330,7 +330,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
     public Completable postSwaggerGlobalValidAsync() {
         return postSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

@@ -117,7 +117,7 @@ public class PathsInner {
     public Completable getEmptyAsync(String accountName) {
         return getEmptyWithRestResponseAsync(accountName)
             .toCompletable();
-        }
+    }
 
 
 }

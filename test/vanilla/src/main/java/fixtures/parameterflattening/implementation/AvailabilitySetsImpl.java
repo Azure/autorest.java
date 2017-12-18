@@ -138,7 +138,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
     public Completable updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
             .toCompletable();
-        }
+    }
 
 
 }

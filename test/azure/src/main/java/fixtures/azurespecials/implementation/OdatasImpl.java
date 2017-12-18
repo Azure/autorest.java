@@ -110,7 +110,7 @@ public class OdatasImpl implements Odatas {
     public Completable getWithFilterAsync() {
         return getWithFilterWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
@@ -166,7 +166,7 @@ public class OdatasImpl implements Odatas {
     public Completable getWithFilterAsync(String filter, Integer top, String orderby) {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
             .toCompletable();
-        }
+    }
 
 
 }

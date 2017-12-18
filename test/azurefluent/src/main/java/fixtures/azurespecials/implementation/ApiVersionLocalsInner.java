@@ -125,7 +125,7 @@ public class ApiVersionLocalsInner {
     public Completable getMethodLocalValidAsync() {
         return getMethodLocalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -171,7 +171,7 @@ public class ApiVersionLocalsInner {
     public Completable getMethodLocalNullAsync() {
         return getMethodLocalNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -219,7 +219,7 @@ public class ApiVersionLocalsInner {
     public Completable getMethodLocalNullAsync(String apiVersion) {
         return getMethodLocalNullWithRestResponseAsync(apiVersion)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -265,7 +265,7 @@ public class ApiVersionLocalsInner {
     public Completable getPathLocalValidAsync() {
         return getPathLocalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -311,7 +311,7 @@ public class ApiVersionLocalsInner {
     public Completable getSwaggerLocalValidAsync() {
         return getSwaggerLocalValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

@@ -150,7 +150,7 @@ public class SkipUrlEncodingsInner {
     public Completable getMethodPathValidAsync(String unencodedPathParam) {
         return getMethodPathValidWithRestResponseAsync(unencodedPathParam)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -202,7 +202,7 @@ public class SkipUrlEncodingsInner {
     public Completable getPathPathValidAsync(String unencodedPathParam) {
         return getPathPathValidWithRestResponseAsync(unencodedPathParam)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -248,7 +248,7 @@ public class SkipUrlEncodingsInner {
     public Completable getSwaggerPathValidAsync() {
         return getSwaggerPathValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -300,7 +300,7 @@ public class SkipUrlEncodingsInner {
     public Completable getMethodQueryValidAsync(String q1) {
         return getMethodQueryValidWithRestResponseAsync(q1)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -346,7 +346,7 @@ public class SkipUrlEncodingsInner {
     public Completable getMethodQueryNullAsync() {
         return getMethodQueryNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -394,7 +394,7 @@ public class SkipUrlEncodingsInner {
     public Completable getMethodQueryNullAsync(String q1) {
         return getMethodQueryNullWithRestResponseAsync(q1)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -446,7 +446,7 @@ public class SkipUrlEncodingsInner {
     public Completable getPathQueryValidAsync(String q1) {
         return getPathQueryValidWithRestResponseAsync(q1)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -492,7 +492,7 @@ public class SkipUrlEncodingsInner {
     public Completable getSwaggerQueryValidAsync() {
         return getSwaggerQueryValidWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }
