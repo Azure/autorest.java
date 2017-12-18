@@ -207,10 +207,10 @@ namespace AutoRest.Java.Azure
             {
                 if (method.Extensions.ContainsKey(AzureExtensions.ODataExtension))
                 {
-                    var odataFilter = method.Parameters.FirstOrDefault(p =>
+                    Parameter odataFilter = method.Parameters.FirstOrDefault(p =>
                         p.SerializedName.EqualsIgnoreCase("$filter") &&
-                        (p.Location == ParameterLocation.Query) &&
-                        p.ModelType is CompositeType);
+                        p.Location == ParameterLocation.Query &&
+                        DanCodeGenerator.ParameterGetModelType(p) is CompositeType);
 
                     if (odataFilter == null)
                     {
@@ -230,7 +230,7 @@ namespace AutoRest.Java.Azure
                     {
                         SerializedName = "$filter",
                         Name = "odataQuery",
-                        ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{DanCodeGenerator.GetIModelTypeName(odataFilter.ModelType)}>"),
+                        ModelType = New<CompositeType>($"Microsoft.Rest.Azure.OData.ODataQuery<{DanCodeGenerator.GetIModelTypeName(DanCodeGenerator.ParameterGetModelType(odataFilter))}>"),
                         Documentation = "OData parameters to apply to the operation.",
                         Location = ParameterLocation.Query,
                         odataFilter.IsRequired
