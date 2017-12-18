@@ -126,7 +126,7 @@ public class HttpSuccessImpl implements HttpSuccess {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -179,7 +179,7 @@ public class HttpSuccessImpl implements HttpSuccess {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -232,7 +232,7 @@ public class HttpSuccessImpl implements HttpSuccess {
                     }
                 }
             });
-        }
+    }
 
 
 }

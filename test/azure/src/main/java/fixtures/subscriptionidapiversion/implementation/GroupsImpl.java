@@ -130,7 +130,7 @@ public class GroupsImpl implements Groups {
                     }
                 }
             });
-        }
+    }
 
 
 }

@@ -217,7 +217,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable head300Async() {
         return head300WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -270,7 +270,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -315,7 +315,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable head301Async() {
         return head301WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -360,7 +360,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable get301Async() {
         return get301WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -406,7 +406,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable put301Async() {
         return put301WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -454,7 +454,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable put301Async(Boolean booleanValue) {
         return put301WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -499,7 +499,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable head302Async() {
         return head302WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -544,7 +544,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable get302Async() {
         return get302WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -590,7 +590,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable patch302Async() {
         return patch302WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -638,7 +638,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable patch302Async(Boolean booleanValue) {
         return patch302WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -684,7 +684,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable post303Async() {
         return post303WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -732,7 +732,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable post303Async(Boolean booleanValue) {
         return post303WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -777,7 +777,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable head307Async() {
         return head307WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -822,7 +822,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable get307Async() {
         return get307WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -868,7 +868,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable put307Async() {
         return put307WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -916,7 +916,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable put307Async(Boolean booleanValue) {
         return put307WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -962,7 +962,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable patch307Async() {
         return patch307WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -1010,7 +1010,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable patch307Async(Boolean booleanValue) {
         return patch307WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1056,7 +1056,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable post307Async() {
         return post307WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -1104,7 +1104,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable post307Async(Boolean booleanValue) {
         return post307WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1150,7 +1150,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable delete307Async() {
         return delete307WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -1198,7 +1198,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
     public Completable delete307Async(Boolean booleanValue) {
         return delete307WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
 }

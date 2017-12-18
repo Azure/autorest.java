@@ -118,7 +118,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
     public Completable head200Async() {
         return head200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -163,7 +163,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
     public Completable head204Async() {
         return head204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -208,7 +208,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
     public Completable head404Async() {
         return head404WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

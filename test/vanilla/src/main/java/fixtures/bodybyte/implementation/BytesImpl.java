@@ -145,7 +145,7 @@ public class BytesImpl implements Bytes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -198,7 +198,7 @@ public class BytesImpl implements Bytes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -251,7 +251,7 @@ public class BytesImpl implements Bytes {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -303,7 +303,7 @@ public class BytesImpl implements Bytes {
     public Completable putNonAsciiAsync(byte[] byteBody) {
         return putNonAsciiWithRestResponseAsync(byteBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -356,7 +356,7 @@ public class BytesImpl implements Bytes {
                     }
                 }
             });
-        }
+    }
 
 
 }

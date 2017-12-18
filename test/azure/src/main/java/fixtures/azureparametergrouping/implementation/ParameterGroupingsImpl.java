@@ -144,7 +144,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         return postRequiredWithRestResponseAsync(parameterGroupingPostRequiredParameters)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -193,7 +193,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postOptionalAsync() {
         return postOptionalWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -250,7 +250,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -303,7 +303,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postMultiParamGroupsAsync() {
         return postMultiParamGroupsWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -373,7 +373,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         return postMultiParamGroupsWithRestResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -422,7 +422,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postSharedParameterGroupObjectAsync() {
         return postSharedParameterGroupObjectWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post parameters with a shared parameter group object.
@@ -479,7 +479,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Completable postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
             .toCompletable();
-        }
+    }
 
 
 }

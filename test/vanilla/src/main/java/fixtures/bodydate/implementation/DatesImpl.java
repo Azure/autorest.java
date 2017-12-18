@@ -164,7 +164,7 @@ public class DatesImpl implements Dates {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -217,7 +217,7 @@ public class DatesImpl implements Dates {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -270,7 +270,7 @@ public class DatesImpl implements Dates {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -323,7 +323,7 @@ public class DatesImpl implements Dates {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -375,7 +375,7 @@ public class DatesImpl implements Dates {
     public Completable putMaxDateAsync(LocalDate dateBody) {
         return putMaxDateWithRestResponseAsync(dateBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -428,7 +428,7 @@ public class DatesImpl implements Dates {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -480,7 +480,7 @@ public class DatesImpl implements Dates {
     public Completable putMinDateAsync(LocalDate dateBody) {
         return putMinDateWithRestResponseAsync(dateBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -533,7 +533,7 @@ public class DatesImpl implements Dates {
                     }
                 }
             });
-        }
+    }
 
 
 }

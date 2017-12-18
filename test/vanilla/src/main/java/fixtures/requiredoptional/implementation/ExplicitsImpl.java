@@ -253,7 +253,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -299,7 +299,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalIntegerParameterAsync() {
         return postOptionalIntegerParameterWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -347,7 +347,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalIntegerParameterAsync(Integer bodyParameter) {
         return postOptionalIntegerParameterWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -408,7 +408,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -455,7 +455,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalIntegerPropertyAsync() {
         return postOptionalIntegerPropertyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -504,7 +504,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter) {
         return postOptionalIntegerPropertyWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -561,7 +561,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -607,7 +607,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalIntegerHeaderAsync() {
         return postOptionalIntegerHeaderWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -655,7 +655,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalIntegerHeaderAsync(Integer headerParameter) {
         return postOptionalIntegerHeaderWithRestResponseAsync(headerParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -715,7 +715,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -761,7 +761,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalStringParameterAsync() {
         return postOptionalStringParameterWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional string. Please put null.
@@ -809,7 +809,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalStringParameterAsync(String bodyParameter) {
         return postOptionalStringParameterWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -870,7 +870,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -917,7 +917,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalStringPropertyAsync() {
         return postOptionalStringPropertyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -966,7 +966,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter) {
         return postOptionalStringPropertyWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1026,7 +1026,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1072,7 +1072,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalStringHeaderAsync() {
         return postOptionalStringHeaderWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -1120,7 +1120,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalStringHeaderAsync(String bodyParameter) {
         return postOptionalStringHeaderWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1181,7 +1181,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1228,7 +1228,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalClassParameterAsync() {
         return postOptionalClassParameterWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -1277,7 +1277,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalClassParameterAsync(Product bodyParameter) {
         return postOptionalClassParameterWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1338,7 +1338,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1385,7 +1385,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalClassPropertyAsync() {
         return postOptionalClassPropertyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -1434,7 +1434,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter) {
         return postOptionalClassPropertyWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1495,7 +1495,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1542,7 +1542,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalArrayParameterAsync() {
         return postOptionalArrayParameterWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1591,7 +1591,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalArrayParameterAsync(List<String> bodyParameter) {
         return postOptionalArrayParameterWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1652,7 +1652,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1699,7 +1699,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalArrayPropertyAsync() {
         return postOptionalArrayPropertyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1748,7 +1748,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter) {
         return postOptionalArrayPropertyWithRestResponseAsync(bodyParameter)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1810,7 +1810,7 @@ public class ExplicitsImpl implements Explicits {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1858,7 +1858,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalArrayHeaderAsync() {
         return postOptionalArrayHeaderWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1908,7 +1908,7 @@ public class ExplicitsImpl implements Explicits {
     public Completable postOptionalArrayHeaderAsync(List<String> headerParameter) {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
             .toCompletable();
-        }
+    }
 
 
 }

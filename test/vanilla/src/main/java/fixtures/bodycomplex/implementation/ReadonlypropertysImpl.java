@@ -129,7 +129,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -182,7 +182,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
     public Completable putValidAsync(ReadonlyObj complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
 }

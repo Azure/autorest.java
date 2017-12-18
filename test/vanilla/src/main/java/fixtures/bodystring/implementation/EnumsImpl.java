@@ -154,7 +154,7 @@ public class EnumsImpl implements Enums {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -206,7 +206,7 @@ public class EnumsImpl implements Enums {
     public Completable putNotExpandableAsync(Colors stringBody) {
         return putNotExpandableWithRestResponseAsync(stringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -259,7 +259,7 @@ public class EnumsImpl implements Enums {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -311,7 +311,7 @@ public class EnumsImpl implements Enums {
     public Completable putReferencedAsync(Colors enumStringBody) {
         return putReferencedWithRestResponseAsync(enumStringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -364,7 +364,7 @@ public class EnumsImpl implements Enums {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -417,7 +417,7 @@ public class EnumsImpl implements Enums {
     public Completable putReferencedConstantAsync(RefColorConstant enumStringBody) {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
             .toCompletable();
-        }
+    }
 
 
 }

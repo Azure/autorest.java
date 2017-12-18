@@ -179,7 +179,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -232,7 +232,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -285,7 +285,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -338,7 +338,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -391,7 +391,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Completable putUtcMaxDateTimeAsync(DateTime datetimeBody) {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -444,7 +444,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -497,7 +497,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -550,7 +550,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     public Completable putUtcMinDateTimeAsync(DateTime datetimeBody) {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -603,7 +603,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     }
                 }
             });
-        }
+    }
 
 
 }

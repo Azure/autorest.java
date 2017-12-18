@@ -141,7 +141,7 @@ public class PathsImpl implements Paths {
     public Completable getEmptyAsync(String vault, String secret, String keyName) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName)
             .toCompletable();
-        }
+    }
 
     /**
      * Get a 200 to test a valid base uri.
@@ -216,7 +216,7 @@ public class PathsImpl implements Paths {
     public Completable getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
             .toCompletable();
-        }
+    }
 
 
 }

@@ -198,7 +198,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -244,7 +244,7 @@ public class StringsImpl implements Strings {
     public Completable putNullAsync() {
         return putNullWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Set string value null.
@@ -292,7 +292,7 @@ public class StringsImpl implements Strings {
     public Completable putNullAsync(String stringBody) {
         return putNullWithRestResponseAsync(stringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -345,7 +345,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -397,7 +397,7 @@ public class StringsImpl implements Strings {
     public Completable putEmptyAsync(String stringBody) {
         return putEmptyWithRestResponseAsync(stringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -450,7 +450,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -502,7 +502,7 @@ public class StringsImpl implements Strings {
     public Completable putMbcsAsync(String stringBody) {
         return putMbcsWithRestResponseAsync(stringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -555,7 +555,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -607,7 +607,7 @@ public class StringsImpl implements Strings {
     public Completable putWhitespaceAsync(String stringBody) {
         return putWhitespaceWithRestResponseAsync(stringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -660,7 +660,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -713,7 +713,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -766,7 +766,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -819,7 +819,7 @@ public class StringsImpl implements Strings {
     public Completable putBase64UrlEncodedAsync(byte[] stringBody) {
         return putBase64UrlEncodedWithRestResponseAsync(stringBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -872,7 +872,7 @@ public class StringsImpl implements Strings {
                     }
                 }
             });
-        }
+    }
 
 
 }

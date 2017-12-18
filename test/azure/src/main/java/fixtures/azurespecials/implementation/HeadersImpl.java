@@ -131,7 +131,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
     public Completable customNamedRequestIdAsync(String fooClientRequestId) {
         return customNamedRequestIdWithRestResponseAsync(fooClientRequestId)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -185,7 +185,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
     public Completable customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -245,7 +245,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
                     }
                 }
             });
-        }
+    }
 
 
 }

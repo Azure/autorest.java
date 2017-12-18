@@ -18,15 +18,27 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaBlock IncreaseIndent()
+        {
+            contents.IncreaseIndent();
+            return this;
+        }
+
+        public JavaBlock DecreaseIndent()
+        {
+            contents.DecreaseIndent();
+            return this;
+        }
+
         public JavaBlock Text(string text)
         {
             contents.Text(text);
             return this;
         }
 
-        public JavaBlock Line(string text)
+        public JavaBlock Line(string text, params object[] formattedArguments)
         {
-            contents.Line(text);
+            contents.Line(text, formattedArguments);
             return this;
         }
 
@@ -66,7 +78,7 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaWordWrappedMultipleLineComment> commentAction)
+        public JavaBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
             contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
             return this;

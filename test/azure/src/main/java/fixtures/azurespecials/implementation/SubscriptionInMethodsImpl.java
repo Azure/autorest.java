@@ -132,7 +132,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     public Completable postMethodLocalValidAsync(String subscriptionId) {
         return postMethodLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -184,7 +184,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     public Completable postMethodLocalNullAsync(String subscriptionId) {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -236,7 +236,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     public Completable postPathLocalValidAsync(String subscriptionId) {
         return postPathLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -288,7 +288,7 @@ public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     public Completable postSwaggerLocalValidAsync(String subscriptionId) {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
-        }
+    }
 
 
 }

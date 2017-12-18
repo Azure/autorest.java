@@ -117,7 +117,7 @@ public class HeadExceptionsInner {
     public Completable head200Async() {
         return head200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -162,7 +162,7 @@ public class HeadExceptionsInner {
     public Completable head204Async() {
         return head204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -207,7 +207,7 @@ public class HeadExceptionsInner {
     public Completable head404Async() {
         return head404WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

@@ -151,7 +151,7 @@ public class BoolsImpl implements Bools {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -200,7 +200,7 @@ public class BoolsImpl implements Bools {
     public Completable putTrueAsync(boolean boolBody) {
         return putTrueWithRestResponseAsync(boolBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -253,7 +253,7 @@ public class BoolsImpl implements Bools {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -302,7 +302,7 @@ public class BoolsImpl implements Bools {
     public Completable putFalseAsync(boolean boolBody) {
         return putFalseWithRestResponseAsync(boolBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -355,7 +355,7 @@ public class BoolsImpl implements Bools {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -408,7 +408,7 @@ public class BoolsImpl implements Bools {
                     }
                 }
             });
-        }
+    }
 
 
 }

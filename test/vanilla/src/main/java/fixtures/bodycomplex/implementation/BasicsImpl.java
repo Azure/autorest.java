@@ -154,7 +154,7 @@ public class BasicsImpl implements Basics {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -207,7 +207,7 @@ public class BasicsImpl implements Basics {
     public Completable putValidAsync(Basic complexBody) {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -260,7 +260,7 @@ public class BasicsImpl implements Basics {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -313,7 +313,7 @@ public class BasicsImpl implements Basics {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -366,7 +366,7 @@ public class BasicsImpl implements Basics {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -419,7 +419,7 @@ public class BasicsImpl implements Basics {
                     }
                 }
             });
-        }
+    }
 
 
 }

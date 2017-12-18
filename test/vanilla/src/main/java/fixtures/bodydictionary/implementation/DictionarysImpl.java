@@ -518,7 +518,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -571,7 +571,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -624,7 +624,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putEmptyAsync(Map<String, String> arrayBody) {
         return putEmptyWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -677,7 +677,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -730,7 +730,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -783,7 +783,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -836,7 +836,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -889,7 +889,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -942,7 +942,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putBooleanTfftAsync(Map<String, Boolean> arrayBody) {
         return putBooleanTfftWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -995,7 +995,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1048,7 +1048,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1101,7 +1101,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1154,7 +1154,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putIntegerValidAsync(Map<String, Integer> arrayBody) {
         return putIntegerValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1207,7 +1207,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1260,7 +1260,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1313,7 +1313,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1366,7 +1366,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putLongValidAsync(Map<String, Long> arrayBody) {
         return putLongValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1419,7 +1419,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1472,7 +1472,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1525,7 +1525,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1578,7 +1578,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putFloatValidAsync(Map<String, Double> arrayBody) {
         return putFloatValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1631,7 +1631,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1684,7 +1684,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1737,7 +1737,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1790,7 +1790,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putDoubleValidAsync(Map<String, Double> arrayBody) {
         return putDoubleValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1843,7 +1843,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1896,7 +1896,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1949,7 +1949,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2002,7 +2002,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putStringValidAsync(Map<String, String> arrayBody) {
         return putStringValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2055,7 +2055,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2108,7 +2108,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2161,7 +2161,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2214,7 +2214,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putDateValidAsync(Map<String, LocalDate> arrayBody) {
         return putDateValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2267,7 +2267,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2320,7 +2320,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2373,7 +2373,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2426,7 +2426,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putDateTimeValidAsync(Map<String, DateTime> arrayBody) {
         return putDateTimeValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2479,7 +2479,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2532,7 +2532,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2585,7 +2585,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2644,7 +2644,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody) {
         return putDateTimeRfc1123ValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2697,7 +2697,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2750,7 +2750,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putDurationValidAsync(Map<String, Period> arrayBody) {
         return putDurationValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2803,7 +2803,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2856,7 +2856,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putByteValidAsync(Map<String, byte[]> arrayBody) {
         return putByteValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -2909,7 +2909,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2962,7 +2962,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3015,7 +3015,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3068,7 +3068,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3121,7 +3121,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3174,7 +3174,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3227,7 +3227,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3280,7 +3280,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putComplexValidAsync(Map<String, Widget> arrayBody) {
         return putComplexValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -3333,7 +3333,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3386,7 +3386,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3439,7 +3439,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3492,7 +3492,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3545,7 +3545,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3598,7 +3598,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putArrayValidAsync(Map<String, List<String>> arrayBody) {
         return putArrayValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -3651,7 +3651,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3704,7 +3704,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3757,7 +3757,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3810,7 +3810,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3863,7 +3863,7 @@ public class DictionarysImpl implements Dictionarys {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -3916,7 +3916,7 @@ public class DictionarysImpl implements Dictionarys {
     public Completable putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody) {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
             .toCompletable();
-        }
+    }
 
 
 }

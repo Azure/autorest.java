@@ -305,7 +305,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramExistingKeyAsync(String userAgent) {
         return paramExistingKeyWithRestResponseAsync(userAgent)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -350,7 +350,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseExistingKeyAsync() {
         return responseExistingKeyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -402,7 +402,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramProtectedKeyAsync(String contentType) {
         return paramProtectedKeyWithRestResponseAsync(contentType)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -447,7 +447,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseProtectedKeyAsync() {
         return responseProtectedKeyWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -503,7 +503,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramIntegerAsync(String scenario, int value) {
         return paramIntegerWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -555,7 +555,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseIntegerAsync(String scenario) {
         return responseIntegerWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -611,7 +611,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramLongAsync(String scenario, long value) {
         return paramLongWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -663,7 +663,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseLongAsync(String scenario) {
         return responseLongWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -719,7 +719,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramFloatAsync(String scenario, double value) {
         return paramFloatWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -771,7 +771,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseFloatAsync(String scenario) {
         return responseFloatWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -827,7 +827,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramDoubleAsync(String scenario, double value) {
         return paramDoubleWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -879,7 +879,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseDoubleAsync(String scenario) {
         return responseDoubleWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -935,7 +935,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramBoolAsync(String scenario, boolean value) {
         return paramBoolWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -987,7 +987,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseBoolAsync(String scenario) {
         return responseBoolWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1040,7 +1040,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramStringAsync(String scenario) {
         return paramStringWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
@@ -1095,7 +1095,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramStringAsync(String scenario, String value) {
         return paramStringWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1147,7 +1147,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseStringAsync(String scenario) {
         return responseStringWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1206,7 +1206,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramDateAsync(String scenario, LocalDate value) {
         return paramDateWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1258,7 +1258,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseDateAsync(String scenario) {
         return responseDateWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1317,7 +1317,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramDatetimeAsync(String scenario, DateTime value) {
         return paramDatetimeWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1369,7 +1369,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseDatetimeAsync(String scenario) {
         return responseDatetimeWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1426,7 +1426,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramDatetimeRfc1123Async(String scenario) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -1485,7 +1485,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramDatetimeRfc1123Async(String scenario, DateTime value) {
         return paramDatetimeRfc1123WithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1537,7 +1537,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseDatetimeRfc1123Async(String scenario) {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1596,7 +1596,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramDurationAsync(String scenario, Period value) {
         return paramDurationWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1648,7 +1648,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseDurationAsync(String scenario) {
         return responseDurationWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1708,7 +1708,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramByteAsync(String scenario, byte[] value) {
         return paramByteWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1760,7 +1760,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseByteAsync(String scenario) {
         return responseByteWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1813,7 +1813,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramEnumAsync(String scenario) {
         return paramEnumWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
@@ -1868,7 +1868,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable paramEnumAsync(String scenario, GreyscaleColors value) {
         return paramEnumWithRestResponseAsync(scenario, value)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1920,7 +1920,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable responseEnumAsync(String scenario) {
         return responseEnumWithRestResponseAsync(scenario)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1965,7 +1965,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     public Completable customRequestIdAsync() {
         return customRequestIdWithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

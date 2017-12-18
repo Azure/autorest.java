@@ -206,7 +206,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -259,7 +259,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -312,7 +312,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -365,7 +365,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -418,7 +418,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -471,7 +471,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -520,7 +520,7 @@ public class IntsImpl implements Ints {
     public Completable putMax32Async(int intBody) {
         return putMax32WithRestResponseAsync(intBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -569,7 +569,7 @@ public class IntsImpl implements Ints {
     public Completable putMax64Async(long intBody) {
         return putMax64WithRestResponseAsync(intBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -618,7 +618,7 @@ public class IntsImpl implements Ints {
     public Completable putMin32Async(int intBody) {
         return putMin32WithRestResponseAsync(intBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -667,7 +667,7 @@ public class IntsImpl implements Ints {
     public Completable putMin64Async(long intBody) {
         return putMin64WithRestResponseAsync(intBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -720,7 +720,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -770,7 +770,7 @@ public class IntsImpl implements Ints {
     public Completable putUnixTimeDateAsync(DateTime intBody) {
         return putUnixTimeDateWithRestResponseAsync(intBody)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -823,7 +823,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -876,7 +876,7 @@ public class IntsImpl implements Ints {
                     }
                 }
             });
-        }
+    }
 
 
 }

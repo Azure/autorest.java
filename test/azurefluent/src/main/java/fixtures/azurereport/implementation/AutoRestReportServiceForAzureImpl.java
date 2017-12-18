@@ -233,7 +233,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Get test coverage report.
@@ -289,7 +289,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
                     }
                 }
             });
-        }
+    }
 
 
 }

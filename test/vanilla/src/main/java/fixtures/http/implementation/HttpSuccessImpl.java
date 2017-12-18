@@ -219,7 +219,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable head200Async() {
         return head200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -272,7 +272,7 @@ public class HttpSuccessImpl implements HttpSuccess {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -318,7 +318,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put200Async() {
         return put200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put boolean value true returning 200 success.
@@ -366,7 +366,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put200Async(Boolean booleanValue) {
         return put200WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -412,7 +412,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable patch200Async() {
         return patch200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -460,7 +460,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable patch200Async(Boolean booleanValue) {
         return patch200WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -506,7 +506,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post200Async() {
         return post200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -554,7 +554,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post200Async(Boolean booleanValue) {
         return post200WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -600,7 +600,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable delete200Async() {
         return delete200WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Delete simple boolean value true returns 200.
@@ -648,7 +648,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable delete200Async(Boolean booleanValue) {
         return delete200WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -694,7 +694,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put201Async() {
         return put201WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put true Boolean value in request returns 201.
@@ -742,7 +742,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put201Async(Boolean booleanValue) {
         return put201WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -788,7 +788,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post201Async() {
         return post201WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -836,7 +836,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post201Async(Boolean booleanValue) {
         return post201WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -882,7 +882,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put202Async() {
         return put202WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -930,7 +930,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put202Async(Boolean booleanValue) {
         return put202WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -976,7 +976,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable patch202Async() {
         return patch202WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -1024,7 +1024,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable patch202Async(Boolean booleanValue) {
         return patch202WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1070,7 +1070,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post202Async() {
         return post202WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -1118,7 +1118,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post202Async(Boolean booleanValue) {
         return post202WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1164,7 +1164,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable delete202Async() {
         return delete202WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -1212,7 +1212,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable delete202Async(Boolean booleanValue) {
         return delete202WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1257,7 +1257,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable head204Async() {
         return head204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1303,7 +1303,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put204Async() {
         return put204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -1351,7 +1351,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable put204Async(Boolean booleanValue) {
         return put204WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1397,7 +1397,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable patch204Async() {
         return patch204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -1445,7 +1445,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable patch204Async(Boolean booleanValue) {
         return patch204WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1491,7 +1491,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post204Async() {
         return post204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1539,7 +1539,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable post204Async(Boolean booleanValue) {
         return post204WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1585,7 +1585,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable delete204Async() {
         return delete204WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -1633,7 +1633,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable delete204Async(Boolean booleanValue) {
         return delete204WithRestResponseAsync(booleanValue)
             .toCompletable();
-        }
+    }
 
 
     /**
@@ -1678,7 +1678,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     public Completable head404Async() {
         return head404WithRestResponseAsync()
             .toCompletable();
-        }
+    }
 
 
 }

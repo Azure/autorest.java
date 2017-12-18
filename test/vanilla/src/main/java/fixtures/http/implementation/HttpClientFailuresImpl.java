@@ -233,7 +233,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -286,7 +286,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -340,7 +340,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -396,7 +396,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -450,7 +450,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -506,7 +506,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -560,7 +560,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -616,7 +616,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -670,7 +670,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -726,7 +726,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -779,7 +779,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -832,7 +832,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -885,7 +885,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -939,7 +939,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -995,7 +995,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1049,7 +1049,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -1105,7 +1105,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1159,7 +1159,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -1215,7 +1215,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1269,7 +1269,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -1325,7 +1325,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1379,7 +1379,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -1435,7 +1435,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1488,7 +1488,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1541,7 +1541,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1594,7 +1594,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1648,7 +1648,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -1704,7 +1704,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1758,7 +1758,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -1814,7 +1814,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1868,7 +1868,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -1924,7 +1924,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -1977,7 +1977,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2031,7 +2031,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -2087,7 +2087,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
     /**
@@ -2140,7 +2140,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                     }
                 }
             });
-        }
+    }
 
 
 }
