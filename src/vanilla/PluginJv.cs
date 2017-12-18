@@ -4,24 +4,10 @@
 
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Model;
-using AutoRest.Core.Utilities;
-using AutoRest.Java.Model;
-using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java
 {
     public sealed class PluginJv : Plugin<IGeneratorSettings, TransformerJv, CodeGeneratorJv, CodeNamerJv, CodeModel>
     {
-        public PluginJv()
-        {
-            Context = new Context
-            {
-                // inherit base settings
-                Context,
-
-                // set code model implementations our own implementations 
-                new Factory<Parameter, ParameterJv>()
-            };
-        }
     }
 }

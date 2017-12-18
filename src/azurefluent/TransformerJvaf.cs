@@ -78,7 +78,7 @@ namespace AutoRest.Java.Azure
         {
             foreach (Parameter param in serviceClient.Methods.SelectMany(m => m.Parameters))
             {
-                AppendInnerToTopLevelType(param.ModelType, serviceClient);
+                AppendInnerToTopLevelType(DanCodeGenerator.ParameterGetModelType(param), serviceClient);
             }
             foreach (Response response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
             {

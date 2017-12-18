@@ -4,9 +4,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
-using AutoRest.Java.Azure;
 using AutoRest.Java.Azure.Fluent;
-using AutoRest.Java.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -328,7 +326,7 @@ namespace AutoRest.Java.DanModel
                     {
                         foreach (Parameter parameter in method.Parameters)
                         {
-                            IModelType parameterType = parameter.ModelType;
+                            IModelType parameterType = ParameterGetModelType(parameter);
                             if (parameterType is SequenceType sequenceType && !javaFileMap.Keys.Contains(sequenceType, ModelNameComparer.Instance))
                             {
                                 string sequenceTypeName = GetIModelTypeName(sequenceType);
@@ -600,9 +598,9 @@ namespace AutoRest.Java.DanModel
 
                 foreach (Method method in rootMethods)
                 {
-                    IEnumerable<ParameterJv> nonConstantLocalParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-                    IEnumerable<ParameterJv> nonConstantOptionalLocalParameters = nonConstantLocalParameters.Where(p => !p.IsRequired);
-                    IEnumerable<ParameterJv> nonConstantRequiredLocalParameters = nonConstantLocalParameters.Where(p => p.IsRequired);
+                    IEnumerable<Parameter> nonConstantLocalParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+                    IEnumerable<Parameter> nonConstantOptionalLocalParameters = nonConstantLocalParameters.Where(p => !p.IsRequired);
+                    IEnumerable<Parameter> nonConstantRequiredLocalParameters = nonConstantLocalParameters.Where(p => p.IsRequired);
 
                     if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
                     {
@@ -701,28 +699,31 @@ namespace AutoRest.Java.DanModel
                             });
                             classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(method.ReturnType)}> {MethodName(method)}SinglePageAsync({MethodRequiredParameterDeclaration(method, settings)})", function =>
                             {
-                                foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                foreach (Parameter param in MethodRequiredNullableParameters(method))
                                 {
-                                    function.If($"{param.Name} == null)", ifBlock =>
+                                    string parameterName = ParameterGetName(param);
+                                    function.If($"{parameterName} == null)", ifBlock =>
                                     {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
                                     });
                                 }
 
-                                foreach (ParameterJv param in MethodParametersToValidate(method).Where(p => p.IsRequired))
+                                foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
                                 {
-                                    function.Line($"Validator.validate({param.Name});");
+                                    function.Line($"Validator.validate({ParameterGetName(param)});");
                                 }
 
-                                foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                foreach (Parameter parameter in MethodLocalParameters(method))
                                 {
+                                    string parameterName = ParameterGetName(parameter);
+                                    IModelType parameterClientType = ParameterClientType(parameter);
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {IModelTypeDefaultValue(parameter.ClientType, method) ?? "null"});");
+                                        function.Line($"final {GetIModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"});");
                                     }
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"});");
+                                        function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameterClientType))} {parameterName} = {parameter.DefaultValue ?? "null"});");
                                     }
                                 }
 
@@ -838,24 +839,25 @@ namespace AutoRest.Java.DanModel
                         });
                         classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(method.ReturnType)}> {MethodName(method)}SinglePageAsync({MethodParameterDeclaration(method, settings)})", function =>
                         {
-                            foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                            foreach (Parameter param in MethodRequiredNullableParameters(method))
                             {
-                                function.If($"{param.Name} == null", ifBlock =>
+                                string parameterName = ParameterGetName(param);
+                                function.If($"{parameterName} == null", ifBlock =>
                                 {
-                                    function.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                    function.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
                                 });
                             }
 
-                            foreach (ParameterJv param in MethodParametersToValidate(method))
+                            foreach (Parameter param in MethodParametersToValidate(method))
                             {
-                                function.Line($"Validator.validate({param.Name});");
+                                function.Line($"Validator.validate({ParameterGetName(param)});");
                             }
 
-                            foreach (ParameterJv parameter in MethodLocalParameters(method))
+                            foreach (Parameter parameter in MethodLocalParameters(method))
                             {
                                 if (parameter.IsConstant)
                                 {
-                                    function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    function.Line($"final {GetIModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                 }
                             }
 
@@ -941,28 +943,29 @@ namespace AutoRest.Java.DanModel
                                 });
                                 classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {MethodName(method)}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
                                 {
-                                    foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                    foreach (Parameter param in MethodRequiredNullableParameters(method))
                                     {
-                                        function.If($"{param.Name} == null", ifBlock =>
+                                        function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                         {
-                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                         });
                                     }
 
-                                    foreach (ParameterJv param in MethodParametersToValidate(method).Where(p => p.IsRequired))
+                                    foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
                                     {
-                                        function.Line($"Validator.validate({param.Name});");
+                                        function.Line($"Validator.validate({ParameterGetName(param)});");
                                     }
 
-                                    foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                    foreach (Parameter parameter in MethodLocalParameters(method))
                                     {
                                         if (!parameter.IsRequired)
                                         {
-                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {IModelTypeDefaultValue(parameter.WireType, method) ?? "null"};");
+                                            IModelType parameterWireType = ParameterWireType(parameter);
+                                            function.Line($"final {GetIModelTypeName(parameterWireType)} {ParameterWireName(parameter)} = {IModelTypeDefaultValue(parameterWireType, method) ?? "null"};");
                                         }
                                         if (parameter.IsConstant)
                                         {
-                                            function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter)))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                         }
                                     }
 
@@ -1028,24 +1031,24 @@ namespace AutoRest.Java.DanModel
                                 });
                                 classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {MethodName(method)}Async({MethodParameterDeclaration(method, settings)})", function =>
                                 {
-                                    foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                    foreach (Parameter param in MethodRequiredNullableParameters(method))
                                     {
-                                        function.If($"{param.Name} == null", ifBlock =>
+                                        function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                         {
-                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                         });
                                     }
 
-                                    foreach (ParameterJv param in MethodParametersToValidate(method))
+                                    foreach (Parameter param in MethodParametersToValidate(method))
                                     {
-                                        function.Line($"Validator.validate({param.Name});");
+                                        function.Line($"Validator.validate({ParameterGetName(param)});");
                                     }
 
-                                    foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                    foreach (Parameter parameter in MethodLocalParameters(method))
                                     {
                                         if (parameter.IsConstant)
                                         {
-                                            function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                         }
                                     }
 
@@ -1235,9 +1238,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
@@ -1272,9 +1275,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 if (method.ReturnType.Body != null)
@@ -1324,9 +1327,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 if (method.ReturnType.Body != null)
@@ -1340,30 +1343,32 @@ namespace AutoRest.Java.DanModel
                             });
                             classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(method.ReturnType)}> {MethodName(method)}SinglePageAsync({MethodRequiredParameterDeclaration(method, settings)})", function =>
                             {
-                                foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                foreach (Parameter param in MethodRequiredNullableParameters(method))
                                 {
-                                    string paramName = param.Name;
+                                    string paramName = ParameterGetName(param);
                                     function.If($"{paramName} == null", ifBlock =>
                                     {
                                         ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {paramName} is required and cannot be null.\");");
                                     });
                                 }
 
-                                foreach (ParameterJv param in MethodParametersToValidate(method).Where(p => p.IsRequired))
+                                foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
                                 {
-                                    function.Line($"Validator.validate({param.Name});");
+                                    function.Line($"Validator.validate({ParameterGetName(param)});");
                                 }
 
-                                foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                foreach (Parameter parameter in MethodLocalParameters(method))
                                 {
+                                    string parameterName = ParameterGetName(parameter);
+                                    IModelType parameterClientType = ParameterClientType(parameter);
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {IModelTypeDefaultValue(parameter.ClientType, method) ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
                                     }
 
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameterClientType))} {parameterName} = {parameter.DefaultValue ?? "null"};");
                                     }
                                 }
 
@@ -1404,9 +1409,9 @@ namespace AutoRest.Java.DanModel
                         classBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                             }
                             ThrowsIllegalArgumentException(comment);
                             ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
@@ -1441,9 +1446,9 @@ namespace AutoRest.Java.DanModel
                         classBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                             }
                             ThrowsIllegalArgumentException(comment);
                             if (method.ReturnType.Body != null)
@@ -1493,9 +1498,9 @@ namespace AutoRest.Java.DanModel
                         classBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                             }
                             ThrowsIllegalArgumentException(comment);
                             if (method.ReturnType.Body != null)
@@ -1509,24 +1514,24 @@ namespace AutoRest.Java.DanModel
                         });
                         classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(method.ReturnType)}> {MethodName(method)}SinglePageAsync({MethodParameterDeclaration(method, settings)})", function =>
                         {
-                            foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                            foreach (Parameter param in MethodRequiredNullableParameters(method))
                             {
-                                function.If($"{param.Name} == null", ifBlock =>
+                                function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                 {
-                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                 });
                             }
 
-                            foreach (ParameterJv param in MethodParametersToValidate(method))
+                            foreach (Parameter param in MethodParametersToValidate(method))
                             {
-                                function.Line($"Validator.validate({param.Name});");
+                                function.Line($"Validator.validate({ParameterGetName(param)});");
                             }
 
-                            foreach (ParameterJv parameter in MethodLocalParameters(method))
+                            foreach (Parameter parameter in MethodLocalParameters(method))
                             {
                                 if (parameter.IsConstant)
                                 {
-                                    function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    function.Line($"final {GetIModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                 }
                             }
 
@@ -1570,9 +1575,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 if (method.ReturnType.Body != null)
                                 {
@@ -1603,9 +1608,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 if (method.ReturnType.Body != null)
                                 {
@@ -1618,26 +1623,28 @@ namespace AutoRest.Java.DanModel
                             });
                             classBlock.Block($"public Observable<Page<{ResponseSequenceElementTypeString(method.ReturnType)}>> {MethodName(method)}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
                             {
-                                foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                foreach (Parameter param in MethodRequiredNullableParameters(method))
                                 {
-                                    function.If($"{param.Name} == null", ifBlock =>
+                                    function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                     {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                     });
                                 }
-                                foreach (ParameterJv param in MethodParametersToValidate(method).Where(p => p.IsRequired))
+                                foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
                                 {
-                                    function.Line($"Validator.validate({param.Name});");
+                                    function.Line($"Validator.validate({ParameterGetName(param)});");
                                 }
-                                foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                foreach (Parameter parameter in MethodLocalParameters(method))
                                 {
+                                    string parameterName = ParameterGetName(parameter);
+                                    IModelType parameterClientType = ParameterClientType(parameter);
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {IModelTypeDefaultValue(parameter.ClientType, method) ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
                                     }
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameterClientType)} {parameterName} = {parameter.DefaultValue ?? "null"};");
                                     }
                                 }
 
@@ -1673,9 +1680,9 @@ namespace AutoRest.Java.DanModel
                         classBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                             }
                             if (method.ReturnType.Body != null)
                             {
@@ -1706,9 +1713,9 @@ namespace AutoRest.Java.DanModel
                         classBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                             {
-                                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                             }
                             if (method.ReturnType.Body != null)
                             {
@@ -1721,22 +1728,22 @@ namespace AutoRest.Java.DanModel
                         });
                         classBlock.Block($"public Observable<Page<{ResponseSequenceElementTypeString(method.ReturnType)}>> {MethodName(method)}Async({MethodParameterDeclaration(method, settings)})", function =>
                         {
-                            foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                            foreach (Parameter param in MethodRequiredNullableParameters(method))
                             {
-                                function.If($"{param.Name} == null", ifBlock =>
+                                function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                 {
-                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                 });
                             }
-                            foreach (ParameterJv param in MethodParametersToValidate(method))
+                            foreach (Parameter param in MethodParametersToValidate(method))
                             {
-                                function.Line($"Validator.validate({param.Name});");
+                                function.Line($"Validator.validate({ParameterGetName(param)});");
                             }
-                            foreach (ParameterJv parameter in MethodLocalParameters(method))
+                            foreach (Parameter parameter in MethodLocalParameters(method))
                             {
                                 if (parameter.IsConstant)
                                 {
-                                    function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                    function.Line($"final {GetIModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                 }
                             }
 
@@ -1781,9 +1788,9 @@ namespace AutoRest.Java.DanModel
                                 classBlock.MultipleLineComment(comment =>
                                 {
                                     AddMethodSummaryAndDescription(comment, method);
-                                    foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                    foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                     {
-                                        comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                        comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                     }
                                     ThrowsIllegalArgumentException(comment);
                                     ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
@@ -1812,9 +1819,9 @@ namespace AutoRest.Java.DanModel
                                 classBlock.MultipleLineComment(comment =>
                                 {
                                     AddMethodSummaryAndDescription(comment, method);
-                                    foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                    foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                     {
-                                        comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                        comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                     }
                                     ParamServiceCallback(comment);
                                     ThrowsIllegalArgumentException(comment);
@@ -1832,35 +1839,36 @@ namespace AutoRest.Java.DanModel
                                 classBlock.MultipleLineComment(comment =>
                                 {
                                     AddMethodSummaryAndDescription(comment, method);
-                                    foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                                    foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                                     {
-                                        comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                        comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                     }
                                     ThrowsIllegalArgumentException(comment);
                                     comment.Return("the observable for the request");
                                 });
                                 classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {MethodName(method)}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
                                 {
-                                    foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                    foreach (Parameter param in MethodRequiredNullableParameters(method))
                                     {
-                                        function.If($"{param.Name} == null", ifBlock =>
+                                        function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                         {
-                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                         });
                                     }
-                                    foreach (ParameterJv param in MethodParametersToValidate(method).Where(p => p.IsRequired))
+                                    foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
                                     {
-                                        function.Line($"Validator.validate({param.Name});");
+                                        function.Line($"Validator.validate({ParameterGetName(param)});");
                                     }
-                                    foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                    foreach (Parameter parameter in MethodLocalParameters(method))
                                     {
                                         if (!parameter.IsRequired)
                                         {
-                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {IModelTypeDefaultValue(parameter.WireType, method) ?? "null"};");
+                                            IModelType parameterWireType = ParameterWireType(parameter);
+                                            function.Line($"final {GetIModelTypeName(parameterWireType)} {ParameterWireName(parameter)} = {IModelTypeDefaultValue(parameterWireType, method) ?? "null"};");
                                         }
                                         if (parameter.IsConstant)
                                         {
-                                            function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter)))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                         }
                                     }
 
@@ -1887,9 +1895,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
@@ -1918,9 +1926,9 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 ParamServiceCallback(comment);
                                 ThrowsIllegalArgumentException(comment);
@@ -1938,31 +1946,31 @@ namespace AutoRest.Java.DanModel
                             classBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                foreach (ParameterJv param in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
                                 {
-                                    comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment().Trim());
+                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
                                 }
                                 ThrowsIllegalArgumentException(comment);
                                 comment.Return("the observable for the request");
                             });
                             classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {MethodName(method)}Async({MethodParameterDeclaration(method, settings)})", function =>
                             {
-                                foreach (ParameterJv param in MethodRequiredNullableParameters(method))
+                                foreach (Parameter param in MethodRequiredNullableParameters(method))
                                 {
-                                    function.If($"{param.Name} == null", ifBlock =>
+                                    function.If($"{ParameterGetName(param)} == null", ifBlock =>
                                     {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
                                     });
                                 }
-                                foreach (ParameterJv param in MethodParametersToValidate(method))
+                                foreach (Parameter param in MethodParametersToValidate(method))
                                 {
-                                    function.Line($"Validator.validate({param.Name});");
+                                    function.Line($"Validator.validate({ParameterGetName(param)});");
                                 }
-                                foreach (ParameterJv parameter in MethodLocalParameters(method))
+                                foreach (Parameter parameter in MethodLocalParameters(method))
                                 {
                                     if (parameter.IsConstant)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ModelType)} {parameter.Name} = {parameter.DefaultValue ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
                                     }
                                 }
 
@@ -2199,10 +2207,10 @@ namespace AutoRest.Java.DanModel
                     string methodDescription = method.Description;
                     string methodDescriptionXmlEscaped = methodDescription?.EscapeXmlComment().Period();
 
-                    IEnumerable<ParameterJv> methodParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+                    IEnumerable<Parameter> methodParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
                     if (methodParameters.Any(p => !p.IsRequired))
                     {
-                        IEnumerable<ParameterJv> requiredMethodParameters = methodParameters.Where(p => p.IsRequired);
+                        IEnumerable<Parameter> requiredMethodParameters = methodParameters.Where(p => p.IsRequired);
 
                         interfaceBlock.MultipleLineComment(comment =>
                         {
@@ -2428,11 +2436,11 @@ namespace AutoRest.Java.DanModel
             comment.Line();
         }
 
-        private static void AddParameters(JavaMultipleLineComment comment, IEnumerable<ParameterJv> parameters)
+        private static void AddParameters(JavaMultipleLineComment comment, IEnumerable<Parameter> parameters)
         {
-            foreach (ParameterJv param in parameters)
+            foreach (Parameter param in parameters)
             {
-                comment.Param(param.Name, param.Documentation.Else("the " + GetIModelTypeName(param.ModelType) + " value").EscapeXmlComment());
+                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + GetIModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment());
             }
         }
 
@@ -2682,8 +2690,8 @@ namespace AutoRest.Java.DanModel
             string asyncMethodName = $"{methodName}Async";
             string asyncRestResponseMethodName = $"{methodName}WithRestResponseAsync";
 
-            IEnumerable<ParameterJv> nonConstantParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-            IEnumerable<ParameterJv> nonConstantRequiredParameters = nonConstantParameters.Where(p => p.IsRequired);
+            IEnumerable<Parameter> nonConstantParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+            IEnumerable<Parameter> nonConstantRequiredParameters = nonConstantParameters.Where(p => p.IsRequired);
             IEnumerable<JavaMethodParameter> parameters = nonConstantParameters.Select(ParseParameter);
             IEnumerable<JavaMethodParameter> requiredParameters = nonConstantRequiredParameters.Select(ParseParameter);
 
@@ -2757,11 +2765,11 @@ namespace AutoRest.Java.DanModel
             return javaMethods;
         }
 
-        private static JavaMethodParameter ParseParameter(ParameterJv parameter)
+        private static JavaMethodParameter ParseParameter(Parameter parameter)
         {
-            string description = parameter.Documentation.Else($"the {GetIModelTypeName(parameter.ModelType)} value").EscapeXmlComment();
-            string type = GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType));
-            string name = parameter.Name;
+            string description = parameter.Documentation.Else($"the {GetIModelTypeName(ParameterGetModelType(parameter))} value").EscapeXmlComment();
+            string type = GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter)));
+            string name = ParameterGetName(parameter);
             return new JavaMethodParameter(description, type, name);
         }
 
@@ -3401,20 +3409,18 @@ namespace AutoRest.Java.DanModel
 
         private static void GenerateRootMethodFunctions(JavaBlock classBlock, Method method, Settings settings)
         {
-            IEnumerable<ParameterJv> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-            IEnumerable<ParameterJv> requiredParameters = allParameters.Where(p => p.IsRequired);
+            IEnumerable<Parameter> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+            IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
             bool hasOptionalParameters = allParameters.Count() != requiredParameters.Count();
 
             CompositeType callbackParamModelType = DependencyInjection.New<CompositeType>();
             callbackParamModelType.Name.FixedValue = $"ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}>";
 
-            ParameterJv callbackParam = new ParameterJv()
-            {
-                ModelType = callbackParamModelType,
-                Name = "serviceCallback",
-                SerializedName = "serviceCallback",
-                Documentation = "the async ServiceCallback to handle successful and failed responses."
-            };
+            Parameter callbackParam = DependencyInjection.New<Parameter>();
+            callbackParam.SerializedName = "serviceCallback";
+            callbackParam.Documentation = "the async ServiceCallback to handle successful and failed responses.";
+            ParameterSetModelType(callbackParam, callbackParamModelType);
+            ParameterSetName(callbackParam, "serviceCallback");
 
             const string callbackReturnDocumentation = "the {@link ServiceFuture} object";
 
@@ -3592,13 +3598,14 @@ namespace AutoRest.Java.DanModel
 
         internal static IModelType GetPropertyModelType(Property property)
         {
-            if (property.ModelType == null)
+            IModelType propertyModelType = property.ModelType;
+            if (propertyModelType == null)
             {
                 return null;
             }
             return property.IsXNullable ?? !property.IsRequired
-                ? property.ModelType
-                : GetIModelTypeNonNullableVariant(property.ModelType);
+                ? propertyModelType
+                : GetIModelTypeNonNullableVariant(propertyModelType);
         }
 
         internal static IEnumerable<string> GetIModelTypeImports(IModelType modelType)
@@ -4352,31 +4359,43 @@ namespace AutoRest.Java.DanModel
                 {
                     return;
                 }
-                var groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                if (nextGroupType.Name == groupedType.Name)
+
+                Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+
+                string nextGroupTypeName = ParameterGetName(nextGroupType);
+                string groupedTypeName = ParameterGetName(groupedType);
+                if (nextGroupTypeName == groupedTypeName)
                 {
                     return;
                 }
-                var nextGroupTypeName = CodeNamer.Instance.GetTypeName(nextGroupType.Name) + "Inner";
+
+                string nextGroupTypeInnerName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + "Inner";
                 if (filterRequired && !groupedType.IsRequired)
                 {
                     return;
                 }
+
+                string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+                string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
                 if (!groupedType.IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
-                    builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
+                    builder.AppendLine($"{nextGroupTypeInnerName} {nextGroupTypeCamelCaseName} = null;");
+                    builder.AppendLine($"if ({groupedTypeCamelCaseName} != null) {{");
                     builder.Indent();
-                    builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                    builder.AppendLine($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeInnerName}();");
                 }
                 else
                 {
-                    builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                    builder.AppendLine($"{nextGroupTypeInnerName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeInnerName}();");
                 }
-                foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+
+                foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
                 {
-                    builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
+                    string outParamName = ParameterGetName(outParam);
+                    string outParamPascalCaseName = outParamName.ToPascalCase();
+                    string outParamCamelCaseName = outParamName.ToCamelCase();
+                    builder.AppendLine($"{nextGroupTypeCamelCaseName}.with{outParamPascalCaseName}({groupedTypeCamelCaseName}.{outParamCamelCaseName}());");
                 }
                 if (!groupedType.IsRequired)
                 {
@@ -4389,32 +4408,42 @@ namespace AutoRest.Java.DanModel
                 {
                     return;
                 }
-                var groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                if (nextGroupType.Name == groupedType.Name)
+
+                Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                string groupedTypeName = ParameterGetName(groupedType);
+                Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+                string nextGroupTypeName = ParameterGetName(nextGroupType);
+                if (nextGroupTypeName == groupedTypeName)
                 {
                     return;
                 }
-                var nextGroupTypeName = CodeNamerJva.Instance.GetTypeName(nextGroupType.Name);
+
+                string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName);
                 if (filterRequired && !groupedType.IsRequired)
                 {
                     return;
                 }
+
+                string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+                string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
                 if (!groupedType.IsRequired)
                 {
-                    builder.AppendLine("{0} {1} = null;", nextGroupTypeName, nextGroupType.Name.ToCamelCase());
-                    builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
+                    builder.AppendLine($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+                    builder.AppendLine($"if ({groupedTypeCamelCaseName} != null) {{");
                     builder.Indent();
-                    builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                    builder.AppendLine($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
                 }
                 else
                 {
-                    builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupTypeName);
+                    builder.AppendLine($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
                 }
-                foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+
+                foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
                 {
-                    builder.AppendLine("{0}.with{1}({2}.{3}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase(), outParam.Name.ToCamelCase());
+                    string outParamName = ParameterGetName(outParam);
+                    builder.AppendLine($"{nextGroupTypeCamelCaseName}.with{outParamName.ToPascalCase()}({groupedTypeCamelCaseName}.{outParamName.ToCamelCase()}());");
                 }
+
                 if (!groupedType.IsRequired)
                 {
                     builder.Outdent().AppendLine(@"}");
@@ -4446,7 +4475,7 @@ namespace AutoRest.Java.DanModel
                 }
 
                 // parameter types
-                method.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
+                method.Parameters.OfType<Parameter>().ForEach(p => imports.AddRange(ParameterInterfaceImports(p)));
                 // return type
                 imports.AddRange(ResponseInterfaceImports(method.ReturnType));
                 // exceptions
@@ -4514,7 +4543,7 @@ namespace AutoRest.Java.DanModel
                 }
 
                 // parameter types
-                method.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
+                method.Parameters.OfType<Parameter>().ForEach(p => imports.AddRange(ParameterInterfaceImports(p)));
                 // return type
                 imports.AddRange(ResponseInterfaceImports(method.ReturnType));
                 // exceptions
@@ -4562,7 +4591,7 @@ namespace AutoRest.Java.DanModel
                 }
 
                 // parameter types
-                method.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
+                method.Parameters.OfType<Parameter>().ForEach(p => imports.AddRange(ParameterInterfaceImports(p)));
                 // return type
                 imports.AddRange(ResponseInterfaceImports(method.ReturnType));
                 // exceptions
@@ -4613,7 +4642,7 @@ namespace AutoRest.Java.DanModel
                     imports.Add("io.reactivex.Maybe");
                 }
 
-                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(p.RetrofitImports));
+                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(ParameterRetrofitImports(p)));
                 // Http verb annotations
                 imports.Add("com.microsoft.rest.v2.annotations." + method.HttpMethod.ToString().ToUpperInvariant());
                 // response type conversion
@@ -4627,9 +4656,9 @@ namespace AutoRest.Java.DanModel
                     imports.Add("com.microsoft.rest.v2.Validator");
                 }
                 // parameters
-                MethodLocalParameters(method).Concat(method.LogicalParameters.OfType<ParameterJv>())
-                    .ForEach(p => imports.AddRange(p.ClientImplImports));
-                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(p.WireImplImports));
+                MethodLocalParameters(method).Concat(method.LogicalParameters.OfType<Parameter>())
+                    .ForEach(p => imports.AddRange(ParameterClientImplImports(p)));
+                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(ParameterWireImplImports(p)));
                 // return type
                 imports.AddRange(ResponseImplImports(method.ReturnType));
                 // response type (can be different from return type)
@@ -4654,7 +4683,7 @@ namespace AutoRest.Java.DanModel
                     imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                     method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
                         .SelectMany(t => GetIModelTypeImports(t))
-                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(p.ModelType).Contains(i)))
+                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p)).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
                     imports.AddRange(ResponseImplImports(method.ReturnType));
@@ -4684,7 +4713,7 @@ namespace AutoRest.Java.DanModel
                     imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                     method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
                         .SelectMany(t => GetIModelTypeImports(t))
-                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(p.ModelType).Contains(i)))
+                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p)).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
                     imports.AddRange(ResponseImplImports(method.ReturnType));
@@ -4744,7 +4773,7 @@ namespace AutoRest.Java.DanModel
                     imports.Add("io.reactivex.Maybe");
                 }
 
-                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(p.RetrofitImports));
+                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(ParameterRetrofitImports(p)));
                 // Http verb annotations
                 imports.Add("com.microsoft.rest.v2.annotations." + method.HttpMethod.ToString().ToUpperInvariant());
                 // response type conversion
@@ -4758,9 +4787,9 @@ namespace AutoRest.Java.DanModel
                     imports.Add("com.microsoft.rest.v2.Validator");
                 }
                 // parameters
-                MethodLocalParameters(method).Concat(method.LogicalParameters.OfType<ParameterJv>())
-                    .ForEach(p => imports.AddRange(p.ClientImplImports));
-                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(p.WireImplImports));
+                MethodLocalParameters(method).Concat(method.LogicalParameters.OfType<Parameter>())
+                    .ForEach(p => imports.AddRange(ParameterClientImplImports(p)));
+                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(ParameterWireImplImports(p)));
                 // return type
                 imports.AddRange(ResponseImplImports(method.ReturnType));
                 // response type (can be different from return type)
@@ -4785,7 +4814,7 @@ namespace AutoRest.Java.DanModel
                     imports.Remove("com.microsoft.azure.v2.AzureResponseBuilder");
                     method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
                         .SelectMany(t => GetIModelTypeImports(t))
-                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(p.ModelType).Contains(i)))
+                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p)).Contains(i)))
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
                     imports.AddRange(ResponseImplImports(method.ReturnType));
@@ -4831,7 +4860,7 @@ namespace AutoRest.Java.DanModel
                     imports.Add("io.reactivex.Maybe");
                 }
 
-                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(p.RetrofitImports));
+                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(ParameterRetrofitImports(p)));
                 // Http verb annotations
                 imports.Add("com.microsoft.rest.v2.annotations." + method.HttpMethod.ToString().ToUpperInvariant());
                 // response type conversion
@@ -4845,9 +4874,9 @@ namespace AutoRest.Java.DanModel
                     imports.Add("com.microsoft.rest.v2.Validator");
                 }
                 // parameters
-                MethodLocalParameters(method).Concat(method.LogicalParameters.OfType<ParameterJv>())
-                    .ForEach(p => imports.AddRange(p.ClientImplImports));
-                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(p.WireImplImports));
+                MethodLocalParameters(method).Concat(method.LogicalParameters.OfType<Parameter>())
+                    .ForEach(p => imports.AddRange(ParameterClientImplImports(p)));
+                MethodRetrofitParameters(method, settings).ForEach(p => imports.AddRange(ParameterWireImplImports(p)));
                 // return type
                 imports.AddRange(ResponseImplImports(method.ReturnType));
                 // response type (can be different from return type)
@@ -5079,28 +5108,26 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        internal static IEnumerable<ParameterJv> MethodRetrofitParameters(Method method, Settings settings)
+        internal static IEnumerable<Parameter> MethodRetrofitParameters(Method method, Settings settings)
         {
-            IEnumerable<ParameterJv> result;
+            IEnumerable<Parameter> result;
 
             if (IsFluentOrAzure(settings))
             {
-                List<ParameterJv> parameters = MethodJvRetrofitParameters(method).ToList();
+                List<Parameter> parameters = MethodJvRetrofitParameters(method).ToList();
 
                 if (MethodIsPagingNextOperation(method))
                 {
                     parameters.RemoveAll(p => p.Location == ParameterLocation.Path);
 
-                    var nextUrlParam = new ParameterJv
-                    {
-                        Name = "nextUrl",
-                        SerializedName = "nextUrl",
-                        ModelType = DependencyInjection.New<PrimaryType>(KnownPrimaryType.String),
-                        Documentation = "The URL to get the next page of items.",
-                        Location = ParameterLocation.Path,
-                        IsRequired = true
-                    };
-                    nextUrlParam.Extensions.Add(AzureExtensions.SkipUrlEncodingExtension, true);
+                    Parameter nextUrlParam = DependencyInjection.New<Parameter>();
+                    nextUrlParam.SerializedName = "nextUrl";
+                    nextUrlParam.Documentation = "The URL to get the next page of items.";
+                    nextUrlParam.Location = ParameterLocation.Path;
+                    nextUrlParam.IsRequired = true;
+                    ParameterSetModelType(nextUrlParam, DependencyInjection.New<PrimaryType>(KnownPrimaryType.String));
+                    ParameterSetName(nextUrlParam, "nextUrl");
+                    nextUrlParam.Extensions.Add(SwaggerExtensions.SkipUrlEncodingExtension, true);
                     parameters.Insert(0, nextUrlParam);
                 }
 
@@ -5114,9 +5141,9 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        private static IEnumerable<ParameterJv> MethodJvRetrofitParameters(Method method)
+        private static IEnumerable<Parameter> MethodJvRetrofitParameters(Method method)
             => method.LogicalParameters
-                .OfType<ParameterJv>()
+                .OfType<Parameter>()
                 .Where(p => p.Location != ParameterLocation.None);
 
         private static string MethodParameterApiDeclaration(Method method, Settings settings)
@@ -5128,15 +5155,15 @@ namespace AutoRest.Java.DanModel
                 bool shouldGenerateXmlSerialization = method.CodeModel.ShouldGenerateXmlSerialization;
 
                 List<string> declarations = new List<string>();
-                foreach (ParameterJv parameter in MethodOrderedRetrofitParameters(method, settings))
+                foreach (Parameter parameter in MethodOrderedRetrofitParameters(method, settings))
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
-                    if (method.Url.Contains("{" + parameter.Name + "}"))
+                    if (method.Url.Contains("{" + ParameterGetName(parameter) + "}"))
                     {
                         parameter.Location = ParameterLocation.Path;
                     }
 
-                    var name = parameter.SerializedName;
+                    string name = parameter.SerializedName;
                     if (parameter.Extensions.ContainsKey("hostParameter"))
                     {
                         declarationBuilder.Append($"@HostParam(\"{name}\") ");
@@ -5145,7 +5172,7 @@ namespace AutoRest.Java.DanModel
                         parameter.Location == ParameterLocation.Query ||
                         parameter.Location == ParameterLocation.Header)
                     {
-                        var location = parameter.Location;
+                        ParameterLocation location = parameter.Location;
                         declarationBuilder.Append($"@{location}Param(\"{name}\") ");
                     }
                     else if (parameter.Location == ParameterLocation.Body)
@@ -5157,16 +5184,17 @@ namespace AutoRest.Java.DanModel
                         declarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
                     }
 
-                    var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
+                    string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
 
-                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameter.ModelType is SequenceType);
+                    IModelType parameterModelType = ParameterGetModelType(parameter);
+                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameterModelType is SequenceType);
                     if (shouldUseXmlListWrapper)
                     {
-                        declarationBuilder.Append(parameter.ModelType.XmlName + "Wrapper");
+                        declarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
                     }
                     else
                     {
-                        declarationBuilder.Append(GetIModelTypeName(parameter.WireType));
+                        declarationBuilder.Append(GetIModelTypeName(ParameterWireType(parameter)));
                     }
 
                     declarationBuilder.Append(" " + declarativeName);
@@ -5175,7 +5203,7 @@ namespace AutoRest.Java.DanModel
 
                 string declaration = string.Join(", ", declarations);
 
-                foreach (ParameterJv parameter in MethodRetrofitParameters(method, settings).Where(p =>
+                foreach (Parameter parameter in MethodRetrofitParameters(method, settings).Where(p =>
                     p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
                 {
                     if (GetExtensionBool(parameter?.Extensions, AzureExtensions.SkipUrlEncodingExtension))
@@ -5192,15 +5220,15 @@ namespace AutoRest.Java.DanModel
                 bool shouldGenerateXmlSerialization = method.CodeModel.ShouldGenerateXmlSerialization;
 
                 List<string> declarations = new List<string>();
-                foreach (ParameterJv parameter in MethodOrderedRetrofitParameters(method, settings))
+                foreach (Parameter parameter in MethodOrderedRetrofitParameters(method, settings))
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
-                    if (method.Url.Contains("{" + parameter.Name + "}"))
+                    if (method.Url.Contains("{" + ParameterGetName(parameter) + "}"))
                     {
                         parameter.Location = ParameterLocation.Path;
                     }
 
-                    var name = parameter.SerializedName;
+                    string name = parameter.SerializedName;
                     if (parameter.Extensions.ContainsKey("hostParameter"))
                     {
                         declarationBuilder.Append($"@HostParam(\"{name}\") ");
@@ -5209,7 +5237,7 @@ namespace AutoRest.Java.DanModel
                         parameter.Location == ParameterLocation.Query ||
                         parameter.Location == ParameterLocation.Header)
                     {
-                        var location = parameter.Location;
+                        ParameterLocation location = parameter.Location;
                         declarationBuilder.Append($"@{location}Param(\"{name}\") ");
                     }
                     else if (parameter.Location == ParameterLocation.Body)
@@ -5221,16 +5249,17 @@ namespace AutoRest.Java.DanModel
                         declarationBuilder.Append($"/* @Part(\"{name}\") not supported by RestProxy */");
                     }
 
-                    var declarativeName = parameter.ClientProperty != null ? parameter.ClientProperty.Name : parameter.Name;
+                    string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
 
-                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameter.ModelType is SequenceType);
+                    IModelType parameterModelType = ParameterGetModelType(parameter);
+                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameterModelType is SequenceType);
                     if (shouldUseXmlListWrapper)
                     {
-                        declarationBuilder.Append(parameter.ModelType.XmlName + "Wrapper");
+                        declarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
                     }
                     else
                     {
-                        declarationBuilder.Append(GetIModelTypeName(parameter.WireType));
+                        declarationBuilder.Append(GetIModelTypeName(ParameterWireType(parameter)));
                     }
 
                     declarationBuilder.Append(" " + declarativeName);
@@ -5252,11 +5281,11 @@ namespace AutoRest.Java.DanModel
             MatchCollection matches = regex.Matches(methodUrl);
             builder.Append("\"").Append(regex.Replace(methodUrl, "%s").TrimStart('/')).Append("\"");
 
-            IEnumerable<ParameterJv> retrofitParameters = MethodJvRetrofitParameters(method);
+            IEnumerable<Parameter> retrofitParameters = MethodJvRetrofitParameters(method);
             foreach (Match match in matches)
             {
                 string serializedName = match.Value.Trim('{', '}');
-                builder.Append(", " + retrofitParameters.First(p => p.SerializedName == serializedName).WireName);
+                builder.Append(", " + ParameterWireName(retrofitParameters.First(p => p.SerializedName == serializedName)));
             }
             return builder.Append(")").ToString();
         }
@@ -5270,9 +5299,9 @@ namespace AutoRest.Java.DanModel
                 if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
                 {
                     List<string> declarations = new List<string>();
-                    foreach (ParameterJv parameter in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                    foreach (Parameter parameter in MethodLocalParameters(method).Where(p => !p.IsConstant))
                     {
-                        declarations.Add($"final {GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType))} {parameter.Name}");
+                        declarations.Add($"final {GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter)))} {ParameterGetName(parameter)}");
                     }
 
                     result = string.Join(", ", declarations);
@@ -5280,9 +5309,9 @@ namespace AutoRest.Java.DanModel
                 else
                 {
                     List<string> declarations = new List<string>();
-                    foreach (var parameter in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                    foreach (Parameter parameter in MethodLocalParameters(method).Where(p => !p.IsConstant))
                     {
-                        declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
+                        declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter))) + " " + ParameterGetName(parameter));
                     }
 
                     result = string.Join(", ", declarations);
@@ -5291,9 +5320,9 @@ namespace AutoRest.Java.DanModel
             else
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in MethodLocalParameters(method).Where(p => !p.IsConstant))
+                foreach (Parameter parameter in MethodLocalParameters(method).Where(p => !p.IsConstant))
                 {
-                    declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
+                    declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter))) + " " + ParameterGetName(parameter));
                 }
 
                 result = string.Join(", ", declarations);
@@ -5311,18 +5340,18 @@ namespace AutoRest.Java.DanModel
                 if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
                 {
                     List<string> declarations = new List<string>();
-                    foreach (ParameterJv parameter in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                    foreach (Parameter parameter in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add("final " + GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
+                        declarations.Add("final " + GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter))) + " " + ParameterGetName(parameter));
                     }
                     result = string.Join(", ", declarations);
                 }
                 else
                 {
                     List<string> declarations = new List<string>();
-                    foreach (var parameter in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                    foreach (Parameter parameter in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                     {
-                        declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
+                        declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter))) + " " + ParameterGetName(parameter));
                     }
                     result = string.Join(", ", declarations);
                 }
@@ -5330,9 +5359,9 @@ namespace AutoRest.Java.DanModel
             else
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
+                foreach (Parameter parameter in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
                 {
-                    declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name);
+                    declarations.Add(GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter))) + " " + ParameterGetName(parameter));
                 }
                 result = string.Join(", ", declarations);
             }
@@ -5530,20 +5559,20 @@ namespace AutoRest.Java.DanModel
             {
                 if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
                 {
-                    return string.Join(", ", MethodLocalParameters(nextMethod).Select(p => p.IsRequired ? (string)p.Name : "null"));
+                    return string.Join(", ", MethodLocalParameters(nextMethod).Select(p => p.IsRequired ? ParameterGetName(p) : "null"));
                 }
                 var groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
                 var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
                 List<string> invocations = new List<string>();
-                foreach (var parameter in MethodLocalParameters(nextMethod))
+                foreach (Parameter parameter in MethodLocalParameters(nextMethod))
                 {
                     if (parameter.IsRequired)
                     {
-                        invocations.Add(parameter.Name);
+                        invocations.Add(ParameterGetName(parameter));
                     }
-                    else if (parameter.Name == nextGroupType.Name && groupedType.IsRequired)
+                    else if (ParameterGetName(parameter) == ParameterGetName(nextGroupType) && groupedType.IsRequired)
                     {
-                        invocations.Add(parameter.Name);
+                        invocations.Add(ParameterGetName(parameter));
                     }
                     else
                     {
@@ -5562,7 +5591,7 @@ namespace AutoRest.Java.DanModel
         {
             string invocation;
             Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, out invocation);
-            return nextMethod.Parameters.First(p => p.Name.ToString().StartsWith("next", StringComparison.OrdinalIgnoreCase)).Name;
+            return ParameterGetName(nextMethod.Parameters.First(p => ParameterGetName(p).StartsWith("next", StringComparison.OrdinalIgnoreCase)));
         }
 
         internal static Method MethodGetPagingNextMethodWithInvocation(Method method, out string invocation, bool async = false, bool singlePage = true)
@@ -5611,24 +5640,24 @@ namespace AutoRest.Java.DanModel
             return invocation;
         }
 
-        private static IEnumerable<ParameterJv> MethodOrderedRetrofitParameters(Method method, Settings settings)
+        private static IEnumerable<Parameter> MethodOrderedRetrofitParameters(Method method, Settings settings)
         {
-            IEnumerable<ParameterJv> retrofitParameters = MethodRetrofitParameters(method, settings);
+            IEnumerable<Parameter> retrofitParameters = MethodRetrofitParameters(method, settings);
             return retrofitParameters.Where(p => p.Location == ParameterLocation.Path)
                 .Union(retrofitParameters.Where(p => p.Location != ParameterLocation.Path));
         }
 
         private static string MethodParameterInvocation(Method method)
-            => string.Join(", ", MethodLocalParameters(method).Where(p => !p.IsConstant).Select(p => p.Name));
+            => string.Join(", ", MethodLocalParameters(method).Where(p => !p.IsConstant).Select(p => ParameterGetName(p)));
 
         private static string MethodRequiredParameterInvocation(Method methodJv)
         {
             List<string> invocations = new List<string>();
-            foreach (ParameterJv parameter in MethodLocalParameters(methodJv))
+            foreach (Parameter parameter in MethodLocalParameters(methodJv))
             {
                 if (parameter.IsRequired && !parameter.IsConstant)
                 {
-                    invocations.Add(parameter.Name);
+                    invocations.Add(ParameterGetName(parameter));
                 }
             }
             return string.Join(", ", invocations);
@@ -5639,14 +5668,14 @@ namespace AutoRest.Java.DanModel
             bool shouldUseXmlSerialization = method.CodeModel.ShouldGenerateXmlSerialization;
 
             IEnumerable<string> arguments = MethodOrderedRetrofitParameters(method, settings)
-                .Select(parameter => shouldUseXmlSerialization && (parameter.WireType is SequenceType)
-                    ? $"new {parameter.WireType.XmlName}Wrapper({parameter.WireName})"
-                    : parameter.WireName);
+                .Select(parameter => shouldUseXmlSerialization && (ParameterWireType(parameter) is SequenceType)
+                    ? $"new {ParameterWireType(parameter).XmlName}Wrapper({ParameterWireName(parameter)})"
+                    : ParameterWireName(parameter));
 
             return string.Join(", ", arguments);
         }
 
-        private static string MethodJavadoc(Method method, IEnumerable<ParameterJv> parameters, IEnumerable<string> exceptionsDocumentation, string optionalReturnDocumentation)
+        private static string MethodJavadoc(Method method, IEnumerable<Parameter> parameters, IEnumerable<string> exceptionsDocumentation, string optionalReturnDocumentation)
         {
             IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine("/**");
@@ -5662,10 +5691,10 @@ namespace AutoRest.Java.DanModel
 
             builder.AppendLine(" * ");
 
-            foreach (ParameterJv param in parameters)
+            foreach (Parameter param in parameters)
             {
-                string paramDoc = param.Documentation.Else($"the {GetIModelTypeName(param.ModelType)} value").EscapeXmlComment().Trim();
-                builder.AppendLine($" * @param {param.Name} {paramDoc}");
+                string paramDoc = param.Documentation.Else($"the {GetIModelTypeName(ParameterGetModelType(param))} value").EscapeXmlComment().Trim();
+                builder.AppendLine($" * @param {ParameterGetName(param)} {paramDoc}");
             }
 
             foreach (string exception in exceptionsDocumentation)
@@ -5682,11 +5711,11 @@ namespace AutoRest.Java.DanModel
             return builder.ToString();
         }
 
-        internal static string MethodParameterDeclaration(IEnumerable<ParameterJv> parameters)
-            => string.Join(", ", parameters.Select(parameter => GetIModelTypeName(GetIModelTypeParameterVariant(parameter.ClientType)) + " " + parameter.Name));
+        internal static string MethodParameterDeclaration(IEnumerable<Parameter> parameters)
+            => string.Join(", ", parameters.Select(parameter => GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(parameter))) + " " + ParameterGetName(parameter)));
 
-        internal static string MethodArguments(IEnumerable<ParameterJv> parameters)
-            => string.Join(", ", parameters.Select(parameter => parameter.Name.Value));
+        internal static string MethodArguments(IEnumerable<Parameter> parameters)
+            => string.Join(", ", parameters.Select(parameter => ParameterGetName(parameter)));
 
         private static IEnumerable<string> MethodAsyncExceptionDocumentation()
             => new[] { " * @throws IllegalArgumentException thrown if parameters fail the validation" };
@@ -5715,7 +5744,7 @@ namespace AutoRest.Java.DanModel
         private static string MethodObservableReturnDocumentation(Method method)
             => string.IsNullOrEmpty(MethodReturnTypeResponseName(method)) ? "" : $"a {{@link Single}} emitting the {MethodRestResponseAbstractTypeName(method)} object";
 
-        private static string MethodObservableRestResponseImpl(Method method, IEnumerable<ParameterJv> parameters, bool takeOnlyRequiredParameters, Settings settings)
+        private static string MethodObservableRestResponseImpl(Method method, IEnumerable<Parameter> parameters, bool takeOnlyRequiredParameters, Settings settings)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             builder.AppendLine($"public Single<{MethodRestResponseAbstractTypeName(method)}> {MethodName(method)}WithRestResponseAsync({MethodParameterDeclaration(parameters)}) {{");
@@ -5724,30 +5753,31 @@ namespace AutoRest.Java.DanModel
             // Check presence of required parameters
             foreach (Parameter param in MethodRequiredNullableParameters(method))
             {
-                builder.AppendLine($"if ({param.Name} == null) {{");
+                string parameterName = ParameterGetName(param);
+                builder.AppendLine($"if ({parameterName} == null) {{");
                 builder.Indent();
-                builder.AppendLine($"throw new IllegalArgumentException(\"Parameter {param.Name} is required and cannot be null.\");");
+                builder.AppendLine($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
                 builder.Outdent();
                 builder.AppendLine("}");
             }
 
-            foreach (ParameterJv param in MethodLocalParameters(method))
+            foreach (Parameter param in MethodLocalParameters(method))
             {
-                IModelType parameterClientType = param.ClientType;
+                IModelType parameterClientType = ParameterClientType(param);
                 string parameterClientTypeName = GetIModelTypeName(parameterClientType);
                 if (takeOnlyRequiredParameters && !param.IsRequired)
                 {
-                    builder.AppendLine($"final {parameterClientTypeName} {param.Name} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
+                    builder.AppendLine($"final {parameterClientTypeName} {ParameterGetName(param)} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
                 }
                 else if (param.IsConstant)
                 {
-                    builder.AppendLine($"final {parameterClientTypeName} {param.Name} = {param.DefaultValue ?? "null"};");
+                    builder.AppendLine($"final {parameterClientTypeName} {ParameterGetName(param)} = {param.DefaultValue ?? "null"};");
                 }
             }
 
             foreach (Parameter param in MethodParametersToValidate(method))
             {
-                builder.AppendLine($"Validator.validate({param.Name});");
+                builder.AppendLine($"Validator.validate({ParameterGetName(param)});");
             }
 
             string mappings = MethodBuildInputMappings(method, takeOnlyRequiredParameters);
@@ -5769,7 +5799,7 @@ namespace AutoRest.Java.DanModel
             return builder.ToString();
         }
 
-        private static string MethodObservableImpl(Method method, IEnumerable<ParameterJv> parameters)
+        private static string MethodObservableImpl(Method method, IEnumerable<Parameter> parameters)
         {
             string returnType;
             if (method.ReturnType.Body == null)
@@ -5817,13 +5847,13 @@ namespace AutoRest.Java.DanModel
             return builder.ToString();
         }
 
-        private static string MethodCallbackImpl(Method method, IEnumerable<ParameterJv> parameters, ParameterJv callbackParam)
+        private static string MethodCallbackImpl(Method method, IEnumerable<Parameter> parameters, Parameter callbackParam)
         {
             var builder = new IndentedStringBuilder(IndentedStringBuilder.FourSpaces);
             string methodName = MethodName(method);
             builder.AppendLine($"public ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> {methodName}Async({MethodParameterDeclaration(parameters.ConcatSingleItem(callbackParam))}) {{");
             builder.Indent();
-            builder.AppendLine($"return ServiceFuture.fromBody({methodName}Async({MethodArguments(parameters)}), {callbackParam.Name});");
+            builder.AppendLine($"return ServiceFuture.fromBody({methodName}Async({MethodArguments(parameters)}), {ParameterGetName(callbackParam)});");
             builder.Outdent();
             builder.AppendLine("}");
 
@@ -5843,7 +5873,7 @@ namespace AutoRest.Java.DanModel
                 ? ""
                 : $"the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object if successful.";
 
-        private static string MethodSyncImpl(Method method, IEnumerable<ParameterJv> parameters)
+        private static string MethodSyncImpl(Method method, IEnumerable<Parameter> parameters)
         {
             string paramString = MethodParameterDeclaration(parameters);
             string argsString = MethodArguments(parameters);
@@ -5875,11 +5905,11 @@ namespace AutoRest.Java.DanModel
         {
             IndentedStringBuilder builder = new IndentedStringBuilder();
             string methodClientReference = MethodClientReference(method);
-            foreach (ParameterJv p in MethodRetrofitParameters(method, settings))
+            foreach (Parameter p in MethodRetrofitParameters(method, settings))
             {
-                if (p.NeedsConversion)
+                if (ParameterNeedsConversion(p))
                 {
-                    builder.Append(p.ConvertToWireType(p.Name, methodClientReference));
+                    builder.Append(ParameterConvertToWireType(p, ParameterGetName(p), methodClientReference));
                 }
             }
             return builder.ToString();
@@ -5891,9 +5921,9 @@ namespace AutoRest.Java.DanModel
             string methodClientReference = MethodClientReference(method);
             foreach (var p in MethodRetrofitParameters(method, settings).Where(p => p.IsRequired))
             {
-                if (p.NeedsConversion)
+                if (ParameterNeedsConversion(p))
                 {
-                    builder.Append(p.ConvertToWireType(p.Name, methodClientReference));
+                    builder.Append(ParameterConvertToWireType(p, ParameterGetName(p), methodClientReference));
                 }
             }
             return builder.ToString();
@@ -5904,36 +5934,37 @@ namespace AutoRest.Java.DanModel
             IndentedStringBuilder builder = new IndentedStringBuilder();
             foreach (ParameterTransformation transformation in method.InputParameterTransformation)
             {
-                var outParamName = transformation.OutputParameter.Name;
-                while (method.Parameters.Any(p => p.Name == outParamName))
+                var outParamName = ParameterGetName(transformation.OutputParameter);
+                while (method.Parameters.Any(p => ParameterGetName(p) == outParamName))
                 {
                     outParamName += "1";
                 }
-                transformation.OutputParameter.Name = outParamName;
+                ParameterSetName(transformation.OutputParameter, outParamName);
                 string nullCheck = MethodBuildNullCheckExpression(transformation);
                 bool conditionalAssignment = !string.IsNullOrEmpty(nullCheck) && !transformation.OutputParameter.IsRequired && !filterRequired;
                 if (conditionalAssignment)
                 {
                     builder.AppendLine("{0} {1} = null;",
-                            GetIModelTypeName(GetIModelTypeParameterVariant(((ParameterJv)transformation.OutputParameter).ClientType)),
+                            GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(transformation.OutputParameter))),
                             outParamName);
                     builder.AppendLine("if ({0}) {{", nullCheck).Indent();
                 }
 
+                IModelType transformationOutputParameterModelType = ParameterGetModelType(transformation.OutputParameter);
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                    transformation.OutputParameter.ModelType is CompositeType)
+                    transformationOutputParameterModelType is CompositeType)
                 {
                     builder.AppendLine("{0}{1} = new {2}();",
-                        !conditionalAssignment ? GetIModelTypeName(GetIModelTypeParameterVariant(((ParameterJv)transformation.OutputParameter).ClientType)) + " " : "",
+                        !conditionalAssignment ? GetIModelTypeName(GetIModelTypeParameterVariant(ParameterClientType(transformation.OutputParameter))) + " " : "",
                         outParamName,
-                        GetIModelTypeName(transformation.OutputParameter.ModelType));
+                        GetIModelTypeName(transformationOutputParameterModelType));
                 }
 
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}{2};",
-                        !conditionalAssignment && !(transformation.OutputParameter.ModelType is CompositeType) ?
-                            GetIModelTypeName(GetIModelTypeParameterVariant(((ParameterJv)transformation.OutputParameter).ClientType)) + " " : "",
+                        !conditionalAssignment && !(transformationOutputParameterModelType is CompositeType) ?
+                            GetIModelTypeName(GetIModelTypeParameterVariant((ParameterClientType(transformation.OutputParameter)))) + " " : "",
                         outParamName,
                         MethodGetMapping(mapping, filterRequired));
                 }
@@ -5950,7 +5981,7 @@ namespace AutoRest.Java.DanModel
 
         private static string MethodGetMapping(ParameterMapping mapping, bool filterRequired)
         {
-            string inputPath = mapping.InputParameter.Name;
+            string inputPath = ParameterGetName(mapping.InputParameter);
             if (mapping.InputParameterProperty != null)
             {
                 inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
@@ -5982,18 +6013,19 @@ namespace AutoRest.Java.DanModel
             return string.Join(" || ",
                 transformation.ParameterMappings
                     .Where(m => !m.InputParameter.IsRequired)
-                    .Select(m => m.InputParameter.Name + " != null"));
+                    .Select(m => ParameterGetName(m.InputParameter) + " != null"));
         }
 
-        private static IEnumerable<ParameterJv> MethodRequiredNullableParameters(Method method)
+        private static IEnumerable<Parameter> MethodRequiredNullableParameters(Method method)
         {
-            foreach (ParameterJv param in method.Parameters)
+            foreach (Parameter param in method.Parameters)
             {
-                if (!param.ModelType.IsPrimaryType(KnownPrimaryType.Int) &&
-                    !param.ModelType.IsPrimaryType(KnownPrimaryType.Double) &&
-                    !param.ModelType.IsPrimaryType(KnownPrimaryType.Boolean) &&
-                    !param.ModelType.IsPrimaryType(KnownPrimaryType.Long) &&
-                    !param.ModelType.IsPrimaryType(KnownPrimaryType.UnixTime) &&
+                IModelType parameterModelType = ParameterGetModelType(param);
+                if (!parameterModelType.IsPrimaryType(KnownPrimaryType.Int) &&
+                    !parameterModelType.IsPrimaryType(KnownPrimaryType.Double) &&
+                    !parameterModelType.IsPrimaryType(KnownPrimaryType.Boolean) &&
+                    !parameterModelType.IsPrimaryType(KnownPrimaryType.Long) &&
+                    !parameterModelType.IsPrimaryType(KnownPrimaryType.UnixTime) &&
                     !param.IsConstant && param.IsRequired)
                 {
                     yield return param;
@@ -6001,12 +6033,13 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static IEnumerable<ParameterJv> MethodParametersToValidate(Method method)
+        private static IEnumerable<Parameter> MethodParametersToValidate(Method method)
         {
-            foreach (ParameterJv param in method.Parameters)
+            foreach (Parameter param in method.Parameters)
             {
-                if (param.ModelType is PrimaryType ||
-                    param.ModelType is EnumType ||
+                IModelType parameterModelType = ParameterGetModelType(param);
+                if (parameterModelType is PrimaryType ||
+                    parameterModelType is EnumType ||
                     param.IsConstant)
                 {
                     continue;
@@ -6015,15 +6048,14 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static IEnumerable<ParameterJv> MethodLocalParameters(Method method)
+        private static IEnumerable<Parameter> MethodLocalParameters(Method method)
         {
             //Omit parameter-group properties for now since Java doesn't support them yet
-            var par = method.Parameters
-                .OfType<ParameterJv>()
-                .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(p.Name))
+            return method.Parameters
+                .OfType<Parameter>()
+                .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(ParameterGetName(p)))
                 .OrderBy(item => !item.IsRequired)
                 .ToList();
-            return par;
         }
 
         private static string MethodExpectedResponsesAnnotation(Method method)
@@ -6445,5 +6477,250 @@ namespace AutoRest.Java.DanModel
 
         internal static IModelType IModelTypeServiceResponseVariant(IModelType modelType)
             => GetIModelTypeNonNullableVariant(GetIModelTypeResponseVariant(modelType)) ?? modelType;
+
+        internal static bool ParameterWantNullable(Parameter parameter)
+            => parameter.IsXNullable ?? !parameter.IsRequired;
+
+        internal static string ParameterGetName(Parameter parameter)
+        {
+            string result;
+            if (!parameter.IsClientProperty)
+            {
+                result = parameter.Name;
+            }
+            else
+            {
+                string caller = (parameter.Method != null && true == parameter.Method.Group.IsNullOrEmpty() ? "this" : "this.client");
+                result = $"{caller}.{parameter.ClientProperty.Name.ToCamelCase()}()";
+            }
+            return result;
+        }
+
+        internal static void ParameterSetName(Parameter parameter, string name)
+        {
+            parameter.Name = name;
+        }
+
+        internal static IModelType ParameterGetModelType(Parameter parameter)
+        {
+            IModelType result = parameter.ModelType;
+            if (result != null && !ParameterWantNullable(parameter))
+            {
+                result = GetIModelTypeNonNullableVariant(result);
+            }
+            return result;
+        }
+
+        internal static void ParameterSetModelType(Parameter parameter, IModelType modelType)
+        {
+            parameter.ModelType = modelType;
+        }
+
+        internal static IModelType ParameterClientType(Parameter parameter)
+            => GetIModelTypeParameterVariant(ParameterGetModelType(parameter));
+
+        internal static IModelType ParameterWireType(Parameter parameter)
+        {
+            IModelType modelType = ParameterGetModelType(parameter);
+            if (modelType.IsPrimaryType(KnownPrimaryType.Stream))
+            {
+                // Just pass whatever we give to clients to RestProxy
+                return ParameterClientType(parameter);
+            }
+            else if (!modelType.IsPrimaryType(KnownPrimaryType.Base64Url) &&
+                parameter.Location != ParameterLocation.Body &&
+                parameter.Location != ParameterLocation.FormData &&
+                NeedsSpecialSerialization(ParameterClientType(parameter)))
+            {
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.String);
+            }
+            else
+            {
+                return modelType;
+            }
+        }
+
+        internal static bool ParameterNeedsConversion(Parameter parameter)
+            => !ParameterClientType(parameter).StructurallyEquals(ParameterWireType(parameter));
+
+        internal static string ParameterWireName(Parameter parameter)
+            => ParameterNeedsConversion(parameter) ? $"{ParameterGetName(parameter).ToCamelCase()}Converted" : ParameterGetName(parameter);
+
+        private static string ParameterConvertToWireType(Parameter parameter, string source, string clientReference)
+        {
+            if (parameter.Location != ParameterLocation.Body &&
+                parameter.Location != ParameterLocation.FormData &&
+                NeedsSpecialSerialization(ParameterGetModelType(parameter)))
+            {
+                IModelType clientType = ParameterClientType(parameter);
+                PrimaryType primary = clientType as PrimaryType;
+                SequenceType sequence = clientType as SequenceType;
+                if (primary != null && primary.IsPrimaryType(KnownPrimaryType.ByteArray))
+                {
+                    IModelType wireType = ParameterWireType(parameter);
+                    string wireTypeName = GetIModelTypeName(wireType);
+                    string wireName = ParameterWireName(parameter);
+                    if (wireType.IsPrimaryType(KnownPrimaryType.String))
+                    {
+                        return $"{wireTypeName} {wireName} = Base64.encodeBase64String({source});";
+                    }
+                    else
+                    {
+                        return $"{wireTypeName} {wireName} = Base64Url.encode({source});";
+                    }
+                }
+                else if (sequence != null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
+                        GetIModelTypeName(ParameterWireType(parameter)),
+                        ParameterWireName(parameter),
+                        clientReference,
+                        source,
+                        parameter.CollectionFormat.ToString().ToUpperInvariant());
+                }
+            }
+
+            return ParameterConvertClientTypeToWireType(parameter, ParameterWireType(parameter), source, ParameterWireName(parameter), clientReference);
+        }
+
+        private static string ParameterConvertClientTypeToWireType(Parameter parameter, IModelType wireType, string source, string target, string clientReference, int level = 0)
+        {
+            IndentedStringBuilder builder = new IndentedStringBuilder();
+            if (wireType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
+            {
+                if (!parameter.IsRequired)
+                {
+                    builder.AppendLine("DateTimeRfc1123 {0} = {1};", target, IModelTypeDefaultValue(wireType, parameter.Method) ?? "null")
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                builder.AppendLine("{0}{1} = new DateTimeRfc1123({2});", parameter.IsRequired ? "DateTimeRfc1123 " : "", target, source);
+                if (!parameter.IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
+            }
+            else if (wireType.IsPrimaryType(KnownPrimaryType.UnixTime))
+            {
+                if (!parameter.IsRequired)
+                {
+                    builder.AppendLine("Long {0} = {1};", target, IModelTypeDefaultValue(wireType, parameter.Method) ?? "null")
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                builder.AppendLine("{0}{1} = {2}.toDateTime(DateTimeZone.UTC).getMillis() / 1000;", parameter.IsRequired ? "Long " : "", target, source);
+            }
+            else if (wireType.IsPrimaryType(KnownPrimaryType.Base64Url))
+            {
+                if (!parameter.IsRequired)
+                {
+                    builder.AppendLine("Base64Url {0} = {1};", target, IModelTypeDefaultValue(wireType, parameter.Method) ?? "null")
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                builder.AppendLine("{0}{1} = Base64Url.encode({2});", parameter.IsRequired ? "Base64Url " : "", target, source);
+                if (!parameter.IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
+            }
+            else if (wireType is SequenceType wireSequenceType)
+            {
+                if (!parameter.IsRequired)
+                {
+                    builder.AppendLine("{0} {1} = {2};", GetIModelTypeName(ParameterWireType(parameter)), target, IModelTypeDefaultValue(wireType, parameter.Method) ?? "null")
+                        .AppendLine("if ({0} != null) {{", source).Indent();
+                }
+                IModelType elementType = wireSequenceType.ElementType;
+                var itemName = string.Format(CultureInfo.InvariantCulture, "item{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                var itemTarget = string.Format(CultureInfo.InvariantCulture, "value{0}", level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                builder.AppendLine("{0}{1} = new ArrayList<{2}>();", parameter.IsRequired ? GetIModelTypeName(wireType) + " " : "", target, GetIModelTypeName(elementType))
+                    .AppendLine("for ({0} {1} : {2}) {{", GetIModelTypeName(GetIModelTypeParameterVariant(elementType)), itemName, source)
+                    .Indent().AppendLine(ParameterConvertClientTypeToWireType(parameter, elementType, itemName, itemTarget, clientReference, level + 1))
+                        .AppendLine("{0}.add({1});", target, itemTarget)
+                    .Outdent().Append("}");
+                if (!parameter.IsRequired)
+                {
+                    builder.Outdent().AppendLine("}");
+                }
+            }
+            else if (wireType is DictionaryType dictionaryType)
+            {
+                if (!parameter.IsRequired)
+                {
+                    builder.AppendLine($"{GetIModelTypeName(ParameterWireType(parameter))} {target} = {IModelTypeDefaultValue(wireType, parameter.Method) ?? "null"};");
+                    builder.AppendLine($"if ({source} != null) {{");
+                    builder.Indent();
+                }
+
+                IModelType valueType = dictionaryType.ValueType;
+
+                string levelString = (level == 0 ? "" : level.ToString(CultureInfo.InvariantCulture));
+                string itemName = $"entry{levelString}";
+                string itemTarget = $"value{levelString}";
+
+                builder.AppendLine($"{(parameter.IsRequired ? GetIModelTypeName(wireType) + " " : "")}{target} = new HashMap<String, {GetIModelTypeName(valueType)}>();");
+                builder.AppendLine($"for (Map.Entry<String, {GetIModelTypeName(GetIModelTypeParameterVariant(valueType))}> {itemName} : {source}.entrySet()) {{");
+                builder.Indent();
+                builder.AppendLine(ParameterConvertClientTypeToWireType(parameter, valueType, itemName + ".getValue()", itemTarget, clientReference, level + 1));
+                builder.AppendLine($"{target}.put({itemName}.getKey(), {itemTarget});");
+                builder.Outdent();
+                builder.Append("}");
+
+                if (!parameter.IsRequired)
+                {
+                    builder.Outdent();
+                    builder.AppendLine("}");
+                }
+            }
+            return builder.ToString();
+        }
+
+        internal static bool NeedsSpecialSerialization(IModelType type)
+        {
+            PrimaryType known = type as PrimaryType;
+            return known != null &&
+                type.IsPrimaryType(KnownPrimaryType.ByteArray) ||
+                type is SequenceType;
+        }
+
+        internal static IEnumerable<string> ParameterInterfaceImports(Parameter parameter)
+            => GetIModelTypeImports(ParameterClientType(parameter));
+
+        private static IEnumerable<string> ParameterWireImplImports(Parameter parameter)
+        {
+            List<string> imports = new List<string>(GetIModelTypeImports(ParameterWireType(parameter)));
+            if (parameter.Location != ParameterLocation.Body)
+            {
+                IModelType modelType = ParameterGetModelType(parameter);
+                if (modelType.IsPrimaryType(KnownPrimaryType.ByteArray))
+                {
+                    imports.Add("org.apache.commons.codec.binary.Base64");
+                }
+                else if (modelType is SequenceType)
+                {
+                    imports.Add("com.microsoft.rest.v2.CollectionFormat");
+                }
+            }
+            return imports;
+        }
+
+        private static IEnumerable<string> ParameterClientImplImports(Parameter parameter)
+            => GetIModelTypeImports(ParameterClientType(parameter));
+
+        private static IEnumerable<string> ParameterRetrofitImports(Parameter parameter)
+        {
+            List<string> imports = new List<string>();
+
+            ParameterLocation location = parameter.Location;
+            if (location == ParameterLocation.Body || !NeedsSpecialSerialization(ParameterGetModelType(parameter)))
+            {
+                imports.AddRange(GetIModelTypeImports(ParameterWireType(parameter)));
+            }
+
+            if (location != ParameterLocation.None && location != ParameterLocation.FormData)
+            {
+                imports.Add($"com.microsoft.rest.v2.annotations.{location.ToString()}Param");
+            }
+            return imports;
+        }
     }
 }
