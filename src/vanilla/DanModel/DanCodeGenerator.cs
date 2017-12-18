@@ -56,6 +56,9 @@ namespace AutoRest.Java.DanModel
 
         private static readonly IDictionary<Response, Method> responseParents = new Dictionary<Response, Method>();
 
+        // This is a Not set because the default value for WantNullable was true.
+        private static readonly ISet<PrimaryType> primaryTypeNotWantNullable = new HashSet<PrimaryType>();
+
         public static string BetaSinceVersion()
         {
             string[] versionParts = targetVersion.Split('.');
@@ -715,7 +718,7 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"});");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {IModelTypeDefaultValue(parameter.ClientType, method) ?? "null"});");
                                     }
                                     if (parameter.IsConstant)
                                     {
@@ -955,7 +958,7 @@ namespace AutoRest.Java.DanModel
                                     {
                                         if (!parameter.IsRequired)
                                         {
-                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {IModelTypeDefaultValue(parameter.WireType, method) ?? "null"};");
                                         }
                                         if (parameter.IsConstant)
                                         {
@@ -1085,7 +1088,7 @@ namespace AutoRest.Java.DanModel
                     string propertyDescription = property.Documentation;
                     string propertyName = property.Name;
                     string propertyNameCamelCase = propertyName.ToCamelCase();
-                    string propertyType = GetIModelTypeName(GetPropertyModelType(property).ServiceResponseVariant());
+                    string propertyType = GetIModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)));
 
                     if (isFirstMethod)
                     {
@@ -1355,7 +1358,7 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {IModelTypeDefaultValue(parameter.ClientType, method) ?? "null"};");
                                     }
 
                                     if (parameter.IsConstant)
@@ -1630,7 +1633,7 @@ namespace AutoRest.Java.DanModel
                                 {
                                     if (!parameter.IsRequired)
                                     {
-                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {parameter.ClientType.GetDefaultValue(method) ?? "null"};");
+                                        function.Line($"final {GetIModelTypeName(parameter.ClientType)} {parameter.Name} = {IModelTypeDefaultValue(parameter.ClientType, method) ?? "null"};");
                                     }
                                     if (parameter.IsConstant)
                                     {
@@ -1853,7 +1856,7 @@ namespace AutoRest.Java.DanModel
                                     {
                                         if (!parameter.IsRequired)
                                         {
-                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {parameter.WireType.GetDefaultValue(method) ?? "null"};");
+                                            function.Line($"final {GetIModelTypeName(parameter.WireType)} {parameter.WireName} = {IModelTypeDefaultValue(parameter.WireType, method) ?? "null"};");
                                         }
                                         if (parameter.IsConstant)
                                         {
@@ -2145,7 +2148,7 @@ namespace AutoRest.Java.DanModel
                 foreach (Property property in codeModel.Properties)
                 {
                     string propertyDescription = property.Documentation;
-                    string propertyType = GetIModelTypeName(GetPropertyModelType(property).ServiceResponseVariant());
+                    string propertyType = GetIModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)));
                     string propertyName = property.Name;
                     string propertyNameCamelCase = propertyName.ToCamelCase();
 
@@ -2361,7 +2364,7 @@ namespace AutoRest.Java.DanModel
             foreach (Property property in properties)
             {
                 string propertyDocumentation = property.Documentation.ToString().Period();
-                string propertyType = GetIModelTypeName(GetPropertyModelType(property).ServiceResponseVariant());
+                string propertyType = GetIModelTypeName(IModelTypeServiceResponseVariant(GetPropertyModelType(property)));
                 string propertyName = property.Name;
                 string propertyNameCamelCase = propertyName.ToCamelCase();
 
@@ -3726,7 +3729,7 @@ namespace AutoRest.Java.DanModel
             if (modelType is SequenceType sequenceTypeJv)
             {
                 IModelType elementTypeResponseVariant = GetIModelTypeResponseVariant(sequenceTypeJv.ElementType);
-                if (elementTypeResponseVariant != sequenceTypeJv.ElementType && (elementTypeResponseVariant as PrimaryTypeJv)?.Nullable != false)
+                if (elementTypeResponseVariant != sequenceTypeJv.ElementType && PrimaryTypeNullable(elementTypeResponseVariant as PrimaryType) != false)
                 {
                     SequenceType sequenceType = DependencyInjection.New<SequenceType>();
                     sequenceType.ElementType = elementTypeResponseVariant;
@@ -3736,7 +3739,7 @@ namespace AutoRest.Java.DanModel
             else if (modelType is DictionaryType dictionaryType)
             {
                 IModelType valueTypeResponseVariant = GetIModelTypeResponseVariant(dictionaryType.ValueType);
-                if (valueTypeResponseVariant != dictionaryType.ValueType && (valueTypeResponseVariant as PrimaryTypeJv)?.Nullable != false)
+                if (valueTypeResponseVariant != dictionaryType.ValueType && PrimaryTypeNullable(valueTypeResponseVariant as PrimaryType) != false)
                 {
                     DictionaryType dictionaryTypeResult = DependencyInjection.New<DictionaryType>();
                     dictionaryTypeResult.ValueType = valueTypeResponseVariant;
@@ -3762,7 +3765,7 @@ namespace AutoRest.Java.DanModel
             if (modelType is SequenceType sequenceType)
             {
                 IModelType elementTypeResponseVariant = GetIModelTypeParameterVariant(sequenceType.ElementType);
-                if (elementTypeResponseVariant != sequenceType.ElementType && (elementTypeResponseVariant as PrimaryTypeJv)?.Nullable != false)
+                if (elementTypeResponseVariant != sequenceType.ElementType && PrimaryTypeNullable(elementTypeResponseVariant as PrimaryType) != false)
                 {
                     SequenceType resultSequenceType = DependencyInjection.New<SequenceType>();
                     resultSequenceType.ElementType = elementTypeResponseVariant;
@@ -3785,14 +3788,13 @@ namespace AutoRest.Java.DanModel
         {
             IModelType result = modelType;
 
-            if (modelType is PrimaryTypeJv primaryType)
+            if (modelType is PrimaryType primaryType)
             {
-                result = new PrimaryTypeJv
-                {
-                    KnownPrimaryType = primaryType.KnownPrimaryType,
-                    Format = primaryType.Format,
-                    WantNullable = false
-                };
+                PrimaryType resultPrimaryType = DependencyInjection.New<PrimaryType>(primaryType.KnownPrimaryType);
+                resultPrimaryType.Format = primaryType.Format;
+                PrimaryTypeSetWantNullable(resultPrimaryType, false);
+
+                result = resultPrimaryType;
             }
 
             return result;
@@ -3827,9 +3829,68 @@ namespace AutoRest.Java.DanModel
                 {
                     result = string.IsNullOrEmpty(result) || !innerModelCompositeType.Contains(modelType) ? result : result + "Inner";
                 }
-                else if (modelType is PrimaryTypeJv primaryTypeJv)
+                else if (modelType is PrimaryType primaryType)
                 {
-                    result = primaryTypeJv.ImplementationName;
+                    switch (primaryType.KnownPrimaryType)
+                    {
+                        case KnownPrimaryType.None:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Void" : "void";
+                            break;
+                        case KnownPrimaryType.Base64Url:
+                            result = "Base64Url";
+                            break;
+                        case KnownPrimaryType.Boolean:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Boolean" : "boolean";
+                            break;
+                        case KnownPrimaryType.ByteArray:
+                            result = "byte[]";
+                            break;
+                        case KnownPrimaryType.Date:
+                            result = "LocalDate";
+                            break;
+                        case KnownPrimaryType.DateTime:
+                            result = "DateTime";
+                            break;
+                        case KnownPrimaryType.DateTimeRfc1123:
+                            result = "DateTimeRfc1123";
+                            break;
+                        case KnownPrimaryType.Double:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Double" : "double";
+                            break;
+                        case KnownPrimaryType.Decimal:
+                            result = "BigDecimal";
+                            break;
+                        case KnownPrimaryType.Int:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Integer" : "int";
+                            break;
+                        case KnownPrimaryType.Long:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
+                            break;
+                        case KnownPrimaryType.Stream:
+                            result = "InputStream";
+                            break;
+                        case KnownPrimaryType.String:
+                            result = "String";
+                            break;
+                        case KnownPrimaryType.TimeSpan:
+                            result = "Period";
+                            break;
+                        case KnownPrimaryType.UnixTime:
+                            result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
+                            break;
+                        case KnownPrimaryType.Uuid:
+                            result = "UUID";
+                            break;
+                        case KnownPrimaryType.Object:
+                            result = "Object";
+                            break;
+                        case KnownPrimaryType.Credentials:
+                            result = "ServiceClientCredentials";
+                            break;
+
+                        default:
+                            throw new NotImplementedException($"Primary type {primaryType.KnownPrimaryType} is not implemented in {primaryType.GetType().Name}");
+                    }
                 }
             }
             return result;
@@ -4061,7 +4122,7 @@ namespace AutoRest.Java.DanModel
                 {
                     IModelType responseBodyWireType = ResponseBodyWireType(response);
                     IModelType responseVariant = GetIModelTypeResponseVariant(responseBodyWireType);
-                    if ((responseVariant as PrimaryTypeJv)?.Nullable != false)
+                    if (PrimaryTypeNullable(responseVariant as PrimaryType) != false)
                     {
                         result = GetIModelTypeName(responseVariant);
                     }
@@ -4075,7 +4136,7 @@ namespace AutoRest.Java.DanModel
             {
                 IModelType bodyWireType = ResponseBodyWireType(response);
                 IModelType responseVariant = GetIModelTypeResponseVariant(bodyWireType);
-                if ((responseVariant as PrimaryTypeJv)?.Nullable != false)
+                if (PrimaryTypeNullable(responseVariant as PrimaryType) != false)
                 {
                     result = GetIModelTypeName(responseVariant);
                 }
@@ -4194,7 +4255,7 @@ namespace AutoRest.Java.DanModel
             IModelType result = response.Body;
             if (result == null)
             {
-                result = new PrimaryTypeJv(KnownPrimaryType.None);
+                result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.None);
             }
             return result;
         }
@@ -5447,7 +5508,7 @@ namespace AutoRest.Java.DanModel
             => string.Join(", ", MethodExceptions(method, settings));
 
         internal static string MethodReturnTypeResponseName(Method method)
-            => GetIModelTypeName(ResponseBodyClientType(method.ReturnType)?.ServiceResponseVariant());
+            => GetIModelTypeName(IModelTypeServiceResponseVariant(ResponseBodyClientType(method.ReturnType)));
 
         private static string MethodPagingGroupedParameterTransformation(Method method, bool filterRequired, Settings settings)
         {
@@ -5676,7 +5737,7 @@ namespace AutoRest.Java.DanModel
                 string parameterClientTypeName = GetIModelTypeName(parameterClientType);
                 if (takeOnlyRequiredParameters && !param.IsRequired)
                 {
-                    builder.AppendLine($"final {parameterClientTypeName} {param.Name} = {parameterClientType.GetDefaultValue(method) ?? "null"};");
+                    builder.AppendLine($"final {parameterClientTypeName} {param.Name} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
                 }
                 else if (param.IsConstant)
                 {
@@ -6209,7 +6270,7 @@ namespace AutoRest.Java.DanModel
         internal static IModelType DictionaryTypeParameterVariant(DictionaryType dictionaryType)
         {
             IModelType parameterVariant = GetIModelTypeParameterVariant(dictionaryType.ValueType);
-            if (parameterVariant != dictionaryType.ValueType && (parameterVariant as PrimaryTypeJv)?.Nullable != false)
+            if (parameterVariant != dictionaryType.ValueType && PrimaryTypeNullable(parameterVariant as PrimaryType) != false)
             {
                 DictionaryType result = DependencyInjection.New<DictionaryType>();
                 result.ValueType = parameterVariant;
@@ -6260,15 +6321,15 @@ namespace AutoRest.Java.DanModel
         {
             if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
             }
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
             }
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
             }
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.None)
             {
@@ -6284,24 +6345,105 @@ namespace AutoRest.Java.DanModel
         {
             if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
             }
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.DateTime);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
             }
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
             }
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.Stream)
             {
-                return new PrimaryTypeJv(KnownPrimaryType.ByteArray);
+                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
             }
             else
             {
                 return primaryType;
             }
         }
+
+        private static void PrimaryTypeSetWantNullable(PrimaryType primaryType, bool wantNullable)
+        {
+            if (!wantNullable)
+            {
+                primaryTypeNotWantNullable.Add(primaryType);
+            }
+            else
+            {
+                primaryTypeNotWantNullable.Remove(primaryType);
+            }
+        }
+
+        internal static bool PrimaryTypeGetWantNullable(PrimaryType primaryType)
+            => !primaryTypeNotWantNullable.Contains(primaryType);
+
+        internal static string IModelTypeDefaultValue(IModelType modelType)
+        {
+            string result;
+            if (modelType is PrimaryType primaryType)
+            {
+                string modelTypeName = GetIModelTypeName(primaryType);
+                if (modelTypeName == "byte[]")
+                {
+                    result = "new byte[0]";
+                }
+                else if (modelTypeName == "Byte[]")
+                {
+                    return "new Byte[0]";
+                }
+                else if (PrimaryTypeNullable(primaryType))
+                {
+                    return null;
+                }
+                else
+                {
+                    throw new NotSupportedException($"{modelTypeName} does not have default value!");
+                }
+            }
+            else
+            {
+                result = modelType.DefaultValue;
+            }
+            return result;
+        }
+
+        private static bool PrimaryTypeNullable(PrimaryType primaryType)
+        {
+            if (primaryType == null || PrimaryTypeGetWantNullable(primaryType))
+            {
+                return true;
+            }
+            switch (primaryType.KnownPrimaryType)
+            {
+                case KnownPrimaryType.None:
+                case KnownPrimaryType.Boolean:
+                case KnownPrimaryType.Double:
+                case KnownPrimaryType.Int:
+                case KnownPrimaryType.Long:
+                case KnownPrimaryType.UnixTime:
+                    return false;
+            }
+            return true;
+        }
+
+        internal static string IModelTypeDefaultValue(IModelType modelType, Method parent)
+        {
+            string result;
+            if (modelType is PrimaryType && GetIModelTypeName(modelType) == "RequestBody")
+            {
+                result = $"RequestBody.create(MediaType.parse(\"{parent.RequestContentType}\"), new byte[0])";
+            }
+            else
+            {
+                result = IModelTypeDefaultValue(modelType);
+            }
+            return result;
+        }
+
+        internal static IModelType IModelTypeServiceResponseVariant(IModelType modelType)
+            => GetIModelTypeNonNullableVariant(GetIModelTypeResponseVariant(modelType)) ?? modelType;
     }
 }

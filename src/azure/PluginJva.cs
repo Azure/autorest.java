@@ -20,8 +20,7 @@ namespace AutoRest.Java.Azure
                 Context,
 
                 // set code model implementations our own implementations 
-                new Factory<Parameter, ParameterJv>(),
-                new Factory<PrimaryType, PrimaryTypeJv>()
+                new Factory<Parameter, ParameterJv>()
             };
         }
     }
