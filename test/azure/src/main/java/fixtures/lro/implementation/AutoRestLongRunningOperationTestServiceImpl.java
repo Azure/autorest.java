@@ -110,6 +110,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
 
     /**
      * Gets the LROs object to access its operations.
+     *
      * @return the LROs object.
      */
     public LROs lROs() {
@@ -123,6 +124,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
 
     /**
      * Gets the LRORetrys object to access its operations.
+     *
      * @return the LRORetrys object.
      */
     public LRORetrys lRORetrys() {
@@ -136,6 +138,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
 
     /**
      * Gets the LROSADs object to access its operations.
+     *
      * @return the LROSADs object.
      */
     public LROSADs lROSADs() {
@@ -149,6 +152,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
 
     /**
      * Gets the LROsCustomHeaders object to access its operations.
+     *
      * @return the LROsCustomHeaders object.
      */
     public LROsCustomHeaders lROsCustomHeaders() {

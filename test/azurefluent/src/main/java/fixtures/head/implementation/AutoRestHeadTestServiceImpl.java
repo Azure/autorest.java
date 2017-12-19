@@ -105,6 +105,7 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient {
 
     /**
      * Gets the HttpSuccessInner object to access its operations.
+     *
      * @return the HttpSuccessInner object.
      */
     public HttpSuccessInner httpSuccess() {

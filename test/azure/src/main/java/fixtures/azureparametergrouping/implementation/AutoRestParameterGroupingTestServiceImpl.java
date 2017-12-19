@@ -107,6 +107,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
 
     /**
      * Gets the ParameterGroupings object to access its operations.
+     *
      * @return the ParameterGroupings object.
      */
     public ParameterGroupings parameterGroupings() {

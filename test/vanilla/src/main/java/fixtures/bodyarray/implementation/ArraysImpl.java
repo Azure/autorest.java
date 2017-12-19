@@ -2629,7 +2629,6 @@ public class ArraysImpl implements Arrays {
         List<DateTimeRfc1123> arrayBodyConverted = new ArrayList<DateTimeRfc1123>();
         for (DateTime item : arrayBody) {
             DateTimeRfc1123 value = new DateTimeRfc1123(item);
-
             arrayBodyConverted.add(value);
         }
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);
