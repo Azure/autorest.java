@@ -46,8 +46,9 @@ namespace AutoRest.Java
                 return null;
             }
 
+            string name = string.IsNullOrEmpty(property.XmlName) ? property.SerializedName : property.XmlName;
             List<string> settings = new List<string>();
-            settings.Add(string.Format(CultureInfo.InvariantCulture, "value = \"{0}\"", property.SerializedName));
+            settings.Add(string.Format(CultureInfo.InvariantCulture, "value = \"{0}\"", name));
             if (property.IsRequired)
             {
                 settings.Add("required = true");

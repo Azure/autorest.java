@@ -2808,6 +2808,7 @@ namespace AutoRest.Java.DanModel
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
+            bool shouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
 
             foreach (CompositeType modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
@@ -2841,6 +2842,11 @@ namespace AutoRest.Java.DanModel
                     if (compositeTypeProperties.Any(p => p.XmlIsAttribute))
                     {
                         imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                    }
+
+                    if (shouldGenerateXmlSerialization && compositeTypeProperties.Any(p => p.ModelType is SequenceType))
+                    {
+                        imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper");
                     }
 
                     // For polymorphism
@@ -2967,7 +2973,13 @@ namespace AutoRest.Java.DanModel
                         {
                             if (property.XmlIsAttribute)
                             {
-                                annotation = $"JacksonXmlProperty(localName = \"{property.SerializedName}\", isAttribute = true)";
+                                string localName = string.IsNullOrEmpty(property.XmlName) ? property.SerializedName.ToString() : property.XmlName;
+                                annotation = $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)";
+                            }
+                            else if (shouldGenerateXmlSerialization && property.ModelType is SequenceType)
+                            {
+                                string localName = string.IsNullOrEmpty(property.XmlName) ? property.SerializedName.ToString() : property.XmlName;
+                                annotation = $"JacksonXmlElementWrapper(localName = \"{localName}\")";
                             }
                             else
                             {
