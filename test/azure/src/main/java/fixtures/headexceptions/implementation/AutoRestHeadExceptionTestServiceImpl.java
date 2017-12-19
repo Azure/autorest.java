@@ -107,6 +107,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
 
     /**
      * Gets the HeadExceptions object to access its operations.
+     *
      * @return the HeadExceptions object.
      */
     public HeadExceptions headExceptions() {

@@ -107,6 +107,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
 
     /**
      * Gets the Pagings object to access its operations.
+     *
      * @return the Pagings object.
      */
     public Pagings pagings() {

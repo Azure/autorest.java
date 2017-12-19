@@ -132,6 +132,7 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     public Paths paths() {
