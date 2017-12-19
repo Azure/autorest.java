@@ -39,14 +39,14 @@ namespace AutoRest.Java
             return builder.ToString();
         }
 
-        public static string GetJsonProperty(this Property property)
+        public static string GetSerializeAnnotationArgs(this Property property, bool shouldUseXmlSerialization)
         {
             if (property == null)
             {
                 return null;
             }
 
-            string name = string.IsNullOrEmpty(property.XmlName) ? property.SerializedName : property.XmlName;
+            string name = shouldUseXmlSerialization ? property.XmlName : property.SerializedName;
             List<string> settings = new List<string>();
             settings.Add(string.Format(CultureInfo.InvariantCulture, "value = \"{0}\"", name));
             if (property.IsRequired)

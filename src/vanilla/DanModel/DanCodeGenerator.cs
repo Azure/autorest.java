@@ -2813,7 +2813,7 @@ namespace AutoRest.Java.DanModel
                         imports.AddRange(GetImports(property, settings));
                     }
 
-                    if (compositeTypeProperties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
+                    if (compositeTypeProperties.Any(p => !p.GetSerializeAnnotationArgs(shouldGenerateXmlSerialization).IsNullOrEmpty()))
                     {
                         imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
@@ -2947,22 +2947,22 @@ namespace AutoRest.Java.DanModel
                         }
 
                         string annotation = null;
-                        string jsonSetting = property.GetJsonProperty();
-                        if (!string.IsNullOrEmpty(jsonSetting))
+                        string annotationArgs = property.GetSerializeAnnotationArgs(shouldGenerateXmlSerialization);
+                        if (!string.IsNullOrEmpty(annotationArgs))
                         {
                             if (property.XmlIsAttribute)
                             {
-                                string localName = string.IsNullOrEmpty(property.XmlName) ? property.SerializedName.ToString() : property.XmlName;
+                                string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
                                 annotation = $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)";
                             }
                             else if (shouldGenerateXmlSerialization && property.ModelType is SequenceType)
                             {
-                                string localName = string.IsNullOrEmpty(property.XmlName) ? property.SerializedName.ToString() : property.XmlName;
+                                string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
                                 annotation = $"JacksonXmlElementWrapper(localName = \"{localName}\")";
                             }
                             else
                             {
-                                annotation = $"JsonProperty({jsonSetting})";
+                                annotation = $"JsonProperty({annotationArgs})";
                             }
                         }
 
