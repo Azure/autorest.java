@@ -14,12 +14,12 @@ namespace AutoRest.Java
 
         public bool Equals(ModelType x, ModelType y)
         {
-            return DanCodeGenerator.GetIModelTypeName(x).Equals(DanCodeGenerator.GetIModelTypeName(y)) || x.XmlName.Equals(y.XmlName);
+            return DanCodeGenerator.IModelTypeName(x).Equals(DanCodeGenerator.IModelTypeName(y)) || x.XmlName.Equals(y.XmlName);
         }
 
         public int GetHashCode(ModelType obj)
         {
-            return DanCodeGenerator.GetIModelTypeName(obj).GetHashCode() ^ obj.XmlName.GetHashCode();
+            return DanCodeGenerator.IModelTypeName(obj).GetHashCode() ^ obj.XmlName.GetHashCode();
         }
     }
 }

@@ -144,6 +144,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the XMsClientRequestIdsInner object to access its operations.
+     *
      * @return the XMsClientRequestIdsInner object.
      */
     public XMsClientRequestIdsInner xMsClientRequestIds() {
@@ -157,6 +158,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the SubscriptionInCredentialsInner object to access its operations.
+     *
      * @return the SubscriptionInCredentialsInner object.
      */
     public SubscriptionInCredentialsInner subscriptionInCredentials() {
@@ -170,6 +172,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the SubscriptionInMethodsInner object to access its operations.
+     *
      * @return the SubscriptionInMethodsInner object.
      */
     public SubscriptionInMethodsInner subscriptionInMethods() {
@@ -183,6 +186,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the ApiVersionDefaultsInner object to access its operations.
+     *
      * @return the ApiVersionDefaultsInner object.
      */
     public ApiVersionDefaultsInner apiVersionDefaults() {
@@ -196,6 +200,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the ApiVersionLocalsInner object to access its operations.
+     *
      * @return the ApiVersionLocalsInner object.
      */
     public ApiVersionLocalsInner apiVersionLocals() {
@@ -209,6 +214,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the SkipUrlEncodingsInner object to access its operations.
+     *
      * @return the SkipUrlEncodingsInner object.
      */
     public SkipUrlEncodingsInner skipUrlEncodings() {
@@ -222,6 +228,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the OdatasInner object to access its operations.
+     *
      * @return the OdatasInner object.
      */
     public OdatasInner odatas() {
@@ -235,6 +242,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
 
     /**
      * Gets the HeadersInner object to access its operations.
+     *
      * @return the HeadersInner object.
      */
     public HeadersInner headers() {

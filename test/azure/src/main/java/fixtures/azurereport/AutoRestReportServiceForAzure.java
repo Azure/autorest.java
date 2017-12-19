@@ -92,7 +92,7 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map<String, Integer> object
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Maybe<Map<String, Integer>> getReportAsync();
 
@@ -100,7 +100,7 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map<String, Integer> object
+     * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
     /**

@@ -146,6 +146,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
 
     /**
      * Gets the Groups object to access its operations.
+     *
      * @return the Groups object.
      */
     public Groups groups() {

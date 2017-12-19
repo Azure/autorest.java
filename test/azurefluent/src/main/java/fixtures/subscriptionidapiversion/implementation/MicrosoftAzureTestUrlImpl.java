@@ -144,6 +144,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
 
     /**
      * Gets the GroupsInner object to access its operations.
+     *
      * @return the GroupsInner object.
      */
     public GroupsInner groups() {

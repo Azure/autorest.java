@@ -2628,7 +2628,6 @@ public class DictionarysImpl implements Dictionarys {
         Map<String, DateTimeRfc1123> arrayBodyConverted = new HashMap<String, DateTimeRfc1123>();
         for (Map.Entry<String, DateTime> entry : arrayBody.entrySet()) {
             DateTimeRfc1123 value = new DateTimeRfc1123(entry.getValue());
-
             arrayBodyConverted.put(entry.getKey(), value);
         }
         return service.putDateTimeRfc1123Valid(arrayBodyConverted);

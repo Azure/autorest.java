@@ -130,6 +130,7 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
 
     /**
      * Gets the PathsInner object to access its operations.
+     *
      * @return the PathsInner object.
      */
     public PathsInner paths() {

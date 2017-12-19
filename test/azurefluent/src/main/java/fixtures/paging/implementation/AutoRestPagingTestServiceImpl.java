@@ -105,6 +105,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
 
     /**
      * Gets the PagingsInner object to access its operations.
+     *
      * @return the PagingsInner object.
      */
     public PagingsInner pagings() {
