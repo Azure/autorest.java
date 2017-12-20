@@ -2823,9 +2823,14 @@ namespace AutoRest.Java.DanModel
                         imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
                     }
 
-                    if (shouldGenerateXmlSerialization && compositeTypeProperties.Any(p => p.ModelType is SequenceType))
+                    if (shouldGenerateXmlSerialization && compositeTypeProperties.Any(p => p.XmlIsWrapped && p.ModelType is SequenceType))
                     {
                         imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper");
+                    }
+                    
+                    if (shouldGenerateXmlSerialization)
+                    {
+                        imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
                     }
 
                     // For polymorphism
@@ -2913,6 +2918,10 @@ namespace AutoRest.Java.DanModel
                             classAnnotations.Add(subTypeAnnotationBuilder.ToString());
                         }
                     }
+                    if (shouldGenerateXmlSerialization)
+                    {
+                        classAnnotations.Add($"JacksonXmlRootElement(localName = \"{modelType.XmlName}\")");
+                    }
 
                     if (CompositeTypeNeedsFlatten(modelType))
                     {
@@ -2955,7 +2964,7 @@ namespace AutoRest.Java.DanModel
                                 string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
                                 annotation = $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)";
                             }
-                            else if (shouldGenerateXmlSerialization && property.ModelType is SequenceType)
+                            else if (shouldGenerateXmlSerialization && property.XmlIsWrapped && property.ModelType is SequenceType)
                             {
                                 string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
                                 annotation = $"JacksonXmlElementWrapper(localName = \"{localName}\")";
