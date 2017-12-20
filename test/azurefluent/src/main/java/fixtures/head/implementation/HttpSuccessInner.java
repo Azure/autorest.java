@@ -127,7 +127,6 @@ public class HttpSuccessInner {
             });
     }
 
-
     /**
      * Return 204 status code if successful.
      *
@@ -180,7 +179,6 @@ public class HttpSuccessInner {
             });
     }
 
-
     /**
      * Return 404 status code if successful.
      *
@@ -232,6 +230,5 @@ public class HttpSuccessInner {
                 }
             });
     }
-
 
 }

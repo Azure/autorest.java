@@ -61,6 +61,7 @@ public interface AutoRestHeadTestService {
 
     /**
      * Gets the HttpSuccess object to access its operations.
+     *
      * @return the HttpSuccess object.
      */
     HttpSuccess httpSuccess();

@@ -258,7 +258,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -385,7 +384,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
@@ -514,7 +512,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that includes a nextLink that has 10 pages.
      *
@@ -532,7 +529,6 @@ public class PagingsImpl implements Pagings {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
-
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).blockingGet();
             }
         };
@@ -558,7 +554,6 @@ public class PagingsImpl implements Pagings {
                     PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                     pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                     pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
-
                     return Observable.just(page).concatWith(getMultiplePagesWithOffsetNextAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions));
                 }
             });
@@ -606,7 +601,6 @@ public class PagingsImpl implements Pagings {
                 PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                 pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
-
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).blockingGet();
             }
         };
@@ -633,7 +627,6 @@ public class PagingsImpl implements Pagings {
                     PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                     pagingGetMultiplePagesWithOffsetNextOptions.withMaxresults(pagingGetMultiplePagesWithOffsetOptions.maxresults());
                     pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
-
                     return Observable.just(page).concatWith(getMultiplePagesWithOffsetNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions));
                 }
             });
@@ -662,7 +655,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -718,7 +710,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
@@ -772,7 +763,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -828,7 +818,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that receives a 400 on the second call.
      *
@@ -883,7 +872,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that receives an invalid nextLink.
      *
@@ -937,7 +925,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -1005,7 +992,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      *
@@ -1068,7 +1054,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
@@ -1143,7 +1128,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      *
@@ -1214,7 +1198,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
@@ -1275,7 +1258,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -1418,7 +1400,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
@@ -1559,7 +1540,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -1702,7 +1682,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
@@ -1763,7 +1742,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -1826,7 +1804,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that receives a 400 on the first call.
      *
@@ -1887,7 +1864,6 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -1950,7 +1926,6 @@ public class PagingsImpl implements Pagings {
         });
     }
 
-
     /**
      * A paging operation that receives an invalid nextLink.
      *
@@ -2011,6 +1986,5 @@ public class PagingsImpl implements Pagings {
             }
         });
     }
-
 
 }

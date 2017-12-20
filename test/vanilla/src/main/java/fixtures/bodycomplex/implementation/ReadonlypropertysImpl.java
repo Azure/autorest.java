@@ -131,7 +131,6 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
             });
     }
 
-
     /**
      * Put complex types that have readonly properties.
      *
@@ -183,6 +182,5 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
 }

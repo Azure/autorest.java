@@ -156,7 +156,6 @@ public class BasicsImpl implements Basics {
             });
     }
 
-
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
@@ -208,7 +207,6 @@ public class BasicsImpl implements Basics {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -262,7 +260,6 @@ public class BasicsImpl implements Basics {
             });
     }
 
-
     /**
      * Get a basic complex type that is empty.
      *
@@ -314,7 +311,6 @@ public class BasicsImpl implements Basics {
                 }
             });
     }
-
 
     /**
      * Get a basic complex type whose properties are null.
@@ -368,7 +364,6 @@ public class BasicsImpl implements Basics {
             });
     }
 
-
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
@@ -420,6 +415,5 @@ public class BasicsImpl implements Basics {
                 }
             });
     }
-
 
 }

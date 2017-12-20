@@ -255,7 +255,6 @@ public class ExplicitsImpl implements Explicits {
             });
     }
 
-
     /**
      * Test explicitly optional integer. Please put null.
      *
@@ -349,7 +348,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -409,7 +407,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -506,7 +503,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
@@ -562,7 +558,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -657,7 +652,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
@@ -716,7 +710,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional string. Please put null.
@@ -811,7 +804,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -871,7 +863,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -968,7 +959,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
@@ -1027,7 +1017,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -1122,7 +1111,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
@@ -1182,7 +1170,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -1279,7 +1266,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -1339,7 +1325,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -1436,7 +1421,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
@@ -1496,7 +1480,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional array. Please put null.
@@ -1593,7 +1576,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
@@ -1653,7 +1635,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -1750,7 +1731,6 @@ public class ExplicitsImpl implements Explicits {
             .toCompletable();
     }
 
-
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
@@ -1811,7 +1791,6 @@ public class ExplicitsImpl implements Explicits {
                 }
             });
     }
-
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -1909,6 +1888,5 @@ public class ExplicitsImpl implements Explicits {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
             .toCompletable();
     }
-
 
 }

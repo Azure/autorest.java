@@ -136,7 +136,6 @@ public class FilesImpl implements Files {
             });
     }
 
-
     /**
      * Get a large file.
      *
@@ -189,7 +188,6 @@ public class FilesImpl implements Files {
             });
     }
 
-
     /**
      * Get empty file.
      *
@@ -241,6 +239,5 @@ public class FilesImpl implements Files {
                 }
             });
     }
-
 
 }

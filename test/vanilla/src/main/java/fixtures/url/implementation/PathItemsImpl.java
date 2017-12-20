@@ -220,7 +220,6 @@ public class PathItemsImpl implements PathItems {
             .toCompletable();
     }
 
-
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      *
@@ -352,7 +351,6 @@ public class PathItemsImpl implements PathItems {
         return getGlobalQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
-
 
     /**
      * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
@@ -486,7 +484,6 @@ public class PathItemsImpl implements PathItems {
             .toCompletable();
     }
 
-
     /**
      * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      *
@@ -618,6 +615,5 @@ public class PathItemsImpl implements PathItems {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
-
 
 }

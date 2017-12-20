@@ -310,7 +310,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
             .toCompletable();
     }
 
-
     /**
      * Get External Resource as an Array.
      *
@@ -362,7 +361,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                 }
             });
     }
-
 
     /**
      * Put External Resource as a Dictionary.
@@ -459,7 +457,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
             .toCompletable();
     }
 
-
     /**
      * Get External Resource as a Dictionary.
      *
@@ -511,7 +508,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                 }
             });
     }
-
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -608,7 +604,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
             .toCompletable();
     }
 
-
     /**
      * Get External Resource as a ResourceCollection.
      *
@@ -660,6 +655,5 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                 }
             });
     }
-
 
 }

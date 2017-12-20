@@ -158,29 +158,6 @@ namespace AutoRest.Java
 
         #endregion
 
-        #region type handling
-
-        public static string GetJavaException(string exception, CodeModel cm)
-        {
-            switch (exception) {
-                case "IOException":
-                    return "java.io.IOException";
-                case "CloudException":
-                    return "com.microsoft.azure.v2.CloudException";
-                case "RestException":
-                    return "com.microsoft.rest.v2.RestException";
-                case "IllegalArgumentException":
-                    return null;
-                case "InterruptedException":
-                    return null;
-                default:
-                    return (cm.Namespace.ToLowerInvariant())
-                        + ".models." + exception;
-            }
-        }
-
-        #endregion
-
         public override string EscapeDefaultValue(string defaultValue, IModelType type)
         {
             if (type == null)

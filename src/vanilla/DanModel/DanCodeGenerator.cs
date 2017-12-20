@@ -34,7 +34,7 @@ namespace AutoRest.Java.DanModel
 
         private const string azureEnvironmentImport = "com.microsoft.azure.v2." + azureEnvironmentType;
         private const string azureEnvironmentType = "AzureEnvironment";
-        private const string azureEnvironemntVariableName = "azureEnvironment";
+        private const string azureEnvironmentVariableName = "azureEnvironment";
         private const string azureEnvironmentDescription = "The environment that requests will target.";
 
         private const string azureProxyImport = "com.microsoft.azure.v2." + azureProxyType;
@@ -42,6 +42,11 @@ namespace AutoRest.Java.DanModel
 
         private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
+
+        private const string innerSupportsImportPrefix = "com.microsoft.azure.management.resources.fluentcore.collection.InnerSupports";
+        private const string innerSupportsGetImport = innerSupportsImportPrefix + "Get";
+        private const string innerSupportsDeleteImport = innerSupportsImportPrefix + "Delete";
+        private const string innerSupportsListingImport = innerSupportsImportPrefix + "Listing";
 
         internal static readonly IDictionary<KeyValuePair<string, string>, string> pageClasses = new Dictionary<KeyValuePair<string, string>, string>();
 
@@ -455,11 +460,11 @@ namespace AutoRest.Java.DanModel
                     {
                         comment.Description(constructorDescription);
                         comment.Param("credentials", "the management credentials for Azure");
-                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
+                        comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"public {className}(ServiceClientCredentials credentials, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
+                    classBlock.Block($"public {className}(ServiceClientCredentials credentials, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                     {
-                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironmentVariableName});");
                     });
                 }
                 else
@@ -476,14 +481,13 @@ namespace AutoRest.Java.DanModel
                     classBlock.MultipleLineComment(comment =>
                     {
                         comment.Description(constructorDescription);
-                        comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
+                        comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
                     });
-                    classBlock.Block($"public {className}({azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
+                    classBlock.Block($"public {className}({azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                     {
-                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironemntVariableName});");
+                        constructor.Line($"this({azureProxyType}.defaultPipeline({className}.class, credentials), {azureEnvironmentVariableName});");
                     });
                 }
-
 
                 classBlock.Line();
                 classBlock.MultipleLineComment(comment =>
@@ -500,11 +504,11 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Description(constructorDescription);
                     comment.Param(httpPipelineVariableName, httpPipelineDescription);
-                    comment.Param(azureEnvironemntVariableName, azureEnvironmentDescription);
+                    comment.Param(azureEnvironmentVariableName, azureEnvironmentDescription);
                 });
-                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironemntVariableName})", constructor =>
+                classBlock.Block($"public {className}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                 {
-                    constructor.Line($"super({httpPipelineVariableName}, {azureEnvironemntVariableName});");
+                    constructor.Line($"super({httpPipelineVariableName}, {azureEnvironmentVariableName});");
                     constructor.Line("initialize();");
                 });
                 classBlock.Line();
@@ -549,7 +553,7 @@ namespace AutoRest.Java.DanModel
                     classBlock.Annotation($"Host(\"{GetBaseUrl(codeModel)}\")");
                     classBlock.Block($"interface {GetServiceClientServiceType(codeModel)}", interfaceBlock =>
                     {
-                        foreach (Method method in GetRootMethods(codeModel))
+                        foreach (Method method in rootMethods)
                         {
                             if (MethodIsPagingNextOperation(method))
                             {
@@ -583,481 +587,381 @@ namespace AutoRest.Java.DanModel
                     classBlock.Line();
                 }
 
-                foreach (Method method in rootMethods)
-                {
-                    IEnumerable<Parameter> nonConstantLocalParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-                    IEnumerable<Parameter> nonConstantOptionalLocalParameters = nonConstantLocalParameters.Where(p => !p.IsRequired);
-                    IEnumerable<Parameter> nonConstantRequiredLocalParameters = nonConstantLocalParameters.Where(p => p.IsRequired);
-
-                    string methodName = MethodName(method);
-                    Response methodReturnType = method.ReturnType;
-                    string methodReturnTypeResponseName = MethodReturnTypeResponseName(method);
-                    string methodReturnTypeResponseNameXmlEscaped = methodReturnTypeResponseName.EscapeXmlComment();
-
-                    if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
-                    {
-                        if (nonConstantOptionalLocalParameters.Any())
-                        {
-                            // -----------------------------------------------
-                            // All pages. Synchronous with required parameters
-                            // -----------------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, nonConstantRequiredLocalParameters);
-                                ThrowsIllegalArgumentException(comment);
-                                ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                                ThrowsRuntimeException(comment);
-                                if (methodReturnType.Body != null)
-                                {
-                                    comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                function.Line($"{ResponseServiceResponseGenericParameterString(methodReturnType, settings)} response = {methodName}SinglePageAsync({MethodRequiredParameterInvocation(method)}).blockingGet();");
-                                function.Block($"return new {ResponseGenericBodyClientTypeString(methodReturnType)}(response)", anonymousClass =>
-                                {
-                                    anonymousClass.Annotation("Override");
-                                    anonymousClass.Block($"public {ResponseServiceResponseGenericParameterString(methodReturnType, settings)} nextPage(String {MethodPagingNextPageLinkParameterName(method)})", subFunction =>
-                                    {
-                                        subFunction.Line(MethodPagingGroupedParameterTransformation(method, true, settings));
-                                        subFunction.Return($"{MethodGetPagingNextMethodInvocation(method)}({MethodNextMethodParameterInvocation(method, true)}).blockingGet()");
-                                    });
-                                });
-                            });
-                            classBlock.Line();
-
-                            // -----------------------------------------------
-                            // All pages. Observable with required parameters.
-                            // -----------------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, nonConstantRequiredLocalParameters);
-                                ThrowsIllegalArgumentException(comment);
-                                if (methodReturnType.Body != null)
-                                {
-                                    comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>}} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}> {methodName}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                function.Line($"return {methodName}SinglePageAsync({MethodRequiredParameterInvocation(method)})");
-                                function.Indent(() =>
-                                {
-                                    function.Line(".toObservable()");
-                                    function.Line($".concatMap(new Function<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}, Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>>() {{");
-                                    function.Indent(() =>
-                                    {
-                                        function.Annotation("Override");
-                                        function.Block($"public Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}> apply({ResponseServiceResponseGenericParameterString(methodReturnType, settings)} page)", subFunction =>
-                                        {
-                                            string pagingNextPageLinkParameterName = MethodPagingNextPageLinkParameterName(method);
-                                            subFunction.Line($"String {pagingNextPageLinkParameterName} = page.nextPageLink();");
-                                            subFunction.If($"{pagingNextPageLinkParameterName} == null", ifBlock =>
-                                            {
-                                                ifBlock.Return("Observable.just(page)");
-                                            });
-                                            subFunction.Line(MethodPagingGroupedParameterTransformation(method, true, settings));
-                                            subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, false)}({MethodNextMethodParameterInvocation(method, true)}))");
-                                        });
-                                    });
-                                    function.Line("});");
-                                });
-                            });
-                            classBlock.Line();
-
-                            // -------------------------------------------------
-                            // Single page. Observable with required parameters.
-                            // -------------------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, nonConstantRequiredLocalParameters);
-                                ThrowsIllegalArgumentException(comment);
-                                if (methodReturnType.Body != null)
-                                {
-                                    comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>}} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}> {methodName}SinglePageAsync({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                {
-                                    string parameterName = ParameterGetName(param);
-                                    function.If($"{parameterName} == null)", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
-                                    });
-                                }
-
-                                foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
-                                {
-                                    function.Line($"Validator.validate({ParameterGetName(param)});");
-                                }
-
-                                foreach (Parameter parameter in MethodLocalParameters(method))
-                                {
-                                    string parameterName = ParameterGetName(parameter);
-                                    IModelType parameterClientType = ParameterClientType(parameter);
-                                    if (!parameter.IsRequired)
-                                    {
-                                        function.Line($"final {IModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"});");
-                                    }
-                                    if (parameter.IsConstant)
-                                    {
-                                        function.Line($"final {IModelTypeParameterVariantName(parameterClientType)} {parameterName} = {parameter.DefaultValue ?? "null"});");
-                                    }
-                                }
-
-                                MethodBuildInputMappings(method, true, function);
-                                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-                                if (MethodIsPagingNextOperation(method))
-                                {
-                                    function.Line($"String nextUrl = {MethodNextUrlConstructor(method, settings)};");
-                                }
-                                string restResponseReturnType = MethodRestResponseConcreteTypeName(method, settings);
-                                function.Block($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{restResponseReturnType}, {ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>()", anonymousClass =>
-                                {
-                                    anonymousClass.Annotation("Override");
-                                    anonymousClass.Block($"public {ResponseServiceResponseGenericParameterString(methodReturnType, settings)} apply({restResponseReturnType} response)", subFunction =>
-                                    {
-                                        subFunction.Return("response.body()");
-                                    });
-                                });
-                            });
-                            classBlock.Line();
-                        }
-
-                        // -------------------------------------------
-                        // All pages. Synchronous with all parameters.
-                        // -------------------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, nonConstantLocalParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                            ThrowsRuntimeException(comment);
-                            if (methodReturnType.Body != null)
-                            {
-                                comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            function.Line($"{ResponseServiceResponseGenericParameterString(methodReturnType, settings)} response = {methodName}SinglePageAsync({MethodParameterInvocation(method)}).blockingGet();");
-                            function.Block($"return new {ResponseGenericBodyClientTypeString(methodReturnType)}(response)", anonymousClass =>
-                            {
-                                anonymousClass.Annotation("Override");
-                                anonymousClass.Block($"public {ResponseServiceResponseGenericParameterString(methodReturnType, settings)} nextPage(String {MethodPagingNextPageLinkParameterName(method)})", subFunction =>
-                                {
-                                    subFunction.Line(MethodPagingGroupedParameterTransformation(method, false, settings));
-                                    subFunction.Return($"{MethodGetPagingNextMethodInvocation(method)}({MethodNextMethodParameterInvocation(method, false)}).blockingGet()");
-                                });
-                            });
-                        });
-
-                        classBlock.Line();
-
-                        // ------------------------------------------
-                        // All pages. Observable with all parameters.
-                        // ------------------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, nonConstantLocalParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            if (methodReturnType.Body != null)
-                            {
-                                comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>}} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}> {methodName}Async({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            function.Line($"return {methodName}SinglePageAsync({MethodParameterInvocation(method)})");
-                            function.Indent(() =>
-                            {
-                                function.Line(".toObservable()");
-                                function.Line($".concatMap(new Function<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}, Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>>() {{");
-                                function.Indent(() =>
-                                {
-                                    function.Annotation("Override");
-                                    function.Block($"public Observable<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}> apply({ResponseServiceResponseGenericParameterString(methodReturnType, settings)} page)", subFunction =>
-                                    {
-                                        string pagingNextPageLinkParameterName = MethodPagingNextPageLinkParameterName(method);
-                                        subFunction.Line($"String {pagingNextPageLinkParameterName} = page.nextPageLink();");
-                                        subFunction.If($"{pagingNextPageLinkParameterName} == null", ifBlock =>
-                                        {
-                                            ifBlock.Return("Observable.just(page)");
-                                        });
-                                        subFunction.Line(MethodPagingGroupedParameterTransformation(method, false, settings));
-                                        subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, false)}({MethodNextMethodParameterInvocation(method, false)}))");
-                                    });
-                                });
-                                function.Line("});");
-                            });
-                        });
-                        classBlock.Line();
-
-                        // --------------------------------------------
-                        // Single page. Observable with all parameters.
-                        // --------------------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, nonConstantLocalParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            if (methodReturnType.Body != null)
-                            {
-                                comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>}} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}> {methodName}SinglePageAsync({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            foreach (Parameter param in MethodRequiredNullableParameters(method))
-                            {
-                                string parameterName = ParameterGetName(param);
-                                function.If($"{parameterName} == null", ifBlock =>
-                                {
-                                    function.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
-                                });
-                            }
-
-                            foreach (Parameter param in MethodParametersToValidate(method))
-                            {
-                                function.Line($"Validator.validate({ParameterGetName(param)});");
-                            }
-
-                            foreach (Parameter parameter in MethodLocalParameters(method))
-                            {
-                                if (parameter.IsConstant)
-                                {
-                                    function.Line($"final {GetIModelTypeName(ParameterGetModelType(parameter), settings)} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                }
-                            }
-
-                            MethodBuildInputMappings(method, false, function);
-                            MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-                            if (MethodIsPagingNextOperation(method))
-                            {
-                                function.Line($"String nextUrl = {MethodNextUrlConstructor(method, settings)};");
-                            }
-                            function.Block($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{MethodRestResponseConcreteTypeName(method, settings)}, {ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>()", anonymousClass =>
-                            {
-                                anonymousClass.Annotation("Override");
-                                anonymousClass.Block($"public {ResponseServiceResponseGenericParameterString(methodReturnType, settings)} apply({MethodRestResponseConcreteTypeName(method, settings)} response)", subFunction =>
-                                {
-                                    subFunction.Return("response.body()");
-                                });
-                            });
-                        });
-                        classBlock.Line();
-                    }
-                    else
-                    {
-                        if (!MethodIsLongRunningOperation(method))
-                        {
-                            GenerateRootMethodFunctions(classBlock, method, settings);
-                        }
-                        else
-                        {
-                            if (nonConstantOptionalLocalParameters.Any())
-                            {
-                                // -----------------------------------------
-                                // Synchronous with only required parameters
-                                // -----------------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, nonConstantRequiredLocalParameters);
-                                    ThrowsIllegalArgumentException(comment);
-                                    ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                                    ThrowsRuntimeException(comment);
-                                    if (methodReturnType.Body != null)
-                                    {
-                                        comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                    }
-                                });
-                                classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                                {
-                                    if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(methodReturnType))) == "void")
-                                    {
-                                        function.Line($"{methodName}Async({MethodRequiredParameterInvocation(method)}).blockingLast().result();");
-                                    }
-                                    else
-                                    {
-                                        function.Return($"{methodName}Async({MethodRequiredParameterInvocation(method)}).blockingLast().result()");
-                                    }
-                                });
-
-                                // --------------------------------------
-                                // Callback with only required parameters
-                                // --------------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, nonConstantRequiredLocalParameters);
-                                    ParamServiceCallback(comment);
-                                    ThrowsIllegalArgumentException(comment);
-                                    comment.Return("the {@link ServiceFuture} object");
-                                });
-                                classBlock.Block($"public ServiceFuture<{ResponseServiceFutureGenericParameterString(methodReturnType)}> {methodName}Async({MethodRequiredParameterDeclarationWithCallback(method, settings)})", function =>
-                                {
-                                    function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({MethodRequiredParameterInvocation(method)}, serviceCallback)");
-                                });
-
-                                // ----------------------------------------
-                                // Observable with only required parameters
-                                // ----------------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, nonConstantRequiredLocalParameters);
-                                    ThrowsIllegalArgumentException(comment);
-                                    comment.Return("the observable for the request");
-                                });
-                                classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(methodReturnType)}>> {methodName}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                                {
-                                    foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                    {
-                                        function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                        {
-                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                        });
-                                    }
-
-                                    foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
-                                    {
-                                        function.Line($"Validator.validate({ParameterGetName(param)});");
-                                    }
-
-                                    foreach (Parameter parameter in MethodLocalParameters(method))
-                                    {
-                                        if (!parameter.IsRequired)
-                                        {
-                                            IModelType parameterWireType = ParameterWireType(parameter);
-                                            function.Line($"final {IModelTypeName(parameterWireType)} {ParameterWireName(parameter)} = {IModelTypeDefaultValue(parameterWireType, method) ?? "null"};");
-                                        }
-                                        if (parameter.IsConstant)
-                                        {
-                                            function.Line($"final {IModelTypeParameterVariantName(ParameterClientType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                        }
-                                    }
-
-                                    MethodBuildInputMappings(method, true, function);
-                                    IEnumerable<Parameter> requiredRetrofitParameters = MethodRetrofitParameters(method, settings).Where(p => p.IsRequired);
-                                    MethodParameterConversion(method, settings, requiredRetrofitParameters, function);
-                                    function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
-                                });
-
-                                // -------------------------------
-                                // Synchronous with all parameters
-                                // -------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, nonConstantLocalParameters);
-                                    ThrowsIllegalArgumentException(comment);
-                                    ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                                    ThrowsRuntimeException(comment);
-                                    if (methodReturnType.Body != null)
-                                    {
-                                        comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                    }
-                                });
-                                classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodParameterDeclaration(method, settings)})", function =>
-                                {
-                                    if (methodReturnTypeResponseName == "void")
-                                    {
-                                        function.Line($"{methodName}Async({MethodParameterInvocation(method)}).blockingLast();");
-                                    }
-                                    else
-                                    {
-                                        function.Return($"{methodName}Async({MethodParameterInvocation(method)}).blockingLast().result()");
-                                    }
-                                });
-                                classBlock.Line();
-
-                                // ----------------------------
-                                // Callback with all parameters
-                                // ----------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, nonConstantLocalParameters);
-                                    ParamServiceCallback(comment);
-                                    ThrowsIllegalArgumentException(comment);
-                                    comment.Return("the {{@link ServiceFuture}} object");
-                                });
-                                classBlock.Block($"public ServiceFuture<{ResponseServiceFutureGenericParameterString(methodReturnType)}> {methodName}Async({MethodParameterDeclarationWithCallback(method, settings)})", function =>
-                                {
-                                    function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({MethodParameterInvocation(method)}, serviceCallback)");
-                                });
-                                classBlock.Line();
-
-                                // ------------------------------
-                                // Observable with all parameters
-                                // ------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    AddParameters(comment, nonConstantLocalParameters);
-                                    ThrowsIllegalArgumentException(comment);
-                                    comment.Return("the observable for the request");
-                                });
-                                classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(methodReturnType)}>> {methodName}Async({MethodParameterDeclaration(method, settings)})", function =>
-                                {
-                                    foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                    {
-                                        function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                        {
-                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                        });
-                                    }
-
-                                    foreach (Parameter param in MethodParametersToValidate(method))
-                                    {
-                                        function.Line($"Validator.validate({ParameterGetName(param)});");
-                                    }
-
-                                    foreach (Parameter parameter in MethodLocalParameters(method))
-                                    {
-                                        if (parameter.IsConstant)
-                                        {
-                                            function.Line($"final {IModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                        }
-                                    }
-
-                                    MethodBuildInputMappings(method, false, function);
-                                    MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-                                    function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
-                                });
-                            }
-                        }
-                    }
-                    classBlock.Line();
-                }
+                AddMethodOverloads(classBlock, rootMethods, settings);
             });
 
             return javaFile;
+        }
+
+        private static void AddMethodOverloads(JavaBlock block, IEnumerable<Method> methods, Settings settings)
+        {
+            foreach (Method method in methods)
+            {
+                IEnumerable<Parameter> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+                IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
+                bool hasOptionalParameters = (allParameters.Count() != requiredParameters.Count());
+
+                if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
+                {
+                    if (hasOptionalParameters)
+                    {
+                        AddPagingMethodOverloads(block, method, requiredParameters, settings, true, true);
+                    }
+                    AddPagingMethodOverloads(block, method, allParameters, settings, false, false);
+                }
+                else if (MethodSimulateAsPagingOperation(method))
+                {
+                    if (hasOptionalParameters)
+                    {
+                        AddSimulatedPagingMethodOverloads(block, method, requiredParameters, settings, true, true);
+                    }
+                    AddSimulatedPagingMethodOverloads(block, method, allParameters, settings, false, false);
+                }
+                else if (MethodIsLongRunningOperation(method))
+                {
+                    if (hasOptionalParameters)
+                    {
+                        AddLongRunningOperationMethodOverloads(block, method, requiredParameters, settings, true, true);
+                    }
+                    AddLongRunningOperationMethodOverloads(block, method, allParameters, settings, false, false);
+                }
+                else
+                {
+                    if (hasOptionalParameters)
+                    {
+                        AddRegularMethodOverloads(block, method, settings, requiredParameters, true);
+                    }
+                    AddRegularMethodOverloads(block, method, settings, allParameters, false);
+                }
+            }
+        }
+
+        private static void AddLongRunningOperationMethodOverloads(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            AddSynchronousMethodComment(block, method, parameters, settings);
+            AddSynchronousLongRunningOperationMethodImplementation(block, method, parameters, settings);
+            block.Line();
+
+            AddServiceFutureMethodComment(block, method, parameters);
+            AddServiceFutureLongRunningOperationMethodImplementation(block, method, parameters, settings);
+            block.Line();
+
+            AddOperationStatusMethodComment(block, method, parameters);
+            AddOperationStatusMethodImplementation(block, method, parameters, settings, filterRequired, onlyRequiredParameters);
+            block.Line();
+        }
+
+        private static void AddPagingMethodOverloads(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            AddSynchronousMethodComment(block, method, parameters, settings);
+            AddSynchronousPagedListMethodImplementation(block, method, parameters, settings, filterRequired);
+            block.Line();
+
+            AddObservablePagedListMethodComment(block, method, parameters, settings);
+            AddObservablePagedListMethodImplementation(block, method, parameters, settings, filterRequired);
+            block.Line();
+
+            AddSinglePageMethodComment(block, method, parameters, settings);
+            AddSinglePageMethodImplementation(block, method, parameters, settings, filterRequired, onlyRequiredParameters);
+            block.Line();
+        }
+
+        private static void AddSimulatedPagingMethodOverloads(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            AddSynchronousPagedListMethodComment(block, method, parameters);
+            AddSynchronousSimulatedPagingMethodImplementation(block, method, parameters, settings);
+            block.Line();
+
+            AddObservablePagedListMethodComment(block, method, parameters, settings);
+            AddObservableSimulatedPagingMethodImplementation(block, method, parameters, settings, filterRequired, onlyRequiredParameters);
+            block.Line();
+        }
+
+        private static void AddSynchronousMethodComment(JavaBlock typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                ThrowsIllegalArgumentException(comment);
+                ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
+                ThrowsRuntimeException(comment);
+                if (method.ReturnType.Body != null)
+                {
+                    comment.Return($"the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object if successful.");
+                }
+            });
+        }
+
+        private static string GetSynchronousMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string returnType = MethodReturnTypeResponseName(method);
+            string methodName = MethodName(method);
+            return $"{returnType} {methodName}({MethodParameterDeclaration(method, settings, parameters)})";
+        }
+
+        private static void AddSynchronousMethodSignature(JavaBlock typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            typeBlock.Line($"{GetSynchronousMethodSignature(method, parameters, settings)};");
+        }
+
+        private static void AddSynchronousLongRunningOperationMethodImplementation(JavaBlock classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string methodName = MethodName(method);
+            classBlock.Block($"public {GetSynchronousMethodSignature(method, parameters, settings)}", function =>
+            {
+                string argumentList = ArgumentList(parameters);
+                if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(method.ReturnType))) == "void")
+                {
+                    function.Line($"{methodName}Async({argumentList}).blockingLast();");
+                }
+                else
+                {
+                    function.Return($"{methodName}Async({argumentList}).blockingLast().result()");
+                }
+            });
+        }
+
+        private static void AddSynchronousPagedListMethodImplementation(JavaBlock classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired)
+        {
+            string returnType = MethodReturnTypeResponseName(method);
+            string methodName = MethodName(method);
+            Response methodReturnType = method.ReturnType;
+            string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
+            classBlock.Block($"public {returnType} {methodName}({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            {
+                function.Line($"{responseServiceResponseGenericParameterString} response = {methodName}SinglePageAsync({ArgumentList(parameters)}).blockingGet();");
+                function.ReturnBlock($"new {ResponseGenericBodyClientTypeString(methodReturnType)}(response)", anonymousClass =>
+                {
+                    anonymousClass.Annotation("Override");
+                    anonymousClass.Block($"public {responseServiceResponseGenericParameterString} nextPage(String {MethodPagingNextPageLinkParameterName(method)})", subFunction =>
+                    {
+                        MethodPagingGroupedParameterTransformation(method, filterRequired, settings, subFunction);
+                        subFunction.Return($"{MethodGetPagingNextMethodInvocation(method)}({MethodNextMethodParameterInvocation(method, filterRequired)}).blockingGet()");
+                    });
+                });
+            });
+        }
+
+        private static void AddSynchronousSimulatedPagingMethodImplementation(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string methodName = MethodName(method);
+            block.Block($"public PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> {methodName}({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            {
+                string pageImplType = SequenceTypeGetPageImplType(ResponseBodyClientType(method.ReturnType));
+                string sequenceElementTypeString = ResponseSequenceElementTypeString(method.ReturnType);
+                function.Line($"{pageImplType}<{sequenceElementTypeString}> page = new {pageImplType}<>();");
+                function.Line($"page.setItems({methodName}Async({ArgumentList(parameters)}).single().items());");
+                function.Line("page.setNextPageLink(null);");
+                function.ReturnBlock($"new PagedList<{sequenceElementTypeString}>(page)", anonymousClass =>
+                {
+                    anonymousClass.Annotation("Override");
+                    anonymousClass.Block($"public Page<{sequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
+                    {
+                        subFunction.Return("null");
+                    });
+                });
+            });
+        }
+
+        private static void AddSynchronousPagedListMethodComment(JavaBlock typeBlock, Method method, IEnumerable<Parameter> parameters)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                if (method.ReturnType.Body != null)
+                {
+                    comment.Return($"the PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> object if successful.");
+                }
+            });
+        }
+
+        private static void AddObservablePagedListMethodComment(JavaBlock typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                ThrowsIllegalArgumentException(comment);
+                if (method.ReturnType.Body != null)
+                {
+                    comment.Return($"the observable to the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object");
+                }
+                else
+                {
+                    comment.Return($"the {{@link Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings).EscapeXmlComment()}>}} object if successful.");
+                }
+            });
+        }
+
+        private static void AddObservablePagedListMethodImplementation(JavaBlock classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired)
+        {
+            string pageType = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
+            string methodName = MethodName(method);
+            classBlock.Block($"public Observable<{pageType}> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            {
+                function.Line($"return {methodName}SinglePageAsync({ArgumentList(parameters)})");
+                function.Indent(() =>
+                {
+                    function.Line(".toObservable()");
+                    function.Line($".concatMap(new Function<{pageType}, Observable<{pageType}>>() {{");
+                    function.Indent(() =>
+                    {
+                        function.Annotation("Override");
+                        function.Block($"public Observable<{pageType}> apply({pageType} page)", subFunction =>
+                        {
+                            string pagingNextPageLinkParameterName = MethodPagingNextPageLinkParameterName(method);
+                            subFunction.Line($"String {pagingNextPageLinkParameterName} = page.nextPageLink();");
+                            subFunction.If($"{pagingNextPageLinkParameterName} == null", ifBlock =>
+                            {
+                                ifBlock.Return("Observable.just(page)");
+                            });
+                            MethodPagingGroupedParameterTransformation(method, filterRequired, settings, subFunction);
+                            subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, false)}({MethodNextMethodParameterInvocation(method, filterRequired)}))");
+                        });
+                    });
+                    function.Line("});");
+                });
+            });
+        }
+
+        private static void AddObservableSimulatedPagingMethodImplementation(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            string methodName = MethodName(method);
+            Response methodReturnType = method.ReturnType;
+            string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(methodReturnType, settings);
+            block.Block($"public Observable<Page<{ResponseSequenceElementTypeString(methodReturnType)}>> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            {
+                AddRequiredNullableParameterChecks(function, method);
+                AddValidationChecks(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
+
+                MethodBuildInputMappings(method, filterRequired, function);
+
+                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
+
+                function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{MethodRestResponseConcreteTypeName(method, settings)}, {responseServiceResponseGenericParameterString}>() {{");
+                function.Indent(() =>
+                {
+                    function.Annotation("Override");
+                    function.Block($"public {responseServiceResponseGenericParameterString} apply({MethodRestResponseConcreteTypeName(method, settings)} response)", subFunction =>
+                    {
+                        subFunction.Return("response.body()");
+                    });
+                });
+                function.Line("}).toObservable();");
+            });
+        }
+
+        private static void AddServiceFutureMethodComment(JavaBlock typeBlock, Method method, IEnumerable<Parameter> parameters)
+        {
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                ParamServiceCallback(comment);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return("the {@link ServiceFuture} object");
+            });
+        }
+
+        private static string GetServiceFutureMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string serviceFutureTypeParameter = ResponseServiceFutureGenericParameterString(method.ReturnType);
+            string methodName = MethodName(method);
+            return $"ServiceFuture<{serviceFutureTypeParameter}> {methodName}Async({MethodParameterDeclarationWithCallback(method, settings, parameters)})";
+        }
+
+        private static void AddServiceFutureMethodSignature(JavaBlock typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            typeBlock.Line(GetServiceFutureMethodSignature(method, parameters, settings) + ";");
+        }
+
+        private static void AddServiceFutureLongRunningOperationMethodImplementation(JavaBlock classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string methodName = MethodName(method);
+            classBlock.Block($"public {GetServiceFutureMethodSignature(method, parameters, settings)}", function =>
+            {
+                function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({ArgumentList(parameters)}), serviceCallback)");
+            });
+        }
+
+        private static void AddSinglePageMethodComment(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            block.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                ThrowsIllegalArgumentException(comment);
+                Response methodReturnType = method.ReturnType;
+                if (methodReturnType.Body != null)
+                {
+                    comment.Return($"the {MethodReturnTypeResponseName(method).EscapeXmlComment()} object if successful.");
+                }
+                else
+                {
+                    comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(methodReturnType, settings)}>}} object if successful.");
+                }
+            });
+        }
+
+        private static void AddSinglePageMethodImplementation(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            string methodName = MethodName(method);
+            string singleTypeParameter = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
+            block.Block($"public Single<{singleTypeParameter}> {methodName}SinglePageAsync({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            {
+                AddRequiredNullableParameterChecks(function, method);
+                AddValidationChecks(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
+
+                MethodBuildInputMappings(method, filterRequired, function);
+                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
+                if (MethodIsPagingNextOperation(method))
+                {
+                    function.Line($"String nextUrl = {MethodNextUrlConstructor(method, settings)};");
+                }
+                string restResponseReturnType = MethodRestResponseConcreteTypeName(method, settings);
+                function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{restResponseReturnType}, {singleTypeParameter}>() {{");
+                function.Indent(() =>
+                {
+                    function.Annotation("Override");
+                    function.Block($"public {singleTypeParameter} apply({restResponseReturnType} response)", subFunction =>
+                    {
+                        subFunction.Return("response.body()");
+                    });
+                });
+                function.Line("});");
+            });
+        }
+
+        private static void AddOperationStatusMethodComment(JavaBlock block, Method method, IEnumerable<Parameter> parameters)
+        {
+            block.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return("the observable for the request");
+            });
+        }
+
+        private static void AddOperationStatusMethodImplementation(JavaBlock block, Method method, IEnumerable<Parameter> parameters, Settings settings, bool filterRequired, bool onlyRequiredParameters)
+        {
+            string methodName = MethodName(method);
+            string operationStatusTypeParameter = ResponseGenericBodyClientTypeString(method.ReturnType);
+            block.Block($"public Observable<OperationStatus<{operationStatusTypeParameter}>> {methodName}Async({MethodParameterDeclaration(method, settings, parameters)})", function =>
+            {
+                AddRequiredNullableParameterChecks(function, method);
+                AddValidationChecks(function, method, onlyRequiredParameters);
+                AddOptionalOrConstantParameterVariables(function, method, onlyRequiredParameters);
+
+                MethodBuildInputMappings(method, filterRequired, function);
+                IEnumerable<Parameter> requiredRetrofitParameters = MethodRetrofitParameters(method, settings).Where(p => p.IsRequired);
+                MethodParameterConversion(method, settings, requiredRetrofitParameters, function);
+                function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
+            });
         }
 
         public static JavaFile GetAzureServiceClientInterfaceJavaFile(CodeModel codeModel, Settings settings)
@@ -1097,8 +1001,7 @@ namespace AutoRest.Java.DanModel
                     }
                     interfaceBlock.MultipleLineComment(comment =>
                     {
-                        comment.Line($"Gets {propertyDescription}.");
-                        comment.Line();
+                        comment.Description($"Gets {propertyDescription}.");
                         comment.Return($"the {propertyName} value.");
                     });
                     interfaceBlock.Line($"{propertyType} {propertyNameCamelCase}();");
@@ -1107,8 +1010,7 @@ namespace AutoRest.Java.DanModel
                         interfaceBlock.Line();
                         interfaceBlock.MultipleLineComment(comment =>
                         {
-                            comment.Line($"Sets {propertyDescription}.");
-                            comment.Line();
+                            comment.Description($"Sets {propertyDescription}.");
                             comment.Param(propertyNameCamelCase, $"the {propertyName} value.");
                             comment.Return("the service client itself");
                         });
@@ -1123,7 +1025,7 @@ namespace AutoRest.Java.DanModel
                     interfaceBlock.Line();
                     interfaceBlock.MultipleLineComment(comment =>
                     {
-                        comment.Line($"Gets the {operationType} object to access its operations.");
+                        comment.Description($"Gets the {operationType} object to access its operations.");
                         comment.Return($"the {operationType} object.");
                     });
                     interfaceBlock.Line($"{operationType} {MethodGroupName(operation).ToCamelCase()}();");
@@ -1219,730 +1121,7 @@ namespace AutoRest.Java.DanModel
 
                 classBlock.Line();
 
-                foreach (Method method in methodGroup.Methods)
-                {
-                    string methodName = MethodName(method);
-                    string methodReturnTypeResponseName = MethodReturnTypeResponseName(method);
-                    string methodReturnTypeResponseNameXmlEscaped = methodReturnTypeResponseName.EscapeXmlComment();
-
-                    if (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method))
-                    {
-                        if (MethodLocalParameters(method).Any(p => !p.IsConstant && !p.IsRequired))
-                        {
-                            // -----------------------------------------------
-                            // All pages. Synchronous with required parameters
-                            // -----------------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                ThrowsIllegalArgumentException(comment);
-                                ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                                ThrowsRuntimeException(comment);
-                                if (method.ReturnType.Body != null)
-                                {
-                                    comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                function.Line($"{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} response = {methodName}SinglePageAsync({MethodRequiredParameterInvocation(method)}).blockingGet();");
-                                function.ReturnBlock($"new {ResponseGenericBodyClientTypeString(method.ReturnType)}(response)", anonymousClass =>
-                                {
-                                    anonymousClass.Annotation("Override");
-                                    anonymousClass.Block($"public {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} nextPage(String {MethodPagingNextPageLinkParameterName(method)})", subFunction =>
-                                    {
-                                        string transformation = MethodPagingGroupedParameterTransformation(method, true, settings);
-                                        if (!string.IsNullOrWhiteSpace(transformation))
-                                        {
-                                            subFunction.Line(transformation);
-                                        }
-                                        subFunction.Return($"{MethodGetPagingNextMethodInvocation(method)}({MethodNextMethodParameterInvocation(method, true)}).blockingGet()");
-                                    });
-                                });
-                            });
-                            classBlock.Line();
-
-                            // -----------------------------------------------
-                            // All pages. Observable with required parameters.
-                            // -----------------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                ThrowsIllegalArgumentException(comment);
-                                if (method.ReturnType.Body != null)
-                                {
-                                    comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> {methodName}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                function.Line($"return {methodName}SinglePageAsync({MethodRequiredParameterInvocation(method)})");
-                                function.Indent(() =>
-                                {
-                                    function.Line(".toObservable()");
-                                    string serviceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
-                                    function.Line($".concatMap(new Function<{serviceResponseGenericParameterString}, Observable<{serviceResponseGenericParameterString}>>() {{");
-                                    function.Indent(() =>
-                                    {
-                                        function.Annotation("Override");
-                                        function.Block($"public Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> apply({ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} page)", subFunction =>
-                                        {
-                                            string pagingNextPageLinkParameterName = MethodPagingNextPageLinkParameterName(method);
-                                            subFunction.Line($"String {pagingNextPageLinkParameterName} = page.nextPageLink();");
-                                            subFunction.If($"{pagingNextPageLinkParameterName} == null", ifBlock =>
-                                            {
-                                                ifBlock.Return("Observable.just(page)");
-                                            });
-                                            string transformation = MethodPagingGroupedParameterTransformation(method, true, settings);
-                                            if (!string.IsNullOrWhiteSpace(transformation))
-                                            {
-                                                subFunction.Line(transformation);
-                                            }
-                                            subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, false)}({MethodNextMethodParameterInvocation(method, true)}))");
-                                        });
-                                    });
-                                    function.Line("});");
-                                });
-                            });
-                            classBlock.Line();
-
-                            // -------------------------------------------------
-                            // Single page. Observable with required parameters.
-                            // -------------------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                ThrowsIllegalArgumentException(comment);
-                                if (method.ReturnType.Body != null)
-                                {
-                                    comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> {methodName}SinglePageAsync({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                {
-                                    string paramName = ParameterGetName(param);
-                                    function.If($"{paramName} == null", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {paramName} is required and cannot be null.\");");
-                                    });
-                                }
-
-                                foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
-                                {
-                                    function.Line($"Validator.validate({ParameterGetName(param)});");
-                                }
-
-                                foreach (Parameter parameter in MethodLocalParameters(method))
-                                {
-                                    string parameterName = ParameterGetName(parameter);
-                                    IModelType parameterClientType = ParameterClientType(parameter);
-                                    if (!parameter.IsRequired)
-                                    {
-                                        function.Line($"final {IModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
-                                    }
-
-                                    if (parameter.IsConstant)
-                                    {
-                                        function.Line($"final {IModelTypeParameterVariantName(parameterClientType)} {parameterName} = {parameter.DefaultValue ?? "null"};");
-                                    }
-                                }
-
-                                MethodBuildInputMappings(method, true, function);
-
-                                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-
-                                if (MethodIsPagingNextOperation(method))
-                                {
-                                    function.Line($"String nextUrl = {MethodNextUrlConstructor(method, settings)};");
-                                }
-
-                                function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{MethodRestResponseConcreteTypeName(method, settings)}, {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>() {{");
-                                function.Indent(() =>
-                                {
-                                    function.Annotation("Override");
-                                    function.Block($"public {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} apply({MethodRestResponseConcreteTypeName(method, settings)} response)", subFunction =>
-                                    {
-                                        subFunction.Return("response.body()");
-                                    });
-                                });
-                                function.Line("});");
-                            });
-                            classBlock.Line();
-                        }
-
-                        // -------------------------------------------
-                        // All pages. Synchronous with all parameters.
-                        // -------------------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                            {
-                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                            }
-                            ThrowsIllegalArgumentException(comment);
-                            ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                            ThrowsRuntimeException(comment);
-                            if (method.ReturnType.Body != null)
-                            {
-                                comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            function.Line($"{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} response = {methodName}SinglePageAsync({MethodParameterInvocation(method)}).blockingGet();");
-                            function.ReturnBlock($"new {ResponseGenericBodyClientTypeString(method.ReturnType)}(response)", anonymousClass =>
-                            {
-                                anonymousClass.Annotation("Override");
-                                anonymousClass.Block($"public {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} nextPage(String {MethodPagingNextPageLinkParameterName(method)})", subFunction =>
-                                {
-                                    string transformation = MethodPagingGroupedParameterTransformation(method, false, settings);
-                                    if (!string.IsNullOrWhiteSpace(transformation))
-                                    {
-                                        subFunction.Line(transformation);
-                                    }
-                                    subFunction.Return($"{MethodGetPagingNextMethodInvocation(method)}({MethodNextMethodParameterInvocation(method, false)}).blockingGet()");
-                                });
-                            });
-                        });
-                        classBlock.Line();
-
-                        // ------------------------------------------
-                        // All pages. Observable with all parameters.
-                        // ------------------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                            {
-                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                            }
-                            ThrowsIllegalArgumentException(comment);
-                            if (method.ReturnType.Body != null)
-                            {
-                                comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> {methodName}Async({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            function.Line($"return {methodName}SinglePageAsync({MethodParameterInvocation(method)})");
-                            function.Indent(() =>
-                            {
-                                function.Line(".toObservable()");
-                                function.Line($".concatMap(new Function<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}, Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>>() {{");
-                                function.Indent(() =>
-                                {
-                                    function.Annotation("Override");
-                                    function.Block($"public Observable<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> apply({ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} page)", subFunction =>
-                                    {
-                                        string nextPageLinkVariableName = MethodPagingNextPageLinkParameterName(method);
-                                        subFunction.Line($"String {nextPageLinkVariableName} = page.nextPageLink();");
-                                        subFunction.If($"{nextPageLinkVariableName} == null", ifBlock =>
-                                        {
-                                            ifBlock.Return("Observable.just(page)");
-                                        });
-
-                                        string transformation = MethodPagingGroupedParameterTransformation(method, false, settings);
-                                        if (!string.IsNullOrWhiteSpace(transformation))
-                                        {
-                                            subFunction.Line(transformation);
-                                        }
-                                        subFunction.Return($"Observable.just(page).concatWith({MethodGetPagingNextMethodInvocation(method, false)}({MethodNextMethodParameterInvocation(method, false)}))");
-                                    });
-                                });
-                                function.Line("});");
-                            });
-                        });
-                        classBlock.Line();
-
-                        // --------------------------------------------
-                        // Single page. Observable with all parameters.
-                        // --------------------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                            {
-                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                            }
-                            ThrowsIllegalArgumentException(comment);
-                            if (method.ReturnType.Body != null)
-                            {
-                                comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> {methodName}SinglePageAsync({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            foreach (Parameter param in MethodRequiredNullableParameters(method))
-                            {
-                                function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                {
-                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                });
-                            }
-
-                            foreach (Parameter param in MethodParametersToValidate(method))
-                            {
-                                function.Line($"Validator.validate({ParameterGetName(param)});");
-                            }
-
-                            foreach (Parameter parameter in MethodLocalParameters(method))
-                            {
-                                if (parameter.IsConstant)
-                                {
-                                    function.Line($"final {IModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                }
-                            }
-
-                            MethodBuildInputMappings(method, false, function);
-
-                            MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-
-                            if (MethodIsPagingNextOperation(method))
-                            {
-                                function.Line($"String nextUrl = {MethodNextUrlConstructor(method, settings)};");
-                            }
-
-                            function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{MethodRestResponseConcreteTypeName(method, settings)}, {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>() {{");
-                            function.Indent(() =>
-                            {
-                                function.Annotation("Override");
-                                function.Block($"public {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} apply({MethodRestResponseConcreteTypeName(method, settings)} response)", subFunction =>
-                                {
-                                    subFunction.Return("response.body()");
-                                });
-                            });
-                            function.Line("});");
-                        });
-                        classBlock.Line();
-                    }
-                    else if (MethodSimulateAsPagingOperation(method))
-                    {
-                        if (MethodLocalParameters(method).Any(p => !p.IsConstant && !p.IsRequired))
-                        {
-                            // -----------------------------------------
-                            // Synchronous with only required parameters
-                            // -----------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                if (method.ReturnType.Body != null)
-                                {
-                                    comment.Return($"the PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> {methodName}({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                string pageImplType = SequenceTypeGetPageImplType(ResponseBodyClientType(method.ReturnType));
-                                string sequenceElementTypeString = ResponseSequenceElementTypeString(method.ReturnType);
-                                function.Line($"{pageImplType}<{sequenceElementTypeString}> page = new {pageImplType}<>();");
-                                function.Line($"page.setItems({methodName}Async({MethodRequiredParameterInvocation(method)}).single().items());");
-                                function.Line("page.setNextPageLink(null);");
-                                function.ReturnBlock($"new PagedList<{sequenceElementTypeString}>(page)", anonymousClass =>
-                                {
-                                    anonymousClass.Annotation("Override");
-                                    anonymousClass.Block($"public Page<{sequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
-                                    {
-                                        subFunction.Return("null");
-                                    });
-                                });
-                            });
-                            classBlock.Line();
-
-                            // ----------------------------------------
-                            // Observable with only required parameters
-                            // ----------------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                if (method.ReturnType.Body != null)
-                                {
-                                    comment.Return($"the observable to the {ResponseGenericBodyClientTypeString(method.ReturnType).EscapeXmlComment()} object");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Observable<Page<{ResponseSequenceElementTypeString(method.ReturnType)}>>}} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public Observable<Page<{ResponseSequenceElementTypeString(method.ReturnType)}>> {methodName}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                            {
-                                foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                {
-                                    function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                    });
-                                }
-                                foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
-                                {
-                                    function.Line($"Validator.validate({ParameterGetName(param)});");
-                                }
-                                foreach (Parameter parameter in MethodLocalParameters(method))
-                                {
-                                    string parameterName = ParameterGetName(parameter);
-                                    IModelType parameterClientType = ParameterClientType(parameter);
-                                    if (!parameter.IsRequired)
-                                    {
-                                        function.Line($"final {IModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
-                                    }
-                                    if (parameter.IsConstant)
-                                    {
-                                        function.Line($"final {IModelTypeName(parameterClientType)} {parameterName} = {parameter.DefaultValue ?? "null"};");
-                                    }
-                                }
-
-                                MethodBuildInputMappings(method, true, function);
-
-                                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-
-                                function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{MethodRestResponseConcreteTypeName(method, settings)}, {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>() {{");
-                                function.Indent(() =>
-                                {
-                                    function.Annotation("Override");
-                                    function.Block($"public {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} apply({MethodRestResponseConcreteTypeName(method, settings)} response)", subFunction =>
-                                    {
-                                        subFunction.Return("response.body()");
-                                    });
-                                });
-                                function.Line("}).toObservable();");
-                            });
-                            classBlock.Line();
-                        }
-
-                        // -------------------------------
-                        // Synchronous with all parameters
-                        // -------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                            {
-                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                            }
-                            if (method.ReturnType.Body != null)
-                            {
-                                comment.Return($"the PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public PagedList<{ResponseSequenceElementTypeString(method.ReturnType)}> {methodName}({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            string pageImplType = SequenceTypeGetPageImplType(ResponseBodyClientType(method.ReturnType));
-                            string sequenceElementTypeString = ResponseSequenceElementTypeString(method.ReturnType);
-                            function.Line($"{pageImplType}<{sequenceElementTypeString}> page = new {pageImplType}<>();");
-                            function.Line($"page.setItems({methodName}Async({MethodParameterInvocation(method)}).toBlocking().single().items());");
-                            function.Line($"page.setNextPageLink(null);");
-                            function.ReturnBlock($"new PagedList<{sequenceElementTypeString}>(page)", anonymousClass =>
-                            {
-                                anonymousClass.Annotation("Override");
-                                anonymousClass.Block($"public Page<{sequenceElementTypeString}> nextPage(String nextPageLink)", subFunction =>
-                                {
-                                    subFunction.Return("null");
-                                });
-                            });
-                        });
-                        classBlock.Line();
-
-                        // ------------------------------
-                        // Observable with all parameters
-                        // ------------------------------
-                        classBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                            {
-                                comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                            }
-                            if (method.ReturnType.Body != null)
-                            {
-                                comment.Return($"the observable to the {ResponseGenericBodyClientTypeString(method.ReturnType).EscapeXmlComment()} object");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Observable<Page<{ResponseSequenceElementTypeString(method.ReturnType)}>>}} object if successful.");
-                            }
-                        });
-                        classBlock.Block($"public Observable<Page<{ResponseSequenceElementTypeString(method.ReturnType)}>> {methodName}Async({MethodParameterDeclaration(method, settings)})", function =>
-                        {
-                            foreach (Parameter param in MethodRequiredNullableParameters(method))
-                            {
-                                function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                {
-                                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                });
-                            }
-                            foreach (Parameter param in MethodParametersToValidate(method))
-                            {
-                                function.Line($"Validator.validate({ParameterGetName(param)});");
-                            }
-                            foreach (Parameter parameter in MethodLocalParameters(method))
-                            {
-                                if (parameter.IsConstant)
-                                {
-                                    function.Line($"final {IModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                }
-                            }
-
-                            MethodBuildInputMappings(method, true, function);
-
-                            MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-
-                            function.Line($"return service.{methodName}({MethodParameterApiInvocation(method, settings)}).map(new Function<{MethodRestResponseConcreteTypeName(method, settings)}, {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>() {{");
-                            function.Indent(() =>
-                            {
-                                function.Annotation("Override");
-                                function.Block($"public {ResponseServiceResponseGenericParameterString(method.ReturnType, settings)} apply({MethodRestResponseConcreteTypeName(method, settings)} response)", subFunction =>
-                                {
-                                    subFunction.Return("response.body()");
-                                });
-                            });
-                            function.Line("}).toObservable();");
-                        });
-                        classBlock.Line();
-                    }
-                    else
-                    {
-                        if (!MethodIsLongRunningOperation(method))
-                        {
-                            GenerateRootMethodFunctions(classBlock, method, settings);
-                        }
-                        else
-                        {
-                            if (MethodLocalParameters(method).Any(p => !p.IsConstant && !p.IsRequired))
-                            {
-                                // -----------------------------------------
-                                // Synchronous with only required parameters
-                                // -----------------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                    {
-                                        comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                    }
-                                    ThrowsIllegalArgumentException(comment);
-                                    ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                                    ThrowsRuntimeException(comment);
-                                    if (method.ReturnType.Body != null)
-                                    {
-                                        comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                    }
-                                });
-                                classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                                {
-                                    if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(method.ReturnType))) == "void")
-                                    {
-                                        function.Line($"{methodName}Async({MethodRequiredParameterInvocation(method)}).blockingLast().result();");
-                                    }
-                                    else
-                                    {
-                                        function.Return($"{methodName}Async({MethodRequiredParameterInvocation(method)}).blockingLast().result()");
-                                    }
-                                });
-                                classBlock.Line();
-
-                                // --------------------------------------
-                                // Callback with only required parameters
-                                // --------------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                    {
-                                        comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                    }
-                                    ParamServiceCallback(comment);
-                                    ThrowsIllegalArgumentException(comment);
-                                    comment.Return("the {@link ServiceFuture} object");
-                                });
-                                classBlock.Block($"public ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> {methodName}Async({MethodRequiredParameterDeclarationWithCallback(method, settings)})", function =>
-                                {
-                                    function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({MethodRequiredParameterInvocation(method)}), serviceCallback)");
-                                });
-                                classBlock.Line();
-
-                                // ----------------------------------------
-                                // Observable with only required parameters
-                                // ----------------------------------------
-                                classBlock.MultipleLineComment(comment =>
-                                {
-                                    AddMethodSummaryAndDescription(comment, method);
-                                    foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired))
-                                    {
-                                        comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                    }
-                                    ThrowsIllegalArgumentException(comment);
-                                    comment.Return("the observable for the request");
-                                });
-                                classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {methodName}Async({MethodRequiredParameterDeclaration(method, settings)})", function =>
-                                {
-                                    foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                    {
-                                        function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                        {
-                                            ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                        });
-                                    }
-                                    foreach (Parameter param in MethodParametersToValidate(method).Where(p => p.IsRequired))
-                                    {
-                                        function.Line($"Validator.validate({ParameterGetName(param)});");
-                                    }
-                                    foreach (Parameter parameter in MethodLocalParameters(method))
-                                    {
-                                        if (!parameter.IsRequired)
-                                        {
-                                            IModelType parameterWireType = ParameterWireType(parameter);
-                                            function.Line($"final {IModelTypeName(parameterWireType)} {ParameterWireName(parameter)} = {IModelTypeDefaultValue(parameterWireType, method) ?? "null"};");
-                                        }
-                                        if (parameter.IsConstant)
-                                        {
-                                            function.Line($"final {IModelTypeParameterVariantName(ParameterClientType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                        }
-                                    }
-
-                                    MethodBuildInputMappings(method, true, function);
-
-                                    IEnumerable<Parameter> requiredRetrofitParameters = MethodRetrofitParameters(method, settings).Where(p => p.IsRequired);
-                                    MethodParameterConversion(method, settings, requiredRetrofitParameters, function);
-
-                                    function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
-                                });
-                                classBlock.Line();
-                            }
-
-                            // -------------------------------
-                            // Synchronous with all parameters
-                            // -------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                ThrowsIllegalArgumentException(comment);
-                                ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                                ThrowsRuntimeException(comment);
-                                if (method.ReturnType.Body != null)
-                                {
-                                    comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                                }
-                            });
-                            classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({MethodParameterDeclaration(method, settings)})", function =>
-                            {
-                                if (methodReturnTypeResponseName == "void")
-                                {
-                                    function.Line($"{methodName}Async({MethodParameterInvocation(method)}).blockingLast();");
-                                }
-                                else
-                                {
-                                    function.Return($"{methodName}Async({MethodParameterInvocation(method)}).blockingLast().result()");
-                                }
-                            });
-                            classBlock.Line();
-
-                            // ----------------------------
-                            // Callback with all parameters
-                            // ----------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                ParamServiceCallback(comment);
-                                ThrowsIllegalArgumentException(comment);
-                                comment.Return("the {@link ServiceFuture} object");
-                            });
-                            classBlock.Block($"public ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> {methodName}Async({MethodParameterDeclarationWithCallback(method, settings)})", function =>
-                            {
-                                function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({MethodParameterInvocation(method)}), serviceCallback)");
-                            });
-                            classBlock.Line();
-
-                            // ------------------------------
-                            // Observable with all parameters
-                            // ------------------------------
-                            classBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                foreach (Parameter param in MethodLocalParameters(method).Where(p => !p.IsConstant))
-                                {
-                                    comment.Param(ParameterGetName(param), param.Documentation.Else("the " + IModelTypeName(ParameterGetModelType(param)) + " value").EscapeXmlComment().Trim());
-                                }
-                                ThrowsIllegalArgumentException(comment);
-                                comment.Return("the observable for the request");
-                            });
-                            classBlock.Block($"public Observable<OperationStatus<{ResponseGenericBodyClientTypeString(method.ReturnType)}>> {methodName}Async({MethodParameterDeclaration(method, settings)})", function =>
-                            {
-                                foreach (Parameter param in MethodRequiredNullableParameters(method))
-                                {
-                                    function.If($"{ParameterGetName(param)} == null", ifBlock =>
-                                    {
-                                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(param)} is required and cannot be null.\");");
-                                    });
-                                }
-                                foreach (Parameter param in MethodParametersToValidate(method))
-                                {
-                                    function.Line($"Validator.validate({ParameterGetName(param)});");
-                                }
-                                foreach (Parameter parameter in MethodLocalParameters(method))
-                                {
-                                    if (parameter.IsConstant)
-                                    {
-                                        function.Line($"final {IModelTypeName(ParameterGetModelType(parameter))} {ParameterGetName(parameter)} = {parameter.DefaultValue ?? "null"};");
-                                    }
-                                }
-
-                                MethodBuildInputMappings(method, false, function);
-
-                                MethodParameterConversion(method, settings, MethodRetrofitParameters(method, settings), function);
-
-                                function.Return($"service.{methodName}({MethodParameterApiInvocation(method, settings)})");
-                            });
-                        }
-                    }
-
-                    classBlock.Line();
-                }
+                AddMethodOverloads(classBlock, methodGroup.Methods, settings);
             });
 
             return javaFile;
@@ -2082,7 +1261,15 @@ namespace AutoRest.Java.DanModel
                     foreach (Method method in rootMethods)
                     {
                         classBlock.Line();
-                        GenerateRootMethodFunctions(classBlock, method, settings);
+
+                        IEnumerable<Parameter> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+                        IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
+
+                        if (allParameters.Count() != requiredParameters.Count())
+                        {
+                            AddRegularMethodOverloads(classBlock, method, settings, requiredParameters, true);
+                        }
+                        AddRegularMethodOverloads(classBlock, method, settings, allParameters, false);
                     }
                 }
             });
@@ -2153,51 +1340,27 @@ namespace AutoRest.Java.DanModel
             {
                 foreach (Method method in rootMethods)
                 {
-                    string methodSummary = method.Summary;
-                    string methodSummaryXmlEscaped = methodSummary?.EscapeXmlComment().Period();
-                    string methodDescription = method.Description;
-                    string methodDescriptionXmlEscaped = methodDescription?.EscapeXmlComment().Period();
                     string methodName = MethodName(method);
                     string methodReturnTypeResponseName = MethodReturnTypeResponseName(method);
                     string methodReturnTypeResponseNameXmlEscaped = methodReturnTypeResponseName.EscapeXmlComment();
-
-                    IEnumerable<Parameter> methodParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-                    if (methodParameters.Any(p => !p.IsRequired))
+                    string responseServiceResponseGenericParameterString = ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
+                    
+                    IEnumerable<Parameter> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+                    IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
+                    if (allParameters.Count() != requiredParameters.Count())
                     {
-                        IEnumerable<Parameter> requiredMethodParameters = methodParameters.Where(p => p.IsRequired);
+                        AddSynchronousMethodComment(interfaceBlock, method, requiredParameters, settings);
+                        AddSynchronousMethodSignature(interfaceBlock, method, requiredParameters, settings);
+                        interfaceBlock.Line();
 
-                        interfaceBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, requiredMethodParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                            ThrowsRuntimeException(comment);
-                            if (methodReturnTypeResponseName.Else("void") != "void")
-                            {
-                                comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                            }
-                        });
-                        interfaceBlock.Line($"{methodReturnTypeResponseName} {methodName}({MethodRequiredParameterDeclaration(method, settings)});");
-
+                        AddServiceFutureMethodComment(interfaceBlock, method, requiredParameters);
+                        AddServiceFutureMethodSignature(interfaceBlock, method, requiredParameters, settings);
                         interfaceBlock.Line();
 
                         interfaceBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, requiredMethodParameters);
-                            ParamServiceCallback(comment);
-                            ThrowsIllegalArgumentException(comment);
-                            comment.Return("the {@link ServiceFuture} object");
-                        });
-                        interfaceBlock.Line($"ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> {methodName}Async({MethodRequiredParameterDeclarationWithCallback(method, settings)});");
-
-                        interfaceBlock.Line();
-
-                        interfaceBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, requiredMethodParameters);
+                            AddParameters(comment, requiredParameters);
                             ThrowsIllegalArgumentException(comment);
                             if (methodReturnTypeResponseName.Else("void") != "void")
                             {
@@ -2205,17 +1368,16 @@ namespace AutoRest.Java.DanModel
                             }
                             else
                             {
-                                comment.Return($"the {{@link Maybe<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
+                                comment.Return($"the {{@link Maybe<{responseServiceResponseGenericParameterString}>}} object if successful.");
                             }
                         });
-
                         if (methodReturnTypeResponseName.Else("void") != "void")
                         {
-                            interfaceBlock.Line($"Maybe<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> {methodName}Async({MethodRequiredParameterDeclaration(method, settings)});");
+                            interfaceBlock.Line($"Maybe<{responseServiceResponseGenericParameterString}> {methodName}Async({MethodParameterDeclaration(method, settings, requiredParameters)});");
                         }
                         else
                         {
-                            interfaceBlock.Line($"Completable {methodName}Async({MethodRequiredParameterDeclaration(method, settings)});");
+                            interfaceBlock.Line($"Completable {methodName}Async({MethodParameterDeclaration(method, settings, requiredParameters)});");
                         }
 
                         if (MethodShouldGenerateBeginRestResponseMethod(method, settings))
@@ -2225,7 +1387,7 @@ namespace AutoRest.Java.DanModel
                             interfaceBlock.MultipleLineComment(comment =>
                             {
                                 AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, requiredMethodParameters);
+                                AddParameters(comment, requiredParameters);
                                 ThrowsIllegalArgumentException(comment);
                                 if (methodReturnTypeResponseName.Else("void") != "void")
                                 {
@@ -2233,45 +1395,25 @@ namespace AutoRest.Java.DanModel
                                 }
                                 else
                                 {
-                                    comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
+                                    comment.Return($"the {{@link Single<{responseServiceResponseGenericParameterString}>}} object if successful.");
                                 }
                             });
-                            interfaceBlock.Line($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({MethodRequiredParameterDeclaration(method, settings)});");
+                            interfaceBlock.Line($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({MethodParameterDeclaration(method, settings, requiredParameters)});");
                         }
                     }
 
-                    interfaceBlock.MultipleLineComment(comment =>
-                    {
-                        AddMethodSummaryAndDescription(comment, method);
-                        AddParameters(comment, methodParameters);
-                        ThrowsIllegalArgumentException(comment);
-                        ThrowsOperationException(comment, MethodOperationExceptionTypeString(method, settings));
-                        ThrowsRuntimeException(comment);
-                        if (methodReturnTypeResponseName.Else("void") != "void")
-                        {
-                            comment.Return($"the {methodReturnTypeResponseNameXmlEscaped} object if successful.");
-                        }
-                    });
-                    interfaceBlock.Line($"{methodReturnTypeResponseName} {methodName}({MethodParameterDeclaration(method, settings)});");
+                    AddSynchronousMethodComment(interfaceBlock, method, allParameters, settings);
+                    AddSynchronousMethodSignature(interfaceBlock, method, allParameters, settings);
+                    interfaceBlock.Line();
 
+                    AddServiceFutureMethodComment(interfaceBlock, method, allParameters);
+                    AddServiceFutureMethodSignature(interfaceBlock, method, allParameters, settings);
                     interfaceBlock.Line();
 
                     interfaceBlock.MultipleLineComment(comment =>
                     {
                         AddMethodSummaryAndDescription(comment, method);
-                        AddParameters(comment, methodParameters);
-                        ParamServiceCallback(comment);
-                        ThrowsIllegalArgumentException(comment);
-                        comment.Return("the {@link ServiceFuture} object");
-                    });
-                    interfaceBlock.Line($"ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> {methodName}Async({MethodParameterDeclarationWithCallback(method, settings)});");
-
-                    interfaceBlock.Line();
-
-                    interfaceBlock.MultipleLineComment(comment =>
-                    {
-                        AddMethodSummaryAndDescription(comment, method);
-                        AddParameters(comment, methodParameters);
+                        AddParameters(comment, allParameters);
                         ThrowsIllegalArgumentException(comment);
                         if (methodReturnTypeResponseName.Else("void") != "void")
                         {
@@ -2279,14 +1421,14 @@ namespace AutoRest.Java.DanModel
                         }
                         else
                         {
-                            comment.Return($"the {{@link Maybe<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
+                            comment.Return($"the {{@link Maybe<{responseServiceResponseGenericParameterString}>}} object if successful.");
                         }
                     });
 
-                    string methodParameterDeclaration = MethodParameterDeclaration(method, settings);
+                    string methodParameterDeclaration = MethodParameterDeclaration(method, settings, allParameters);
                     if (methodReturnTypeResponseName.Else("void") != "void")
                     {
-                        interfaceBlock.Line($"Maybe<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}> {methodName}Async({methodParameterDeclaration});");
+                        interfaceBlock.Line($"Maybe<{responseServiceResponseGenericParameterString}> {methodName}Async({methodParameterDeclaration});");
                     }
                     else
                     {
@@ -2300,7 +1442,7 @@ namespace AutoRest.Java.DanModel
                         interfaceBlock.MultipleLineComment(comment =>
                         {
                             AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, methodParameters);
+                            AddParameters(comment, allParameters);
                             ThrowsIllegalArgumentException(comment);
                             if (methodReturnTypeResponseName.Else("void") != "void")
                             {
@@ -2308,11 +1450,11 @@ namespace AutoRest.Java.DanModel
                             }
                             else
                             {
-                                comment.Return($"the {{@link Single<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>}} object if successful.");
+                                comment.Return($"the {{@link Single<{responseServiceResponseGenericParameterString}>}} object if successful.");
                             }
                         });
+                        interfaceBlock.Line($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({MethodParameterDeclaration(method, settings, allParameters)});");
                     }
-                    interfaceBlock.Line($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({MethodParameterDeclaration(method, settings)});");
 
                     interfaceBlock.Line();
 
@@ -2508,9 +1650,14 @@ namespace AutoRest.Java.DanModel
 
                 foreach (Method method in methodGroup.Methods)
                 {
-                    GenerateRootMethodFunctions(classBlock, method, settings);
+                    IEnumerable<Parameter> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
+                    IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
 
-                    classBlock.Line();
+                    if (allParameters.Count() != requiredParameters.Count())
+                    {
+                        AddRegularMethodOverloads(classBlock, method, settings, requiredParameters, true);
+                    }
+                    AddRegularMethodOverloads(classBlock, method, settings, allParameters, false);
                 }
             });
 
@@ -2870,7 +2017,7 @@ namespace AutoRest.Java.DanModel
                         {
                             if (modelType.BaseModelType != null && IModelTypeName(modelType.BaseModelType).EndsWith("Inner", StringComparison.Ordinal) ^ innerModelCompositeType.Contains(modelType))
                             {
-                                imports.AddRange(GetIModelTypeImports(modelType.BaseModelType));
+                                imports.AddRange(GetIModelTypeImports(modelType.BaseModelType, settings));
                             }
                         }
                     }
@@ -3376,20 +2523,7 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        private static void GenerateRootMethodFunctions(JavaBlock classBlock, Method method, Settings settings)
-        {
-            IEnumerable<Parameter> allParameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-            IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
-
-            if (allParameters.Count() != requiredParameters.Count())
-            {
-                GenerateRootMethodFunctions(classBlock, method, settings, requiredParameters, true);
-            }
-
-            GenerateRootMethodFunctions(classBlock, method, settings, allParameters, false);
-        }
-
-        private static void GenerateRootMethodFunctions(JavaBlock classBlock, Method method, Settings settings, IEnumerable<Parameter> parameters, bool takeOnlyRequiredParameters)
+        private static void AddRegularMethodOverloads(JavaBlock classBlock, Method method, Settings settings, IEnumerable<Parameter> parameters, bool takeOnlyRequiredParameters)
         {
             CompositeType callbackParamModelType = DependencyInjection.New<CompositeType>();
             callbackParamModelType.Name.FixedValue = $"ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}>";
@@ -3426,7 +2560,7 @@ namespace AutoRest.Java.DanModel
             string methodArguments = string.Join(", ", parameters.Select(parameter => ParameterGetName(parameter)));
 
             // ---------------------------------
-            // Synchronous, Body, all parameters
+            // Synchronous
             // ---------------------------------
             MethodJavadoc(classBlock, method, parameters, methodSyncExceptionDocumentation, methodSyncReturnDocumentation);
             classBlock.Block($"public {methodReturnTypeResponseName} {methodName}({methodParameterDeclaration})", function =>
@@ -3443,7 +2577,7 @@ namespace AutoRest.Java.DanModel
             classBlock.Line();
 
             // ------------------------------
-            // Callback, Body, all parameters
+            // Callback
             // ------------------------------
             MethodJavadoc(classBlock, method, parameters.ConcatSingleItem(callbackParam), methodAsyncExceptionDocumentation, callbackReturnDocumentation);
             classBlock.Block($"public ServiceFuture<{ResponseServiceFutureGenericParameterString(methodReturnType)}> {methodName}Async({MethodParameterDeclaration(parameters.ConcatSingleItem(callbackParam))})", function =>
@@ -3453,20 +2587,12 @@ namespace AutoRest.Java.DanModel
             classBlock.Line();
 
             // ----------------------------------------
-            // Observable, RestResponse, all parameters
+            // Observable, RestResponse
             // ----------------------------------------
             MethodJavadoc(classBlock, method, parameters, methodAsyncExceptionDocumentation, methodObservableReturnDocumentation);
             classBlock.Block($"public Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({methodParameterDeclaration})", function =>
             {
-                // Check presence of required parameters
-                foreach (Parameter param in MethodRequiredNullableParameters(method))
-                {
-                    string parameterName = ParameterGetName(param);
-                    function.If($"{parameterName} == null", ifBlock =>
-                    {
-                        ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {parameterName} is required and cannot be null.\");");
-                    });
-                }
+                AddRequiredNullableParameterChecks(function, method);
 
                 foreach (Parameter param in MethodLocalParameters(method))
                 {
@@ -3483,10 +2609,7 @@ namespace AutoRest.Java.DanModel
                     }
                 }
 
-                foreach (Parameter param in MethodParametersToValidate(method))
-                {
-                    function.Line($"Validator.validate({ParameterGetName(param)});");
-                }
+                AddValidationChecks(function, method, false);
 
                 MethodBuildInputMappings(method, takeOnlyRequiredParameters, function);
 
@@ -3497,7 +2620,7 @@ namespace AutoRest.Java.DanModel
             classBlock.Line();
 
             // --------------------------------
-            // Observable, Body, all parameters
+            // Observable
             // --------------------------------
             MethodJavadoc(classBlock, method, parameters, methodAsyncExceptionDocumentation, methodObservableReturnDocumentation);
             IModelType methodReturnTypeBody = methodReturnType.Body;
@@ -3625,14 +2748,14 @@ namespace AutoRest.Java.DanModel
             if (IsFluent(settings))
             {
                 IModelType modelType = GetPropertyModelType(property);
-                List<string> imports = new List<string>(GetIModelTypeImports(modelType)
+                List<string> imports = new List<string>(GetIModelTypeImports(modelType, settings)
                             .Where(c => !c.StartsWith(property.Parent.CodeModel?.Namespace.ToLowerInvariant(), StringComparison.Ordinal) ||
                                 c.EndsWith("Inner", StringComparison.Ordinal) ^ innerModelProperties.Contains(property)));
 
                 if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
                 {
-                    imports.AddRange(GetIModelTypeImports(modelType));
-                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType)));
+                    imports.AddRange(GetIModelTypeImports(modelType, settings));
+                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType), settings));
                 }
 
                 result = imports;
@@ -3640,7 +2763,7 @@ namespace AutoRest.Java.DanModel
             else
             {
                 IModelType modelType = GetPropertyModelType(property);
-                List<string> imports = new List<string>(GetIModelTypeImports(modelType)
+                List<string> imports = new List<string>(GetIModelTypeImports(modelType, settings)
                         .Where(c => !c.StartsWith(
                             string.Join(
                                 ".",
@@ -3650,8 +2773,8 @@ namespace AutoRest.Java.DanModel
 
                 if (modelType.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123) || modelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
-                    imports.AddRange(GetIModelTypeImports(modelType));
-                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType)));
+                    imports.AddRange(GetIModelTypeImports(modelType, settings));
+                    imports.AddRange(GetIModelTypeImports(GetIModelTypeResponseVariant(modelType), settings));
                 }
 
                 result = imports;
@@ -3671,9 +2794,6 @@ namespace AutoRest.Java.DanModel
                 ? propertyModelType
                 : GetIModelTypeNonNullableVariant(propertyModelType);
         }
-
-        internal static IEnumerable<string> GetIModelTypeImports(IModelType modelType)
-            => GetIModelTypeImports(modelType, Settings.Instance);
 
         private static IEnumerable<string> GetIModelTypeImports(IModelType modelType, Settings settings)
         {
@@ -3711,12 +2831,12 @@ namespace AutoRest.Java.DanModel
                 }
                 else if (modelType is SequenceType sequenceType)
                 {
-                    result = GetIModelTypeImports(sequenceType.ElementType)
+                    result = GetIModelTypeImports(sequenceType.ElementType, settings)
                         .Concat(new[] { "java.util.List" });
                 }
                 else if (modelType is DictionaryType dictionaryType)
                 {
-                    result = GetIModelTypeImports(dictionaryType.ValueType)
+                    result = GetIModelTypeImports(dictionaryType.ValueType, settings)
                         .Concat(new[] { "java.util.Map" });
                 }
                 else if (modelType is PrimaryType primaryType)
@@ -3792,10 +2912,7 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        internal static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel)
-            => CompositeTypeImportsFluent(compositeTypeName, codeModel, false, false, Settings.Instance);
-
-        internal static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static IEnumerable<string> CompositeTypeImportsFluent(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
         {
             List<string> result = new List<string>();
             if (compositeTypeName.Contains('<'))
@@ -3809,10 +2926,7 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        internal static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel)
-            => CompositeTypeImportsAzure(compositeTypeName, codeModel, false, false, Settings.Instance);
-
-        internal static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
+        private static IEnumerable<string> CompositeTypeImportsAzure(string compositeTypeName, CodeModel codeModel, bool compositeTypeIsExternalExtension, bool compositeTypeIsAzureResourceExtension, Settings settings)
         {
             List<string> result = new List<string>();
             if (compositeTypeName.Contains('<'))
@@ -3885,11 +2999,33 @@ namespace AutoRest.Java.DanModel
             }
             else if (modelType is DictionaryType dictionaryType)
             {
-                result = DictionaryTypeParameterVariant(dictionaryType);
+                IModelType valueType = dictionaryType.ValueType;
+                IModelType valueTypeParameterVariant = IModelTypeParameterVariant(valueType);
+                if (valueTypeParameterVariant != valueType && PrimaryTypeNullable(valueTypeParameterVariant as PrimaryType) != false)
+                {
+                    DictionaryType convertedValueDictionaryType = DependencyInjection.New<DictionaryType>();
+                    convertedValueDictionaryType.ValueType = valueTypeParameterVariant;
+                    result = convertedValueDictionaryType;
+                }
             }
             else if (modelType is PrimaryType primaryType)
             {
-                result = PrimaryTypeParameterVariant(primaryType);
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
+                }
+                else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
+                {
+                    result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
+                }
+                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
+                {
+                    result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
+                }
+                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Stream)
+                {
+                    result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
+                }
             }
 
             return result;
@@ -4299,22 +3435,6 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        private static string ResponseServiceResponseConcreteParameterString(Response response, Settings settings)
-        {
-            string result;
-
-            if (IsFluentOrAzure(settings) && ResponseBodyClientType(response) is SequenceType bodySequenceType && (ResponseIsPagedResponse(response) || MethodSimulateAsPagingOperation(ResponseGetParent(response))))
-            {
-                result = $"{SequenceTypeGetPageImplType(bodySequenceType)}<{IModelTypeName(bodySequenceType.ElementType)}>";
-            }
-            else
-            {
-                result = ResponseGenericBodyClientTypeString(response);
-            }
-
-            return result;
-        }
-
         internal static string ResponseClientCallbackTypeString(Response response)
             => ResponseClientCallbackTypeString(response, Settings.Instance);
 
@@ -4394,18 +3514,18 @@ namespace AutoRest.Java.DanModel
             return returnValueWireType;
         }
 
-        internal static IEnumerable<string> ResponseInterfaceImports(Response response)
-            => GetIModelTypeImports(ResponseBodyClientType(response)).Concat(GetIModelTypeImports(ResponseHeaderClientType(response)));
+        internal static IEnumerable<string> ResponseInterfaceImports(Response response, Settings settings)
+            => GetIModelTypeImports(ResponseBodyClientType(response), settings).Concat(GetIModelTypeImports(ResponseHeaderClientType(response), settings));
 
-        internal static IEnumerable<string> ResponseImplImports(Response response)
+        internal static IEnumerable<string> ResponseImplImports(Response response, Settings settings)
         {
-            List<string> imports = new List<string>(ResponseInterfaceImports(response));
+            List<string> imports = new List<string>(ResponseInterfaceImports(response, settings));
 
             IModelType bodyWireType = ResponseBodyWireType(response);
-            imports.AddRange(GetIModelTypeImports(bodyWireType));
+            imports.AddRange(GetIModelTypeImports(bodyWireType, settings));
 
             IModelType responseHeaders = response.Headers;
-            imports.AddRange(GetIModelTypeImports(responseHeaders));
+            imports.AddRange(GetIModelTypeImports(responseHeaders, settings));
 
             string returnValueWireType = ResponseReturnValueWireType(response);
             if (returnValueWireType != null)
@@ -4435,103 +3555,55 @@ namespace AutoRest.Java.DanModel
         internal static bool MethodIsLongRunningOperation(Method method)
             => GetExtensionBool(method?.Extensions, AzureExtensions.LongRunningExtension);
 
-        internal static void MethodTransformPagingGroupedParameter(Method method, IndentedStringBuilder builder, Method nextMethod, bool filterRequired, Settings settings)
+        internal static void MethodTransformPagingGroupedParameter(Method method, JavaBlock block, Method nextMethod, bool filterRequired, Settings settings)
         {
-            if (IsFluent(settings))
+            if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
             {
-                if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
-                {
-                    return;
-                }
+                return;
+            }
 
-                Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
 
-                string nextGroupTypeName = ParameterGetName(nextGroupType);
-                string groupedTypeName = ParameterGetName(groupedType);
-                if (nextGroupTypeName == groupedTypeName)
-                {
-                    return;
-                }
+            string nextGroupTypeName = ParameterGetName(nextGroupType);
+            string groupedTypeName = ParameterGetName(groupedType);
+            if (nextGroupTypeName == groupedTypeName)
+            {
+                return;
+            }
 
-                string nextGroupTypeInnerName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + "Inner";
-                if (filterRequired && !groupedType.IsRequired)
-                {
-                    return;
-                }
+            if (filterRequired && !groupedType.IsRequired)
+            {
+                return;
+            }
 
-                string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
-                string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
-                if (!groupedType.IsRequired)
-                {
-                    builder.AppendLine($"{nextGroupTypeInnerName} {nextGroupTypeCamelCaseName} = null;");
-                    builder.AppendLine($"if ({groupedTypeCamelCaseName} != null) {{");
-                    builder.Indent();
-                    builder.AppendLine($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeInnerName}();");
-                }
-                else
-                {
-                    builder.AppendLine($"{nextGroupTypeInnerName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeInnerName}();");
-                }
+            string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
+            string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
 
-                foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
-                {
-                    string outParamName = ParameterGetName(outParam);
-                    string outParamPascalCaseName = outParamName.ToPascalCase();
-                    string outParamCamelCaseName = outParamName.ToCamelCase();
-                    builder.AppendLine($"{nextGroupTypeCamelCaseName}.with{outParamPascalCaseName}({groupedTypeCamelCaseName}.{outParamCamelCaseName}());");
-                }
-                if (!groupedType.IsRequired)
-                {
-                    builder.Outdent().AppendLine(@"}");
-                }
+            string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName) + (IsFluent(settings) ? "Inner" : "");
+
+            if (!groupedType.IsRequired)
+            {
+                block.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
+                block.Line($"if ({groupedTypeCamelCaseName} != null) {{");
+                block.IncreaseIndent();
+                block.Line($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
             }
             else
             {
-                if (method.InputParameterTransformation.IsNullOrEmpty() || nextMethod.InputParameterTransformation.IsNullOrEmpty())
-                {
-                    return;
-                }
+                block.Line($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
+            }
 
-                Parameter groupedType = method.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                string groupedTypeName = ParameterGetName(groupedType);
-                Parameter nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
-                string nextGroupTypeName = ParameterGetName(nextGroupType);
-                if (nextGroupTypeName == groupedTypeName)
-                {
-                    return;
-                }
+            foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+            {
+                string outParamName = ParameterGetName(outParam);
+                block.Line($"{nextGroupTypeCamelCaseName}.with{outParamName.ToPascalCase()}({groupedTypeCamelCaseName}.{outParamName.ToCamelCase()}());");
+            }
 
-                string nextGroupTypeCodeName = CodeNamer.Instance.GetTypeName(nextGroupTypeName);
-                if (filterRequired && !groupedType.IsRequired)
-                {
-                    return;
-                }
-
-                string nextGroupTypeCamelCaseName = nextGroupTypeName.ToCamelCase();
-                string groupedTypeCamelCaseName = groupedTypeName.ToCamelCase();
-                if (!groupedType.IsRequired)
-                {
-                    builder.AppendLine($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = null;");
-                    builder.AppendLine($"if ({groupedTypeCamelCaseName} != null) {{");
-                    builder.Indent();
-                    builder.AppendLine($"{nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
-                }
-                else
-                {
-                    builder.AppendLine($"{nextGroupTypeCodeName} {nextGroupTypeCamelCaseName} = new {nextGroupTypeCodeName}();");
-                }
-
-                foreach (Parameter outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
-                {
-                    string outParamName = ParameterGetName(outParam);
-                    builder.AppendLine($"{nextGroupTypeCamelCaseName}.with{outParamName.ToPascalCase()}({groupedTypeCamelCaseName}.{outParamName.ToCamelCase()}());");
-                }
-
-                if (!groupedType.IsRequired)
-                {
-                    builder.Outdent().AppendLine(@"}");
-                }
+            if (!groupedType.IsRequired)
+            {
+                block.DecreaseIndent();
+                block.Line("}");
             }
         }
 
@@ -4559,11 +3631,11 @@ namespace AutoRest.Java.DanModel
             // parameter types
             foreach (Parameter parameter in method.Parameters)
             {
-                imports.AddRange(GetIModelTypeImports(ParameterClientType(parameter)));
+                imports.AddRange(GetIModelTypeImports(ParameterClientType(parameter), settings));
             }
 
             // return type
-            imports.AddRange(ResponseInterfaceImports(methodReturnType));
+            imports.AddRange(ResponseInterfaceImports(methodReturnType, settings));
 
             // exceptions
             imports.AddRange(MethodExceptionImports(method, settings));
@@ -4603,7 +3675,7 @@ namespace AutoRest.Java.DanModel
 
                         if (ResponseBodyClientType(methodReturnType) is SequenceType pageType)
                         {
-                            imports.AddRange(CompositeTypeImportsFluent(SequenceTypeGetPageImplType(pageType), null));
+                            imports.AddRange(CompositeTypeImportsFluent(SequenceTypeGetPageImplType(pageType), null, false, false, settings));
                         }
                     }
                 }
@@ -4647,7 +3719,7 @@ namespace AutoRest.Java.DanModel
                 ParameterLocation location = retrofitParameter.Location;
                 if (location == ParameterLocation.Body || !NeedsSpecialSerialization(ParameterGetModelType(retrofitParameter)))
                 {
-                    imports.AddRange(GetIModelTypeImports(ParameterWireType(retrofitParameter)));
+                    imports.AddRange(GetIModelTypeImports(ParameterWireType(retrofitParameter), settings));
                 }
 
                 if (location != ParameterLocation.None && location != ParameterLocation.FormData)
@@ -4689,18 +3761,18 @@ namespace AutoRest.Java.DanModel
             IEnumerable<Parameter> methodLogicalParameters = method.LogicalParameters;
             foreach (Parameter parameter in methodLocalParameters.Concat(methodLogicalParameters))
             {
-                imports.AddRange(GetIModelTypeImports(ParameterClientType(parameter)));
+                imports.AddRange(GetIModelTypeImports(ParameterClientType(parameter), settings));
             }
 
             // return type
-            IEnumerable<string> methodReturnTypeResponseImplImports = ResponseImplImports(methodReturnType);
+            IEnumerable<string> methodReturnTypeResponseImplImports = ResponseImplImports(methodReturnType, settings);
             imports.AddRange(methodReturnTypeResponseImplImports);
 
             // response type (can be different from return type)
             IEnumerable<Response> methodResponses = method.Responses.Values;
             foreach (Response methodResponse in methodResponses)
             {
-                imports.AddRange(ResponseImplImports(methodResponse));
+                imports.AddRange(ResponseImplImports(methodResponse, settings));
             }
 
             // exceptions
@@ -4735,8 +3807,8 @@ namespace AutoRest.Java.DanModel
                     imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
 
                     method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
-                        .SelectMany(t => GetIModelTypeImports(t))
-                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p)).Contains(i)))
+                        .SelectMany(t => GetIModelTypeImports(t, settings))
+                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p), settings).Contains(i)))
                         .ForEach(i => imports.Remove(i));
 
                     // return type may have been removed as a side effect
@@ -4754,11 +3826,11 @@ namespace AutoRest.Java.DanModel
                     imports.Add("com.microsoft.azure.v2.ListOperationCallback");
                     imports.Add("com.microsoft.azure.v2.Page");
                     imports.Add("com.microsoft.azure.v2.PagedList");
-                    imports.AddRange(CompositeTypeImportsAzure(typeName, methodCodeModel));
+                    imports.AddRange(CompositeTypeImportsAzure(typeName, methodCodeModel, false, false, settings));
                 }
                 else if (methodIsPagingNonPollingOperation)
                 {
-                    imports.AddRange(CompositeTypeImportsAzure(typeName, methodCodeModel));
+                    imports.AddRange(CompositeTypeImportsAzure(typeName, methodCodeModel, false, false, settings));
                 }
 
                 if (isFluent)
@@ -4766,17 +3838,17 @@ namespace AutoRest.Java.DanModel
                     string methodOperationExceptionTypeString = MethodOperationExceptionTypeString(method, settings);
                     if (methodOperationExceptionTypeString != "CloudException" && methodOperationExceptionTypeString != "RestException")
                     {
-                        imports.RemoveWhere(i => CompositeTypeImportsAzure(methodOperationExceptionTypeString, methodCodeModel).Contains(i));
-                        imports.AddRange(CompositeTypeImportsFluent(methodOperationExceptionTypeString, methodCodeModel));
+                        imports.RemoveWhere(i => CompositeTypeImportsAzure(methodOperationExceptionTypeString, methodCodeModel, false, false, settings).Contains(i));
+                        imports.AddRange(CompositeTypeImportsFluent(methodOperationExceptionTypeString, methodCodeModel, false, false, settings));
                     }
                     if (methodIsLongRunningOperation)
                     {
                         method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
-                            .SelectMany(t => GetIModelTypeImports(t))
-                            .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p)).Contains(i)))
+                            .SelectMany(t => GetIModelTypeImports(t, settings))
+                            .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p), settings).Contains(i)))
                             .ForEach(i => imports.Remove(i));
                         // return type may have been removed as a side effect
-                        imports.AddRange(ResponseImplImports(method.ReturnType));
+                        imports.AddRange(ResponseImplImports(method.ReturnType, settings));
                     }
 
                     SequenceType pageType = ResponseBodyClientType(method.ReturnType) as SequenceType;
@@ -4801,7 +3873,7 @@ namespace AutoRest.Java.DanModel
 
                     if ((methodIsPagingOperation || methodIsPagingNextOperation || methodSimulateAsPagingOperation || methodIsPagingNonPollingOperation) && pageType != null)
                     {
-                        imports.RemoveWhere(i => CompositeTypeImportsAzure(SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType)), methodCodeModel).Contains(i));
+                        imports.RemoveWhere(i => CompositeTypeImportsAzure(SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType)), methodCodeModel, false, false, settings).Contains(i));
                     }
                 }
             }
@@ -5183,12 +4255,6 @@ namespace AutoRest.Java.DanModel
             return builder.Append(")").ToString();
         }
 
-        private static string MethodParameterDeclaration(Method method, Settings settings)
-        {
-            IEnumerable<Parameter> parameters = MethodLocalParameters(method).Where(p => !p.IsConstant);
-            return MethodParameterDeclaration(method, settings, parameters);
-        }
-
         private static string MethodParameterDeclaration(Method method, Settings settings, IEnumerable<Parameter> parameters)
         {
             string parameterPrefix = (IsFluentOrAzure(settings) && (MethodIsPagingOperation(method) || MethodIsPagingNextOperation(method)) ? "final " : "");
@@ -5200,88 +4266,32 @@ namespace AutoRest.Java.DanModel
             }));
         }
 
-        private static string MethodRequiredParameterDeclaration(Method method, Settings settings)
+        private static string MethodParameterDeclarationWithCallback(Method method, Settings settings, IEnumerable<Parameter> parameters)
         {
-            IEnumerable<Parameter> parameters = MethodLocalParameters(method).Where(p => !p.IsConstant && p.IsRequired);
-            return MethodParameterDeclaration(method, settings, parameters);
-        }
-
-        private static string MethodParameterDeclarationWithCallback(Method method, Settings settings)
-        {
-            string result;
+            string result = MethodParameterDeclaration(method, settings, parameters);
+            if (!result.IsNullOrEmpty())
+            {
+                result += ", ";
+            }
 
             if (IsFluentOrAzure(settings))
             {
-                string parameters = MethodParameterDeclaration(method, settings);
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-
                 if (MethodIsPagingOperation(method))
                 {
-                    parameters += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
+                    result += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
                 }
                 else if (MethodIsPagingNextOperation(method))
                 {
-                    parameters += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
+                    result += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
                 }
                 else
                 {
-                    parameters += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
+                    result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
                 }
-
-                result = parameters;
             }
             else
             {
-                string parameters = MethodParameterDeclaration(method, settings);
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-                parameters += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
-                result = parameters;
-            }
-
-            return result;
-        }
-
-        private static string MethodRequiredParameterDeclarationWithCallback(Method method, Settings settings)
-        {
-            string result;
-
-            if (IsFluentOrAzure(settings))
-            {
-                string parameters = MethodRequiredParameterDeclaration(method, settings);
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-
-                if (MethodIsPagingOperation(method))
-                {
-                    parameters += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
-                }
-                else if (MethodIsPagingNextOperation(method))
-                {
-                    parameters += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
-                }
-                else
-                {
-                    parameters += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
-                }
-                result = parameters;
-            }
-            else
-            {
-                string parameters = MethodRequiredParameterDeclaration(method, settings);
-                if (!parameters.IsNullOrEmpty())
-                {
-                    parameters += ", ";
-                }
-                parameters += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
-                result = parameters;
+                result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
             }
 
             return result;
@@ -5289,59 +4299,39 @@ namespace AutoRest.Java.DanModel
 
         private static IEnumerable<string> MethodExceptionImports(Method method, Settings settings)
         {
-            CodeModel codeModel = method.CodeModel;
-            return MethodExceptionNames(method, settings)
-                .Select((string methodExceptionName) => CodeNamerJv.GetJavaException(methodExceptionName, codeModel))
-                .Where((string methodExceptionImport) => methodExceptionImport != null);
-        }
+            HashSet<string> exceptionImports = new HashSet<string>();
+            exceptionImports.Add("java.io.IOException");
 
-        private static IEnumerable<string> MethodExceptionNames(Method method, Settings settings)
-        {
-            IEnumerable<string> result;
-
-            if (IsFluent(settings) || IsAzure(settings))
+            string methodOperationExceptionTypeImport = null;
+            string methodOperationExceptionTypeName = MethodOperationExceptionTypeString(method, settings);
+            switch (methodOperationExceptionTypeName)
             {
-                List<string> exceptions = new List<string>();
-                exceptions.Add(MethodOperationExceptionTypeString(method, settings));
-                exceptions.Add("IOException");
-                if (MethodRequiredNullableParameters(method).Any())
-                {
-                    exceptions.Add("IllegalArgumentException");
-                }
-                if (MethodIsLongRunningOperation(method))
-                {
-                    exceptions.Add("InterruptedException");
-                }
-                result = exceptions;
+                case "CloudException":
+                    methodOperationExceptionTypeImport = "com.microsoft.azure.v2.CloudException";
+                    break;
+                case "RestException":
+                    methodOperationExceptionTypeImport = "com.microsoft.rest.v2.RestException";
+                    break;
+                default:
+                    methodOperationExceptionTypeImport = $"{method.CodeModel.Namespace.ToLowerInvariant()}.models.{methodOperationExceptionTypeName}";
+                    break;
             }
-            else
-            {
-                List<string> exceptions = new List<string>();
-                exceptions.Add(MethodOperationExceptionTypeString(method, settings));
-                exceptions.Add("IOException");
-                if (MethodRequiredNullableParameters(method).Any())
-                {
-                    exceptions.Add("IllegalArgumentException");
-                }
-                result = exceptions;
-            }
+            exceptionImports.Add(methodOperationExceptionTypeImport);
 
-            return result;
+            return exceptionImports;
         }
 
         internal static string MethodReturnTypeResponseName(Method method)
             => IModelTypeName(IModelTypeServiceResponseVariant(ResponseBodyClientType(method.ReturnType)));
 
-        private static string MethodPagingGroupedParameterTransformation(Method method, bool filterRequired, Settings settings)
+        private static void MethodPagingGroupedParameterTransformation(Method method, bool filterRequired, Settings settings, JavaBlock block)
         {
-            var builder = new IndentedStringBuilder();
             if (MethodIsPagingOperation(method))
             {
                 string invocation;
                 Method nextMethod = MethodGetPagingNextMethodWithInvocation(method, out invocation);
-                MethodTransformPagingGroupedParameter(method, builder, nextMethod, filterRequired, settings);
+                MethodTransformPagingGroupedParameter(method, block, nextMethod, filterRequired, settings);
             }
-            return builder.ToString();
         }
 
         private static string MethodNextMethodParameterInvocation(Method method, bool filterRequired)
@@ -5376,7 +4366,7 @@ namespace AutoRest.Java.DanModel
             }
             else
             {
-                return MethodParameterInvocation(nextMethod);
+                return ArgumentList(MethodLocalParameters(nextMethod).Where(p => !p.IsConstant));
             }
         }
 
@@ -5440,12 +4430,6 @@ namespace AutoRest.Java.DanModel
                 .Union(retrofitParameters.Where(p => p.Location != ParameterLocation.Path));
         }
 
-        private static string MethodParameterInvocation(Method method)
-            => ArgumentList(MethodLocalParameters(method).Where(p => !p.IsConstant));
-
-        private static string MethodRequiredParameterInvocation(Method methodJv)
-            => ArgumentList(MethodLocalParameters(methodJv).Where(p => !p.IsConstant && p.IsRequired));
-
         private static string ArgumentList(IEnumerable<Parameter> parameters)
             => string.Join(", ", parameters.Select(p => ParameterGetName(p)));
 
@@ -5492,21 +4476,36 @@ namespace AutoRest.Java.DanModel
                 ? "Void"
                 : IModelTypeName(ResponseHeaderClientType(method.ReturnType));
 
-        internal static string MethodRestResponseConcreteBodyName(Method method, Settings settings)
-            => method.ReturnType.Body == null
-                ? "Void"
-                : ResponseServiceResponseConcreteParameterString(method.ReturnType, settings);
-
         internal static string MethodRestResponseAbstractTypeName(Method method, Settings settings)
         {
             Response methodReturnType = method.ReturnType;
             string deserializedResponseHeadersType = MethodRestResponseHeadersName(method);
-            string deserializedResponseBodyType = method.ReturnType.Body == null ? "Void" : ResponseServiceResponseGenericParameterString(method.ReturnType, settings);
+            string deserializedResponseBodyType = methodReturnType.Body == null ? "Void" : ResponseServiceResponseGenericParameterString(methodReturnType, settings);
             return $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
         }
 
         private static string MethodRestResponseConcreteTypeName(Method method, Settings settings)
-            => $"RestResponse<{MethodRestResponseHeadersName(method)}, {MethodRestResponseConcreteBodyName(method, settings)}>";
+        {
+            Response methodReturnType = method.ReturnType;
+
+            string deserializedResponseHeadersType = MethodRestResponseHeadersName(method);
+
+            string deserializedResponseBodyType;
+            if (methodReturnType.Body == null)
+            {
+                deserializedResponseBodyType = "Void";
+            }
+            else if (IsFluentOrAzure(settings) && ResponseBodyClientType(methodReturnType) is SequenceType bodySequenceType && (ResponseIsPagedResponse(methodReturnType) || MethodSimulateAsPagingOperation(ResponseGetParent(methodReturnType))))
+            {
+                deserializedResponseBodyType = $"{SequenceTypeGetPageImplType(bodySequenceType)}<{IModelTypeName(bodySequenceType.ElementType)}>";
+            }
+            else
+            {
+                deserializedResponseBodyType = ResponseGenericBodyClientTypeString(methodReturnType);
+            }
+
+            return $"RestResponse<{deserializedResponseHeadersType}, {deserializedResponseBodyType}>";
+        }
 
         internal static string MethodClientReference(Method method)
             => method.Group.IsNullOrEmpty() ? "this" : "this.client";
@@ -5601,10 +4600,30 @@ namespace AutoRest.Java.DanModel
 
                 foreach (ParameterMapping mapping in transformationParameterMappings)
                 {
+                    string inputPath = ParameterGetName(mapping.InputParameter);
+                    if (mapping.InputParameterProperty != null)
+                    {
+                        inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
+                    }
+                    if (filterRequired && !mapping.InputParameter.IsRequired)
+                    {
+                        inputPath = "null";
+                    }
+
+                    string getMapping;
+                    if (mapping.OutputParameterProperty != null)
+                    {
+                        getMapping = $".with{CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty)}({inputPath})";
+                    }
+                    else
+                    {
+                        getMapping = $" = {inputPath}";
+                    }
+
                     block.Line("{0}{1}{2};",
                         !conditionalAssignment && !transformationOutputParameterModelIsCompositeType ? transformationOutputParameterClientParameterVariantTypeName + " " : "",
                         outParamName,
-                        MethodGetMapping(mapping, filterRequired));
+                        getMapping);
                 }
 
                 if (conditionalAssignment)
@@ -5615,43 +4634,60 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static string MethodGetMapping(ParameterMapping mapping, bool filterRequired)
+        private static void AddRequiredNullableParameterChecks(JavaBlock block, Method method)
         {
-            string inputPath = ParameterGetName(mapping.InputParameter);
-            if (mapping.InputParameterProperty != null)
+            IEnumerable<Parameter> requiredNullableParameters = method.Parameters.Where((Parameter parameter) =>
             {
-                inputPath += "." + CodeNamer.Instance.CamelCase(mapping.InputParameterProperty) + "()";
-            }
-            if (filterRequired && !mapping.InputParameter.IsRequired)
-            {
-                inputPath = "null";
-            }
+                bool result = !parameter.IsConstant && parameter.IsRequired;
+                if (result)
+                {
+                    IModelType parameterModelType = ParameterGetModelType(parameter);
+                    result = !parameterModelType.IsPrimaryType(KnownPrimaryType.Int) &&
+                             !parameterModelType.IsPrimaryType(KnownPrimaryType.Double) &&
+                             !parameterModelType.IsPrimaryType(KnownPrimaryType.Boolean) &&
+                             !parameterModelType.IsPrimaryType(KnownPrimaryType.Long) &&
+                             !parameterModelType.IsPrimaryType(KnownPrimaryType.UnixTime);
+                }
+                return result;
+            });
 
-            string outputPath = "";
-            if (mapping.OutputParameterProperty != null)
+            foreach (Parameter requiredNullableParameter in requiredNullableParameters)
             {
-                outputPath += ".with" + CodeNamer.Instance.PascalCase(mapping.OutputParameterProperty);
-                return string.Format(CultureInfo.InvariantCulture, "{0}({1})", outputPath, inputPath);
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", outputPath, inputPath);
+                block.If($"{ParameterGetName(requiredNullableParameter)} == null", ifBlock =>
+                {
+                    ifBlock.Line($"throw new IllegalArgumentException(\"Parameter {ParameterGetName(requiredNullableParameter)} is required and cannot be null.\");");
+                });
             }
         }
 
-        private static IEnumerable<Parameter> MethodRequiredNullableParameters(Method method)
+        private static void AddValidationChecks(JavaBlock block, Method method, bool onlyRequiredParameters)
         {
-            foreach (Parameter param in method.Parameters)
+            IEnumerable<Parameter> parametersToValidate = MethodParametersToValidate(method);
+            if (onlyRequiredParameters)
             {
-                IModelType parameterModelType = ParameterGetModelType(param);
-                if (!parameterModelType.IsPrimaryType(KnownPrimaryType.Int) &&
-                    !parameterModelType.IsPrimaryType(KnownPrimaryType.Double) &&
-                    !parameterModelType.IsPrimaryType(KnownPrimaryType.Boolean) &&
-                    !parameterModelType.IsPrimaryType(KnownPrimaryType.Long) &&
-                    !parameterModelType.IsPrimaryType(KnownPrimaryType.UnixTime) &&
-                    !param.IsConstant && param.IsRequired)
+                parametersToValidate = parametersToValidate.Where(p => p.IsRequired);
+            }
+            foreach (Parameter param in parametersToValidate)
+            {
+                block.Line($"Validator.validate({ParameterGetName(param)});");
+            }
+        }
+
+        private static void AddOptionalOrConstantParameterVariables(JavaBlock block, Method method, bool addOptionalParameterVariables)
+        {
+            foreach (Parameter parameter in MethodLocalParameters(method))
+            {
+                string parameterName = ParameterGetName(parameter);
+                IModelType parameterClientType = ParameterClientType(parameter);
+
+                if (addOptionalParameterVariables && !parameter.IsRequired)
                 {
-                    yield return param;
+                    block.Line($"final {IModelTypeName(parameterClientType)} {parameterName} = {IModelTypeDefaultValue(parameterClientType, method) ?? "null"};");
+                }
+
+                if (parameter.IsConstant)
+                {
+                    block.Line($"final {IModelTypeParameterVariantName(parameterClientType)} {parameterName} = {parameter.DefaultValue ?? "null"};");
                 }
             }
         }
@@ -5672,14 +4708,10 @@ namespace AutoRest.Java.DanModel
         }
 
         private static IEnumerable<Parameter> MethodLocalParameters(Method method)
-        {
-            //Omit parameter-group properties for now since Java doesn't support them yet
-            return method.Parameters
-                .OfType<Parameter>()
+            => method.Parameters
+                //Omit parameter-group properties for now since Java doesn't support them yet
                 .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(ParameterGetName(p)))
-                .OrderBy(item => !item.IsRequired)
-                .ToList();
-        }
+                .OrderBy(item => !item.IsRequired);
 
         private static string MethodExpectedResponsesAnnotation(Method method)
         {
@@ -5719,14 +4751,33 @@ namespace AutoRest.Java.DanModel
 
             if (IsFluent(settings))
             {
-                IEnumerable<string> interfacesToImport = MethodGroupInterfacesToImport(methodGroup);
+                List<string> interfacesToImport = new List<string>();
+
+                Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.GetByResourceGroup));
+                if (getMethod != null && TakesTwoRequiredParameters(getMethod))
+                {
+                    interfacesToImport.Add(innerSupportsGetImport);
+                }
+
+                Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.Delete));
+                if (deleteMethod != null && TakesTwoRequiredParameters(deleteMethod))
+                {
+                    interfacesToImport.Add(innerSupportsDeleteImport);
+                }
+
+                Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.List));
+                Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.ListByResourceGroup));
+                bool anyMethodSupportsInnerListing = listMethod != null && listByResourceGroup != null
+                    && StringComparer.OrdinalIgnoreCase.Equals(
+                        ResponseSequenceElementTypeString(listMethod.ReturnType),
+                        ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
+                if (anyMethodSupportsInnerListing)
+                {
+                    interfacesToImport.Add(innerSupportsListingImport);
+                }
 
                 List<string> imports = new List<string>();
-                string ns = methodGroup.CodeModel.Namespace.ToLowerInvariant();
-                foreach (string interfaceToImport in interfacesToImport)
-                {
-                    imports.Add(interfaceToImport);
-                }
+                imports.AddRange(interfacesToImport);
 
                 List<string> azureImplImports = new List<string>();
                 azureImplImports.Add("com.microsoft.rest.v2.RestProxy");
@@ -5739,6 +4790,7 @@ namespace AutoRest.Java.DanModel
                 azureImplImports.Add("com.microsoft.azure.v2.AzureProxy");
                 azureImplImports.Remove("com.microsoft.rest.v2.RestProxy");
 
+                string ns = methodGroup.CodeModel.Namespace.ToLowerInvariant();
                 foreach (string azureImplImport in azureImplImports)
                 {
                     if (azureImplImport.StartsWith(ns + ".implementation", StringComparison.OrdinalIgnoreCase))
@@ -5855,41 +4907,6 @@ namespace AutoRest.Java.DanModel
             return result;
         }
 
-        internal static IEnumerable<string> MethodGroupInterfacesToImport(MethodGroup methodGroup)
-        {
-            List<string> result = new List<string>();
-
-            const string InnerSupportsGet = "InnerSupportsGet";
-            const string InnerSupportsDelete = "InnerSupportsDelete";
-            const string InnerSupportsListing = "InnerSupportsListing";
-
-            const string packageName = "com.microsoft.azure.management.resources.fluentcore.collection";
-            Method getMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.GetByResourceGroup));
-            if (getMethod != null && TakesTwoRequiredParameters(getMethod))
-            {
-                result.Add($"{packageName}.{InnerSupportsGet}");
-            }
-
-            Method deleteMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.Delete));
-            if (deleteMethod != null && TakesTwoRequiredParameters(deleteMethod))
-            {
-                result.Add($"{packageName}.{InnerSupportsDelete}");
-            }
-
-            Method listMethod = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.List));
-            Method listByResourceGroup = methodGroup.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(MethodName(x), WellKnowMethodNames.ListByResourceGroup));
-            bool anyMethodSupportsInnerListing = listMethod != null && listByResourceGroup != null
-                && StringComparer.OrdinalIgnoreCase.Equals(
-                    ResponseSequenceElementTypeString(listMethod.ReturnType),
-                    ResponseSequenceElementTypeString(listByResourceGroup.ReturnType));
-            if (anyMethodSupportsInnerListing)
-            {
-                result.Add($"{packageName}.{InnerSupportsListing}");
-            }
-
-            return result;
-        }
-
         private static string MethodGroupFullType(MethodGroup methodGroup)
             => methodGroup.CodeModel.Namespace.ToLowerInvariant() + "." + methodGroup.TypeName;
 
@@ -5916,18 +4933,6 @@ namespace AutoRest.Java.DanModel
             return methodGroup.Name.ToCamelCase();
         }
 
-        internal static IModelType DictionaryTypeParameterVariant(DictionaryType dictionaryType)
-        {
-            IModelType parameterVariant = IModelTypeParameterVariant(dictionaryType.ValueType);
-            if (parameterVariant != dictionaryType.ValueType && PrimaryTypeNullable(parameterVariant as PrimaryType) != false)
-            {
-                DictionaryType result = DependencyInjection.New<DictionaryType>();
-                result.ValueType = parameterVariant;
-                return result;
-            }
-            return dictionaryType;
-        }
-
         private static IModelType PrimaryTypeResponseVariant(PrimaryType primaryType)
         {
             if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
@@ -5945,30 +4950,6 @@ namespace AutoRest.Java.DanModel
             else if (primaryType.KnownPrimaryType == KnownPrimaryType.None)
             {
                 return GetIModelTypeNonNullableVariant(primaryType);
-            }
-            else
-            {
-                return primaryType;
-            }
-        }
-
-        private static IModelType PrimaryTypeParameterVariant(PrimaryType primaryType)
-        {
-            if (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123)
-            {
-                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
-            }
-            else if (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime)
-            {
-                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.DateTime);
-            }
-            else if (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url)
-            {
-                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
-            }
-            else if (primaryType.KnownPrimaryType == KnownPrimaryType.Stream)
-            {
-                return DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
             }
             else
             {

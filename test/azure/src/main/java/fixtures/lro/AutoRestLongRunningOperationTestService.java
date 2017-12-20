@@ -61,24 +61,28 @@ public interface AutoRestLongRunningOperationTestService {
 
     /**
      * Gets the LROs object to access its operations.
+     *
      * @return the LROs object.
      */
     LROs lROs();
 
     /**
      * Gets the LRORetrys object to access its operations.
+     *
      * @return the LRORetrys object.
      */
     LRORetrys lRORetrys();
 
     /**
      * Gets the LROSADs object to access its operations.
+     *
      * @return the LROSADs object.
      */
     LROSADs lROSADs();
 
     /**
      * Gets the LROsCustomHeaders object to access its operations.
+     *
      * @return the LROsCustomHeaders object.
      */
     LROsCustomHeaders lROsCustomHeaders();

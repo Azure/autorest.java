@@ -131,7 +131,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
             });
     }
 
-
     /**
      * Put complex types that are polymorphic and have recursive references.
      *
@@ -391,6 +390,5 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
 }

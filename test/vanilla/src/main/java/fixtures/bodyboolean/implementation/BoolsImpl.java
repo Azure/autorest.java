@@ -153,7 +153,6 @@ public class BoolsImpl implements Bools {
             });
     }
 
-
     /**
      * Set Boolean value true.
      *
@@ -201,7 +200,6 @@ public class BoolsImpl implements Bools {
         return putTrueWithRestResponseAsync(boolBody)
             .toCompletable();
     }
-
 
     /**
      * Get false Boolean value.
@@ -255,7 +253,6 @@ public class BoolsImpl implements Bools {
             });
     }
 
-
     /**
      * Set Boolean value false.
      *
@@ -303,7 +300,6 @@ public class BoolsImpl implements Bools {
         return putFalseWithRestResponseAsync(boolBody)
             .toCompletable();
     }
-
 
     /**
      * Get null Boolean value.
@@ -357,7 +353,6 @@ public class BoolsImpl implements Bools {
             });
     }
 
-
     /**
      * Get invalid Boolean value.
      *
@@ -409,6 +404,5 @@ public class BoolsImpl implements Bools {
                 }
             });
     }
-
 
 }

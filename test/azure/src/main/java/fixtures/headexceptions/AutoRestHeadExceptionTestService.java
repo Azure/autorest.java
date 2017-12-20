@@ -61,6 +61,7 @@ public interface AutoRestHeadExceptionTestService {
 
     /**
      * Gets the HeadExceptions object to access its operations.
+     *
      * @return the HeadExceptions object.
      */
     HeadExceptions headExceptions();

@@ -302,7 +302,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 204 response with no payload.
      *
@@ -354,7 +353,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -408,7 +406,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 202 response with no payload:.
      *
@@ -460,7 +457,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -514,7 +510,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
@@ -566,7 +561,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -620,7 +614,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
@@ -672,7 +665,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -726,7 +718,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
@@ -778,7 +769,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -832,7 +822,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
@@ -885,7 +874,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 202 response with no payload.
      *
@@ -929,7 +917,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError202NoneWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a 204 response with no payload.
@@ -975,7 +962,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             .toCompletable();
     }
 
-
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
@@ -1019,7 +1005,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError400ValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -1065,7 +1050,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             .toCompletable();
     }
 
-
     /**
      * Send a 204 response with no payload.
      *
@@ -1109,7 +1093,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone204NoneWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a 400 response with no payload.
@@ -1155,7 +1138,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             .toCompletable();
     }
 
-
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
@@ -1199,7 +1181,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone400InvalidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -1253,7 +1234,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 200 response with no payload.
      *
@@ -1305,7 +1285,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -1359,7 +1338,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 400 response with no payload.
      *
@@ -1412,7 +1390,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
@@ -1456,7 +1433,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone200InvalidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a 200 response with no payload.
@@ -1502,7 +1478,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             .toCompletable();
     }
 
-
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
@@ -1547,7 +1522,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             .toCompletable();
     }
 
-
     /**
      * Send a 400 response with no payload.
      *
@@ -1591,7 +1565,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone400NoneWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
@@ -1645,7 +1618,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
      *
@@ -1697,7 +1669,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
@@ -1751,7 +1722,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
@@ -1803,7 +1773,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
@@ -1857,7 +1826,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
@@ -1910,7 +1878,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
      *
@@ -1962,6 +1929,5 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 
 }

@@ -153,7 +153,6 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             .toCompletable();
     }
 
-
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
@@ -205,7 +204,6 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             .toCompletable();
     }
 
-
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
@@ -250,7 +248,6 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getSwaggerPathValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -302,7 +299,6 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getMethodQueryValidWithRestResponseAsync(q1)
             .toCompletable();
     }
-
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -397,7 +393,6 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             .toCompletable();
     }
 
-
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
@@ -449,7 +444,6 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
             .toCompletable();
     }
 
-
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
@@ -494,6 +488,5 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getSwaggerQueryValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

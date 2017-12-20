@@ -166,7 +166,6 @@ public class DatesImpl implements Dates {
             });
     }
 
-
     /**
      * Get invalid date value.
      *
@@ -218,7 +217,6 @@ public class DatesImpl implements Dates {
                 }
             });
     }
-
 
     /**
      * Get overflow date value.
@@ -272,7 +270,6 @@ public class DatesImpl implements Dates {
             });
     }
 
-
     /**
      * Get underflow date value.
      *
@@ -325,7 +322,6 @@ public class DatesImpl implements Dates {
             });
     }
 
-
     /**
      * Put max date value 9999-12-31.
      *
@@ -376,7 +372,6 @@ public class DatesImpl implements Dates {
         return putMaxDateWithRestResponseAsync(dateBody)
             .toCompletable();
     }
-
 
     /**
      * Get max date value 9999-12-31.
@@ -430,7 +425,6 @@ public class DatesImpl implements Dates {
             });
     }
 
-
     /**
      * Put min date value 0000-01-01.
      *
@@ -481,7 +475,6 @@ public class DatesImpl implements Dates {
         return putMinDateWithRestResponseAsync(dateBody)
             .toCompletable();
     }
-
 
     /**
      * Get min date value 0000-01-01.
@@ -534,6 +527,5 @@ public class DatesImpl implements Dates {
                 }
             });
     }
-
 
 }

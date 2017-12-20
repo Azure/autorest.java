@@ -221,7 +221,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Get 200 success.
      *
@@ -273,7 +272,6 @@ public class HttpSuccessImpl implements HttpSuccess {
                 }
             });
     }
-
 
     /**
      * Put boolean value true returning 200 success.
@@ -368,7 +366,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Patch true Boolean value in request returning 200.
      *
@@ -461,7 +458,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         return patch200WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -556,7 +552,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Delete simple boolean value true returns 200.
      *
@@ -649,7 +644,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         return delete200WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Put true Boolean value in request returns 201.
@@ -744,7 +738,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Post true Boolean value in request returns 201 (Created).
      *
@@ -837,7 +830,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         return post201WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -932,7 +924,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Patch true Boolean value in request returns 202.
      *
@@ -1025,7 +1016,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         return patch202WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -1120,7 +1110,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Delete true Boolean value in request returns 202 (accepted).
      *
@@ -1214,7 +1203,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Return 204 status code if successful.
      *
@@ -1258,7 +1246,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         return head204WithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -1353,7 +1340,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Patch true Boolean value in request returns 204 (no content).
      *
@@ -1446,7 +1432,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         return patch204WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -1541,7 +1526,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Delete true Boolean value in request returns 204 (no content).
      *
@@ -1635,7 +1619,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             .toCompletable();
     }
 
-
     /**
      * Return 404 status code.
      *
@@ -1679,6 +1662,5 @@ public class HttpSuccessImpl implements HttpSuccess {
         return head404WithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

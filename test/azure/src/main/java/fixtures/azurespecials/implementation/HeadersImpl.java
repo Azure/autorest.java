@@ -133,7 +133,6 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
             .toCompletable();
     }
 
-
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
@@ -186,7 +185,6 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
         return customNamedRequestIdParamGroupingWithRestResponseAsync(headerCustomNamedRequestIdParamGroupingParameters)
             .toCompletable();
     }
-
 
     /**
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -246,6 +244,5 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
                 }
             });
     }
-
 
 }

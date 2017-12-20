@@ -291,5 +291,4 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
             });
     }
 
-
 }

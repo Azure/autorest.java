@@ -131,7 +131,6 @@ public class HttpFailuresImpl implements HttpFailures {
             });
     }
 
-
     /**
      * Get empty error form server.
      *
@@ -184,7 +183,6 @@ public class HttpFailuresImpl implements HttpFailures {
             });
     }
 
-
     /**
      * Get empty response from server.
      *
@@ -236,6 +234,5 @@ public class HttpFailuresImpl implements HttpFailures {
                 }
             });
     }
-
 
 }

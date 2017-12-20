@@ -219,7 +219,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
@@ -272,7 +271,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             });
     }
 
-
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
@@ -317,7 +315,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Return 301 status code and redirect to /http/success/200.
      *
@@ -361,7 +358,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return get301WithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -456,7 +452,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
@@ -501,7 +496,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Return 302 status code and redirect to /http/success/200.
      *
@@ -545,7 +539,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return get302WithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -640,7 +633,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
@@ -734,7 +726,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Redirect with 307, resulting in a 200 success.
      *
@@ -779,7 +770,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Redirect get with 307, resulting in a 200 success.
      *
@@ -823,7 +813,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return get307WithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -918,7 +907,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
@@ -1011,7 +999,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return patch307WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -1106,7 +1093,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
             .toCompletable();
     }
 
-
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
@@ -1199,6 +1185,5 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return delete307WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
 }
