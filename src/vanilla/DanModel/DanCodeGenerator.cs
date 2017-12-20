@@ -4152,7 +4152,7 @@ namespace AutoRest.Java.DanModel
                     string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
 
                     IModelType parameterModelType = ParameterGetModelType(parameter);
-                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameterModelType is SequenceType);
+                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && (parameterModelType is SequenceType);
                     if (shouldUseXmlListWrapper)
                     {
                         declarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
@@ -4217,7 +4217,7 @@ namespace AutoRest.Java.DanModel
                     string declarativeName = parameter.ClientProperty != null ? (string)parameter.ClientProperty.Name : ParameterGetName(parameter);
 
                     IModelType parameterModelType = ParameterGetModelType(parameter);
-                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && (parameterModelType is SequenceType);
+                    bool shouldUseXmlListWrapper = shouldGenerateXmlSerialization && parameter.Location == ParameterLocation.Body && parameterModelType is SequenceType;
                     if (shouldUseXmlListWrapper)
                     {
                         declarationBuilder.Append(parameterModelType.XmlName + "Wrapper");
