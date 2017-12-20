@@ -1934,6 +1934,7 @@ namespace AutoRest.Java.DanModel
             List<JavaFile> exceptionJavaFiles = new List<JavaFile>();
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
+            bool shouldGenerateXmlSerialization = codeModel.ShouldGenerateXmlSerialization;
 
             foreach (CompositeType modelType in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
             {
@@ -1959,7 +1960,7 @@ namespace AutoRest.Java.DanModel
                         imports.AddRange(GetImports(property, settings));
                     }
 
-                    if (compositeTypeProperties.Any(p => !p.GetJsonProperty().IsNullOrEmpty()))
+                    if (compositeTypeProperties.Any(p => !p.GetSerializeAnnotationArgs(shouldGenerateXmlSerialization).IsNullOrEmpty()))
                     {
                         imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
@@ -1967,6 +1968,16 @@ namespace AutoRest.Java.DanModel
                     if (compositeTypeProperties.Any(p => p.XmlIsAttribute))
                     {
                         imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                    }
+
+                    if (shouldGenerateXmlSerialization && compositeTypeProperties.Any(p => p.XmlIsWrapped && p.ModelType is SequenceType))
+                    {
+                        imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper");
+                    }
+                    
+                    if (shouldGenerateXmlSerialization)
+                    {
+                        imports.Add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
                     }
 
                     // For polymorphism
@@ -2054,6 +2065,10 @@ namespace AutoRest.Java.DanModel
                             classAnnotations.Add(subTypeAnnotationBuilder.ToString());
                         }
                     }
+                    if (shouldGenerateXmlSerialization)
+                    {
+                        classAnnotations.Add($"JacksonXmlRootElement(localName = \"{modelType.XmlName}\")");
+                    }
 
                     if (CompositeTypeNeedsFlatten(modelType))
                     {
@@ -2088,16 +2103,22 @@ namespace AutoRest.Java.DanModel
                         }
 
                         string annotation = null;
-                        string jsonSetting = property.GetJsonProperty();
-                        if (!string.IsNullOrEmpty(jsonSetting))
+                        string annotationArgs = property.GetSerializeAnnotationArgs(shouldGenerateXmlSerialization);
+                        if (!string.IsNullOrEmpty(annotationArgs))
                         {
                             if (property.XmlIsAttribute)
                             {
-                                annotation = $"JacksonXmlProperty(localName = \"{property.SerializedName}\", isAttribute = true)";
+                                string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
+                                annotation = $"JacksonXmlProperty(localName = \"{localName}\", isAttribute = true)";
+                            }
+                            else if (shouldGenerateXmlSerialization && property.XmlIsWrapped && property.ModelType is SequenceType)
+                            {
+                                string localName = shouldGenerateXmlSerialization ? property.XmlName : property.SerializedName.ToString();
+                                annotation = $"JacksonXmlElementWrapper(localName = \"{localName}\")";
                             }
                             else
                             {
-                                annotation = $"JsonProperty({jsonSetting})";
+                                annotation = $"JsonProperty({annotationArgs})";
                             }
                         }
 
