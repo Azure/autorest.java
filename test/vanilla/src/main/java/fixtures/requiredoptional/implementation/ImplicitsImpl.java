@@ -166,7 +166,6 @@ public class ImplicitsImpl implements Implicits {
             });
     }
 
-
     /**
      * Test implicitly optional query parameter.
      *
@@ -259,7 +258,6 @@ public class ImplicitsImpl implements Implicits {
         return putOptionalQueryWithRestResponseAsync(queryParameter)
             .toCompletable();
     }
-
 
     /**
      * Test implicitly optional header parameter.
@@ -354,7 +352,6 @@ public class ImplicitsImpl implements Implicits {
             .toCompletable();
     }
 
-
     /**
      * Test implicitly optional body parameter.
      *
@@ -448,7 +445,6 @@ public class ImplicitsImpl implements Implicits {
             .toCompletable();
     }
 
-
     /**
      * Test implicitly required path parameter.
      *
@@ -503,7 +499,6 @@ public class ImplicitsImpl implements Implicits {
                 }
             });
     }
-
 
     /**
      * Test implicitly required query parameter.
@@ -560,7 +555,6 @@ public class ImplicitsImpl implements Implicits {
             });
     }
 
-
     /**
      * Test implicitly optional query parameter.
      *
@@ -612,6 +606,5 @@ public class ImplicitsImpl implements Implicits {
                 }
             });
     }
-
 
 }

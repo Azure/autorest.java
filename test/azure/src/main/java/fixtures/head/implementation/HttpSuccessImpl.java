@@ -128,7 +128,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             });
     }
 
-
     /**
      * Return 204 status code if successful.
      *
@@ -181,7 +180,6 @@ public class HttpSuccessImpl implements HttpSuccess {
             });
     }
 
-
     /**
      * Return 404 status code if successful.
      *
@@ -233,6 +231,5 @@ public class HttpSuccessImpl implements HttpSuccess {
                 }
             });
     }
-
 
 }

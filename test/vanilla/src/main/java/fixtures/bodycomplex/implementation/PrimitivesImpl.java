@@ -261,7 +261,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with integer properties.
      *
@@ -313,7 +312,6 @@ public class PrimitivesImpl implements Primitives {
         return putIntWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with long properties.
@@ -367,7 +365,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with long properties.
      *
@@ -419,7 +416,6 @@ public class PrimitivesImpl implements Primitives {
         return putLongWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with float properties.
@@ -473,7 +469,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with float properties.
      *
@@ -525,7 +520,6 @@ public class PrimitivesImpl implements Primitives {
         return putFloatWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with double properties.
@@ -579,7 +573,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with double properties.
      *
@@ -631,7 +624,6 @@ public class PrimitivesImpl implements Primitives {
         return putDoubleWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with bool properties.
@@ -685,7 +677,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with bool properties.
      *
@@ -737,7 +728,6 @@ public class PrimitivesImpl implements Primitives {
         return putBoolWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with string properties.
@@ -791,7 +781,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with string properties.
      *
@@ -843,7 +832,6 @@ public class PrimitivesImpl implements Primitives {
         return putStringWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with date properties.
@@ -897,7 +885,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with date properties.
      *
@@ -949,7 +936,6 @@ public class PrimitivesImpl implements Primitives {
         return putDateWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with datetime properties.
@@ -1003,7 +989,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with datetime properties.
      *
@@ -1055,7 +1040,6 @@ public class PrimitivesImpl implements Primitives {
         return putDateTimeWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with datetimeRfc1123 properties.
@@ -1109,7 +1093,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with datetimeRfc1123 properties.
      *
@@ -1161,7 +1144,6 @@ public class PrimitivesImpl implements Primitives {
         return putDateTimeRfc1123WithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with duration properties.
@@ -1215,7 +1197,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with duration properties.
      *
@@ -1267,7 +1248,6 @@ public class PrimitivesImpl implements Primitives {
         return putDurationWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with byte properties.
@@ -1321,7 +1301,6 @@ public class PrimitivesImpl implements Primitives {
             });
     }
 
-
     /**
      * Put complex types with byte properties.
      *
@@ -1373,6 +1352,5 @@ public class PrimitivesImpl implements Primitives {
         return putByteWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
 }

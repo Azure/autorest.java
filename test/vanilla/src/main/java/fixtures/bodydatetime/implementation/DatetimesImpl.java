@@ -232,7 +232,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Get invalid datetime value.
      *
@@ -284,7 +283,6 @@ public class DatetimesImpl implements Datetimes {
                 }
             });
     }
-
 
     /**
      * Get overflow datetime value.
@@ -338,7 +336,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Get underflow datetime value.
      *
@@ -391,7 +388,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
@@ -442,7 +438,6 @@ public class DatetimesImpl implements Datetimes {
         return putUtcMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
-
 
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
@@ -496,7 +491,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
@@ -549,7 +543,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
@@ -600,7 +593,6 @@ public class DatetimesImpl implements Datetimes {
         return putLocalPositiveOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
-
 
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
@@ -654,7 +646,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
@@ -707,7 +698,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
@@ -758,7 +748,6 @@ public class DatetimesImpl implements Datetimes {
         return putLocalNegativeOffsetMaxDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
-
 
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
@@ -812,7 +801,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
@@ -865,7 +853,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
@@ -916,7 +903,6 @@ public class DatetimesImpl implements Datetimes {
         return putUtcMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
-
 
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
@@ -970,7 +956,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
@@ -1021,7 +1006,6 @@ public class DatetimesImpl implements Datetimes {
         return putLocalPositiveOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
-
 
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
@@ -1075,7 +1059,6 @@ public class DatetimesImpl implements Datetimes {
             });
     }
 
-
     /**
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
@@ -1126,7 +1109,6 @@ public class DatetimesImpl implements Datetimes {
         return putLocalNegativeOffsetMinDateTimeWithRestResponseAsync(datetimeBody)
             .toCompletable();
     }
-
 
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
@@ -1179,6 +1161,5 @@ public class DatetimesImpl implements Datetimes {
                 }
             });
     }
-
 
 }

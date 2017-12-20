@@ -141,7 +141,6 @@ public class ParameterGroupingsInner {
             .toCompletable();
     }
 
-
     /**
      * Post a bunch of optional parameters grouped.
      *
@@ -246,7 +245,6 @@ public class ParameterGroupingsInner {
         return postOptionalWithRestResponseAsync(parameterGroupingPostOptionalParameters)
             .toCompletable();
     }
-
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -370,7 +368,6 @@ public class ParameterGroupingsInner {
             .toCompletable();
     }
 
-
     /**
      * Post parameters with a shared parameter group object.
      *
@@ -475,6 +472,5 @@ public class ParameterGroupingsInner {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
             .toCompletable();
     }
-
 
 }

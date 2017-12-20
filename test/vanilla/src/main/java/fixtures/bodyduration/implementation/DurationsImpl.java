@@ -142,7 +142,6 @@ public class DurationsImpl implements Durations {
             });
     }
 
-
     /**
      * Put a positive duration value.
      *
@@ -193,7 +192,6 @@ public class DurationsImpl implements Durations {
         return putPositiveDurationWithRestResponseAsync(durationBody)
             .toCompletable();
     }
-
 
     /**
      * Get a positive duration value.
@@ -247,7 +245,6 @@ public class DurationsImpl implements Durations {
             });
     }
 
-
     /**
      * Get an invalid duration value.
      *
@@ -299,6 +296,5 @@ public class DurationsImpl implements Durations {
                 }
             });
     }
-
 
 }

@@ -200,7 +200,6 @@ public class StringsImpl implements Strings {
             });
     }
 
-
     /**
      * Set string value null.
      *
@@ -294,7 +293,6 @@ public class StringsImpl implements Strings {
             .toCompletable();
     }
 
-
     /**
      * Get empty string value value ''.
      *
@@ -347,7 +345,6 @@ public class StringsImpl implements Strings {
             });
     }
 
-
     /**
      * Set string value empty ''.
      *
@@ -398,7 +395,6 @@ public class StringsImpl implements Strings {
         return putEmptyWithRestResponseAsync(stringBody)
             .toCompletable();
     }
-
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
@@ -452,7 +448,6 @@ public class StringsImpl implements Strings {
             });
     }
 
-
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€'.
      *
@@ -503,7 +498,6 @@ public class StringsImpl implements Strings {
         return putMbcsWithRestResponseAsync(stringBody)
             .toCompletable();
     }
-
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -557,7 +551,6 @@ public class StringsImpl implements Strings {
             });
     }
 
-
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
@@ -608,7 +601,6 @@ public class StringsImpl implements Strings {
         return putWhitespaceWithRestResponseAsync(stringBody)
             .toCompletable();
     }
-
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -662,7 +654,6 @@ public class StringsImpl implements Strings {
             });
     }
 
-
     /**
      * Get value that is base64 encoded.
      *
@@ -714,7 +705,6 @@ public class StringsImpl implements Strings {
                 }
             });
     }
-
 
     /**
      * Get value that is base64url encoded.
@@ -768,7 +758,6 @@ public class StringsImpl implements Strings {
             });
     }
 
-
     /**
      * Put value that is base64url encoded.
      *
@@ -821,7 +810,6 @@ public class StringsImpl implements Strings {
             .toCompletable();
     }
 
-
     /**
      * Get null value that is expected to be base64url encoded.
      *
@@ -873,6 +861,5 @@ public class StringsImpl implements Strings {
                 }
             });
     }
-
 
 }

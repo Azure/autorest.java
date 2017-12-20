@@ -76,6 +76,7 @@ public interface AutoRestParameterizedHostTestClient {
 
     /**
      * Gets the Paths object to access its operations.
+     *
      * @return the Paths object.
      */
     Paths paths();

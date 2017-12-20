@@ -338,7 +338,6 @@ public class LRORetrysImpl implements LRORetrys {
             });
     }
 
-
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -521,7 +520,6 @@ public class LRORetrysImpl implements LRORetrys {
             });
     }
 
-
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -607,7 +605,6 @@ public class LRORetrysImpl implements LRORetrys {
             });
     }
 
-
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
@@ -683,7 +680,6 @@ public class LRORetrysImpl implements LRORetrys {
         return delete202Retry200WithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -761,7 +757,6 @@ public class LRORetrysImpl implements LRORetrys {
             .toCompletable();
     }
 
-
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
@@ -770,7 +765,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200Async().blockingLast().result();
+        beginPost202Retry200Async().blockingLast();
     }
 
     /**
@@ -926,7 +921,6 @@ public class LRORetrysImpl implements LRORetrys {
             .toCompletable();
     }
 
-
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
@@ -935,7 +929,7 @@ public class LRORetrysImpl implements LRORetrys {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededAsync().blockingLast().result();
+        beginPostAsyncRelativeRetrySucceededAsync().blockingLast();
     }
 
     /**
@@ -1090,6 +1084,5 @@ public class LRORetrysImpl implements LRORetrys {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
             .toCompletable();
     }
-
 
 }

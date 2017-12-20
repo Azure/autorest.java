@@ -149,7 +149,6 @@ public class ArraysImpl implements Arrays {
             });
     }
 
-
     /**
      * Put complex types with array property.
      *
@@ -201,7 +200,6 @@ public class ArraysImpl implements Arrays {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with array property which is empty.
@@ -255,7 +253,6 @@ public class ArraysImpl implements Arrays {
             });
     }
 
-
     /**
      * Put complex types with array property which is empty.
      *
@@ -308,7 +305,6 @@ public class ArraysImpl implements Arrays {
             .toCompletable();
     }
 
-
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
@@ -360,6 +356,5 @@ public class ArraysImpl implements Arrays {
                 }
             });
     }
-
 
 }

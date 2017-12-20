@@ -160,7 +160,6 @@ public class HttpRetrysImpl implements HttpRetrys {
             .toCompletable();
     }
 
-
     /**
      * Return 500 status code, then 200 after retry.
      *
@@ -253,7 +252,6 @@ public class HttpRetrysImpl implements HttpRetrys {
         return put500WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -348,7 +346,6 @@ public class HttpRetrysImpl implements HttpRetrys {
             .toCompletable();
     }
 
-
     /**
      * Return 502 status code, then 200 after retry.
      *
@@ -392,7 +389,6 @@ public class HttpRetrysImpl implements HttpRetrys {
         return get502WithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -487,7 +483,6 @@ public class HttpRetrysImpl implements HttpRetrys {
             .toCompletable();
     }
 
-
     /**
      * Return 503 status code, then 200 after retry.
      *
@@ -580,7 +575,6 @@ public class HttpRetrysImpl implements HttpRetrys {
         return delete503WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -675,7 +669,6 @@ public class HttpRetrysImpl implements HttpRetrys {
             .toCompletable();
     }
 
-
     /**
      * Return 504 status code, then 200 after retry.
      *
@@ -768,6 +761,5 @@ public class HttpRetrysImpl implements HttpRetrys {
         return patch504WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 
 }

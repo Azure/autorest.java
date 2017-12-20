@@ -208,7 +208,6 @@ public class IntsImpl implements Ints {
             });
     }
 
-
     /**
      * Get invalid Int value.
      *
@@ -260,7 +259,6 @@ public class IntsImpl implements Ints {
                 }
             });
     }
-
 
     /**
      * Get overflow Int32 value.
@@ -314,7 +312,6 @@ public class IntsImpl implements Ints {
             });
     }
 
-
     /**
      * Get underflow Int32 value.
      *
@@ -366,7 +363,6 @@ public class IntsImpl implements Ints {
                 }
             });
     }
-
 
     /**
      * Get overflow Int64 value.
@@ -420,7 +416,6 @@ public class IntsImpl implements Ints {
             });
     }
 
-
     /**
      * Get underflow Int64 value.
      *
@@ -473,7 +468,6 @@ public class IntsImpl implements Ints {
             });
     }
 
-
     /**
      * Put max int32 value.
      *
@@ -521,7 +515,6 @@ public class IntsImpl implements Ints {
         return putMax32WithRestResponseAsync(intBody)
             .toCompletable();
     }
-
 
     /**
      * Put max int64 value.
@@ -571,7 +564,6 @@ public class IntsImpl implements Ints {
             .toCompletable();
     }
 
-
     /**
      * Put min int32 value.
      *
@@ -620,7 +612,6 @@ public class IntsImpl implements Ints {
             .toCompletable();
     }
 
-
     /**
      * Put min int64 value.
      *
@@ -668,7 +659,6 @@ public class IntsImpl implements Ints {
         return putMin64WithRestResponseAsync(intBody)
             .toCompletable();
     }
-
 
     /**
      * Get datetime encoded as Unix time value.
@@ -722,7 +712,6 @@ public class IntsImpl implements Ints {
             });
     }
 
-
     /**
      * Put datetime encoded as Unix time.
      *
@@ -771,7 +760,6 @@ public class IntsImpl implements Ints {
         return putUnixTimeDateWithRestResponseAsync(intBody)
             .toCompletable();
     }
-
 
     /**
      * Get invalid Unix time value.
@@ -825,7 +813,6 @@ public class IntsImpl implements Ints {
             });
     }
 
-
     /**
      * Get null Unix time value.
      *
@@ -877,6 +864,5 @@ public class IntsImpl implements Ints {
                 }
             });
     }
-
 
 }

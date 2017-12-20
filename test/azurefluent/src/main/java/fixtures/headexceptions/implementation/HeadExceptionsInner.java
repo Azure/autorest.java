@@ -119,7 +119,6 @@ public class HeadExceptionsInner {
             .toCompletable();
     }
 
-
     /**
      * Return 204 status code if successful.
      *
@@ -164,7 +163,6 @@ public class HeadExceptionsInner {
             .toCompletable();
     }
 
-
     /**
      * Return 404 status code if successful.
      *
@@ -208,6 +206,5 @@ public class HeadExceptionsInner {
         return head404WithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

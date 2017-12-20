@@ -319,7 +319,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get false Boolean value on path.
      *
@@ -364,7 +363,6 @@ public class QueriesImpl implements Queries {
         return getBooleanFalseWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -459,7 +457,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '1000000' integer value.
      *
@@ -505,7 +502,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '-1000000' integer value.
      *
@@ -550,7 +546,6 @@ public class QueriesImpl implements Queries {
         return getIntNegativeOneMillionWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null integer value (no query parameter).
@@ -645,7 +640,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '10000000000' 64 bit integer value.
      *
@@ -691,7 +685,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '-10000000000' 64 bit integer value.
      *
@@ -736,7 +729,6 @@ public class QueriesImpl implements Queries {
         return getNegativeTenBillionWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -831,7 +823,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '1.034E+20' numeric value.
      *
@@ -877,7 +868,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '-1.034E-20' numeric value.
      *
@@ -922,7 +912,6 @@ public class QueriesImpl implements Queries {
         return floatScientificNegativeWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null numeric value (no query parameter).
@@ -1017,7 +1006,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '9999999.999' numeric value.
      *
@@ -1063,7 +1051,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '-9999999.999' numeric value.
      *
@@ -1108,7 +1095,6 @@ public class QueriesImpl implements Queries {
         return doubleDecimalNegativeWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null numeric value (no query parameter).
@@ -1203,7 +1189,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
@@ -1248,7 +1233,6 @@ public class QueriesImpl implements Queries {
         return stringUnicodeWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -1295,7 +1279,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get ''.
      *
@@ -1340,7 +1323,6 @@ public class QueriesImpl implements Queries {
         return stringEmptyWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null (no query parameter in url).
@@ -1435,7 +1417,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get using uri with query parameter 'green color'.
      *
@@ -1529,7 +1510,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get null (no query parameter in url).
      *
@@ -1622,7 +1602,6 @@ public class QueriesImpl implements Queries {
         return enumNullWithRestResponseAsync(enumQuery)
             .toCompletable();
     }
-
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -1719,7 +1698,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '' as byte array.
      *
@@ -1765,7 +1743,6 @@ public class QueriesImpl implements Queries {
         return byteEmptyWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -1862,7 +1839,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '2012-01-01' as date.
      *
@@ -1907,7 +1883,6 @@ public class QueriesImpl implements Queries {
         return dateValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -2002,7 +1977,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
@@ -2047,7 +2021,6 @@ public class QueriesImpl implements Queries {
         return dateTimeValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -2141,7 +2114,6 @@ public class QueriesImpl implements Queries {
         return dateTimeNullWithRestResponseAsync(dateTimeQuery)
             .toCompletable();
     }
-
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -2240,7 +2212,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get a null array of string using the csv-array format.
      *
@@ -2337,7 +2308,6 @@ public class QueriesImpl implements Queries {
         return arrayStringCsvNullWithRestResponseAsync(arrayQuery)
             .toCompletable();
     }
-
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -2436,7 +2406,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
@@ -2533,7 +2502,6 @@ public class QueriesImpl implements Queries {
         return arrayStringSsvValidWithRestResponseAsync(arrayQuery)
             .toCompletable();
     }
-
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -2632,7 +2600,6 @@ public class QueriesImpl implements Queries {
             .toCompletable();
     }
 
-
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
@@ -2729,6 +2696,5 @@ public class QueriesImpl implements Queries {
         return arrayStringPipesValidWithRestResponseAsync(arrayQuery)
             .toCompletable();
     }
-
 
 }

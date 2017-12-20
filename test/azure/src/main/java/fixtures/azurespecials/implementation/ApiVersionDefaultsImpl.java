@@ -130,7 +130,6 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
             .toCompletable();
     }
 
-
     /**
      * GET method with api-version modeled in global settings.
      *
@@ -177,7 +176,6 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getMethodGlobalNotProvidedValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * GET method with api-version modeled in global settings.
@@ -226,7 +224,6 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
             .toCompletable();
     }
 
-
     /**
      * GET method with api-version modeled in global settings.
      *
@@ -273,6 +270,5 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

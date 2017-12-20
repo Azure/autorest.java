@@ -83,6 +83,7 @@ public interface MicrosoftAzureTestUrl {
 
     /**
      * Gets the Groups object to access its operations.
+     *
      * @return the Groups object.
      */
     Groups groups();

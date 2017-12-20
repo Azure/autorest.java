@@ -83,48 +83,56 @@ public interface AutoRestAzureSpecialParametersTestClient {
 
     /**
      * Gets the XMsClientRequestIds object to access its operations.
+     *
      * @return the XMsClientRequestIds object.
      */
     XMsClientRequestIds xMsClientRequestIds();
 
     /**
      * Gets the SubscriptionInCredentials object to access its operations.
+     *
      * @return the SubscriptionInCredentials object.
      */
     SubscriptionInCredentials subscriptionInCredentials();
 
     /**
      * Gets the SubscriptionInMethods object to access its operations.
+     *
      * @return the SubscriptionInMethods object.
      */
     SubscriptionInMethods subscriptionInMethods();
 
     /**
      * Gets the ApiVersionDefaults object to access its operations.
+     *
      * @return the ApiVersionDefaults object.
      */
     ApiVersionDefaults apiVersionDefaults();
 
     /**
      * Gets the ApiVersionLocals object to access its operations.
+     *
      * @return the ApiVersionLocals object.
      */
     ApiVersionLocals apiVersionLocals();
 
     /**
      * Gets the SkipUrlEncodings object to access its operations.
+     *
      * @return the SkipUrlEncodings object.
      */
     SkipUrlEncodings skipUrlEncodings();
 
     /**
      * Gets the Odatas object to access its operations.
+     *
      * @return the Odatas object.
      */
     Odatas odatas();
 
     /**
      * Gets the Headers object to access its operations.
+     *
      * @return the Headers object.
      */
     Headers headers();

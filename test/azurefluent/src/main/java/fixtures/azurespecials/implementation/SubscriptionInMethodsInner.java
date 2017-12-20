@@ -133,7 +133,6 @@ public class SubscriptionInMethodsInner {
             .toCompletable();
     }
 
-
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
      *
@@ -184,7 +183,6 @@ public class SubscriptionInMethodsInner {
         return postMethodLocalNullWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }
-
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -237,7 +235,6 @@ public class SubscriptionInMethodsInner {
             .toCompletable();
     }
 
-
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
      *
@@ -288,6 +285,5 @@ public class SubscriptionInMethodsInner {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }
-
 
 }

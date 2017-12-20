@@ -155,7 +155,6 @@ public class DictionarysImpl implements Dictionarys {
             });
     }
 
-
     /**
      * Put complex types with dictionary property.
      *
@@ -207,7 +206,6 @@ public class DictionarysImpl implements Dictionarys {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -261,7 +259,6 @@ public class DictionarysImpl implements Dictionarys {
             });
     }
 
-
     /**
      * Put complex types with dictionary property which is empty.
      *
@@ -313,7 +310,6 @@ public class DictionarysImpl implements Dictionarys {
         return putEmptyWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Get complex types with dictionary property which is null.
@@ -367,7 +363,6 @@ public class DictionarysImpl implements Dictionarys {
             });
     }
 
-
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
@@ -419,6 +414,5 @@ public class DictionarysImpl implements Dictionarys {
                 }
             });
     }
-
 
 }

@@ -131,7 +131,6 @@ public class InheritancesImpl implements Inheritances {
             });
     }
 
-
     /**
      * Put complex types that extend others.
      *
@@ -183,6 +182,5 @@ public class InheritancesImpl implements Inheritances {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
 }

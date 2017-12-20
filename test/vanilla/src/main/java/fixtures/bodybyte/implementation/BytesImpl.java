@@ -147,7 +147,6 @@ public class BytesImpl implements Bytes {
             });
     }
 
-
     /**
      * Get empty byte value ''.
      *
@@ -199,7 +198,6 @@ public class BytesImpl implements Bytes {
                 }
             });
     }
-
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -253,7 +251,6 @@ public class BytesImpl implements Bytes {
             });
     }
 
-
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
@@ -304,7 +301,6 @@ public class BytesImpl implements Bytes {
         return putNonAsciiWithRestResponseAsync(byteBody)
             .toCompletable();
     }
-
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
@@ -357,6 +353,5 @@ public class BytesImpl implements Bytes {
                 }
             });
     }
-
 
 }

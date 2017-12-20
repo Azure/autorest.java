@@ -127,7 +127,6 @@ public class ApiVersionLocalsInner {
             .toCompletable();
     }
 
-
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
@@ -221,7 +220,6 @@ public class ApiVersionLocalsInner {
             .toCompletable();
     }
 
-
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
@@ -267,7 +265,6 @@ public class ApiVersionLocalsInner {
             .toCompletable();
     }
 
-
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
@@ -312,6 +309,5 @@ public class ApiVersionLocalsInner {
         return getSwaggerLocalValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

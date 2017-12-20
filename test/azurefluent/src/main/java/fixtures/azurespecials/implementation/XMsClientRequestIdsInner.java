@@ -114,7 +114,6 @@ public class XMsClientRequestIdsInner {
             .toCompletable();
     }
 
-
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
@@ -165,6 +164,5 @@ public class XMsClientRequestIdsInner {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
             .toCompletable();
     }
-
 
 }

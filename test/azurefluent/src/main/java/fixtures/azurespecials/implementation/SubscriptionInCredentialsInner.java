@@ -136,7 +136,6 @@ public class SubscriptionInCredentialsInner {
             .toCompletable();
     }
 
-
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
@@ -183,7 +182,6 @@ public class SubscriptionInCredentialsInner {
         return postMethodGlobalNullWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -235,7 +233,6 @@ public class SubscriptionInCredentialsInner {
             .toCompletable();
     }
 
-
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
@@ -283,7 +280,6 @@ public class SubscriptionInCredentialsInner {
             .toCompletable();
     }
 
-
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
@@ -330,6 +326,5 @@ public class SubscriptionInCredentialsInner {
         return postSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

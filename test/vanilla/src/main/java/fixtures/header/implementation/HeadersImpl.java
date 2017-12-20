@@ -307,7 +307,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
@@ -351,7 +350,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseExistingKeyWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
@@ -404,7 +402,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
@@ -448,7 +445,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseProtectedKeyWithRestResponseAsync()
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
@@ -505,7 +501,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "value": 1 or -2.
      *
@@ -556,7 +551,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseIntegerWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
@@ -613,7 +607,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "value": 105 or -2.
      *
@@ -664,7 +657,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseLongWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
@@ -721,7 +713,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "value": 0.07 or -3.0.
      *
@@ -772,7 +763,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseFloatWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
@@ -829,7 +819,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "value": 7e120 or -3.0.
      *
@@ -880,7 +869,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseDoubleWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
@@ -937,7 +925,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header value "value": true or false.
      *
@@ -988,7 +975,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseBoolWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
@@ -1097,7 +1083,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
@@ -1148,7 +1133,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseStringWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
@@ -1208,7 +1192,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
@@ -1259,7 +1242,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseDateWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
@@ -1319,7 +1301,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
@@ -1370,7 +1351,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseDatetimeWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -1487,7 +1467,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
@@ -1538,7 +1517,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseDatetimeRfc1123WithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
@@ -1598,7 +1576,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "P123DT22H14M12.011S".
      *
@@ -1649,7 +1626,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseDurationWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
@@ -1710,7 +1686,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
@@ -1761,7 +1736,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         return responseByteWithRestResponseAsync(scenario)
             .toCompletable();
     }
-
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
@@ -1870,7 +1844,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Get a response with header values "GREY" or null.
      *
@@ -1922,7 +1895,6 @@ public class HeadersImpl implements fixtures.header.Headers {
             .toCompletable();
     }
 
-
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
@@ -1966,6 +1938,5 @@ public class HeadersImpl implements fixtures.header.Headers {
         return customRequestIdWithRestResponseAsync()
             .toCompletable();
     }
-
 
 }

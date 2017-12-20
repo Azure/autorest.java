@@ -156,7 +156,6 @@ public class EnumsImpl implements Enums {
             });
     }
 
-
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -207,7 +206,6 @@ public class EnumsImpl implements Enums {
         return putNotExpandableWithRestResponseAsync(stringBody)
             .toCompletable();
     }
-
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -261,7 +259,6 @@ public class EnumsImpl implements Enums {
             });
     }
 
-
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
@@ -312,7 +309,6 @@ public class EnumsImpl implements Enums {
         return putReferencedWithRestResponseAsync(enumStringBody)
             .toCompletable();
     }
-
 
     /**
      * Get value 'green-color' from the constant.
@@ -366,7 +362,6 @@ public class EnumsImpl implements Enums {
             });
     }
 
-
     /**
      * Sends value 'green-color' from a constant.
      *
@@ -418,6 +413,5 @@ public class EnumsImpl implements Enums {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
             .toCompletable();
     }
-
 
 }

@@ -262,7 +262,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Get invalid float Number value.
      *
@@ -314,7 +313,6 @@ public class NumbersImpl implements Numbers {
                 }
             });
     }
-
 
     /**
      * Get invalid double Number value.
@@ -368,7 +366,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Get invalid decimal Number value.
      *
@@ -421,7 +418,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big float value 3.402823e+20.
      *
@@ -469,7 +465,6 @@ public class NumbersImpl implements Numbers {
         return putBigFloatWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big float value 3.402823e+20.
@@ -523,7 +518,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big double value 2.5976931e+101.
      *
@@ -571,7 +565,6 @@ public class NumbersImpl implements Numbers {
         return putBigDoubleWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big double value 2.5976931e+101.
@@ -625,7 +618,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big double value 99999999.99.
      *
@@ -673,7 +665,6 @@ public class NumbersImpl implements Numbers {
         return putBigDoublePositiveDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big double value 99999999.99.
@@ -727,7 +718,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big double value -99999999.99.
      *
@@ -775,7 +765,6 @@ public class NumbersImpl implements Numbers {
         return putBigDoubleNegativeDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big double value -99999999.99.
@@ -829,7 +818,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big decimal value 2.5976931e+101.
      *
@@ -880,7 +868,6 @@ public class NumbersImpl implements Numbers {
         return putBigDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -934,7 +921,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big decimal value 99999999.99.
      *
@@ -985,7 +971,6 @@ public class NumbersImpl implements Numbers {
         return putBigDecimalPositiveDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big decimal value 99999999.99.
@@ -1039,7 +1024,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put big decimal value -99999999.99.
      *
@@ -1090,7 +1074,6 @@ public class NumbersImpl implements Numbers {
         return putBigDecimalNegativeDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big decimal value -99999999.99.
@@ -1144,7 +1127,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put small float value 3.402823e-20.
      *
@@ -1192,7 +1174,6 @@ public class NumbersImpl implements Numbers {
         return putSmallFloatWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big double value 3.402823e-20.
@@ -1246,7 +1227,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put small double value 2.5976931e-101.
      *
@@ -1294,7 +1274,6 @@ public class NumbersImpl implements Numbers {
         return putSmallDoubleWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get big double value 2.5976931e-101.
@@ -1348,7 +1327,6 @@ public class NumbersImpl implements Numbers {
             });
     }
 
-
     /**
      * Put small decimal value 2.5976931e-101.
      *
@@ -1399,7 +1377,6 @@ public class NumbersImpl implements Numbers {
         return putSmallDecimalWithRestResponseAsync(numberBody)
             .toCompletable();
     }
-
 
     /**
      * Get small decimal value 2.5976931e-101.
@@ -1452,6 +1429,5 @@ public class NumbersImpl implements Numbers {
                 }
             });
     }
-
 
 }

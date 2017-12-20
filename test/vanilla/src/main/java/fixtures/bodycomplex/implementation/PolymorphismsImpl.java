@@ -150,7 +150,6 @@ public class PolymorphismsImpl implements Polymorphisms {
             });
     }
 
-
     /**
      * Put complex types that are polymorphic.
      *
@@ -331,7 +330,6 @@ public class PolymorphismsImpl implements Polymorphisms {
             .toCompletable();
     }
 
-
     /**
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
@@ -384,7 +382,6 @@ public class PolymorphismsImpl implements Polymorphisms {
             });
     }
 
-
     /**
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      *
@@ -436,7 +433,6 @@ public class PolymorphismsImpl implements Polymorphisms {
         return putComplicatedWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -589,6 +585,5 @@ public class PolymorphismsImpl implements Polymorphisms {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 
 }
