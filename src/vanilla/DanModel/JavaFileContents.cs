@@ -310,14 +310,13 @@ namespace AutoRest.Java.DanModel
 
         public void ReturnAnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
         {
-            Block(anonymousClassDeclaration, block =>
+            Line($"return {anonymousClassDeclaration} {{");
+            Indent(() =>
             {
-                if (anonymousClassBlock != null)
-                {
-                    JavaClass javaClass = new JavaClass(this);
-                    anonymousClassBlock.Invoke(javaClass);
-                }
+                JavaClass javaClass = new JavaClass(this);
+                anonymousClassBlock.Invoke(javaClass);
             });
+            Line("};");
         }
 
         public void Annotation(params string[] annotations)
