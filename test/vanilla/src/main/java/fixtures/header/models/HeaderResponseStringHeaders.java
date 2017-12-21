@@ -42,5 +42,4 @@ public class HeaderResponseStringHeaders {
         this.value = value;
         return this;
     }
-
 }

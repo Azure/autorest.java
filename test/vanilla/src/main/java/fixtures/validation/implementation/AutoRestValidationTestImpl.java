@@ -212,7 +212,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
             });
     }
 
-
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -259,7 +258,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
             throw new IllegalArgumentException("Parameter this.apiVersion() is required and cannot be null.");
         }
         final Product body = null;
-        Validator.validate(body);
         return service.validationOfBody(this.subscriptionId(), resourceGroupName, id, body, this.apiVersion());
     }
 
@@ -358,7 +356,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
             });
     }
 
-
     /**
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
@@ -396,7 +393,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
             .toCompletable();
     }
 
-
     /**
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
@@ -423,7 +419,6 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     public Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync() {
         final String constantParam = "constant";
         final Product body = null;
-        Validator.validate(body);
         return service.postWithConstantInBody(constantParam, body);
     }
 
@@ -493,5 +488,4 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
                 }
             });
     }
-
 }

@@ -602,5 +602,4 @@ public interface Pagings {
      * @return the {@link Observable&lt;Page&lt;Product&gt;&gt;} object if successful.
      */
     Observable<Page<Product>> getMultiplePagesFailureUriNextAsync(String nextPageLink);
-
 }

@@ -94,5 +94,4 @@ public class PagingGetMultiplePagesWithOffsetOptions {
         this.timeout = timeout;
         return this;
     }
-
 }

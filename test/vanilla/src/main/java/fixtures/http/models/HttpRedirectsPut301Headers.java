@@ -42,5 +42,4 @@ public class HttpRedirectsPut301Headers {
         this.location = location;
         return this;
     }
-
 }

@@ -119,5 +119,4 @@ public interface Paths {
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion);
-
 }

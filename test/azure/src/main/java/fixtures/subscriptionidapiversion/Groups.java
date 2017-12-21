@@ -63,5 +63,4 @@ public interface Groups {
      * @return the {@link Single&lt;RestResponse&lt;Void, SampleResourceGroup&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroupWithRestResponseAsync(String resourceGroupName);
-
 }

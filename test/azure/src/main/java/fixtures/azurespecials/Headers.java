@@ -143,5 +143,4 @@ public interface Headers {
      * @return the {@link Single&lt;RestResponse&lt;HeaderCustomNamedRequestIdHeadHeaders, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHeadWithRestResponseAsync(String fooClientRequestId);
-
 }

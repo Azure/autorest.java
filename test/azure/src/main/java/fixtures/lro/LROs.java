@@ -3844,5 +3844,4 @@ public interface LROs {
      * @return the {@link Single&lt;RestResponse&lt;LROsPostAsyncRetrycanceledHeaders, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync(Product product);
-
 }

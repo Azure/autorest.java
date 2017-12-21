@@ -67,5 +67,4 @@ public class Pet {
         this.name = name;
         return this;
     }
-
 }

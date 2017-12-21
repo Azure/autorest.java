@@ -70,5 +70,4 @@ public class PagingGetMultiplePagesWithOffsetNextOptionsInner {
         this.timeout = timeout;
         return this;
     }
-
 }

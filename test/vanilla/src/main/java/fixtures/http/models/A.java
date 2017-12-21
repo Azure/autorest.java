@@ -41,5 +41,4 @@ public class A {
         this.statusCode = statusCode;
         return this;
     }
-
 }

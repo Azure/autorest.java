@@ -43,5 +43,4 @@ public class AvailabilitySetUpdateParameters {
         this.tags = tags;
         return this;
     }
-
 }

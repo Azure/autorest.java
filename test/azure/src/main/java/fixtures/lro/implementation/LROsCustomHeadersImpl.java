@@ -45,9 +45,14 @@ import java.io.IOException;
  * LROsCustomHeaders.
  */
 public class LROsCustomHeadersImpl implements LROsCustomHeaders {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private LROsCustomHeadersService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
@@ -113,7 +118,6 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -218,7 +222,6 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<LROsCustomHeaderPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -400,7 +403,6 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
@@ -580,7 +582,6 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<LROsCustomHeaderPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -744,7 +745,6 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      */
     public Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -807,5 +807,4 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return postAsyncRetrySucceededWithRestResponseAsync(product)
             .toCompletable();
     }
-
 }

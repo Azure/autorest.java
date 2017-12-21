@@ -111,7 +111,6 @@ public class DatesImpl implements Dates {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, LocalDate>> getMinDate();
-
     }
 
     /**
@@ -527,5 +526,4 @@ public class DatesImpl implements Dates {
                 }
             });
     }
-
 }

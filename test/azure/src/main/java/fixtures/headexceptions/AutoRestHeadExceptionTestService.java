@@ -65,5 +65,4 @@ public interface AutoRestHeadExceptionTestService {
      * @return the HeadExceptions object.
      */
     HeadExceptions headExceptions();
-
 }

@@ -101,7 +101,6 @@ public class EnumsImpl implements Enums {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putReferencedConstant(@BodyParam("application/json; charset=utf-8") RefColorConstant enumStringBody);
-
     }
 
     /**
@@ -413,5 +412,4 @@ public class EnumsImpl implements Enums {
         return putReferencedConstantWithRestResponseAsync(enumStringBody)
             .toCompletable();
     }
-
 }

@@ -174,7 +174,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> head404();
-
     }
 
     /**
@@ -1662,5 +1661,4 @@ public class HttpSuccessImpl implements HttpSuccess {
         return head404WithRestResponseAsync()
             .toCompletable();
     }
-
 }

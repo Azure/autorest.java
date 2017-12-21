@@ -41,5 +41,4 @@ public class ClassWrapper {
         this.value = value;
         return this;
     }
-
 }

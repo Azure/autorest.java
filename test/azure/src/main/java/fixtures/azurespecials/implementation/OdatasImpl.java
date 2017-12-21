@@ -36,9 +36,14 @@ import java.io.IOException;
  * Odatas.
  */
 public class OdatasImpl implements Odatas {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private OdatasService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -62,7 +67,6 @@ public class OdatasImpl implements Odatas {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getWithFilter(@QueryParam("$filter") String filter, @QueryParam("$top") Integer top, @QueryParam("$orderby") String orderby, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -167,5 +171,4 @@ public class OdatasImpl implements Odatas {
         return getWithFilterWithRestResponseAsync(filter, top, orderby)
             .toCompletable();
     }
-
 }

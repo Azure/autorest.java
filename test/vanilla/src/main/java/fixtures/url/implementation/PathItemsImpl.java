@@ -85,7 +85,6 @@ public class PathItemsImpl implements PathItems {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
-
     }
 
     /**
@@ -615,5 +614,4 @@ public class PathItemsImpl implements PathItems {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
-
 }

@@ -42,5 +42,4 @@ public class HttpRedirectsDelete307Headers {
         this.location = location;
         return this;
     }
-
 }

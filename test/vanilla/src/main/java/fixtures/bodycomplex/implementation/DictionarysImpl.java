@@ -100,7 +100,6 @@ public class DictionarysImpl implements Dictionarys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DictionaryWrapper>> getNotProvided();
-
     }
 
     /**
@@ -414,5 +413,4 @@ public class DictionarysImpl implements Dictionarys {
                 }
             });
     }
-
 }

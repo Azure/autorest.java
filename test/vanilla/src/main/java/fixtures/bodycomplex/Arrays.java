@@ -206,5 +206,4 @@ public interface Arrays {
      * @return the {@link Single&lt;RestResponse&lt;Void, ArrayWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, ArrayWrapper>> getNotProvidedWithRestResponseAsync();
-
 }

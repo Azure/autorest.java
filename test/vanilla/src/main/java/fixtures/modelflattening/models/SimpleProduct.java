@@ -128,5 +128,4 @@ public class SimpleProduct extends BaseProduct {
         this.odatavalue = odatavalue;
         return this;
     }
-
 }

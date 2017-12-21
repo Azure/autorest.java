@@ -67,5 +67,4 @@ public class OperationResultError {
         this.message = message;
         return this;
     }
-
 }

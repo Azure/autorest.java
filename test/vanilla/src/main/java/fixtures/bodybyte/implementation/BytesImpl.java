@@ -92,7 +92,6 @@ public class BytesImpl implements Bytes {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getInvalid();
-
     }
 
     /**
@@ -353,5 +352,4 @@ public class BytesImpl implements Bytes {
                 }
             });
     }
-
 }

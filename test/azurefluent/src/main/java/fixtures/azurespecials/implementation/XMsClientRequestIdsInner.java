@@ -35,9 +35,14 @@ import java.io.IOException;
  * XMsClientRequestIds.
  */
 public class XMsClientRequestIdsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private XMsClientRequestIdsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -67,7 +72,6 @@ public class XMsClientRequestIdsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> paramGet(@HeaderParam("x-ms-client-request-id") String xMsClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -164,5 +168,4 @@ public class XMsClientRequestIdsInner {
         return paramGetWithRestResponseAsync(xMsClientRequestId)
             .toCompletable();
     }
-
 }

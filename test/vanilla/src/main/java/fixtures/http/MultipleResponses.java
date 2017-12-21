@@ -1206,5 +1206,4 @@ public interface MultipleResponses {
      * @return the {@link Single&lt;RestResponse&lt;Void, A&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, A>> get200ModelA202ValidWithRestResponseAsync();
-
 }

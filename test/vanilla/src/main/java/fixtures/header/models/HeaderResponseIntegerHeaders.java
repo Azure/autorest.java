@@ -41,5 +41,4 @@ public class HeaderResponseIntegerHeaders {
         this.value = value;
         return this;
     }
-
 }

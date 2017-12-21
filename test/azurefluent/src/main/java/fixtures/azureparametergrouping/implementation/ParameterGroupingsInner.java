@@ -38,9 +38,14 @@ import java.io.IOException;
  * ParameterGroupings.
  */
 public class ParameterGroupingsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private ParameterGroupingsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterGroupingTestServiceImpl client;
 
     /**
@@ -82,7 +87,6 @@ public class ParameterGroupingsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postSharedParameterGroupObject(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne);
-
     }
 
     /**
@@ -172,7 +176,6 @@ public class ParameterGroupingsInner {
      */
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync() {
         final ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters = null;
-        Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         Integer query = null;
         return service.postOptional(this.client.acceptLanguage(), customHeader, query);
@@ -278,8 +281,6 @@ public class ParameterGroupingsInner {
     public Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync() {
         final FirstParameterGroupInner firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
-        Validator.validate(firstParameterGroup);
-        Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
         Integer queryOne = null;
         String headerTwo = null;
@@ -399,7 +400,6 @@ public class ParameterGroupingsInner {
      */
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync() {
         final FirstParameterGroupInner firstParameterGroup = null;
-        Validator.validate(firstParameterGroup);
         String headerOne = null;
         Integer queryOne = null;
         return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
@@ -472,5 +472,4 @@ public class ParameterGroupingsInner {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
             .toCompletable();
     }
-
 }

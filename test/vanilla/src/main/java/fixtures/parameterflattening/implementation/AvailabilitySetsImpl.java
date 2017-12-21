@@ -69,7 +69,6 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Void>> update(@PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam("application/json; charset=utf-8") AvailabilitySetUpdateParameters tags);
-
     }
 
     /**
@@ -139,5 +138,4 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
         return updateWithRestResponseAsync(resourceGroupName, avset, tags)
             .toCompletable();
     }
-
 }

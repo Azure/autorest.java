@@ -42,5 +42,4 @@ public class ArrayOptionalWrapper {
         this.value = value;
         return this;
     }
-
 }

@@ -545,5 +545,4 @@ public interface LROsCustomHeaders {
      * @return the {@link Single&lt;RestResponse&lt;LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders, Void>> postAsyncRetrySucceededWithRestResponseAsync(Product product);
-
 }

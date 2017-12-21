@@ -14,11 +14,9 @@ package fixtures.bodyduration;
  * The interface for AutoRestDurationTestService class.
  */
 public interface AutoRestDurationTestService {
-
     /**
      * Gets the Durations object to access its operations.
      * @return the Durations object.
      */
     Durations durations();
-
 }

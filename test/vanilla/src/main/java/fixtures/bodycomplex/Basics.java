@@ -238,5 +238,4 @@ public interface Basics {
      * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync();
-
 }

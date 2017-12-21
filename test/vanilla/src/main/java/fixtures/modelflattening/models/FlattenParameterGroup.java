@@ -175,5 +175,4 @@ public class FlattenParameterGroup {
         this.odatavalue = odatavalue;
         return this;
     }
-
 }

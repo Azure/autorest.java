@@ -94,5 +94,4 @@ public class Basic {
         this.color = color;
         return this;
     }
-
 }

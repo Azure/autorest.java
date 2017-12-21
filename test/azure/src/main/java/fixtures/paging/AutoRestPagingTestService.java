@@ -65,5 +65,4 @@ public interface AutoRestPagingTestService {
      * @return the Pagings object.
      */
     Pagings pagings();
-
 }

@@ -61,5 +61,4 @@ public class Product extends Resource {
     public String provisioningStateValues() {
         return this.provisioningStateValues;
     }
-
 }

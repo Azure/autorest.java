@@ -36,9 +36,14 @@ import java.io.IOException;
  * SkipUrlEncodings.
  */
 public class SkipUrlEncodingsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private SkipUrlEncodingsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -98,7 +103,6 @@ public class SkipUrlEncodingsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getSwaggerQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -487,5 +491,4 @@ public class SkipUrlEncodingsInner {
         return getSwaggerQueryValidWithRestResponseAsync()
             .toCompletable();
     }
-
 }

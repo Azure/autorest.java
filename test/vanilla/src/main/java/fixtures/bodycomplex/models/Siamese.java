@@ -41,5 +41,4 @@ public class Siamese extends Cat {
         this.breed = breed;
         return this;
     }
-
 }

@@ -42,5 +42,4 @@ public class HeaderResponseDurationHeaders {
         this.value = value;
         return this;
     }
-
 }

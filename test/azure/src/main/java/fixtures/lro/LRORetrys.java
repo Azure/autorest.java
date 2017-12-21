@@ -730,5 +730,4 @@ public interface LRORetrys {
      * @return the {@link Single&lt;RestResponse&lt;LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>> postAsyncRelativeRetrySucceededWithRestResponseAsync(Product product);
-
 }

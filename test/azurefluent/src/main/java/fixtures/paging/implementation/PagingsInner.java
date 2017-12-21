@@ -40,9 +40,14 @@ import java.util.List;
  * Pagings.
  */
 public class PagingsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PagingsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestPagingTestServiceImpl client;
 
     /**
@@ -192,7 +197,6 @@ public class PagingsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesFailureUriNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -1977,5 +1981,4 @@ public class PagingsInner {
             }
         });
     }
-
 }

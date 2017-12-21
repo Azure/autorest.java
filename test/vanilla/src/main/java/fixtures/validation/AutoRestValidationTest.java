@@ -26,7 +26,6 @@ import java.io.IOException;
  * The interface for AutoRestValidationTest class.
  */
 public interface AutoRestValidationTest {
-
     /**
      * Gets Subscription ID.
      *
@@ -100,7 +99,6 @@ public interface AutoRestValidationTest {
      */
     Single<RestResponse<Void, Product>> validationOfMethodParametersWithRestResponseAsync(String resourceGroupName, int id);
 
-
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -143,6 +141,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id);
+
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -190,7 +189,6 @@ public interface AutoRestValidationTest {
      */
     Single<RestResponse<Void, Product>> validationOfBodyWithRestResponseAsync(String resourceGroupName, int id, Product body);
 
-
     /**
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws RestException thrown if the request is rejected by server
@@ -216,7 +214,6 @@ public interface AutoRestValidationTest {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> getWithConstantInPathWithRestResponseAsync();
-
 
     /**
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -244,6 +241,7 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync();
+
     /**
      * @param body the Product value
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -274,6 +272,4 @@ public interface AutoRestValidationTest {
      * @return the observable to the Product object
      */
     Single<RestResponse<Void, Product>> postWithConstantInBodyWithRestResponseAsync(Product body);
-
-
 }

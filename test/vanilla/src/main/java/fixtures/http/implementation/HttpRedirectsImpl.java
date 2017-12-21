@@ -172,7 +172,6 @@ public class HttpRedirectsImpl implements HttpRedirects {
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
-
     }
 
     /**
@@ -1185,5 +1184,4 @@ public class HttpRedirectsImpl implements HttpRedirects {
         return delete307WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 }

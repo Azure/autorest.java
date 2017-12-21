@@ -41,9 +41,14 @@ import java.io.IOException;
  * LROs.
  */
 public class LROsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private LROsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
@@ -493,7 +498,6 @@ public class LROsInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -598,7 +602,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
 
@@ -780,7 +783,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200SucceededNoStateWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
 
@@ -962,7 +964,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -1144,7 +1145,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
@@ -1326,7 +1326,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
 
@@ -1508,7 +1507,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingFailed200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
@@ -1690,7 +1688,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
 
@@ -1872,7 +1869,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
@@ -2054,7 +2050,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -2236,7 +2231,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -2418,7 +2412,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
@@ -2600,7 +2593,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
@@ -2782,7 +2774,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
@@ -2964,7 +2955,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SkuInner>> putNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
-        Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
 
@@ -3146,7 +3136,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SkuInner>> putAsyncNonResourceWithRestResponseAsync() {
         final SkuInner sku = null;
-        Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
@@ -3328,7 +3317,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SubProductInner>> putSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
-        Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage());
     }
 
@@ -3510,7 +3498,6 @@ public class LROsInner {
      */
     public Single<RestResponse<Void, SubProductInner>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
 
@@ -4732,7 +4719,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -4898,7 +4884,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
 
@@ -5080,7 +5065,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -5262,7 +5246,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -5442,7 +5425,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailedWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
@@ -5606,7 +5588,6 @@ public class LROsInner {
      */
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeadersInner, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 
@@ -5669,5 +5650,4 @@ public class LROsInner {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
             .toCompletable();
     }
-
 }

@@ -14,7 +14,6 @@ package fixtures.url;
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
-
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path
      *
@@ -62,5 +61,4 @@ public interface AutoRestUrlTestService {
      * @return the PathItems object.
      */
     PathItems pathItems();
-
 }

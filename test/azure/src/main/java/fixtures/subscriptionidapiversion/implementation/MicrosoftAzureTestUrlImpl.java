@@ -23,8 +23,6 @@ import fixtures.subscriptionidapiversion.MicrosoftAzureTestUrl;
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
  */
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements MicrosoftAzureTestUrl {
-
-
     /**
      * Subscription Id.
      */

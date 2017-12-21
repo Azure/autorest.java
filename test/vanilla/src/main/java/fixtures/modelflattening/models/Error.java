@@ -93,5 +93,4 @@ public class Error {
         this.parentError = parentError;
         return this;
     }
-
 }

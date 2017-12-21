@@ -67,5 +67,4 @@ public class IntWrapper {
         this.field2 = field2;
         return this;
     }
-
 }

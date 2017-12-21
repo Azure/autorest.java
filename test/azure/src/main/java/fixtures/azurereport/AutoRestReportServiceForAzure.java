@@ -103,6 +103,7 @@ public interface AutoRestReportServiceForAzure {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
+
     /**
      * Get test coverage report.
      *
@@ -141,6 +142,4 @@ public interface AutoRestReportServiceForAzure {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
-
-
 }

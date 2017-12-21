@@ -70,5 +70,4 @@ public class LROSADsDelete202RetryInvalidHeaderHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

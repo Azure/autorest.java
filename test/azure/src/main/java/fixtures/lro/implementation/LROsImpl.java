@@ -68,9 +68,14 @@ import java.io.IOException;
  * LROs.
  */
 public class LROsImpl implements LROs {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private LROsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
@@ -520,7 +525,6 @@ public class LROsImpl implements LROs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -625,7 +629,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put200SucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put200Succeeded(product, this.client.acceptLanguage());
     }
 
@@ -807,7 +810,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put200SucceededNoStateWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put200SucceededNoState(product, this.client.acceptLanguage());
     }
 
@@ -989,7 +991,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put202Retry200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -1171,7 +1172,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
@@ -1353,7 +1353,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put200UpdatingSucceeded204WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put200UpdatingSucceeded204(product, this.client.acceptLanguage());
     }
 
@@ -1535,7 +1534,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put201CreatingFailed200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put201CreatingFailed200(product, this.client.acceptLanguage());
     }
 
@@ -1717,7 +1715,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Product>> put200Acceptedcanceled200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put200Acceptedcanceled200(product, this.client.acceptLanguage());
     }
 
@@ -1899,7 +1896,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetryWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
@@ -2081,7 +2077,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -2263,7 +2258,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -2445,7 +2439,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailedWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
@@ -2627,7 +2620,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceledWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncNoRetrycanceled(product, this.client.acceptLanguage());
     }
 
@@ -2809,7 +2801,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetryWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncNoHeaderInRetry(product, this.client.acceptLanguage());
     }
 
@@ -2991,7 +2982,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Sku>> putNonResourceWithRestResponseAsync() {
         final Sku sku = null;
-        Validator.validate(sku);
         return service.putNonResource(sku, this.client.acceptLanguage());
     }
 
@@ -3173,7 +3163,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, Sku>> putAsyncNonResourceWithRestResponseAsync() {
         final Sku sku = null;
-        Validator.validate(sku);
         return service.putAsyncNonResource(sku, this.client.acceptLanguage());
     }
 
@@ -3355,7 +3344,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, SubProduct>> putSubResourceWithRestResponseAsync() {
         final SubProduct product = null;
-        Validator.validate(product);
         return service.putSubResource(product, this.client.acceptLanguage());
     }
 
@@ -3537,7 +3525,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<Void, SubProduct>> putAsyncSubResourceWithRestResponseAsync() {
         final SubProduct product = null;
-        Validator.validate(product);
         return service.putAsyncSubResource(product, this.client.acceptLanguage());
     }
 
@@ -4759,7 +4746,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -4925,7 +4911,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202NoRetry204(product, this.client.acceptLanguage());
     }
 
@@ -5107,7 +5092,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -5289,7 +5273,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncNoRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -5469,7 +5452,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailedWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRetryFailed(product, this.client.acceptLanguage());
     }
 
@@ -5633,7 +5615,6 @@ public class LROsImpl implements LROs {
      */
     public Single<RestResponse<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceledWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRetrycanceled(product, this.client.acceptLanguage());
     }
 
@@ -5696,5 +5677,4 @@ public class LROsImpl implements LROs {
         return postAsyncRetrycanceledWithRestResponseAsync(product)
             .toCompletable();
     }
-
 }

@@ -67,5 +67,4 @@ public class FloatWrapper {
         this.field2 = field2;
         return this;
     }
-
 }

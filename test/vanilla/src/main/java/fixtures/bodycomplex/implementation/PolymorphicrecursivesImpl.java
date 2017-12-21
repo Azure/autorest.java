@@ -76,7 +76,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
-
     }
 
     /**
@@ -390,5 +389,4 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

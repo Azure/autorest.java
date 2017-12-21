@@ -308,6 +308,17 @@ namespace AutoRest.Java.DanModel
             Line($"}};");
         }
 
+        public void ReturnAnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
+        {
+            Line($"return {anonymousClassDeclaration} {{");
+            Indent(() =>
+            {
+                JavaClass javaClass = new JavaClass(this);
+                anonymousClassBlock.Invoke(javaClass);
+            });
+            Line("};");
+        }
+
         public void Annotation(params string[] annotations)
         {
             Annotation((IEnumerable<string>)annotations);
@@ -327,9 +338,9 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        public void PublicFinalClass(string className, Action<JavaClass> classAction)
+        public void PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
         {
-            Block($"public final class {className}", (blockAction) =>
+            Block($"public final class {classDeclaration}", (blockAction) =>
             {
                 if (classAction != null)
                 {
@@ -351,14 +362,41 @@ namespace AutoRest.Java.DanModel
             });
         }
 
+        public void PrivateStaticFinalClass(string classSignature, Action<JavaClass> classAction)
+        {
+            Block($"private static final class {classSignature}", (blockAction) =>
+            {
+                if (classAction != null)
+                {
+                    JavaClass javaClass = new JavaClass(this);
+                    classAction.Invoke(javaClass);
+                }
+            });
+        }
+
         public void PublicEnum(string enumName, Action<JavaBlock> enumAction)
         {
             Block($"public enum {enumName}", enumAction);
         }
 
-        public void PublicInterface(string interfaceName, Action<JavaBlock> enumAction)
+        public void PublicInterface(string interfaceSignature, Action<JavaInterface> interfaceAction)
         {
-            Block($"public interface {interfaceName}", enumAction);
+            Line($"public interface {interfaceSignature} {{");
+            Indent(() =>
+            {
+                interfaceAction.Invoke(new JavaInterface(this));
+            });
+            Line($"}}");
+        }
+
+        public void Interface(string interfaceSignature, Action<JavaInterface> interfaceAction)
+        {
+            Line($"interface {interfaceSignature} {{");
+            Indent(() =>
+            {
+                interfaceAction.Invoke(new JavaInterface(this));
+            });
+            Line($"}}");
         }
 
         public void CommentParam(string parameterName, string parameterDescription)

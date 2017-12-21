@@ -41,5 +41,4 @@ public class Dog extends Pet {
         this.food = food;
         return this;
     }
-
 }

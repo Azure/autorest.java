@@ -87,7 +87,6 @@ public class DurationsImpl implements Durations {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Period>> getInvalid();
-
     }
 
     /**
@@ -296,5 +295,4 @@ public class DurationsImpl implements Durations {
                 }
             });
     }
-
 }

@@ -45,6 +45,12 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
+        public JavaFile PublicFinalClass(string classDeclaration, Action<JavaClass> classAction)
+        {
+            Contents.PublicFinalClass(classDeclaration, classAction);
+            return this;
+        }
+
         public JavaFile Package(string package)
         {
             Contents.Package(package);
@@ -99,28 +105,15 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaFile Annotation(IEnumerable<string> annotations)
-        {
-            Contents.Annotation(annotations);
-            return this;
-        }
-
-        public JavaFile PublicFinalClass(string className, Action<JavaClass> classAction)
-        {
-            Contents.PublicFinalClass(className, classAction);
-            return this;
-        }
-
         public JavaFile PublicEnum(string enumName, Action<JavaBlock> enumAction)
         {
             Contents.PublicEnum(enumName, enumAction);
             return this;
         }
 
-        public JavaFile PublicInterface(string interfaceName, Action<JavaBlock> interfaceAction)
+        public void PublicInterface(string interfaceName, Action<JavaInterface> interfaceAction)
         {
             Contents.PublicInterface(interfaceName, interfaceAction);
-            return this;
         }
     }
 }

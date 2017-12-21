@@ -67,5 +67,4 @@ public class Error {
         this.message = message;
         return this;
     }
-
 }

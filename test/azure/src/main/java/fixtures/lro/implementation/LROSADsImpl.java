@@ -63,9 +63,14 @@ import java.io.IOException;
  * LROSADs.
  */
 public class LROSADsImpl implements LROSADs {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private LROSADsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
@@ -395,7 +400,6 @@ public class LROSADsImpl implements LROSADs {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPolling(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -500,7 +504,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putNonRetry400WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putNonRetry400(product, this.client.acceptLanguage());
     }
 
@@ -682,7 +685,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putNonRetry201Creating400(product, this.client.acceptLanguage());
     }
 
@@ -864,7 +866,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putNonRetry201Creating400InvalidJsonWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putNonRetry201Creating400InvalidJson(product, this.client.acceptLanguage());
     }
 
@@ -1046,7 +1047,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetry400Headers, Product>> putAsyncRelativeRetry400WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
@@ -1454,7 +1454,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostNonRetry400Headers, Void>> postNonRetry400WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postNonRetry400(product, this.client.acceptLanguage());
     }
 
@@ -1618,7 +1617,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPost202NonRetry400Headers, Void>> post202NonRetry400WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202NonRetry400(product, this.client.acceptLanguage());
     }
 
@@ -1782,7 +1780,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetry400Headers, Void>> postAsyncRelativeRetry400WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRelativeRetry400(product, this.client.acceptLanguage());
     }
 
@@ -1948,7 +1945,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> putError201NoProvisioningStatePayloadWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putError201NoProvisioningStatePayload(product, this.client.acceptLanguage());
     }
 
@@ -2130,7 +2126,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusHeaders, Product>> putAsyncRelativeRetryNoStatusWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetryNoStatus(product, this.client.acceptLanguage());
     }
 
@@ -2312,7 +2307,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>> putAsyncRelativeRetryNoStatusPayloadWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetryNoStatusPayload(product, this.client.acceptLanguage());
     }
 
@@ -2644,7 +2638,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPost202NoLocationHeaders, Void>> post202NoLocationWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202NoLocation(product, this.client.acceptLanguage());
     }
 
@@ -2808,7 +2801,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryNoPayloadHeaders, Void>> postAsyncRelativeRetryNoPayloadWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRelativeRetryNoPayload(product, this.client.acceptLanguage());
     }
 
@@ -2974,7 +2966,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<Void, Product>> put200InvalidJsonWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put200InvalidJson(product, this.client.acceptLanguage());
     }
 
@@ -3156,7 +3147,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>> putAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
@@ -3338,7 +3328,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>> putAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
@@ -3746,7 +3735,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPost202RetryInvalidHeaderHeaders, Void>> post202RetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202RetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
@@ -3910,7 +3898,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>> postAsyncRelativeRetryInvalidHeaderWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRelativeRetryInvalidHeader(product, this.client.acceptLanguage());
     }
 
@@ -4074,7 +4061,6 @@ public class LROSADsImpl implements LROSADs {
      */
     public Single<RestResponse<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>> postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.acceptLanguage());
     }
 
@@ -4137,5 +4123,4 @@ public class LROSADsImpl implements LROSADs {
         return postAsyncRelativeRetryInvalidJsonPollingWithRestResponseAsync(product)
             .toCompletable();
     }
-
 }

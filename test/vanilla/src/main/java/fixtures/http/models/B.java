@@ -41,5 +41,4 @@ public class B extends A {
         this.textStatusCode = textStatusCode;
         return this;
     }
-
 }

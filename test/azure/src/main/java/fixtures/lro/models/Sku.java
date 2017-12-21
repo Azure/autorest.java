@@ -67,5 +67,4 @@ public class Sku {
         this.id = id;
         return this;
     }
-
 }

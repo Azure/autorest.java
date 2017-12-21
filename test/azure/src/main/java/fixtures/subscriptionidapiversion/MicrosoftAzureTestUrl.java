@@ -87,5 +87,4 @@ public interface MicrosoftAzureTestUrl {
      * @return the Groups object.
      */
     Groups groups();
-
 }

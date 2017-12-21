@@ -98,7 +98,6 @@ public class BoolsImpl implements Bools {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> getInvalid();
-
     }
 
     /**
@@ -404,5 +403,4 @@ public class BoolsImpl implements Bools {
                 }
             });
     }
-
 }

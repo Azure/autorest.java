@@ -95,7 +95,6 @@ public class PolymorphismsImpl implements Polymorphisms {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
-
     }
 
     /**
@@ -585,5 +584,4 @@ public class PolymorphismsImpl implements Polymorphisms {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

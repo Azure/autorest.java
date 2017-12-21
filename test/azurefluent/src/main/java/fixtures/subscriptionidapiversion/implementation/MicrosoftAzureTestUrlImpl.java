@@ -21,8 +21,6 @@ import com.microsoft.rest.v2.http.HttpPipeline;
  * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
  */
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
-
-
     /**
      * Subscription Id.
      */

@@ -76,7 +76,6 @@ public class InheritancesImpl implements Inheritances {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
-
     }
 
     /**
@@ -182,5 +181,4 @@ public class InheritancesImpl implements Inheritances {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

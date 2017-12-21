@@ -346,5 +346,4 @@ public interface Datetimerfc1123s {
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getUtcMinDateTimeWithRestResponseAsync();
-
 }

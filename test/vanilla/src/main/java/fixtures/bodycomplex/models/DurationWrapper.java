@@ -42,5 +42,4 @@ public class DurationWrapper {
         this.field = field;
         return this;
     }
-
 }

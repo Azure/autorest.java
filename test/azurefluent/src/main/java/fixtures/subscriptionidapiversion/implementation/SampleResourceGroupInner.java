@@ -67,5 +67,4 @@ public class SampleResourceGroupInner {
         this.location = location;
         return this;
     }
-
 }

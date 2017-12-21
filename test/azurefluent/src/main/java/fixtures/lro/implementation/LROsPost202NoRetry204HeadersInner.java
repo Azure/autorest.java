@@ -69,5 +69,4 @@ public class LROsPost202NoRetry204HeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

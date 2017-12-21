@@ -465,7 +465,6 @@ public class DictionarysImpl implements Dictionarys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDictionaryValid(@BodyParam("application/json; charset=utf-8") Map<String, Map<String, String>> arrayBody);
-
     }
 
     /**
@@ -3852,5 +3851,4 @@ public class DictionarysImpl implements Dictionarys {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
-
 }

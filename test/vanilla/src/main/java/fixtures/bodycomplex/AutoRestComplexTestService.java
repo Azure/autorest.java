@@ -14,7 +14,6 @@ package fixtures.bodycomplex;
  * The interface for AutoRestComplexTestService class.
  */
 public interface AutoRestComplexTestService {
-
     /**
      * Gets API ID.
      *
@@ -77,5 +76,4 @@ public interface AutoRestComplexTestService {
      * @return the Readonlypropertys object.
      */
     Readonlypropertys readonlypropertys();
-
 }

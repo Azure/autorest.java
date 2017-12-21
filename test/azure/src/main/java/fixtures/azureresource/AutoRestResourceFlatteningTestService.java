@@ -107,6 +107,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync();
+
     /**
      * Put External Resource as an Array.
      *
@@ -145,7 +146,6 @@ public interface AutoRestResourceFlatteningTestService {
      */
     Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync(List<Resource> resourceArray);
 
-
     /**
      * Get External Resource as an Array.
      *
@@ -181,7 +181,6 @@ public interface AutoRestResourceFlatteningTestService {
      */
     Single<RestResponse<Void, List<FlattenedProduct>>> getArrayWithRestResponseAsync();
 
-
     /**
      * Put External Resource as a Dictionary.
      *
@@ -215,6 +214,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync();
+
     /**
      * Put External Resource as a Dictionary.
      *
@@ -253,7 +253,6 @@ public interface AutoRestResourceFlatteningTestService {
      */
     Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
 
-
     /**
      * Get External Resource as a Dictionary.
      *
@@ -289,7 +288,6 @@ public interface AutoRestResourceFlatteningTestService {
      */
     Single<RestResponse<Void, Map<String, FlattenedProduct>>> getDictionaryWithRestResponseAsync();
 
-
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -323,6 +321,7 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Single<Void>} object if successful.
      */
     Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync();
+
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -361,7 +360,6 @@ public interface AutoRestResourceFlatteningTestService {
      */
     Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync(ResourceCollection resourceComplexObject);
 
-
     /**
      * Get External Resource as a ResourceCollection.
      *
@@ -396,6 +394,4 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the observable to the ResourceCollection object
      */
     Single<RestResponse<Void, ResourceCollection>> getResourceCollectionWithRestResponseAsync();
-
-
 }

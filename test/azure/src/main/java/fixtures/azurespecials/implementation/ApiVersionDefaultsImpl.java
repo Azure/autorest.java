@@ -36,9 +36,14 @@ import java.io.IOException;
  * ApiVersionDefaults.
  */
 public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private ApiVersionDefaultsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -80,7 +85,6 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getSwaggerGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -270,5 +274,4 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
     }
-
 }

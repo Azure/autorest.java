@@ -385,5 +385,4 @@ public interface Implicits {
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> getOptionalGlobalQueryWithRestResponseAsync();
-
 }

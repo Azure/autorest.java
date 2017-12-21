@@ -41,9 +41,14 @@ import java.io.IOException;
  * LRORetrys.
  */
 public class LRORetrysInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private LRORetrysService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
@@ -145,7 +150,6 @@ public class LRORetrysInner {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void>> postAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -250,7 +254,6 @@ public class LRORetrysInner {
      */
     public Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
@@ -432,7 +435,6 @@ public class LRORetrysInner {
      */
     public Single<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>> putAsyncRelativeRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -849,7 +851,6 @@ public class LRORetrysInner {
      */
     public Single<RestResponse<LRORetrysPost202Retry200HeadersInner, Void>> post202Retry200WithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -1013,7 +1014,6 @@ public class LRORetrysInner {
      */
     public Single<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner, Void>> postAsyncRelativeRetrySucceededWithRestResponseAsync() {
         final ProductInner product = null;
-        Validator.validate(product);
         return service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -1076,5 +1076,4 @@ public class LRORetrysInner {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
             .toCompletable();
     }
-
 }

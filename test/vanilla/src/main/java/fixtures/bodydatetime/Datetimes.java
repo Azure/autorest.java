@@ -708,5 +708,4 @@ public interface Datetimes {
      * @return the {@link Single&lt;RestResponse&lt;Void, DateTime&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTimeWithRestResponseAsync();
-
 }

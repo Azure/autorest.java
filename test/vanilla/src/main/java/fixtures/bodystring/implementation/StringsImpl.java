@@ -145,7 +145,6 @@ public class StringsImpl implements Strings {
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getNullBase64UrlEncoded();
-
     }
 
     /**
@@ -861,5 +860,4 @@ public class StringsImpl implements Strings {
                 }
             });
     }
-
 }

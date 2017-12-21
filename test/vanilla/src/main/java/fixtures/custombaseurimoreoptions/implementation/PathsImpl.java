@@ -68,7 +68,6 @@ public class PathsImpl implements Paths {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
-
     }
 
     /**
@@ -217,5 +216,4 @@ public class PathsImpl implements Paths {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
             .toCompletable();
     }
-
 }

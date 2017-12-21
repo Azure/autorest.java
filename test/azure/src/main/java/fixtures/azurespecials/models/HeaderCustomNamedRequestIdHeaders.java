@@ -41,5 +41,4 @@ public class HeaderCustomNamedRequestIdHeaders {
         this.fooRequestId = fooRequestId;
         return this;
     }
-
 }

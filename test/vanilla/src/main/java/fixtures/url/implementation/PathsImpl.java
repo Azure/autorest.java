@@ -225,7 +225,6 @@ public class PathsImpl implements Paths {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> unixTimeUrl(@PathParam("unixTimeUrlPath") long unixTimeUrlPath);
-
     }
 
     /**
@@ -1461,5 +1460,4 @@ public class PathsImpl implements Paths {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
             .toCompletable();
     }
-
 }

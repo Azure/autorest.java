@@ -14,11 +14,9 @@ package fixtures.bodyfile;
  * The interface for AutoRestSwaggerBATFileService class.
  */
 public interface AutoRestSwaggerBATFileService {
-
     /**
      * Gets the Files object to access its operations.
      * @return the Files object.
      */
     Files files();
-
 }

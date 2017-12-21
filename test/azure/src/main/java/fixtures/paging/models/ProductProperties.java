@@ -67,5 +67,4 @@ public class ProductProperties {
         this.name = name;
         return this;
     }
-
 }

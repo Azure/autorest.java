@@ -20,7 +20,6 @@ import fixtures.custombaseuri.Paths;
  * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
  */
 public class AutoRestParameterizedHostTestClientImpl extends ServiceClient implements AutoRestParameterizedHostTestClient {
-
     /**
      * A string value that is used as a global part of the parameterized host.
      */

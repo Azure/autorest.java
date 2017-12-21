@@ -41,9 +41,14 @@ import java.io.IOException;
  * Headers.
  */
 public class HeadersImpl implements fixtures.azurespecials.Headers {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HeadersService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -79,7 +84,6 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HeaderCustomNamedRequestIdHeadHeaders, Boolean>> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -244,5 +248,4 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
                 }
             });
     }
-
 }

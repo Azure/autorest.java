@@ -76,7 +76,6 @@ public class FormdatasImpl implements Formdatas {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> uploadFileViaBody(@BodyParam("application/octet-stream") byte[] fileContent);
-
     }
 
     /**
@@ -203,5 +202,4 @@ public class FormdatasImpl implements Formdatas {
                 }
             });
     }
-
 }

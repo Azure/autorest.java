@@ -153,7 +153,6 @@ public class IntsImpl implements Ints {
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateTime>> getNullUnixTime();
-
     }
 
     /**
@@ -864,5 +863,4 @@ public class IntsImpl implements Ints {
                 }
             });
     }
-
 }

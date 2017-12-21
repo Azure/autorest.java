@@ -99,5 +99,4 @@ public class LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

@@ -68,5 +68,4 @@ public class PagingGetOdataMultiplePagesOptionsInner {
         this.timeout = timeout;
         return this;
     }
-
 }

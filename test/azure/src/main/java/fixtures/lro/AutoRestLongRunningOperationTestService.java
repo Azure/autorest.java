@@ -86,5 +86,4 @@ public interface AutoRestLongRunningOperationTestService {
      * @return the LROsCustomHeaders object.
      */
     LROsCustomHeaders lROsCustomHeaders();
-
 }

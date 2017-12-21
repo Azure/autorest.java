@@ -104,7 +104,6 @@ public class ImplicitsImpl implements Implicits {
         @GET("reqopt/global/optional/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);
-
     }
 
     /**
@@ -606,5 +605,4 @@ public class ImplicitsImpl implements Implicits {
                 }
             });
     }
-
 }

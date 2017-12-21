@@ -1293,5 +1293,4 @@ public interface Headers {
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> customRequestIdWithRestResponseAsync();
-
 }

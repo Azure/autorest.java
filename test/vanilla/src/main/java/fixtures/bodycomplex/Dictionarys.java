@@ -241,5 +241,4 @@ public interface Dictionarys {
      * @return the {@link Single&lt;RestResponse&lt;Void, DictionaryWrapper&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, DictionaryWrapper>> getNotProvidedWithRestResponseAsync();
-
 }

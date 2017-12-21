@@ -34,9 +34,14 @@ import java.io.IOException;
  * HttpSuccess.
  */
 public class HttpSuccessInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HttpSuccessService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestHeadTestServiceImpl client;
 
     /**
@@ -72,7 +77,6 @@ public class HttpSuccessInner {
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Boolean>> head404(@HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -230,5 +234,4 @@ public class HttpSuccessInner {
                 }
             });
     }
-
 }

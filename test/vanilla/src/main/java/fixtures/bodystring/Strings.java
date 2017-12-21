@@ -528,5 +528,4 @@ public interface Strings {
      * @return the {@link Single&lt;RestResponse&lt;Void, byte[]&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, byte[]>> getNullBase64UrlEncodedWithRestResponseAsync();
-
 }

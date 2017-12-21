@@ -247,7 +247,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         @GET("http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA202Valid();
-
     }
 
     /**
@@ -1929,5 +1928,4 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 }

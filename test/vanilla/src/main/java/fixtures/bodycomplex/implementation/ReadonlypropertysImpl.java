@@ -76,7 +76,6 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
-
     }
 
     /**
@@ -182,5 +181,4 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

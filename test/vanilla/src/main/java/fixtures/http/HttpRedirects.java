@@ -817,5 +817,4 @@ public interface HttpRedirects {
      * @return the {@link Single&lt;RestResponse&lt;HttpRedirectsDelete307Headers, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<HttpRedirectsDelete307Headers, Void>> delete307WithRestResponseAsync(Boolean booleanValue);
-
 }

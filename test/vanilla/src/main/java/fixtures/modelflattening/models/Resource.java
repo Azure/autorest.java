@@ -113,5 +113,4 @@ public class Resource {
     public String name() {
         return this.name;
     }
-
 }

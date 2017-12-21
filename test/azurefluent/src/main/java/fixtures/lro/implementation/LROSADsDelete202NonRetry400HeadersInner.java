@@ -69,5 +69,4 @@ public class LROSADsDelete202NonRetry400HeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

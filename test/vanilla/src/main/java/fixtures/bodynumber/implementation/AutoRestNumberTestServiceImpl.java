@@ -20,7 +20,6 @@ import fixtures.bodynumber.Numbers;
  * Initializes a new instance of the AutoRestNumberTestService class.
  */
 public class AutoRestNumberTestServiceImpl extends ServiceClient implements AutoRestNumberTestService {
-
     /**
      * The Numbers object to access its operations.
      */

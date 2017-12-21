@@ -23,8 +23,6 @@ import fixtures.paging.Pagings;
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
  */
 public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
-
-
     /**
      * Gets or sets the preferred language for the response.
      */

@@ -99,5 +99,4 @@ public class LROSADsPostAsyncRelativeRetryNoPayloadHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

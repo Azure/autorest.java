@@ -14,11 +14,9 @@ package fixtures.bodydatetime;
  * The interface for AutoRestDateTimeTestService class.
  */
 public interface AutoRestDateTimeTestService {
-
     /**
      * Gets the Datetimes object to access its operations.
      * @return the Datetimes object.
      */
     Datetimes datetimes();
-
 }

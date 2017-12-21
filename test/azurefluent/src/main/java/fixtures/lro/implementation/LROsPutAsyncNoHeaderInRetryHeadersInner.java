@@ -41,5 +41,4 @@ public class LROsPutAsyncNoHeaderInRetryHeadersInner {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
     }
-
 }

@@ -14,11 +14,9 @@ package fixtures.bodyboolean;
  * The interface for AutoRestBoolTestService class.
  */
 public interface AutoRestBoolTestService {
-
     /**
      * Gets the Bools object to access its operations.
      * @return the Bools object.
      */
     Bools bools();
-
 }

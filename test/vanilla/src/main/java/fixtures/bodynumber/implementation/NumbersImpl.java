@@ -207,7 +207,6 @@ public class NumbersImpl implements Numbers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, BigDecimal>> getSmallDecimal();
-
     }
 
     /**
@@ -1429,5 +1428,4 @@ public class NumbersImpl implements Numbers {
                 }
             });
     }
-
 }

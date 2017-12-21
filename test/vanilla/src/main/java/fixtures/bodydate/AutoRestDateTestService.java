@@ -14,11 +14,9 @@ package fixtures.bodydate;
  * The interface for AutoRestDateTestService class.
  */
 public interface AutoRestDateTestService {
-
     /**
      * Gets the Dates object to access its operations.
      * @return the Dates object.
      */
     Dates dates();
-
 }

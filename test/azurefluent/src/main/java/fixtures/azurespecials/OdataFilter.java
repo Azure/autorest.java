@@ -67,5 +67,4 @@ public class OdataFilter {
         this.name = name;
         return this;
     }
-
 }

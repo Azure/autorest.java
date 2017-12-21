@@ -20,7 +20,6 @@ import fixtures.bodyduration.Durations;
  * Initializes a new instance of the AutoRestDurationTestService class.
  */
 public class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
-
     /**
      * The Durations object to access its operations.
      */

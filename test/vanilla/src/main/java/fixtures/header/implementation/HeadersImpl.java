@@ -253,7 +253,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> customRequestId();
-
     }
 
     /**
@@ -1938,5 +1937,4 @@ public class HeadersImpl implements fixtures.header.Headers {
         return customRequestIdWithRestResponseAsync()
             .toCompletable();
     }
-
 }

@@ -168,5 +168,4 @@ public interface Durations {
      * @return the {@link Single&lt;RestResponse&lt;Void, Period&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Period>> getInvalidWithRestResponseAsync();
-
 }

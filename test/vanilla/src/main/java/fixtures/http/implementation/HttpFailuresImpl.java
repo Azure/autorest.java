@@ -76,7 +76,6 @@ public class HttpFailuresImpl implements HttpFailures {
         @GET("http/failure/nomodel/empty")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Boolean>> getNoModelEmpty();
-
     }
 
     /**
@@ -234,5 +233,4 @@ public class HttpFailuresImpl implements HttpFailures {
                 }
             });
     }
-
 }

@@ -466,7 +466,6 @@ public class ArraysImpl implements Arrays {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putDictionaryValid(@BodyParam("application/json; charset=utf-8") List<Map<String, String>> arrayBody);
-
     }
 
     /**
@@ -3853,5 +3852,4 @@ public class ArraysImpl implements Arrays {
         return putDictionaryValidWithRestResponseAsync(arrayBody)
             .toCompletable();
     }
-
 }

@@ -81,7 +81,6 @@ public class FilesImpl implements Files {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> getEmptyFile();
-
     }
 
     /**
@@ -239,5 +238,4 @@ public class FilesImpl implements Files {
                 }
             });
     }
-
 }

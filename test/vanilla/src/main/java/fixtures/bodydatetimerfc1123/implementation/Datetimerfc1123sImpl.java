@@ -126,7 +126,6 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateTime>> getUtcMinDateTime();
-
     }
 
     /**
@@ -596,5 +595,4 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 }
             });
     }
-
 }

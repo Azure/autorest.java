@@ -38,9 +38,14 @@ import java.io.IOException;
  * Groups.
  */
 public class GroupsImpl implements Groups {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private GroupsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private MicrosoftAzureTestUrlImpl client;
 
     /**
@@ -64,7 +69,6 @@ public class GroupsImpl implements Groups {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, SampleResourceGroup>> getSampleResourceGroup(@PathParam("subscriptionId") String subscriptionId, @PathParam("resourceGroupName") String resourceGroupName, @QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -131,5 +135,4 @@ public class GroupsImpl implements Groups {
                 }
             });
     }
-
 }

@@ -93,5 +93,4 @@ public class StringWrapper {
         this.nullProperty = nullProperty;
         return this;
     }
-
 }

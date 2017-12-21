@@ -113,7 +113,6 @@ public class HttpRetrysImpl implements HttpRetrys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
-
     }
 
     /**
@@ -761,5 +760,4 @@ public class HttpRetrysImpl implements HttpRetrys {
         return patch504WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 }

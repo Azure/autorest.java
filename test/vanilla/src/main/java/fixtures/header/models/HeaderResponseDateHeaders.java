@@ -42,5 +42,4 @@ public class HeaderResponseDateHeaders {
         this.value = value;
         return this;
     }
-
 }

@@ -177,7 +177,6 @@ public class DatetimesImpl implements Datetimes {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTime();
-
     }
 
     /**
@@ -1161,5 +1160,4 @@ public class DatetimesImpl implements Datetimes {
                 }
             });
     }
-
 }

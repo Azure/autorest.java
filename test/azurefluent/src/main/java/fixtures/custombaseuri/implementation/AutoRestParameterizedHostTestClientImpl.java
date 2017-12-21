@@ -21,8 +21,6 @@ import com.microsoft.rest.v2.http.HttpPipeline;
  * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
  */
 public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient {
-
-
     /**
      * A string value that is used as a global part of the parameterized host.
      */

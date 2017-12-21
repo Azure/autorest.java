@@ -101,7 +101,6 @@ public class BasicsImpl implements Basics {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Basic>> getNotProvided();
-
     }
 
     /**
@@ -415,5 +414,4 @@ public class BasicsImpl implements Basics {
                 }
             });
     }
-
 }

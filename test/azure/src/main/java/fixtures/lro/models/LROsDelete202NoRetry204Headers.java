@@ -69,5 +69,4 @@ public class LROsDelete202NoRetry204Headers {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

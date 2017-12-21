@@ -206,7 +206,6 @@ public class PrimitivesImpl implements Primitives {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
-
     }
 
     /**
@@ -1352,5 +1351,4 @@ public class PrimitivesImpl implements Primitives {
         return putByteWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

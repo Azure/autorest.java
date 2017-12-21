@@ -69,5 +69,4 @@ public class FirstParameterGroup {
         this.queryOne = queryOne;
         return this;
     }
-
 }

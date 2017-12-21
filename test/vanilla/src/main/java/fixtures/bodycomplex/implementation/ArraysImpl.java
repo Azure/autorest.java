@@ -94,7 +94,6 @@ public class ArraysImpl implements Arrays {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ArrayWrapper>> getNotProvided();
-
     }
 
     /**
@@ -356,5 +355,4 @@ public class ArraysImpl implements Arrays {
                 }
             });
     }
-
 }

@@ -14,11 +14,9 @@ package fixtures.header;
  * The interface for AutoRestSwaggerBATHeaderService class.
  */
 public interface AutoRestSwaggerBATHeaderService {
-
     /**
      * Gets the Headers object to access its operations.
      * @return the Headers object.
      */
     Headers headers();
-
 }

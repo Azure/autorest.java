@@ -180,7 +180,6 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
         @HEAD("http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head429();
-
     }
 
     /**
@@ -2119,5 +2118,4 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                 }
             });
     }
-
 }

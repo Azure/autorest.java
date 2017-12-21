@@ -42,5 +42,4 @@ public class ArrayWrapper {
         this.array = array;
         return this;
     }
-
 }

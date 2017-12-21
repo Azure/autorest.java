@@ -43,5 +43,4 @@ public class OperationResult {
         this.status = status;
         return this;
     }
-
 }

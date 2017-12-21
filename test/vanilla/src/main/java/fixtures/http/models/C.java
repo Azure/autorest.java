@@ -41,5 +41,4 @@ public class C {
         this.httpCode = httpCode;
         return this;
     }
-
 }

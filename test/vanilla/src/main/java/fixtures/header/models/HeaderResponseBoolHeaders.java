@@ -41,5 +41,4 @@ public class HeaderResponseBoolHeaders {
         this.value = value;
         return this;
     }
-
 }

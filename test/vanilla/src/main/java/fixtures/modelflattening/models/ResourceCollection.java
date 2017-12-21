@@ -95,5 +95,4 @@ public class ResourceCollection {
         this.dictionaryofresources = dictionaryofresources;
         return this;
     }
-
 }
