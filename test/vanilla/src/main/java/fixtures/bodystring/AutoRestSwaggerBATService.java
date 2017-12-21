@@ -14,7 +14,6 @@ package fixtures.bodystring;
  * The interface for AutoRestSwaggerBATService class.
  */
 public interface AutoRestSwaggerBATService {
-
     /**
      * Gets the Strings object to access its operations.
      * @return the Strings object.
@@ -26,5 +25,4 @@ public interface AutoRestSwaggerBATService {
      * @return the Enums object.
      */
     Enums enums();
-
 }

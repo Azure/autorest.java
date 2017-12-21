@@ -67,5 +67,4 @@ public class Widget {
         this.stringProperty = stringProperty;
         return this;
     }
-
 }

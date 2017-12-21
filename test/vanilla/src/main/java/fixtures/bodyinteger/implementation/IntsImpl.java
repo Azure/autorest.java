@@ -56,7 +56,7 @@ public class IntsImpl implements Ints {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public IntsImpl(AutoRestIntegerTestServiceImpl client) {
+    public public IntsImpl(AutoRestIntegerTestServiceImpl client) {
         this.service = RestProxy.create(IntsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -153,7 +153,6 @@ public class IntsImpl implements Ints {
         @ReturnValueWireType(UnixTime.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateTime>> getNullUnixTime();
-
     }
 
     /**
@@ -864,5 +863,4 @@ public class IntsImpl implements Ints {
                 }
             });
     }
-
 }

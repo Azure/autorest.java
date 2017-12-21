@@ -35,9 +35,14 @@ import java.io.IOException;
  * SubscriptionInMethods.
  */
 public class SubscriptionInMethodsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private SubscriptionInMethodsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -79,7 +84,6 @@ public class SubscriptionInMethodsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postSwaggerLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -285,5 +289,4 @@ public class SubscriptionInMethodsInner {
         return postSwaggerLocalValidWithRestResponseAsync(subscriptionId)
             .toCompletable();
     }
-
 }

@@ -50,7 +50,7 @@ public class FilesImpl implements Files {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
+    public public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
         this.service = RestProxy.create(FilesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -81,7 +81,6 @@ public class FilesImpl implements Files {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> getEmptyFile();
-
     }
 
     /**
@@ -239,5 +238,4 @@ public class FilesImpl implements Files {
                 }
             });
     }
-
 }

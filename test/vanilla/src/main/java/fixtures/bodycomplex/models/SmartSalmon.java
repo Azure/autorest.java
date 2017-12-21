@@ -72,5 +72,4 @@ public class SmartSalmon extends Salmon {
         this.collegeDegree = collegeDegree;
         return this;
     }
-
 }

@@ -42,5 +42,4 @@ public class HttpRedirectsGet300Headers {
         this.location = location;
         return this;
     }
-
 }

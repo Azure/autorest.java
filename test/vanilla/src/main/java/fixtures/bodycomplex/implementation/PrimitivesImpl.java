@@ -64,7 +64,7 @@ public class PrimitivesImpl implements Primitives {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
+    public public PrimitivesImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(PrimitivesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -206,7 +206,6 @@ public class PrimitivesImpl implements Primitives {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putByte(@BodyParam("application/json; charset=utf-8") ByteWrapper complexBody);
-
     }
 
     /**
@@ -1352,5 +1351,4 @@ public class PrimitivesImpl implements Primitives {
         return putByteWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

@@ -24,7 +24,6 @@ import java.util.Map;
  * The interface for AutoRestReportService class.
  */
 public interface AutoRestReportService {
-
     /**
      * Get test coverage report.
      *
@@ -59,6 +58,7 @@ public interface AutoRestReportService {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
+
     /**
      * Get test coverage report.
      *
@@ -97,6 +97,4 @@ public interface AutoRestReportService {
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
-
-
 }

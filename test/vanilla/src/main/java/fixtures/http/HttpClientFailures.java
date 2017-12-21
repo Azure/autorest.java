@@ -1336,5 +1336,4 @@ public interface HttpClientFailures {
      * @return the {@link Single&lt;RestResponse&lt;Void, Error&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Error>> head429WithRestResponseAsync();
-
 }

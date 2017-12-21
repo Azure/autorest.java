@@ -42,5 +42,4 @@ public class DictionaryWrapper {
         this.defaultProgram = defaultProgram;
         return this;
     }
-
 }

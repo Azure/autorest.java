@@ -21,8 +21,6 @@ import com.microsoft.rest.v2.http.HttpPipeline;
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
  */
 public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
-
-
     /**
      * Gets or sets the preferred language for the response.
      */

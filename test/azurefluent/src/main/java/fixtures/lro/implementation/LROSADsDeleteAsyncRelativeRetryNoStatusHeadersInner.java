@@ -99,5 +99,4 @@ public class LROSADsDeleteAsyncRelativeRetryNoStatusHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

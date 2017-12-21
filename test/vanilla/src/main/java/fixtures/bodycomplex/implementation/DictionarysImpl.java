@@ -54,7 +54,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public DictionarysImpl(AutoRestComplexTestServiceImpl client) {
+    public public DictionarysImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(DictionarysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -100,7 +100,6 @@ public class DictionarysImpl implements Dictionarys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DictionaryWrapper>> getNotProvided();
-
     }
 
     /**
@@ -414,5 +413,4 @@ public class DictionarysImpl implements Dictionarys {
                 }
             });
     }
-
 }

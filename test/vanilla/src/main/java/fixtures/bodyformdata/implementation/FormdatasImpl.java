@@ -52,7 +52,7 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
+    public public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
         this.service = RestProxy.create(FormdatasService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -76,7 +76,6 @@ public class FormdatasImpl implements Formdatas {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> uploadFileViaBody(@BodyParam("application/octet-stream") byte[] fileContent);
-
     }
 
     /**
@@ -203,5 +202,4 @@ public class FormdatasImpl implements Formdatas {
                 }
             });
     }
-
 }

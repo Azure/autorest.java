@@ -54,7 +54,7 @@ public class InheritancesImpl implements Inheritances {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public InheritancesImpl(AutoRestComplexTestServiceImpl client) {
+    public public InheritancesImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(InheritancesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -76,7 +76,6 @@ public class InheritancesImpl implements Inheritances {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Siamese complexBody);
-
     }
 
     /**
@@ -182,5 +181,4 @@ public class InheritancesImpl implements Inheritances {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

@@ -97,5 +97,4 @@ public class LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

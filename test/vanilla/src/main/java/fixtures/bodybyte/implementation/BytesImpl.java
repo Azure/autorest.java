@@ -52,7 +52,7 @@ public class BytesImpl implements Bytes {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public BytesImpl(AutoRestSwaggerBATByteServiceImpl client) {
+    public public BytesImpl(AutoRestSwaggerBATByteServiceImpl client) {
         this.service = RestProxy.create(BytesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -92,7 +92,6 @@ public class BytesImpl implements Bytes {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getInvalid();
-
     }
 
     /**
@@ -353,5 +352,4 @@ public class BytesImpl implements Bytes {
                 }
             });
     }
-
 }

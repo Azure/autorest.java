@@ -14,11 +14,9 @@ package fixtures.bodydatetimerfc1123;
  * The interface for AutoRestRFC1123DateTimeTestService class.
  */
 public interface AutoRestRFC1123DateTimeTestService {
-
     /**
      * Gets the Datetimerfc1123s object to access its operations.
      * @return the Datetimerfc1123s object.
      */
     Datetimerfc1123s datetimerfc1123s();
-
 }

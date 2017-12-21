@@ -53,7 +53,7 @@ public class DatesImpl implements Dates {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public DatesImpl(AutoRestDateTestServiceImpl client) {
+    public public DatesImpl(AutoRestDateTestServiceImpl client) {
         this.service = RestProxy.create(DatesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -111,7 +111,6 @@ public class DatesImpl implements Dates {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, LocalDate>> getMinDate();
-
     }
 
     /**
@@ -527,5 +526,4 @@ public class DatesImpl implements Dates {
                 }
             });
     }
-
 }

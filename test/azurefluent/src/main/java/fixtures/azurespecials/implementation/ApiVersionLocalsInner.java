@@ -35,9 +35,14 @@ import java.io.IOException;
  * ApiVersionLocals.
  */
 public class ApiVersionLocalsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private ApiVersionLocalsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -79,7 +84,6 @@ public class ApiVersionLocalsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getSwaggerLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -309,5 +313,4 @@ public class ApiVersionLocalsInner {
         return getSwaggerLocalValidWithRestResponseAsync()
             .toCompletable();
     }
-
 }

@@ -42,5 +42,4 @@ public class ProductInner {
         this.properties = properties;
         return this;
     }
-
 }

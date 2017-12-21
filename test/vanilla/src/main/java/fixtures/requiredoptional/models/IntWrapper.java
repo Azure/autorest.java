@@ -41,5 +41,4 @@ public class IntWrapper {
         this.value = value;
         return this;
     }
-
 }

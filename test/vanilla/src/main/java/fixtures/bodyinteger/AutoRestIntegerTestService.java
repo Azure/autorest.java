@@ -14,11 +14,9 @@ package fixtures.bodyinteger;
  * The interface for AutoRestIntegerTestService class.
  */
 public interface AutoRestIntegerTestService {
-
     /**
      * Gets the Ints object to access its operations.
      * @return the Ints object.
      */
     Ints ints();
-
 }

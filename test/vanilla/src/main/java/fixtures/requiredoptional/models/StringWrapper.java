@@ -41,5 +41,4 @@ public class StringWrapper {
         this.value = value;
         return this;
     }
-
 }

@@ -42,5 +42,4 @@ public class HeaderResponseEnumHeaders {
         this.value = value;
         return this;
     }
-
 }

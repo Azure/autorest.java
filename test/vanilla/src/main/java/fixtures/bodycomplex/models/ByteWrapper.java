@@ -41,5 +41,4 @@ public class ByteWrapper {
         this.field = field;
         return this;
     }
-
 }

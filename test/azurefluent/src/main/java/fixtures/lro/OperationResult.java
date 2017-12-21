@@ -69,5 +69,4 @@ public class OperationResult {
         this.error = error;
         return this;
     }
-
 }

@@ -23,8 +23,6 @@ import fixtures.headexceptions.HeadExceptions;
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl class.
  */
 public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient implements AutoRestHeadExceptionTestService {
-
-
     /**
      * Gets or sets the preferred language for the response.
      */

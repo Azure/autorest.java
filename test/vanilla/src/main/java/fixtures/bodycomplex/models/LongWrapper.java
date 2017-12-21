@@ -67,5 +67,4 @@ public class LongWrapper {
         this.field2 = field2;
         return this;
     }
-
 }

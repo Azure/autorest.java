@@ -14,7 +14,6 @@ package fixtures.http;
  * The interface for AutoRestHttpInfrastructureTestService class.
  */
 public interface AutoRestHttpInfrastructureTestService {
-
     /**
      * Gets the HttpFailures object to access its operations.
      * @return the HttpFailures object.
@@ -56,5 +55,4 @@ public interface AutoRestHttpInfrastructureTestService {
      * @return the MultipleResponses object.
      */
     MultipleResponses multipleResponses();
-
 }

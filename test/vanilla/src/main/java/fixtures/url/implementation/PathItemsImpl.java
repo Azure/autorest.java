@@ -51,7 +51,7 @@ public class PathItemsImpl implements PathItems {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public PathItemsImpl(AutoRestUrlTestServiceImpl client) {
+    public public PathItemsImpl(AutoRestUrlTestServiceImpl client) {
         this.service = RestProxy.create(PathItemsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -85,7 +85,6 @@ public class PathItemsImpl implements PathItems {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getLocalPathItemQueryNull(@PathParam("localStringPath") String localStringPath, @PathParam("pathItemStringPath") String pathItemStringPath, @PathParam("globalStringPath") String globalStringPath, @QueryParam("localStringQuery") String localStringQuery, @QueryParam("pathItemStringQuery") String pathItemStringQuery, @QueryParam("globalStringQuery") String globalStringQuery);
-
     }
 
     /**
@@ -615,5 +614,4 @@ public class PathItemsImpl implements PathItems {
         return getLocalPathItemQueryNullWithRestResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery)
             .toCompletable();
     }
-
 }

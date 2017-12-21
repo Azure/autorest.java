@@ -136,5 +136,4 @@ public interface AutoRestAzureSpecialParametersTestClient {
      * @return the Headers object.
      */
     Headers headers();
-
 }

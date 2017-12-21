@@ -75,5 +75,4 @@ public class ConstantProduct {
         this.constProperty2 = constProperty2;
         return this;
     }
-
 }

@@ -53,7 +53,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public NumbersImpl(AutoRestNumberTestServiceImpl client) {
+    public public NumbersImpl(AutoRestNumberTestServiceImpl client) {
         this.service = RestProxy.create(NumbersService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -207,7 +207,6 @@ public class NumbersImpl implements Numbers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, BigDecimal>> getSmallDecimal();
-
     }
 
     /**
@@ -1429,5 +1428,4 @@ public class NumbersImpl implements Numbers {
                 }
             });
     }
-
 }

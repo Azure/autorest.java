@@ -54,7 +54,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public ReadonlypropertysImpl(AutoRestComplexTestServiceImpl client) {
+    public public ReadonlypropertysImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(ReadonlypropertysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -76,7 +76,6 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") ReadonlyObj complexBody);
-
     }
 
     /**
@@ -182,5 +181,4 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

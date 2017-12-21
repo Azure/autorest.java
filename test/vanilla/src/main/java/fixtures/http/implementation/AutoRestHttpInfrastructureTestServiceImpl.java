@@ -26,7 +26,6 @@ import fixtures.http.MultipleResponses;
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
  */
 public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
-
     /**
      * The HttpFailures object to access its operations.
      */

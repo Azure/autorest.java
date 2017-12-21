@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AutoRest.Java.DanModel
 {
@@ -7,9 +6,9 @@ namespace AutoRest.Java.DanModel
     {
         private readonly JavaFileContents contents;
 
-        public JavaBlock(JavaFileContents file)
+        public JavaBlock(JavaFileContents contents)
         {
-            this.contents = file;
+            this.contents = contents;
         }
 
         public JavaBlock Indent(Action indentAction)
@@ -27,12 +26,6 @@ namespace AutoRest.Java.DanModel
         public JavaBlock DecreaseIndent()
         {
             contents.DecreaseIndent();
-            return this;
-        }
-
-        public JavaBlock Text(string text)
-        {
-            contents.Text(text);
             return this;
         }
 
@@ -54,34 +47,15 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaBlock BlockStatement(string text, Action<JavaBlock> bodyAction)
-        {
-            contents.BlockStatement(text, bodyAction);
-            return this;
-        }
-
         public JavaBlock SingleLineComment(string text)
         {
             contents.SingleLineComment(text);
             return this;
         }
 
-        public JavaBlock SingleLineSlashSlashComment(string text)
-        {
-            contents.SingleLineSlashSlashComment(text);
-            return this;
-        }
-
-        public JavaBlock MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
+        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
             contents.MultipleLineComment(commentAction);
-            return this;
-        }
-
-        public JavaBlock WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
-        {
-            contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
-            return this;
         }
 
         public JavaBlock Return(string text)
@@ -90,22 +64,14 @@ namespace AutoRest.Java.DanModel
             return this;
         }
 
-        public JavaBlock ReturnBlock(string text, Action<JavaBlock> block)
-        {
-            contents.ReturnBlock(text, block);
-            return this;
-        }
-
-        public JavaBlock Annotation(params string[] annotations)
+        public void Annotation(params string[] annotations)
         {
             contents.Annotation(annotations);
-            return this;
         }
 
-        public JavaBlock Annotation(IEnumerable<string> annotations)
+        public void ReturnAnonymousClass(string anonymousClassDeclaration, Action<JavaClass> anonymousClassBlock)
         {
-            contents.Annotation(annotations);
-            return this;
+            contents.ReturnAnonymousClass(anonymousClassDeclaration, anonymousClassBlock);
         }
 
         public JavaIfBlock<JavaBlock> If(string condition, Action<JavaBlock> ifAction)

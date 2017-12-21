@@ -96,5 +96,4 @@ public class LROsPostAsyncRetrySucceededHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

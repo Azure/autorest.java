@@ -53,7 +53,7 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpServerFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public public HttpServerFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpServerFailuresService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -83,7 +83,6 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
         @DELETE("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
-
     }
 
     /**
@@ -407,5 +406,4 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
                 }
             });
     }
-
 }

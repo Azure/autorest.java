@@ -14,7 +14,6 @@ package fixtures.requiredoptional;
  * The interface for AutoRestRequiredOptionalTestService class.
  */
 public interface AutoRestRequiredOptionalTestService {
-
     /**
      * Gets number of items to skip
      *
@@ -71,5 +70,4 @@ public interface AutoRestRequiredOptionalTestService {
      * @return the Explicits object.
      */
     Explicits explicits();
-
 }

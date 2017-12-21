@@ -56,7 +56,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public public MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(MultipleResponsesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -247,7 +247,6 @@ public class MultipleResponsesImpl implements MultipleResponses {
         @GET("http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA202Valid();
-
     }
 
     /**
@@ -1929,5 +1928,4 @@ public class MultipleResponsesImpl implements MultipleResponses {
                 }
             });
     }
-
 }

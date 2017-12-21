@@ -40,9 +40,14 @@ import java.util.List;
  * Pagings.
  */
 public class PagingsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PagingsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestPagingTestServiceImpl client;
 
     /**
@@ -192,7 +197,6 @@ public class PagingsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, PageImpl<ProductInner>>> getMultiplePagesFailureUriNext(@PathParam(value = "nextUrl", encoded = true) String nextUrl, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -205,12 +209,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getSinglePages() {
         Page<ProductInner> response = getSinglePagesSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getSinglePagesNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -259,12 +263,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePages() {
         Page<ProductInner> response = getMultiplePagesSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -319,12 +323,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         Page<ProductInner> response = getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -386,12 +390,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getOdataMultiplePages() {
         Page<ProductInner> response = getOdataMultiplePagesSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -446,12 +450,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getOdataMultiplePages(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         Page<ProductInner> response = getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -514,7 +518,7 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions) {
         Page<ProductInner> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
@@ -522,7 +526,7 @@ public class PagingsInner {
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, pagingGetMultiplePagesWithOffsetNextOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -586,7 +590,7 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) {
         Page<ProductInner> response = getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptionsInner();
@@ -594,7 +598,7 @@ public class PagingsInner {
                 pagingGetMultiplePagesWithOffsetNextOptions.withTimeout(pagingGetMultiplePagesWithOffsetOptions.timeout());
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -657,12 +661,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesRetryFirst() {
         Page<ProductInner> response = getMultiplePagesRetryFirstSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -711,12 +715,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesRetrySecond() {
         Page<ProductInner> response = getMultiplePagesRetrySecondSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -765,12 +769,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getSinglePagesFailure() {
         Page<ProductInner> response = getSinglePagesFailureSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getSinglePagesFailureNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -819,12 +823,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesFailure() {
         Page<ProductInner> response = getMultiplePagesFailureSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -873,12 +877,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesFailureUri() {
         Page<ProductInner> response = getMultiplePagesFailureUriSinglePageAsync().blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -929,12 +933,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesFragmentNextLink(final String tenant, final String apiVersion) {
         Page<ProductInner> response = getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextLink) {
                 return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -994,12 +998,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesFragmentWithGroupingNextLink(final CustomParameterGroupInner customParameterGroup) {
         Page<ProductInner> response = getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextLink) {
                 return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1059,12 +1063,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> nextFragment(final String tenant, final String nextLink, final String apiVersion) {
         Page<ProductInner> response = nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextLink) {
                 return nextFragmentSinglePageAsync(tenant, nextLink, apiVersion).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1131,12 +1135,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> nextFragmentWithGrouping(final String nextLink, final CustomParameterGroupInner customParameterGroup) {
         Page<ProductInner> response = nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextLink) {
                 return nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1200,12 +1204,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getSinglePagesNext(final String nextPageLink) {
         Page<ProductInner> response = getSinglePagesNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getSinglePagesNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1261,12 +1265,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesNext(final String nextPageLink) {
         Page<ProductInner> response = getMultiplePagesNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, null, null).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1328,12 +1332,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions) {
         Page<ProductInner> response = getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1402,12 +1406,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getOdataMultiplePagesNext(final String nextPageLink) {
         Page<ProductInner> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, null, null).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1469,12 +1473,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getOdataMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions) {
         Page<ProductInner> response = getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1543,12 +1547,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesWithOffsetNext(final String nextPageLink) {
         Page<ProductInner> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, null, null).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1610,12 +1614,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions) {
         Page<ProductInner> response = getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1684,12 +1688,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesRetryFirstNext(final String nextPageLink) {
         Page<ProductInner> response = getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1745,12 +1749,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesRetrySecondNext(final String nextPageLink) {
         Page<ProductInner> response = getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1806,12 +1810,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getSinglePagesFailureNext(final String nextPageLink) {
         Page<ProductInner> response = getSinglePagesFailureNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getSinglePagesFailureNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1867,12 +1871,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesFailureNext(final String nextPageLink) {
         Page<ProductInner> response = getMultiplePagesFailureNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1928,12 +1932,12 @@ public class PagingsInner {
      */
     public PagedList<ProductInner> getMultiplePagesFailureUriNext(final String nextPageLink) {
         Page<ProductInner> response = getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).blockingGet();
-        return new PagedList<ProductInner>(response) {
+        new PagedList<ProductInner>(response) {
             @Override
             public Page<ProductInner> nextPage(String nextPageLink) {
                 return getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink).blockingGet();
             }
-        };
+        }
     }
 
     /**
@@ -1977,5 +1981,4 @@ public class PagingsInner {
             }
         });
     }
-
 }

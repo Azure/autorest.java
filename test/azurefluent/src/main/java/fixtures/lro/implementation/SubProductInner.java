@@ -61,5 +61,4 @@ public class SubProductInner extends SubResource {
     public String provisioningStateValues() {
         return this.provisioningStateValues;
     }
-
 }

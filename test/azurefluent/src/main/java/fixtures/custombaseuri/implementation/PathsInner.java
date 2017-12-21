@@ -36,9 +36,14 @@ import java.io.IOException;
  * Paths.
  */
 public class PathsInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private PathsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterizedHostTestClientImpl client;
 
     /**
@@ -62,7 +67,6 @@ public class PathsInner {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getEmpty(@HostParam("accountName") String accountName, @HostParam("host") String host, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -118,5 +122,4 @@ public class PathsInner {
         return getEmptyWithRestResponseAsync(accountName)
             .toCompletable();
     }
-
 }

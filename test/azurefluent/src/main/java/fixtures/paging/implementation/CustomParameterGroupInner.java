@@ -69,5 +69,4 @@ public class CustomParameterGroupInner {
         this.tenant = tenant;
         return this;
     }
-
 }

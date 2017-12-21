@@ -2,46 +2,131 @@
 
 namespace AutoRest.Java.DanModel
 {
-    public class JavaClass : JavaBlock
+    public class JavaClass : JavaAbstractType
     {
+        private readonly JavaFileContents contents;
+        private bool addNewLine;
+
         public JavaClass(JavaFileContents contents)
-            : base(contents)
         {
+            this.contents = contents;
         }
 
-        public JavaClass PrivateMemberVariable(string description, string variableType, string variableName)
+        private void AddExpectedNewLine()
+        {
+            if (addNewLine)
+            {
+                contents.Line();
+                addNewLine = false;
+            }
+        }
+
+        public void PrivateMemberVariable(string variableType, string variableName)
+        {
+            PrivateMemberVariable($"{variableType} {variableName}");
+        }
+
+        public void PrivateMemberVariable(string variableDeclaration)
+        {
+            AddExpectedNewLine();
+            contents.Line($"private {variableDeclaration};");
+            addNewLine = true;
+        }
+
+        public void PrivateFinalMemberVariable(string variableType, string variableName)
+        {
+            AddExpectedNewLine();
+            contents.Line($"private final {variableType} {variableName};");
+            addNewLine = true;
+        }
+
+        public void PublicStaticFinalVariable(string variableDeclaration)
+        {
+            AddExpectedNewLine();
+            contents.Line($"public static final {variableDeclaration};");
+            addNewLine = true;
+        }
+
+        public void PublicConstructor(string constructorSignature, Action<JavaBlock> constructor)
+        {
+            AddExpectedNewLine();
+            contents.Block($"public {constructorSignature}", constructor);
+            addNewLine = true;
+        }
+
+        public void PublicMethod(string methodSignature, Action<JavaBlock> method)
+        {
+            AddExpectedNewLine();
+            contents.Block($"public {methodSignature}", method);
+            addNewLine = true;
+        }
+
+        public void ProtectedMethod(string methodSignature, Action<JavaBlock> method)
+        {
+            AddExpectedNewLine();
+            contents.Block($"protected {methodSignature}", method);
+            addNewLine = true;
+        }
+
+        public void PrivateMethod(string methodSignature, Action<JavaBlock> method)
+        {
+            AddExpectedNewLine();
+            contents.Block($"private {methodSignature}", method);
+            addNewLine = true;
+        }
+
+        public void PublicStaticMethod(string methodSignature, Action<JavaBlock> method)
+        {
+            AddExpectedNewLine();
+            contents.Block($"public static {methodSignature}", method);
+            addNewLine = true;
+        }
+
+        public void PublicInterface(string interfaceSignature, Action<JavaInterface> interfaceBlock)
+        {
+            AddExpectedNewLine();
+            contents.PublicInterface(interfaceSignature, interfaceBlock);
+            addNewLine = true;
+        }
+
+        public void Interface(string interfaceSignature, Action<JavaInterface> interfaceBlock)
+        {
+            AddExpectedNewLine();
+            contents.Interface(interfaceSignature, interfaceBlock);
+            addNewLine = true;
+        }
+
+        public void PrivateStaticFinalClass(string classSignature, Action<JavaClass> classBlock)
+        {
+            AddExpectedNewLine();
+            contents.PrivateStaticFinalClass(classSignature, classBlock);
+            addNewLine = true;
+        }
+
+        public void MultipleLineComment(string description)
         {
             MultipleLineComment(comment =>
             {
-                comment.Line(description);
+                comment.Description(description);
             });
-            Line($"private {variableType} {variableName};");
-            return this;
         }
 
-        public JavaClass PublicGetter(string variableType, string variableName)
+        public void MultipleLineComment(Action<JavaMultipleLineComment> commentAction)
         {
-            MultipleLineComment(comment =>
-            {
-                comment.Line($"Gets the {variableType} object to access its operations.");
-                comment.Line();
-                comment.Return($"the {variableType} object.");
-            });
-            Block($"public {variableType} {variableName}()", function =>
-            {
-                function.Return($"this.{variableName}");
-            });
-            return this;
+            AddExpectedNewLine();
+            contents.MultipleLineComment(commentAction);
         }
 
-        public JavaClass PublicConstructor(string description, string className, Action<JavaBlock> constructor)
+        public void WordWrappedMultipleLineComment(int wordWrapWidth, Action<JavaMultipleLineComment> commentAction)
         {
-            MultipleLineComment(comment =>
-            {
-                comment.Line(description);
-            });
-            Block($"public {className}()", constructor);
-            return this;
+            AddExpectedNewLine();
+            contents.WordWrappedMultipleLineComment(wordWrapWidth, commentAction);
+        }
+
+        public void Annotation(params string[] annotations)
+        {
+            AddExpectedNewLine();
+            contents.Annotation(annotations);
         }
     }
 }

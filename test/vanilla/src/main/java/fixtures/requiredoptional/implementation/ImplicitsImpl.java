@@ -56,7 +56,7 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public ImplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
+    public public ImplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
         this.service = RestProxy.create(ImplicitsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -104,7 +104,6 @@ public class ImplicitsImpl implements Implicits {
         @GET("reqopt/global/optional/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);
-
     }
 
     /**
@@ -606,5 +605,4 @@ public class ImplicitsImpl implements Implicits {
                 }
             });
     }
-
 }

@@ -67,5 +67,4 @@ public class ParameterGroupingPostOptionalParametersInner {
         this.query = query;
         return this;
     }
-
 }

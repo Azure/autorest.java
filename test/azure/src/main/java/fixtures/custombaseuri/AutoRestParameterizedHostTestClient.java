@@ -80,5 +80,4 @@ public interface AutoRestParameterizedHostTestClient {
      * @return the Paths object.
      */
     Paths paths();
-
 }

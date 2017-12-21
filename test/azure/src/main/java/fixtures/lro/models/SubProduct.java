@@ -61,5 +61,4 @@ public class SubProduct extends SubResource {
     public String provisioningStateValues() {
         return this.provisioningStateValues;
     }
-
 }

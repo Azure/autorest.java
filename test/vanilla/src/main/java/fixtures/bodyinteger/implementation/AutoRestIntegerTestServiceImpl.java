@@ -20,7 +20,6 @@ import fixtures.bodyinteger.Ints;
  * Initializes a new instance of the AutoRestIntegerTestService class.
  */
 public class AutoRestIntegerTestServiceImpl extends ServiceClient implements AutoRestIntegerTestService {
-
     /**
      * The Ints object to access its operations.
      */

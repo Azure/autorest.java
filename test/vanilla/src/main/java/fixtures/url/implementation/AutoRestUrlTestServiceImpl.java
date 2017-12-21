@@ -22,7 +22,6 @@ import fixtures.url.Queries;
  * Initializes a new instance of the AutoRestUrlTestService class.
  */
 public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRestUrlTestService {
-
     /**
      * A string value 'globalItemStringPath' that appears in the path.
      */

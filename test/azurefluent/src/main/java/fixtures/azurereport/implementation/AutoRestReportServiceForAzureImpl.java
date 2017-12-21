@@ -39,9 +39,10 @@ import java.util.Map;
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
  */
 public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private AutoRestReportServiceForAzureService service;
-
 
     /**
      * Gets or sets the preferred language for the response.
@@ -179,7 +180,6 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Map<String, Integer>>> getReport(@QueryParam("qualifier") String qualifier, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -290,5 +290,4 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
                 }
             });
     }
-
 }

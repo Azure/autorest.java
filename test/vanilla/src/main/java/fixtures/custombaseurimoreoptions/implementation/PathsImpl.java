@@ -52,7 +52,7 @@ public class PathsImpl implements Paths {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(AutoRestParameterizedCustomHostTestClientImpl client) {
+    public public PathsImpl(AutoRestParameterizedCustomHostTestClientImpl client) {
         this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -68,7 +68,6 @@ public class PathsImpl implements Paths {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getEmpty(@HostParam("vault") String vault, @HostParam("secret") String secret, @HostParam("dnsSuffix") String dnsSuffix, @PathParam("keyName") String keyName, @PathParam("subscriptionId") String subscriptionId, @QueryParam("keyVersion") String keyVersion);
-
     }
 
     /**
@@ -217,5 +216,4 @@ public class PathsImpl implements Paths {
         return getEmptyWithRestResponseAsync(vault, secret, keyName, keyVersion)
             .toCompletable();
     }
-
 }

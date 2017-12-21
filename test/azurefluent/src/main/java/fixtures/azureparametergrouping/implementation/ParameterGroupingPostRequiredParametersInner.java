@@ -119,5 +119,4 @@ public class ParameterGroupingPostRequiredParametersInner {
         this.path = path;
         return this;
     }
-
 }

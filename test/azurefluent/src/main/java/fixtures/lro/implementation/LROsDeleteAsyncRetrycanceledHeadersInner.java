@@ -96,5 +96,4 @@ public class LROsDeleteAsyncRetrycanceledHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

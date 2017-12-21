@@ -67,5 +67,4 @@ public class Product {
         this.stringProperty = stringProperty;
         return this;
     }
-
 }

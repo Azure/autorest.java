@@ -51,5 +51,4 @@ public class HeaderResponseDatetimeRfc1123Headers {
         }
         return this;
     }
-
 }

@@ -71,5 +71,4 @@ public class LROsDeleteProvisioning202DeletingFailed200Headers {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

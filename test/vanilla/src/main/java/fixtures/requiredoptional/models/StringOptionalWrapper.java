@@ -41,5 +41,4 @@ public class StringOptionalWrapper {
         this.value = value;
         return this;
     }
-
 }

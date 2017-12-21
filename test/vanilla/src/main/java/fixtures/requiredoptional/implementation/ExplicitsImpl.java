@@ -65,7 +65,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
+    public public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
         this.service = RestProxy.create(ExplicitsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -196,7 +196,6 @@ public class ExplicitsImpl implements Explicits {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalArrayHeader(@HeaderParam("headerParameter") String headerParameter);
-
     }
 
     /**
@@ -439,7 +438,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalIntegerPropertyWithRestResponseAsync() {
         final IntOptionalWrapper bodyParameter = null;
-        Validator.validate(bodyParameter);
         return service.postOptionalIntegerProperty(bodyParameter);
     }
 
@@ -895,7 +893,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalStringPropertyWithRestResponseAsync() {
         final StringOptionalWrapper bodyParameter = null;
-        Validator.validate(bodyParameter);
         return service.postOptionalStringProperty(bodyParameter);
     }
 
@@ -1202,7 +1199,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalClassParameterWithRestResponseAsync() {
         final Product bodyParameter = null;
-        Validator.validate(bodyParameter);
         return service.postOptionalClassParameter(bodyParameter);
     }
 
@@ -1357,7 +1353,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalClassPropertyWithRestResponseAsync() {
         final ClassOptionalWrapper bodyParameter = null;
-        Validator.validate(bodyParameter);
         return service.postOptionalClassProperty(bodyParameter);
     }
 
@@ -1512,7 +1507,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayParameterWithRestResponseAsync() {
         final List<String> bodyParameter = null;
-        Validator.validate(bodyParameter);
         return service.postOptionalArrayParameter(bodyParameter);
     }
 
@@ -1667,7 +1661,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayPropertyWithRestResponseAsync() {
         final ArrayOptionalWrapper bodyParameter = null;
-        Validator.validate(bodyParameter);
         return service.postOptionalArrayProperty(bodyParameter);
     }
 
@@ -1823,7 +1816,6 @@ public class ExplicitsImpl implements Explicits {
      */
     public Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync() {
         final List<String> headerParameter = null;
-        Validator.validate(headerParameter);
         String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted);
     }
@@ -1888,5 +1880,4 @@ public class ExplicitsImpl implements Explicits {
         return postOptionalArrayHeaderWithRestResponseAsync(headerParameter)
             .toCompletable();
     }
-
 }

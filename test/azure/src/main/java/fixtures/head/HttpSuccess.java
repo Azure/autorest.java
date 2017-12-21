@@ -128,5 +128,4 @@ public interface HttpSuccess {
      * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync();
-
 }

@@ -37,9 +37,14 @@ import java.io.IOException;
  * SubscriptionInCredentials.
  */
 public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private SubscriptionInCredentialsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -87,7 +92,6 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postSwaggerGlobalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -327,5 +331,4 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
         return postSwaggerGlobalValidWithRestResponseAsync()
             .toCompletable();
     }
-
 }

@@ -14,11 +14,9 @@ package fixtures.bodyarray;
  * The interface for AutoRestSwaggerBATArrayService class.
  */
 public interface AutoRestSwaggerBATArrayService {
-
     /**
      * Gets the Arrays object to access its operations.
      * @return the Arrays object.
      */
     Arrays arrays();
-
 }

@@ -35,9 +35,14 @@ import java.io.IOException;
  * HeadExceptions.
  */
 public class HeadExceptionsImpl implements HeadExceptions {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HeadExceptionsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestHeadExceptionTestServiceImpl client;
 
     /**
@@ -73,7 +78,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Void>> head404(@HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -207,5 +211,4 @@ public class HeadExceptionsImpl implements HeadExceptions {
         return head404WithRestResponseAsync()
             .toCompletable();
     }
-
 }

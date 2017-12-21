@@ -41,5 +41,4 @@ public class HeaderResponseDoubleHeaders {
         this.value = value;
         return this;
     }
-
 }

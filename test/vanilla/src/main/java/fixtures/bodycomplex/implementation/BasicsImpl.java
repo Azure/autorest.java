@@ -55,7 +55,7 @@ public class BasicsImpl implements Basics {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public BasicsImpl(AutoRestComplexTestServiceImpl client) {
+    public public BasicsImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(BasicsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -101,7 +101,6 @@ public class BasicsImpl implements Basics {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Basic>> getNotProvided();
-
     }
 
     /**
@@ -415,5 +414,4 @@ public class BasicsImpl implements Basics {
                 }
             });
     }
-
 }

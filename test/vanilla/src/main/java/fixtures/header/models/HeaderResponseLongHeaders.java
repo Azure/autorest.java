@@ -41,5 +41,4 @@ public class HeaderResponseLongHeaders {
         this.value = value;
         return this;
     }
-
 }

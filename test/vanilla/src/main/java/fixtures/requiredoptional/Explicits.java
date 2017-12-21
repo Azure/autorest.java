@@ -1256,5 +1256,4 @@ public interface Explicits {
      * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Void>> postOptionalArrayHeaderWithRestResponseAsync(List<String> headerParameter);
-
 }

@@ -41,5 +41,4 @@ public class HeaderResponseProtectedKeyHeaders {
         this.contentType = contentType;
         return this;
     }
-
 }

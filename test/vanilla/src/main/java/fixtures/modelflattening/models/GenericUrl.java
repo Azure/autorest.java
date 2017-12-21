@@ -41,5 +41,4 @@ public class GenericUrl {
         this.genericValue = genericValue;
         return this;
     }
-
 }

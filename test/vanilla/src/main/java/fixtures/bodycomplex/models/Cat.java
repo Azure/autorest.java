@@ -68,5 +68,4 @@ public class Cat extends Pet {
         this.hates = hates;
         return this;
     }
-
 }

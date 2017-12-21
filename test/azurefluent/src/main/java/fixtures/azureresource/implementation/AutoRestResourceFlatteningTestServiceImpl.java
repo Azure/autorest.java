@@ -44,9 +44,10 @@ import java.util.Map;
  * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
  */
 public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private AutoRestResourceFlatteningTestServiceService service;
-
 
     /**
      * Gets or sets the preferred language for the response.
@@ -209,7 +210,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ResourceCollectionInner>> getResourceCollection(@HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -243,7 +243,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<RestResponse<Void, Void>> putArrayWithRestResponseAsync() {
         final List<Resource> resourceArray = null;
-        Validator.validate(resourceArray);
         return service.putArray(resourceArray, this.acceptLanguage());
     }
 
@@ -390,7 +389,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<RestResponse<Void, Void>> putDictionaryWithRestResponseAsync() {
         final Map<String, FlattenedProductInner> resourceDictionary = null;
-        Validator.validate(resourceDictionary);
         return service.putDictionary(resourceDictionary, this.acceptLanguage());
     }
 
@@ -537,7 +535,6 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      */
     public Single<RestResponse<Void, Void>> putResourceCollectionWithRestResponseAsync() {
         final ResourceCollectionInner resourceComplexObject = null;
-        Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage());
     }
 
@@ -652,5 +649,4 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
                 }
             });
     }
-
 }

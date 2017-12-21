@@ -74,5 +74,4 @@ public class ChildProduct {
         this.count = count;
         return this;
     }
-
 }

@@ -14,7 +14,6 @@ package fixtures.custombaseurimoreoptions;
  * The interface for AutoRestParameterizedCustomHostTestClient class.
  */
 public interface AutoRestParameterizedCustomHostTestClient {
-
     /**
      * Gets The subscription id with value 'test12'.
      *
@@ -50,5 +49,4 @@ public interface AutoRestParameterizedCustomHostTestClient {
      * @return the Paths object.
      */
     Paths paths();
-
 }

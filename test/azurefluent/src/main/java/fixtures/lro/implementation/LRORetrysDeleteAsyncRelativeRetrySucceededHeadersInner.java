@@ -99,5 +99,4 @@ public class LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

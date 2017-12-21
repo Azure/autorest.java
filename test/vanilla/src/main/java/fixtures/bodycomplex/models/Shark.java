@@ -78,5 +78,4 @@ public class Shark extends Fish {
         this.birthday = birthday;
         return this;
     }
-
 }

@@ -37,9 +37,14 @@ import java.io.IOException;
  * Headers.
  */
 public class HeadersInner {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private HeadersService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestAzureSpecialParametersTestClientImpl client;
 
     /**
@@ -75,7 +80,6 @@ public class HeadersInner {
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HeaderCustomNamedRequestIdHeadHeadersInner, Boolean>> customNamedRequestIdHead(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -240,5 +244,4 @@ public class HeadersInner {
                 }
             });
     }
-
 }

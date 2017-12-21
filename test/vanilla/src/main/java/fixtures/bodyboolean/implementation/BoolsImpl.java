@@ -52,7 +52,7 @@ public class BoolsImpl implements Bools {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public BoolsImpl(AutoRestBoolTestServiceImpl client) {
+    public public BoolsImpl(AutoRestBoolTestServiceImpl client) {
         this.service = RestProxy.create(BoolsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -98,7 +98,6 @@ public class BoolsImpl implements Bools {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> getInvalid();
-
     }
 
     /**
@@ -404,5 +403,4 @@ public class BoolsImpl implements Bools {
                 }
             });
     }
-
 }

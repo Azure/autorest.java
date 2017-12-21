@@ -54,7 +54,7 @@ public class StringsImpl implements Strings {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public StringsImpl(AutoRestSwaggerBATServiceImpl client) {
+    public public StringsImpl(AutoRestSwaggerBATServiceImpl client) {
         this.service = RestProxy.create(StringsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -145,7 +145,6 @@ public class StringsImpl implements Strings {
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getNullBase64UrlEncoded();
-
     }
 
     /**
@@ -861,5 +860,4 @@ public class StringsImpl implements Strings {
                 }
             });
     }
-
 }

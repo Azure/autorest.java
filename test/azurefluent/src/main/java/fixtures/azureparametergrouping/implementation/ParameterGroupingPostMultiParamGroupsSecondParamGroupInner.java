@@ -69,5 +69,4 @@ public class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner {
         this.queryTwo = queryTwo;
         return this;
     }
-
 }

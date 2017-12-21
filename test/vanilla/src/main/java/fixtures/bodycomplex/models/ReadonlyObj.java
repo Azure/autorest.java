@@ -56,5 +56,4 @@ public class ReadonlyObj {
         this.size = size;
         return this;
     }
-
 }

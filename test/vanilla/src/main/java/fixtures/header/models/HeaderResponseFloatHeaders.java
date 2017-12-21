@@ -41,5 +41,4 @@ public class HeaderResponseFloatHeaders {
         this.value = value;
         return this;
     }
-
 }

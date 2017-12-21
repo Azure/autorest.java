@@ -74,5 +74,4 @@ public class RefColorConstant {
         this.field1 = field1;
         return this;
     }
-
 }

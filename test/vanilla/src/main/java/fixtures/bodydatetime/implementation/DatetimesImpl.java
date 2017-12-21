@@ -53,7 +53,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public DatetimesImpl(AutoRestDateTimeTestServiceImpl client) {
+    public public DatetimesImpl(AutoRestDateTimeTestServiceImpl client) {
         this.service = RestProxy.create(DatetimesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -177,7 +177,6 @@ public class DatetimesImpl implements Datetimes {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateTime>> getLocalNegativeOffsetMinDateTime();
-
     }
 
     /**
@@ -1161,5 +1160,4 @@ public class DatetimesImpl implements Datetimes {
                 }
             });
     }
-
 }

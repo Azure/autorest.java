@@ -129,5 +129,4 @@ public interface Files {
      * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync();
-
 }

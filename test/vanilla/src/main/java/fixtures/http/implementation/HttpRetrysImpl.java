@@ -55,7 +55,7 @@ public class HttpRetrysImpl implements HttpRetrys {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpRetrysImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public public HttpRetrysImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpRetrysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -113,7 +113,6 @@ public class HttpRetrysImpl implements HttpRetrys {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> patch504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
-
     }
 
     /**
@@ -761,5 +760,4 @@ public class HttpRetrysImpl implements HttpRetrys {
         return patch504WithRestResponseAsync(booleanValue)
             .toCompletable();
     }
-
 }

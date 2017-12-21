@@ -69,7 +69,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public HeadersImpl(AutoRestSwaggerBATHeaderServiceImpl client) {
+    public public HeadersImpl(AutoRestSwaggerBATHeaderServiceImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -253,7 +253,6 @@ public class HeadersImpl implements fixtures.header.Headers {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> customRequestId();
-
     }
 
     /**
@@ -1938,5 +1937,4 @@ public class HeadersImpl implements fixtures.header.Headers {
         return customRequestIdWithRestResponseAsync()
             .toCompletable();
     }
-
 }

@@ -45,5 +45,4 @@ public class Goblinshark extends Shark {
         this.jawsize = jawsize;
         return this;
     }
-
 }

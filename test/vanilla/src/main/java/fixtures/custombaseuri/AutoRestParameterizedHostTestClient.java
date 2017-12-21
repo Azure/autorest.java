@@ -14,7 +14,6 @@ package fixtures.custombaseuri;
  * The interface for AutoRestParameterizedHostTestClient class.
  */
 public interface AutoRestParameterizedHostTestClient {
-
     /**
      * Gets A string value that is used as a global part of the parameterized host
      *
@@ -35,5 +34,4 @@ public interface AutoRestParameterizedHostTestClient {
      * @return the Paths object.
      */
     Paths paths();
-
 }

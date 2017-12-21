@@ -45,5 +45,4 @@ public class Sawshark extends Shark {
         this.picture = picture;
         return this;
     }
-
 }

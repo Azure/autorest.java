@@ -43,9 +43,14 @@ import java.io.IOException;
  * ParameterGroupings.
  */
 public class ParameterGroupingsImpl implements ParameterGroupings {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private ParameterGroupingsService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestParameterGroupingTestServiceImpl client;
 
     /**
@@ -87,7 +92,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postSharedParameterGroupObject(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("header-one") String headerOne, @QueryParam("query-one") Integer queryOne);
-
     }
 
     /**
@@ -177,7 +181,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<RestResponse<Void, Void>> postOptionalWithRestResponseAsync() {
         final ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = null;
-        Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         Integer query = null;
         return service.postOptional(this.client.acceptLanguage(), customHeader, query);
@@ -283,8 +286,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     public Single<RestResponse<Void, Void>> postMultiParamGroupsWithRestResponseAsync() {
         final FirstParameterGroup firstParameterGroup = null;
         final ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = null;
-        Validator.validate(firstParameterGroup);
-        Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
         Integer queryOne = null;
         String headerTwo = null;
@@ -404,7 +405,6 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      */
     public Single<RestResponse<Void, Void>> postSharedParameterGroupObjectWithRestResponseAsync() {
         final FirstParameterGroup firstParameterGroup = null;
-        Validator.validate(firstParameterGroup);
         String headerOne = null;
         Integer queryOne = null;
         return service.postSharedParameterGroupObject(this.client.acceptLanguage(), headerOne, queryOne);
@@ -477,5 +477,4 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
         return postSharedParameterGroupObjectWithRestResponseAsync(firstParameterGroup)
             .toCompletable();
     }
-
 }

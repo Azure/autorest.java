@@ -93,5 +93,4 @@ public class Error {
         this.fields = fields;
         return this;
     }
-
 }

@@ -14,11 +14,9 @@ package fixtures.parameterflattening;
  * The interface for AutoRestParameterFlattening class.
  */
 public interface AutoRestParameterFlattening {
-
     /**
      * Gets the AvailabilitySets object to access its operations.
      * @return the AvailabilitySets object.
      */
     AvailabilitySets availabilitySets();
-
 }

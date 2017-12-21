@@ -69,5 +69,4 @@ public class LRORetrysDelete202Retry200Headers {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

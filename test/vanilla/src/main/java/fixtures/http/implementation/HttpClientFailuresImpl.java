@@ -55,7 +55,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpClientFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public public HttpClientFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpClientFailuresService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -180,7 +180,6 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
         @HEAD("http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head429();
-
     }
 
     /**
@@ -2119,5 +2118,4 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
                 }
             });
     }
-
 }

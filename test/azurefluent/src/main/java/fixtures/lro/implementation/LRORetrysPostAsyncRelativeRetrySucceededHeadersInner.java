@@ -99,5 +99,4 @@ public class LRORetrysPostAsyncRelativeRetrySucceededHeadersInner {
         this.retryAfter = retryAfter;
         return this;
     }
-
 }

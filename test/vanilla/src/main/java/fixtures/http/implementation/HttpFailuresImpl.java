@@ -50,7 +50,7 @@ public class HttpFailuresImpl implements HttpFailures {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public public HttpFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpFailuresService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -76,7 +76,6 @@ public class HttpFailuresImpl implements HttpFailures {
         @GET("http/failure/nomodel/empty")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Boolean>> getNoModelEmpty();
-
     }
 
     /**
@@ -234,5 +233,4 @@ public class HttpFailuresImpl implements HttpFailures {
                 }
             });
     }
-
 }

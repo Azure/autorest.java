@@ -41,5 +41,4 @@ public class Product {
         this.properties = properties;
         return this;
     }
-
 }

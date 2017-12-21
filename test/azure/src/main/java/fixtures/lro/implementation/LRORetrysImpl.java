@@ -49,9 +49,14 @@ import java.io.IOException;
  * LRORetrys.
  */
 public class LRORetrysImpl implements LRORetrys {
-    /** The RestProxy service to perform REST calls. */
+    /**
+     * The RestProxy service to perform REST calls.
+     */
     private LRORetrysService service;
-    /** The service client containing this operation class. */
+
+    /**
+     * The service client containing this operation class.
+     */
     private AutoRestLongRunningOperationTestServiceImpl client;
 
     /**
@@ -153,7 +158,6 @@ public class LRORetrysImpl implements LRORetrys {
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>> postAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") Product product, @HeaderParam("accept-language") String acceptLanguage);
-
     }
 
     /**
@@ -258,7 +262,6 @@ public class LRORetrysImpl implements LRORetrys {
      */
     public Single<RestResponse<Void, Product>> put201CreatingSucceeded200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.put201CreatingSucceeded200(product, this.client.acceptLanguage());
     }
 
@@ -440,7 +443,6 @@ public class LRORetrysImpl implements LRORetrys {
      */
     public Single<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeaders, Product>> putAsyncRelativeRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.putAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -857,7 +859,6 @@ public class LRORetrysImpl implements LRORetrys {
      */
     public Single<RestResponse<LRORetrysPost202Retry200Headers, Void>> post202Retry200WithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.post202Retry200(product, this.client.acceptLanguage());
     }
 
@@ -1021,7 +1022,6 @@ public class LRORetrysImpl implements LRORetrys {
      */
     public Single<RestResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders, Void>> postAsyncRelativeRetrySucceededWithRestResponseAsync() {
         final Product product = null;
-        Validator.validate(product);
         return service.postAsyncRelativeRetrySucceeded(product, this.client.acceptLanguage());
     }
 
@@ -1084,5 +1084,4 @@ public class LRORetrysImpl implements LRORetrys {
         return postAsyncRelativeRetrySucceededWithRestResponseAsync(product)
             .toCompletable();
     }
-
 }

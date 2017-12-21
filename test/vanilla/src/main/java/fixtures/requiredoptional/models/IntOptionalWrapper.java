@@ -41,5 +41,4 @@ public class IntOptionalWrapper {
         this.value = value;
         return this;
     }
-
 }

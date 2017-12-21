@@ -69,5 +69,4 @@ public class LROsPutAsyncNoRetrySucceededHeadersInner {
         this.location = location;
         return this;
     }
-
 }

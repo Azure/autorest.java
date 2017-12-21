@@ -75,5 +75,4 @@ public class Salmon extends Fish {
         this.iswild = iswild;
         return this;
     }
-
 }

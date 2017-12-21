@@ -59,7 +59,7 @@ public class PathsImpl implements Paths {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public PathsImpl(AutoRestUrlTestServiceImpl client) {
+    public public PathsImpl(AutoRestUrlTestServiceImpl client) {
         this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -225,7 +225,6 @@ public class PathsImpl implements Paths {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> unixTimeUrl(@PathParam("unixTimeUrlPath") long unixTimeUrlPath);
-
     }
 
     /**
@@ -1461,5 +1460,4 @@ public class PathsImpl implements Paths {
         return unixTimeUrlWithRestResponseAsync(unixTimeUrlPath)
             .toCompletable();
     }
-
 }

@@ -55,7 +55,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public PolymorphismsImpl(AutoRestComplexTestServiceImpl client) {
+    public public PolymorphismsImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(PolymorphismsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -95,7 +95,6 @@ public class PolymorphismsImpl implements Polymorphisms {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValidMissingRequired(@BodyParam("application/json; charset=utf-8") Fish complexBody);
-
     }
 
     /**
@@ -585,5 +584,4 @@ public class PolymorphismsImpl implements Polymorphisms {
         return putValidMissingRequiredWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

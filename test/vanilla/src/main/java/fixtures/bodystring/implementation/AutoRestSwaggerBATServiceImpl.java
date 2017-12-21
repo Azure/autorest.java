@@ -21,7 +21,6 @@ import fixtures.bodystring.Strings;
  * Initializes a new instance of the AutoRestSwaggerBATService class.
  */
 public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
-
     /**
      * The Strings object to access its operations.
      */

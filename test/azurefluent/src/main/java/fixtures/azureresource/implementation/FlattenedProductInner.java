@@ -96,5 +96,4 @@ public class FlattenedProductInner extends Resource {
         this.provisioningState = provisioningState;
         return this;
     }
-
 }

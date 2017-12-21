@@ -56,7 +56,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public public HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpSuccessService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -174,7 +174,6 @@ public class HttpSuccessImpl implements HttpSuccess {
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> head404();
-
     }
 
     /**
@@ -1662,5 +1661,4 @@ public class HttpSuccessImpl implements HttpSuccess {
         return head404WithRestResponseAsync()
             .toCompletable();
     }
-
 }

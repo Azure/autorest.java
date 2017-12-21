@@ -42,5 +42,4 @@ public class HeaderCustomNamedRequestIdParamGroupingParameters {
         this.fooClientRequestId = fooClientRequestId;
         return this;
     }
-
 }

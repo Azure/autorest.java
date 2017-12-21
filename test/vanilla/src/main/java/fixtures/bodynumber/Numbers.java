@@ -895,5 +895,4 @@ public interface Numbers {
      * @return the {@link Single&lt;RestResponse&lt;Void, BigDecimal&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, BigDecimal>> getSmallDecimalWithRestResponseAsync();
-
 }

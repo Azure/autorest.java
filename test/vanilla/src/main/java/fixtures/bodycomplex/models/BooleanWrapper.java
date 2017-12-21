@@ -67,5 +67,4 @@ public class BooleanWrapper {
         this.fieldFalse = fieldFalse;
         return this;
     }
-
 }

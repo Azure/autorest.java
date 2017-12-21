@@ -181,5 +181,4 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
                 }
             });
     }
-
 }

@@ -311,5 +311,4 @@ public interface Dates {
      * @return the {@link Single&lt;RestResponse&lt;Void, LocalDate&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, LocalDate>> getMinDateWithRestResponseAsync();
-
 }

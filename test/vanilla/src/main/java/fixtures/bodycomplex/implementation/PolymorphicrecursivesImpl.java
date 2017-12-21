@@ -54,7 +54,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
+    public public PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(PolymorphicrecursivesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -76,7 +76,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
-
     }
 
     /**
@@ -390,5 +389,4 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return putValidWithRestResponseAsync(complexBody)
             .toCompletable();
     }
-
 }

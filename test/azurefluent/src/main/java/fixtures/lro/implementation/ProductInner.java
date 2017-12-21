@@ -61,5 +61,4 @@ public class ProductInner extends Resource {
     public String provisioningStateValues() {
         return this.provisioningStateValues;
     }
-
 }

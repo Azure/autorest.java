@@ -55,7 +55,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public Datetimerfc1123sImpl(AutoRestRFC1123DateTimeTestServiceImpl client) {
+    public public Datetimerfc1123sImpl(AutoRestRFC1123DateTimeTestServiceImpl client) {
         this.service = RestProxy.create(Datetimerfc1123sService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -126,7 +126,6 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
         @ReturnValueWireType(DateTimeRfc1123.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DateTime>> getUtcMinDateTime();
-
     }
 
     /**
@@ -596,5 +595,4 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
                 }
             });
     }
-
 }

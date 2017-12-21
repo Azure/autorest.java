@@ -42,5 +42,4 @@ public class LROsDeleteNoHeaderInRetryHeadersInner {
         this.location = location;
         return this;
     }
-
 }

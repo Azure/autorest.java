@@ -43,5 +43,4 @@ public class ProductWrapper {
         this.value = value;
         return this;
     }
-
 }

@@ -234,5 +234,4 @@ public class Product {
         this.constStringAsEnum = constStringAsEnum;
         return this;
     }
-
 }

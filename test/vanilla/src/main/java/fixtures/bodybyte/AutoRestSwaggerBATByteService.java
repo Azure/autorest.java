@@ -14,11 +14,9 @@ package fixtures.bodybyte;
  * The interface for AutoRestSwaggerBATByteService class.
  */
 public interface AutoRestSwaggerBATByteService {
-
     /**
      * Gets the Bytes object to access its operations.
      * @return the Bytes object.
      */
     Bytes bytes();
-
 }

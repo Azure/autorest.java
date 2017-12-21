@@ -68,5 +68,4 @@ public class PagingGetMultiplePagesOptionsInner {
         this.timeout = timeout;
         return this;
     }
-
 }

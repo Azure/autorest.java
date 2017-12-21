@@ -54,7 +54,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public ArraysImpl(AutoRestComplexTestServiceImpl client) {
+    public public ArraysImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(ArraysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
@@ -94,7 +94,6 @@ public class ArraysImpl implements Arrays {
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ArrayWrapper>> getNotProvided();
-
     }
 
     /**
@@ -356,5 +355,4 @@ public class ArraysImpl implements Arrays {
                 }
             });
     }
-
 }

@@ -42,5 +42,4 @@ public class HttpRedirectsPatch307Headers {
         this.location = location;
         return this;
     }
-
 }
