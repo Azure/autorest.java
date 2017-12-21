@@ -52,7 +52,7 @@ public class BoolsImpl implements Bools {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public BoolsImpl(AutoRestBoolTestServiceImpl client) {
+    public BoolsImpl(AutoRestBoolTestServiceImpl client) {
         this.service = RestProxy.create(BoolsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

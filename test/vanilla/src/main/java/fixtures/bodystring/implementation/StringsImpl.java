@@ -54,7 +54,7 @@ public class StringsImpl implements Strings {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public StringsImpl(AutoRestSwaggerBATServiceImpl client) {
+    public StringsImpl(AutoRestSwaggerBATServiceImpl client) {
         this.service = RestProxy.create(StringsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

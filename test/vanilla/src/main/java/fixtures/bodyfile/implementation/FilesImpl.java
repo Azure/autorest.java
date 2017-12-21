@@ -50,7 +50,7 @@ public class FilesImpl implements Files {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
+    public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
         this.service = RestProxy.create(FilesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

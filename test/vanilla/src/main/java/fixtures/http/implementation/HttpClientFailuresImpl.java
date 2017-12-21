@@ -55,7 +55,7 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public HttpClientFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public HttpClientFailuresImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpClientFailuresService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

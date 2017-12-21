@@ -54,7 +54,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
+    public PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(PolymorphicrecursivesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

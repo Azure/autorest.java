@@ -56,7 +56,7 @@ public class MultipleResponsesImpl implements MultipleResponses {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public MultipleResponsesImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(MultipleResponsesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

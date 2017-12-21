@@ -55,7 +55,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public PolymorphismsImpl(AutoRestComplexTestServiceImpl client) {
+    public PolymorphismsImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(PolymorphismsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

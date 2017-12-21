@@ -65,7 +65,7 @@ public class ExplicitsImpl implements Explicits {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
+    public ExplicitsImpl(AutoRestRequiredOptionalTestServiceImpl client) {
         this.service = RestProxy.create(ExplicitsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

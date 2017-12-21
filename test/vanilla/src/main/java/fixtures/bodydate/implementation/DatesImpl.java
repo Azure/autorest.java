@@ -53,7 +53,7 @@ public class DatesImpl implements Dates {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public DatesImpl(AutoRestDateTestServiceImpl client) {
+    public DatesImpl(AutoRestDateTestServiceImpl client) {
         this.service = RestProxy.create(DatesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

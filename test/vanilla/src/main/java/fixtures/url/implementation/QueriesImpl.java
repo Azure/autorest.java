@@ -57,7 +57,7 @@ public class QueriesImpl implements Queries {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public QueriesImpl(AutoRestUrlTestServiceImpl client) {
+    public QueriesImpl(AutoRestUrlTestServiceImpl client) {
         this.service = RestProxy.create(QueriesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

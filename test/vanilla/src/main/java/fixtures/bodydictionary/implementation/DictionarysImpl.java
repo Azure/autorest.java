@@ -63,7 +63,7 @@ public class DictionarysImpl implements Dictionarys {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public DictionarysImpl(AutoRestSwaggerBATdictionaryServiceImpl client) {
+    public DictionarysImpl(AutoRestSwaggerBATdictionaryServiceImpl client) {
         this.service = RestProxy.create(DictionarysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

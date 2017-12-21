@@ -53,7 +53,7 @@ public class DatetimesImpl implements Datetimes {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public DatetimesImpl(AutoRestDateTimeTestServiceImpl client) {
+    public DatetimesImpl(AutoRestDateTimeTestServiceImpl client) {
         this.service = RestProxy.create(DatetimesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

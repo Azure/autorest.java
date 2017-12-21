@@ -51,7 +51,7 @@ public class PathItemsImpl implements PathItems {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public PathItemsImpl(AutoRestUrlTestServiceImpl client) {
+    public PathItemsImpl(AutoRestUrlTestServiceImpl client) {
         this.service = RestProxy.create(PathItemsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

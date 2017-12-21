@@ -56,7 +56,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public HttpSuccessImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpSuccessService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

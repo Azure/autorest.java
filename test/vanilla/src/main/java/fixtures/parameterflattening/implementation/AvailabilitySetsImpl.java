@@ -54,7 +54,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public AvailabilitySetsImpl(AutoRestParameterFlatteningImpl client) {
+    public AvailabilitySetsImpl(AutoRestParameterFlatteningImpl client) {
         this.service = RestProxy.create(AvailabilitySetsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

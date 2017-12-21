@@ -55,7 +55,7 @@ public class BasicsImpl implements Basics {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public BasicsImpl(AutoRestComplexTestServiceImpl client) {
+    public BasicsImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(BasicsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

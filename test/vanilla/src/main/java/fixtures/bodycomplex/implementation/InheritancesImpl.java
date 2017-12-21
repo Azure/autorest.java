@@ -54,7 +54,7 @@ public class InheritancesImpl implements Inheritances {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public InheritancesImpl(AutoRestComplexTestServiceImpl client) {
+    public InheritancesImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(InheritancesService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

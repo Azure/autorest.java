@@ -52,7 +52,7 @@ public class PathsImpl implements Paths {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public PathsImpl(AutoRestParameterizedCustomHostTestClientImpl client) {
+    public PathsImpl(AutoRestParameterizedCustomHostTestClientImpl client) {
         this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

@@ -53,7 +53,7 @@ public class DurationsImpl implements Durations {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public DurationsImpl(AutoRestDurationTestServiceImpl client) {
+    public DurationsImpl(AutoRestDurationTestServiceImpl client) {
         this.service = RestProxy.create(DurationsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

@@ -53,7 +53,7 @@ public class NumbersImpl implements Numbers {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public NumbersImpl(AutoRestNumberTestServiceImpl client) {
+    public NumbersImpl(AutoRestNumberTestServiceImpl client) {
         this.service = RestProxy.create(NumbersService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

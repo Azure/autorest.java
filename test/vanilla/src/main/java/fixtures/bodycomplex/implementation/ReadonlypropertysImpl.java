@@ -54,7 +54,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public ReadonlypropertysImpl(AutoRestComplexTestServiceImpl client) {
+    public ReadonlypropertysImpl(AutoRestComplexTestServiceImpl client) {
         this.service = RestProxy.create(ReadonlypropertysService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

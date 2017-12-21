@@ -1539,7 +1539,7 @@ namespace AutoRest.Java.DanModel
                     comment.Description($"Initializes an instance of {methodGroupTypeName}.");
                     comment.Param("client", "the instance of the service client containing this operation class.");
                 });
-                classBlock.PublicConstructor($"public {className}({serviceClientType} client)", constructor =>
+                classBlock.PublicConstructor($"{className}({serviceClientType} client)", constructor =>
                 {
                     constructor.Line($"this.service = {restProxyType}.create({serviceType}.class, client.httpPipeline(), client.serializerAdapter());");
                     constructor.Line("this.client = client;");

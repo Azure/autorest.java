@@ -52,7 +52,7 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
+    public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
         this.service = RestProxy.create(FormdatasService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }

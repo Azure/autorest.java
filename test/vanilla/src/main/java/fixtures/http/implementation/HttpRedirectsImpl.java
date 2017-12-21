@@ -72,7 +72,7 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param client the instance of the service client containing this operation class.
      */
-    public public HttpRedirectsImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
+    public HttpRedirectsImpl(AutoRestHttpInfrastructureTestServiceImpl client) {
         this.service = RestProxy.create(HttpRedirectsService.class, client.httpPipeline(), client.serializerAdapter());
         this.client = client;
     }
