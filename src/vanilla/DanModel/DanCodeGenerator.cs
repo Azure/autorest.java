@@ -2287,7 +2287,7 @@ namespace AutoRest.Java.DanModel
                             comment.Return($"the corresponding {enumName}");
                         });
                         classBlock.Annotation("JsonCreator");
-                        classBlock.PublicStaticMethod($"public static {enumName} fromString(String name)", (function) =>
+                        classBlock.PublicStaticMethod($"{enumName} fromString(String name)", (function) =>
                         {
                             function.Return($"fromString(name, {enumName}.class)");
                         });

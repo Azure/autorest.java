@@ -45,7 +45,7 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * @return the corresponding CMYKColors
      */
     @JsonCreator
-    public static public static CMYKColors fromString(String name) {
+    public static CMYKColors fromString(String name) {
         return fromString(name, CMYKColors.class);
     }
 
