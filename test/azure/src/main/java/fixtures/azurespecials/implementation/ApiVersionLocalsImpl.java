@@ -62,25 +62,21 @@ public class ApiVersionLocalsImpl implements ApiVersionLocals {
      */
     @Host("http://localhost:3000")
     interface ApiVersionLocalsService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalNull" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodLocalNull(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getPathLocalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getPathLocalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getSwaggerLocalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -62,7 +62,6 @@ public class PathsInner {
      */
     @Host("http://{accountName}{host}")
     interface PathsService {
-        @Headers({ "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

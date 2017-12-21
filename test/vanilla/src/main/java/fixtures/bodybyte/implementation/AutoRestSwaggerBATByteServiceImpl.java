@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATByteServiceImpl extends ServiceClient implements 
      */
     public AutoRestSwaggerBATByteServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.bytes = new BytesImpl(this);
     }
 }

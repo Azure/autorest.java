@@ -66,31 +66,26 @@ public class PolymorphismsImpl implements Polymorphisms {
      */
     @Host("http://localhost:3000")
     interface PolymorphismsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValid" })
         @GET("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Fish>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Fish complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getComplicated" })
         @GET("complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Salmon>> getComplicated();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putComplicated" })
         @PUT("complex/polymorphism/complicated")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putComplicated(@BodyParam("application/json; charset=utf-8") Salmon complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

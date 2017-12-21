@@ -98,7 +98,6 @@ public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient
      */
     public AutoRestParameterizedCustomHostTestClientImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.dnsSuffix = "host";
         this.paths = new PathsImpl(this);
     }

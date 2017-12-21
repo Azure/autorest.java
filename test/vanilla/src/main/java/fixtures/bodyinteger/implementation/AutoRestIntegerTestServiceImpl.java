@@ -48,7 +48,6 @@ public class AutoRestIntegerTestServiceImpl extends ServiceClient implements Aut
      */
     public AutoRestIntegerTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.ints = new IntsImpl(this);
     }
 }

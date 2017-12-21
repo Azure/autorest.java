@@ -292,10 +292,6 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      */
     public AutoRestAzureSpecialParametersTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
-        initialize();
-    }
-
-    protected void initialize() {
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

@@ -63,37 +63,31 @@ public class BoolsImpl implements Bools {
      */
     @Host("http://localhost:3000")
     interface BoolsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
         @GET("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> getTrue();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
         @PUT("bool/true")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putTrue(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
         @GET("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> getFalse();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
         @PUT("bool/false")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putFalse(@BodyParam("application/json; charset=utf-8") boolean boolBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
         @GET("bool/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
         @GET("bool/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -83,91 +83,76 @@ public class HttpRedirectsImpl implements HttpRedirects {
      */
     @Host("http://localhost:3000")
     interface HttpRedirectsService {
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects head300" })
         @HEAD("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsHead300Headers, Void>> head300();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects get300" })
         @GET("http/redirect/300")
         @ExpectedResponses({200, 300})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsGet300Headers, List<String>>> get300();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects head301" })
         @HEAD("http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsHead301Headers, Void>> head301();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects get301" })
         @GET("http/redirect/301")
         @ExpectedResponses({200, 301})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsGet301Headers, Void>> get301();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects put301" })
         @PUT("http/redirect/301")
         @ExpectedResponses({301})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsPut301Headers, Void>> put301(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects head302" })
         @HEAD("http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsHead302Headers, Void>> head302();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects get302" })
         @GET("http/redirect/302")
         @ExpectedResponses({200, 302})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsGet302Headers, Void>> get302();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects patch302" })
         @PATCH("http/redirect/302")
         @ExpectedResponses({302})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsPatch302Headers, Void>> patch302(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects post303" })
         @POST("http/redirect/303")
         @ExpectedResponses({200, 303})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsPost303Headers, Void>> post303(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects head307" })
         @HEAD("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsHead307Headers, Void>> head307();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects get307" })
         @GET("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsGet307Headers, Void>> get307();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects put307" })
         @PUT("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsPut307Headers, Void>> put307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects patch307" })
         @PATCH("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsPatch307Headers, Void>> patch307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects post307" })
         @POST("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HttpRedirectsPost307Headers, Void>> post307(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRedirects delete307" })
         @DELETE("http/redirect/307")
         @ExpectedResponses({200, 307})
         @UnexpectedResponseExceptionType(ErrorException.class)

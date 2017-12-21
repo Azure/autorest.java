@@ -56,9 +56,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      */
     public AutoRestReportServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
-
-        service = RestProxy.create(AutoRestReportServiceService.class, httpPipeline);
+        this.service = RestProxy.create(AutoRestReportServiceService.class, httpPipeline);
     }
 
     /**

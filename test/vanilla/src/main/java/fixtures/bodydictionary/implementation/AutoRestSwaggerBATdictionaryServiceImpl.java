@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient imple
      */
     public AutoRestSwaggerBATdictionaryServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.dictionarys = new DictionarysImpl(this);
     }
 }

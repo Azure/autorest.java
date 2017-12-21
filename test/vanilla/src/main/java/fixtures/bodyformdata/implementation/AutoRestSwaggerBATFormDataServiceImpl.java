@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient impleme
      */
     public AutoRestSwaggerBATFormDataServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.formdatas = new FormdatasImpl(this);
     }
 }

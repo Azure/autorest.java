@@ -65,31 +65,26 @@ public class ArraysImpl implements Arrays {
      */
     @Host("http://localhost:3000")
     interface ArraysService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getValid" })
         @GET("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ArrayWrapper>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays putValid" })
         @PUT("complex/array/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getEmpty" })
         @GET("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ArrayWrapper>> getEmpty();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays putEmpty" })
         @PUT("complex/array/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") ArrayWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Arrays getNotProvided" })
         @GET("complex/array/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

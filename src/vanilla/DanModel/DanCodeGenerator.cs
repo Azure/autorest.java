@@ -505,77 +505,31 @@ namespace AutoRest.Java.DanModel
                 classBlock.PublicConstructor($"{className}({httpPipelineType} {httpPipelineVariableName}, {azureEnvironmentType} {azureEnvironmentVariableName})", constructor =>
                 {
                     constructor.Line($"super({httpPipelineVariableName}, {azureEnvironmentVariableName});");
-                    constructor.Line("initialize();");
-                });
 
-                classBlock.ProtectedMethod("void initialize()", function =>
-                {
                     foreach (Property property in GetPropertiesEx(codeModel).Where(p => p.DefaultValue != null))
                     {
-                        function.Line($"this.{property.Name} = {property.DefaultValue};");
+                        constructor.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
 
                     foreach (MethodGroup operation in GetAllOperations(codeModel))
                     {
-                        function.Line($"this.{MethodGroupName(operation)} = new {MethodGroupImplType(operation, settings)}(this);");
-                    }
-
-                    string defaultHeaders = "";
-                    if (!string.IsNullOrWhiteSpace(defaultHeaders))
-                    {
-                        function.Line(defaultHeaders);
+                        constructor.Line($"this.{MethodGroupName(operation)} = new {MethodGroupImplType(operation, settings)}(this);");
                     }
 
                     if (hasRootMethods)
                     {
-                        function.Line("initializeService();");
+                        constructor.Line($"this.service = {azureProxyType}.create({serviceClientType}.class, this);");
                     }
                 });
 
                 if (hasRootMethods)
                 {
-                    classBlock.PrivateMethod("void initializeService()", function =>
-                    {
-                        function.Line($"service = {azureProxyType}.create({serviceClientType}.class, this);");
-                    });
-
                     classBlock.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
                     {
                         comment.Description($"The interface defining all the services for {codeModel.Name} to be used by {restProxyType} to perform REST calls.");
                     });
-                    classBlock.Annotation($"Host(\"{GetBaseUrl(codeModel)}\")");
-                    classBlock.Interface(GetServiceClientServiceType(codeModel), interfaceBlock =>
-                    {
-                        foreach (Method method in rootMethods)
-                        {
-                            if (MethodIsPagingNextOperation(method))
-                            {
-                                interfaceBlock.Annotation("GET(\"{{nextUrl}}\")");
-                            }
-                            else
-                            {
-                                interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
-                            }
-
-                            AddExpectedResponsesAnnotation(interfaceBlock, method);
-
-                            if (method.DefaultResponse.Body != null)
-                            {
-                                interfaceBlock.Annotation($"UnexpectedResponseExceptionType({MethodOperationExceptionTypeString(method, settings)}.class)");
-                            }
-
-                            string methodName = MethodName(method);
-                            string methodParameterApiDeclaration = MethodParameterApiDeclaration(method, settings);
-                            if (MethodIsLongRunningOperation(method))
-                            {
-                                interfaceBlock.Method($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>> {methodName}({methodParameterApiDeclaration})");
-                            }
-                            else
-                            {
-                                interfaceBlock.Method($"Single<{MethodRestResponseConcreteTypeName(method, settings)}> {methodName}({methodParameterApiDeclaration})");
-                            }
-                        }
-                    });
+                    AddHostAnnotation(classBlock, codeModel);
+                    AddServiceInterface(classBlock, GetServiceClientServiceType(codeModel), rootMethods, settings);
                 }
 
                 AddMethodOverloads(classBlock, rootMethods, settings);
@@ -1044,41 +998,8 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Description($"The interface defining all the services for {methodGroup.TypeName} to be used by {restProxyType} to perform REST calls.");
                 });
-                classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroup.CodeModel)}\")");
-                classBlock.Interface(MethodGroupServiceType(methodGroup), interfaceBlock =>
-                {
-                    foreach (Method method in methodGroup.Methods)
-                    {
-                        string methodName = MethodName(method);
-
-                        interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {MethodGroupFullType(methodGroup)} {methodName}\" }})");
-                        if (MethodIsPagingNextOperation(method))
-                        {
-                            interfaceBlock.Annotation("GET(\"{nextUrl}\")");
-                        }
-                        else
-                        {
-                            interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
-                        }
-
-                        AddExpectedResponsesAnnotation(interfaceBlock, method);
-
-                        if (method.DefaultResponse.Body != null)
-                        {
-                            interfaceBlock.Annotation($"UnexpectedResponseExceptionType({MethodOperationExceptionTypeString(method, settings)}.class)");
-                        }
-
-                        string methodParameterApiDeclaration = MethodParameterApiDeclaration(method, settings);
-                        if (MethodIsLongRunningOperation(method))
-                        {
-                            interfaceBlock.Method($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(method.ReturnType, settings)}>> {methodName}({methodParameterApiDeclaration})");
-                        }
-                        else
-                        {
-                            interfaceBlock.Method($"Single<{MethodRestResponseConcreteTypeName(method, settings)}> {methodName}({methodParameterApiDeclaration})");
-                        }
-                    }
-                });
+                AddHostAnnotation(classBlock, codeModel);
+                AddServiceInterface(classBlock, MethodGroupServiceType(methodGroup), methodGroup.Methods, settings);
 
                 AddMethodOverloads(classBlock, methodGroup.Methods, settings);
             });
@@ -1120,8 +1041,7 @@ namespace AutoRest.Java.DanModel
             javaFile.PublicClass($"{className} extends ServiceClient implements {interfaceName}", classBlock =>
             {
                 string serviceClientType = GetServiceClientServiceType(codeModel);
-                string baseUrl = GetBaseUrl(codeModel);
-
+                
                 if (hasRootMethods)
                 {
                     classBlock.MultipleLineComment(comment =>
@@ -1173,11 +1093,11 @@ namespace AutoRest.Java.DanModel
                 {
                     constructor.Line($"super({httpPipelineVariableName});");
 
-                    constructor.Line();
                     foreach (Property property in codeModel.Properties.Where(p => p.DefaultValue != null))
                     {
                         constructor.Line($"this.{property.Name} = {property.DefaultValue};");
                     }
+
                     foreach (MethodGroup operation in GetAllOperations(codeModel))
                     {
                         constructor.Line($"this.{MethodGroupName(operation)} = new {operation.TypeName}Impl(this);");
@@ -1185,8 +1105,7 @@ namespace AutoRest.Java.DanModel
 
                     if (hasRootMethods)
                     {
-                        constructor.Line();
-                        constructor.Line($"service = {restProxyType}.create({serviceClientType}.class, {httpPipelineVariableName});");
+                        constructor.Line($"this.service = {restProxyType}.create({serviceClientType}.class, {httpPipelineVariableName});");
                     }
                 });
 
@@ -1196,34 +1115,8 @@ namespace AutoRest.Java.DanModel
                     {
                         comment.Description($"The interface defining all the services for {interfaceName} to be used by Retrofit to perform actually REST calls.");
                     });
-                    classBlock.Annotation($"Host(\"{baseUrl}\")");
-                    classBlock.Interface(serviceClientType, interfaceBlock =>
-                    {
-                        foreach (Method method in codeModel.Methods)
-                        {
-                            if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
-                            {
-                                interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
-                            }
-
-                            interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
-
-                            if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
-                            {
-                                interfaceBlock.SingleLineSlashSlashComment($"@Streaming not supported by {restProxyType}");
-                            }
-
-                            AddExpectedResponsesAnnotation(interfaceBlock, method);
-
-                            if (method.DefaultResponse.Body != null)
-                            {
-                                interfaceBlock.Annotation($"UnexpectedResponseExceptionType({MethodOperationExceptionTypeString(method, settings)}.class)");
-                            }
-
-                            string methodName = MethodName(method);
-                            interfaceBlock.Method($"Single<{MethodRestResponseConcreteTypeName(method, settings)}> {methodName}({MethodParameterApiDeclaration(method, settings)})");
-                        }
-                    });
+                    AddHostAnnotation(classBlock, codeModel);
+                    AddServiceInterface(classBlock, serviceClientType, rootMethods, settings);
 
                     foreach (Method method in rootMethods)
                     {
@@ -1549,44 +1442,8 @@ namespace AutoRest.Java.DanModel
                 {
                     comment.Description($"The interface defining all the services for {methodGroupTypeName} to be used by {restProxyType} to perform REST calls.");
                 });
-
-                classBlock.Annotation($"Host(\"{GetBaseUrl(methodGroup.CodeModel)}\")");
-                classBlock.Interface(MethodGroupServiceType(methodGroup), interfaceBlock =>
-                {
-                    foreach (Method method in methodGroup.Methods)
-                    {
-                        string methodName = MethodName(method);
-                        string methodRequestContentType = method.RequestContentType;
-                        if (methodRequestContentType == "multipart/form-data" || methodRequestContentType == "application/x-www-form-urlencoded")
-                        {
-                            interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
-                        }
-                        else
-                        {
-                            interfaceBlock.Annotation($"Headers({{ \"x-ms-logging-context: {MethodGroupFullType(methodGroup)} {methodName}\" }})");
-                        }
-                        interfaceBlock.Annotation($"{method.HttpMethod.ToString().ToUpper()}(\"{method.Url.TrimStart('/')}\")");
-                        if (method.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
-                        {
-                            interfaceBlock.SingleLineSlashSlashComment($"@Streaming not supported by {restProxyType}");
-                        }
-
-                        AddExpectedResponsesAnnotation(interfaceBlock, method);
-
-                        string methodReturnValueWireType = ResponseReturnValueWireType(method.ReturnType);
-                        if (methodReturnValueWireType != null)
-                        {
-                            interfaceBlock.Annotation($"ReturnValueWireType({methodReturnValueWireType}.class)");
-                        }
-
-                        if (method.DefaultResponse.Body != null)
-                        {
-                            interfaceBlock.Annotation($"UnexpectedResponseExceptionType({MethodOperationExceptionTypeString(method, settings)}.class)");
-                        }
-
-                        interfaceBlock.Method($"Single<{MethodRestResponseConcreteTypeName(method, settings)}> {methodName}({MethodParameterApiDeclaration(method, settings)})");
-                    }
-                });
+                AddHostAnnotation(classBlock, codeModel);
+                AddServiceInterface(classBlock, MethodGroupServiceType(methodGroup), methodGroup.Methods, settings);
 
                 foreach (Method method in methodGroup.Methods)
                 {
@@ -3612,7 +3469,10 @@ namespace AutoRest.Java.DanModel
             imports.Add("io.reactivex.functions.Function");
             imports.Add("com.microsoft.rest.v2.annotations.Headers");
             imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
-            imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+            if (HasUnexpectedResponseExceptionType(method))
+            {
+                imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
+            }
             imports.Add("com.microsoft.rest.v2.annotations.Host");
             imports.Add("com.microsoft.rest.v2.http.HttpClient");
             imports.Add("com.microsoft.rest.v2.ServiceFuture");
@@ -4628,18 +4488,6 @@ namespace AutoRest.Java.DanModel
                 .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(ParameterGetName(p)))
                 .OrderBy(item => !item.IsRequired);
 
-        private static void AddExpectedResponsesAnnotation(JavaInterface interfaceBlock, Method method)
-        {
-            IEnumerable<HttpStatusCode> expectedResponses = method.Responses.Keys;
-            if (expectedResponses.Any())
-            {
-                string expectedResponseStrings = string.Join(", ", expectedResponses
-                    .OrderBy(statusCode => statusCode)
-                    .Select(statusCode => statusCode.ToString("D")));
-                interfaceBlock.Annotation($"ExpectedResponses({{{expectedResponseStrings}}})");
-            }
-        }
-
         private static bool MethodHasSequenceType(IModelType mt)
         {
             if (mt is SequenceType)
@@ -5114,6 +4962,74 @@ namespace AutoRest.Java.DanModel
             return known != null &&
                 type.IsPrimaryType(KnownPrimaryType.ByteArray) ||
                 type is SequenceType;
+        }
+
+        private static bool HasUnexpectedResponseExceptionType(Method method)
+        {
+            return method.DefaultResponse.Body != null;
+        }
+
+        private static void AddHostAnnotation(JavaClass classBlock, CodeModel codeModel)
+        {
+            string baseUrl = GetBaseUrl(codeModel);
+            classBlock.Annotation($"Host(\"{baseUrl}\")");
+        }
+
+        private static void AddServiceInterface(JavaClass classBlock, string interfaceName, IEnumerable<Method> serviceMethods, Settings settings)
+        {
+            classBlock.Interface(interfaceName, interfaceBlock =>
+            {
+                foreach (Method serviceMethod in serviceMethods)
+                {
+                    string requestContentType = serviceMethod.RequestContentType;
+                    if (requestContentType == "multipart/form-data" || requestContentType == "application/x-www-form-urlencoded")
+                    {
+                        interfaceBlock.SingleLineSlashSlashComment($"@Multipart not supported by {restProxyType}");
+                    }
+
+                    if (MethodIsPagingNextOperation(serviceMethod))
+                    {
+                        interfaceBlock.Annotation("GET(\"{nextUrl}\")");
+                    }
+                    else
+                    {
+                        string httpMethod = serviceMethod.HttpMethod.ToString().ToUpper();
+                        string path = serviceMethod.Url.TrimStart('/');
+                        interfaceBlock.Annotation($"{httpMethod}(\"{path}\")");
+                    }
+
+                    IEnumerable<HttpStatusCode> expectedResponses = serviceMethod.Responses.Keys;
+                    if (expectedResponses.Any())
+                    {
+                        string expectedResponseStrings = string.Join(", ", expectedResponses
+                            .OrderBy(statusCode => statusCode)
+                            .Select(statusCode => statusCode.ToString("D")));
+                        interfaceBlock.Annotation($"ExpectedResponses({{{expectedResponseStrings}}})");
+                    }
+
+                    string methodReturnValueWireType = ResponseReturnValueWireType(serviceMethod.ReturnType);
+                    if (methodReturnValueWireType != null)
+                    {
+                        interfaceBlock.Annotation($"ReturnValueWireType({methodReturnValueWireType}.class)");
+                    }
+
+                    if (HasUnexpectedResponseExceptionType(serviceMethod))
+                    {
+                        interfaceBlock.Annotation($"UnexpectedResponseExceptionType({MethodOperationExceptionTypeString(serviceMethod, settings)}.class)");
+                    }
+
+                    string methodName = MethodName(serviceMethod);
+                    string methodParameterApiDeclaration = MethodParameterApiDeclaration(serviceMethod, settings);
+                    if (MethodIsLongRunningOperation(serviceMethod))
+                    {
+                        interfaceBlock.Method($"Observable<OperationStatus<{ResponseServiceResponseGenericParameterString(serviceMethod.ReturnType, settings)}>> {methodName}({methodParameterApiDeclaration})");
+                    }
+                    else
+                    {
+                        interfaceBlock.Method($"Single<{MethodRestResponseConcreteTypeName(serviceMethod, settings)}> {methodName}({methodParameterApiDeclaration})");
+                    }
+                }
+            });
         }
     }
 }

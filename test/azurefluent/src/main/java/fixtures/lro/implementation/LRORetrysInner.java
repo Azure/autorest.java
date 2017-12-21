@@ -67,85 +67,71 @@ public class LRORetrysInner {
      */
     @Host("http://localhost:3000")
     interface LRORetrysService {
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginPut201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys put201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginPutAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys putAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysPutAsyncRelativeRetrySucceededHeadersInner, ProductInner>> putAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys deleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/retryerror/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginDelete202Retry200" })
         @DELETE("lro/retryerror/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys delete202Retry200" })
         @DELETE("lro/retryerror/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysDelete202Retry200HeadersInner, Void>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteAsyncRelativeRetrySucceeded" })
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys deleteAsyncRelativeRetrySucceeded" })
         @DELETE("lro/retryerror/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner, Void>> deleteAsyncRelativeRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginPost202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys post202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LRORetrysPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys beginPostAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginPostAsyncRelativeRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LRORetrys postAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)

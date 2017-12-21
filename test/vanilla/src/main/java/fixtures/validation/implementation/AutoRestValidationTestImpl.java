@@ -113,9 +113,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public AutoRestValidationTestImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
-
-        service = RestProxy.create(AutoRestValidationTestService.class, httpPipeline);
+        this.service = RestProxy.create(AutoRestValidationTestService.class, httpPipeline);
     }
 
     /**

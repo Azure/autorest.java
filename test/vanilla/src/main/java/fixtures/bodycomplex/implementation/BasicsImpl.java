@@ -66,37 +66,31 @@ public class BasicsImpl implements Basics {
      */
     @Host("http://localhost:3000")
     interface BasicsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getValid" })
         @GET("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Basic>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics putValid" })
         @PUT("complex/basic/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") Basic complexBody, @QueryParam("api-version") String apiVersion);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getInvalid" })
         @GET("complex/basic/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Basic>> getInvalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getEmpty" })
         @GET("complex/basic/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Basic>> getEmpty();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getNull" })
         @GET("complex/basic/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Basic>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Basics getNotProvided" })
         @GET("complex/basic/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

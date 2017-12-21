@@ -66,37 +66,31 @@ public class EnumsImpl implements Enums {
      */
     @Host("http://localhost:3000")
     interface EnumsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getNotExpandable" })
         @GET("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Colors>> getNotExpandable();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums putNotExpandable" })
         @PUT("string/enum/notExpandable")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putNotExpandable(@BodyParam("application/json; charset=utf-8") Colors stringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getReferenced" })
         @GET("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Colors>> getReferenced();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums putReferenced" })
         @PUT("string/enum/Referenced")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putReferenced(@BodyParam("application/json; charset=utf-8") Colors enumStringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums getReferencedConstant" })
         @GET("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, RefColorConstant>> getReferencedConstant();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Enums putReferencedConstant" })
         @PUT("string/enum/ReferencedConstant")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

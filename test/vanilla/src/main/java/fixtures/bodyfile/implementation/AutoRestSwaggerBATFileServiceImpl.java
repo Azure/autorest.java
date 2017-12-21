@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements 
      */
     public AutoRestSwaggerBATFileServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.files = new FilesImpl(this);
     }
 }

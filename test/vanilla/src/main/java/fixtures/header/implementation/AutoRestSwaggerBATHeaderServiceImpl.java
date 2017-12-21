@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implement
      */
     public AutoRestSwaggerBATHeaderServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.headers = new HeadersImpl(this);
     }
 }

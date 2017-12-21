@@ -48,7 +48,6 @@ public class AutoRestDurationTestServiceImpl extends ServiceClient implements Au
      */
     public AutoRestDurationTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.durations = new DurationsImpl(this);
     }
 }

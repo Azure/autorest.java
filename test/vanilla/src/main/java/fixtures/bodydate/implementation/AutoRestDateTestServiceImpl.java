@@ -48,7 +48,6 @@ public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRe
      */
     public AutoRestDateTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.dates = new DatesImpl(this);
     }
 }

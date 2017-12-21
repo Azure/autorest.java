@@ -48,7 +48,6 @@ public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements
      */
     public AutoRestSwaggerBATArrayServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.arrays = new ArraysImpl(this);
     }
 }

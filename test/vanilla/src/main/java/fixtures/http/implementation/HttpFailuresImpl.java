@@ -61,18 +61,15 @@ public class HttpFailuresImpl implements HttpFailures {
      */
     @Host("http://localhost:3000")
     interface HttpFailuresService {
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getEmptyError" })
         @GET("http/failure/emptybody/error")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> getEmptyError();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getNoModelError" })
         @GET("http/failure/nomodel/error")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Boolean>> getNoModelError();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpFailures getNoModelEmpty" })
         @GET("http/failure/nomodel/empty")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Boolean>> getNoModelEmpty();

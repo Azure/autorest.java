@@ -76,122 +76,100 @@ public class ExplicitsImpl implements Explicits {
      */
     @Host("http://localhost:3000")
     interface ExplicitsService {
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
         @POST("reqopt/requied/integer/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredIntegerParameter(@BodyParam("application/json; charset=utf-8") int bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerParameter" })
         @POST("reqopt/optional/integer/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalIntegerParameter(@BodyParam("application/json; charset=utf-8") Integer bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerProperty" })
         @POST("reqopt/requied/integer/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredIntegerProperty(@BodyParam("application/json; charset=utf-8") IntWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerProperty" })
         @POST("reqopt/optional/integer/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalIntegerProperty(@BodyParam("application/json; charset=utf-8") IntOptionalWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerHeader" })
         @POST("reqopt/requied/integer/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredIntegerHeader(@HeaderParam("headerParameter") int headerParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerHeader" })
         @POST("reqopt/optional/integer/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalIntegerHeader(@HeaderParam("headerParameter") Integer headerParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringParameter" })
         @POST("reqopt/requied/string/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringParameter" })
         @POST("reqopt/optional/string/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalStringParameter(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringProperty" })
         @POST("reqopt/requied/string/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredStringProperty(@BodyParam("application/json; charset=utf-8") StringWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringProperty" })
         @POST("reqopt/optional/string/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalStringProperty(@BodyParam("application/json; charset=utf-8") StringOptionalWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringHeader" })
         @POST("reqopt/requied/string/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredStringHeader(@HeaderParam("headerParameter") String headerParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringHeader" })
         @POST("reqopt/optional/string/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalStringHeader(@HeaderParam("bodyParameter") String bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassParameter" })
         @POST("reqopt/requied/class/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassParameter" })
         @POST("reqopt/optional/class/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalClassParameter(@BodyParam("application/json; charset=utf-8") Product bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassProperty" })
         @POST("reqopt/requied/class/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredClassProperty(@BodyParam("application/json; charset=utf-8") ClassWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassProperty" })
         @POST("reqopt/optional/class/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalClassProperty(@BodyParam("application/json; charset=utf-8") ClassOptionalWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayParameter" })
         @POST("reqopt/requied/array/parameter")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayParameter" })
         @POST("reqopt/optional/array/parameter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalArrayParameter(@BodyParam("application/json; charset=utf-8") List<String> bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayProperty" })
         @POST("reqopt/requied/array/property")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayProperty" })
         @POST("reqopt/optional/array/property")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postOptionalArrayProperty(@BodyParam("application/json; charset=utf-8") ArrayOptionalWrapper bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayHeader" })
         @POST("reqopt/requied/array/header")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> postRequiredArrayHeader(@HeaderParam("headerParameter") String headerParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayHeader" })
         @POST("reqopt/optional/array/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

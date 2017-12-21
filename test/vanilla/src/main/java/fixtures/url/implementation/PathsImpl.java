@@ -70,157 +70,131 @@ public class PathsImpl implements Paths {
      */
     @Host("http://localhost:3000")
     interface PathsService {
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths getBooleanTrue" })
         @GET("paths/bool/true/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getBooleanTrue(@PathParam("boolPath") boolean boolPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths getBooleanFalse" })
         @GET("paths/bool/false/{boolPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getBooleanFalse(@PathParam("boolPath") boolean boolPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths getIntOneMillion" })
         @GET("paths/int/1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getIntOneMillion(@PathParam("intPath") int intPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths getIntNegativeOneMillion" })
         @GET("paths/int/-1000000/{intPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getIntNegativeOneMillion(@PathParam("intPath") int intPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths getTenBillion" })
         @GET("paths/long/10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getTenBillion(@PathParam("longPath") long longPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths getNegativeTenBillion" })
         @GET("paths/long/-10000000000/{longPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getNegativeTenBillion(@PathParam("longPath") long longPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths floatScientificPositive" })
         @GET("paths/float/1.034E+20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> floatScientificPositive(@PathParam("floatPath") double floatPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths floatScientificNegative" })
         @GET("paths/float/-1.034E-20/{floatPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> floatScientificNegative(@PathParam("floatPath") double floatPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths doubleDecimalPositive" })
         @GET("paths/double/9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> doubleDecimalPositive(@PathParam("doublePath") double doublePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths doubleDecimalNegative" })
         @GET("paths/double/-9999999.999/{doublePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> doubleDecimalNegative(@PathParam("doublePath") double doublePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths stringUnicode" })
         @GET("paths/string/unicode/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> stringUnicode(@PathParam("stringPath") String stringPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths stringUrlEncoded" })
         @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> stringUrlEncoded(@PathParam("stringPath") String stringPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths stringEmpty" })
         @GET("paths/string/empty/{stringPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> stringEmpty(@PathParam("stringPath") String stringPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths stringNull" })
         @GET("paths/string/null/{stringPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> stringNull(@PathParam("stringPath") String stringPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths enumValid" })
         @GET("paths/enum/green%20color/{enumPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> enumValid(@PathParam("enumPath") UriColor enumPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths enumNull" })
         @GET("paths/string/null/{enumPath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> enumNull(@PathParam("enumPath") UriColor enumPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths byteMultiByte" })
         @GET("paths/byte/multibyte/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> byteMultiByte(@PathParam("bytePath") String bytePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths byteEmpty" })
         @GET("paths/byte/empty/{bytePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> byteEmpty(@PathParam("bytePath") String bytePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths byteNull" })
         @GET("paths/byte/null/{bytePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> byteNull(@PathParam("bytePath") String bytePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths dateValid" })
         @GET("paths/date/2012-01-01/{datePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> dateValid(@PathParam("datePath") LocalDate datePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths dateNull" })
         @GET("paths/date/null/{datePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> dateNull(@PathParam("datePath") LocalDate datePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths dateTimeValid" })
         @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> dateTimeValid(@PathParam("dateTimePath") DateTime dateTimePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths dateTimeNull" })
         @GET("paths/datetime/null/{dateTimePath}")
         @ExpectedResponses({400})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> dateTimeNull(@PathParam("dateTimePath") DateTime dateTimePath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths base64Url" })
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> base64Url(@PathParam("base64UrlPath") Base64Url base64UrlPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths arrayCsvInPath" })
         @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> arrayCsvInPath(@PathParam("arrayPath") String arrayPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.url.Paths unixTimeUrl" })
         @GET("paths/int/1460505600/{unixTimeUrlPath}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

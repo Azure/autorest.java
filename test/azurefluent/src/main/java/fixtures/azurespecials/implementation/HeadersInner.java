@@ -63,19 +63,16 @@ public class HeadersInner {
      */
     @Host("http://localhost:3000")
     interface HeadersService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId" })
         @POST("azurespecials/customNamedRequestId")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HeaderCustomNamedRequestIdHeadersInner, Void>> customNamedRequestId(@HeaderParam("foo-client-request-id") String fooClientRequestId, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner, Void>> customNamedRequestIdParamGrouping(@HeaderParam("accept-language") String acceptLanguage, @HeaderParam("foo-client-request-id") String fooClientRequestId);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdHead" })
         @HEAD("azurespecials/customNamedRequestIdHead")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)

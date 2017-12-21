@@ -65,13 +65,11 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      */
     @Host("http://localhost:3000")
     interface ReadonlypropertysService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
         @GET("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, ReadonlyObj>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
         @PUT("complex/readonlyproperty/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

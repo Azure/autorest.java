@@ -23,7 +23,6 @@ import com.microsoft.rest.v2.annotations.Headers;
 import com.microsoft.rest.v2.annotations.Host;
 import com.microsoft.rest.v2.annotations.PATCH;
 import com.microsoft.rest.v2.annotations.PathParam;
-import com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType;
 import com.microsoft.rest.v2.http.HttpClient;
 import fixtures.parameterflattening.AvailabilitySets;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
@@ -65,7 +64,6 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      */
     @Host("http://localhost:3000")
     interface AvailabilitySetsService {
-        @Headers({ "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({200})
         Single<RestResponse<Void, Void>> update(@PathParam("resourceGroupName") String resourceGroupName, @PathParam("availabilitySetName") String avset, @BodyParam("application/json; charset=utf-8") AvailabilitySetUpdateParameters tags);

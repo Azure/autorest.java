@@ -66,49 +66,41 @@ public class HttpRetrysImpl implements HttpRetrys {
      */
     @Host("http://localhost:3000")
     interface HttpRetrysService {
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys head408" })
         @HEAD("http/retry/408")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> head408();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys put500" })
         @PUT("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> put500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys patch500" })
         @PATCH("http/retry/500")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> patch500(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys get502" })
         @GET("http/retry/502")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> get502();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys post503" })
         @POST("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> post503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys delete503" })
         @DELETE("http/retry/503")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> delete503(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys put504" })
         @PUT("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> put504(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpRetrys patch504" })
         @PATCH("http/retry/504")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

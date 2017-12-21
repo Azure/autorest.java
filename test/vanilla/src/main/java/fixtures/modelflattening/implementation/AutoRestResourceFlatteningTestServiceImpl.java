@@ -69,9 +69,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
-
-        service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpPipeline);
+        this.service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpPipeline);
     }
 
     /**

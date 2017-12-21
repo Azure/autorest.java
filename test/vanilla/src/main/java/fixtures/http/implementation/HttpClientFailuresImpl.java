@@ -66,117 +66,94 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      */
     @Host("http://localhost:3000")
     interface HttpClientFailuresService {
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures head400" })
         @HEAD("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head400();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures get400" })
         @GET("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get400();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures put400" })
         @PUT("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> put400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures patch400" })
         @PATCH("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> patch400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures post400" })
         @POST("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> post400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures delete400" })
         @DELETE("http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> delete400(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures head401" })
         @HEAD("http/failure/client/401")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head401();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures get402" })
         @GET("http/failure/client/402")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get402();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures get403" })
         @GET("http/failure/client/403")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get403();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures put404" })
         @PUT("http/failure/client/404")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> put404(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures patch405" })
         @PATCH("http/failure/client/405")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> patch405(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures post406" })
         @POST("http/failure/client/406")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> post406(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures delete407" })
         @DELETE("http/failure/client/407")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> delete407(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures put409" })
         @PUT("http/failure/client/409")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> put409(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures head410" })
         @HEAD("http/failure/client/410")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head410();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures get411" })
         @GET("http/failure/client/411")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get411();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures get412" })
         @GET("http/failure/client/412")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get412();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures put413" })
         @PUT("http/failure/client/413")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> put413(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures patch414" })
         @PATCH("http/failure/client/414")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> patch414(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures post415" })
         @POST("http/failure/client/415")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> post415(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures get416" })
         @GET("http/failure/client/416")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get416();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures delete417" })
         @DELETE("http/failure/client/417")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> delete417(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpClientFailures head429" })
         @HEAD("http/failure/client/429")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head429();

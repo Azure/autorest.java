@@ -63,43 +63,36 @@ public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      */
     @Host("http://localhost:3000")
     interface SkipUrlEncodingsService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodPathValid" })
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathPathValid" })
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getPathPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerPathValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getSwaggerPathValid(@PathParam(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryValid" })
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryNull" })
         @GET("azurespecials/skipUrlEncoding/method/query/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodQueryNull(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathQueryValid" })
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getPathQueryValid(@QueryParam(value = "q1", encoded = true) String q1, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerQueryValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

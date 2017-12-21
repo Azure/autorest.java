@@ -67,109 +67,91 @@ public class HttpSuccessImpl implements HttpSuccess {
      */
     @Host("http://localhost:3000")
     interface HttpSuccessService {
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess head200" })
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> head200();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess get200" })
         @GET("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Boolean>> get200();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess put200" })
         @PUT("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> put200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess patch200" })
         @PATCH("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> patch200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess post200" })
         @POST("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> post200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess delete200" })
         @DELETE("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> delete200(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess put201" })
         @PUT("http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> put201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess post201" })
         @POST("http/success/201")
         @ExpectedResponses({201})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> post201(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess put202" })
         @PUT("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> put202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess patch202" })
         @PATCH("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> patch202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess post202" })
         @POST("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> post202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess delete202" })
         @DELETE("http/success/202")
         @ExpectedResponses({202})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> delete202(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> head204();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess put204" })
         @PUT("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> put204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess patch204" })
         @PATCH("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> patch204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess post204" })
         @POST("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> post204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess delete204" })
         @DELETE("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> delete204(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpSuccess head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)

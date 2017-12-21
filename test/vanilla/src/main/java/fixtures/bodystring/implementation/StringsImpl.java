@@ -65,81 +65,68 @@ public class StringsImpl implements Strings {
      */
     @Host("http://localhost:3000")
     interface StringsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNull" })
         @GET("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, String>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putNull" })
         @PUT("string/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putNull(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getEmpty" })
         @GET("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, String>> getEmpty();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putEmpty" })
         @PUT("string/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getMbcs" })
         @GET("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, String>> getMbcs();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putMbcs" })
         @PUT("string/mbcs")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putMbcs(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getWhitespace" })
         @GET("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, String>> getWhitespace();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putWhitespace" })
         @PUT("string/whitespace")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putWhitespace(@BodyParam("application/json; charset=utf-8") String stringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNotProvided" })
         @GET("string/notProvided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, String>> getNotProvided();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getBase64Encoded" })
         @GET("string/base64Encoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getBase64Encoded();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getBase64UrlEncoded" })
         @GET("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getBase64UrlEncoded();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings putBase64UrlEncoded" })
         @PUT("string/base64UrlEncoding")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putBase64UrlEncoded(@BodyParam("application/json; charset=utf-8") Base64Url stringBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodystring.Strings getNullBase64UrlEncoded" })
         @GET("string/nullBase64UrlEncoding")
         @ExpectedResponses({200})
         @ReturnValueWireType(Base64Url.class)

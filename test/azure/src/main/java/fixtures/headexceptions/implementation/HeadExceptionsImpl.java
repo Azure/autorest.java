@@ -61,19 +61,16 @@ public class HeadExceptionsImpl implements HeadExceptions {
      */
     @Host("http://localhost:3000")
     interface HeadExceptionsService {
-        @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Void>> head200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Void>> head204(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204})
         @UnexpectedResponseExceptionType(CloudException.class)

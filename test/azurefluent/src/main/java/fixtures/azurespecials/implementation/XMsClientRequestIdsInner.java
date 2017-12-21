@@ -61,13 +61,11 @@ public class XMsClientRequestIdsInner {
      */
     @Host("http://localhost:3000")
     interface XMsClientRequestIdsService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds get" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Void>> get(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds paramGet" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

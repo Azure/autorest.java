@@ -65,13 +65,11 @@ public class InheritancesImpl implements Inheritances {
      */
     @Host("http://localhost:3000")
     interface InheritancesService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Inheritances getValid" })
         @GET("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Siamese>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Inheritances putValid" })
         @PUT("complex/inheritance/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

@@ -63,31 +63,26 @@ public class BytesImpl implements Bytes {
      */
     @Host("http://localhost:3000")
     interface BytesService {
-        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getNull" })
         @GET("byte/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getEmpty" })
         @GET("byte/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getEmpty();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getNonAscii" })
         @GET("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, byte[]>> getNonAscii();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes putNonAscii" })
         @PUT("byte/nonAscii")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putNonAscii(@BodyParam("application/json; charset=utf-8") byte[] byteBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodybyte.Bytes getInvalid" })
         @GET("byte/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
