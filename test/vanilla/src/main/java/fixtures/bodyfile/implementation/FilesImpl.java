@@ -61,23 +61,17 @@ public class FilesImpl implements Files {
      */
     @Host("http://localhost:3000")
     interface FilesService {
-        @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getFile" })
         @GET("files/stream/nonempty")
-        // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> getFile();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getFileLarge" })
         @GET("files/stream/verylarge")
-        // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> getFileLarge();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyfile.Files getEmptyFile" })
         @GET("files/stream/empty")
-        // @Streaming not supported by RestProxy
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, InputStream>> getEmptyFile();

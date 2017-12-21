@@ -48,7 +48,6 @@ public class AutoRestNumberTestServiceImpl extends ServiceClient implements Auto
      */
     public AutoRestNumberTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.numbers = new NumbersImpl(this);
     }
 }

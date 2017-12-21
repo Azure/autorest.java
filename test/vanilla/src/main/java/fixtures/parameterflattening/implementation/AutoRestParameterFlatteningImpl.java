@@ -48,7 +48,6 @@ public class AutoRestParameterFlatteningImpl extends ServiceClient implements Au
      */
     public AutoRestParameterFlatteningImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.availabilitySets = new AvailabilitySetsImpl(this);
     }
 }

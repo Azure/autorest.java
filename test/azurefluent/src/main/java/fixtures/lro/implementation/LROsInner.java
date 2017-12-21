@@ -67,433 +67,361 @@ public class LROsInner {
      */
     @Host("http://localhost:3000")
     interface LROsService {
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Succeeded" })
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200Succeeded" })
         @PUT("lro/put/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200Succeeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200SucceededNoState(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut202Retry200" })
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put202Retry200" })
         @PUT("lro/put/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put201CreatingSucceeded200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200UpdatingSucceeded204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put201CreatingFailed200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPut200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPut200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs put200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, ProductInner>> put200Acceptedcanceled200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutNoHeaderInRetryHeadersInner, ProductInner>> putNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncRetrySucceededHeadersInner, ProductInner>> putAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncNoRetrySucceededHeadersInner, ProductInner>> putAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncRetryFailedHeadersInner, ProductInner>> putAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncNoRetrycanceledHeadersInner, ProductInner>> putAsyncNoRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPutAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         @ExpectedResponses({200, 201, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPutAsyncNoHeaderInRetryHeadersInner, ProductInner>> putAsyncNoHeaderInRetry(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutNonResource" })
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<SkuInner>> beginPutNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putNonResource" })
         @PUT("lro/putnonresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SkuInner>> putNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<SkuInner>> beginPutAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SkuInner>> putAsyncNonResource(@BodyParam("application/json; charset=utf-8") SkuInner sku, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutSubResource" })
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<SubProductInner>> beginPutSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putSubResource" })
         @PUT("lro/putsubresource/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SubProductInner>> putSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<SubProductInner>> beginPutAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs putAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SubProductInner>> putAsyncSubResource(@BodyParam("application/json; charset=utf-8") SubProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Accepted200Succeeded" })
         @DELETE("lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteProvisioning202Accepted200SucceededHeadersInner, ProductInner>> deleteProvisioning202Accepted200Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202DeletingFailed200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteProvisioning202DeletingFailed200HeadersInner, ProductInner>> deleteProvisioning202DeletingFailed200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginDeleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Deletingcanceled200" })
         @DELETE("lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteProvisioning202Deletingcanceled200HeadersInner, ProductInner>> deleteProvisioning202Deletingcanceled200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDelete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete204Succeeded" })
         @DELETE("lro/delete/204/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Void>> delete204Succeeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginDelete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete202Retry200" })
         @DELETE("lro/delete/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDelete202Retry200HeadersInner, ProductInner>> delete202Retry200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDelete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginDelete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs delete202NoRetry204" })
         @DELETE("lro/delete/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDelete202NoRetry204HeadersInner, ProductInner>> delete202NoRetry204(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteNoHeaderInRetry" })
         @DELETE("lro/delete/noheader")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteNoHeaderInRetryHeadersInner, Void>> deleteNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoHeaderInRetry" })
         @DELETE("lro/deleteasync/noheader/202/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncNoHeaderInRetryHeadersInner, Void>> deleteAsyncNoHeaderInRetry(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrySucceeded" })
         @DELETE("lro/deleteasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncRetrySucceededHeadersInner, Void>> deleteAsyncRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoRetrySucceeded" })
         @DELETE("lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncNoRetrySucceededHeadersInner, Void>> deleteAsyncNoRetrySucceeded(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetryFailed" })
         @DELETE("lro/deleteasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncRetryFailedHeadersInner, Void>> deleteAsyncRetryFailed(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginDeleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrycanceled" })
         @DELETE("lro/deleteasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsDeleteAsyncRetrycanceledHeadersInner, Void>> deleteAsyncRetrycanceled(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost200WithPayload" })
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<SkuInner>> beginPost200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs post200WithPayload" })
         @POST("lro/post/payload/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, SkuInner>> post200WithPayload(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202Retry200" })
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginPost202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs post202Retry200" })
         @POST("lro/post/202/retry/200")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPost202Retry200HeadersInner, Void>> post202Retry200(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPost202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPost202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs post202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPost202NoRetry204HeadersInner, ProductInner>> post202NoRetry204(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPostAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetrySucceededHeadersInner, ProductInner>> postAsyncRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<ProductInner>> beginPostAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncNoRetrySucceededHeadersInner, ProductInner>> postAsyncNoRetrySucceeded(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginPostAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<LROsPostAsyncRetryFailedHeadersInner, Void>> postAsyncRetryFailed(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)
         Observable<OperationStatus<Void>> beginPostAsyncRetrycanceled(@BodyParam("application/json; charset=utf-8") ProductInner product, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         @ExpectedResponses({200, 202, 204})
         @UnexpectedResponseExceptionType(CloudException.class)

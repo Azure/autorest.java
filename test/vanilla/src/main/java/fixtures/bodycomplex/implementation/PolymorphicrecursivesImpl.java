@@ -65,13 +65,11 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      */
     @Host("http://localhost:3000")
     interface PolymorphicrecursivesService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives getValid" })
         @GET("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Fish>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives putValid" })
         @PUT("complex/polymorphicrecursive/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

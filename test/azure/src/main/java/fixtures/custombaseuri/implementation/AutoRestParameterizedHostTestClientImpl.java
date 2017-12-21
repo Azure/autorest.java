@@ -173,10 +173,6 @@ public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient 
      */
     public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
-        initialize();
-    }
-
-    protected void initialize() {
         this.host = "host";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

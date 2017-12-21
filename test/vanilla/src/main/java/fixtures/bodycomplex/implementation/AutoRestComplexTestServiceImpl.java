@@ -178,7 +178,6 @@ public class AutoRestComplexTestServiceImpl extends ServiceClient implements Aut
      */
     public AutoRestComplexTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.apiVersion = "2014-04-01-preview";
         this.basics = new BasicsImpl(this);
         this.primitives = new PrimitivesImpl(this);

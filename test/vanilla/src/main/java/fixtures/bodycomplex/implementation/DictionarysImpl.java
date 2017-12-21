@@ -65,37 +65,31 @@ public class DictionarysImpl implements Dictionarys {
      */
     @Host("http://localhost:3000")
     interface DictionarysService {
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getValid" })
         @GET("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DictionaryWrapper>> getValid();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Dictionarys putValid" })
         @PUT("complex/dictionary/typed/valid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putValid(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getEmpty" })
         @GET("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DictionaryWrapper>> getEmpty();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Dictionarys putEmpty" })
         @PUT("complex/dictionary/typed/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putEmpty(@BodyParam("application/json; charset=utf-8") DictionaryWrapper complexBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getNull" })
         @GET("complex/dictionary/typed/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, DictionaryWrapper>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getNotProvided" })
         @GET("complex/dictionary/typed/notprovided")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

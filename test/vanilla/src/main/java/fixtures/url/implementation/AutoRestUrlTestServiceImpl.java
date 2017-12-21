@@ -128,7 +128,6 @@ public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRes
      */
     public AutoRestUrlTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.paths = new PathsImpl(this);
         this.queries = new QueriesImpl(this);
         this.pathItems = new PathItemsImpl(this);

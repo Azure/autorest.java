@@ -138,7 +138,6 @@ public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient imple
      */
     public AutoRestRequiredOptionalTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.implicits = new ImplicitsImpl(this);
         this.explicits = new ExplicitsImpl(this);
     }

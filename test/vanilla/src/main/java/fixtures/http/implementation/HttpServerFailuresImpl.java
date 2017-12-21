@@ -64,22 +64,18 @@ public class HttpServerFailuresImpl implements HttpServerFailures {
      */
     @Host("http://localhost:3000")
     interface HttpServerFailuresService {
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures head501" })
         @HEAD("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> head501();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures get501" })
         @GET("http/failure/server/501")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> get501();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures post505" })
         @POST("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> post505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);
 
-        @Headers({ "x-ms-logging-context: fixtures.http.HttpServerFailures delete505" })
         @DELETE("http/failure/server/505")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> delete505(@BodyParam("application/json; charset=utf-8") Boolean booleanValue);

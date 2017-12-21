@@ -187,10 +187,6 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient implements Mic
      */
     public MicrosoftAzureTestUrlImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
-        initialize();
-    }
-
-    protected void initialize() {
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;

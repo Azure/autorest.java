@@ -148,10 +148,6 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      */
     public AutoRestParameterGroupingTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
-        initialize();
-    }
-
-    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;

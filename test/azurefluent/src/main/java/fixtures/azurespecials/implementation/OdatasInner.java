@@ -61,7 +61,6 @@ public class OdatasInner {
      */
     @Host("http://localhost:3000")
     interface OdatasService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

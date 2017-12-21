@@ -61,25 +61,21 @@ public class SubscriptionInMethodsInner {
      */
     @Host("http://localhost:3000")
     interface SubscriptionInMethodsService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postMethodLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postMethodLocalNull(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postPathLocalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> postPathLocalValid(@PathParam("subscriptionId") String subscriptionId, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postSwaggerLocalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

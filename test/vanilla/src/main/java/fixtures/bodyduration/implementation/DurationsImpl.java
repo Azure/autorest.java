@@ -64,25 +64,21 @@ public class DurationsImpl implements Durations {
      */
     @Host("http://localhost:3000")
     interface DurationsService {
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getNull" })
         @GET("duration/null")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Period>> getNull();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations putPositiveDuration" })
         @PUT("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putPositiveDuration(@BodyParam("application/json; charset=utf-8") Period durationBody);
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getPositiveDuration" })
         @GET("duration/positiveduration")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Period>> getPositiveDuration();
 
-        @Headers({ "x-ms-logging-context: fixtures.bodyduration.Durations getInvalid" })
         @GET("duration/invalid")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

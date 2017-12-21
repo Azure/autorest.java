@@ -63,7 +63,6 @@ public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements Auto
      */
     public AutoRestSwaggerBATServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.strings = new StringsImpl(this);
         this.enums = new EnumsImpl(this);
     }

@@ -67,183 +67,149 @@ public class MultipleResponsesImpl implements MultipleResponses {
      */
     @Host("http://localhost:3000")
     interface MultipleResponsesService {
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError200Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model204NoModelDefaultError200Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError204Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model204NoModelDefaultError204Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError201Invalid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model204NoModelDefaultError201Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError202None" })
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model204NoModelDefaultError202None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError400Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         @ExpectedResponses({200, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model204NoModelDefaultError400Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError200Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model201ModelDefaultError200Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError201Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model201ModelDefaultError201Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError400Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         @ExpectedResponses({200, 201})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, A>> get200Model201ModelDefaultError400Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError200Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError201Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError404Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError400Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         @ExpectedResponses({200, 201, 404})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Object>> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError202None" })
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> get202None204NoneDefaultError202None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError204None" })
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> get202None204NoneDefaultError204None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError400Valid" })
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         @ExpectedResponses({202, 204})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> get202None204NoneDefaultError400Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone202Invalid" })
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         @ExpectedResponses({202, 204})
         Single<RestResponse<Void, Void>> get202None204NoneDefaultNone202Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone204None" })
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         @ExpectedResponses({202, 204})
         Single<RestResponse<Void, Void>> get202None204NoneDefaultNone204None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone400None" })
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         @ExpectedResponses({202, 204})
         Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone400Invalid" })
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         @ExpectedResponses({202, 204})
         Single<RestResponse<Void, Void>> get202None204NoneDefaultNone400Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200Valid" })
         @GET("http/payloads/default/A/response/200/valid")
         @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA200Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200None" })
         @GET("http/payloads/default/A/response/200/none")
         @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA200None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400Valid" })
         @GET("http/payloads/default/A/response/400/valid")
         @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA400Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400None" })
         @GET("http/payloads/default/A/response/400/none")
         @UnexpectedResponseExceptionType(AException.class)
         Single<RestResponse<Void, A>> getDefaultModelA400None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200Invalid" })
         @GET("http/payloads/default/none/response/200/invalid")
         Single<RestResponse<Void, Void>> getDefaultNone200Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200None" })
         @GET("http/payloads/default/none/response/200/none")
         Single<RestResponse<Void, Void>> getDefaultNone200None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400Invalid" })
         @GET("http/payloads/default/none/response/400/invalid")
         Single<RestResponse<Void, Void>> getDefaultNone400Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400None" })
         @GET("http/payloads/default/none/response/400/none")
         Single<RestResponse<Void, Void>> getDefaultNone400None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200None" })
         @GET("http/payloads/200/A/response/200/none")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA200None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200Valid" })
         @GET("http/payloads/200/A/response/200/valid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA200Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200Invalid" })
         @GET("http/payloads/200/A/response/200/invalid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA200Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400None" })
         @GET("http/payloads/200/A/response/400/none")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA400None();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400Valid" })
         @GET("http/payloads/200/A/response/400/valid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA400Valid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400Invalid" })
         @GET("http/payloads/200/A/response/400/invalid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA400Invalid();
 
-        @Headers({ "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA202Valid" })
         @GET("http/payloads/200/A/response/202/valid")
         @ExpectedResponses({200})
         Single<RestResponse<Void, A>> get200ModelA202Valid();

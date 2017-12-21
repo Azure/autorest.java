@@ -73,7 +73,6 @@ public class AutoRestParameterizedHostTestClientImpl extends ServiceClient imple
      */
     public AutoRestParameterizedHostTestClientImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.host = "host";
         this.paths = new PathsImpl(this);
     }

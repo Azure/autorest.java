@@ -48,7 +48,6 @@ public class AutoRestDateTimeTestServiceImpl extends ServiceClient implements Au
      */
     public AutoRestDateTimeTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.datetimes = new DatetimesImpl(this);
     }
 }

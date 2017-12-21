@@ -48,7 +48,6 @@ public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRe
      */
     public AutoRestBoolTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.bools = new BoolsImpl(this);
     }
 }

@@ -60,19 +60,16 @@ public class HttpSuccessInner {
      */
     @Host("http://localhost:3000")
     interface HttpSuccessService {
-        @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")
         @ExpectedResponses({200, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Boolean>> head200(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
         @HEAD("http/success/204")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)
         Single<RestResponse<Void, Boolean>> head204(@HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
         @HEAD("http/success/404")
         @ExpectedResponses({204, 404})
         @UnexpectedResponseExceptionType(CloudException.class)

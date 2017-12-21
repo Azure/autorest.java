@@ -67,40 +67,33 @@ public class ImplicitsImpl implements Implicits {
      */
     @Host("http://localhost:3000")
     interface ImplicitsService {
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredPath" })
         @GET("reqopt/implicit/required/path/{pathParameter}")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getRequiredPath(@PathParam("pathParameter") String pathParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalQuery" })
         @PUT("reqopt/implicit/optional/query")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putOptionalQuery(@QueryParam("queryParameter") String queryParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalHeader" })
         @PUT("reqopt/implicit/optional/header")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putOptionalHeader(@HeaderParam("queryParameter") String queryParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits putOptionalBody" })
         @PUT("reqopt/implicit/optional/body")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> putOptionalBody(@BodyParam("application/json; charset=utf-8") String bodyParameter);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalPath" })
         @GET("reqopt/global/required/path/{required-global-path}")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getRequiredGlobalPath(@PathParam("required-global-path") String requiredGlobalPath);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getRequiredGlobalQuery" })
         @GET("reqopt/global/required/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getRequiredGlobalQuery(@QueryParam("required-global-query") String requiredGlobalQuery);
 
-        @Headers({ "x-ms-logging-context: fixtures.requiredoptional.Implicits getOptionalGlobalQuery" })
         @GET("reqopt/global/optional/query")
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Error>> getOptionalGlobalQuery(@QueryParam("optional-global-query") Integer optionalGlobalQuery);

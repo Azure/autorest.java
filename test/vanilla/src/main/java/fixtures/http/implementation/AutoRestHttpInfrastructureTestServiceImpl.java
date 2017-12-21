@@ -138,7 +138,6 @@ public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient imp
      */
     public AutoRestHttpInfrastructureTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.httpFailures = new HttpFailuresImpl(this);
         this.httpSuccess = new HttpSuccessImpl(this);
         this.httpRedirects = new HttpRedirectsImpl(this);

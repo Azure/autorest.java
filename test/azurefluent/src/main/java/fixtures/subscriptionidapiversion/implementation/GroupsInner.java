@@ -62,7 +62,6 @@ public class GroupsInner {
      */
     @Host("https://management.azure.com/")
     interface GroupsService {
-        @Headers({ "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

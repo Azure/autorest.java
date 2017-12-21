@@ -48,7 +48,6 @@ public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implem
      */
     public AutoRestRFC1123DateTimeTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-
         this.datetimerfc1123s = new Datetimerfc1123sImpl(this);
     }
 }

@@ -61,25 +61,21 @@ public class ApiVersionDefaultsInner {
      */
     @Host("http://localhost:3000")
     interface ApiVersionDefaultsService {
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalNotProvidedValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getMethodGlobalNotProvidedValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getPathGlobalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
         Single<RestResponse<Void, Void>> getPathGlobalValid(@QueryParam("api-version") String apiVersion, @HeaderParam("accept-language") String acceptLanguage);
 
-        @Headers({ "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getSwaggerGlobalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)

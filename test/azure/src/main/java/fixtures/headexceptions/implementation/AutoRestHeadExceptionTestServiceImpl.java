@@ -148,10 +148,6 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient imp
      */
     public AutoRestHeadExceptionTestServiceImpl(HttpPipeline httpPipeline, AzureEnvironment azureEnvironment) {
         super(httpPipeline, azureEnvironment);
-        initialize();
-    }
-
-    protected void initialize() {
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
