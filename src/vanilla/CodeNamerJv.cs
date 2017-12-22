@@ -59,7 +59,7 @@ namespace AutoRest.Java
                 "Duration",
                 "Period",
                 "BigDecimal",
-                "InputStream"
+                "AsyncInputStream"
             }.ForEach(s => PrimaryTypes.Add(s));
             new HashSet<string>
             {

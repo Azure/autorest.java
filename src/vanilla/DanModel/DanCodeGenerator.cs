@@ -2631,7 +2631,7 @@ namespace AutoRest.Java.DanModel
                             result = new[] { "java.math.BigDecimal" };
                             break;
                         case KnownPrimaryType.Stream:
-                            result = new[] { "java.io.InputStream" };
+                            result = new[] { "com.microsoft.rest.v2.http.AsyncInputStream" };
                             break;
                         case KnownPrimaryType.TimeSpan:
                             result = new[] { "org.joda.time.Period" };
@@ -2794,10 +2794,6 @@ namespace AutoRest.Java.DanModel
                 {
                     result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
                 }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Stream)
-                {
-                    result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
-                }
             }
 
             return result;
@@ -2886,7 +2882,7 @@ namespace AutoRest.Java.DanModel
                             result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
                             break;
                         case KnownPrimaryType.Stream:
-                            result = "InputStream";
+                            result = "AsyncInputStream";
                             break;
                         case KnownPrimaryType.String:
                             result = "String";
