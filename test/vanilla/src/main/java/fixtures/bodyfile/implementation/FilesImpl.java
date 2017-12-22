@@ -64,17 +64,17 @@ public class FilesImpl implements Files {
         @GET("files/stream/nonempty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, InputStream>> getFile();
+        Single<RestResponse<Void, AsyncInputStream>> getFile();
 
         @GET("files/stream/verylarge")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, InputStream>> getFileLarge();
+        Single<RestResponse<Void, AsyncInputStream>> getFileLarge();
 
         @GET("files/stream/empty")
         @ExpectedResponses({200})
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Single<RestResponse<Void, InputStream>> getEmptyFile();
+        Single<RestResponse<Void, AsyncInputStream>> getEmptyFile();
     }
 
     /**
@@ -83,9 +83,9 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @return the AsyncInputStream object if successful.
      */
-    public InputStream getFile() {
+    public AsyncInputStream getFile() {
         return getFileAsync().blockingGet();
     }
 
@@ -96,7 +96,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<InputStream> getFileAsync(ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> getFileAsync(ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
@@ -104,9 +104,9 @@ public class FilesImpl implements Files {
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
      */
-    public Single<RestResponse<Void, InputStream>> getFileWithRestResponseAsync() {
+    public Single<RestResponse<Void, AsyncInputStream>> getFileWithRestResponseAsync() {
         return service.getFile();
     }
 
@@ -114,12 +114,12 @@ public class FilesImpl implements Files {
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
      */
-    public Maybe<InputStream> getFileAsync() {
+    public Maybe<AsyncInputStream> getFileAsync() {
         return getFileWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
-                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
+                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
                     } else {
@@ -135,9 +135,9 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @return the AsyncInputStream object if successful.
      */
-    public InputStream getFileLarge() {
+    public AsyncInputStream getFileLarge() {
         return getFileLargeAsync().blockingGet();
     }
 
@@ -148,7 +148,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<InputStream> getFileLargeAsync(ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> getFileLargeAsync(ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
@@ -156,9 +156,9 @@ public class FilesImpl implements Files {
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
      */
-    public Single<RestResponse<Void, InputStream>> getFileLargeWithRestResponseAsync() {
+    public Single<RestResponse<Void, AsyncInputStream>> getFileLargeWithRestResponseAsync() {
         return service.getFileLarge();
     }
 
@@ -166,12 +166,12 @@ public class FilesImpl implements Files {
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
      */
-    public Maybe<InputStream> getFileLargeAsync() {
+    public Maybe<AsyncInputStream> getFileLargeAsync() {
         return getFileLargeWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
-                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
+                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
                     } else {
@@ -187,9 +187,9 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the InputStream object if successful.
+     * @return the AsyncInputStream object if successful.
      */
-    public InputStream getEmptyFile() {
+    public AsyncInputStream getEmptyFile() {
         return getEmptyFileAsync().blockingGet();
     }
 
@@ -200,7 +200,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<InputStream> getEmptyFileAsync(ServiceCallback<InputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> getEmptyFileAsync(ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 
@@ -208,9 +208,9 @@ public class FilesImpl implements Files {
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
      */
-    public Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync() {
+    public Single<RestResponse<Void, AsyncInputStream>> getEmptyFileWithRestResponseAsync() {
         return service.getEmptyFile();
     }
 
@@ -218,12 +218,12 @@ public class FilesImpl implements Files {
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, InputStream> object
+     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
      */
-    public Maybe<InputStream> getEmptyFileAsync() {
+    public Maybe<AsyncInputStream> getEmptyFileAsync() {
         return getEmptyFileWithRestResponseAsync()
-            .flatMapMaybe(new Function<RestResponse<Void, InputStream>, Maybe<InputStream>>() {
-                public Maybe<InputStream> apply(RestResponse<Void, InputStream> restResponse) {
+            .flatMapMaybe(new Function<RestResponse<Void, AsyncInputStream>, Maybe<AsyncInputStream>>() {
+                public Maybe<AsyncInputStream> apply(RestResponse<Void, AsyncInputStream> restResponse) {
                     if (restResponse.body() == null) {
                         return Maybe.empty();
                     } else {

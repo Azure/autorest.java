@@ -1870,7 +1870,7 @@ namespace AutoRest.Java.DanModel
                             result = PrimaryTypeGetWantNullable(primaryType) ? "Long" : "long";
                             break;
                         case KnownPrimaryType.Stream:
-                            result = "InputStream";
+                            result = "AsyncInputStream";
                             break;
                         case KnownPrimaryType.String:
                             result = "String";
