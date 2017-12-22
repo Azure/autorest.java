@@ -56,7 +56,7 @@ public class HttpSuccessInner {
 
     /**
      * The interface defining all the services for HttpSuccess to be used by
-     * RestProxy to perform REST calls.
+     * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface HttpSuccessService {

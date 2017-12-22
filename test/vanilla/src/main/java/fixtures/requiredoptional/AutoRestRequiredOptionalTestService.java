@@ -15,14 +15,14 @@ package fixtures.requiredoptional;
  */
 public interface AutoRestRequiredOptionalTestService {
     /**
-     * Gets number of items to skip
+     * Gets number of items to skip.
      *
      * @return the requiredGlobalPath value.
      */
     String requiredGlobalPath();
 
     /**
-     * Sets number of items to skip
+     * Sets number of items to skip.
      *
      * @param requiredGlobalPath the requiredGlobalPath value.
      * @return the service client itself
@@ -30,14 +30,14 @@ public interface AutoRestRequiredOptionalTestService {
     AutoRestRequiredOptionalTestService withRequiredGlobalPath(String requiredGlobalPath);
 
     /**
-     * Gets number of items to skip
+     * Gets number of items to skip.
      *
      * @return the requiredGlobalQuery value.
      */
     String requiredGlobalQuery();
 
     /**
-     * Sets number of items to skip
+     * Sets number of items to skip.
      *
      * @param requiredGlobalQuery the requiredGlobalQuery value.
      * @return the service client itself
@@ -45,14 +45,14 @@ public interface AutoRestRequiredOptionalTestService {
     AutoRestRequiredOptionalTestService withRequiredGlobalQuery(String requiredGlobalQuery);
 
     /**
-     * Gets number of items to skip
+     * Gets number of items to skip.
      *
      * @return the optionalGlobalQuery value.
      */
     int optionalGlobalQuery();
 
     /**
-     * Sets number of items to skip
+     * Sets number of items to skip.
      *
      * @param optionalGlobalQuery the optionalGlobalQuery value.
      * @return the service client itself

@@ -41,11 +41,11 @@ import io.reactivex.functions.Function;
 import java.io.IOException;
 
 /**
- * Initializes a new instance of the AutoRestValidationTest class.
+ * Initializes a new instance of the AutoRestValidationTest type.
  */
 public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
-     * The proxy service to use to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private AutoRestValidationTestService service;
 
@@ -113,12 +113,12 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      */
     public AutoRestValidationTestImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-        this.service = RestProxy.create(AutoRestValidationTestService.class, httpPipeline);
+        this.service = RestProxy.create(AutoRestValidationTestService.class, this);
     }
 
     /**
      * The interface defining all the services for AutoRestValidationTest to be
-     * used by Retrofit to perform actually REST calls.
+     * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface AutoRestValidationTestService {

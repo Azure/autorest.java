@@ -59,8 +59,8 @@ public class GroupsImpl implements Groups {
     }
 
     /**
-     * The interface defining all the services for Groups to be used by
-     * RestProxy to perform REST calls.
+     * The interface defining all the services for Groups to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("https://management.azure.com/")
     interface GroupsService {

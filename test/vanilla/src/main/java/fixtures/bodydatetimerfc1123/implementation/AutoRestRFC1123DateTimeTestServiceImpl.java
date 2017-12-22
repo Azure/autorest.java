@@ -17,7 +17,7 @@ import fixtures.bodydatetimerfc1123.AutoRestRFC1123DateTimeTestService;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 
 /**
- * Initializes a new instance of the AutoRestRFC1123DateTimeTestService class.
+ * Initializes a new instance of the AutoRestRFC1123DateTimeTestService type.
  */
 public class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient implements AutoRestRFC1123DateTimeTestService {
     /**

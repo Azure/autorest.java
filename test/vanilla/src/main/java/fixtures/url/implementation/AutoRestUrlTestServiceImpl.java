@@ -19,7 +19,7 @@ import fixtures.url.Paths;
 import fixtures.url.Queries;
 
 /**
- * Initializes a new instance of the AutoRestUrlTestService class.
+ * Initializes a new instance of the AutoRestUrlTestService type.
  */
 public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRestUrlTestService {
     /**

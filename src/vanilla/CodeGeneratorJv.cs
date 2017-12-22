@@ -57,7 +57,7 @@ namespace AutoRest.Java
         }
 
         protected Task WriteOperationJavaFiles(CodeModel codeModel)
-            => WriteJavaFiles(DanCodeGenerator.GetOperationJavaFiles(codeModel, Settings));
+            => WriteJavaFiles(DanCodeGenerator.GetMethodGroupClientAndMethodGroupClientInterfaceJavaFiles(codeModel, Settings));
 
         protected Task WriteAzureServiceManagerJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceManagerJavaFile(codeModel, Settings));
@@ -67,9 +67,6 @@ namespace AutoRest.Java
 
         protected Task WriteXmlWrapperJavaFiles(CodeModel codeModel)
             => WriteJavaFiles(DanCodeGenerator.GetXmlWrapperJavaFiles(codeModel, Settings));
-
-        protected Task WriteAzureServiceClientJavaFile(CodeModel codeModel)
-            => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientJavaFile(codeModel, Settings));
 
         protected Task WriteAzureServiceClientInterfaceJavaFile(CodeModel codeModel)
             => WriteJavaFile(DanCodeGenerator.GetAzureServiceClientInterfaceJavaFile(codeModel, Settings));

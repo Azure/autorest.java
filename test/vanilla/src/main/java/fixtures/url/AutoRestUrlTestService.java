@@ -15,14 +15,14 @@ package fixtures.url;
  */
 public interface AutoRestUrlTestService {
     /**
-     * Gets A string value 'globalItemStringPath' that appears in the path
+     * Gets A string value 'globalItemStringPath' that appears in the path.
      *
      * @return the globalStringPath value.
      */
     String globalStringPath();
 
     /**
-     * Sets A string value 'globalItemStringPath' that appears in the path
+     * Sets A string value 'globalItemStringPath' that appears in the path.
      *
      * @param globalStringPath the globalStringPath value.
      * @return the service client itself
@@ -30,14 +30,14 @@ public interface AutoRestUrlTestService {
     AutoRestUrlTestService withGlobalStringPath(String globalStringPath);
 
     /**
-     * Gets should contain value null
+     * Gets should contain value null.
      *
      * @return the globalStringQuery value.
      */
     String globalStringQuery();
 
     /**
-     * Sets should contain value null
+     * Sets should contain value null.
      *
      * @param globalStringQuery the globalStringQuery value.
      * @return the service client itself

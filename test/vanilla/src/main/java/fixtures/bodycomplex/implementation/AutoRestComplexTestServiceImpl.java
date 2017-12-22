@@ -24,7 +24,7 @@ import fixtures.bodycomplex.Primitives;
 import fixtures.bodycomplex.Readonlypropertys;
 
 /**
- * Initializes a new instance of the AutoRestComplexTestService class.
+ * Initializes a new instance of the AutoRestComplexTestService type.
  */
 public class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
     /**

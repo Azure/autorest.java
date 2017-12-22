@@ -17,7 +17,7 @@ import fixtures.custombaseurimoreoptions.AutoRestParameterizedCustomHostTestClie
 import fixtures.custombaseurimoreoptions.Paths;
 
 /**
- * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
+ * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient type.
  */
 public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
     /**

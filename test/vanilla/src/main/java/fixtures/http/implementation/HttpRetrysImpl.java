@@ -61,8 +61,8 @@ public class HttpRetrysImpl implements HttpRetrys {
     }
 
     /**
-     * The interface defining all the services for HttpRetrys to be used by
-     * RestProxy to perform REST calls.
+     * The interface defining all the services for HttpRetrys to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface HttpRetrysService {

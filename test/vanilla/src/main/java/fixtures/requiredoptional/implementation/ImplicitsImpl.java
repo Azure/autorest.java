@@ -62,8 +62,8 @@ public class ImplicitsImpl implements Implicits {
     }
 
     /**
-     * The interface defining all the services for Implicits to be used by
-     * RestProxy to perform REST calls.
+     * The interface defining all the services for Implicits to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface ImplicitsService {

@@ -18,7 +18,7 @@ import fixtures.requiredoptional.Explicits;
 import fixtures.requiredoptional.Implicits;
 
 /**
- * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
+ * Initializes a new instance of the AutoRestRequiredOptionalTestService type.
  */
 public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
     /**

@@ -47,11 +47,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+ * Initializes a new instance of the AutoRestResourceFlatteningTestService type.
  */
 public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     /**
-     * The proxy service to use to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private AutoRestResourceFlatteningTestServiceService service;
 
@@ -69,13 +69,13 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      */
     public AutoRestResourceFlatteningTestServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-        this.service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, httpPipeline);
+        this.service = RestProxy.create(AutoRestResourceFlatteningTestServiceService.class, this);
     }
 
     /**
      * The interface defining all the services for
-     * AutoRestResourceFlatteningTestService to be used by Retrofit to perform
-     * actually REST calls.
+     * AutoRestResourceFlatteningTestService to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     interface AutoRestResourceFlatteningTestServiceService {

@@ -13,14 +13,13 @@ package fixtures.paging.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
 
 /**
- * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
+ * Initializes a new instance of the AutoRestPagingTestService type.
  */
 public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
     /**
@@ -118,7 +117,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * @param credentials the management credentials for Azure
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestPagingTestServiceImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestPagingTestServiceImpl.class, credentials));
     }
 
     /**
@@ -128,7 +127,7 @@ public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestPagingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestPagingTestServiceImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestPagingTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**

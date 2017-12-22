@@ -13,12 +13,11 @@ package fixtures.lro.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
- * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl class.
+ * Initializes a new instance of the AutoRestLongRunningOperationTestServiceImpl type.
  */
 public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceClient {
     /**
@@ -158,7 +157,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param credentials the management credentials for Azure
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials));
     }
 
     /**
@@ -168,7 +167,7 @@ public class AutoRestLongRunningOperationTestServiceImpl extends AzureServiceCli
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestLongRunningOperationTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestLongRunningOperationTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**

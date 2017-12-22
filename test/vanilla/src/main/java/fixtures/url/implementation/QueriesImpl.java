@@ -63,8 +63,8 @@ public class QueriesImpl implements Queries {
     }
 
     /**
-     * The interface defining all the services for Queries to be used by
-     * RestProxy to perform REST calls.
+     * The interface defining all the services for Queries to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface QueriesService {

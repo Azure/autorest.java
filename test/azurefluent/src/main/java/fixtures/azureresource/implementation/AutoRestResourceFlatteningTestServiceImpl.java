@@ -41,11 +41,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
+ * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl type.
  */
 public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private AutoRestResourceFlatteningTestServiceService service;
 
@@ -130,7 +130,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @param credentials the management credentials for Azure
      */
     public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials));
     }
 
     /**
@@ -140,7 +140,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestResourceFlatteningTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestResourceFlatteningTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**
@@ -168,8 +168,8 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
     /**
      * The interface defining all the services for
-     * AutoRestResourceFlatteningTestService to be used by RestProxy to perform
-     * REST calls.
+     * AutoRestResourceFlatteningTestService to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     interface AutoRestResourceFlatteningTestServiceService {

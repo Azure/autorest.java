@@ -57,7 +57,7 @@ public class SubscriptionInMethodsInner {
 
     /**
      * The interface defining all the services for SubscriptionInMethods to be
-     * used by RestProxy to perform REST calls.
+     * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface SubscriptionInMethodsService {

@@ -42,14 +42,14 @@ public interface AutoRestValidationTest {
     AutoRestValidationTest withSubscriptionId(String subscriptionId);
 
     /**
-     * Gets Required string following pattern \d{2}-\d{2}-\d{4}
+     * Gets Required string following pattern \d{2}-\d{2}-\d{4}.
      *
      * @return the apiVersion value.
      */
     String apiVersion();
 
     /**
-     * Sets Required string following pattern \d{2}-\d{2}-\d{4}
+     * Sets Required string following pattern \d{2}-\d{2}-\d{4}.
      *
      * @param apiVersion the apiVersion value.
      * @return the service client itself

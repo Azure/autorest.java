@@ -17,7 +17,7 @@ import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.Bools;
 
 /**
- * Initializes a new instance of the AutoRestBoolTestService class.
+ * Initializes a new instance of the AutoRestBoolTestService type.
  */
 public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRestBoolTestService {
     /**

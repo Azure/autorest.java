@@ -13,14 +13,13 @@ package fixtures.head.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.head.AutoRestHeadTestService;
 import fixtures.head.HttpSuccess;
 
 /**
- * Initializes a new instance of the AutoRestHeadTestServiceImpl class.
+ * Initializes a new instance of the AutoRestHeadTestService type.
  */
 public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements AutoRestHeadTestService {
     /**
@@ -118,7 +117,7 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
      * @param credentials the management credentials for Azure
      */
     public AutoRestHeadTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestHeadTestServiceImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestHeadTestServiceImpl.class, credentials));
     }
 
     /**
@@ -128,7 +127,7 @@ public class AutoRestHeadTestServiceImpl extends AzureServiceClient implements A
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestHeadTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestHeadTestServiceImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestHeadTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**

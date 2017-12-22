@@ -13,12 +13,11 @@ package fixtures.headexceptions.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
- * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl class.
+ * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl type.
  */
 public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
     /**
@@ -116,7 +115,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials));
     }
 
     /**
@@ -126,7 +125,7 @@ public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient {
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestHeadExceptionTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestHeadExceptionTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**

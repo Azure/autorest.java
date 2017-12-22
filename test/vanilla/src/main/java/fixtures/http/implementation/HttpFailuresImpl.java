@@ -57,7 +57,7 @@ public class HttpFailuresImpl implements HttpFailures {
 
     /**
      * The interface defining all the services for HttpFailures to be used by
-     * RestProxy to perform REST calls.
+     * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface HttpFailuresService {

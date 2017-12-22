@@ -58,7 +58,7 @@ public class XMsClientRequestIdsImpl implements XMsClientRequestIds {
 
     /**
      * The interface defining all the services for XMsClientRequestIds to be
-     * used by RestProxy to perform REST calls.
+     * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface XMsClientRequestIdsService {

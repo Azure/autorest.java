@@ -36,11 +36,11 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
+ * Initializes a new instance of the AutoRestReportServiceForAzureImpl type.
  */
 public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private AutoRestReportServiceForAzureService service;
 
@@ -125,7 +125,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials));
     }
 
     /**
@@ -135,7 +135,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestReportServiceForAzureImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestReportServiceForAzureImpl.class, credentials), azureEnvironment);
     }
 
     /**
@@ -163,8 +163,8 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
 
     /**
      * The interface defining all the services for
-     * AutoRestReportServiceForAzure to be used by RestProxy to perform REST
-     * calls.
+     * AutoRestReportServiceForAzure to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     interface AutoRestReportServiceForAzureService {

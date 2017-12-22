@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import fixtures.azurespecials.ApiVersionDefaults;
@@ -27,7 +26,7 @@ import fixtures.azurespecials.SubscriptionInMethods;
 import fixtures.azurespecials.XMsClientRequestIds;
 
 /**
- * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
+ * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient type.
  */
 public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient implements AutoRestAzureSpecialParametersTestClient {
     /**
@@ -262,7 +261,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      * @param credentials the management credentials for Azure
      */
     public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials));
     }
 
     /**
@@ -272,7 +271,7 @@ public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceCl
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestAzureSpecialParametersTestClientImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestAzureSpecialParametersTestClientImpl.class, credentials), azureEnvironment);
     }
 
     /**
