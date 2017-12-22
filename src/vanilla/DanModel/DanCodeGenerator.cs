@@ -1619,7 +1619,7 @@ namespace AutoRest.Java.DanModel
                             result = new[] { "java.math.BigDecimal" };
                             break;
                         case KnownPrimaryType.Stream:
-                            result = new[] { "java.io.AsyncInputStream" };
+                            result = new[] { "com.microsoft.rest.v2.http.AsyncInputStream" };
                             break;
                         case KnownPrimaryType.TimeSpan:
                             result = new[] { "org.joda.time.Period" };

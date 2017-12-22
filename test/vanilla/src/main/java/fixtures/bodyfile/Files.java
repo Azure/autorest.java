@@ -31,34 +31,34 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AsyncInputStream object if successful.
+     * @return the InputStream object if successful.
      */
-    AsyncInputStream getFile();
+    InputStream getFile();
 
     /**
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
-    ServiceFuture<AsyncInputStream> getFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback);
+    ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Maybe<AsyncInputStream> getFileAsync();
+    Maybe<InputStream> getFileAsync();
 
     /**
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, AsyncInputStream>> getFileWithRestResponseAsync();
+    Single<RestResponse<Void, InputStream>> getFileWithRestResponseAsync();
 
     /**
      * Get a large file.
@@ -66,34 +66,34 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AsyncInputStream object if successful.
+     * @return the InputStream object if successful.
      */
-    AsyncInputStream getFileLarge();
+    InputStream getFileLarge();
 
     /**
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
-    ServiceFuture<AsyncInputStream> getFileLargeAsync(final ServiceCallback<AsyncInputStream> serviceCallback);
+    ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Maybe<AsyncInputStream> getFileLargeAsync();
+    Maybe<InputStream> getFileLargeAsync();
 
     /**
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, AsyncInputStream>> getFileLargeWithRestResponseAsync();
+    Single<RestResponse<Void, InputStream>> getFileLargeWithRestResponseAsync();
 
     /**
      * Get empty file.
@@ -101,32 +101,32 @@ public interface Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the AsyncInputStream object if successful.
+     * @return the InputStream object if successful.
      */
-    AsyncInputStream getEmptyFile();
+    InputStream getEmptyFile();
 
     /**
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link ServiceFuture&lt;AsyncInputStream&gt;} object
+     * @return the {@link ServiceFuture&lt;InputStream&gt;} object
      */
-    ServiceFuture<AsyncInputStream> getEmptyFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback);
+    ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Maybe&lt;AsyncInputStream&gt;} object if successful.
+     * @return the {@link Maybe&lt;InputStream&gt;} object if successful.
      */
-    Maybe<AsyncInputStream> getEmptyFileAsync();
+    Maybe<InputStream> getEmptyFileAsync();
 
     /**
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
+     * @return the {@link Single&lt;RestResponse&lt;Void, InputStream&gt;&gt;} object if successful.
      */
-    Single<RestResponse<Void, AsyncInputStream>> getEmptyFileWithRestResponseAsync();
+    Single<RestResponse<Void, InputStream>> getEmptyFileWithRestResponseAsync();
 }
