@@ -1782,10 +1782,6 @@ namespace AutoRest.Java.DanModel
                 {
                     result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
                 }
-                else if (primaryType.KnownPrimaryType == KnownPrimaryType.Stream)
-                {
-                    result = DependencyInjection.New<PrimaryType>(KnownPrimaryType.ByteArray);
-                }
             }
 
             return result;
