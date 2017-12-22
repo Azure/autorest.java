@@ -18,7 +18,7 @@ import fixtures.bodystring.Enums;
 import fixtures.bodystring.Strings;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATService class.
+ * Initializes a new instance of the AutoRestSwaggerBATService type.
  */
 public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
     /**

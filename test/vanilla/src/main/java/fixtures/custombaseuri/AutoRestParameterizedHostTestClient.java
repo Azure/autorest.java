@@ -15,14 +15,14 @@ package fixtures.custombaseuri;
  */
 public interface AutoRestParameterizedHostTestClient {
     /**
-     * Gets A string value that is used as a global part of the parameterized host
+     * Gets A string value that is used as a global part of the parameterized host.
      *
      * @return the host value.
      */
     String host();
 
     /**
-     * Sets A string value that is used as a global part of the parameterized host
+     * Sets A string value that is used as a global part of the parameterized host.
      *
      * @param host the host value.
      * @return the service client itself

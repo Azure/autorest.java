@@ -23,7 +23,7 @@ import fixtures.http.HttpSuccess;
 import fixtures.http.MultipleResponses;
 
 /**
- * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
+ * Initializes a new instance of the AutoRestHttpInfrastructureTestService type.
  */
 public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
     /**

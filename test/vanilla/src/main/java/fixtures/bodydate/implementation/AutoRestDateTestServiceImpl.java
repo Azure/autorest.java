@@ -17,7 +17,7 @@ import fixtures.bodydate.AutoRestDateTestService;
 import fixtures.bodydate.Dates;
 
 /**
- * Initializes a new instance of the AutoRestDateTestService class.
+ * Initializes a new instance of the AutoRestDateTestService type.
  */
 public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRestDateTestService {
     /**

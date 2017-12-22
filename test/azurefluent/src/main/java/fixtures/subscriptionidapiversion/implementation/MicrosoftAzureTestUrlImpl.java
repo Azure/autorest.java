@@ -13,12 +13,11 @@ package fixtures.subscriptionidapiversion.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
- * Initializes a new instance of the MicrosoftAzureTestUrlImpl class.
+ * Initializes a new instance of the MicrosoftAzureTestUrlImpl type.
  */
 public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
     /**
@@ -155,7 +154,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param credentials the management credentials for Azure
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials));
     }
 
     /**
@@ -165,7 +164,7 @@ public class MicrosoftAzureTestUrlImpl extends AzureServiceClient {
      * @param azureEnvironment The environment that requests will target.
      */
     public MicrosoftAzureTestUrlImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(MicrosoftAzureTestUrlImpl.class, credentials), azureEnvironment);
     }
 
     /**

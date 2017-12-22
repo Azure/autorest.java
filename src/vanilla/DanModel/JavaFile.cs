@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Java.DanModel
 {
     public class JavaFile
     {
+        private string package;
+        private int packageWithPeriodLength;
+
         public JavaFile(string filePath)
         {
             FilePath = filePath;
@@ -53,6 +57,8 @@ namespace AutoRest.Java.DanModel
 
         public JavaFile Package(string package)
         {
+            this.package = package;
+            this.packageWithPeriodLength = (package == null ? 0 : package.Period().Length);
             Contents.Package(package);
             return this;
         }
@@ -65,6 +71,12 @@ namespace AutoRest.Java.DanModel
 
         public JavaFile Import(IEnumerable<string> imports)
         {
+            if (!string.IsNullOrEmpty(package))
+            {
+                // Only import paths that don't start with this file's package, or if they do start
+                // with this file's package, then they must exist within a subpackage.
+                imports = imports.Where(import => !import.StartsWith(package) || import.IndexOf('.', packageWithPeriodLength) != -1);
+            }
             Contents.Import(imports);
             return this;
         }

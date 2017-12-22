@@ -60,16 +60,14 @@ namespace AutoRest.Java
             return string.Join(", ", settings);
         }
 
-        public static void AddRange<T>(this HashSet<T> hashSet, IEnumerable<T> range)
+        public static void AddRange<T>(this ISet<T> hashSet, IEnumerable<T> range)
         {
-            if( hashSet == null || range == null)
+            if (hashSet != null && range != null)
             {
-                return;
-            }
-
-            foreach(var item in range)
-            {
-                hashSet.Add(item);
+                foreach (T item in range)
+                {
+                    hashSet.Add(item);
+                }
             }
         }
     }

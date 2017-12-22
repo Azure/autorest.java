@@ -34,11 +34,11 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Initializes a new instance of the AutoRestReportService class.
+ * Initializes a new instance of the AutoRestReportService type.
  */
 public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
     /**
-     * The proxy service to use to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private AutoRestReportServiceService service;
 
@@ -56,12 +56,12 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      */
     public AutoRestReportServiceImpl(HttpPipeline httpPipeline) {
         super(httpPipeline);
-        this.service = RestProxy.create(AutoRestReportServiceService.class, httpPipeline);
+        this.service = RestProxy.create(AutoRestReportServiceService.class, this);
     }
 
     /**
      * The interface defining all the services for AutoRestReportService to be
-     * used by Retrofit to perform actually REST calls.
+     * used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface AutoRestReportServiceService {

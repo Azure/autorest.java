@@ -17,7 +17,7 @@ import fixtures.bodyfile.AutoRestSwaggerBATFileService;
 import fixtures.bodyfile.Files;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATFileService class.
+ * Initializes a new instance of the AutoRestSwaggerBATFileService type.
  */
 public class AutoRestSwaggerBATFileServiceImpl extends ServiceClient implements AutoRestSwaggerBATFileService {
     /**

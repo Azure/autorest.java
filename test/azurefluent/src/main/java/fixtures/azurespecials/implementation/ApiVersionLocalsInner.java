@@ -57,7 +57,7 @@ public class ApiVersionLocalsInner {
 
     /**
      * The interface defining all the services for ApiVersionLocals to be used
-     * by RestProxy to perform REST calls.
+     * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface ApiVersionLocalsService {

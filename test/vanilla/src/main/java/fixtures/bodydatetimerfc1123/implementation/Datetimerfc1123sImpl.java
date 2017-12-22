@@ -62,7 +62,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
 
     /**
      * The interface defining all the services for Datetimerfc1123s to be used
-     * by RestProxy to perform REST calls.
+     * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface Datetimerfc1123sService {

@@ -57,7 +57,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
 
     /**
      * The interface defining all the services for HeadExceptions to be used by
-     * RestProxy to perform REST calls.
+     * the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface HeadExceptionsService {

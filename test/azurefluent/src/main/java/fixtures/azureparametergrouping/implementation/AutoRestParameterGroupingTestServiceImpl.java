@@ -13,12 +13,11 @@ package fixtures.azureparametergrouping.implementation;
 import com.microsoft.azure.v2.AzureEnvironment;
 import com.microsoft.azure.v2.AzureProxy;
 import com.microsoft.azure.v2.AzureServiceClient;
-import com.microsoft.rest.v2.RestResponse;
 import com.microsoft.rest.v2.credentials.ServiceClientCredentials;
 import com.microsoft.rest.v2.http.HttpPipeline;
 
 /**
- * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
+ * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl type.
  */
 public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
     /**
@@ -116,7 +115,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param credentials the management credentials for Azure
      */
     public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials) {
-        this(AzureProxy.defaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials));
+        this(AzureProxy.createDefaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials));
     }
 
     /**
@@ -126,7 +125,7 @@ public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient
      * @param azureEnvironment The environment that requests will target.
      */
     public AutoRestParameterGroupingTestServiceImpl(ServiceClientCredentials credentials, AzureEnvironment azureEnvironment) {
-        this(AzureProxy.defaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials), azureEnvironment);
+        this(AzureProxy.createDefaultPipeline(AutoRestParameterGroupingTestServiceImpl.class, credentials), azureEnvironment);
     }
 
     /**

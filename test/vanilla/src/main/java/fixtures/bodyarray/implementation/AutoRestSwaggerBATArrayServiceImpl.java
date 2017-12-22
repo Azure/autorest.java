@@ -17,7 +17,7 @@ import fixtures.bodyarray.Arrays;
 import fixtures.bodyarray.AutoRestSwaggerBATArrayService;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATArrayService class.
+ * Initializes a new instance of the AutoRestSwaggerBATArrayService type.
  */
 public class AutoRestSwaggerBATArrayServiceImpl extends ServiceClient implements AutoRestSwaggerBATArrayService {
     /**

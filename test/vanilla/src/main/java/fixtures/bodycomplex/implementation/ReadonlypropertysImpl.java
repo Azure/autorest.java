@@ -61,7 +61,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
 
     /**
      * The interface defining all the services for Readonlypropertys to be used
-     * by RestProxy to perform REST calls.
+     * by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface ReadonlypropertysService {

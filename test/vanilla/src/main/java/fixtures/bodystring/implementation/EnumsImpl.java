@@ -61,8 +61,8 @@ public class EnumsImpl implements Enums {
     }
 
     /**
-     * The interface defining all the services for Enums to be used by
-     * RestProxy to perform REST calls.
+     * The interface defining all the services for Enums to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     interface EnumsService {

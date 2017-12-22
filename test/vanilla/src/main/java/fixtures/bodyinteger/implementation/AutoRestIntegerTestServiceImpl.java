@@ -17,7 +17,7 @@ import fixtures.bodyinteger.AutoRestIntegerTestService;
 import fixtures.bodyinteger.Ints;
 
 /**
- * Initializes a new instance of the AutoRestIntegerTestService class.
+ * Initializes a new instance of the AutoRestIntegerTestService type.
  */
 public class AutoRestIntegerTestServiceImpl extends ServiceClient implements AutoRestIntegerTestService {
     /**

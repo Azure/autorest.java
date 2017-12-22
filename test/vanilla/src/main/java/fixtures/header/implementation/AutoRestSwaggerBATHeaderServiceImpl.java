@@ -17,7 +17,7 @@ import fixtures.header.AutoRestSwaggerBATHeaderService;
 import fixtures.header.Headers;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATHeaderService class.
+ * Initializes a new instance of the AutoRestSwaggerBATHeaderService type.
  */
 public class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient implements AutoRestSwaggerBATHeaderService {
     /**

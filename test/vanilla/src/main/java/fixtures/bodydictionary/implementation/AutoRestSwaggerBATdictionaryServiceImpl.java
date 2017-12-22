@@ -17,7 +17,7 @@ import fixtures.bodydictionary.AutoRestSwaggerBATdictionaryService;
 import fixtures.bodydictionary.Dictionarys;
 
 /**
- * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
+ * Initializes a new instance of the AutoRestSwaggerBATdictionaryService type.
  */
 public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient implements AutoRestSwaggerBATdictionaryService {
     /**

@@ -16,7 +16,7 @@ namespace AutoRest.Java.Azure
         public override async Task Generate(CodeModel codeModel)
         {
             // Service client
-            await WriteAzureServiceClientJavaFile(codeModel).ConfigureAwait(false);
+            await WriteServiceClientJavaFile(codeModel).ConfigureAwait(false);
 
             // Service client interface
             await WriteAzureServiceClientInterfaceJavaFile(codeModel).ConfigureAwait(false);
