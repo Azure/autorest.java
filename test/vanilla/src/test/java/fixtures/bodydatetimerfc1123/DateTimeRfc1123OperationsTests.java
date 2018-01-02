@@ -1,6 +1,6 @@
 package fixtures.bodydatetimerfc1123;
 
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.microsoft.rest.v2.http.HttpPipeline;
 import com.microsoft.rest.v2.policy.PortPolicy;
 import com.microsoft.rest.v2.policy.ProtocolPolicy;
@@ -34,7 +34,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(InvalidDefinitionException.class, exception.getCause().getClass());
+            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
         }
     }
 
@@ -53,7 +53,7 @@ public class DateTimeRfc1123OperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(InvalidDefinitionException.class, exception.getCause().getClass());
+            Assert.assertEquals(JsonMappingException.class, exception.getCause().getClass());
         }
     }
 
