@@ -40,7 +40,7 @@ import java.io.IOException;
  */
 public class InheritancesImpl implements Inheritances {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private InheritancesService service;
 
@@ -50,12 +50,12 @@ public class InheritancesImpl implements Inheritances {
     private AutoRestComplexTestServiceImpl client;
 
     /**
-     * Initializes an instance of Inheritances.
+     * Initializes an instance of InheritancesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public InheritancesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(InheritancesService.class, client.httpPipeline(), client.serializerAdapter());
+        this.service = RestProxy.create(InheritancesService.class, client);
         this.client = client;
     }
 
@@ -95,7 +95,7 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Siamese> getValidAsync(ServiceCallback<Siamese> serviceCallback) {
+    public ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -103,7 +103,7 @@ public class InheritancesImpl implements Inheritances {
      * Get complex types that extend others.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Siamese> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Siamese&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Siamese>> getValidWithRestResponseAsync() {
         return service.getValid();
@@ -135,7 +135,6 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void putValid(Siamese complexBody) {
         putValidAsync(complexBody).blockingAwait();
@@ -149,7 +148,7 @@ public class InheritancesImpl implements Inheritances {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(Siamese complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -158,7 +157,7 @@ public class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Siamese complexBody) {
         if (complexBody == null) {

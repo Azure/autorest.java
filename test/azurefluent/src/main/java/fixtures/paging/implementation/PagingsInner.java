@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class PagingsInner {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private PagingsService service;
 

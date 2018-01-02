@@ -38,7 +38,7 @@ import java.io.IOException;
  */
 public class PathsImpl implements Paths {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private PathsService service;
 
@@ -48,12 +48,12 @@ public class PathsImpl implements Paths {
     private AutoRestParameterizedCustomHostTestClientImpl client;
 
     /**
-     * Initializes an instance of Paths.
+     * Initializes an instance of PathsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public PathsImpl(AutoRestParameterizedCustomHostTestClientImpl client) {
-        this.service = RestProxy.create(PathsService.class, client.httpPipeline(), client.serializerAdapter());
+        this.service = RestProxy.create(PathsService.class, client);
         this.client = client;
     }
 
@@ -78,7 +78,6 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName) {
         getEmptyAsync(vault, secret, keyName).blockingAwait();
@@ -94,7 +93,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName), serviceCallback);
     }
 
@@ -105,7 +104,7 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName) {
         if (vault == null) {
@@ -151,7 +150,6 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
         getEmptyAsync(vault, secret, keyName, keyVersion).blockingAwait();
@@ -168,7 +166,7 @@ public class PathsImpl implements Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
@@ -180,7 +178,7 @@ public class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> getEmptyWithRestResponseAsync(String vault, String secret, String keyName, String keyVersion) {
         if (vault == null) {

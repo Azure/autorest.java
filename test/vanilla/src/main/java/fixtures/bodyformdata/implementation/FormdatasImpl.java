@@ -38,7 +38,7 @@ import java.io.IOException;
  */
 public class FormdatasImpl implements Formdatas {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private FormdatasService service;
 
@@ -48,12 +48,12 @@ public class FormdatasImpl implements Formdatas {
     private AutoRestSwaggerBATFormDataServiceImpl client;
 
     /**
-     * Initializes an instance of Formdatas.
+     * Initializes an instance of FormdatasImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public FormdatasImpl(AutoRestSwaggerBATFormDataServiceImpl client) {
-        this.service = RestProxy.create(FormdatasService.class, client.httpPipeline(), client.serializerAdapter());
+        this.service = RestProxy.create(FormdatasService.class, client);
         this.client = client;
     }
 
@@ -98,7 +98,7 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName, ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> uploadFileAsync(AsyncInputStream fileContent, String fileName, final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileAsync(fileContent, fileName), serviceCallback);
     }
 
@@ -108,7 +108,7 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> uploadFileWithRestResponseAsync(AsyncInputStream fileContent, String fileName) {
         if (fileContent == null) {
@@ -162,7 +162,7 @@ public class FormdatasImpl implements Formdatas {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent, ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> uploadFileViaBodyAsync(AsyncInputStream fileContent, final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(uploadFileViaBodyAsync(fileContent), serviceCallback);
     }
 
@@ -171,7 +171,7 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> uploadFileViaBodyWithRestResponseAsync(AsyncInputStream fileContent) {
         if (fileContent == null) {

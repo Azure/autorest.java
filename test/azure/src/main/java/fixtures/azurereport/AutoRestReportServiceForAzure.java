@@ -100,7 +100,7 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync();
 
@@ -139,7 +139,7 @@ public interface AutoRestReportServiceForAzure {
      *
      * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the Map&lt;String, Integer&gt; object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Map&lt;String, Integer&gt;&gt;&gt;} object if successful.
      */
     Single<RestResponse<Void, Map<String, Integer>>> getReportWithRestResponseAsync(String qualifier);
 }
