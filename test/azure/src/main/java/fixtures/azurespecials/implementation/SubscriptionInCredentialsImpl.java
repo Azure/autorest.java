@@ -38,7 +38,7 @@ import java.io.IOException;
  */
 public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private SubscriptionInCredentialsService service;
 
@@ -95,7 +95,6 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void postMethodGlobalValid() {
         postMethodGlobalValidAsync().blockingAwait();
@@ -108,7 +107,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postMethodGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalValidAsync(), serviceCallback);
     }
 
@@ -116,7 +115,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMethodGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
@@ -142,7 +141,6 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void postMethodGlobalNull() {
         postMethodGlobalNullAsync().blockingAwait();
@@ -155,7 +153,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postMethodGlobalNullAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalNullAsync(), serviceCallback);
     }
 
@@ -163,7 +161,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMethodGlobalNullWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
@@ -189,7 +187,6 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void postMethodGlobalNotProvidedValid() {
         postMethodGlobalNotProvidedValidAsync().blockingAwait();
@@ -202,7 +199,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postMethodGlobalNotProvidedValidAsync(), serviceCallback);
     }
 
@@ -210,7 +207,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postMethodGlobalNotProvidedValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
@@ -239,7 +236,6 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void postPathGlobalValid() {
         postPathGlobalValidAsync().blockingAwait();
@@ -252,7 +248,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postPathGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postPathGlobalValidAsync(), serviceCallback);
     }
 
@@ -260,7 +256,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postPathGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {
@@ -286,7 +282,6 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void postSwaggerGlobalValid() {
         postSwaggerGlobalValidAsync().blockingAwait();
@@ -299,7 +294,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> postSwaggerGlobalValidAsync(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(postSwaggerGlobalValidAsync(), serviceCallback);
     }
 
@@ -307,7 +302,7 @@ public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials 
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> postSwaggerGlobalValidWithRestResponseAsync() {
         if (this.client.subscriptionId() == null) {

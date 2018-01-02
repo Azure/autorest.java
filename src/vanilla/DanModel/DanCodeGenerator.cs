@@ -48,6 +48,8 @@ namespace AutoRest.Java.DanModel
         private const string credentialsVariableName = "credentials";
         private const string credentialsDescription = "the management credentials for Azure";
 
+        private const string serviceCallbackVariableName = "serviceCallback";
+
         private const string implPackage = "implementation";
         private const string modelsPackage = ".models";
 
@@ -75,19 +77,10 @@ namespace AutoRest.Java.DanModel
             List<JavaFile> result = new List<JavaFile>();
 
             bool isFluent = IsFluent(settings);
-            bool isAzure = IsAzure(settings);
-            bool isAzureOrFluent = isAzure || isFluent;
 
             foreach (MethodGroup methodGroup in GetMethodGroups(codeModel))
             {
-                if (isAzureOrFluent)
-                {
-                    result.Add(GetAzureMethodGroupClientJavaFile(codeModel, settings, methodGroup));
-                }
-                else
-                {
-                    result.Add(GetMethodGroupClientJavaFile(codeModel, settings, methodGroup));
-                }
+                result.Add(GetMethodGroupClientJavaFile(codeModel, settings, methodGroup));
 
                 if (!isFluent)
                 {
@@ -115,7 +108,7 @@ namespace AutoRest.Java.DanModel
             int newMinorVersion = (patchVersion == 0 ? minorVersion : minorVersion + 1);
             string betaSinceVersion = "V" + versionParts[0] + "_" + newMinorVersion + "_0";
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
 
             javaFile.Import(
                 "com.microsoft.azure.management.apigeneration.Beta",
@@ -226,7 +219,7 @@ namespace AutoRest.Java.DanModel
                 string className = pageClass.Value.ToPascalCase();
 
                 string subPackage = (IsFluent(settings) ? implPackage : modelsPackage);
-                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
+                JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, subPackage, settings, className);
                 javaFile.Import("com.fasterxml.jackson.annotation.JsonProperty",
                                 "com.microsoft.azure.v2.Page",
                                 "java.util.List");
@@ -331,7 +324,7 @@ namespace AutoRest.Java.DanModel
                                 string xmlNameCamelCase = xmlName.ToCamelCase();
                                 string className = $"{xmlName.ToPascalCase()}Wrapper";
 
-                                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
+                                JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
                                 javaFile.Import(GetIModelTypeImports(sequenceType, settings).Concat(new string[]
                                 {
                                     "com.fasterxml.jackson.annotation.JsonCreator",
@@ -375,7 +368,7 @@ namespace AutoRest.Java.DanModel
         public static JavaFile GetServiceClientJavaFile(CodeModel codeModel, Settings settings)
         {
             string serviceClientClassName = GetServiceClientClassName(codeModel);
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, serviceClientClassName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, serviceClientClassName);
 
             javaFile.Import(GetServiceClientClassImports(codeModel, settings));
 
@@ -402,7 +395,7 @@ namespace AutoRest.Java.DanModel
         {
             string interfaceName = GetServiceClientInterfaceName(codeModel);
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
             List<string> imports = GetServiceClientInterfaceImorts(codeModel, settings).ToList();
             if (IsFluent(settings))
@@ -436,55 +429,11 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        public static JavaFile GetAzureMethodGroupClientJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
-        {
-            int maximumCommentWidth = GetMaximumCommentWidth(settings);
-
-            string className = GetMethodGroupClientClassName(methodGroup, settings);
-
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
-            javaFile.Import(MethodGroupImplImports(methodGroup, settings));
-
-            string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
-            javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
-            {
-                comment.Description($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
-            });
-            javaFile.PublicClass($"{className}{MethodGroupParentDeclaration(methodGroup, settings)}", classBlock =>
-            {
-                string methodGroupServiceType = GetRestAPIInterfaceName(methodGroup);
-                string serviceClientType = MethodGroupServiceClientType(methodGroup);
-
-                classBlock.MultipleLineComment($"The {restProxyType} service to perform REST calls.");
-                classBlock.PrivateMemberVariable(methodGroupServiceType, "service");
-
-                classBlock.MultipleLineComment($"The service client containing this operation class.");
-                classBlock.PrivateMemberVariable(serviceClientType, "client");
-
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description($"Initializes an instance of {className}.");
-                    comment.Param("client", "the instance of the service client containing this operation class.");
-                });
-                classBlock.PublicConstructor($"{className}({serviceClientType} client)", constructor =>
-                {
-                    constructor.Line($"this.service = {azureProxyType}.create({methodGroupServiceType}.class, client);");
-                    constructor.Line("this.client = client;");
-                });
-
-                AddRestAPIInterface(classBlock, codeModel, methodGroup, settings);
-
-                AddClientMethodOverloads(classBlock, methodGroup.Methods, settings);
-            });
-
-            return javaFile;
-        }
-
         public static JavaFile GetServiceClientInterfaceJavaFile(CodeModel codeModel, Settings settings)
         {
             string interfaceName = GetServiceClientInterfaceName(codeModel);
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, null, settings, interfaceName);
 
             javaFile.Import(GetServiceClientInterfaceImorts(codeModel, settings));
 
@@ -517,14 +466,13 @@ namespace AutoRest.Java.DanModel
 
         public static JavaFile GetMethodGroupClientJavaFile(CodeModel codeModel, Settings settings, MethodGroup methodGroup)
         {
-            string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
             string className = GetMethodGroupClientClassName(methodGroup, settings);
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
-
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, implPackage, settings, className);
             javaFile.Import(MethodGroupImplImports(methodGroup, settings));
 
             int maximumCommentWidth = GetMaximumCommentWidth(settings);
+            string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
             javaFile.WordWrappedMultipleLineComment(maximumCommentWidth, comment =>
             {
                 comment.Line($"An instance of this class provides access to all the operations defined in {methodGroupClientInterfaceName}.");
@@ -534,26 +482,20 @@ namespace AutoRest.Java.DanModel
                 string restAPIInterfaceName = GetRestAPIInterfaceName(methodGroup);
                 string serviceClientTypeName = MethodGroupServiceClientType(methodGroup);
 
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description($"The {restProxyType} service to perform REST calls.");
-                });
+                classBlock.MultipleLineComment($"The proxy service used to perform REST calls.");
                 classBlock.PrivateMemberVariable(restAPIInterfaceName, "service");
 
-                classBlock.MultipleLineComment(comment =>
-                {
-                    comment.Description("The service client containing this operation class.");
-                });
+                classBlock.MultipleLineComment("The service client containing this operation class.");
                 classBlock.PrivateMemberVariable(serviceClientTypeName, "client");
 
                 classBlock.MultipleLineComment(comment =>
                 {
-                    comment.Description($"Initializes an instance of {methodGroupClientInterfaceName}.");
+                    comment.Description($"Initializes an instance of {className}.");
                     comment.Param("client", "the instance of the service client containing this operation class.");
                 });
                 classBlock.PublicConstructor($"{className}({serviceClientTypeName} client)", constructor =>
                 {
-                    constructor.Line($"this.service = {restProxyType}.create({restAPIInterfaceName}.class, client.httpPipeline(), client.serializerAdapter());");
+                    AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(methodGroup), GetRestAPIInterfaceName(methodGroup), "client", settings);
                     constructor.Line("this.client = client;");
                 });
 
@@ -569,7 +511,7 @@ namespace AutoRest.Java.DanModel
         {
             string methodGroupClientInterfaceName = GetMethodGroupClientInterfaceName(methodGroup);
 
-            JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, null, settings, methodGroupClientInterfaceName);
+            JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, null, settings, methodGroupClientInterfaceName);
 
             IEnumerable<string> imports = methodGroup.Methods.SelectMany(method => GetClientInterfaceMethodImports(method, settings));
             javaFile.Import(imports);
@@ -750,7 +692,7 @@ namespace AutoRest.Java.DanModel
                     });
 
                     string className = IModelTypeName(modelType);
-                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(modelType, settings), settings, className);
+                    JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(modelType, settings), settings, className);
 
                     List<string> imports = new List<string>();
                     IEnumerable<Property> compositeTypeProperties = GetCompositeTypeProperties(modelType);
@@ -1005,7 +947,7 @@ namespace AutoRest.Java.DanModel
                 // "CloudError" because those types already exist in the runtime.
                 if (exceptionBodyTypeName != "CloudError" && exceptionName != "CloudErrorException")
                 {
-                    JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(exceptionType, settings), settings, exceptionName);
+                    JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, GetCompositeTypeModelsPackage(exceptionType, settings), settings, exceptionName);
                     javaFile.Import("com.microsoft.rest.v2.RestException",
                                     "com.microsoft.rest.v2.http.HttpResponse");
                     javaFile.MultipleLineComment((comment) =>
@@ -1063,7 +1005,7 @@ namespace AutoRest.Java.DanModel
                 IEnumerable<JavaEnumValue> enumValues = enumType.Values
                     .Select((EnumValue value) => new JavaEnumValue(value.MemberName, value.SerializedName));
 
-                JavaFile javaFile = GenerateJavaFileWithHeaderAndPackage(codeModel, modelsPackage, settings, enumName);
+                JavaFile javaFile = GetJavaFileWithHeaderAndPackage(codeModel, modelsPackage, settings, enumName);
                 if (enumType.ModelAsString)
                 {
                     javaFile.Import("java.util.Collection",
@@ -1198,25 +1140,23 @@ namespace AutoRest.Java.DanModel
         }
 
         private static int GetMaximumCommentWidth(Settings settings)
-        {
-            return settings.MaximumCommentColumns;
-        }
+            => settings.MaximumCommentColumns;
 
-        public static string GetServiceName(Settings settings, CodeModel codeModel)
+        internal static string GetServiceName(Settings settings, CodeModel codeModel)
         {
-            var serviceNameSetting = settings.Host?.GetValue<string>("service-name").Result;
+            string serviceNameSetting = settings.Host?.GetValue<string>("service-name").Result;
             if (!string.IsNullOrEmpty(serviceNameSetting))
             {
                 return serviceNameSetting;
             }
 
-            var method = codeModel.Methods[0];
-            var match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
-            var serviceName = match.Groups[1].Value.ToPascalCase();
+            Method method = codeModel.Methods[0];
+            Match match = Regex.Match(input: method.Url, pattern: @"/providers/microsoft\.(\w+)/", options: RegexOptions.IgnoreCase);
+            string serviceName = match.Groups[1].Value.ToPascalCase();
             return serviceName;
         }
 
-        private static JavaFile GenerateJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
+        private static JavaFile GetJavaFileWithHeaderAndPackage(CodeModel codeModel, string subPackage, Settings settings, string fileNameWithoutExtension)
         {
             string package = GetPackage(codeModel, subPackage);
             JavaFile javaFile = GetJavaFile(package, fileNameWithoutExtension);
@@ -1238,43 +1178,18 @@ namespace AutoRest.Java.DanModel
             return javaFile;
         }
 
-        private static bool HasOptionalParameters(Method method)
-            => GetRestAPIMethodParameters(method).Any(p => !p.IsConstant && !p.IsRequired);
-
-        private static void AddRegularMethodOverloads(JavaClass classBlock, Method method, Settings settings)
+        private static void AddRegularMethodOverloads(JavaClass classBlock, Method restAPIMethod, Settings settings)
         {
-            if (HasOptionalParameters(method))
+            if (HasOptionalClientMethodParameters(restAPIMethod))
             {
-                AddRegularMethodOverloads(classBlock, method, settings, true);
+                AddRegularMethodOverloads(classBlock, restAPIMethod, settings, true);
             }
-            AddRegularMethodOverloads(classBlock, method, settings, false);
+            AddRegularMethodOverloads(classBlock, restAPIMethod, settings, false);
         }
 
         private static void AddRegularMethodOverloads(JavaClass classBlock, Method method, Settings settings, bool onlyRequiredParameters)
         {
-            IEnumerable<Parameter> methodParameters = GetRestAPIMethodParameters(method).Where(p => !p.IsConstant);
-            if (onlyRequiredParameters)
-            {
-                methodParameters = methodParameters.Where(p => p.IsRequired);
-            }
-
-            CompositeType callbackParamModelType = DependencyInjection.New<CompositeType>();
-            callbackParamModelType.Name.FixedValue = $"ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}>";
-
-            Parameter callbackParam = DependencyInjection.New<Parameter>();
-            callbackParam.SerializedName = "serviceCallback";
-            callbackParam.Documentation = "the async ServiceCallback to handle successful and failed responses.";
-            ParameterSetModelType(callbackParam, callbackParamModelType);
-            ParameterSetName(callbackParam, "serviceCallback");
-
-            const string callbackReturnDocumentation = "the {@link ServiceFuture} object";
-
-            string[] methodSyncExceptionDocumentation = new[]
-            {
-                "@throws IllegalArgumentException thrown if parameters fail the validation",
-                $"@throws {MethodOperationExceptionTypeString(method, settings)} thrown if the request is rejected by server",
-                "@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent"
-            };
+            IEnumerable<Parameter> clientMethodParameters = (onlyRequiredParameters ? GetClientMethodRequiredParameters(method) : GetClientMethodParameters(method));
 
             string methodReturnTypeResponseName = MethodReturnTypeResponseName(method);
             string methodReturnTypeResponseNameXmlEscaped = methodReturnTypeResponseName.EscapeXmlComment();
@@ -1288,15 +1203,15 @@ namespace AutoRest.Java.DanModel
             string methodObservableReturnDocumentation = methodReturnTypeResponseNameIsNullOrEmpty ? "" : $"a {{@link Single}} emitting the {MethodRestResponseAbstractTypeName(method, settings)} object";
 
             string methodName = MethodName(method);
-            string methodParameterDeclaration = MethodParameterDeclaration(methodParameters);
+            string methodParameterDeclaration = MethodParameterDeclaration(clientMethodParameters);
             Response methodReturnType = method.ReturnType;
-            string methodArguments = string.Join(", ", methodParameters.Select(parameter => ParameterGetName(parameter)));
+            string methodArguments = string.Join(", ", clientMethodParameters.Select(parameter => ParameterGetName(parameter)));
 
             // ---------------------------------
             // Synchronous
             // ---------------------------------
-            MethodJavadoc(classBlock, method, methodParameters, methodSyncExceptionDocumentation, methodSyncReturnDocumentation);
-            classBlock.PublicMethod($"{methodReturnTypeResponseName} {methodName}({methodParameterDeclaration})", function =>
+            AddSynchronousMethodComment(classBlock, method, clientMethodParameters, settings);
+            classBlock.PublicMethod(GetSynchronousMethodSignature(method, clientMethodParameters, settings), function =>
             {
                 if (IModelTypeName(GetIModelTypeResponseVariant(ResponseBodyClientType(methodReturnType))) == "void")
                 {
@@ -1311,17 +1226,17 @@ namespace AutoRest.Java.DanModel
             // ------------------------------
             // Callback
             // ------------------------------
-            MethodJavadoc(classBlock, method, methodParameters.ConcatSingleItem(callbackParam), methodAsyncExceptionDocumentation, callbackReturnDocumentation);
-            classBlock.PublicMethod($"ServiceFuture<{ResponseServiceFutureGenericParameterString(methodReturnType)}> {methodName}Async({MethodParameterDeclaration(methodParameters.ConcatSingleItem(callbackParam))})", function =>
+            AddServiceFutureMethodComment(classBlock, method, clientMethodParameters);
+            classBlock.PublicMethod(GetServiceFutureMethodSignature(method, clientMethodParameters, settings), function =>
             {
-                function.Return($"ServiceFuture.fromBody({methodName}Async({methodArguments}), {ParameterGetName(callbackParam)})");
+                function.Return($"ServiceFuture.fromBody({methodName}Async({methodArguments}), {serviceCallbackVariableName})");
             });
 
             // ----------------------------------------
             // Observable, RestResponse
             // ----------------------------------------
-            MethodJavadoc(classBlock, method, methodParameters, methodAsyncExceptionDocumentation, methodObservableReturnDocumentation);
-            classBlock.PublicMethod($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({methodParameterDeclaration})", function =>
+            AddAsyncRestResponseMethodComment(classBlock, method, clientMethodParameters, settings);
+            classBlock.PublicMethod(GetAsyncRestResponseMethodSignature(method, clientMethodParameters, settings), function =>
             {
                 AddRequiredNullableParameterChecks(function, method);
 
@@ -1339,7 +1254,7 @@ namespace AutoRest.Java.DanModel
             // --------------------------------
             // Observable
             // --------------------------------
-            MethodJavadoc(classBlock, method, methodParameters, methodAsyncExceptionDocumentation, methodObservableReturnDocumentation);
+            MethodJavadoc(classBlock, method, clientMethodParameters, methodAsyncExceptionDocumentation, methodObservableReturnDocumentation);
             IModelType methodReturnTypeBody = methodReturnType.Body;
             string returnType;
             string responseGenericBodyClientTypeString = null;
@@ -1353,7 +1268,7 @@ namespace AutoRest.Java.DanModel
                 returnType = $"Maybe<{responseGenericBodyClientTypeString}>";
             }
 
-            string methodParametersDeclaration = MethodParameterDeclaration(methodParameters);
+            string methodParametersDeclaration = MethodParameterDeclaration(clientMethodParameters);
             classBlock.PublicMethod($"{returnType} {methodName}Async({methodParametersDeclaration})", function =>
             {
                 function.Line($"return {methodName}WithRestResponseAsync({methodArguments})");
@@ -1425,7 +1340,9 @@ namespace AutoRest.Java.DanModel
             bool isFluent = IsFluent(settings);
             if (!isFluent)
             {
-                imports.Add(GetServiceClientInterfacePath(codeModel));
+                string serviceClientInterfacePath = GetPackage(codeModel) + "." + GetServiceClientInterfaceName(codeModel);
+                imports.Add(serviceClientInterfacePath);
+
                 foreach (string methodGroupClientInterfacePath in GetMethodGroups(codeModel).Select(GetMethodGroupClientInterfacePath))
                 {
                     imports.Add(methodGroupClientInterfacePath);
@@ -1465,7 +1382,7 @@ namespace AutoRest.Java.DanModel
             => GetRestAPIMethods(codeModel).SelectMany(m => GetClientInterfaceMethodImports(m, settings));
 
         private static IEnumerable<MethodGroup> GetMethodGroups(CodeModel codeModel)
-            => codeModel.Operations.Where(operation => !MethodGroupName(operation).IsNullOrEmpty());
+            => codeModel.Operations.Where(operation => !string.IsNullOrEmpty(MethodGroupName(operation)));
 
         private static string GetRestAPIInterfaceName(CodeModel codeModel)
         {
@@ -1484,6 +1401,14 @@ namespace AutoRest.Java.DanModel
         /// <returns></returns>
         private static bool HasRestAPIMethods(CodeModel codeModel)
             => GetRestAPIMethods(codeModel).Any();
+
+        /// <summary>
+        /// Get whether or not the provided MethodGroup/MethodGroupClient has any REST API methods on it.
+        /// </summary>
+        /// <param name="methodGroup"></param>
+        /// <returns></returns>
+        private static bool HasRestAPIMethods(MethodGroup methodGroup)
+            => GetRestAPIMethods(methodGroup).Any();
 
         /// <summary>
         /// Get the REST API methods that are defined for the provided CodeModel/ServiceClient.
@@ -2443,7 +2368,7 @@ namespace AutoRest.Java.DanModel
         internal static IEnumerable<string> MethodImplImports(Method method)
             => MethodImplImports(method, Settings.Instance);
 
-        private static IEnumerable<string> MethodImplImports(Method method, Settings settings)
+        private static IEnumerable<string> MethodImplImports(Method restAPIMethod, Settings settings)
         {
             HashSet<string> imports = new HashSet<string>();
 
@@ -2453,7 +2378,7 @@ namespace AutoRest.Java.DanModel
             imports.Add("io.reactivex.functions.Function");
             imports.Add("com.microsoft.rest.v2.annotations.Headers");
             imports.Add("com.microsoft.rest.v2.annotations.ExpectedResponses");
-            if (HasUnexpectedResponseExceptionType(method))
+            if (HasUnexpectedResponseExceptionType(restAPIMethod))
             {
                 imports.Add("com.microsoft.rest.v2.annotations.UnexpectedResponseExceptionType");
             }
@@ -2462,7 +2387,7 @@ namespace AutoRest.Java.DanModel
             imports.Add("com.microsoft.rest.v2.ServiceFuture");
             imports.Add("com.microsoft.rest.v2.ServiceCallback");
 
-            Response methodReturnType = method.ReturnType;
+            Response methodReturnType = restAPIMethod.ReturnType;
             if (methodReturnType.Body == null)
             {
                 imports.Add("io.reactivex.Completable");
@@ -2472,7 +2397,7 @@ namespace AutoRest.Java.DanModel
                 imports.Add("io.reactivex.Maybe");
             }
 
-            IEnumerable<Parameter> methodRetrofitParameters = MethodRetrofitParameters(method, settings);
+            IEnumerable<Parameter> methodRetrofitParameters = MethodRetrofitParameters(restAPIMethod, settings);
             foreach (Parameter retrofitParameter in methodRetrofitParameters)
             {
                 ParameterLocation location = retrofitParameter.Location;
@@ -2501,23 +2426,23 @@ namespace AutoRest.Java.DanModel
             }
 
             // Http verb annotations
-            imports.Add($"com.microsoft.rest.v2.annotations.{method.HttpMethod.ToString().ToUpperInvariant()}");
+            imports.Add($"com.microsoft.rest.v2.annotations.{restAPIMethod.HttpMethod.ToString().ToUpperInvariant()}");
 
             // response type conversion
-            if (method.Responses.Any())
+            if (restAPIMethod.Responses.Any())
             {
                 imports.Add("com.google.common.reflect.TypeToken");
             }
 
             // validation
-            if (!MethodParametersToValidate(method).IsNullOrEmpty())
+            if (HasClientMethodParametersOrClientPropertiesToValidate(restAPIMethod))
             {
                 imports.Add("com.microsoft.rest.v2.Validator");
             }
 
             // parameters
-            IEnumerable<Parameter> methodLocalParameters = GetRestAPIMethodParameters(method);
-            IEnumerable<Parameter> methodLogicalParameters = method.LogicalParameters;
+            IEnumerable<Parameter> methodLocalParameters = GetRestAPIMethodParameters(restAPIMethod);
+            IEnumerable<Parameter> methodLogicalParameters = restAPIMethod.LogicalParameters;
             foreach (Parameter parameter in methodLocalParameters.Concat(methodLogicalParameters))
             {
                 imports.AddRange(GetIModelTypeImports(ParameterClientType(parameter), settings));
@@ -2528,24 +2453,24 @@ namespace AutoRest.Java.DanModel
             imports.AddRange(methodReturnTypeResponseImplImports);
 
             // response type (can be different from return type)
-            IEnumerable<Response> methodResponses = method.Responses.Values;
+            IEnumerable<Response> methodResponses = restAPIMethod.Responses.Values;
             foreach (Response methodResponse in methodResponses)
             {
                 imports.AddRange(ResponseImplImports(methodResponse, settings));
             }
 
             // exceptions
-            imports.AddRange(MethodExceptionImports(method, settings));
+            imports.AddRange(MethodExceptionImports(restAPIMethod, settings));
 
             // parameterized host
             bool isParameterizedHost;
-            bool containsParameterizedHostExtension = method?.CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false;
+            bool containsParameterizedHostExtension = restAPIMethod?.CodeModel?.Extensions?.ContainsKey(SwaggerExtensions.ParameterizedHostExtension) ?? false;
             bool isAzure = IsAzure(settings);
             bool isFluent = IsFluent(settings);
             bool isAzureOrFluent = isAzure || isFluent;
             if (isAzureOrFluent)
             {
-                isParameterizedHost = containsParameterizedHostExtension && !MethodIsPagingNextOperation(method);
+                isParameterizedHost = containsParameterizedHostExtension && !MethodIsPagingNextOperation(restAPIMethod);
             }
             else
             {
@@ -2559,25 +2484,25 @@ namespace AutoRest.Java.DanModel
 
             if (isAzureOrFluent)
             {
-                bool methodIsLongRunningOperation = MethodIsLongRunningOperation(method);
+                bool methodIsLongRunningOperation = MethodIsLongRunningOperation(restAPIMethod);
                 if (methodIsLongRunningOperation)
                 {
                     imports.Add("com.microsoft.azure.v2.OperationStatus");
                     imports.Add("com.microsoft.azure.v2.util.ServiceFutureUtil");
 
-                    method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
+                    restAPIMethod.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { restAPIMethod.DefaultResponse.Body })
                         .SelectMany(t => GetIModelTypeImports(t, settings))
-                        .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p), settings).Contains(i)))
+                        .Where(i => !restAPIMethod.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p), settings).Contains(i)))
                         .ForEach(i => imports.Remove(i));
 
                     // return type may have been removed as a side effect
                     imports.AddRange(methodReturnTypeResponseImplImports);
                 }
-                CodeModel methodCodeModel = method.CodeModel;
+                CodeModel methodCodeModel = restAPIMethod.CodeModel;
                 string typeName = SequenceTypeGetPageImplType(ResponseBodyClientType(methodReturnType));
-                bool methodIsPagingOperation = MethodIsPagingOperation(method);
-                bool methodIsPagingNextOperation = MethodIsPagingNextOperation(method);
-                bool methodIsPagingNonPollingOperation = MethodIsPagingNonPollingOperation(method);
+                bool methodIsPagingOperation = MethodIsPagingOperation(restAPIMethod);
+                bool methodIsPagingNextOperation = MethodIsPagingNextOperation(restAPIMethod);
+                bool methodIsPagingNonPollingOperation = MethodIsPagingNonPollingOperation(restAPIMethod);
                 if (methodIsPagingOperation || methodIsPagingNextOperation)
                 {
                     imports.Remove("java.util.ArrayList");
@@ -2594,7 +2519,7 @@ namespace AutoRest.Java.DanModel
 
                 if (isFluent)
                 {
-                    string methodOperationExceptionTypeString = MethodOperationExceptionTypeString(method, settings);
+                    string methodOperationExceptionTypeString = MethodOperationExceptionTypeString(restAPIMethod, settings);
                     if (methodOperationExceptionTypeString != "CloudException" && methodOperationExceptionTypeString != "RestException")
                     {
                         imports.RemoveWhere(i => CompositeTypeImportsAzure(methodOperationExceptionTypeString, methodCodeModel, false, false, settings).Contains(i));
@@ -2602,16 +2527,16 @@ namespace AutoRest.Java.DanModel
                     }
                     if (methodIsLongRunningOperation)
                     {
-                        method.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { method.DefaultResponse.Body })
+                        restAPIMethod.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { restAPIMethod.DefaultResponse.Body })
                             .SelectMany(t => GetIModelTypeImports(t, settings))
-                            .Where(i => !method.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p), settings).Contains(i)))
+                            .Where(i => !restAPIMethod.Parameters.Any(p => GetIModelTypeImports(ParameterGetModelType(p), settings).Contains(i)))
                             .ForEach(i => imports.Remove(i));
                         // return type may have been removed as a side effect
-                        imports.AddRange(ResponseImplImports(method.ReturnType, settings));
+                        imports.AddRange(ResponseImplImports(restAPIMethod.ReturnType, settings));
                     }
 
-                    SequenceType pageType = ResponseBodyClientType(method.ReturnType) as SequenceType;
-                    bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(method);
+                    SequenceType pageType = ResponseBodyClientType(restAPIMethod.ReturnType) as SequenceType;
+                    bool methodSimulateAsPagingOperation = MethodSimulateAsPagingOperation(restAPIMethod);
                     if (methodIsPagingOperation || methodIsPagingNextOperation || methodSimulateAsPagingOperation)
                     {
                         imports.Add("com.microsoft.azure.v2.PagedList");
@@ -3037,20 +2962,20 @@ namespace AutoRest.Java.DanModel
             {
                 if (MethodIsPagingOperation(method))
                 {
-                    result += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
+                    result += $"final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
                 }
                 else if (MethodIsPagingNextOperation(method))
                 {
-                    result += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> serviceCallback";
+                    result += $"final ServiceFuture<{ResponseServiceFutureGenericParameterString(method.ReturnType)}> serviceFuture, final ListOperationCallback<{ResponseSequenceElementTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
                 }
                 else
                 {
-                    result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
+                    result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
                 }
             }
             else
             {
-                result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> serviceCallback";
+                result += $"final ServiceCallback<{ResponseGenericBodyClientTypeString(method.ReturnType)}> {serviceCallbackVariableName}";
             }
 
             return result;
@@ -3421,7 +3346,7 @@ namespace AutoRest.Java.DanModel
 
         private static void AddValidationChecks(JavaBlock block, Method method, bool onlyRequiredParameters)
         {
-            IEnumerable<Parameter> parametersToValidate = MethodParametersToValidate(method);
+            IEnumerable<Parameter> parametersToValidate = GetClientMethodParametersAndClientPropertiesToValidate(method);
             if (onlyRequiredParameters)
             {
                 parametersToValidate = parametersToValidate.Where(p => p.IsRequired);
@@ -3451,20 +3376,20 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static IEnumerable<Parameter> MethodParametersToValidate(Method method)
-        {
-            foreach (Parameter param in method.Parameters)
-            {
-                IModelType parameterModelType = ParameterGetModelType(param);
-                if (parameterModelType is PrimaryType ||
-                    parameterModelType is EnumType ||
-                    param.IsConstant)
+        private static bool HasClientMethodParametersOrClientPropertiesToValidate(Method method)
+            => GetClientMethodParametersAndClientPropertiesToValidate(method).Any();
+
+        private static IEnumerable<Parameter> GetClientMethodParametersAndClientPropertiesToValidate(Method method)
+            => method.Parameters.Where(parameter =>
                 {
-                    continue;
-                }
-                yield return param;
-            }
-        }
+                    bool result = !parameter.IsConstant;
+                    if (result)
+                    {
+                        IModelType parameterModelType = ParameterGetModelType(parameter);
+                        result = !(parameterModelType is PrimaryType) && !(parameterModelType is EnumType);
+                    }
+                    return result;
+                });
 
         /// <summary>
         /// Get the required Client method overload parameters of the provided REST API method.
@@ -3482,6 +3407,9 @@ namespace AutoRest.Java.DanModel
         private static IEnumerable<Parameter> GetClientMethodParameters(Method restAPIMethod)
             => GetRestAPIMethodParameters(restAPIMethod).Where(parameter => !parameter.IsConstant);
 
+        private static bool HasOptionalClientMethodParameters(Method restAPIMethod)
+            => GetClientMethodParameters(restAPIMethod).Any(parameter => !parameter.IsRequired);
+
         /// <summary>
         /// Get the parameters for the provided REST API method.
         /// </summary>
@@ -3492,7 +3420,7 @@ namespace AutoRest.Java.DanModel
                 //Omit parameter-group properties for now since Java doesn't support them yet
                 .Where(p => p != null && !p.IsClientProperty && !string.IsNullOrWhiteSpace(ParameterGetName(p)))
                 .OrderBy(item => !item.IsRequired);
-
+        
         private static bool MethodHasSequenceType(IModelType mt)
         {
             if (mt is SequenceType)
@@ -4083,9 +4011,6 @@ namespace AutoRest.Java.DanModel
         private static string GetServiceClientInterfaceName(CodeModel codeModel)
             => codeModel.Name.ToPascalCase();
 
-        private static string GetServiceClientInterfacePath(CodeModel codeModel)
-            => GetPackage(codeModel) + "." + GetServiceClientInterfaceName(codeModel);
-
         private static string GetServiceClientClassName(CodeModel codeModel)
             => GetServiceClientInterfaceName(codeModel) + "Impl";
 
@@ -4191,35 +4116,35 @@ namespace AutoRest.Java.DanModel
                 bool isAzureOrFluent = IsAzureOrFluent(settings);
                 foreach (Method restAPIMethod in restAPIMethods)
                 {
-                    IEnumerable<Parameter> allParameters = GetRestAPIMethodParameters(restAPIMethod).Where(p => !p.IsConstant);
-                    IEnumerable<Parameter> requiredParameters = allParameters.Where(p => p.IsRequired);
-                    bool hasOptionalParameters = (allParameters.Count() != requiredParameters.Count());
+                    IEnumerable<Parameter> clientMethodParameters = GetClientMethodParameters(restAPIMethod);
+                    IEnumerable<Parameter> requiredClientMethodParameters = GetClientMethodRequiredParameters(restAPIMethod);
+                    bool hasOptionalClientMethodParameters = HasOptionalClientMethodParameters(restAPIMethod);
 
                     if (isAzureOrFluent)
                     {
                         if (MethodIsPagingOperation(restAPIMethod) || MethodIsPagingNextOperation(restAPIMethod))
                         {
-                            if (hasOptionalParameters)
+                            if (hasOptionalClientMethodParameters)
                             {
-                                AddPagingMethodOverloads(classBlock, restAPIMethod, requiredParameters, settings, true, true);
+                                AddPagingMethodOverloads(classBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
                             }
-                            AddPagingMethodOverloads(classBlock, restAPIMethod, allParameters, settings, false, false);
+                            AddPagingMethodOverloads(classBlock, restAPIMethod, clientMethodParameters, settings, false, false);
                         }
                         else if (MethodSimulateAsPagingOperation(restAPIMethod))
                         {
-                            if (hasOptionalParameters)
+                            if (hasOptionalClientMethodParameters)
                             {
-                                AddSimulatedPagingMethodOverloads(classBlock, restAPIMethod, requiredParameters, settings, true, true);
+                                AddSimulatedPagingMethodOverloads(classBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
                             }
-                            AddSimulatedPagingMethodOverloads(classBlock, restAPIMethod, allParameters, settings, false, false);
+                            AddSimulatedPagingMethodOverloads(classBlock, restAPIMethod, clientMethodParameters, settings, false, false);
                         }
                         else if (MethodIsLongRunningOperation(restAPIMethod))
                         {
-                            if (hasOptionalParameters)
+                            if (hasOptionalClientMethodParameters)
                             {
-                                AddLongRunningOperationMethodOverloads(classBlock, restAPIMethod, requiredParameters, settings, true, true);
+                                AddLongRunningOperationMethodOverloads(classBlock, restAPIMethod, requiredClientMethodParameters, settings, true, true);
                             }
-                            AddLongRunningOperationMethodOverloads(classBlock, restAPIMethod, allParameters, settings, false, false);
+                            AddLongRunningOperationMethodOverloads(classBlock, restAPIMethod, clientMethodParameters, settings, false, false);
                         }
                         else
                         {
@@ -4255,7 +4180,7 @@ namespace AutoRest.Java.DanModel
             AddServiceFutureMethodComment(classBlock, method, parameters);
             classBlock.PublicMethod(GetServiceFutureMethodSignature(method, parameters, settings), function =>
             {
-                function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({ArgumentList(parameters)}), serviceCallback)");
+                function.Return($"ServiceFutureUtil.fromLRO({methodName}Async({ArgumentList(parameters)}), {serviceCallbackVariableName})");
             });
 
             AddOperationStatusMethodComment(classBlock, method, parameters);
@@ -4477,6 +4402,33 @@ namespace AutoRest.Java.DanModel
             interfaceBlock.Method(GetServiceFutureMethodSignature(method, parameters, settings));
         }
 
+        private static void AddAsyncRestResponseMethodComment(JavaAbstractType typeBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string restResponseType = MethodRestResponseAbstractTypeName(method, settings);
+
+            typeBlock.MultipleLineComment(comment =>
+            {
+                AddMethodSummaryAndDescription(comment, method);
+                AddParameters(comment, parameters);
+                ThrowsIllegalArgumentException(comment);
+                comment.Return($"the {{@link Single<{restResponseType}>}} object if successful.".EscapeXmlComment());
+            });
+        }
+
+        private static string GetAsyncRestResponseMethodSignature(Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            string restResponseType = MethodRestResponseAbstractTypeName(method, settings);
+            string methodName = MethodName(method);
+            string methodParameterDeclaration = MethodParameterDeclaration(method, settings, parameters);
+
+            return $"Single<{restResponseType}> {methodName}WithRestResponseAsync({methodParameterDeclaration})";
+        }
+
+        private static void AddAsyncRestResponseMethodSignature(JavaInterface interfaceBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
+        {
+            interfaceBlock.Method(GetAsyncRestResponseMethodSignature(method, parameters, settings));
+        }
+
         private static void AddSinglePageMethodComment(JavaClass classBlock, Method method, IEnumerable<Parameter> parameters, Settings settings)
         {
             classBlock.MultipleLineComment(comment =>
@@ -4586,21 +4538,8 @@ namespace AutoRest.Java.DanModel
 
                         if (MethodShouldGenerateBeginRestResponseMethod(method, settings))
                         {
-                            interfaceBlock.MultipleLineComment(comment =>
-                            {
-                                AddMethodSummaryAndDescription(comment, method);
-                                AddParameters(comment, requiredParameters);
-                                ThrowsIllegalArgumentException(comment);
-                                if (methodReturnTypeResponseName.Else("void") != "void")
-                                {
-                                    comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                                }
-                                else
-                                {
-                                    comment.Return($"the {{@link Single<{responseServiceResponseGenericParameterString}>}} object if successful.");
-                                }
-                            });
-                            interfaceBlock.Method($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({MethodParameterDeclaration(method, settings, requiredParameters)})");
+                            AddAsyncRestResponseMethodComment(interfaceBlock, method, requiredParameters, settings);
+                            AddAsyncRestResponseMethodSignature(interfaceBlock, method, requiredParameters, settings);
                         }
                     }
 
@@ -4637,21 +4576,8 @@ namespace AutoRest.Java.DanModel
 
                     if (MethodShouldGenerateBeginRestResponseMethod(method, settings))
                     {
-                        interfaceBlock.MultipleLineComment(comment =>
-                        {
-                            AddMethodSummaryAndDescription(comment, method);
-                            AddParameters(comment, allParameters);
-                            ThrowsIllegalArgumentException(comment);
-                            if (methodReturnTypeResponseName.Else("void") != "void")
-                            {
-                                comment.Return($"the observable to the {methodReturnTypeResponseNameXmlEscaped} object");
-                            }
-                            else
-                            {
-                                comment.Return($"the {{@link Single<{responseServiceResponseGenericParameterString}>}} object if successful.");
-                            }
-                        });
-                        interfaceBlock.Method($"Single<{MethodRestResponseAbstractTypeName(method, settings)}> {methodName}WithRestResponseAsync({MethodParameterDeclaration(method, settings, allParameters)})");
+                        AddAsyncRestResponseMethodComment(interfaceBlock, method, allParameters, settings);
+                        AddAsyncRestResponseMethodSignature(interfaceBlock, method, allParameters, settings);
                     }
                 }
             }
@@ -4740,7 +4666,7 @@ namespace AutoRest.Java.DanModel
 
         private static void ParamServiceCallback(JavaMultipleLineComment comment)
         {
-            comment.Param("serviceCallback", "the async ServiceCallback to handle successful and failed responses.");
+            comment.Param(serviceCallbackVariableName, "the async ServiceCallback to handle successful and failed responses.");
         }
 
         private static void ThrowsIllegalArgumentException(JavaMultipleLineComment comment)
@@ -4850,7 +4776,7 @@ namespace AutoRest.Java.DanModel
             JavaMethodParameter callbackParameter = new JavaMethodParameter(
                 "the async ServiceCallback to handle successful and failed responses.",
                 $"ServiceCallback<{asyncInnerReturnType}>",
-                "serviceCallback",
+                serviceCallbackVariableName,
                 final: true);
 
             bool shouldGenerateCallbackMethod =
@@ -5061,11 +4987,8 @@ namespace AutoRest.Java.DanModel
 
             AddMethodGroupClientVariableInitializationStatements(constructor, codeModel, settings);
 
-            AddProxyVariableInitializationStatement(constructor, codeModel, settings);
+            AddProxyVariableInitializationStatement(constructor, GetRestAPIMethods(codeModel), GetRestAPIInterfaceName(codeModel), "this", settings);
         }
-
-        private static string CreateDefaultPipelineExpression(string className, Settings settings)
-            => CreateDefaultPipelineExpression(settings, IsAzureOrFluent(settings) ? new[] { className + ".class" } : null);
 
         private static string CreateDefaultPipelineExpression(Settings settings, params string[] arguments)
         {
@@ -5112,19 +5035,15 @@ namespace AutoRest.Java.DanModel
             }
         }
 
-        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, CodeModel codeModel, Settings settings)
+        private static void AddProxyVariableInitializationStatement(JavaBlock constructor, IEnumerable<Method> restAPIMethods, string restAPIInterfaceName, string serviceClientVariableName, Settings settings)
         {
-            if (HasRestAPIMethods(codeModel))
+            if (restAPIMethods.Any())
             {
-                string proxyCreatorType = GetProxyCreatorType(settings);
-                string restAPIInterfaceName = GetRestAPIInterfaceName(codeModel);
-                constructor.Line($"this.service = {proxyCreatorType}.create({restAPIInterfaceName}.class, this);");
+                constructor.Line($"this.service = {GetProxyCreatorType(settings)}.create({restAPIInterfaceName}.class, {serviceClientVariableName});");
             }
         }
 
         private static string GetProxyCreatorType(Settings settings)
-        {
-            return IsAzureOrFluent(settings) ? azureProxyType : restProxyType;
-        }
+            => IsAzureOrFluent(settings) ? azureProxyType : restProxyType;
     }
 }

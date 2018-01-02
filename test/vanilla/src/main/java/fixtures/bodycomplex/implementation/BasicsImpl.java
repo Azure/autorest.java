@@ -41,7 +41,7 @@ import java.io.IOException;
  */
 public class BasicsImpl implements Basics {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private BasicsService service;
 
@@ -51,12 +51,12 @@ public class BasicsImpl implements Basics {
     private AutoRestComplexTestServiceImpl client;
 
     /**
-     * Initializes an instance of Basics.
+     * Initializes an instance of BasicsImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public BasicsImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(BasicsService.class, client.httpPipeline(), client.serializerAdapter());
+        this.service = RestProxy.create(BasicsService.class, client);
         this.client = client;
     }
 
@@ -116,7 +116,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getValidAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -124,7 +124,7 @@ public class BasicsImpl implements Basics {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Basic>> getValidWithRestResponseAsync() {
         return service.getValid();
@@ -156,7 +156,6 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void putValid(Basic complexBody) {
         putValidAsync(complexBody).blockingAwait();
@@ -170,7 +169,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(Basic complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -179,7 +178,7 @@ public class BasicsImpl implements Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Basic complexBody) {
         if (complexBody == null) {
@@ -220,7 +219,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getInvalidAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getInvalidAsync(), serviceCallback);
     }
 
@@ -228,7 +227,7 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Basic>> getInvalidWithRestResponseAsync() {
         return service.getInvalid();
@@ -272,7 +271,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getEmptyAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyAsync(), serviceCallback);
     }
 
@@ -280,7 +279,7 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type that is empty.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Basic>> getEmptyWithRestResponseAsync() {
         return service.getEmpty();
@@ -324,7 +323,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getNullAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNullAsync(), serviceCallback);
     }
 
@@ -332,7 +331,7 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type whose properties are null.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Basic>> getNullWithRestResponseAsync() {
         return service.getNull();
@@ -376,7 +375,7 @@ public class BasicsImpl implements Basics {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Basic> getNotProvidedAsync(ServiceCallback<Basic> serviceCallback) {
+    public ServiceFuture<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         return ServiceFuture.fromBody(getNotProvidedAsync(), serviceCallback);
     }
 
@@ -384,7 +383,7 @@ public class BasicsImpl implements Basics {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Basic> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Basic&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Basic>> getNotProvidedWithRestResponseAsync() {
         return service.getNotProvided();

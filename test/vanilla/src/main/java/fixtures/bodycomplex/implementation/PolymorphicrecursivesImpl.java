@@ -40,7 +40,7 @@ import java.io.IOException;
  */
 public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private PolymorphicrecursivesService service;
 
@@ -50,12 +50,12 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     private AutoRestComplexTestServiceImpl client;
 
     /**
-     * Initializes an instance of Polymorphicrecursives.
+     * Initializes an instance of PolymorphicrecursivesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public PolymorphicrecursivesImpl(AutoRestComplexTestServiceImpl client) {
-        this.service = RestProxy.create(PolymorphicrecursivesService.class, client.httpPipeline(), client.serializerAdapter());
+        this.service = RestProxy.create(PolymorphicrecursivesService.class, client);
         this.client = client;
     }
 
@@ -95,7 +95,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Fish> getValidAsync(ServiceCallback<Fish> serviceCallback) {
+    public ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         return ServiceFuture.fromBody(getValidAsync(), serviceCallback);
     }
 
@@ -103,7 +103,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Fish> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Fish&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Fish>> getValidWithRestResponseAsync() {
         return service.getValid();
@@ -187,7 +187,6 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void putValid(Fish complexBody) {
         putValidAsync(complexBody).blockingAwait();
@@ -253,7 +252,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putValidAsync(Fish complexBody, ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(putValidAsync(complexBody), serviceCallback);
     }
 
@@ -314,7 +313,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      *     ]
      * }
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> putValidWithRestResponseAsync(Fish complexBody) {
         if (complexBody == null) {

@@ -36,7 +36,7 @@ import java.io.IOException;
  */
 public class HttpSuccessImpl implements HttpSuccess {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private HttpSuccessService service;
 
@@ -96,7 +96,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> head200Async(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -104,7 +104,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
@@ -148,7 +148,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> head204Async(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -156,7 +156,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
@@ -200,7 +200,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Boolean> head404Async(ServiceCallback<Boolean> serviceCallback) {
+    public ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
@@ -208,7 +208,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Boolean> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Boolean&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Boolean>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());

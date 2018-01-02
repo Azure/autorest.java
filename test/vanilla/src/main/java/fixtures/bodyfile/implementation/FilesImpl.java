@@ -36,7 +36,7 @@ import java.io.IOException;
  */
 public class FilesImpl implements Files {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private FilesService service;
 
@@ -46,12 +46,12 @@ public class FilesImpl implements Files {
     private AutoRestSwaggerBATFileServiceImpl client;
 
     /**
-     * Initializes an instance of Files.
+     * Initializes an instance of FilesImpl.
      *
      * @param client the instance of the service client containing this operation class.
      */
     public FilesImpl(AutoRestSwaggerBATFileServiceImpl client) {
-        this.service = RestProxy.create(FilesService.class, client.httpPipeline(), client.serializerAdapter());
+        this.service = RestProxy.create(FilesService.class, client);
         this.client = client;
     }
 
@@ -96,7 +96,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AsyncInputStream> getFileAsync(ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> getFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileAsync(), serviceCallback);
     }
 
@@ -104,7 +104,7 @@ public class FilesImpl implements Files {
      * Get file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> getFileWithRestResponseAsync() {
         return service.getFile();
@@ -148,7 +148,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AsyncInputStream> getFileLargeAsync(ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> getFileLargeAsync(final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getFileLargeAsync(), serviceCallback);
     }
 
@@ -156,7 +156,7 @@ public class FilesImpl implements Files {
      * Get a large file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> getFileLargeWithRestResponseAsync() {
         return service.getFileLarge();
@@ -200,7 +200,7 @@ public class FilesImpl implements Files {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<AsyncInputStream> getEmptyFileAsync(ServiceCallback<AsyncInputStream> serviceCallback) {
+    public ServiceFuture<AsyncInputStream> getEmptyFileAsync(final ServiceCallback<AsyncInputStream> serviceCallback) {
         return ServiceFuture.fromBody(getEmptyFileAsync(), serviceCallback);
     }
 
@@ -208,7 +208,7 @@ public class FilesImpl implements Files {
      * Get empty file.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, AsyncInputStream> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, AsyncInputStream&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, AsyncInputStream>> getEmptyFileWithRestResponseAsync() {
         return service.getEmptyFile();

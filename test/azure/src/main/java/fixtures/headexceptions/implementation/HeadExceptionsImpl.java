@@ -36,7 +36,7 @@ import java.io.IOException;
  */
 public class HeadExceptionsImpl implements HeadExceptions {
     /**
-     * The RestProxy service to perform REST calls.
+     * The proxy service used to perform REST calls.
      */
     private HeadExceptionsService service;
 
@@ -83,7 +83,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void head200() {
         head200Async().blockingAwait();
@@ -96,7 +95,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head200Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head200Async(), serviceCallback);
     }
 
@@ -104,7 +103,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 200 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head200WithRestResponseAsync() {
         return service.head200(this.client.acceptLanguage());
@@ -127,7 +126,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void head204() {
         head204Async().blockingAwait();
@@ -140,7 +138,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head204Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head204Async(), serviceCallback);
     }
 
@@ -148,7 +146,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 204 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head204WithRestResponseAsync() {
         return service.head204(this.client.acceptLanguage());
@@ -171,7 +169,6 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws CloudException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the void object if successful.
      */
     public void head404() {
         head404Async().blockingAwait();
@@ -184,7 +181,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> head404Async(ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromBody(head404Async(), serviceCallback);
     }
 
@@ -192,7 +189,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 404 status code if successful.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return a {@link Single} emitting the RestResponse<Void, Void> object
+     * @return the {@link Single&lt;RestResponse&lt;Void, Void&gt;&gt;} object if successful.
      */
     public Single<RestResponse<Void, Void>> head404WithRestResponseAsync() {
         return service.head404(this.client.acceptLanguage());
